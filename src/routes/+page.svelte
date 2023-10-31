@@ -102,7 +102,7 @@
 	}
 
 	.hero-image {
-		background-image: url('./homepage/hero.png');
+		background-image: url('/homepage/hero.png');
 		background-size: cover;
 	}
 </style>
