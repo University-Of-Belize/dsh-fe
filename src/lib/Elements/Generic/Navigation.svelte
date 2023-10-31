@@ -70,7 +70,14 @@
 			{/if}
 
 			{#if !user}
-				<Button icon={faRightToBracket} color="COLORYLW" text="Login" />
+				<div
+					class="btn-wrp"
+					on:click={async () => {
+						await goto('/auth/login');
+					}}
+				>
+					<Button icon={faRightToBracket} color="COLORYLW" text="Login" />
+				</div>
 			{:else}
 				<img
 					src={user.profile ?? './placeholder/avatar.png'}
@@ -96,10 +103,20 @@
 			bind:this={navDrawer}
 		>
 			<div class="top-row flex justify-between items-center w-full pt-2">
-				<div class="btn-wrp pr-1">
+				<div
+					class="btn-wrp pr-1"
+					on:click={async () => {
+						await goto('/auth/login');
+					}}
+				>
 					<Button icon={faRightToBracket} color="COLORYLW" text="Login" />
 				</div>
-				<div class="btn-wrp pl-2" />
+				<div
+					class="btn-wrp pl-2"
+					on:click={async () => {
+						await goto('/auth/signup');
+					}}
+				/>
 				<Button icon={faGift} color="COLORPNK" text="Sign up" color_t="COLORWHT" />
 			</div>
 			<div class="two py-6">
@@ -120,6 +137,9 @@
 						text="Beverages/Drinks"
 						color_t="COLORBLK"
 						custom_style="w-full font-semibold"
+						on:click={async () => {
+							await goto('/products?filter=beverages');
+						}}
 					/>
 				</div>
 				<div class="two pt-1">
@@ -129,6 +149,9 @@
 						text="Food"
 						color_t="COLORBLK"
 						custom_style="w-full font-semibold"
+						on:click={async () => {
+							await goto('/products?filter=food');
+						}}
 					/>
 				</div>
 				<div class="two pt-1">
@@ -138,6 +161,9 @@
 						text="Snacks"
 						color_t="COLORBLK"
 						custom_style="w-full font-semibold"
+						on:click={async () => {
+							await goto('/products?filter=snacks');
+						}}
 					/>
 				</div>
 			</div>
