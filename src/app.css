@@ -1,0 +1,41 @@
+@import-normalize;
+@tailwind base;
+@tailwind components;
+@layer base {
+	:root {
+		--COLORWHT: 227 223 209;
+		--COLORWHT1: 244 238 226;
+		--COLORWHT2: 239 235 222;
+		--COLORWHT3: 212 208 195;
+		--COLORBLK: 42 26 31;
+		--COLORYLW: 199 159 31;
+		--COLORBYW: 214 182 15;
+		--COLORPNK: 155 70 117;
+		--COLORRED: 132 45 10;
+		
+	}
+}
+@tailwind utilities;
+
+body {
+	font-family: 'Inter', sans-serif;
+}
+
+::-webkit-scrollbar {
+	background-color: #6b6b6b;
+	width: 0.35rem;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #d8dee9;
+	border-radius: 2px;
+}
+
+/* The tree is inverted */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
