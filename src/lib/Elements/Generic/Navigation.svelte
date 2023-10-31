@@ -25,9 +25,11 @@
 		// Loop till the opacity reaches zero while moving the drawer to the left
 		if (navTransparency == 0) {
 			nav.style.opacity = '1';
+			nav.style.display = 'flex';
 			navTransparency = 1;
 		} else {
 			nav.style.opacity = '0';
+			nav.style.display = 'none';
 			navTransparency = 0;
 		}
 	}
@@ -86,7 +88,7 @@
 
 	<div
 		class="sidebar flex justify-start items-center w-full h-screen bg-black bg-opacity-25"
-		style="opacity: 0"
+		style="opacity: 0; display: none"
 		bind:this={nav}
 	>
 		<div
