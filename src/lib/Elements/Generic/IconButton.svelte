@@ -1,0 +1,21 @@
+<script lang="ts">
+	import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+	import Fa from "svelte-fa";
+	export let icon: IconDefinition;
+	export let color: String;
+	let className: String = "";
+	export {className as class};
+</script>
+
+<div
+	class="placeholder bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORBLK bg-COLORYLW bg-COLORBYW bg-COLORPNK bg-COLORRED hidden w-full"
+>
+	&nbsp;
+</div>
+<div
+	class="button w-fit flex rounded-sm bg-{color} hover:bg-opacity-80 cursor-pointer text-COLORWHT1 px-4 py-2 items-center text-sm select-none mr-2 {className}"
+>
+	<div class="icon w-fit">
+		<Fa {icon} size="1.01x" />
+	</div>
+</div>

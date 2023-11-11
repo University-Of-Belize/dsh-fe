@@ -9,7 +9,7 @@
 	<div class="hero">
 		<div class="image-and-wrapper relative" style="height: 800px">
 			<div class="navigation absolute w-full top-0 z-20">
-				<Navigation transparency={25} search={false} />
+				<Navigation transparency={5} search={true} />
 			</div>
 			<div class="content-wrapper w-full h-full absolute flex items-center justify-center z-10">
 				<div class="content flex-1 flex items-center justify-center">
@@ -47,7 +47,6 @@
 			>
 				Categories
 			</div>
-
 		</div>
 	</div>
 	<div class="category-grid flex justify-center items-center w-full flex-wrap lg:flex-nowrap">

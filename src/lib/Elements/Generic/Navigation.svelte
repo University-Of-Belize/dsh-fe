@@ -14,6 +14,7 @@
 	import { goto } from '$app/navigation';
 	export let transparency: number = 0;
 	export let search: boolean = true;
+	export let value: string = "";
 	export let user: object | undefined = undefined;
 	let nav: HTMLDivElement;
 	let navDrawer: HTMLDivElement;
@@ -27,10 +28,12 @@
 			nav.style.opacity = '1';
 			nav.style.display = 'flex';
 			navTransparency = 1;
+			document.body.style.overflow = 'hidden';
 		} else {
 			nav.style.opacity = '0';
 			nav.style.display = 'none';
 			navTransparency = 0;
+			document.body.style.overflow = 'initial';
 		}
 	}
 </script>
@@ -53,19 +56,20 @@
 			</div>
 			<h1 class="text-COLORBLK font-semibold">Cafe</h1>
 			{#if search}
-				<div
-					class="searchbar flex-1 flex rounded-sm bg-COLORWHT1 px-4 py-2 mx-8 items-center text-sm"
+				<form
+					class="searchbar flex-1 flex rounded-sm bg-COLORWHT1 px-4 py-2 mx-8 items-center text-sm bg-opacity-90"
+					action="/products"
 				>
 					<div class="searchicon w-fit">
 						<Fa icon={faSearch} size="1.01x" class="text-COLORBLK pr-4" />
 					</div>
-					<input
+					<input {value}
 						type="text"
 						name="search"
 						class="w-full font-regular focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
 						placeholder="Search for snacks, drinks and lunch"
 					/>
-				</div>
+				</form>
 			{:else}<div class="searchbar flex-1 flex px-4 py-2 mx-8 items-center text-sm" />
 			{/if}
 

@@ -1,0 +1,11 @@
+{
+	"server": {
+		"HTTPOrigin": "https://winter-darkness-1705.fly.dev"
+	},
+	"product-view": {
+		"default-image": "https://via.placeholder.com/500"
+	},
+	"product-showcase": {
+		"default-image": "https://via.placeholder.com/50"
+	}
+}
