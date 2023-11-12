@@ -7,20 +7,23 @@
 		faGift,
 		faRightToBracket,
 		faSearch,
-		faUtensils,
-		faWhiskeyGlass
+		faStar
 	} from '@fortawesome/free-solid-svg-icons';
 	import Button from './Button.svelte';
 	import { goto } from '$app/navigation';
+	import config from '$lib/config/settings.json';
 	export let transparency: number = 0;
 	export let search: boolean = true;
-	export let value: string = "";
+	export let value: string = '';
+	export let titleText: string = 'Cafe';
+	export let titleWhere: string = '/';
 	export let user: object | undefined = undefined;
 	let nav: HTMLDivElement;
 	let navDrawer: HTMLDivElement;
 	let navClose: HTMLDivElement;
 	let navToggle: HTMLDivElement;
 	let navTransparency: number = 0;
+	let categories = [];
 
 	function toggleNav() {
 		// Loop till the opacity reaches zero while moving the drawer to the left
@@ -36,6 +39,14 @@
 			document.body.style.overflow = 'initial';
 		}
 	}
+
+	async function getCategories() {
+		const response = await fetch(`${config.server.HTTPOrigin}/api/v1/category`);
+		const data = await response.json();
+		categories = data.is;
+	}
+
+	getCategories();
 </script>
 
 <div
@@ -54,7 +65,12 @@
 			>
 				<Fa icon={faBars} size="1.01x" class="text-black" />
 			</div>
-			<h1 class="text-COLORBLK font-semibold">Cafe</h1>
+			<h1
+				class="text-COLORBLK font-semibold hover:underline cursor-pointer"
+				on:click={() => goto(`${titleWhere}`)}
+			>
+				{titleText}
+			</h1>
 			{#if search}
 				<form
 					class="searchbar flex-1 flex rounded-sm bg-COLORWHT1 px-4 py-2 mx-8 items-center text-sm bg-opacity-90"
@@ -63,7 +79,8 @@
 					<div class="searchicon w-fit">
 						<Fa icon={faSearch} size="1.01x" class="text-COLORBLK pr-4" />
 					</div>
-					<input {value}
+					<input
+						{value}
 						type="text"
 						name="search"
 						class="w-full font-regular focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
@@ -134,42 +151,35 @@
 			</div>
 			<div class="three py-6 border-t border-black border-dashed border-opacity-5">
 				<div class="title font-semibold pb-5">Categories</div>
-				<div class="two pt-1">
-					<Button
-						icon={faWhiskeyGlass}
-						color="COLORWHT3"
-						text="Beverages/Drinks"
-						color_t="COLORBLK"
-						custom_style="w-full font-semibold"
-						on:click={async () => {
-							await goto('/products?filter=beverages');
-						}}
-					/>
-				</div>
-				<div class="two pt-1">
-					<Button
-						icon={faBurger}
-						color="COLORWHT3"
-						text="Food"
-						color_t="COLORBLK"
-						custom_style="w-full font-semibold"
-						on:click={async () => {
-							await goto('/products?filter=food');
-						}}
-					/>
-				</div>
-				<div class="two pt-1">
-					<Button
-						icon={faUtensils}
-						color="COLORWHT3"
-						text="Snacks"
-						color_t="COLORBLK"
-						custom_style="w-full font-semibold"
-						on:click={async () => {
-							await goto('/products?filter=snacks');
-						}}
-					/>
-				</div>
+
+				{#if categories.length > 0}
+					{#each categories as category}
+						<div
+							class="two pt-1"
+							on:click={() => {
+								goto(`/products?filter=${category.name.toString().toLowerCase()}`);
+							}}
+						>
+							<Button
+								icon={faStar}
+								color="COLORWHT3"
+								text={category.name}
+								color_t="COLORBLK"
+								custom_style="w-full font-semibold"
+							/>
+						</div>
+					{/each}
+				{:else}
+					<div class="two pt-1">
+						<Button
+							icon={faStar}
+							color="COLORWHT3"
+							text="Looks like you caught us! Just a moment."
+							color_t="COLORBLK"
+							custom_style="w-full font-semibold"
+						/>
+					</div>
+				{/if}
 			</div>
 		</div>
 		<div class="outerNav bg-transparent h-full flex-1" bind:this={navClose} on:click={toggleNav}>

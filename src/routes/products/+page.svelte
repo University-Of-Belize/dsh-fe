@@ -46,32 +46,58 @@
 
 	const products = writable<Product[]>([]);
 	$: params = $page.url.searchParams.get('search');
+	$: params_filter = $page.url.searchParams.get('filter');
 
 	// Thread run everytime the params change
 	$: (async () => {
-		const response = await fetch(
-			`${config.server.HTTPOrigin}/api/v1/search?filter=productName&q=${params?.toString().toLowerCase()}`
+		const searchPromise = fetch(
+			`${config.server.HTTPOrigin}/api/v1/search?filter=productName&q=${params
+				?.toString()
+				.toLowerCase()}`
 		);
-		if (response.body == null) return;
-		let r;
+		let searchResults, nameResults;
 		try {
-			r = await response.json();
+			const searchResponse = await searchPromise;
+			if (searchResponse.status === 404) {
+				throw new Error('Search not found');
+			}
+			searchResults = await searchResponse.json();
 		} catch (e) {
 			console.error('Error parsing JSON:', e);
 			products.set([]);
 			return;
 		}
-		if (r && r.length > 0) {
-			products.set(r); // @ts-ignore
+		if (searchResults && searchResults.length > 0) {
+			products.set(searchResults); // @ts-ignore
 		} else {
-			products.set([]);
+			try {
+				const namePromise = fetch(
+					`${config.server.HTTPOrigin}/api/v1/search?filter=name&q=${
+						params_filter?.toString().toLowerCase() ?? params?.toString().toLowerCase()
+					}`
+				);
+				const nameResponse = await namePromise;
+				if (nameResponse.status === 404) {
+					throw new Error('Name not found');
+				}
+				nameResults = await nameResponse.json();
+			} catch (e) {
+				console.error('Error parsing JSON:', e);
+				products.set([]);
+				return;
+			}
+			if (nameResults && nameResults.length > 0) {
+				products.set(nameResults); // @ts-ignore
+			} else {
+				products.set([]);
+			}
 		}
 	})();
 </script>
 
 <main class="w-full h-screen">
 	<div class="navigation w-full z-20">
-		<Navigation transparency={5} search={true} value={params}/>
+		<Navigation transparency={5} search={true} value={params} />
 	</div>
 	<div class="content-wrapper w-full h-full absolute flex items-start justify-start z-10">
 		{#if $products && $products.length > 0}
@@ -94,7 +120,11 @@
 							</div>
 							<div class="relative flex-grow ml-4">
 								<h2 class="text-lg font-semibold text-gray-700">{product.productName}</h2>
-								<p class="mt-2 text-gray-600 font-light">{product.description.length > 100 ? `${product.description.slice(0, 100)}...` : product.description}</p>
+								<p class="mt-2 text-gray-600 font-light">
+									{product.description.length > 100
+										? `${product.description.slice(0, 100)}...`
+										: product.description}
+								</p>
 								<p class="mb-16 text-gray-600 font-bold">
 									${parseFloat(product.price?.$numberDecimal).toFixed(2)}
 								</p>
@@ -110,8 +140,8 @@
 									</div>
 
 									<IconButton icon={faShoppingCart} color="COLORYLW" />
-									
-									<IconButton icon={faHeart} color="COLORRED" class="hidden lg:flex"/>
+
+									<IconButton icon={faHeart} color="COLORRED" class="hidden lg:flex" />
 								</div>
 							</div>
 						</div>
