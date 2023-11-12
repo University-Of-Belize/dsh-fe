@@ -38,7 +38,7 @@
 				: productDescription}
 		</p>
 		<p class="mb-16 text-gray-600 font-bold">
-			${parseFloat(productPrice).toFixed(2)}
+			${parseFloat(productPrice).toFixed(2)}BZD
 		</p>
 		<div class="comboBox flex flex-wrap absolute bottom-1">
 			<div

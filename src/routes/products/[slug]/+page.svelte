@@ -13,42 +13,9 @@
 	import IconButton from '$lib/Elements/Generic/IconButton.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import Fa from 'svelte-fa';
+	import type { Product } from '$lib/types/Product.ts';
+	import StarCount from '$lib/Elements/Generic/StarCount.svelte';
 	let hero_image: HTMLDivElement;
-
-	interface Product {
-		id: string;
-		score: number;
-		terms: string[];
-		match: {
-			[key: string]: string[];
-		};
-		description: string;
-		productName: string;
-		category: {
-			_id: string;
-			name: string;
-			alias: string;
-			description: string;
-			hidden: boolean;
-			__v: number;
-		};
-		image: string;
-		in_stock: number;
-		price: {
-			$numberDecimal: string;
-		};
-		reviews: {
-			_id: string;
-			content: string;
-			original_content: string;
-			rating: number;
-			reviewer: string;
-			hidden: boolean;
-			product: string;
-			__v: number;
-		}[];
-		slug: string;
-	}
 
 	const product = writable<Product | null>(null);
 	const params = $page.params.slug;
@@ -120,21 +87,7 @@
 							>
 								{$product.productName || "Oops, this product doesn't exist!"}
 							</div>
-							<div class="text-lg flex items-center justify-start text-COLORYLW">
-								<!-- Don't ask. It's copilot-->
-								<div class="rating-as-text mt-1 pr-2">
-									{calculateRating($product.reviews)}
-								</div>
-								{#each Array.from({ length: 5 }, (_, i) => i) as _}
-									{#if _ < Math.floor(calculateRating($product.reviews))}
-										<Fa icon={faStar} size="1x" />
-									{:else if _ === Math.floor(calculateRating($product.reviews)) && calculateRating($product.reviews) % 1 >= 0.5}
-										<Fa icon={faStarHalfAlt} size="1x" />
-									{:else}
-										<Fa icon={faStar} size="1x" class="opacity-25" />
-									{/if}
-								{/each}
-							</div>
+							<StarCount reviews={$product.reviews} />
 							<div class="text-sm lg:text-lg font-light text-COLORWHT">
 								{@html $product.description}
 							</div>
@@ -181,17 +134,8 @@
 					</div>
 					<div
 						class="rating-as-stars flex w-full justify-start items-center pl-1 text-xl text-COLORYLW"
-					>
-						<!-- Copilot Logic-->
-						{#each Array.from({ length: 5 }, (_, i) => i) as _}
-							{#if _ < Math.floor(calculateRating($product.reviews))}
-								<Fa icon={faStar} size="1x" />
-							{:else if _ === Math.floor(calculateRating($product.reviews)) && calculateRating($product.reviews) % 1 >= 0.5}
-								<Fa icon={faStarHalfAlt} size="1x" />
-							{:else}
-								<Fa icon={faStar} size="1x" class="opacity-25" />
-							{/if}
-						{/each}
+					><StarCount reviews={$product.reviews}/>
+					
 					</div>
 					<div class="rating-as-text w-full flex items-center justify-start pl-1 py-2">
 						{calculateRating($product.reviews, true)} Reviews
@@ -213,10 +157,11 @@
 			</div>
 
 			{#each $product.reviews as review}
-					<div class="review my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-2 rounded-md">
+				<div class="review my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-2 rounded-md">
 					<div class="flex bg-opacity-100">
 						<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
-							<img class="rounded-md"
+							<img
+								class="rounded-md"
 								src={review.reviewer?.profile_picture ||
 									config['product-showcase']['default-image']}
 								alt="{review.reviewer?.username}'s avatar"
@@ -228,7 +173,7 @@
 						</div>
 						<div class="review-content text-COLORBLK">
 							<div class="text-lg font-semibold flex">
-								{review.reviewer?.username || "Anonymous"}
+								{review.reviewer?.username || 'Anonymous'}
 								<div class="starcount flex text-COLORYLW items-center justify-center px-2">
 									<!-- Copilot Logic-->
 									{#each Array.from({ length: 5 }, (_, i) => i) as _}
