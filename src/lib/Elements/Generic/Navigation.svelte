@@ -1,17 +1,17 @@
 <script lang="ts">
-	import Fa from 'svelte-fa';
+	import { goto } from '$app/navigation';
+	import config from '$lib/config/settings.json';
 	import {
 		faBars,
-		faBurger,
 		faCog,
 		faGift,
 		faRightToBracket,
 		faSearch,
 		faStar
 	} from '@fortawesome/free-solid-svg-icons';
+	import Fa from 'svelte-fa';
 	import Button from './Button.svelte';
-	import { goto } from '$app/navigation';
-	import config from '$lib/config/settings.json';
+	import { onMount } from 'svelte';
 	export let transparency: number = 0;
 	export let search: boolean = true;
 	export let value: string = '';
@@ -25,6 +25,19 @@
 	let navTransparency: number = 0;
 	let cachedCategories = localStorage.getItem("categories");
 	let categories = [];
+
+onMount(async ()=>{
+	if(localStorage.token){
+		const response = await fetch(`${config["server"]["HTTPOrigin"]}/api/v1/search?filter=user_id&q=${localStorage.user_id}`, {
+			headers: {
+				'Authorization': `Bearer ${localStorage.token}`
+			}
+		});
+		const data = await response.json(); console.log(data)
+		user = data[0]; // Not a what is. It's a search
+		localStorage.setItem("user", JSON.stringify(user));
+	}
+})
 
 	function toggleNav() {
 		// Loop till the opacity reaches zero while moving the drawer to the left
@@ -102,17 +115,17 @@
 						await goto('/auth/login');
 					}}
 				>
-					<Button icon={faRightToBracket} color="COLORYLW" text="Login" />
+					<Button icon={faRightToBracket} color="COLORYLW" text="Log in" />
 				</div>
 			{:else}
 				<img
-					src={user.profile ?? './placeholder/avatar.png'}
+					src={user.profile_picture ?? '/placeholder/avatar.png'}
 					alt="{user.username}'s photo"
 					width="40px"
 					class="rounded-full cursor-pointer hover:opacity-80"
 					style="height: 40px;"
 					on:click={async () => {
-						await goto('/admin/dashboard/');
+						await goto(`/admin/dashboard/user/manage?user_id=${user.id}`);
 					}}
 				/>
 			{/if}
@@ -135,7 +148,7 @@
 						await goto('/auth/login');
 					}}
 				>
-					<Button icon={faRightToBracket} color="COLORYLW" text="Login" />
+					<Button icon={faRightToBracket} color="COLORYLW" text="Log in" />
 				</div>
 				<div
 					class="btn-wrp pl-2"

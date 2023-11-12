@@ -10,6 +10,7 @@ export default {
 				COLORWHT2: 'rgb(var(--COLORWHT2) / var(--tw-bg-opacity))',
 				COLORWHT3: 'rgb(var(--COLORWHT3) / var(--tw-bg-opacity))',
 				COLORWHT4: 'rgb(var(--COLORWHT4) / var(--tw-bg-opacity))',
+				COLORWHT5: 'rgb(var(--COLORWHT5) / var(--tw-bg-opacity))',
 				COLORBLE: 'rgb(var(--COLORBLE) / var(--tw-bg-opacity))',
 				COLORBLK: 'rgb(var(--COLORBLK) / var(--tw-bg-opacity))',
 				COLORYLW: 'rgb(var(--COLORYLW) / var(--tw-bg-opacity))',

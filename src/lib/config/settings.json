@@ -1,6 +1,7 @@
 {
 	"server": {
-		"HTTPOrigin": "https://winter-darkness-1705.fly.dev"
+		"HTTPOrigin": "https://winter-darkness-1705.fly.dev",
+		"support-email": "cafe@ub.edu.bz"
 	},
 	"product-view": {
 		"default-image": "https://via.placeholder.com/500"

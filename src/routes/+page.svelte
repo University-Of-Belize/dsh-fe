@@ -1,17 +1,17 @@
 <script lang="ts">
-	import { faGift, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import Button from '$lib/Elements/Generic/Button.svelte';
 	import { goto } from '$app/navigation';
-	import config from '$lib/config/settings.json';
-	import ProductBanner from '$lib/Elements/Generic/ProductBanner.svelte';
-	import { onMount } from 'svelte';
-	import type { Product as Product_ } from '$lib/types/Product.ts';
+	import Button from '$lib/Elements/Generic/Button.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
+	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import ProductBanner from '$lib/Elements/Generic/ProductBanner.svelte';
+	import config from '$lib/config/settings.json';
+	import type { Product as Product_ } from '$lib/types/Product.ts';
+	import { faGift, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+	import { onMount } from 'svelte';
 	let categories = [];
 	let product: Product_[] | null;
 	onMount(async () => {
-		const res = await fetch('https://winter-darkness-1705.fly.dev/api/v1/menu/random');
+		const res = await fetch(`${config["server"]["HTTPOrigin"]}/api/v1/menu/random`);
 		const r = await res.json();
 		product = r.is;
 		console.log(product);
@@ -46,7 +46,7 @@
 									goto('/auth/login');
 								}}
 							>
-								<Button icon={faRightToBracket} color="COLORYLW" text="Login" />
+								<Button icon={faRightToBracket} color="COLORYLW" text="Log in" />
 							</div>
 						</div>
 					</div>
