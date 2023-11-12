@@ -23,6 +23,7 @@
 	let navClose: HTMLDivElement;
 	let navToggle: HTMLDivElement;
 	let navTransparency: number = 0;
+	let cachedCategories = localStorage.getItem("categories");
 	let categories = [];
 
 	function toggleNav() {
@@ -41,11 +42,15 @@
 	}
 
 	async function getCategories() {
-		const response = await fetch(`${config.server.HTTPOrigin}/api/v1/category`);
-		const data = await response.json();
-		categories = data.is;
+		if (!cachedCategories) {
+			const response = await fetch(`${config.server.HTTPOrigin}/api/v1/category`);
+			const data = await response.json();
+			categories = data.is;
+			localStorage.setItem("categories", JSON.stringify(categories));
+		} else {
+			categories = JSON.parse(cachedCategories);
+		}
 	}
-
 	getCategories();
 </script>
 

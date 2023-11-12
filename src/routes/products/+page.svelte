@@ -7,6 +7,7 @@
 
 	import IconButton from '$lib/Elements/Generic/IconButton.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import Product from '$lib/Elements/Generic/ProductElement.svelte';
 	import Fa from 'svelte-fa';
 
 	interface Product {
@@ -97,14 +98,15 @@
 
 <main class="w-full h-screen">
 	<div class="navigation w-full z-20">
-		<Navigation transparency={5} search={true} value={params} />
+		<Navigation transparency={5} search={true} value={params ?? undefined} />
 	</div>
 	<div class="content-wrapper w-full h-full absolute flex items-start justify-start z-10">
 		{#if $products && $products.length > 0}
 			<div class="flex flex-wrap">
 				{#each $products as product}<!-- This way, we filter out all the products from reviews -->
 					{#if product.price != undefined}
-						<div class="bg-white rounded-lg shadow-lg p-4 m-4 flex max-w-lg">
+					<Product image={product.image} name={product.productName} description={product.description} price={product.price?.$numberDecimal} slug={product.slug} />
+						<!-- <div class="bg-white rounded-lg shadow-lg p-4 m-4 flex max-w-lg">
 							<div class="flex-none">
 								<img
 									src={product.image || config['product-view']['default-image']}
@@ -144,7 +146,7 @@
 									<IconButton icon={faHeart} color="COLORRED" class="hidden lg:flex" />
 								</div>
 							</div>
-						</div>
+						</div> -->
 					{/if}
 				{/each}
 			</div>
