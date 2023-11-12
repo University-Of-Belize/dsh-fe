@@ -123,7 +123,10 @@
 			{/if}
 
 			<div class="featured lg:hidden">
-				<div class="banner-featured flex justify-start items-center text-2xl bg-COLORWHT font-semibold text-COLORBLK px-8 py-4">Our Daily Special
+				<div
+					class="banner-featured flex justify-start items-center text-2xl bg-COLORWHT font-semibold text-COLORBLK px-8 py-4"
+				>
+					Our Daily Special
 				</div>
 				{#if product}
 					{#each product as product}
@@ -137,22 +140,28 @@
 								reviews={product.reviews}
 							/>
 						</div>{/each}
-				{/if}	<Footer text="There's more to explore"> <div class="block">
-					<div class="text-xl font-light">Shop our entire menu by creating an account</div>
-								<div
-								class="btn-wrp p-2 w-full flex justify-center items-center"
-								on:click={async () => {
-									await goto('/auth/signup');
-								}}
-							>
-							
+				{/if}
+				<Footer text="There's more to explore">
+					<div class="block">
+						<div class="text-xl font-light">Shop our entire menu by creating an account</div>
+						<div
+							class="btn-wrp p-2 w-full flex justify-center items-center"
+							on:click={async () => {
+								await goto('/auth/signup');
+							}}
+						>
 							<Button icon={faGift} color="COLORPNK" text="Sign up" color_t="COLORWHT" />
-						</div></div>
-					</Footer>
+						</div>
+					</div>
+				</Footer>
 			</div>
 		</div>
-		<div class="featured hidden lg:block">		<div class="banner-featured flex justify-start items-center text-2xl bg-COLORWHT font-semibold text-COLORBLK px-8 py-4">Our Daily Special
-		</div>
+		<div class="featured hidden lg:block">
+			<div
+				class="banner-featured flex justify-start items-center text-2xl bg-COLORWHT font-semibold text-COLORBLK px-8 py-12"
+			>
+				Daily Special
+			</div>
 			{#if product}
 				{#each product as product}
 					<div class="flex w-full">
@@ -168,17 +177,18 @@
 			{/if}
 		</div>
 	</div>
-	<Footer text="There's more to explore"> <div class="block">
-	<div class="text-xl font-light">Shop our entire menu by creating an account</div>
-				<div
+	<Footer text="There's more to explore">
+		<div class="block">
+			<div class="text-xl font-light">Shop our entire menu by creating an account</div>
+			<div
 				class="btn-wrp p-2 w-full flex justify-center items-center"
 				on:click={async () => {
 					await goto('/auth/signup');
 				}}
 			>
-			
-			<Button icon={faGift} color="COLORPNK" text="Sign up" color_t="COLORWHT" />
-		</div></div>
+				<Button icon={faGift} color="COLORPNK" text="Sign up" color_t="COLORWHT" />
+			</div>
+		</div>
 	</Footer>
 </main>
 
