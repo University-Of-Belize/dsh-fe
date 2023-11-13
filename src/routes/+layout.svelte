@@ -24,21 +24,23 @@
 		}
 
 		if (localStorage.token) {
-			// Run login checks
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/dash`, {
-				headers: {
-					Authorization: `Bearer ${localStorage.token}`
+			try {
+				// Run login checks
+				const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/dash`, {
+					headers: {
+						Authorization: `Bearer ${localStorage.token}`
+					}
+				});
+				if (res.status === 403) {
+					localStorage.removeItem('token');
+					localStorage.removeItem('user_id');
+					localStorage.removeItem('user');
+					toast.push('Your session is invalidated. Please sign in.');
+					goto('/auth/login');
 				}
-			}).catch((error) => {
+			} catch (error) {
 				console.log(error);
-				toast.push(`Oops. Something unexpected happened: ${error.message}`);
-			});
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('Your session is invalidated. Please sign in.');
-				goto('/auth/login');
+				toast.push(`Oops. Something unexpected happened: ${error.message}. Try logging in again.`);
 			}
 		}
 	});

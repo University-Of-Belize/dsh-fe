@@ -16,7 +16,7 @@
 	import type { Product } from '$lib/types/Product.ts';
 	import StarCount from '$lib/Elements/Generic/StarCount.svelte';
 	import { toast } from '@zerodevx/svelte-toast';
-	let hero_image: HTMLDivElement;
+	// let hero_image: HTMLDivElement;
 
 	const product = writable<Product | null>(null);
 	const params = $page.params.slug;

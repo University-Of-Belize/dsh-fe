@@ -18,9 +18,9 @@
 	import Fa from 'svelte-fa';
 	let navDrawer: HTMLDivElement;
 	interface DashData {
-    what: string;
-    is: Array<Array<string | string[]>>;
-}
+		what: string;
+		is: Array<Array<string | string[]>>;
+	}
 	let data: DashData;
 	let icons: DashData['is'][0][2];
 	$: mode = `<div class='font-bold pl-1'>Dashboard</div>`;
@@ -31,7 +31,18 @@
 				headers: {
 					Authorization: `Bearer ${localStorage.token}`
 				}
-			}); if(res.status === 403){toast.push("You need to log in."); goto("/auth/login")}if(!res.ok) { const r = await res.json(); return toast.push(r.message)}
+			});
+			if (res.status === 403) {
+				localStorage.removeItem('token');
+				localStorage.removeItem('user_id');
+				localStorage.removeItem('user');
+				toast.push('You need to log in.');
+				goto('/auth/login');
+			}
+			if (!res.ok) {
+				const r = await res.json();
+				return toast.push(r.message);
+			}
 			data = await res.json();
 			console.log(data);
 			mode =
@@ -48,7 +59,12 @@
 
 <main class="w-full h-screen">
 	<div class="navigation w-full z-20">
-		<Navigation transparency={5} search={true} titleText="Cafe | {mode}" titleWhere="/admin/dashboard" />
+		<Navigation
+			transparency={5}
+			search={true}
+			titleText="Cafe | {mode}"
+			titleWhere="/admin/dashboard"
+		/>
 	</div>
 	<div class="main-content flex items-center justify-start h-full text-COLORBLK">
 		<div
@@ -171,27 +187,40 @@
 			<div class="flex justify-between flex-wrap w-full">
 				{#if data != undefined}
 					{#each data.is[0][1] as shortcut, i}
-						<div class="w-56 h-56 rounded-sm bg-COLORWHT3 text-COLORBLK mx-4 my-4" on:click={()=>goto(data.is[1][1] ?? "/admin/dashboard")}>
+						<div
+							class="w-56 h-56 rounded-sm bg-COLORWHT3 text-COLORBLK mx-4 my-4 hover:opacity-80 cursor-pointer select-none"
+							on:click={() => goto(data.is[1][1][i] ?? '/admin/dashboard')}
+						>
 							<div class="flex items-center justify-center w-full h-full text-center">
 								<div class="block">
 									<div class="flex justify-center items-center w-full py-6">
 										{#if icons[i]}{#if icons[i] === 'user'}
-												<Fa icon={faUserCog} size={data.is[1][0] ?? "4x"} />{:else if icons[i] === 'hamburger'}<Fa
+												<Fa
+													icon={faUserCog}
+													size={data.is[1][0] ?? '4x'}
+												/>{:else if icons[i] === 'hamburger'}<Fa
 													icon={faHamburger}
-													size={data.is[1][0] ?? "4x"}
+													size={data.is[1][0] ?? '4x'}
 												/>{:else if icons[i] === 'list'}<Fa
 													icon={faList}
-													size={data.is[1][0] ?? "4x"}
-												/>{:else if icons[i] === 'plus'}<Fa icon={faPlus} size={data.is[1][0] ?? "4x"} />{:else}<Fa
-													icon={faQuestion}
-													size={data.is[1][0] ?? "4x"}
-												/>{/if}{/if}
+													size={data.is[1][0] ?? '4x'}
+												/>{:else if icons[i] === 'plus'}<Fa
+													icon={faPlus}
+													size={data.is[1][0] ?? '4x'}
+												/>{:else if icons[i] === 'message'}<Fa
+													icon={faMessage}
+													size={data.is[1][0] ?? '4x'}
+												/>{:else}<Fa icon={faQuestion} size={data.is[1][0] ?? '4x'} />
+											{/if}
+										{/if}
 									</div>
 									<div class="description font-semibold">{shortcut}</div>
 								</div>
 							</div>
 						</div>
-					{/each}{:else}<div class="font-light">There was a problem while loading the shortcuts.</div>{/if}
+					{/each}{:else}<div class="font-light">
+						There was a problem while loading the shortcuts.
+					</div>{/if}
 			</div>
 		</div>
 	</div>
