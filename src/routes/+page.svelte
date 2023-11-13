@@ -80,7 +80,7 @@
 			</div>
 		</div>
 		<div
-			class="category-grid flex justify-center items-center w-full flex-wrap lg:flex-nowrap h-96"
+			class="category-grid flex flex-wrap justify-center items-center w-full flex-wrap lg:flex-nowrap h-96"
 		>
 			{#if categories.length > 0}
 				{#each categories as category}
