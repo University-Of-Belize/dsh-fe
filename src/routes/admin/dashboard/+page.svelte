@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Generic/Button.svelte';
+	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import config from '$lib/config/settings.json';
 	import {
@@ -17,6 +18,7 @@
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	let navDrawer: HTMLDivElement;
+	let staff: boolean = false;
 	interface DashData {
 		what: string;
 		is: Array<Array<string | string[]>>;
@@ -45,6 +47,7 @@
 			}
 			data = await res.json();
 			console.log(data);
+			staff = data.is[0][0] === 'super' ? true : false;
 			mode =
 				data.is[0][0] === 'super'
 					? `<div class='font-bold pl-1'>SuperUser Mode</div>`
@@ -87,97 +90,7 @@
 					/>
 				</div>
 			</div>
-
-			<div class="section py-6 border-t border-black border-dashed border-opacity-5">
-				<div class="title font-semibold pb-5">Server Configuration</div>
-				<div class="three pt-1">
-					<Button
-						icon={faUserCog}
-						color="COLORWHT3"
-						text="User management"
-						color_t="COLORBLK"
-						custom_style="w-full font-semibold"
-					/>
-				</div>
-				<div class="three pt-1">
-					<Button
-						icon={faMessage}
-						color="COLORWHT3"
-						text="Review management"
-						color_t="COLORBLK"
-						custom_style="w-full font-semibold"
-					/>
-				</div>
-				<div class="three pt-1">
-					<Button
-						icon={faPlus}
-						color="transparent"
-						text="Create a new user"
-						color_t="COLORBLK"
-						custom_style="w-full font-semibold"
-					/>
-				</div>
-			</div>
-			<div class="section py-6 border-t border-black border-dashed border-opacity-5">
-				<div class="title font-semibold pb-5">Order Management</div>
-				<div class="three pt-1">
-					<Button
-						icon={faList}
-						color="COLORWHT3"
-						text="What's queued?"
-						color_t="COLORBLK"
-						custom_style="w-full font-semibold"
-					/>
-				</div>
-			</div>
-			<div class="section py-6 border-t border-black border-dashed border-opacity-5">
-				<div class="title font-semibold pb-5">Product Management</div>
-				<div class="three pt-1">
-					<Button
-						icon={faPlus}
-						color="COLORWHT3"
-						text="Category management"
-						color_t="COLORBLK"
-						custom_style="w-full font-semibold"
-					/>
-				</div>
-				<div class="three pt-1">
-					<Button
-						icon={faHamburger}
-						color="COLORWHT3"
-						text="Product management"
-						color_t="COLORBLK"
-						custom_style="w-full font-semibold"
-					/>
-				</div>
-				<div class="three pt-1">
-					<Button
-						icon={faTag}
-						color="COLORWHT3"
-						text="Promo code management"
-						color_t="COLORBLK"
-						custom_style="w-full font-semibold"
-					/>
-				</div>
-				<div class="three pt-1">
-					<Button
-						icon={faPlus}
-						color="transparent"
-						text="Start a new category"
-						color_t="COLORBLK"
-						custom_style="w-full font-semibold"
-					/>
-				</div>
-				<div class="three pt-1">
-					<Button
-						icon={faPlus}
-						color="transparent"
-						text="Start a new promo code"
-						color_t="COLORBLK"
-						custom_style="w-full font-semibold"
-					/>
-				</div>
-			</div>
+			<DashList {staff} />
 		</div>
 		<div class="content block px-16 py-16 w-full h-full bg-transparent">
 			<div class="flex text-2xl font-semibold pb-2">
