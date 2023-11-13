@@ -79,13 +79,11 @@
 				</div>
 			</div>
 		</div>
-		<div
-			class="category-grid flex flex-wrap justify-center items-center w-full flex-wrap lg:flex-nowrap h-96"
-		>
+		<div class="category-grid ltr flex flex-wrap justify-center items-center w-full h-96 overflow-auto">
 			{#if categories.length > 0}
 				{#each categories as category}
 					<div
-						class="gridelement h-full w-full flex justify-center items-center relative hover:opacity-80 cursor-pointer"
+						class="gridelement flex-grow flex-shrink-0 lg:basis-1/4 h-full w-full flex justify-center items-center relative hover:opacity-80 cursor-pointer"
 					>
 						<div
 							class="content-wrapper w-full h-full absolute flex items-center justify-center text-7xl font-semibold text-COLORWHT z-10"
@@ -129,61 +127,33 @@
 					<div class="hero-image-1 h-full w-full" />
 				</div>
 			{/if}
+		</div>
 
-			<div class="featured lg:hidden">
-				<div
-					class="banner-featured flex justify-start items-center text-2xl bg-COLORWHT font-semibold text-COLORBLK px-8 py-4"
-				>
-					Our Daily Special
-				</div>
-				{#if product}
-					{#each product as product}
-						<div class="flex w-full">
-							<ProductBanner
-								image={product.image}
-								name={product.productName}
-								description={product.description}
-								price={product.price?.$numberDecimal}
-								slug={product.slug}
-								reviews={product.reviews}
-							/>
-						</div>{/each}
-				{/if}
-				<Footer text="There's more to explore">
-					<div class="block">
-						<div class="text-xl font-light">Shop our entire menu by creating an account</div>
-						<div
-							class="btn-wrp p-2 w-full flex justify-center items-center"
-							on:click={async () => {
-								await goto('/auth/signup');
-							}}
-						>
-							<Button icon={faGift} color="COLORPNK" text="Sign up" color_t="COLORWHT" />
-						</div>
-					</div>
-				</Footer>
-			</div>
-		</div>
-		<div class="featured hidden lg:block">
+		<div class="gridelement h-16 w-full flex justify-center items-center relative">
 			<div
-				class="banner-featured flex justify-start items-center text-2xl bg-COLORWHT font-semibold text-COLORBLK px-8 py-12"
-			>
-				Daily Special
-			</div>
-			{#if product}
-				{#each product as product}
-					<div class="flex w-full">
-						<ProductBanner
-							image={product.image}
-							name={product.productName}
-							description={product.description}
-							price={product.price?.$numberDecimal}
-							slug={product.slug}
-							reviews={product.reviews}
-						/>
-					</div>{/each}
-			{/if}
+				class="content-wrapper w-full h-full absolute flex items-center justify-start text-2xl font-semibold text-COLORWHT bg-COLORBLK px-8 z-10"
+			/>
 		</div>
+	</div>
+	<div class="featured block">
+		<div
+			class="banner-featured flex justify-start items-center text-2xl bg-COLORWHT font-semibold text-COLORBLK px-8 py-12"
+		>
+			Daily Special
+		</div>
+		{#if product}
+			{#each product as product}
+				<div class="flex w-full">
+					<ProductBanner
+						image={product.image}
+						name={product.productName}
+						description={product.description}
+						price={product.price?.$numberDecimal}
+						slug={product.slug}
+						reviews={product.reviews}
+					/>
+				</div>{/each}
+		{/if}
 	</div>
 	<Footer text="There's more to explore">
 		<div class="block">
@@ -212,4 +182,23 @@
 	.hero-image-base {
 		background-size: cover;
 	}
+	
+	.rtl {
+        direction: rtl;
+    }
+    /* .ltr {
+        direction: ltr;
+    } */
+	.rtl::-webkit-scrollbar {
+        width: 15px;
+    }
+	.ltr::-webkit-scrollbar {
+        width: 15px;
+    }
+    
+	@media (max-width: 640px) {
+        .ltr::-webkit-scrollbar {
+            width: 8px;
+        }
+    }
 </style>
