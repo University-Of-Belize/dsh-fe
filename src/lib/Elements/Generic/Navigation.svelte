@@ -12,6 +12,7 @@
 	import Fa from 'svelte-fa';
 	import Button from './Button.svelte';
 	import { onMount } from 'svelte';
+	import { toast } from '@zerodevx/svelte-toast';
 	export let transparency: number = 0;
 	export let search: boolean = true;
 	export let value: string = '';
@@ -23,21 +24,32 @@
 	let navClose: HTMLDivElement;
 	let navToggle: HTMLDivElement;
 	let navTransparency: number = 0;
-	let cachedCategories = localStorage.getItem("categories");
+	let cachedCategories = localStorage.getItem('categories');
 	let categories = [];
 
-onMount(async ()=>{
-	if(localStorage.token){
-		const response = await fetch(`${config["server"]["HTTPOrigin"]}/api/v1/search?filter=user_id&q=${localStorage.user_id}`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.token}`
+	onMount(async () => {
+		if (localStorage.token) {
+			try {
+				const response = await fetch(
+					`${config['server']['HTTPOrigin']}/api/v1/search?filter=user_id&q=${localStorage.user_id}`,
+					{
+						headers: {
+							Authorization: `Bearer ${localStorage.token}`
+						}
+					}
+				);
+				const data = await response.json();
+				console.log(data);
+				user = data[0]; // Not a what is. It's a search
+				localStorage.setItem('user', JSON.stringify(user));
+			} catch (error) {
+				console.log(error);
+				toast.push(
+					`Oops. Something unexpected happened while loading the navigation: ${error.message}`
+				);
 			}
-		});
-		const data = await response.json(); console.log(data)
-		user = data[0]; // Not a what is. It's a search
-		localStorage.setItem("user", JSON.stringify(user));
-	}
-})
+		}
+	});
 
 	function toggleNav() {
 		// Loop till the opacity reaches zero while moving the drawer to the left
@@ -59,7 +71,7 @@ onMount(async ()=>{
 			const response = await fetch(`${config.server.HTTPOrigin}/api/v1/category`);
 			const data = await response.json();
 			categories = data.is;
-			localStorage.setItem("categories", JSON.stringify(categories));
+			localStorage.setItem('categories', JSON.stringify(categories));
 		} else {
 			categories = JSON.parse(cachedCategories);
 		}
@@ -84,10 +96,10 @@ onMount(async ()=>{
 				<Fa icon={faBars} size="1.01x" class="text-black" />
 			</div>
 			<h1
-				class="text-COLORBLK font-semibold hover:underline cursor-pointer"
+				class="flex text-COLORBLK font-semibold hover:underline cursor-pointer"
 				on:click={() => goto(`${titleWhere}`)}
 			>
-				{titleText}
+				{@html titleText}
 			</h1>
 			{#if search}
 				<form
@@ -141,35 +153,32 @@ onMount(async ()=>{
 			class="drawer bg-COLORWHT px-2 py-2 flex-col justify-start h-screen bg-opacity-100"
 			bind:this={navDrawer}
 		>
-			<div class="top-row flex justify-between items-center w-full pt-2">
-				<div
-					class="btn-wrp pr-1"
-					on:click={async () => {
-						await goto('/auth/login');
-					}}
-				>
-					<Button icon={faRightToBracket} color="COLORYLW" text="Log in" />
-				</div>
-				<div
-					class="btn-wrp pl-2"
-					on:click={async () => {
-						await goto('/auth/signup');
-					}}
-				/>
-				<Button icon={faGift} color="COLORPNK" text="Sign up" color_t="COLORWHT" />
-			</div>
-			<div class="two py-6">
-				<Button
-					icon={faCog}
-					color="COLORBLK"
-					text="My account settings"
-					color_t="COLORWHT"
-					custom_style="w-full"
-				/>
-			</div>
+			{#if !user}
+				<div class="top-row flex justify-between items-center w-full pt-2">
+					<div class="btn-wrp pr-1" on:click={() => goto('/auth/login')}>
+						<Button icon={faRightToBracket} color="COLORYLW" text="Log in" />
+					</div>
+					<div class="btn-wrp pl-2" on:click={() => goto('/auth/register')}>
+						<Button icon={faGift} color="COLORPNK" text="Sign up" color_t="COLORWHT" />
+					</div>
+				</div>{:else}
+				<div class="two py-6">
+					<div class="title font-semibold pb-5">My Account</div>
+					<div
+						on:click={async () => {
+							await goto(`/admin/dashboard/user/manage?user_id=${user?.id}`);
+						}}
+					>
+						<Button
+							icon={faCog}
+							color="COLORBLK"
+							text="My account settings"
+							color_t="COLORWHT"
+							custom_style="w-full"
+						/>
+					</div>
+				</div>{/if}
 			<div class="three py-6 border-t border-black border-dashed border-opacity-5">
-				<div class="title font-semibold pb-5">Categories</div>
-
 				{#if categories.length > 0}
 					{#each categories as category}
 						<div

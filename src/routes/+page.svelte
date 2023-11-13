@@ -7,14 +7,22 @@
 	import config from '$lib/config/settings.json';
 	import type { Product as Product_ } from '$lib/types/Product.ts';
 	import { faGift, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	let categories = [];
 	let product: Product_[] | null;
 	onMount(async () => {
-		const res = await fetch(`${config["server"]["HTTPOrigin"]}/api/v1/menu/random`);
-		const r = await res.json();
-		product = r.is;
-		console.log(product);
+		try {
+			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/menu/random`);
+			const r = await res.json();
+			product = r.is;
+			console.log(product);
+		} catch (error) {
+			console.log(error);
+			toast.push(
+				`Oops. Something unexpected happened while contacting our servers: ${error.message}`
+			);
+		}
 	});
 
 	async function getCategories() {

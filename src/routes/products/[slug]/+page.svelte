@@ -15,16 +15,24 @@
 	import Fa from 'svelte-fa';
 	import type { Product } from '$lib/types/Product.ts';
 	import StarCount from '$lib/Elements/Generic/StarCount.svelte';
+	import { toast } from '@zerodevx/svelte-toast';
 	let hero_image: HTMLDivElement;
 
 	const product = writable<Product | null>(null);
 	const params = $page.params.slug;
 
 	onMount(async () => {
-		// Check if the slug even exists
-		const response = await fetch(`${config.server.HTTPOrigin}/api/v1/menu/slug?id=${params}`);
-		if (!response.ok) {
-			history.back();
+		try {
+			// Check if the slug even exists
+			const response = await fetch(`${config.server.HTTPOrigin}/api/v1/menu/slug?id=${params}`);
+			if (!response.ok) {
+				history.back();
+			}
+		} catch (error) {
+			console.log(error);
+			toast.push(
+				`Oops. Something unexpected happened while loading our products: ${error.message}`
+			);
 		}
 	});
 
@@ -134,8 +142,8 @@
 					</div>
 					<div
 						class="rating-as-stars flex w-full justify-start items-center pl-1 text-xl text-COLORYLW"
-					><StarCount reviews={$product.reviews}/>
-					
+					>
+						<StarCount reviews={$product.reviews} />
 					</div>
 					<div class="rating-as-text w-full flex items-center justify-start pl-1 py-2">
 						{calculateRating($product.reviews, true)} Reviews

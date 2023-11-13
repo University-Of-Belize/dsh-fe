@@ -1,6 +1,11 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import config from '$lib/config/settings.json';
+	import { what_is } from '$lib/vendor/dishout/What_Is';
+	import what from '$lib/vendor/dishout/Whats';
 	import {
 		faGift,
 		faLock,
@@ -9,12 +14,9 @@
 		// faUserCog
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
-	import config from '$lib/config/settings.json';
-	import Fa from 'svelte-fa';
-	import { what_is } from '$lib/vendor/dishout/What_Is';
-	import what from '$lib/vendor/dishout/Whats';
-	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import Fa from 'svelte-fa';
+	$: next_url = $page.url.searchParams.get('next');
 
 	onMount(() => {
 		// Check if we're already logged in
@@ -23,7 +25,7 @@
 		if (token && !blocked) {
 			// token exists, do something
 			toast.push("You're already logged in");
-			goto('/admin/dashboard');
+			goto(next_url ?? '/admin/dashboard');
 		}
 		if (blocked) {
 			toast.push("Sorry, you've been blocked from our services.");
@@ -54,20 +56,23 @@
 				},
 				body: data ? JSON.stringify(what_is(what.public.auth, data)) : null
 			});
-			if (response.status == 403) {
-				const json = await response.json(); // Flag the user
-				localStorage.setItem('blocked', 'true');
-				toast.push(`${json.message}`, {
-					dismissable: false,
-					theme: {
-						'--toastBarBackground': '#842d69'
-					}
-				});
-				// Redirect to verify to notify the status
-				return goto('/auth/verify');
+			const json = await response.json();
+			if (response.status === 403) {
+				// Hackish asf lmfao
+				if (json.message === "Sorry, you've been blocked from our services.") {
+					// Flag the user
+					localStorage.setItem('blocked', 'true');
+					toast.push(`${json.message}`, {
+						dismissable: false,
+						theme: {
+							'--toastBarBackground': '#842d69'
+						}
+					});
+					// Redirect to verify to notify the status
+					return goto('/auth/verify');
+				}
 			}
 			if (!response.ok) {
-				const json = await response.json();
 				return toast.push(`${json.message}`, {
 					dismissable: false,
 					theme: {
@@ -75,7 +80,6 @@
 					}
 				});
 			}
-			const json = await response.json();
 			localStorage.setItem('user_id', json.is[0]);
 			localStorage.setItem('token', json.is[1]);
 			// Remove 'oops' or 'blocked' if exist
@@ -83,7 +87,7 @@
 			localStorage.removeItem('blocked');
 			toast.push('Welcome back!');
 			setTimeout(() => {
-				goto('/admin/dashboard');
+				goto(next_url ?? '/admin/dashboard');
 			}, 2000);
 		} catch (error) {
 			toast.push(`${error.message}. Try again later.`, {

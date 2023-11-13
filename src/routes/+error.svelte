@@ -1,36 +1,28 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	let error_apology: HTMLDivElement;
+	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import EscrowBanner from '$lib/Elements/Generic/EscrowBanner.svelte';
+	import { onMount } from 'svelte';
+	let text: string, branding_text: string, subtitle: string;
+	onMount(() => {
+		if ($page.status === 404) {
+			text = "Sorry, looks like we couldn't find that one 😅";
+		} else {
+			text = 'Whoops, looks like we messed up 😅';
+		}
+		subtitle = `Technical details: HTTP_${$page.status} ${$page.error?.message}`;
+	});
 </script>
 
-<main class="login h-screen w-full overflow-hidden text-white">
-	<div class="content mx-16 flex flex-wrap items-center justify-center">
-		<div class="headline-greeting my-3 mt-7 inline-block text-left">
-			<div class="text-md font-semibold uppercase" style="color: #0EC4DD">HOW EMBARRASSING...</div>
-			<div bind:this={error_apology} class="my-2 text-5xl font-semibold text-white">
-				{#if $page.status == 404}
-					Sorry, looks like we couldn't find that one 😅
-				{:else}
-					Whoops, looks like we messed up 😅
-				{/if}
-			</div>
-			<div class="my-4 text-sm font-semibold text-white">
-				Technical details: HTTP_{$page.status} "{$page.error?.message}"
-			</div>
-			<div class="my-4 text-sm font-semibold text-white">
-				Wanna go <a href="/" class="hover:underline" style="color: #0094FF">Home</a>?
-			</div>
-		</div>
+<main class="w-full h-screen">
+	<div class="navigation w-full z-20">
+		<Navigation transparency={5} search={true} />
+	</div>
+	<div class="main-content flex items-center justify-center h-full">
+		<EscrowBanner
+			{branding_text}
+			text={text ?? 'Oops'}
+			subtitle={subtitle ?? 'Getting error details.'}
+		/>
 	</div>
 </main>
-
-<style>
-	.login {
-		background-color: #191b1f; /* Fallback color */
-		background-image: url('/images/killed.jpg');
-		background-position: center;
-		/* background-size: contain; */
-		/* background-repeat: no-repeat; */
-		/* border-radius: 1vw; */
-	}
-</style>
