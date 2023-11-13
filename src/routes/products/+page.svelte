@@ -8,7 +8,10 @@
 	import IconButton from '$lib/Elements/Generic/IconButton.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import Product from '$lib/Elements/Generic/ProductElement.svelte';
+	import Footer from "$lib/Elements/Generic/Footer.svelte";
 	import Fa from 'svelte-fa';
+	import { goto } from '$app/navigation';
+	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
 
 	interface Product {
 		id: string;
@@ -160,5 +163,14 @@
 				</div>
 			</div>
 		{/if}
-	</div>
-</main>
+	</div>	
+	</main><Footer text="Looks like you've reached the end.">
+		<div class="block">
+			<!-- <div class="text-xl font-light">Shop our entire menu by creating an account</div> -->
+			<div class="flex justify-center items-center w-full pt-8 pb-4">
+				
+					<SearchBar />
+				
+			</div>
+		</div>
+	</Footer>

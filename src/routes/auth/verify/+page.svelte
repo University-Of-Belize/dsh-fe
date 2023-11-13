@@ -9,14 +9,16 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
 	const VerifyToken = $page.url.searchParams.get('activation_token') || false;
 	let smartButton: HTMLDivElement;
+	let search = false;
 	let state = -1; // What is this?
 	$: buttonText = '';
 	$: branding_text = 'One second...';
 	$: text = '';
 	$: subtitle = '';
-	
+
 	onMount(async () => {
 		// Determine the state
 		if (VerifyToken) {
@@ -34,9 +36,9 @@
 			branding_text = 'Blocked';
 			text = "Sorry, you've been blocked from using our services.";
 			subtitle = 'Contact a cafe staff member for assistance';
-			buttonText = 'Leave a message';  // Strip the identity of the user
-			localStorage.removeItem("user_id");
-			localStorage.removeItem("token");
+			buttonText = 'Leave a message'; // Strip the identity of the user
+			localStorage.removeItem('user_id');
+			localStorage.removeItem('token');
 			state = 2;
 		} else {
 			branding_text = "You don't belong here! ⚠️";
@@ -45,7 +47,7 @@
 			buttonText = '';
 			smartButton.style.display = 'none';
 			setTimeout(() => {
-				// goto('/');
+				goto('/');
 			}, 2000);
 		}
 	});
@@ -95,7 +97,7 @@
 			}
 			text = 'All good to go!';
 			const json = await response.json();
-			toast.push(`${json.message}`);
+			toast.push(`${json.message ?? "All good to go!"}`);
 		} catch (error) {
 			text = 'There was an error.';
 			toast.push(`${error.message}. Try again later.`, {
@@ -111,9 +113,13 @@
 		branding_text = 'Trying to activate your account';
 		text = 'Please, wait.';
 		postData(undefined, 'verify', VerifyToken || '');
+		search = true;
+		branding_text = 'Thanks';
+		text = "You've verified your identity";
+		subtitle = 'You will be redirected to the authentication provider shortly.';
 		setTimeout(() => {
 			goto('/auth/login');
-		}, 2000);
+		}, 5000);
 	}
 </script>
 
@@ -124,19 +130,22 @@
 	<div class="main-content flex items-center justify-center h-full">
 		<EscrowBanner {branding_text} {text} {subtitle}>
 			<div class="flex justify-center items-center w-full pt-8 pb-4">
-				<div
-					class="reactive_wrapper w-fit h-fit"
-					on:click={() => smartAction()}
-					bind:this={smartButton}
-				>
-					<Button
-						icon={null}
-						color="COLORWHT1"
-						color_t="COLORBLK"
-						custom_style="justify-center"
-						text={buttonText}
-					/>
-				</div>
+				{#if search}
+					<SearchBar />
+				{:else}
+					<div
+						class="reactive_wrapper w-fit h-fit"
+						on:click={() => smartAction()}
+						bind:this={smartButton}
+					>
+						<Button
+							icon={null}
+							color="COLORWHT1"
+							color_t="COLORBLK"
+							custom_style="justify-center"
+							text={buttonText}
+						/>
+					</div>{/if}
 			</div>
 		</EscrowBanner>
 	</div>

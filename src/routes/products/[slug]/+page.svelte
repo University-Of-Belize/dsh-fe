@@ -2,7 +2,9 @@
 	import { page } from '$app/stores';
 	import config from '$lib/config/settings.json';
 	import {
+		faCog,
 		faHeart,
+		faPencil,
 		faShoppingCart,
 		faStar,
 		faStarHalfAlt
@@ -10,16 +12,22 @@
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
+	import Button from '$lib/Elements/Generic/Button.svelte';
 	import IconButton from '$lib/Elements/Generic/IconButton.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import Fa from 'svelte-fa';
-	import type { Product } from '$lib/types/Product.ts';
 	import StarCount from '$lib/Elements/Generic/StarCount.svelte';
+	import type { Product } from '$lib/types/Product.ts';
 	import { toast } from '@zerodevx/svelte-toast';
+	import Fa from 'svelte-fa';
+	import { what_is } from '$lib/vendor/dishout/What_Is';
+	import what from '$lib/vendor/dishout/Whats';
 	// let hero_image: HTMLDivElement;
-
+	const user = localStorage.user; // The user
 	const product = writable<Product | null>(null);
+	let product_id: string;
 	const params = $page.params.slug;
+	let newReviewContent: HTMLTextAreaElement;
+	let rating = 0;
 
 	onMount(async () => {
 		try {
@@ -53,6 +61,7 @@
 
 		if (r && r.length > 0) {
 			product.set(r[0]); // take the first result
+			product_id = r[0].id;
 		} else {
 			product.set(null);
 		}
@@ -66,7 +75,7 @@
 			index = i;
 		});
 		const result = (sum / reviews.length).toFixed(2);
-		console.log(Number.isNaN(parseFloat(result)));
+		// console.log(Number.isNaN(parseFloat(result)));
 		if (Number.isNaN(parseFloat(result))) return 'No reviews yet';
 		return count ? index : result; // I know this is bad and unscalable, but I'm lazy
 	}
@@ -75,6 +84,66 @@
 		const ratingCount = reviews.filter((review) => review.rating === rating).length;
 		const percentage = (ratingCount / totalReviews) * 100;
 		return percentage.toFixed(0);
+	}
+	function escapeHtml(unsafe) {
+		return unsafe
+			.replace(/&/g, '&amp;')
+			.replace(/</g, '&lt;')
+			.replace(/>/g, '&gt;')
+			.replace(/"/g, '&quot;')
+			.replace(/'/g, '&#039;');
+	}
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		newReviewContent.disabled = true;
+		// @ts-ignore
+		const valueArray = Array.from(event.target)
+			.filter((el) => el.name)
+			.map((el) => el.value);
+		// console.log(valueArray[0], rating);
+		if (rating <= 0 || valueArray[0].trim() === '') {
+			toast.push(
+				'You cannot leave an empty comment and your rating must be <b>greater than 0</b>',
+				{
+					dismissable: false,
+					theme: {
+						'--toastBarBackground': '#842d69'
+					}
+				}
+			);
+		} else {
+			Review(valueArray[0], rating); // Pass in the comment and the rating
+		}
+	};
+
+	function setRating(value: number) {
+		rating = value;
+	}
+
+	async function Review(comment: string, rating: number) {
+		const response = await fetch(`${config['server']['HTTPOrigin']}/api/v1/review/create`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${localStorage.token}`
+			},
+			body: JSON.stringify(what_is(what.public.review, [product_id, rating, comment]))
+		});
+		const data = await response.json();
+		if (!response.ok) {
+			return toast.push(data.message, {
+				dismissable: false,
+				theme: {
+					'--toastBarBackground': '#842d69'
+				}
+			});
+		}
+		toast.push(
+			"Your review was created. It'll take a few minutes to show up. Indexing every: <b>3 minutes</b>"
+		);
+		setTimeout(() => {
+			window.location.reload();
+		}, 2000);
 	}
 </script>
 
@@ -164,62 +233,115 @@
 				</div>
 			</div>
 
-			{#each $product.reviews as review}
-				<div class="review my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-2 rounded-md">
+			<!-- New reviews first -->
+			<div class="flex flex-col-reverse justify-start w-full">
+				{#if $product.reviews.length === 0}<b>No reviews yet. Be the first.</b>{/if}
+				{#each $product.reviews as review}
+					<div class="review my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-2 rounded-md">
+						<div class="flex bg-opacity-100">
+							<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
+								<img
+									class="rounded-md"
+									src={review.reviewer?.profile_picture ||
+										config['product-showcase']['default-image']}
+									alt="{review.reviewer?.username}'s avatar"
+									on:error={() => {
+										review.reviewer.profile_picture = config['product-showcase']['default-image'];
+									}}
+									style="width: 50px; height: 50px;"
+								/>
+							</div>
+							<div class="review-content text-COLORBLK">
+								<div class="text-lg font-semibold flex">
+									{review.reviewer?.username || 'Anonymous'}
+									<div class="starcount flex text-COLORYLW items-center justify-center px-2">
+										<!-- Copilot Logic-->
+										{#each Array.from({ length: 5 }, (_, i) => i) as _}
+											{#if _ < Math.floor(calculateRating([review]))}
+												<Fa icon={faStar} size="1x" />
+											{:else if _ === Math.floor(calculateRating( [review] )) && calculateRating( [review] ) % 1 >= 0.5}
+												<Fa icon={faStarHalfAlt} size="1x" />
+											{:else}
+												<Fa icon={faStar} size="1x" class="opacity-25" />
+											{/if}
+										{/each}
+									</div>
+								</div>
+								<div class="text-md font-light text-COLORBLE">
+									{@html escapeHtml(review.content).replace(/\n/g, '<br>')}
+								</div>
+							</div>
+						</div>
+					</div>
+				{/each}
+			</div>
+			<!--- Create a review --->
+			{#if user}<div class="review my-4 bg-transparent px-4 py-2 rounded-md">
 					<div class="flex bg-opacity-100">
 						<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
 							<img
 								class="rounded-md"
-								src={review.reviewer?.profile_picture ||
-									config['product-showcase']['default-image']}
-								alt="{review.reviewer?.username}'s avatar"
+								src={user.profile_picture || config['product-showcase']['default-image']}
+								alt="{user.username}'s avatar"
 								on:error={() => {
-									review.reviewer.profile_picture = config['product-showcase']['default-image'];
+									user.profile_picture = config['product-showcase']['default-image'];
 								}}
 								style="width: 50px; height: 50px;"
 							/>
 						</div>
-						<div class="review-content text-COLORBLK">
-							<div class="text-lg font-semibold flex">
-								{review.reviewer?.username || 'Anonymous'}
-								<div class="starcount flex text-COLORYLW items-center justify-center px-2">
-									<!-- Copilot Logic-->
-									{#each Array.from({ length: 5 }, (_, i) => i) as _}
-										{#if _ < Math.floor(calculateRating([review]))}
-											<Fa icon={faStar} size="1x" />
-										{:else if _ === Math.floor(calculateRating( [review] )) && calculateRating( [review] ) % 1 >= 0.5}
-											<Fa icon={faStarHalfAlt} size="1x" />
-										{:else}
-											<Fa icon={faStar} size="1x" class="opacity-25" />
-										{/if}
-									{/each}
+						<form
+							class="review-content text-COLORBLK w-full h-full px-1 py-1 rounded-md"
+							action="#"
+							on:submit={(event) => handleSubmit(event)}
+						>
+							<div class="review-wrap border border-black rounded-md mb-4">
+								<div
+									class="text-i-combo flex font-semibold items-center justify-start text-COLORGRY"
+								>
+									<div class="icon px-2 py-2"><Fa icon={faPencil} size="1.01x" /></div>
+									Write a review...
 								</div>
+								<textarea
+									bind:this={newReviewContent}
+									name="review"
+									class="text-md font-light text-COLORBLE h-full w-full px-2 py-1 mx-6 bg-transparent focus:outline-none"
+									rows="6"
+									placeholder="What's on your mind?"
+								/>
 							</div>
-							<div class="text-md font-light text-COLORBLE">{review.content}</div>
-						</div>
+							<div
+								class="star-rating flex flex-row-reverse items-center justify-end select-none text-2xl font-light py-4"
+							>
+								{#each [5, 4, 3, 2, 1] as value}
+									<div class="star flex items-center justify-center text-COLORYLW">
+										<div class="star-wrapper relative">
+											<input
+												type="radio"
+												id={value}
+												name="rating"
+												{value}
+												class="absolute z-10 w-8 h-8 opacity-0"
+												on:change={() => setRating(value)}
+											/>
+											<label for={value} class="relative z-0" class:active={rating >= value}
+												><Fa icon={faStar} size="1x" /></label
+											>
+										</div>
+									</div>
+								{/each}
+								<div class="pr-2">Your Rating</div>
+							</div>
+							<button type="submit"
+								><Button
+									icon={faCog}
+									text="Apply Changes"
+									color_t="COLORWHT"
+									color="COLORBLK"
+								/></button
+							>
+						</form>
 					</div>
-				</div>
-			{/each}
-			<!--- Create a review --->
-			<!-- <div class="review my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-2 rounded-md">
-				<div class="flex bg-opacity-100">
-					<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
-						<img class="rounded-md"
-							src={review.reviewer?.profile_picture ||
-								config['product-showcase']['default-image']}
-							alt="{review.reviewer?.username}'s avatar"
-							on:error={() => {
-								review.reviewer.profile_picture = config['product-showcase']['default-image'];
-							}}
-							style="width: 50px; height: 50px;"
-						/>
-					</div>
-					<div class="review-content text-COLORBLK">
-						
-						<input type="text" class="text-md font-light text-COLORBLE"/>
-					</div>
-				</div>
-			</div> -->
+				</div>{/if}
 		{/if}
 	</div>
 </main>
@@ -231,5 +353,13 @@
 
 	.hero-image {
 		background-size: cover;
+	}
+
+	.star-rating .star-wrapper label {
+		color: #c79f1f;
+		opacity: 0.5;
+	}
+	.star-rating .star-wrapper label.active {
+		opacity: 1;
 	}
 </style>
