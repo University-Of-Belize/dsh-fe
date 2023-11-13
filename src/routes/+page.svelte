@@ -29,6 +29,11 @@
 		const response = await fetch(`${config.server.HTTPOrigin}/api/v1/category`);
 		const data = await response.json();
 		categories = data.is;
+		if (localStorage.categories) {
+			if (localStorage.categories !== JSON.stringify(categories)) {
+				localStorage.removeItem('categories'); // Time for an update
+			}
+		}
 	}
 
 	getCategories();
@@ -79,7 +84,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="category-grid ltr flex flex-wrap justify-center items-center w-full h-96 overflow-auto">
+		<div
+			class="category-grid ltr flex flex-wrap justify-center items-center w-full h-96 overflow-auto"
+		>
 			{#if categories.length > 0}
 				{#each categories as category}
 					<div
@@ -182,23 +189,23 @@
 	.hero-image-base {
 		background-size: cover;
 	}
-	
+
 	.rtl {
-        direction: rtl;
-    }
-    /* .ltr {
+		direction: rtl;
+	}
+	/* .ltr {
         direction: ltr;
     } */
 	.rtl::-webkit-scrollbar {
-        width: 15px;
-    }
+		width: 15px;
+	}
 	.ltr::-webkit-scrollbar {
-        width: 15px;
-    }
-    
+		width: 15px;
+	}
+
 	@media (max-width: 640px) {
-        .ltr::-webkit-scrollbar {
-            width: 8px;
-        }
-    }
+		.ltr::-webkit-scrollbar {
+			width: 8px;
+		}
+	}
 </style>
