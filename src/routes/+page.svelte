@@ -93,7 +93,7 @@
 								goto(`/products?filter=${category.name.toString().toLowerCase()}`);
 							}}
 						>
-							{category.name}
+							{category.alias ?? category.name}
 						</div>
 
 						<div

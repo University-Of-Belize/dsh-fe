@@ -190,7 +190,7 @@
 							<Button
 								icon={faStar}
 								color="COLORWHT3"
-								text={category.name}
+								text={category.alias ?? category.name}
 								color_t="COLORBLK"
 								custom_style="w-full font-semibold"
 							/>
