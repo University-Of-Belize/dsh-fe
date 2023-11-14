@@ -18,7 +18,7 @@
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	let navDrawer: HTMLDivElement;
-	let staff: boolean = JSON.parse(localStorage.staff);  // Others will use this
+	let staff: boolean = JSON.parse(localStorage.staff); // Others will use this
 	interface User {
 		_id: string;
 		id: number;
@@ -36,7 +36,7 @@
 		token: string | null;
 		activation_token?: string;
 	}
-let data: User[]; // List of users
+	let data: User[]; // List of users
 
 	onMount(async () => {
 		try {
@@ -57,9 +57,8 @@ let data: User[]; // List of users
 				return toast.push(r.message);
 			}
 			const r = await res.json();
-			data = r.is;  // Rizz
+			data = r.is; // Rizz
 			console.log(data);
-			
 		} catch (error) {
 			console.log(error);
 			toast.push(`Oops. Something unexpected happened while loading the dash: ${error.message}`);
@@ -104,15 +103,11 @@ let data: User[]; // List of users
 			<DashList {staff} />
 		</div>
 		<div class="content block px-16 py-16 w-full h-full bg-transparent">
-			<div class="flex text-2xl font-semibold pb-2">
-				Product Management
-			</div>
+			<div class="flex text-2xl font-semibold pb-2">Product Management</div>
 			<div class="flex text-xl font-semibold pb-12">Product Listing & Management</div>
 			<div class="flex flex-wrap w-full">
 				{#if data != undefined}
-					{#each data as product, i}
-
-					{/each}{:else}<div class="font-light">
+					{#each data as product, i}{/each}{:else}<div class="font-light">
 						There was a problem while displaying the data.
 					</div>{/if}
 			</div>

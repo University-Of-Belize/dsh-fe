@@ -14,7 +14,7 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
-	
+
 	// Register the user
 	async function Register(payload: string[]) {
 		try {
@@ -41,7 +41,6 @@
 			localStorage.setItem('email', payload[0]);
 			localStorage.setItem('oops', 'true');
 			goto('/auth/verify');
-
 		} catch (error) {
 			toast.push(
 				`${error.message}: You have been temporarily blocked from our services. Do not persist. Try again later.`,
@@ -158,7 +157,10 @@
 
 			<div class="block mx-8 my-8">
 				<div class="text-2xl font-light">Have an account?</div>
-				<div class="login flex flex-1 mt-6 items-center justify-start" on:click={()=>goto("/auth/login")}>
+				<div
+					class="login flex flex-1 mt-6 items-center justify-start"
+					on:click={() => goto('/auth/login')}
+				>
 					<Button
 						icon={faRightToBracket}
 						color="COLORYLW"

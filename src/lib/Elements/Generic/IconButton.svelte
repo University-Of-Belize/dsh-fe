@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-	import Fa from "svelte-fa";
+	import Fa from 'svelte-fa';
 	export let icon: IconDefinition;
 	export let color: String;
-	let className: String = "";
-	export {className as class};
+	let className: String = '';
+	export { className as class };
 </script>
 
 <div

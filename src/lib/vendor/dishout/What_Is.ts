@@ -10,17 +10,17 @@ what: “object”,  // What
 // What is Svelte?
 
 class WhatIs {
-  what: string;
-  is: any;
+	what: string;
+	is: any;
 
-  constructor(what: string, is: any) {
-    this.what = what;
-    this.is = is;
-  }
+	constructor(what: string, is: any) {
+		this.what = what;
+		this.is = is;
+	}
 }
 
 function what_is(what: string, is: any) {
-  return new WhatIs(what, is);
+	return new WhatIs(what, is);
 }
 
-export { what_is};
+export { what_is };

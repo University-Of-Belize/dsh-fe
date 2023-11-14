@@ -8,7 +8,7 @@
 	import IconButton from '$lib/Elements/Generic/IconButton.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import Product from '$lib/Elements/Generic/ProductElement.svelte';
-	import Footer from "$lib/Elements/Generic/Footer.svelte";
+	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Fa from 'svelte-fa';
 	import { goto } from '$app/navigation';
 	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
@@ -108,7 +108,13 @@
 			<div class="flex flex-wrap">
 				{#each $products as product}<!-- This way, we filter out all the products from reviews -->
 					{#if product.price != undefined}
-					<Product image={product.image} name={product.productName} description={product.description} price={product.price?.$numberDecimal} slug={product.slug} />
+						<Product
+							image={product.image}
+							name={product.productName}
+							description={product.description}
+							price={product.price?.$numberDecimal}
+							slug={product.slug}
+						/>
 						<!-- <div class="bg-white rounded-lg shadow-lg p-4 m-4 flex max-w-lg">
 							<div class="flex-none">
 								<img
@@ -163,14 +169,13 @@
 				</div>
 			</div>
 		{/if}
-	</div>	
-	</main><Footer text="Looks like you've reached the end.">
-		<div class="block">
-			<!-- <div class="text-xl font-light">Shop our entire menu by creating an account</div> -->
-			<div class="flex justify-center items-center w-full pt-8 pb-4">
-				
-					<SearchBar />
-				
-			</div>
+	</div>
+</main>
+<Footer text="Looks like you've reached the end.">
+	<div class="block">
+		<!-- <div class="text-xl font-light">Shop our entire menu by creating an account</div> -->
+		<div class="flex justify-center items-center w-full pt-8 pb-4">
+			<SearchBar />
 		</div>
-	</Footer>
+	</div>
+</Footer>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let text: string;
 	export let subtitle: string;
-	export let branding_text: string = "Cafe";
+	export let branding_text: string = 'Cafe';
 </script>
 
 <div class="footer block text-center text-COLORBLK bg-COLORWHT w-full">
@@ -17,5 +17,4 @@
 			</div>
 		</div>
 	</div>
-	
 </div>

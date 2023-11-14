@@ -34,6 +34,7 @@
 		>
 	</div>
 </main>
+
 <style>
 	:root {
 		--tw-bg-opacity: 1;

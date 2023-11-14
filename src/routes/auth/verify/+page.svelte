@@ -97,7 +97,7 @@
 			}
 			text = 'All good to go!';
 			const json = await response.json();
-			toast.push(`${json.message ?? "All good to go!"}`);
+			toast.push(`${json.message ?? 'All good to go!'}`);
 		} catch (error) {
 			text = 'There was an error.';
 			toast.push(`${error.message}. Try again later.`, {

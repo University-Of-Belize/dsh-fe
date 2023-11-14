@@ -77,7 +77,7 @@
 		const result = (sum / reviews.length).toFixed(2);
 		// console.log(Number.isNaN(parseFloat(result)));
 		if (Number.isNaN(parseFloat(result))) return 'No reviews yet';
-		return count ? (index + 1) : result; // I know this is bad and unscalable, but I'm lazy
+		return count ? index + 1 : result; // I know this is bad and unscalable, but I'm lazy
 	}
 	function getPercentage(reviews: Product['reviews'][], rating: Number) {
 		const totalReviews = reviews.length;

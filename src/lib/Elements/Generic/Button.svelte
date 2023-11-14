@@ -3,9 +3,9 @@
 	import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 	export let icon: IconDefinition;
 	export let color: string;
-	export let color_t: string = "COLORBLK"
+	export let color_t: string = 'COLORBLK';
 	export let text: string;
-	export let custom_style: string | undefined = "";
+	export let custom_style: string | undefined = '';
 </script>
 
 <div

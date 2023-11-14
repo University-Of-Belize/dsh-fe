@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let text: string;
-	export let branding_text: string = "Cafe";
+	export let branding_text: string = 'Cafe';
 </script>
 
 <div class="footer block text-center text-COLORBLK bg-COLORWHT">
@@ -15,6 +15,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="chunk-two flex justify-start items-center text-2xl bg-COLORPNK text-white px-8 py-4">{branding_text}
+	<div class="chunk-two flex justify-start items-center text-2xl bg-COLORPNK text-white px-8 py-4">
+		{branding_text}
 	</div>
 </div>
