@@ -75,7 +75,7 @@
 				<div class="title font-semibold pb-5">My Account</div>
 				<div
 					on:click={async () => {
-						await goto(`/admin/dashboard/user/manage?user_id=${user?.id}`);
+						await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
 					}}
 				>
 					<Button

@@ -241,12 +241,11 @@
 						<div class="flex bg-opacity-100">
 							<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
 								<img
-									class="rounded-md"
-									src={review.reviewer?.profile_picture ||
-										config['product-showcase']['default-image']}
+									class="rounded-md w-full"
+									src={review.reviewer?.profile_picture || config['user']['default-image']}
 									alt="{review.reviewer?.username}'s avatar"
 									on:error={() => {
-										review.reviewer.profile_picture = config['product-showcase']['default-image'];
+										review.reviewer.profile_picture = config['user']['default-image'];
 									}}
 									style="width: 50px; height: 50px;"
 								/>
@@ -281,10 +280,10 @@
 						<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
 							<img
 								class="rounded-md"
-								src={user.profile_picture || config['product-showcase']['default-image']}
+								src={user.profile_picture || config['user']['default-image']}
 								alt="{user.username}'s avatar"
 								on:error={() => {
-									user.profile_picture = config['product-showcase']['default-image'];
+									user.profile_picture = config['user']['default-image'];
 								}}
 								style="width: 50px; height: 50px;"
 							/>

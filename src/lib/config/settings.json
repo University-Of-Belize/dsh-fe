@@ -11,5 +11,8 @@
 	},
 	"home-page": {
 		"default-image": "https://via.placeholder.com/100"
+	},
+	"user": {
+		"default-image": "/placeholder/avatar.png"
 	}
 }

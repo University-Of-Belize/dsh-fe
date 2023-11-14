@@ -9,10 +9,10 @@
 		faSearch,
 		faStar
 	} from '@fortawesome/free-solid-svg-icons';
+	import { toast } from '@zerodevx/svelte-toast';
+	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import Button from './Button.svelte';
-	import { onMount } from 'svelte';
-	import { toast } from '@zerodevx/svelte-toast';
 	export let transparency: number = 0;
 	export let search: boolean = true;
 	export let value: string = '';
@@ -135,13 +135,13 @@
 				</div>
 			{:else}
 				<img
-					src={user.profile_picture ?? '/placeholder/avatar.png'}
+					src={user.profile_picture ?? config['user']['default-image']}
 					alt="{user.username}'s photo"
 					width="40px"
 					class="rounded-full cursor-pointer hover:opacity-80"
 					style="height: 40px;"
 					on:click={async () => {
-						await goto(`/admin/dashboard/user/manage?user_id=${user.id}`);
+						await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
 					}}
 				/>
 			{/if}
@@ -170,7 +170,7 @@
 					<div class="title font-semibold pb-5">My Account</div>
 					<div
 						on:click={async () => {
-							await goto(`/admin/dashboard/user/manage?user_id=${user?.id}`);
+							await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
 						}}
 					>
 						<Button

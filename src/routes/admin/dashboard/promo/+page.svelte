@@ -4,19 +4,9 @@
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import config from '$lib/config/settings.json';
-	import {
-		faCog,
-		faHamburger,
-		faList,
-		faMessage,
-		faPlus,
-		faQuestion,
-		faTag,
-		faUserCog
-	} from '@fortawesome/free-solid-svg-icons';
+	import { faCog } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import Fa from 'svelte-fa';
 	let navDrawer: HTMLDivElement;
 	let staff: boolean = JSON.parse(localStorage.staff); // Others will use this
 	interface User {
@@ -88,7 +78,7 @@
 				<div class="title font-semibold pb-5">My Account</div>
 				<div
 					on:click={async () => {
-						await goto(`/admin/dashboard/user/manage?user_id=${user?.id}`);
+						await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
 					}}
 				>
 					<Button
