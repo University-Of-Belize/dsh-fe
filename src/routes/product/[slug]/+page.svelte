@@ -175,7 +175,7 @@
 								<div
 									class="details font-semibold bg-COLORRED text-COLORWHT1 button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-4 py-2 items-center text-sm select-none mr-2"
 									on:click={() => {
-										window.location = `/checkout?single_cart=${$product.slug}`;
+										window.location = `/product/checkout?single_cart=${$product.slug}`;
 									}}
 									role="link"
 								>

@@ -50,7 +50,7 @@
 					class="details font-semibold bg-COLORRED text-COLORWHT1 button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-12 py-4 items-center text-md select-none mr-2"
 					on:click={() => {
 						// @ts-ignore
-						goto(`/products/${productSlug}`);
+						goto(`/product/${productSlug}`);
 					}}
 					role="link"
 				>

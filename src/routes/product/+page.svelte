@@ -1,17 +1,14 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import config from '$lib/config/settings.json';
+	import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 	import { writable } from 'svelte/store';
-	import { faHeart, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
-	import IconButton from '$lib/Elements/Generic/IconButton.svelte';
+	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import Product from '$lib/Elements/Generic/ProductElement.svelte';
-	import Footer from '$lib/Elements/Generic/Footer.svelte';
-	import Fa from 'svelte-fa';
-	import { goto } from '$app/navigation';
 	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
+	import Fa from 'svelte-fa';
 
 	interface Product {
 		id: string;
@@ -143,7 +140,7 @@
 									<div
 										class="details font-semibold bg-COLORRED text-COLORWHT1 button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-4 py-2 items-center text-sm select-none mr-2"
 										on:click={() => {
-											window.location = `/products/${product.slug}`;
+											window.location = `/product/${product.slug}`;
 										}}
 										role="link"
 									>

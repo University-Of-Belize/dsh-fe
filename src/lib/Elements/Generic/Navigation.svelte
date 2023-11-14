@@ -108,7 +108,7 @@
 			{#if search}
 				<form
 					class="searchbar flex-1 flex rounded-sm bg-COLORWHT1 px-4 py-2 mx-8 items-center text-sm bg-opacity-90"
-					action="/products"
+					action="/product"
 				>
 					<div class="searchicon w-fit">
 						<Fa icon={faSearch} size="1.01x" class="text-COLORBLK pr-4" />
@@ -188,7 +188,7 @@
 						<div
 							class="two pt-1"
 							on:click={() => {
-								goto(`/products?filter=${category.name.toString().toLowerCase()}`);
+								goto(`/product?filter=${category.name.toString().toLowerCase()}`);
 							}}
 						>
 							<Button
