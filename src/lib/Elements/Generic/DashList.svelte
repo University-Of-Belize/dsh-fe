@@ -8,13 +8,14 @@
 		faUserCog
 	} from '@fortawesome/free-solid-svg-icons';
 	import Button from './Button.svelte';
+	import { goto } from '$app/navigation';
 
 	export let staff = false;
 </script>
 
 <div class="section py-6 border-t border-black border-dashed border-opacity-5">
 	<div class="title font-semibold pb-5">Server Configuration</div>
-	<div class="three pt-1">
+	<div class="three pt-1" on:click={() => goto('/admin/dashboard/user')}>
 		<Button
 			icon={faUserCog}
 			color="COLORWHT3"
@@ -23,7 +24,7 @@
 			custom_style="w-full font-semibold"
 		/>
 	</div>
-	<div class="three pt-1">
+	<div class="three pt-1" on:click={() => goto('/admin/dashboard/review')}>
 		<Button
 			icon={faMessage}
 			color="COLORWHT3"
@@ -33,7 +34,7 @@
 		/>
 	</div>
 	{#if staff}
-		<div class="three pt-1">
+		<div class="three pt-1" on:click={() => goto('/admin/dashboard/user/manage')}>
 			<Button
 				icon={faPlus}
 				color="transparent"
@@ -45,7 +46,7 @@
 </div>
 <div class="section py-6 border-t border-black border-dashed border-opacity-5">
 	<div class="title font-semibold pb-5">Order Management</div>
-	<div class="three pt-1">
+	<div class="three pt-1" on:click={() => goto('/admin/dashboard/order')}>
 		<Button
 			icon={faList}
 			color="COLORWHT3"
@@ -58,7 +59,7 @@
 {#if staff}
 	<div class="section py-6 border-t border-black border-dashed border-opacity-5">
 		<div class="title font-semibold pb-5">Product Management</div>
-		<div class="three pt-1">
+		<div class="three pt-1" on:click={() => goto('/admin/dashboard/category')}>
 			<Button
 				icon={faPlus}
 				color="COLORWHT3"
@@ -67,7 +68,7 @@
 				custom_style="w-full font-semibold"
 			/>
 		</div>
-		<div class="three pt-1">
+		<div class="three pt-1" on:click={() => goto('/admin/dashboard/product')}>
 			<Button
 				icon={faHamburger}
 				color="COLORWHT3"
@@ -76,7 +77,7 @@
 				custom_style="w-full font-semibold"
 			/>
 		</div>
-		<div class="three pt-1">
+		<div class="three pt-1" on:click={() => goto('/admin/dashboard/promo')}>
 			<Button
 				icon={faTag}
 				color="COLORWHT3"
@@ -85,7 +86,7 @@
 				custom_style="w-full font-semibold"
 			/>
 		</div>
-		<div class="three pt-1">
+		<div class="three pt-1" on:click={() => goto('/admin/dashboard/category/manage')}>
 			<Button
 				icon={faPlus}
 				color="transparent"
@@ -94,7 +95,7 @@
 				custom_style="w-full font-semibold"
 			/>
 		</div>
-		<div class="three pt-1">
+		<div class="three pt-1" on:click={() => goto('/admin/dashboard/promo/manage')}>
 			<Button
 				icon={faPlus}
 				color="transparent"

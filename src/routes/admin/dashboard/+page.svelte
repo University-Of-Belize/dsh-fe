@@ -11,21 +11,19 @@
 		faMessage,
 		faPlus,
 		faQuestion,
-		faTag,
 		faUserCog
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	let navDrawer: HTMLDivElement;
-	let staff: boolean = false;
+	let staff: boolean = JSON.parse(localStorage.staff);  // Others will use this
 	interface DashData {
 		what: string;
 		is: Array<Array<string | string[]>>;
 	}
 	let data: DashData;
 	let icons: DashData['is'][0][2];
-	$: mode = `<div class='font-bold pl-1'>Dashboard</div>`;
 
 	onMount(async () => {
 		try {
@@ -48,10 +46,7 @@
 			data = await res.json();
 			console.log(data);
 			staff = data.is[0][0] === 'super' ? true : false;
-			mode =
-				data.is[0][0] === 'super'
-					? `<div class='font-bold pl-1'>SuperUser Mode</div>`
-					: `<div class='font-bold pl-1'>Dashboard</div>`;
+			localStorage.setItem('staff', staff.toString());
 			icons = data.is[0][2];
 		} catch (error) {
 			console.log(error);
@@ -65,13 +60,15 @@
 		<Navigation
 			transparency={5}
 			search={true}
-			titleText="Cafe | {mode}"
+			titleText="Cafe | {staff
+				? `<div class='font-bold pl-1'>SuperUser Mode</div>`
+				: `<div class='font-bold pl-1'>Dashboard</div>`}"
 			titleWhere="/admin/dashboard"
 		/>
 	</div>
 	<div class="main-content flex items-center justify-start h-full text-COLORBLK">
 		<div
-			class="drawer bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-1/4"
+			class="drawer bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4"
 			bind:this={navDrawer}
 		>
 			<div class="section py-6">
@@ -92,12 +89,14 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block px-16 py-16 w-full h-full bg-transparent">
+		<div class="content hidden lg:block px-16 py-16 w-full h-full bg-transparent">
 			<div class="flex text-2xl font-semibold pb-2">
-				Cafe | {@html mode}
+				Cafe | {@html staff
+					? `<div class='font-bold pl-1'>SuperUser Mode</div>`
+					: `<div class='font-bold pl-1'>Dashboard</div>`}
 			</div>
-			<div class="flex text-2xl font-semibold pb-12">What would you like to do?</div>
-			<div class="flex justify-between flex-wrap w-full">
+			<div class="flex text-xl font-semibold pb-12">What would you like to do?</div>
+			<div class="flex flex-wrap w-full">
 				{#if data != undefined}
 					{#each data.is[0][1] as shortcut, i}
 						<div

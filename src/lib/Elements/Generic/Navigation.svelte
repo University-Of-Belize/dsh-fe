@@ -28,26 +28,30 @@
 	let categories = [];
 
 	onMount(async () => {
-		if (localStorage.token) {
-			try {
-				const response = await fetch(
-					`${config['server']['HTTPOrigin']}/api/v1/search?filter=user_id&q=${localStorage.user_id}`,
-					{
-						headers: {
-							Authorization: `Bearer ${localStorage.token}`
+		if (!localStorage.user) {
+			if (localStorage.token) {
+				try {
+					const response = await fetch(
+						`${config['server']['HTTPOrigin']}/api/v1/search?filter=user_id&q=${localStorage.user_id}`,
+						{
+							headers: {
+								Authorization: `Bearer ${localStorage.token}`
+							}
 						}
-					}
-				);
-				const data = await response.json();
-				console.log(data);
-				user = data[0]; // Not a what is. It's a search
-				localStorage.setItem('user', JSON.stringify(user));
-			} catch (error) {
-				console.log(error);
-				toast.push(
-					`Oops. Something unexpected happened while loading the navigation: ${error.message}`
-				);
+					);
+					const data = await response.json();
+					console.log(data);
+					user = data[0]; // Not a what is. It's a search
+					localStorage.setItem('user', JSON.stringify(user));
+				} catch (error) {
+					console.log(error);
+					toast.push(
+						`Oops. Something unexpected happened while loading the navigation: ${error.message}`
+					);
+				}
 			}
+		} else {
+			user = JSON.parse(localStorage.user);
 		}
 	});
 
