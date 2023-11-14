@@ -17,7 +17,7 @@
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	let navDrawer: HTMLDivElement;
-	let staff: boolean = JSON.parse(localStorage.staff); // Others will use this
+	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	interface DashData {
 		what: string;
 		is: Array<Array<string | string[]>>;

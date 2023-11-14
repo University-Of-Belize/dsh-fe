@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import SearchBar from '$lib/Elements/Generic/AsyncSearch.svelte';
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import SearchBar from '$lib/Elements/Generic/AsyncSearch.svelte';
 	import Select from '$lib/Elements/Generic/Select.svelte';
 	import UserPill from '$lib/Elements/Generic/UserPill.svelte';
 	import config from '$lib/config/settings.json';
@@ -12,7 +12,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	let navDrawer: HTMLDivElement;
-	let staff: boolean = JSON.parse(localStorage.staff); // Others will use this
+	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	$: search = $page.url.searchParams.get('search');
 	$: currentFilter = $page.url.searchParams.get('filter');
 

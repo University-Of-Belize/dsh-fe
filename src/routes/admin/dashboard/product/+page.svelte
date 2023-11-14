@@ -8,7 +8,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	let navDrawer: HTMLDivElement;
-	let staff: boolean = JSON.parse(localStorage.staff); // Others will use this
+	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	interface User {
 		_id: string;
 		id: number;
