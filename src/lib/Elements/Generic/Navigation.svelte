@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings.json';
 	import {
-	faArrowRightFromBracket,
+		faArrowRightFromBracket,
 		faBars,
 		faBasketShopping,
 		faCartShopping,
@@ -110,7 +110,7 @@
 				class="flex text-COLORBLK font-semibold hover:underline cursor-pointer"
 				on:click={() => goto(`${titleWhere}`)}
 			>
-				{@html staff ? titleText + " | Staff Mode" : titleText}
+				{@html staff ? titleText + ' | Staff Mode' : titleText}
 			</h1>
 			{#if search}
 				<form
@@ -141,23 +141,25 @@
 					<Button icon={faRightToBracket} color="COLORYLW" text="Log in" />
 				</div>
 			{:else}
-			<div class="pnav flex items-center justify-center space-x-4"> {#if staff}
-			<div class="btn-wrp" on:click={() => goto("/admin/dashboard")}>
-				<IconButton icon={faCogs} color="COLORWHT" color_t="COLORBLE" />
-			</div>{/if}
-			<div class="btn-wrp" on:click={() => goto("/product/checkout")}>
-				<IconButton icon={faCartShopping} color="COLORWHT" color_t="COLORBLK" />
-			</div>
-				<img
-					src={user.profile_picture ?? config['user']['default-image']}
-					alt="{user.username}'s photo"
-					width="40px"
-					class="rounded-full cursor-pointer hover:opacity-80"
-					style="height: 40px;"
-					on:click={async () => {
-						await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
-					}}
-				/></div>
+				<div class="pnav flex items-center justify-center space-x-4">
+					{#if staff}
+						<div class="btn-wrp" on:click={() => goto('/admin/dashboard')}>
+							<IconButton icon={faCogs} color="COLORWHT" color_t="COLORBLE" />
+						</div>{/if}
+					<div class="btn-wrp" on:click={() => goto('/product/checkout')}>
+						<IconButton icon={faCartShopping} color="COLORWHT" color_t="COLORBLK" />
+					</div>
+					<img
+						src={user.profile_picture ?? config['user']['default-image']}
+						alt="{user.username}'s photo"
+						width="40px"
+						class="rounded-full cursor-pointer hover:opacity-80"
+						style="height: 40px;"
+						on:click={async () => {
+							await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
+						}}
+					/>
+				</div>
 			{/if}
 		</div>
 	</div>
@@ -184,7 +186,8 @@
 					<div class="title font-semibold pb-5">My Account</div>
 					<div
 						on:click={async () => {
-							localStorage.clear(); window.location.reload();
+							localStorage.clear();
+							window.location.reload();
 						}}
 					>
 						<Button

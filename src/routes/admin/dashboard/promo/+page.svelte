@@ -62,9 +62,7 @@
 		<Navigation
 			transparency={5}
 			search={true}
-			titleText="Cafe | {staff
-				? ""
-				: `| <div class='font-bold pl-1'>Dashboard</div>`}"
+			titleText="Cafe | {staff ? '' : `| <div class='font-bold pl-1'>Dashboard</div>`}"
 			titleWhere="/admin/dashboard"
 		/>
 	</div>

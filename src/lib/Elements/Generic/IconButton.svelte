@@ -3,7 +3,7 @@
 	import Fa from 'svelte-fa';
 	export let icon: IconDefinition;
 	export let color: string;
-	export let color_t: string = "COLORWHT1";
+	export let color_t: string = 'COLORWHT1';
 	let className: string = '';
 	export { className as class };
 </script>

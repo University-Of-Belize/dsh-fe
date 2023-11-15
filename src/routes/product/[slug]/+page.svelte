@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import config from '$lib/config/settings.json';
 	import {
-	faCartPlus,
+		faCartPlus,
 		faCog,
 		faPencil,
 		faStar,
