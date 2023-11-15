@@ -133,7 +133,7 @@
 							</div>
 							<div class="price block mx-4 font-semibold">
 								<div class="product-price">
-									${item.product.price.$numberDecimal.toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"]}) ?? '0.00'.toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"]})}
+									${parseFloat(item.product.price.$numberDecimal).toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"]}) ?? '0.00'.toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"]})}
 								</div>
 							</div>
 						</div>
@@ -155,7 +155,7 @@
 									</div>
 								</div>
 								<div class="price block mx-4 font-semibold">
-									<div class="product-price">${cartTotal.toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"]}) ?? '0.00'.toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"]})}</div>
+									<div class="product-price">${parseFloat(cartTotal).toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"]}) ?? parseFloat('0.00').toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"]})}</div>
 								</div>
 							</div>
 						</div>

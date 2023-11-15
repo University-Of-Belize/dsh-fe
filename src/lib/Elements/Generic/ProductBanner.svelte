@@ -45,7 +45,7 @@
 				: productDescription}
 		</p>
 		<p class="mb-16 py-2 text-gray-600 font-bold text-lg lg:text-2xl">
-			${productPrice.toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"]})}
+			${parseFloat(productPrice).toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"]})}
 		</p>
 		<div class="flex items-center">
 			<div class="comboBox flex flex-wrap absolute bottom-2 lg:bottom-6">
