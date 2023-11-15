@@ -63,8 +63,8 @@
 			transparency={5}
 			search={true}
 			titleText="Cafe | {staff
-				? `<div class='font-bold pl-1'>SuperUser Mode</div>`
-				: `<div class='font-bold pl-1'>Dashboard</div>`}"
+				? ""
+				: `| <div class='font-bold pl-1'>Dashboard</div>`}"
 			titleWhere="/admin/dashboard"
 		/>
 	</div>

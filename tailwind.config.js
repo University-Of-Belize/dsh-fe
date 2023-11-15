@@ -16,6 +16,7 @@ export default {
 				COLORGRY: 'rgb(var(--COLORGRY) / var(--tw-bg-opacity))',
 				COLORYLW: 'rgb(var(--COLORYLW) / var(--tw-bg-opacity))',
 				COLORBYW: 'rgb(var(--COLORBYW) / var(--tw-bg-opacity))',
+				COLORHPK: 'rgb(var(--COLORHPK) / var(--tw-bg-opacity))',
 				COLORPNK: 'rgb(var(--COLORPNK) / var(--tw-bg-opacity))',
 				COLORRED: 'rgb(var(--COLORRED) / var(--tw-bg-opacity))'
 			}

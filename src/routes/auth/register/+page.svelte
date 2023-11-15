@@ -14,33 +14,37 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
+	let debounceTimeout: number;
 
 	// Register the user
 	async function Register(payload: string[]) {
 		try {
-			const response = await fetch(`${config['server']['HTTPOrigin']}/api/v1/auth/signup`, {
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json'
-				},
-				method: 'POST',
-				body: JSON.stringify(what_is(what.public.auth, payload))
-			});
-
-			if (!response.ok) {
-				const json = await response.json();
-				return toast.push(`${json.message}`, {
-					dismissable: false,
-					theme: {
-						'--toastBarBackground': '#842d69'
-					}
+			clearTimeout(debounceTimeout);
+			debounceTimeout = setTimeout(async () => {
+				const response = await fetch(`${config['server']['HTTPOrigin']}/api/v1/auth/signup`, {
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json'
+					},
+					method: 'POST',
+					body: JSON.stringify(what_is(what.public.auth, payload))
 				});
-			}
-			const json = await response.json();
-			toast.push(`${json.message}`);
-			localStorage.setItem('email', payload[0]);
-			localStorage.setItem('oops', 'true');
-			goto('/auth/verify');
+
+				if (!response.ok) {
+					const json = await response.json();
+					return toast.push(`${json.message}`, {
+						dismissable: false,
+						theme: {
+							'--toastBarBackground': '#842d69'
+						}
+					});
+				}
+				const json = await response.json();
+				toast.push(`${json.message}`);
+				localStorage.setItem('email', payload[0]);
+				localStorage.setItem('oops', 'true');
+				goto('/auth/verify');
+			}, 500); // debounce every 500ms
 		} catch (error) {
 			toast.push(
 				`${error.message}: You have been temporarily blocked from our services. Do not persist. Try again later.`,

@@ -2,8 +2,13 @@
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings.json';
 	import {
+	faArrowRightFromBracket,
 		faBars,
+		faBasketShopping,
+		faCartShopping,
 		faCog,
+		faCogs,
+		faDashboard,
 		faGift,
 		faRightToBracket,
 		faSearch,
@@ -13,6 +18,7 @@
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import Button from './Button.svelte';
+	import IconButton from './IconButton.svelte';
 	export let transparency: number = 0;
 	export let search: boolean = true;
 	export let value: string = '';
@@ -20,6 +26,7 @@
 	export let titleWhere: string = '/';
 	export let user: object | undefined = undefined;
 	let nav: HTMLDivElement;
+	let staff: string = localStorage.staff ?? false;
 	let navDrawer: HTMLDivElement;
 	let navClose: HTMLDivElement;
 	let navToggle: HTMLDivElement;
@@ -103,7 +110,7 @@
 				class="flex text-COLORBLK font-semibold hover:underline cursor-pointer"
 				on:click={() => goto(`${titleWhere}`)}
 			>
-				{@html titleText}
+				{@html staff ? titleText + " | Staff Mode" : titleText}
 			</h1>
 			{#if search}
 				<form
@@ -134,6 +141,13 @@
 					<Button icon={faRightToBracket} color="COLORYLW" text="Log in" />
 				</div>
 			{:else}
+			<div class="pnav flex items-center justify-center space-x-4"> {#if staff}
+			<div class="btn-wrp" on:click={() => goto("/admin/dashboard")}>
+				<IconButton icon={faCogs} color="COLORWHT" color_t="COLORBLE" />
+			</div>{/if}
+			<div class="btn-wrp" on:click={() => goto("/product/checkout")}>
+				<IconButton icon={faCartShopping} color="COLORWHT" color_t="COLORBLK" />
+			</div>
 				<img
 					src={user.profile_picture ?? config['user']['default-image']}
 					alt="{user.username}'s photo"
@@ -143,7 +157,7 @@
 					on:click={async () => {
 						await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
 					}}
-				/>
+				/></div>
 			{/if}
 		</div>
 	</div>
@@ -166,8 +180,21 @@
 						<Button icon={faGift} color="COLORPNK" text="Sign up" color_t="COLORWHT" />
 					</div>
 				</div>{:else}
-				<div class="two py-6">
+				<div class="two py-6 space-y-2">
 					<div class="title font-semibold pb-5">My Account</div>
+					<div
+						on:click={async () => {
+							localStorage.clear(); window.location.reload();
+						}}
+					>
+						<Button
+							icon={faArrowRightFromBracket}
+							color="COLORBLK"
+							text="Logout"
+							color_t="COLORWHT"
+							custom_style="w-full"
+						/>
+					</div>
 					<div
 						on:click={async () => {
 							await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);

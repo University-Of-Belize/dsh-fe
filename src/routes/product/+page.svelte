@@ -106,7 +106,7 @@
 			<div class="flex flex-wrap">
 				{#each $products as product}<!-- This way, we filter out all the products from reviews -->
 					{#if product.price != undefined}
-						<Product
+						<Product id={product.id}
 							image={product.image}
 							name={product.productName}
 							description={product.description}

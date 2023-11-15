@@ -151,7 +151,7 @@
 		{#if product}
 			{#each product as product}
 				<div class="flex w-full">
-					<ProductBanner
+					<ProductBanner id={product._id}
 						image={product.image}
 						name={product.productName}
 						description={product.description}

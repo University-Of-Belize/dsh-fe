@@ -1,4 +1,5 @@
 interface Product {
+	_id: string;
 	id: string;
 	score: number;
 	terms: string[];

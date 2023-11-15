@@ -1,18 +1,21 @@
 <script lang="ts">
-	import { faHeart, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+	import { faCartPlus, faHeart, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings.json';
 	import type { Product } from '$lib/types/Product';
 	import IconButton from './IconButton.svelte';
 	import StarCount from './StarCount.svelte';
+	import { addToCart } from '../Utility/Cart';
 	let productImage: string;
+	let productId: string;
 	let productName: string;
 	let productDescription: string;
 	let productPrice: string;
 	let productSlug: string;
 	export let reviews: Product['reviews'][] | [] = [];
 	export { productImage as image };
+	export { productId as id };
 	export { productName as name };
 	export { productDescription as description };
 	export { productPrice as price };
@@ -57,9 +60,11 @@
 					Details
 				</div>
 
-				<IconButton icon={faShoppingCart} color="COLORYLW" class="px-5" />
+				<div class="addToCart" on:click={() => addToCart(productId, 1)}>
+					<IconButton icon={faCartPlus} color="COLORYLW" />
+				</div>
 
-				<IconButton icon={faHeart} color="COLORRED" class="hidden lg:flex px-5" />
+				<!-- <IconButton icon={faHeart} color="COLORRED" class="hidden lg:flex px-5" /> -->
 			</div>
 		</div>
 	</div>

@@ -9,7 +9,7 @@
 </script>
 
 <div
-	class="placeholder bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORBLK bg-COLORYLW bg-COLORBYW bg-COLORPNK bg-COLORRED hidden w-full"
+	class="placeholder text-COLORHPK bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORWHT4 bg-COLORWHT5 bg-COLORHPK bg-COLORBLK bg-COLORYLW bg-COLORBYW bg-COLORPNK bg-COLORRED bg-COLORHPK hidden w-full"
 >
 	&nbsp;
 </div>

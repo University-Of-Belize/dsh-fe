@@ -17,6 +17,7 @@
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	$: next_url = $page.url.searchParams.get('next');
+	let debounceTimeout: number;
 
 	onMount(() => {
 		// Check if we're already logged in
@@ -34,7 +35,10 @@
 	});
 
 	async function Login(payload: any) {
-		postData(payload, 'login');
+		clearTimeout(debounceTimeout);
+		debounceTimeout = setTimeout(async () => {
+			postData(payload, 'login');
+		}, 500); // bounce every 500ms - let's hope they don't try to fucking spam the API
 	}
 	// @ts-ignore
 	const handleSubmit = (event) => {

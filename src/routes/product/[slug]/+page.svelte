@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import config from '$lib/config/settings.json';
 	import {
+	faCartPlus,
 		faCog,
 		faHeart,
 		faPencil,
@@ -22,6 +23,7 @@
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { goto } from '$app/navigation';
+	import { addToCart } from '$lib/Elements/Utility/Cart';
 	// let hero_image: HTMLDivElement;
 	const user = localStorage.user; // The user
 	const product = writable<Product | null>(null);
@@ -176,15 +178,18 @@
 								<div
 									class="details font-semibold bg-COLORRED text-COLORWHT1 button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-4 py-2 items-center text-sm select-none mr-2"
 									on:click={() => {
-										goto(`/product/checkout?single_cart=${$product._id}`);
+										localStorage.setItem('wants_single_cart', 'true');
+										goto(`/product/checkout?single_cart=${$product?.id}`);
 									}}
 									role="link"
 								>
 									Purchase Now
 								</div>
 
-								<IconButton icon={faShoppingCart} color="COLORYLW" />
-								<IconButton icon={faHeart} color="COLORRED" />
+								<div class="addToCart" on:click={() => addToCart($product?.id, 1)}>
+									<IconButton icon={faCartPlus} color="COLORYLW" />
+								</div>
+								<!-- <IconButton icon={faHeart} color="COLORRED" /> -->
 							</div>
 						</div>{/if}
 				</div>
