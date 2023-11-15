@@ -132,8 +132,21 @@
 								</div>
 							</div>
 							<div class="price block mx-4 font-semibold">
+								<!-- Product price = product_quantity * product_price -->
 								<div class="product-price">
-									{parseFloat(item.product.price.$numberDecimal).toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"], minimumFractionDigits: 2}) ?? '0.00'.toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"], minimumFractionDigits: 2})}
+									{(parseFloat(item.product.price.$numberDecimal) * item.quantity).toLocaleString(
+										'en-US',
+										{
+											style: 'currency',
+											currency: config['checkout']['currency'],
+											minimumFractionDigits: 2
+										}
+									) ??
+										'0.00'.toLocaleString('en-US', {
+											style: 'currency',
+											currency: config['checkout']['currency'],
+											minimumFractionDigits: 2
+										})}
 								</div>
 							</div>
 						</div>
@@ -155,7 +168,18 @@
 									</div>
 								</div>
 								<div class="price block mx-4 font-semibold">
-									<div class="product-price">{parseFloat(cartTotal).toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"], minimumFractionDigits: 2}) ?? parseFloat('0.00').toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"], minimumFractionDigits: 2})}</div>
+									<div class="product-price">
+										{parseFloat(cartTotal).toLocaleString('en-US', {
+											style: 'currency',
+											currency: config['checkout']['currency'],
+											minimumFractionDigits: 2
+										}) ??
+											parseFloat('0.00').toLocaleString('en-US', {
+												style: 'currency',
+												currency: config['checkout']['currency'],
+												minimumFractionDigits: 2
+											})}
+									</div>
 								</div>
 							</div>
 						</div>
