@@ -26,7 +26,7 @@
 	export let titleWhere: string = '/';
 	export let user: object | undefined = undefined;
 	let nav: HTMLDivElement;
-	let staff: string = localStorage.staff ?? false;
+	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let navDrawer: HTMLDivElement;
 	let navClose: HTMLDivElement;
 	let navToggle: HTMLDivElement;
