@@ -10,8 +10,6 @@
 	import { faPrint, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	let navDrawer: HTMLDivElement;
-	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	const wants_single_cart = localStorage.wants_single_cart ?? false;
 	$: single_cart = $page.url.searchParams.get('single_cart');
 
@@ -85,7 +83,7 @@
 		<Navigation transparency={5} search={true} titleText="Cafe" titleWhere="/" />
 	</div>
 	<div class="main-content flex items-center justify-start h-full text-COLORBLK">
-		<div class="content block px-16 py-16 w-full h-full bg-transparent">
+		<div class="page-content block px-16 py-16 w-full h-full bg-transparent">
 			<div class="flex items-center w-full">
 				<div class="block">
 					<div class="flex text-2xl font-semibold pb-2">Checkout / My Cart</div>
@@ -125,7 +123,7 @@
 							<div class="content block flex-1 mx-4">
 								<div
 									class="product-name text-xl font-base hover:underline cursor-pointer"
-									on:click={()=>goto(`/product/${item.product.slug}`)}
+									on:click={() => goto(`/product/${item.product.slug}`)}
 								>
 									{item.product.productName ?? ''}
 								</div>
@@ -157,12 +155,14 @@
 									</div>
 								</div>
 								<div class="price block mx-4 font-semibold">
-									<div class="product-price">${cartTotal ?? '0.00'}BZD</div>
+									<div class="product-price">${parseFloat(cartTotal).toFixed(2) ?? '0.00'}BZD</div>
 								</div>
 							</div>
 						</div>
 						<div class="pay_now flex w-full justify-start items-center py-4">
-							<Button color="COLORRED" color_t="COLORWHT1" text="Queue Now" icon={undefined} />
+							<div class="btn_wrp" on:click={() => goto('/product/checkout/confirmed')}>
+								<Button color="COLORRED" color_t="COLORWHT1" text="Queue Now" icon={undefined} />
+							</div>
 						</div>
 					</div>
 				{:else if dataLength === 0}
@@ -180,6 +180,8 @@
 	:root {
 		--tw-bg-opacity: 1;
 	}
-	
-	
+	.page-content {
+		background: linear-gradient(rgba(239, 235, 222, 0.75), rgba(239, 235, 222, 0.75)),
+			url('/patterns/checkout.svg');
+	}
 </style>

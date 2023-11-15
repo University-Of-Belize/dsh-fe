@@ -61,9 +61,9 @@
 		<Navigation
 			transparency={5}
 			search={true}
-			titleText="Cafe | {staff
-				? `<div class='font-bold pl-1'>SuperUser Mode</div>`
-				: `<div class='font-bold pl-1'>Dashboard</div>`}"
+			titleText="Cafe {staff
+				? ""
+				: `| <div class='font-bold pl-1'>Dashboard</div>`}"
 			titleWhere="/admin/dashboard"
 		/>
 	</div>
@@ -93,8 +93,8 @@
 		<div class="content hidden lg:block px-16 py-16 w-full h-full bg-transparent">
 			<div class="flex text-2xl font-semibold pb-2">
 				Cafe | {@html staff
-					? ""
-					: `| <div class='font-bold pl-1'>Dashboard</div>`}
+					? "<div class='font-bold pl-1'>SuperUser Mode</div>"
+					: `<div class='font-bold pl-1'>Dashboard</div>`}
 			</div>
 			<div class="flex text-xl font-semibold pb-12">What would you like to do?</div>
 			<div class="flex flex-wrap w-full">

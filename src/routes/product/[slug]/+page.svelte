@@ -4,9 +4,7 @@
 	import {
 	faCartPlus,
 		faCog,
-		faHeart,
 		faPencil,
-		faShoppingCart,
 		faStar,
 		faStarHalfAlt
 	} from '@fortawesome/free-solid-svg-icons';
