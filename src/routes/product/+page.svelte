@@ -12,9 +12,9 @@
 
 	interface Product {
 		id: string;
-		score: number;
-		terms: string[];
-		match: {
+		score?: number;
+		terms?: string[];
+		match?: {
 			[key: string]: string[];
 		};
 		description: string;
@@ -43,6 +43,7 @@
 			__v: number;
 		}[];
 		slug: string;
+		quantity?: number;
 	}
 
 	const products = writable<Product[]>([]);

@@ -40,7 +40,7 @@
 		<p class="mb-16 text-gray-600 font-bold">
 			${parseFloat(productPrice).toFixed(2)}BZD
 		</p>
-		<div class="comboBox flex flex-wrap absolute bottom-1">
+		<div class="comboBox flex flex-wrap absolute bottom-1 h-9">
 			<div
 				class="details font-semibold bg-COLORRED text-COLORWHT1 button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-4 py-2 items-center text-sm select-none mr-2"
 				on:click={() => {
@@ -52,9 +52,8 @@
 				Details
 			</div>
 
-			<IconButton icon={faShoppingCart} color="COLORYLW" />
-
-			<IconButton icon={faHeart} color="COLORRED" class="hidden lg:flex" />
+			<IconButton icon={faShoppingCart} color="COLORYLW"/>
+			<IconButton icon={faHeart} color="COLORRED" class="hidden lg:flex"/>
 		</div>
 	</div>
 </div>

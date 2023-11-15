@@ -21,6 +21,7 @@
 	import Fa from 'svelte-fa';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
+	import { goto } from '$app/navigation';
 	// let hero_image: HTMLDivElement;
 	const user = localStorage.user; // The user
 	const product = writable<Product | null>(null);
@@ -171,11 +172,11 @@
 							<div class="text-md lg:text-xl py-4 font-semibold text-COLORWHT">
 								${parseFloat($product.price.$numberDecimal).toFixed(2)}BZD
 							</div>
-							<div class="comboBox flex absolute py-4">
+							<div class="comboBox flex absolute py-4 h-16">
 								<div
 									class="details font-semibold bg-COLORRED text-COLORWHT1 button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-4 py-2 items-center text-sm select-none mr-2"
 									on:click={() => {
-										window.location = `/product/checkout?single_cart=${$product.slug}`;
+										goto(`/product/checkout?single_cart=${$product._id}`);
 									}}
 									role="link"
 								>
