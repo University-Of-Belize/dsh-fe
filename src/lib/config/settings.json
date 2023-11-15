@@ -14,5 +14,8 @@
 	},
 	"user": {
 		"default-image": "/placeholder/avatar.png"
+	},
+	"checkout": {
+		"currency": "BZD"
 	}
 }
