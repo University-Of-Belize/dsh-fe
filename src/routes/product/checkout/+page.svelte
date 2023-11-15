@@ -73,8 +73,8 @@
 			console.log(error);
 		}
 	});
-	function calculateTotal(price: string) {
-		cartTotal += parseFloat(price);
+	function calculateTotal(price: string, quantity: number) {
+		cartTotal += parseFloat(price) * quantity;
 	}
 </script>
 
@@ -106,7 +106,7 @@
 				{#if data != undefined}
 					{#each data as item}
 						{(() => {
-							calculateTotal(item.product.price.$numberDecimal);
+							calculateTotal(item.product.price.$numberDecimal, item.quantity);
 							return ''; // Weird hack
 						})()}
 						<div
