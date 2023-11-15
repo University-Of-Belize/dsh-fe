@@ -170,7 +170,7 @@
 								{@html $product.description}
 							</div>
 							<div class="text-md lg:text-xl py-4 font-semibold text-COLORWHT">
-								${parseFloat($product.price.$numberDecimal).toFixed(2)}BZD
+								${$product.price.$numberDecimal.toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"]})}
 							</div>
 							<div class="comboBox flex absolute py-4 h-16">
 								<div
