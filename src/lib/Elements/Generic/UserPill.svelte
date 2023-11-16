@@ -1,23 +1,7 @@
 <script lang="ts">
-	interface User {
-		_id: string;
-		id: number;
-		username: string;
-		password: string;
-		email: string;
-		profile_picture?: string;
-		staff: boolean;
-		credit: {
-			$numberDecimal: string;
-		};
-		cart: any[];
-		reset_token: string | null;
-		restrictions: number;
-		__v: number;
-		token: string | null;
-		activation_token?: string;
-	}
+
 	import config from '$lib/config/settings.json';
+	import type { User } from '$lib/types/User';
 	import { stringify } from 'postcss';
 	export let user: User;
 	export let tag: boolean = false;

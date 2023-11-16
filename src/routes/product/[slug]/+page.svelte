@@ -15,7 +15,7 @@
 	import IconButton from '$lib/Elements/Generic/IconButton.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import StarCount from '$lib/Elements/Generic/StarCount.svelte';
-	import type { Product } from '$lib/types/Product.ts';
+	import type { EngineProduct } from '$lib/types/Product.ts';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
@@ -24,7 +24,7 @@
 	import { addToCart } from '$lib/Elements/Utility/Cart';
 	// let hero_image: HTMLDivElement;
 	const user = localStorage.user; // The user
-	const product = writable<Product | null>(null);
+	const product = writable<EngineProduct | null>(null);
 	let product_id: string;
 	const params = $page.params.slug;
 	let newReviewContent: HTMLTextAreaElement;
@@ -67,7 +67,7 @@
 			product.set(null);
 		}
 	})();
-	function calculateRating(reviews: Product['reviews'][], count: boolean) {
+	function calculateRating(reviews: EngineProduct['reviews'], count: boolean = false) {
 		let sum = 0;
 		let index = 0;
 		reviews.forEach((review, i) => {
@@ -80,7 +80,7 @@
 		if (Number.isNaN(parseFloat(result))) return 'No reviews yet';
 		return count ? index + 1 : result; // I know this is bad and unscalable, but I'm lazy
 	}
-	function getPercentage(reviews: Product['reviews'][], rating: Number) {
+	function getPercentage(reviews: EngineProduct['reviews'], rating: Number) {
 		const totalReviews = reviews.length;
 		const ratingCount = reviews.filter((review) => review.rating === rating).length;
 		const percentage = (ratingCount / totalReviews) * 100;
@@ -94,13 +94,13 @@
 			.replace(/"/g, '&quot;')
 			.replace(/'/g, '&#039;');
 	}
-	const handleSubmit = (event) => {
+	const handleSubmit = (event: Event) => {
 		event.preventDefault();
 		newReviewContent.disabled = true;
 		// @ts-ignore
 		const valueArray = Array.from(event.target)
-			.filter((el) => el.name)
-			.map((el) => el.value);
+			.filter((el: any) => el.name)
+			.map((el: any) => el.value);
 		// console.log(valueArray[0], rating);
 		if (rating <= 0 || valueArray[0].trim() === '') {
 			toast.push(
@@ -170,7 +170,11 @@
 								{@html $product.description}
 							</div>
 							<div class="text-md lg:text-xl py-4 font-semibold text-COLORWHT">
-								{parseFloat($product.price.$numberDecimal).toLocaleString("en-US", {style: "currency", currency: config["checkout"]["currency"], minimumFractionDigits: 2})}
+								{parseFloat($product.price.$numberDecimal).toLocaleString('en-US', {
+									style: 'currency',
+									currency: config['checkout']['currency'],
+									minimumFractionDigits: 2
+								})}
 							</div>
 							<div class="comboBox flex absolute py-4 h-16">
 								<div
@@ -262,7 +266,7 @@
 										{#each Array.from({ length: 5 }, (_, i) => i) as _}
 											{#if _ < Math.floor(calculateRating([review]))}
 												<Fa icon={faStar} size="1x" />
-											{:else if _ === Math.floor(calculateRating( [review] )) && calculateRating( [review] ) % 1 >= 0.5}
+											{:else if _ === Math.floor(calculateRating([review])) && calculateRating([review]) % 1 >= 0.5}
 												<Fa icon={faStarHalfAlt} size="1x" />
 											{:else}
 												<Fa icon={faStar} size="1x" class="opacity-25" />

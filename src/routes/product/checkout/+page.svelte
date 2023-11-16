@@ -7,33 +7,15 @@
 	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
 	import { addToCart, emptyCart } from '$lib/Elements/Utility/Cart';
 	import config from '$lib/config/settings.json';
+	import type { CartProduct } from '$lib/types/Product';
 	import { faPrint, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	const wants_single_cart = localStorage.wants_single_cart ?? false;
 	$: single_cart = $page.url.searchParams.get('single_cart');
 
-	interface Product {
-		product: {
-			_id: string;
-			category: string;
-			description: string;
-			image: string;
-			in_stock: number;
-			price: {
-				$numberDecimal: string;
-			};
-			productName: string;
-			reviews: any[];
-			slug: string;
-			__v: number;
-			search_terms: any[];
-		};
-		quantity: number;
-		_id: string;
-	}
 	// The cart is an array of Products
-	let data: Product[] | [] = [];
+	let data: CartProduct[] | [] = [];
 	let dataLength: number = data?.length;
 	let cartTotal: number = 0.0;
 
@@ -54,7 +36,7 @@
 				});
 				if (response.ok) {
 					const r = await response.json(); // Copilot logic (efficiently group the same items together)
-					data = r.is.reduce((acc: Product[], curr: Product) => {
+					data = r.is.reduce((acc: CartProduct[], curr: CartProduct) => {
 						const existingProduct = acc.find((p) => p.product._id === curr.product._id);
 						if (existingProduct) {
 							existingProduct.quantity += curr.quantity;

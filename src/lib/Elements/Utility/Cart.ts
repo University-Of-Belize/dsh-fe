@@ -4,7 +4,7 @@ import config from '$lib/config/settings.json';
 import { toast } from '@zerodevx/svelte-toast';
 let debounceTimeout: number;
 
-const addToCart = async (item: string, quantity: number) => {
+const addToCart = async (item: string | undefined, quantity: number) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {

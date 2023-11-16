@@ -3,34 +3,21 @@
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import UserPill from '$lib/Elements/Generic/UserPill.svelte';
 	import config from '$lib/config/settings.json';
+	import type { Product } from '$lib/types/Product';
+	import type { Review } from '$lib/types/Review';
+	import type { User } from '$lib/types/User';
 	import { faCog } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
-	interface User {
-		_id: string;
-		id: number;
-		username: string;
-		password: string;
-		email: string;
-		staff: boolean;
-		credit: {
-			$numberDecimal: string;
-		};
-		cart: any[];
-		reset_token: string | null;
-		restrictions: number;
-		__v: number;
-		token: string | null;
-		activation_token?: string;
-	}
-	let data: User[]; // List of users
+	let data: Review[]; // List of reviews
 
 	onMount(async () => {
 		try {
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/user/manage`, {
+			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/review/manage`, {
 				headers: {
 					Authorization: `Bearer ${localStorage.token}`
 				}
@@ -55,9 +42,7 @@
 		}
 	});
 </script>
-
-// POST/PUT/DELETE https://winter-darkness-1705.fly.dev/api/v1/admin/user/manage
-<main class="w-full h-screen">
+<main class="w-full h-screen overflow-hidden">
 	<div class="navigation w-full z-20">
 		<Navigation
 			transparency={5}
@@ -90,12 +75,26 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block px-16 py-16 w-full h-full bg-transparent">
+		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto">
 			<div class="flex text-2xl font-semibold pb-2">Review Management</div>
 			<div class="flex text-xl font-semibold pb-12">Reviews & Comment Management</div>
 			<div class="flex flex-wrap w-full">
 				{#if data != undefined}
-					{#each data as review, i}{/each}{:else}<div class="font-light">
+					{#each data as review, i}
+					<div class="user_wrap w-full">
+						<UserPill
+							user={review.reviewer ?? {}}
+							description={`Content: ${review.content}<br/>Original Content: ${review.original_content}`}
+						>
+							<div
+								class="edit-wrap w-fit h-fit"
+								on:click={() => goto(`/product/${review?.product.slug}`)}
+							>
+								<Button icon={faCog} color="COLORBLK" color_t="COLORWHT1" text="Go to listing" />
+							</div>
+						</UserPill>
+					</div>
+					{/each}{:else}<div class="font-light">
 						There was a problem while displaying the data.
 					</div>{/if}
 			</div>
