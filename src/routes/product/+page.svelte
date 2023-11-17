@@ -9,44 +9,9 @@
 	import Product from '$lib/Elements/Generic/ProductElement.svelte';
 	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
 	import Fa from 'svelte-fa';
+	import type { EngineProduct } from '$lib/types/Product';
 
-	interface Product {
-		id: string;
-		score?: number;
-		terms?: string[];
-		match?: {
-			[key: string]: string[];
-		};
-		description: string;
-		productName: string;
-		category: {
-			_id: string;
-			name: string;
-			alias: string;
-			description: string;
-			hidden: boolean;
-			__v: number;
-		};
-		image: string;
-		in_stock: number;
-		price: {
-			$numberDecimal: string;
-		};
-		reviews: {
-			_id: string;
-			content: string;
-			original_content: string;
-			rating: number;
-			reviewer: string;
-			hidden: boolean;
-			product: string;
-			__v: number;
-		}[];
-		slug: string;
-		quantity?: number;
-	}
-
-	const products = writable<Product[]>([]);
+	const products = writable<EngineProduct[]>([]);
 	$: params = $page.url.searchParams.get('search');
 	$: params_filter = $page.url.searchParams.get('filter');
 

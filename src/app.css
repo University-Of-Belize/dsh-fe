@@ -21,6 +21,11 @@
 }
 @tailwind utilities;
 
+/* :global if in component */
+html {
+	scroll-behavior: smooth; /* nice */
+}
+
 body {
 	font-family: 'Inter', sans-serif;
 }

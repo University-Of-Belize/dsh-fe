@@ -1,37 +1,50 @@
+import type { Category } from './Category';
+import type { Review } from './Review';
+
 interface Product {
 	_id: string;
+	category: Category;
+	description: string;
+	image: string;
+	in_stock: number;
+	price: {
+		$numberDecimal: string;
+	};
+	productName: string;
+	reviews: Review[];
+	slug: string;
+	__v: number;
+	search_terms: string[];
+}
+
+interface CartProduct {
+	product: {
+		_id: string;
+		category: string;
+		description: string;
+		image: string;
+		in_stock: number;
+		price: {
+			$numberDecimal: string;
+		};
+		productName: string;
+		reviews: Review[];
+		slug: string;
+		__v: number;
+		search_terms: string[];
+	};
+	quantity: number;
+	_id: string;
+}
+
+interface EngineProduct extends Product {
 	id: string;
 	score: number;
 	terms: string[];
 	match: {
 		[key: string]: string[];
 	};
-	description: string;
-	productName: string;
-	category: {
-		_id: string;
-		name: string;
-		alias: string;
-		description: string;
-		hidden: boolean;
-		__v: number;
-	};
-	image: string;
-	in_stock: number;
-	price: {
-		$numberDecimal: string;
-	};
-	reviews: {
-		_id: string;
-		content: string;
-		original_content: string;
-		rating: number;
-		reviewer: string;
-		hidden: boolean;
-		product: string;
-		__v: number;
-	}[];
-	slug: string;
+	reviews: Review[];
 }
 
-export type { Product };
+export type { Product, CartProduct, EngineProduct };

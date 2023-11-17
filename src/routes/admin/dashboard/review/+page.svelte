@@ -3,52 +3,43 @@
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import UserPill from '$lib/Elements/Generic/UserPill.svelte';
+	import { deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
 	import config from '$lib/config/settings.json';
-	import { faCog } from '@fortawesome/free-solid-svg-icons';
+	import type { Review } from '$lib/types/Review';
+	import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
-	interface User {
-		_id: string;
-		id: number;
-		username: string;
-		password: string;
-		email: string;
-		staff: boolean;
-		credit: {
-			$numberDecimal: string;
-		};
-		cart: any[];
-		reset_token: string | null;
-		restrictions: number;
-		__v: number;
-		token: string | null;
-		activation_token?: string;
+	let data: Review[]; // Declare the data variable
+	$: data; // List of reviews (Review[])
+
+	async function catchAll() {
+		const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/review/manage`, {
+			headers: {
+				Authorization: `Bearer ${localStorage.token}`
+			}
+		});
+		if (res.status === 403) {
+			localStorage.removeItem('token');
+			localStorage.removeItem('user_id');
+			localStorage.removeItem('user');
+			toast.push('You need to log in.');
+			goto('/auth/login');
+		}
+		if (!res.ok) {
+			const r = await res.json();
+			return toast.push(r.message);
+		}
+		const r = await res.json();
+		data = r.is; // Rizz
+		// console.log(data);
 	}
-	let data: User[]; // List of users
 
 	onMount(async () => {
 		try {
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/user/manage`, {
-				headers: {
-					Authorization: `Bearer ${localStorage.token}`
-				}
-			});
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
-			}
-			if (!res.ok) {
-				const r = await res.json();
-				return toast.push(r.message);
-			}
-			const r = await res.json();
-			data = r.is; // Rizz
-			console.log(data);
+			await catchAll();
 		} catch (error) {
 			console.log(error);
 			toast.push(`Oops. Something unexpected happened while loading the dash: ${error.message}`);
@@ -56,8 +47,7 @@
 	});
 </script>
 
-// POST/PUT/DELETE https://winter-darkness-1705.fly.dev/api/v1/admin/user/manage
-<main class="w-full h-screen">
+<main class="w-full h-screen overflow-hidden">
 	<div class="navigation w-full z-20">
 		<Navigation
 			transparency={5}
@@ -90,12 +80,54 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block px-16 py-16 w-full h-full bg-transparent">
+		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto">
 			<div class="flex text-2xl font-semibold pb-2">Review Management</div>
 			<div class="flex text-xl font-semibold pb-12">Reviews & Comment Management</div>
 			<div class="flex flex-wrap w-full">
 				{#if data != undefined}
-					{#each data as review, i}{/each}{:else}<div class="font-light">
+					{#each data as review, i}
+						<div class="user_wrap w-full">
+							<UserPill
+								user={review.reviewer ?? {}}
+								description={`Review ID: ${review._id}<br/>Review For: ${
+									review.product?.productName
+								}<br/>Content: ${escapeHtml(review.content)}<br/>Original Content: ${escapeHtml(
+									review.original_content
+								)}`}
+							>
+								<div class="controls flex space-x-2">
+									<div
+										class="edit-wrap w-fit h-fit"
+										on:click={() => {
+											deleteReview(review._id);
+											catchAll();
+										}}
+									>
+										<Button
+											icon={faTrash}
+											color="transparent"
+											custom_style="border border-COLORHPK"
+											color_t="COLORHPK"
+											text="Delete review"
+										/>
+									</div>
+									<a href="/product/{review?.product.slug}#{review?._id}">
+										<div
+											class="edit-wrap w-fit h-fit"
+											on:click={() => goto(`/product/${review?.product.slug}#${review?._id}`)}
+										>
+											<Button
+												icon={faCog}
+												color="COLORBLK"
+												color_t="COLORWHT1"
+												text="Go to listing"
+											/>
+										</div></a
+									>
+								</div>
+							</UserPill>
+						</div>
+					{/each}{:else}<div class="font-light">
 						There was a problem while displaying the data.
 					</div>{/if}
 			</div>

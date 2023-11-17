@@ -8,6 +8,7 @@
 	import Select from '$lib/Elements/Generic/Select.svelte';
 	import UserPill from '$lib/Elements/Generic/UserPill.svelte';
 	import config from '$lib/config/settings.json';
+	import type { User } from '$lib/types/User';
 	import { faCog } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
@@ -16,24 +17,6 @@
 	$: search = $page.url.searchParams.get('search');
 	$: currentFilter = $page.url.searchParams.get('filter');
 
-	interface User {
-		_id: string;
-		id: number;
-		username: string;
-		score: number;
-		password: string;
-		email: string;
-		staff: boolean;
-		credit: {
-			$numberDecimal: string;
-		};
-		cart: any[];
-		reset_token: string | null;
-		restrictions: number;
-		__v: number;
-		token: string | null;
-		activation_token?: string;
-	}
 	let data: User[]; // List of users
 
 	let debounceTimeout: number;
