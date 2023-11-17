@@ -19,7 +19,7 @@
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import StarCount from '$lib/Elements/Generic/StarCount.svelte';
 	import { addToCart } from '$lib/Elements/Utility/Cart';
-	import { deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
+	import { createReview, deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
 	import type { EngineProduct } from '$lib/types/Product.ts';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
@@ -129,7 +129,7 @@
 				}
 			);
 		} else {
-			Review(valueArray[0], rating); // Pass in the comment and the rating
+			createReview(valueArray[0], rating); // Pass in the comment and the rating
 		}
 	};
 
@@ -137,32 +137,6 @@
 		rating = value;
 	}
 
-	async function Review(comment: string, rating: number) {
-		const response = await fetch(`${config['server']['HTTPOrigin']}/api/v1/review/create`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${localStorage.token}`
-			},
-			body: JSON.stringify(what_is(what.public.review, [product_id, rating, comment]))
-		});
-		const data = await response.json();
-		if (!response.ok) {
-			return toast.push(data.message, {
-				dismissable: false,
-				theme: {
-					'--toastBarBackground': '#842d69'
-				}
-			});
-		}
-		toast.push(
-			// "Your review was created. It'll take a few minutes to show up. Indexing every: <b>3 minutes</b>"
-			data.is[0]
-		);
-		setTimeout(() => {
-			window.location.reload();
-		}, 2000);
-	}
 </script>
 
 <main class="w-full h-screen">
