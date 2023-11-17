@@ -140,9 +140,11 @@
 					<div class="flex text-2xl font-semibold pb-2">User Management</div>
 					<div class="flex text-xl font-semibold pb-12">Who would you like to edit?</div>
 				</div>
-				<div class="flex items-center justify-end flex-1">	<div class="btn_wrp" on:click={() => goto('/admin/dashboard/user/manage')}>
-					<Button color="COLORBLK" color_t="COLORWHT1" text="New user" icon={faPlus} />
-				</div>
+				<div class="flex items-center justify-end flex-1">
+					{#if staff}
+						<div class="btn_wrp" on:click={() => goto('/admin/dashboard/user/manage')}>
+							<Button color="COLORBLK" color_t="COLORWHT1" text="New user" icon={faPlus} />
+						</div>{/if}
 					<!-- <div class="flex flex-col items-end space-y-2">
 						<SearchBar
 							on:input={(e) => {
