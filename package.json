@@ -1,6 +1,6 @@
 {
 	"name": "dsh-fe",
-	"version": "0.0.1",
+	"version": "0.0.46",
 	"private": true,
 	"scripts": {
 		"start": "PORT=8080 node build/index.js",
