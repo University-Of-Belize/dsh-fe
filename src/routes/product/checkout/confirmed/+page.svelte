@@ -1,13 +1,13 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import EscrowBanner from '$lib/Elements/Generic/EscrowBanner.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import { toast } from '@zerodevx/svelte-toast';
-	import config from '$lib/config/settings.json';
+	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
+	import config from '$lib/config/settings';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
-	import { goto } from '$app/navigation';
+	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
 	$: branding_text = 'One second...';
 	$: text = '';
 	$: subtitle = '';

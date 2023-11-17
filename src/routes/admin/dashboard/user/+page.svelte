@@ -1,15 +1,13 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import SearchBar from '$lib/Elements/Generic/AsyncSearch.svelte';
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import Select from '$lib/Elements/Generic/Select.svelte';
 	import UserPill from '$lib/Elements/Generic/UserPill.svelte';
-	import config from '$lib/config/settings.json';
+	import config from '$lib/config/settings';
 	import type { User } from '$lib/types/User';
-	import { faCog } from '@fortawesome/free-solid-svg-icons';
+	import { faCog, faPlus } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	let navDrawer: HTMLDivElement;
@@ -142,8 +140,10 @@
 					<div class="flex text-2xl font-semibold pb-2">User Management</div>
 					<div class="flex text-xl font-semibold pb-12">Who would you like to edit?</div>
 				</div>
-				<div class="flex items-center justify-end flex-1">
-					<div class="flex flex-col items-end space-y-2">
+				<div class="flex items-center justify-end flex-1">	<div class="btn_wrp" on:click={() => goto('/admin/dashboard/user/manage')}>
+					<Button color="COLORBLK" color_t="COLORWHT1" text="New user" icon={faPlus} />
+				</div>
+					<!-- <div class="flex flex-col items-end space-y-2">
 						<SearchBar
 							on:input={(e) => {
 								searchUser(e, currentFilter ?? undefined);
@@ -161,7 +161,7 @@
 							selectedOption={currentFilter ?? 'username'}
 							placeholder="Select a filter"
 						/>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<div class="flex flex-wrap w-full">

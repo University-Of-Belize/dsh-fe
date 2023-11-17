@@ -4,7 +4,7 @@
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import ProductBanner from '$lib/Elements/Generic/ProductBanner.svelte';
-	import config from '$lib/config/settings.json';
+	import config from '$lib/config/settings';
 	import type { Product as Product_ } from '$lib/types/Product.ts';
 	import { faGift, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
@@ -16,7 +16,7 @@
 			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/menu/random`);
 			const r = await res.json();
 			product = r.is;
-			console.log(product);
+			// console.log(product);
 		} catch (error) {
 			console.log(error);
 			toast.push(

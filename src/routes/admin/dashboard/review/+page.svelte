@@ -5,7 +5,7 @@
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import UserPill from '$lib/Elements/Generic/UserPill.svelte';
 	import { deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
-	import config from '$lib/config/settings.json';
+	import config from '$lib/config/settings';
 	import type { Review } from '$lib/types/Review';
 	import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
@@ -90,7 +90,7 @@
 							<UserPill
 								user={review.reviewer ?? {}}
 								description={`Review ID: ${review._id}<br/>Review For: ${
-									review.product?.productName
+									review.product.productName
 								}<br/>Content: ${escapeHtml(review.content)}<br/>Original Content: ${escapeHtml(
 									review.original_content
 								)}`}

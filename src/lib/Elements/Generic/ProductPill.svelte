@@ -1,6 +1,6 @@
 <script lang="ts">
 
-	import config from '$lib/config/settings.json';
+	import config from '$lib/config/settings';
 	import type { Product } from '$lib/types/Product';
 	export let product: Product;
 	export let tag: boolean = false;

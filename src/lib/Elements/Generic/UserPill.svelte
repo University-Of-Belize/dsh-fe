@@ -1,8 +1,7 @@
 <script lang="ts">
 
-	import config from '$lib/config/settings.json';
+	import config from '$lib/config/settings';
 	import type { User } from '$lib/types/User';
-	import { stringify } from 'postcss';
 	export let user: User;
 	export let tag: boolean = false;
 	export let tagColor: string = 'COLORBLK';

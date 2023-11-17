@@ -1,11 +1,13 @@
 <script>
 	import '../app.css';
 	// For reading storage
-	import 'node-localstorage/register';
-	import { SvelteToast, toast } from '@zerodevx/svelte-toast';
 	import { goto } from '$app/navigation';
+	import config from '$lib/config/settings';
+	import { SvelteToast, toast } from '@zerodevx/svelte-toast';
+	import 'node-localstorage/register';
 	import { onMount } from 'svelte';
-	import config from '$lib/config/settings.json';
+	import { beforeNavigate } from '$app/navigation';
+	import { updated } from '$app/stores';
 	const options = {
 		dismissable: true,
 		theme: {
@@ -15,6 +17,12 @@
 		}
 	};
 
+	// Seamless updates
+	beforeNavigate(({ willUnload, to }) => {
+		if ($updated && !willUnload && to?.url) {
+			location.href = to.url.href;
+		}
+	});
 	onMount(async () => {
 		// We're not going to be vicious or anything, but we're going to be a little bit mean.
 		if (localStorage.blocked == 'true') {

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import config from '$lib/config/settings.json';
+	import config from '$lib/config/settings';
 	import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 	import { writable } from 'svelte/store';
 
@@ -8,8 +8,8 @@
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import Product from '$lib/Elements/Generic/ProductElement.svelte';
 	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
-	import Fa from 'svelte-fa';
 	import type { EngineProduct } from '$lib/types/Product';
+	import Fa from 'svelte-fa';
 
 	const products = writable<EngineProduct[]>([]);
 	$: params = $page.url.searchParams.get('search');

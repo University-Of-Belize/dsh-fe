@@ -6,7 +6,7 @@
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
 	import { addToCart, emptyCart } from '$lib/Elements/Utility/Cart';
-	import config from '$lib/config/settings.json';
+	import config from '$lib/config/settings';
 	import type { CartProduct } from '$lib/types/Product';
 	import { faPrint, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';

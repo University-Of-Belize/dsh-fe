@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { faCartPlus, faHeart, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+	import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 	import { goto } from '$app/navigation';
-	import config from '$lib/config/settings.json';
+	import config from '$lib/config/settings';
 	import type { Product } from '$lib/types/Product';
+	import { addToCart } from '../Utility/Cart';
 	import IconButton from './IconButton.svelte';
 	import StarCount from './StarCount.svelte';
-	import { addToCart } from '../Utility/Cart';
 	let productImage: string;
 	let productId: string;
 	let productName: string;
@@ -30,9 +30,6 @@
 			class="h-full w-full lg:w-full lg:h-full object-cover"
 			on:error={() => {
 				productImage = config['product-view']['default-image'];
-			}}
-			on:load={() => {
-				console.log('Image loaded successfully');
 			}}
 		/>
 	</div>

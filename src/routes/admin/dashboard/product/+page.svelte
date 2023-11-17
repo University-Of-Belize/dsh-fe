@@ -5,10 +5,9 @@
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import ProductPill from '$lib/Elements/Generic/ProductPill.svelte';
 	import { deleteProduct } from '$lib/Elements/Utility/Product';
-	import { deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
-	import config from '$lib/config/settings.json';
+	import config from '$lib/config/settings';
 	import type { Product } from '$lib/types/Product';
-	import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
+	import { faCog, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
@@ -82,8 +81,19 @@
 			<DashList {staff} />
 		</div>
 		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto">
-			<div class="flex text-2xl font-semibold pb-2">Product Management</div>
-			<div class="flex text-xl font-semibold pb-12">Product Listing & Management</div>
+			<div class="flex-header flex items-center w-full flex-wrap">
+				<div class="block">
+					<div class="flex text-2xl font-semibold pb-2">Product Management</div>
+					<div class="flex text-xl font-semibold pb-12">Product Listing & Management</div>
+				</div>
+				<div class="flex items-center justify-end flex-1">
+					<div class="flex flex-col items-end space-y-2">
+						<div class="btn_wrp" on:click={() => goto('/admin/dashboard/product/manage')}>
+							<Button color="COLORBLK" color_t="COLORWHT1" text="New product" icon={faPlus} />
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="flex flex-wrap w-full">
 				{#if $data && $data.length > 0}
 					{#each $data as product, i}

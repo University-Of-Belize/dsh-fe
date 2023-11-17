@@ -3,7 +3,7 @@
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import config from '$lib/config/settings.json';
+	import config from '$lib/config/settings';
 	import {
 		faCog,
 		faHamburger,
@@ -45,7 +45,7 @@
 				return toast.push(r.message);
 			}
 			data = await res.json();
-			console.log(data);
+			// console.log(data);
 			staff = data.is[0][0] === 'super' ? true : false;
 			localStorage.setItem('staff', staff.toString());
 			icons = data.is[0][2];

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import config from '$lib/config/settings.json';
+	import config from '$lib/config/settings';
 	import {
 		faCartPlus,
 		faCog,
@@ -13,18 +13,18 @@
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
+	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import IconButton from '$lib/Elements/Generic/IconButton.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import StarCount from '$lib/Elements/Generic/StarCount.svelte';
-	import type { EngineProduct } from '$lib/types/Product.ts';
-	import { toast } from '@zerodevx/svelte-toast';
-	import Fa from 'svelte-fa';
-	import { what_is } from '$lib/vendor/dishout/What_Is';
-	import what from '$lib/vendor/dishout/Whats';
-	import { goto } from '$app/navigation';
 	import { addToCart } from '$lib/Elements/Utility/Cart';
 	import { deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
+	import type { EngineProduct } from '$lib/types/Product.ts';
+	import { what_is } from '$lib/vendor/dishout/What_Is';
+	import what from '$lib/vendor/dishout/Whats';
+	import { toast } from '@zerodevx/svelte-toast';
+	import Fa from 'svelte-fa';
 	// let hero_image: HTMLDivElement;
 	const user = localStorage.user; // The user
 	const product = writable<EngineProduct | null>(null);

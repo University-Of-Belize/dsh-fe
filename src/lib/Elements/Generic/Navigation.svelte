@@ -1,14 +1,15 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import config from '$lib/config/settings.json';
+	import config from '$lib/config/settings';
+	import type { Category } from '$lib/types/Category';
 	import {
 		faArrowRightFromBracket,
 		faBars,
-		faBasketShopping,
+		// faBasketShopping,
 		faCartShopping,
 		faCog,
 		faCogs,
-		faDashboard,
+		// faDashboard,
 		faGift,
 		faRightToBracket,
 		faSearch,
@@ -29,10 +30,13 @@
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let navDrawer: HTMLDivElement;
 	let navClose: HTMLDivElement;
+	let debug_selection: HTMLDivElement;
+	let debug_panel: HTMLDivElement;
+	let hidden: boolean = true;
 	let navToggle: HTMLDivElement;
 	let navTransparency: number = 0;
 	let cachedCategories = localStorage.getItem('categories');
-	let categories = [];
+	let categories: Category[] = [];
 
 	onMount(async () => {
 		if (!localStorage.user) {
@@ -47,7 +51,7 @@
 						}
 					);
 					const data = await response.json();
-					console.log(data);
+					// console.log(data);
 					user = data[0]; // Not a what is. It's a search
 					localStorage.setItem('user', JSON.stringify(user));
 				} catch (error) {
@@ -162,6 +166,35 @@
 				</div>
 			{/if}
 		</div>
+		{#if staff}
+			<div
+				class="cursor-pointer hover:underline text-COLORBLE bg-opacity-100 bg-COLORWHT px-2"
+				bind:this={debug_selection}
+				on:click={() => {
+					if (hidden) {
+						debug_selection.innerText = 'Show debug...';
+					} else {
+						debug_selection.innerText = 'Hide debug...';
+					}
+					debug_panel.classList.toggle('hidden');
+				}}
+			>
+				Show debug...
+			</div>
+			<div class="flex hidden debug w-full my-4" bind:this={debug_panel}>
+				<div class="lefthand block">
+					<div class="lefthand-contents block px-2 select-text">
+						<div class="origin w-full"><b>Origin:</b> {config['server']['HTTPOrigin']}</div>
+						<div class="currency w-full"><b>Currency:</b> {config['checkout']['currency']}</div>
+						<div class="support-email w-full">
+							<b>Support email:</b>
+							{config['server']['support-email']}
+						</div>
+						<div class="version w-full"><b>UI version:</b> {config['ui']['version']}</div>
+					</div>
+				</div>
+			</div>
+		{/if}
 	</div>
 
 	<div

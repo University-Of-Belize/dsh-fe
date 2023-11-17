@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { faCartPlus, faHeart, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+	import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 	import { goto } from '$app/navigation';
-	import config from '$lib/config/settings.json';
-	import IconButton from './IconButton.svelte';
+	import config from '$lib/config/settings';
 	import { addToCart } from '../Utility/Cart';
+	import IconButton from './IconButton.svelte';
 	let productImage: string;
 	let productId: string;
 	let productName: string;
@@ -27,9 +27,6 @@
 			class="w-48 h-48 object-cover rounded-lg"
 			on:error={() => {
 				productImage = config['product-view']['default-image'];
-			}}
-			on:load={() => {
-				console.log('Image loaded successfully');
 			}}
 		/>
 	</div>

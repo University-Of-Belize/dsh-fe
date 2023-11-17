@@ -7,7 +7,7 @@
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import Select from '$lib/Elements/Generic/Select.svelte';
 	import UserPill from '$lib/Elements/Generic/UserPill.svelte';
-	import config from '$lib/config/settings.json';
+	import config from '$lib/config/settings';
 	import { faCog } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';

@@ -1,4 +1,6 @@
-{
+import { version } from '$app/environment';
+
+const settings = {
 	"server": {
 		"HTTPOrigin": "https://winter-darkness-1705.fly.dev",
 		"support-email": "cafe@ub.edu.bz"
@@ -17,5 +19,10 @@
 	},
 	"checkout": {
 		"currency": "BZD"
+	},
+	"ui": {
+		"version": version
 	}
 }
+
+export default settings;
