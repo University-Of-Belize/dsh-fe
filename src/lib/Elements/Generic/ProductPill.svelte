@@ -2,6 +2,9 @@
 
 	import config from '$lib/config/settings';
 	import type { Product } from '$lib/types/Product';
+	import Fa from 'svelte-fa';
+	import {faPencil} from "@fortawesome/free-solid-svg-icons";
+	import {goto} from "$app/navigation";
 	export let product: Product;
 	export let tag: boolean = false;
 	export let tagColor: string = 'COLORBLK';
@@ -17,6 +20,8 @@
 	&nbsp;
 </div>
 
+
+<div class="product-wrp relative"> <div style="top: -23%; right: -1%;" class="widget-wrp absolute flex w-full items-center justify-end"><div on:click={()=>goto(`/admin/dashboard/product/manage?product_id=${product._id}`)} class="widget shadow-md cursor-pointer hover:opacity-80 bg-COLORBLK px-2 py-2 text-COLORWHT w-fit rounded-md"><Fa icon={faPencil} size="0.85x"/></div></div>
 <div class="product my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-2 rounded-md">
 	<div class="flex bg-opacity-100">
 		<div class="product-pfp flex flex-col items-center justify-start pr-4">
@@ -52,4 +57,5 @@
 			</div>
 		</div>
 	</div>
+</div>
 </div>

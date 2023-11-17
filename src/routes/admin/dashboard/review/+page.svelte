@@ -57,7 +57,7 @@
 		/>
 	</div>
 
-	<div class="main-content flex items-center justify-start h-full text-COLORBLK">
+	<div class="main-content flex items-center justify-start h-full text-COLORBLK overflow-hidden">
 		<div
 			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4"
 			bind:this={navDrawer}
@@ -80,7 +80,7 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto">
+		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto pb-40">
 			<div class="flex text-2xl font-semibold pb-2">Review Management</div>
 			<div class="flex text-xl font-semibold pb-12">Reviews & Comment Management</div>
 			<div class="flex flex-wrap w-full">

@@ -80,7 +80,7 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto">
+		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto pb-40">
 			<div class="flex-header flex items-center w-full flex-wrap">
 				<div class="block">
 					<div class="flex text-2xl font-semibold pb-2">Product Management</div>
@@ -100,7 +100,9 @@
 						<div class="user_wrap w-full">
 							<ProductPill
 								product={product ?? {}}
-								description={`Category: ${product.category.name}`}
+								description={`Category: ${
+									product.category ? product.category.name : 'Uncategorized'
+								}`}
 							>
 								<div class="controls flex space-x-2">
 									<div

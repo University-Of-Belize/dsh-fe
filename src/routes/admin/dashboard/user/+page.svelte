@@ -101,7 +101,7 @@
 	});
 </script>
 
-<main class="w-full h-screen">
+<main class="w-full h-screen overflow-hidden">
 	<div class="navigation w-full z-20">
 		<Navigation
 			transparency={5}
@@ -134,7 +134,7 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block px-16 py-16 w-full h-full bg-transparent">
+		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto pb-40">
 			<div class="flex-header flex items-center w-full flex-wrap">
 				<div class="block">
 					<div class="flex text-2xl font-semibold pb-2">User Management</div>

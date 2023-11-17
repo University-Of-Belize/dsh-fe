@@ -20,12 +20,13 @@
 	import Fa from 'svelte-fa';
 	import Button from './Button.svelte';
 	import IconButton from './IconButton.svelte';
+	import type { User } from '$lib/types/User';
 	export let transparency: number = 0;
 	export let search: boolean = true;
 	export let value: string = '';
 	export let titleText: string = 'Cafe';
 	export let titleWhere: string = '/';
-	export let user: object | undefined = undefined;
+	export let user: User | undefined = undefined;
 	let nav: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let navDrawer: HTMLDivElement;

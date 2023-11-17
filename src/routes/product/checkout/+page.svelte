@@ -23,13 +23,19 @@
 		try {
 			if (single_cart && JSON.parse(wants_single_cart)) {
 				localStorage.removeItem('wants_single_cart');
-				addToCart(single_cart, 1).catch((err) => {
-					console.error(err);
-					toast.push('Failed to add item to cart.');
-				});
+				addToCart(single_cart, 1)
+					.then(() => {
+						setTimeout(() => {
+							window.location.reload();
+						}, 2000);
+					})
+					.catch((err) => {
+						console.error(err);
+						toast.push('Failed to add item to cart.');
+					});
 			}
 			setTimeout(async () => {
-				const response = await fetch('https://winter-darkness-1705.fly.dev/api/v1/user/cart', {
+				const response = await fetch(`${config['server']['HTTPOrigin']}/api/v1/user/cart`, {
 					headers: {
 						Authorization: `Bearer ${localStorage.token}`
 					}
@@ -46,7 +52,7 @@
 						return acc;
 					}, []);
 					dataLength = data?.length;
-					console.log(dataLength === 0);
+					// console.log(data, dataLength === 0);
 				} else {
 					console.error('Failed to fetch cart data.');
 				}
@@ -85,7 +91,7 @@
 			</div>
 
 			<div class="cart_items flex flex-col space-y-2 flex-wrap w-full">
-				{#if data != undefined}
+				{#if data != undefined && dataLength > 0}
 					{#each data as item}
 						{(() => {
 							calculateTotal(item.product.price.$numberDecimal, item.quantity);
@@ -172,9 +178,9 @@
 						</div>
 					</div>
 				{:else if dataLength === 0}
-					<div class="font-light">
-						Your cart is empty. Try adding some items to it!
-						<SearchBar />
+					<div class="font-light space-y-4">
+						<div class="cartEmptyMessage">Your cart is empty. Try adding some items to it!</div>
+						<SearchBar nomargin />
 					</div>{:else}
 					<div class="font-light">There was a problem while loading your shopping cart.</div>{/if}
 			</div>
