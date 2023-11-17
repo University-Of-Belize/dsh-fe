@@ -4,9 +4,11 @@
 	import {
 		faCartPlus,
 		faCog,
+		faLink,
 		faPencil,
 		faStar,
-		faStarHalfAlt
+		faStarHalfAlt,
+		faTrash
 	} from '@fortawesome/free-solid-svg-icons';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
@@ -22,6 +24,7 @@
 	import what from '$lib/vendor/dishout/Whats';
 	import { goto } from '$app/navigation';
 	import { addToCart } from '$lib/Elements/Utility/Cart';
+	import { deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
 	// let hero_image: HTMLDivElement;
 	const user = localStorage.user; // The user
 	const product = writable<EngineProduct | null>(null);
@@ -31,6 +34,13 @@
 	let rating = 0;
 
 	onMount(async () => {
+		// Mounted scrolling to anchors
+		setTimeout(() => {
+			const { hash } = document.location;
+			const scrollTo = hash && document.getElementById(hash.slice(1));
+			if (scrollTo) scrollTo.scrollIntoView();
+		}, 2000);
+
 		try {
 			// Check if the slug even exists
 			const response = await fetch(`${config.server.HTTPOrigin}/api/v1/menu/slug?id=${params}`);
@@ -85,14 +95,6 @@
 		const ratingCount = reviews.filter((review) => review.rating === rating).length;
 		const percentage = (ratingCount / totalReviews) * 100;
 		return percentage.toFixed(0);
-	}
-	function escapeHtml(unsafe) {
-		return unsafe
-			.replace(/&/g, '&amp;')
-			.replace(/</g, '&lt;')
-			.replace(/>/g, '&gt;')
-			.replace(/"/g, '&quot;')
-			.replace(/'/g, '&#039;');
 	}
 	const handleSubmit = (event: Event) => {
 		event.preventDefault();
@@ -245,7 +247,7 @@
 			<div class="flex flex-col-reverse justify-start w-full">
 				{#if $product.reviews.length === 0}<b>No reviews yet. Be the first.</b>{/if}
 				{#each $product.reviews as review}
-					<div class="review my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-2 rounded-md">
+					<div class="review my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-2 rounded-md" id={review._id}>
 						<div class="flex bg-opacity-100">
 							<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
 								<img
@@ -266,7 +268,7 @@
 										{#each Array.from({ length: 5 }, (_, i) => i) as _}
 											{#if _ < Math.floor(calculateRating([review]))}
 												<Fa icon={faStar} size="1x" />
-											{:else if _ === Math.floor(calculateRating([review])) && calculateRating([review]) % 1 >= 0.5}
+											{:else if _ === Math.floor(calculateRating( [review] )) && calculateRating( [review] ) % 1 >= 0.5}
 												<Fa icon={faStarHalfAlt} size="1x" />
 											{:else}
 												<Fa icon={faStar} size="1x" class="opacity-25" />
@@ -277,6 +279,56 @@
 								<div class="text-md font-light text-COLORBLE">
 									{@html escapeHtml(review.content).replace(/\n/g, '<br>')}
 								</div>
+								{#if JSON.parse(localStorage.staff ?? false)}
+									<div
+										class="actions flex items-center justify-start lg:justify-end flex-1 text-COLORBLK my-4"
+									>
+										<div class="controls flex space-x-2">
+											<div class="stub hidden bg-COLORRED" />
+											<div
+												class="edit-wrap w-fit h-fit"
+												on:click={() => {
+													deleteReview(review._id);
+													try {
+														document.getElementById(review._id).classList.add('bg-COLORRED');
+														document.getElementById(review._id).classList.remove('bg-COLORWHT3');
+													} catch (error) {
+														console.warn('[DELETE_REVIEW]: Failed to update UI state.', error);
+													}
+													setTimeout(() => {
+														window.location.reload();
+													}, 3000);
+												}}
+											>
+												<Button
+													icon={faTrash}
+													color="transparent"
+													custom_style="border border-COLORHPK"
+													color_t="COLORHPK"
+													text="Delete review"
+												/>
+											</div>
+
+											<div
+												class="edit-wrap w-fit h-fit"
+												on:click={() =>
+													navigator.clipboard
+														.writeText(
+															`${window.location.origin}${window.location.pathname}#${review._id}`
+														)
+														.then(() => {
+															toast.push('Copied link to review to clipboard.');
+														})}
+											>
+												<Button
+													icon={faLink}
+													color="COLORBLK"
+													color_t="COLORWHT1"
+													text="Copy link to review"
+												/>
+											</div>
+										</div>
+									</div>{/if}
 							</div>
 						</div>
 					</div>

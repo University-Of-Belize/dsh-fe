@@ -3,7 +3,7 @@ import type { Review } from './Review';
 
 interface Product {
 	_id: string;
-	category: string;
+	category: Category;
 	description: string;
 	image: string;
 	in_stock: number;
@@ -37,14 +37,13 @@ interface CartProduct {
 	_id: string;
 }
 
-interface EngineProduct extends Omit<Product, 'category'> {
+interface EngineProduct extends Product {
 	id: string;
 	score: number;
 	terms: string[];
 	match: {
 		[key: string]: string[];
 	};
-	category: Category;
 	reviews: Review[];
 }
 

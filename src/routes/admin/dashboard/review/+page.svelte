@@ -4,44 +4,49 @@
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import UserPill from '$lib/Elements/Generic/UserPill.svelte';
+	import { deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
 	import config from '$lib/config/settings.json';
-	import type { Product } from '$lib/types/Product';
 	import type { Review } from '$lib/types/Review';
-	import type { User } from '$lib/types/User';
-	import { faCog } from '@fortawesome/free-solid-svg-icons';
+	import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
-	let data: Review[]; // List of reviews
+	let data: Review[]; // Declare the data variable
+	$: data; // List of reviews (Review[])
+
+	async function catchAll() {
+		const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/review/manage`, {
+			headers: {
+				Authorization: `Bearer ${localStorage.token}`
+			}
+		});
+		if (res.status === 403) {
+			localStorage.removeItem('token');
+			localStorage.removeItem('user_id');
+			localStorage.removeItem('user');
+			toast.push('You need to log in.');
+			goto('/auth/login');
+		}
+		if (!res.ok) {
+			const r = await res.json();
+			return toast.push(r.message);
+		}
+		const r = await res.json();
+		data = r.is; // Rizz
+		// console.log(data);
+	}
 
 	onMount(async () => {
 		try {
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/review/manage`, {
-				headers: {
-					Authorization: `Bearer ${localStorage.token}`
-				}
-			});
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
-			}
-			if (!res.ok) {
-				const r = await res.json();
-				return toast.push(r.message);
-			}
-			const r = await res.json();
-			data = r.is; // Rizz
-			console.log(data);
+			await catchAll();
 		} catch (error) {
 			console.log(error);
 			toast.push(`Oops. Something unexpected happened while loading the dash: ${error.message}`);
 		}
 	});
 </script>
+
 <main class="w-full h-screen overflow-hidden">
 	<div class="navigation w-full z-20">
 		<Navigation
@@ -81,19 +86,47 @@
 			<div class="flex flex-wrap w-full">
 				{#if data != undefined}
 					{#each data as review, i}
-					<div class="user_wrap w-full">
-						<UserPill
-							user={review.reviewer ?? {}}
-							description={`Content: ${review.content}<br/>Original Content: ${review.original_content}`}
-						>
-							<div
-								class="edit-wrap w-fit h-fit"
-								on:click={() => goto(`/product/${review?.product.slug}`)}
+						<div class="user_wrap w-full">
+							<UserPill
+								user={review.reviewer ?? {}}
+								description={`Review ID: ${review._id}<br/>Review For: ${
+									review.product?.productName
+								}<br/>Content: ${escapeHtml(review.content)}<br/>Original Content: ${escapeHtml(
+									review.original_content
+								)}`}
 							>
-								<Button icon={faCog} color="COLORBLK" color_t="COLORWHT1" text="Go to listing" />
-							</div>
-						</UserPill>
-					</div>
+								<div class="controls flex space-x-2">
+									<div
+										class="edit-wrap w-fit h-fit"
+										on:click={() => {
+											deleteReview(review._id);
+											catchAll();
+										}}
+									>
+										<Button
+											icon={faTrash}
+											color="transparent"
+											custom_style="border border-COLORHPK"
+											color_t="COLORHPK"
+											text="Delete review"
+										/>
+									</div>
+									<a href="/product/{review?.product.slug}#{review?._id}">
+										<div
+											class="edit-wrap w-fit h-fit"
+											on:click={() => goto(`/product/${review?.product.slug}#${review?._id}`)}
+										>
+											<Button
+												icon={faCog}
+												color="COLORBLK"
+												color_t="COLORWHT1"
+												text="Go to listing"
+											/>
+										</div></a
+									>
+								</div>
+							</UserPill>
+						</div>
 					{/each}{:else}<div class="font-light">
 						There was a problem while displaying the data.
 					</div>{/if}
