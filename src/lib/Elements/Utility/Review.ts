@@ -38,7 +38,7 @@ const deleteReview = async (reviewId: string) => {
 };
 
 
-async function createReview(comment: string, rating: number) {
+async function createReview(product_id: string, rating: number, comment: string) {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
@@ -66,7 +66,7 @@ async function createReview(comment: string, rating: number) {
 			setTimeout(() => {
 				window.location.reload();
 			}, 2000);
-		}, 500); // 500ms break	
+		}, 500); // 500ms break
 	} catch (error) {
 		console.log(error);
 		toast.push(`Oops. Something unexpected happened while deleting the review: ${error.message}`);

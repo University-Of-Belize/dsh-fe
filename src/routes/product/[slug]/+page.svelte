@@ -129,7 +129,7 @@
 				}
 			);
 		} else {
-			createReview(valueArray[0], rating); // Pass in the comment and the rating
+			createReview(product_id, rating, valueArray[0]); // Pass in the comment and the rating
 		}
 	};
 
