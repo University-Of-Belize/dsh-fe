@@ -95,7 +95,7 @@
 									review.content != review.original_content
 										? `Original Content: ${escapeHtml(review.original_content)}<br/>`
 										: ''
-								}Hidden: ${review.hidden ? "Yes" : "No"}<br/>`}
+								}Hidden: ${review.hidden ? 'Yes' : 'No'}<br/>`}
 							>
 								<div class="controls flex space-x-2">
 									{#if staff}
@@ -103,7 +103,9 @@
 											class="edit-wrap w-fit h-fit"
 											on:click={() => {
 												deleteReview(review._id);
-												catchAll();
+												setTimeout(() => {
+													catchAll();
+												}, 800);
 											}}
 										>
 											<Button

@@ -15,31 +15,31 @@
 
 	let data: Promo[]; // List of promos
 
-async function catchAll(){
-	const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/promo/manage`, {
-				headers: {
-					Authorization: `Bearer ${localStorage.token}`
-				}
-			});
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
+	async function catchAll() {
+		const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/promo/manage`, {
+			headers: {
+				Authorization: `Bearer ${localStorage.token}`
 			}
-			if (!res.ok) {
-				const r = await res.json();
-				return toast.push(r.message);
-			}
+		});
+		if (res.status === 403) {
+			localStorage.removeItem('token');
+			localStorage.removeItem('user_id');
+			localStorage.removeItem('user');
+			toast.push('You need to log in.');
+			goto('/auth/login');
+		}
+		if (!res.ok) {
 			const r = await res.json();
-			data = r.is; // Rizz
-			console.log(data);
-}
+			return toast.push(r.message);
+		}
+		const r = await res.json();
+		data = r.is; // Rizz
+		console.log(data);
+	}
 
 	onMount(async () => {
 		try {
-		await catchAll();
+			await catchAll();
 		} catch (error) {
 			console.log(error);
 			toast.push(`Oops. Something unexpected happened while loading the dash: ${error.message}`);
@@ -86,53 +86,54 @@ async function catchAll(){
 			<div class="flex flex-wrap w-full">
 				{#if data != undefined}
 					{#each data as promo, i}
-					
-					<div class="ctg_wrp w-full">
-						<PromoPill {promo} description={promo.code}
-							><div slot="alias" class="my-2">
-								<!-- Categories get the same alias -->
-							
+						<div class="ctg_wrp w-full">
+							<PromoPill {promo} description={promo.code}
+								><div slot="alias" class="my-2">
+									<!-- Categories get the same alias -->
+
 									<div class="text-md font-semibold">Created by</div>
 									<ul>
 										<li class="before:content-['-⠀'] flex items-center">
-											<div class="font-light text-sm">{promo.created_by ? promo.created_by.username : "Cannot retrieve author."}</div>
+											<div class="font-light text-sm">
+												{promo.created_by ? promo.created_by.username : 'Cannot retrieve author.'}
+											</div>
 										</li>
 									</ul>
-							
-							</div>
-							<div class="controls flex space-x-2">
-								<div
-									class="edit-wrap w-fit h-fit"
-									on:click={() => {
-										deletePromo(promo.code);
-										catchAll();
-									}}
-								>
-									<Button
-										icon={faTrash}
-										color="transparent"
-										custom_style="border border-COLORHPK"
-										color_t="COLORHPK"
-										text="Delete promotion"
-									/>
 								</div>
-								<a href="/admin/dashboard/promo/manage?promo_code{promo.code}">
+								<div class="controls flex space-x-2">
 									<div
 										class="edit-wrap w-fit h-fit"
-										on:click={() => goto(`/admin/dashboard/promo/manage?promo_code${promo.code}`)}
+										on:click={() => {
+											deletePromo(promo.code);
+											setTimeout(() => {
+												catchAll();
+											}, 800);
+										}}
 									>
 										<Button
-											icon={faCog}
-											color="COLORBLK"
-											color_t="COLORWHT1"
-											text="Edit promotion"
+											icon={faTrash}
+											color="transparent"
+											custom_style="border border-COLORHPK"
+											color_t="COLORHPK"
+											text="Delete promotion"
 										/>
-									</div></a
-								>
-							</div>
-						</PromoPill>
-					</div>
-					
+									</div>
+									<a href="/admin/dashboard/promo/manage?promo_code{promo.code}">
+										<div
+											class="edit-wrap w-fit h-fit"
+											on:click={() => goto(`/admin/dashboard/promo/manage?promo_code${promo.code}`)}
+										>
+											<Button
+												icon={faCog}
+												color="COLORBLK"
+												color_t="COLORWHT1"
+												text="Edit promotion"
+											/>
+										</div></a
+									>
+								</div>
+							</PromoPill>
+						</div>
 					{/each}{:else}<div class="font-light">
 						There was a problem while displaying the data.
 					</div>{/if}

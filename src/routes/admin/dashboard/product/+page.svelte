@@ -109,7 +109,9 @@
 										class="edit-wrap w-fit h-fit"
 										on:click={() => {
 											deleteProduct(product.slug);
-											catchAll();
+											setTimeout(() => {
+												catchAll();
+											}, 800);
 										}}
 									>
 										<Button
