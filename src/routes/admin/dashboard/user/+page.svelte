@@ -93,7 +93,7 @@
 				// If we're not searching garbage
 				return searchUser(search);
 			}
-			catchAll();
+			await catchAll();
 		} catch (error) {
 			console.log(error);
 			toast.push(`Oops. Something unexpected happened while loading the dash: ${error.message}`);

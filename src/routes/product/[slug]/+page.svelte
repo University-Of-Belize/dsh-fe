@@ -25,8 +25,9 @@
 	import what from '$lib/vendor/dishout/Whats';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
+	import type { User } from '$lib/types/User';
 	// let hero_image: HTMLDivElement;
-	const user = localStorage.user; // The user
+	const user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // The user
 	const product = writable<EngineProduct | null>(null);
 	let product_id: string;
 	const params = $page.params.slug;
@@ -35,10 +36,23 @@
 
 	onMount(async () => {
 		// Mounted scrolling to anchors
+
+		const { hash } = document.location;
+		if (hash) {
+			toast.push('Locating...');
+		}
 		setTimeout(() => {
-			const { hash } = document.location;
 			const scrollTo = hash && document.getElementById(hash.slice(1));
-			if (scrollTo) scrollTo.scrollIntoView();
+			if (scrollTo) {
+				scrollTo.scrollIntoView();
+			} else {
+				toast.push("Couldn't find that one.<br/>No review found with that ID.", {
+					dismissable: false,
+					theme: {
+						'--toastBarBackground': '#842d69'
+					}
+				});
+			}
 		}, 2000);
 
 		try {
@@ -142,7 +156,8 @@
 			});
 		}
 		toast.push(
-			"Your review was created. It'll take a few minutes to show up. Indexing every: <b>3 minutes</b>"
+			// "Your review was created. It'll take a few minutes to show up. Indexing every: <b>3 minutes</b>"
+			data.is[0]
 		);
 		setTimeout(() => {
 			window.location.reload();
@@ -247,91 +262,95 @@
 			<div class="flex flex-col-reverse justify-start w-full">
 				{#if $product.reviews.length === 0}<b>No reviews yet. Be the first.</b>{/if}
 				{#each $product.reviews as review}
-					<div class="review my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-2 rounded-md" id={review._id}>
-						<div class="flex bg-opacity-100">
-							<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
-								<img
-									class="rounded-md w-full"
-									src={review.reviewer?.profile_picture || config['user']['default-image']}
-									alt="{review.reviewer?.username}'s avatar"
-									on:error={() => {
-										review.reviewer.profile_picture = config['user']['default-image'];
-									}}
-									style="width: 50px; height: 50px;"
-								/>
-							</div>
-							<div class="review-content text-COLORBLK">
-								<div class="text-lg font-semibold flex">
-									{review.reviewer?.username || 'Anonymous'}
-									<div class="starcount flex text-COLORYLW items-center justify-center px-2">
-										<!-- Copilot Logic-->
-										{#each Array.from({ length: 5 }, (_, i) => i) as _}
-											{#if _ < Math.floor(calculateRating([review]))}
-												<Fa icon={faStar} size="1x" />
-											{:else if _ === Math.floor(calculateRating( [review] )) && calculateRating( [review] ) % 1 >= 0.5}
-												<Fa icon={faStarHalfAlt} size="1x" />
-											{:else}
-												<Fa icon={faStar} size="1x" class="opacity-25" />
-											{/if}
-										{/each}
-									</div>
+					{#if !review.hidden}
+						<div
+							class="review my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-2 rounded-md"
+							id={review._id}
+						>
+							<div class="flex bg-opacity-100">
+								<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
+									<img
+										class="rounded-md w-full"
+										src={review.reviewer?.profile_picture || config['user']['default-image']}
+										alt="{review.reviewer?.username}'s avatar"
+										on:error={() => {
+											review.reviewer.profile_picture = config['user']['default-image'];
+										}}
+										style="width: 50px; height: 50px;"
+									/>
 								</div>
-								<div class="text-md font-light text-COLORBLE">
-									{@html escapeHtml(review.content).replace(/\n/g, '<br>')}
-								</div>
-								{#if JSON.parse(localStorage.staff ?? false)}
-									<div
-										class="actions flex items-center justify-start lg:justify-end flex-1 text-COLORBLK my-4"
-									>
-										<div class="controls flex space-x-2">
-											<div class="stub hidden bg-COLORRED" />
-											<div
-												class="edit-wrap w-fit h-fit"
-												on:click={() => {
-													deleteReview(review._id);
-													try {
-														document.getElementById(review._id).classList.add('bg-COLORRED');
-														document.getElementById(review._id).classList.remove('bg-COLORWHT3');
-													} catch (error) {
-														console.warn('[DELETE_REVIEW]: Failed to update UI state.', error);
-													}
-													setTimeout(() => {
-														window.location.reload();
-													}, 3000);
-												}}
-											>
-												<Button
-													icon={faTrash}
-													color="transparent"
-													custom_style="border border-COLORHPK"
-													color_t="COLORHPK"
-													text="Delete review"
-												/>
-											</div>
-
-											<div
-												class="edit-wrap w-fit h-fit"
-												on:click={() =>
-													navigator.clipboard
-														.writeText(
-															`${window.location.origin}${window.location.pathname}#${review._id}`
-														)
-														.then(() => {
-															toast.push('Copied link to review to clipboard.');
-														})}
-											>
-												<Button
-													icon={faLink}
-													color="COLORBLK"
-													color_t="COLORWHT1"
-													text="Copy link to review"
-												/>
-											</div>
+								<div class="review-content text-COLORBLK">
+									<div class="text-lg font-semibold flex">
+										{review.reviewer?.username || 'Anonymous'}
+										<div class="starcount flex text-COLORYLW items-center justify-center px-2">
+											<!-- Copilot Logic-->
+											{#each Array.from({ length: 5 }, (_, i) => i) as _}
+												{#if _ < Math.floor(calculateRating([review]))}
+													<Fa icon={faStar} size="1x" />
+												{:else if _ === Math.floor(calculateRating( [review] )) && calculateRating( [review] ) % 1 >= 0.5}
+													<Fa icon={faStarHalfAlt} size="1x" />
+												{:else}
+													<Fa icon={faStar} size="1x" class="opacity-25" />
+												{/if}
+											{/each}
 										</div>
-									</div>{/if}
+									</div>
+									<div class="text-md font-light text-COLORBLE">
+										{@html escapeHtml(review.content).replace(/\n/g, '<br>')}
+									</div>
+									{#if JSON.parse(localStorage.staff ?? false)}
+										<div
+											class="actions flex items-center justify-start lg:justify-end flex-1 text-COLORBLK my-4"
+										>
+											<div class="controls flex space-x-2">
+												<div class="stub hidden bg-COLORRED" />
+												<div
+													class="edit-wrap w-fit h-fit"
+													on:click={() => {
+														deleteReview(review._id);
+														try {
+															document.getElementById(review._id).classList.add('bg-COLORRED');
+															document.getElementById(review._id).classList.remove('bg-COLORWHT3');
+														} catch (error) {
+															console.warn('[DELETE_REVIEW]: Failed to update UI state.', error);
+														}
+														setTimeout(() => {
+															window.location.reload();
+														}, 3000);
+													}}
+												>
+													<Button
+														icon={faTrash}
+														color="transparent"
+														custom_style="border border-COLORHPK"
+														color_t="COLORHPK"
+														text="Delete review"
+													/>
+												</div>
+
+												<div
+													class="edit-wrap w-fit h-fit"
+													on:click={() =>
+														navigator.clipboard
+															.writeText(
+																`${window.location.origin}${window.location.pathname}#${review._id}`
+															)
+															.then(() => {
+																toast.push('Copied link to review to clipboard.');
+															})}
+												>
+													<Button
+														icon={faLink}
+														color="COLORBLK"
+														color_t="COLORWHT1"
+														text="Copy link to review"
+													/>
+												</div>
+											</div>
+										</div>{/if}
+								</div>
 							</div>
-						</div>
-					</div>
+						</div>{/if}
 				{/each}
 			</div>
 			<!--- Create a review --->
@@ -372,14 +391,14 @@
 								class="star-rating flex flex-row-reverse items-center justify-end select-none text-2xl font-light py-4"
 							>
 								{#each [5, 4, 3, 2, 1] as value}
-									<div class="star flex items-center justify-center text-COLORYLW">
+									<div class="star flex items-center justify-center text-COLORYLW hover:opacity-80">
 										<div class="star-wrapper relative">
 											<input
 												type="radio"
 												id={value}
 												name="rating"
 												{value}
-												class="absolute z-10 w-8 h-8 opacity-0"
+												class="absolute z-10 w-8 h-8 opacity-0 cursor-pointer"
 												on:change={() => setRating(value)}
 											/>
 											<label for={value} class="relative z-0" class:active={rating >= value}

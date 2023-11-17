@@ -3,34 +3,20 @@
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import PromoPill from '$lib/Elements/Generic/PromoPill.svelte';
+	import { deletePromo } from '$lib/Elements/Utility/Promo';
 	import config from '$lib/config/settings';
-	import { faCog } from '@fortawesome/free-solid-svg-icons';
+	import type { Promo } from '$lib/types/Promo';
+	import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
-	interface User {
-		_id: string;
-		id: number;
-		username: string;
-		password: string;
-		email: string;
-		staff: boolean;
-		credit: {
-			$numberDecimal: string;
-		};
-		cart: any[];
-		reset_token: string | null;
-		restrictions: number;
-		__v: number;
-		token: string | null;
-		activation_token?: string;
-	}
-	let data: User[]; // List of users
 
-	onMount(async () => {
-		try {
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/user/manage`, {
+	let data: Promo[]; // List of promos
+
+async function catchAll(){
+	const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/promo/manage`, {
 				headers: {
 					Authorization: `Bearer ${localStorage.token}`
 				}
@@ -49,6 +35,11 @@
 			const r = await res.json();
 			data = r.is; // Rizz
 			console.log(data);
+}
+
+	onMount(async () => {
+		try {
+		await catchAll();
 		} catch (error) {
 			console.log(error);
 			toast.push(`Oops. Something unexpected happened while loading the dash: ${error.message}`);
@@ -56,13 +47,12 @@
 	});
 </script>
 
-// POST/PUT/DELETE https://winter-darkness-1705.fly.dev/api/v1/admin/user/manage
 <main class="w-full h-screen">
 	<div class="navigation w-full z-20">
 		<Navigation
 			transparency={5}
 			search={true}
-			titleText="Cafe | {staff ? '' : `| <div class='font-bold pl-1'>Dashboard</div>`}"
+			titleText="Cafe {staff ? '' : `| <div class='font-bold pl-1'>Dashboard</div>`}"
 			titleWhere="/admin/dashboard"
 		/>
 	</div>
@@ -92,10 +82,58 @@
 		</div>
 		<div class="content block px-16 py-16 w-full h-full bg-transparent">
 			<div class="flex text-2xl font-semibold pb-2">Promo Code Management</div>
-			<div class="flex text-xl font-semibold pb-12">Modify promo codes</div>
+			<div class="flex text-xl font-semibold pb-12">Manage promo codes</div>
 			<div class="flex flex-wrap w-full">
 				{#if data != undefined}
-					{#each data as promo_code, i}{/each}{:else}<div class="font-light">
+					{#each data as promo, i}
+					
+					<div class="ctg_wrp w-full">
+						<PromoPill {promo} description={promo.code}
+							><div slot="alias" class="my-2">
+								<!-- Categories get the same alias -->
+							
+									<div class="text-md font-semibold">Created by</div>
+									<ul>
+										<li class="before:content-['-⠀'] flex items-center">
+											<div class="font-light text-sm">{promo.created_by ? promo.created_by.username : "Cannot retrieve author."}</div>
+										</li>
+									</ul>
+							
+							</div>
+							<div class="controls flex space-x-2">
+								<div
+									class="edit-wrap w-fit h-fit"
+									on:click={() => {
+										deletePromo(promo.code);
+										catchAll();
+									}}
+								>
+									<Button
+										icon={faTrash}
+										color="transparent"
+										custom_style="border border-COLORHPK"
+										color_t="COLORHPK"
+										text="Delete promotion"
+									/>
+								</div>
+								<a href="/admin/dashboard/promo/manage?promo_code{promo.code}">
+									<div
+										class="edit-wrap w-fit h-fit"
+										on:click={() => goto(`/admin/dashboard/promo/manage?promo_code${promo.code}`)}
+									>
+										<Button
+											icon={faCog}
+											color="COLORBLK"
+											color_t="COLORWHT1"
+											text="Edit promotion"
+										/>
+									</div></a
+								>
+							</div>
+						</PromoPill>
+					</div>
+					
+					{/each}{:else}<div class="font-light">
 						There was a problem while displaying the data.
 					</div>{/if}
 			</div>

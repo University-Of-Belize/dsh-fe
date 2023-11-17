@@ -36,7 +36,12 @@
 		console.log(data);
 	}
 	onMount(async () => {
+		try {
 		await catchAll();
+		} catch (error) {
+			console.log(error);
+			toast.push(`Oops. Something unexpected happened while loading the dash: ${error.message}`);
+		}
 	});
 </script>
 

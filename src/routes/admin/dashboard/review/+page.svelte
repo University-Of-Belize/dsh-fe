@@ -83,7 +83,7 @@
 		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto pb-40">
 			<div class="flex text-2xl font-semibold pb-2">Review Management</div>
 			<div class="flex text-xl font-semibold pb-12">Reviews & Comment Management</div>
-			<div class="flex flex-wrap w-full">
+			<div class="flex flex-wrap flex-col-reverse w-full">
 				{#if data != undefined}
 					{#each data as review, i}
 						<div class="user_wrap w-full">
@@ -91,26 +91,29 @@
 								user={review.reviewer ?? {}}
 								description={`Review ID: ${review._id}<br/>Review For: ${
 									review.product.productName
-								}<br/>Content: ${escapeHtml(review.content)}<br/>Original Content: ${escapeHtml(
-									review.original_content
-								)}`}
+								}<br/>Content: ${escapeHtml(review.content)}<br/>${
+									review.content != review.original_content
+										? `Original Content: ${escapeHtml(review.original_content)}<br/>`
+										: ''
+								}Hidden: ${review.hidden ? "Yes" : "No"}<br/>`}
 							>
 								<div class="controls flex space-x-2">
-									<div
-										class="edit-wrap w-fit h-fit"
-										on:click={() => {
-											deleteReview(review._id);
-											catchAll();
-										}}
-									>
-										<Button
-											icon={faTrash}
-											color="transparent"
-											custom_style="border border-COLORHPK"
-											color_t="COLORHPK"
-											text="Delete review"
-										/>
-									</div>
+									{#if staff}
+										<div
+											class="edit-wrap w-fit h-fit"
+											on:click={() => {
+												deleteReview(review._id);
+												catchAll();
+											}}
+										>
+											<Button
+												icon={faTrash}
+												color="transparent"
+												custom_style="border border-COLORHPK"
+												color_t="COLORHPK"
+												text="Delete review"
+											/>
+										</div>{/if}
 									<a href="/product/{review?.product.slug}#{review?._id}">
 										<div
 											class="edit-wrap w-fit h-fit"
