@@ -45,7 +45,7 @@
 			const scrollTo = hash && document.getElementById(hash.slice(1));
 			if (scrollTo) {
 				scrollTo.scrollIntoView();
-			} else {
+			} else if (hash && !scrollTo) {
 				toast.push("Couldn't find that one.<br/>No review found with that ID.", {
 					dismissable: false,
 					theme: {
