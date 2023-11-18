@@ -1,7 +1,6 @@
 <script lang="ts">
-	import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	export let icon: IconDefinition;
+	export let icon: import('@fortawesome/free-solid-svg-icons').IconDefinition;
 	export let color: string;
 	export let color_t: string = 'COLORWHT1';
 	let className: string = '';

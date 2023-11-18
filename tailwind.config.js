@@ -5,12 +5,12 @@ export default {
 		extend: {
 			colors: {
 				// Using modern `rgb`
-				COLORWHT: 'rgb(var(--COLORWHT) / var(--tw-bg-opacity))',
-				COLORWHT1: 'rgb(var(--COLORWHT1) / var(--tw-bg-opacity))',
-				COLORWHT2: 'rgb(var(--COLORWHT2) / var(--tw-bg-opacity))',
-				COLORWHT3: 'rgb(var(--COLORWHT3) / var(--tw-bg-opacity))',
-				COLORWHT4: 'rgb(var(--COLORWHT4) / var(--tw-bg-opacity))',
 				COLORWHT5: 'rgb(var(--COLORWHT5) / var(--tw-bg-opacity))',
+				COLORWHT4: 'rgb(var(--COLORWHT4) / var(--tw-bg-opacity))',
+				COLORWHT3: 'rgb(var(--COLORWHT3) / var(--tw-bg-opacity))',
+				COLORWHT2: 'rgb(var(--COLORWHT2) / var(--tw-bg-opacity))',
+				COLORWHT1: 'rgb(var(--COLORWHT1) / var(--tw-bg-opacity))',
+				COLORWHT: 'rgb(var(--COLORWHT) / var(--tw-bg-opacity))',
 				COLORBLE: 'rgb(var(--COLORBLE) / var(--tw-bg-opacity))',
 				COLORBLK: 'rgb(var(--COLORBLK) / var(--tw-bg-opacity))',
 				COLORGRY: 'rgb(var(--COLORGRY) / var(--tw-bg-opacity))',

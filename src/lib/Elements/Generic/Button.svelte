@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Fa from 'svelte-fa';
-	import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-	export let icon: IconDefinition | undefined;
+	export let icon: import('@fortawesome/free-solid-svg-icons').IconDefinition | undefined;
 	export let color: string;
 	export let color_t: string = 'COLORBLK';
 	export let text: string;
@@ -9,7 +8,7 @@
 </script>
 
 <div
-	class="placeholder bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORWHT4 bg-COLORWHT5 bg-COLORHPK bg-COLORBLK bg-COLORYLW bg-COLORBYW bg-COLORPNK bg-COLORRED hidden w-full"
+	class="placeholder bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORWHT4 bg-COLORWHT5 bg-COLORHPK bg-COLORBLK bg-COLORYLW bg-COLORBLE bg-COLORBYW bg-COLORPNK bg-COLORRED hidden w-full"
 >
 	&nbsp;
 </div>

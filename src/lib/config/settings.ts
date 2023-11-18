@@ -3,7 +3,8 @@ import { version } from '$app/environment';
 const settings = {
 	"server": {
 		"HTTPOrigin": "https://winter-darkness-1705.fly.dev",
-		"support-email": "cafe@ub.edu.bz"
+		"support-email": "cafe@ub.edu.bz",
+		"bound-organization": "University of Belize",
 	},
 	"product-view": {
 		"default-image": "https://via.placeholder.com/500"

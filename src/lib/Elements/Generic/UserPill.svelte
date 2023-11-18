@@ -30,7 +30,7 @@
 				style="width: 50px; height: 50px;"
 			/>
 		</div>
-		<div class="user-wrap flex flex-wrap items-center">
+		<div class="user-wrap flex flex-wrap items-center lg:w-full">
 			<div class="review-content text-COLORBLK" style="word-break: break-word;">
 				<div class="text-base lg:text-lg font-semibold flex items-center">
 					{user.username

@@ -7,7 +7,7 @@
 	import UserPill from '$lib/Elements/Generic/UserPill.svelte';
 	import config from '$lib/config/settings';
 	import type { User } from '$lib/types/User';
-	import { faCog, faPlus } from '@fortawesome/free-solid-svg-icons';
+	import { faCog, faPlus, faUserCog } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	let navDrawer: HTMLDivElement;
@@ -106,7 +106,9 @@
 		<Navigation
 			transparency={5}
 			search={true}
-			titleText="Cafe {staff ? '' : "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
+			titleText="Cafe {staff
+				? ''
+				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
 			titleWhere="/admin/dashboard"
 		/>
 	</div>
@@ -181,11 +183,43 @@
 										? 'Not available with search'
 										: user?.token || '<b>Not Activated / Never logged in</b>'}"
 								>
-									<div
-										class="edit-wrap w-fit h-fit"
-										on:click={() => goto(`/admin/dashboard/user/manage?user_id=${user?._id}`)}
-									>
-										<Button icon={faCog} color="COLORBLK" color_t="COLORWHT1" text="Edit Account" />
+									<div class="actions flex space-x-2">
+										{#if staff}
+											<div
+												class="btn-wrp w-fit h-fit bg-opacity-100"
+												on:click={() => {
+													// Wipe ourselves
+													localStorage.clear(); // Load all the settings
+													localStorage.token = user.token;
+													localStorage.user_id = user._id;
+													localStorage.user = JSON.stringify(user);
+													toast.push(
+														`Loaded into ${user.username}'s account. You will be redirected to their dashboard.`
+													);
+													goto('/admin/dashboard/'); // Reload the window
+													setTimeout(() => {
+														window.location.reload();
+													}, 3000);
+												}}
+											>
+												<Button
+													icon={faUserCog}
+													color="COLORBLE"
+													color_t="COLORWHT1"
+													text="Load account"
+												/>
+											</div>{/if}
+										<div
+											class="edit-wrap w-fit h-fit"
+											on:click={() => goto(`/admin/dashboard/user/manage?user_id=${user?._id}`)}
+										>
+											<Button
+												icon={faCog}
+												color="COLORBLK"
+												color_t="COLORWHT1"
+												text="Edit Account"
+											/>
+										</div>
 									</div>
 								</UserPill>
 							</div>
