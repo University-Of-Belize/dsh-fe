@@ -44,7 +44,7 @@
 			if (localStorage.token) {
 				try {
 					const response = await fetch(
-						`${config['server']['HTTPOrigin']}/api/v1/admin/user/lookup?filter=user_id&q=${localStorage.user_id}`,
+						`${config['server']['HTTPOrigin']}/api/v1/admin/user/lookup`,
 						{
 							headers: {
 								Authorization: `Bearer ${localStorage.token}`

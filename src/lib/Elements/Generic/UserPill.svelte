@@ -30,11 +30,11 @@
 				style="width: 50px; height: 50px;"
 			/>
 		</div>
-		<div class="user-wrap flex flex-wrap items-center w-full">
+		<div class="user-wrap flex flex-wrap items-center">
 			<div class="review-content text-COLORBLK" style="word-break: break-word;">
 				<div class="text-base lg:text-lg font-semibold flex items-center">
 					{user.username
-						? user.id == localStorage.user_id
+						? user._id == localStorage.user_id
 							? `${user?.username} (You)`
 							: user?.username
 						: 'Anonymous'}
