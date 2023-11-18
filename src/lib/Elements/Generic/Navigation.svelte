@@ -119,7 +119,7 @@
 			</h1>
 			{#if search}
 				<form
-					class="searchbar flex-1 flex rounded-sm bg-COLORWHT1 px-4 py-2 mx-8 items-center text-sm bg-opacity-90"
+					class="searchbar flex-1 hidden lg:flex rounded-sm bg-COLORWHT1 px-4 py-2 lg:mx-8 items-center text-sm bg-opacity-90"
 					action="/product"
 				>
 					<div class="searchicon w-fit">
@@ -135,6 +135,11 @@
 				</form>
 			{:else}<div class="searchbar flex-1 flex px-4 py-2 mx-8 items-center text-sm" />
 			{/if}
+			<div
+				class="block lg:hidden mobile-flex-fix flex-1 lg:flex-none w-full items-center justify-center text-sm mx-8"
+			>
+				{@html config['ui']['notice']}
+			</div>
 
 			{#if !user}
 				<div
@@ -146,7 +151,7 @@
 					<Button icon={faRightToBracket} color="COLORYLW" text="Log in" />
 				</div>
 			{:else}
-				<div class="pnav flex items-center justify-center space-x-4">
+				<div class="pnav flex items-center justify-center lg:space-x-4">
 					{#if staff}
 						<div class="btn-wrp" on:click={() => goto('/admin/dashboard')}>
 							<IconButton icon={faCogs} color="COLORWHT" color_t="COLORBLE" />
@@ -169,7 +174,7 @@
 		</div>
 		{#if staff}
 			<div
-				class="cursor-pointer hover:underline text-COLORBLE bg-opacity-100 bg-COLORWHT px-2"
+				class="cursor-pointer hover:underline bg-opacity-50 bg-COLORWHT px-2 my-1"
 				bind:this={debug_selection}
 				on:click={() => {
 					if (hidden) {
@@ -180,7 +185,7 @@
 					debug_panel.classList.toggle('hidden');
 				}}
 			>
-				Show debug...
+				<div class="bg-opacity-100 text-COLORBLK">Show debug...</div>
 			</div>
 			<div class="flex hidden debug w-full my-4" bind:this={debug_panel}>
 				<div class="lefthand block">
@@ -207,6 +212,24 @@
 			class="drawer bg-COLORWHT px-2 py-2 flex-col justify-start h-screen bg-opacity-100"
 			bind:this={navDrawer}
 		>
+			{#if search}
+				<form
+					class="searchbar flex-1 lg:hidden flex rounded-sm bg-COLORWHT1 px-4 py-2 lg:mx-8 my-1 items-center text-sm bg-opacity-90"
+					action="/product"
+				>
+					<div class="searchicon w-fit">
+						<Fa icon={faSearch} size="1.01x" class="text-COLORBLK pr-4" />
+					</div>
+					<input
+						{value}
+						type="text"
+						name="search"
+						class="w-full font-regular focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
+						placeholder="Search for snacks, drinks and lunch"
+					/>
+				</form>
+			{:else}<div class="searchbar flex-1 flex px-4 py-2 mx-8 items-center text-sm" />
+			{/if}
 			{#if !user}
 				<div class="top-row flex justify-between items-center w-full pt-2">
 					<div class="btn-wrp pr-1" on:click={() => goto('/auth/login')}>

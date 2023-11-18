@@ -11,7 +11,7 @@
 	const options = {
 		dismissable: true,
 		theme: {
-			'--toastBackground': '#efebde',
+			'--toastBackground': '#f0ede6',
 			'--toastColor': '#2a1a1f',
 			'--toastBarBackground': '#70a4ff'
 		}
@@ -59,6 +59,6 @@
 
 <style>
 	:global(body) {
-		background: #efebde;
+		background: #f0ede6;
 	}
 </style>

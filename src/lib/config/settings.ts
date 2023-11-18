@@ -21,6 +21,7 @@ const settings = {
 		"currency": "BZD"
 	},
 	"ui": {
+		"notice": "You are viewing <br/><b>A PREVIEW</b>",
 		"version": version
 	}
 }

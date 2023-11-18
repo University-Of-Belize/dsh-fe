@@ -47,7 +47,7 @@
 			</div>
 			<div class="content-wrapper w-full h-full absolute flex items-center justify-center z-10">
 				<div class="content flex-1 flex items-center justify-center">
-					<div class="block content-wrapper px-8 lg:px-0">
+					<div class="block content-wrapper px-4 md:px-8 lg:px-0">
 						<div
 							class="running-heading text-COLORWHT py-10 text-7xl font-medium flex w-full justify-center items-center"
 						>
@@ -64,7 +64,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="fix flex-1">&nbsp;</div>
+				<div class="hidden lg:block fix flex-1">&nbsp;</div>
 			</div>
 			<div
 				class="wrapper bg-black opacity-50 w-full h-full absolute flex items-center justify-center"
