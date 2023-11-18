@@ -44,7 +44,7 @@
 			if (localStorage.token) {
 				try {
 					const response = await fetch(
-						`${config['server']['HTTPOrigin']}/api/v1/search?filter=user_id&q=${localStorage.user_id}`,
+						`${config['server']['HTTPOrigin']}/api/v1/admin/user/lookup?filter=user_id&q=${localStorage.user_id}`,
 						{
 							headers: {
 								Authorization: `Bearer ${localStorage.token}`
@@ -53,7 +53,7 @@
 					);
 					const data = await response.json();
 					// console.log(data);
-					user = data[0]; // Not a what is. It's a search
+					user = data.is; // Get the user
 					localStorage.setItem('user', JSON.stringify(user));
 				} catch (error) {
 					console.log(error);
@@ -138,7 +138,7 @@
 			<div
 				class="block lg:hidden mobile-flex-fix flex-1 lg:flex-none w-full items-center justify-center text-sm mx-8"
 			>
-				{@html config['ui']['notice']}
+				{@html staff ? '' : config['ui']['notice']}
 			</div>
 
 			{#if !user}
