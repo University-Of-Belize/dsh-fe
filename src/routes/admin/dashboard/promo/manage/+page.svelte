@@ -62,7 +62,7 @@
 			data = data[0];
 			// @ts-ignore
 			if (data.length === 0) {
-				toast.push('Category not found.');
+				toast.push('Promotion not found.');
 			}
 			console.log(data);
 		}
@@ -172,7 +172,6 @@
 							<div class="ctg_wrp w-full">
 								<PromoPill promo={data} description={data.code}
 									><div slot="alias" class="my-2">
-										<!-- Categories get the same alias -->
 
 										<div class="text-md font-semibold">Created by</div>
 										<ul>
@@ -231,7 +230,7 @@
 										name="description"
 										class="text-md font-light text-COLORBLE h-full w-full px-2 py-1 mx-6 bg-transparent focus:outline-none"
 										rows="6"
-										placeholder="Category description goes here"
+										placeholder="Promotion description goes here"
 										value={data ? data.description : ''}
 									/>
 								</div>
@@ -271,7 +270,7 @@
 									icon={faCog}
 									color="COLORBLK"
 									color_t="COLORWHT1"
-									text={promo_id ? 'Apply changes' : 'Create category'}
+									text={promo_id ? 'Apply changes' : 'Create promotion'}
 									custom_style="my-2"
 								/>
 							</button>
@@ -289,7 +288,7 @@
 											on:click={() => {
 												deletePromo(data.code);
 												toast.push(
-													`You have deleted the category ${data.code}. It will be invalidated.`
+													`You have deleted the promo ${data.code}. It will be invalidated.`
 												);
 											}}
 										>
