@@ -8,7 +8,7 @@
 </script>
 
 <div
-	class="placeholder bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORWHT4 bg-COLORWHT5 bg-COLORHPK bg-COLORBLK bg-COLORYLW bg-COLORBLE bg-COLORBYW bg-COLORPNK bg-COLORRED hidden w-full"
+	class="placeholder border-COLORHPK border-COLORBLE bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORWHT4 bg-COLORWHT5 bg-COLORHPK bg-COLORBLK bg-COLORYLW bg-COLORBLE bg-COLORBYW bg-COLORPNK bg-COLORRED hidden w-full"
 >
 	&nbsp;
 </div>

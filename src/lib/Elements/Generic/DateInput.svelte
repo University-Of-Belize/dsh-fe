@@ -23,7 +23,7 @@
 	<input
 		on:input={handleChange}
 		{value}
-		type="text"
+		type="date"
 		{name}
 		class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
 		{placeholder}

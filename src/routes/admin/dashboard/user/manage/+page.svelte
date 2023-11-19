@@ -12,7 +12,6 @@
 	import { faAd, faCog, faDollar, faLock, faUserCog } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	const user_id = $page.url.searchParams.get('user_id');
@@ -136,10 +135,8 @@
 
 	<div class="main-content flex items-center justify-start h-full text-COLORBLK overflow-hidden">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4"
-			bind:this={navDrawer}
-		>
-			<div class="section py-6">
+			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4">
+		<div class="section py-6">
 				<div class="title font-semibold pb-5">My Account</div>
 				<div
 					on:click={async () => {
@@ -167,7 +164,7 @@
 								: data
 								? `${data.username}'s`
 								: "User's"
-							: 'Create'} Account Settings
+							: 'Create'} User Account
 					</div>
 					<div class="flex text-xl font-semibold pb-12">
 						{user_id ? 'Edit' : 'Create'}

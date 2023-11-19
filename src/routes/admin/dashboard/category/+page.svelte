@@ -10,7 +10,6 @@
 	import { faCog, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let data: Category[]; // List of users
 
@@ -57,9 +56,7 @@
 
 	<div class="main-content flex items-center justify-start h-full text-COLORBLK">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4"
-			bind:this={navDrawer}
-		>
+			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4">
 			<div class="section py-6">
 				<div class="title font-semibold pb-5">My Account</div>
 				<div
@@ -126,10 +123,10 @@
 											text="Delete category"
 										/>
 									</div>
-									<a href="/admin/dashboard/category/{category.name}">
+									<a href="/admin/dashboard/category/manage?category_id={category._id}">
 										<div
 											class="edit-wrap w-fit h-fit"
-											on:click={() => goto(`/admin/dashboard/category/${category.name}`)}
+											on:click={() => goto(`/admin/dashboard/category/manage?category_id=${category._id}`)}
 										>
 											<Button
 												icon={faCog}

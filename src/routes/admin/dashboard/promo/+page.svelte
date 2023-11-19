@@ -7,10 +7,9 @@
 	import { deletePromo } from '$lib/Elements/Utility/Promo';
 	import config from '$lib/config/settings';
 	import type { Promo } from '$lib/types/Promo';
-	import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
+	import { faCog, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 
 	let data: Promo[]; // List of promos
@@ -52,16 +51,16 @@
 		<Navigation
 			transparency={5}
 			search={true}
-			titleText="Cafe {staff ? '' : "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
+			titleText="Cafe {staff
+				? ''
+				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
 			titleWhere="/admin/dashboard"
 		/>
 	</div>
 
 	<div class="main-content flex items-center justify-start h-full text-COLORBLK">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4"
-			bind:this={navDrawer}
-		>
+			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4">
 			<div class="section py-6">
 				<div class="title font-semibold pb-5">My Account</div>
 				<div
@@ -81,62 +80,74 @@
 			<DashList {staff} />
 		</div>
 		<div class="content block px-16 py-16 w-full h-full bg-transparent">
-			<div class="flex text-2xl font-semibold pb-2">Promo Code Management</div>
-			<div class="flex text-xl font-semibold pb-12">Manage promo codes</div>
-			<div class="flex flex-wrap w-full">
-				{#if data != undefined}
-					{#each data as promo, i}
-						<div class="ctg_wrp w-full">
-							<PromoPill {promo} description={promo.code}
-								><div slot="alias" class="my-2">
-									<!-- Categories get the same alias -->
+			<div class="flex-header flex items-center w-full flex-wrap">
+				<div class="block">
+					<div class="flex text-2xl font-semibold pb-2">Promo Code Management</div>
+					<div class="flex text-xl font-semibold pb-12">Manage promo codes</div>
+				</div>
+				<div class="flex items-center justify-end flex-1">
+					<div class="flex flex-col items-end space-y-2">
+						<div class="btn_wrp" on:click={() => goto('/admin/dashboard/promo/manage')}>
+							<Button color="COLORBLK" color_t="COLORWHT1" text="New promo" icon={faPlus} />
+						</div>
+					</div>
+				</div>
+				<div class="flex flex-wrap w-full">
+					{#if data != undefined}
+						{#each data as promo, i}
+							<div class="ctg_wrp w-full">
+								<PromoPill {promo} description={promo.code}
+									><div slot="alias" class="my-2">
+										<!-- Categories get the same alias -->
 
-									<div class="text-md font-semibold">Created by</div>
-									<ul>
-										<li class="before:content-['-⠀'] flex items-center">
-											<div class="font-light text-sm">
-												{promo.created_by ? promo.created_by.username : 'Cannot retrieve author.'}
-											</div>
-										</li>
-									</ul>
-								</div>
-								<div class="controls flex space-x-2">
-									<div
-										class="edit-wrap w-fit h-fit"
-										on:click={() => {
-											deletePromo(promo.code);
-											setTimeout(() => {
-												catchAll();
-											}, 800);
-										}}
-									>
-										<Button
-											icon={faTrash}
-											color="transparent"
-											custom_style="border border-COLORHPK"
-											color_t="COLORHPK"
-											text="Delete promotion"
-										/>
+										<div class="text-md font-semibold">Created by</div>
+										<ul>
+											<li class="before:content-['-⠀'] flex items-center">
+												<div class="font-light text-sm">
+													{promo.created_by ? promo.created_by.username : 'Cannot retrieve author.'}
+												</div>
+											</li>
+										</ul>
 									</div>
-									<a href="/admin/dashboard/promo/manage?promo_code{promo.code}">
+									<div class="controls flex space-x-2">
 										<div
 											class="edit-wrap w-fit h-fit"
-											on:click={() => goto(`/admin/dashboard/promo/manage?promo_code${promo.code}`)}
+											on:click={() => {
+												deletePromo(promo.code);
+												setTimeout(() => {
+													catchAll();
+												}, 800);
+											}}
 										>
 											<Button
-												icon={faCog}
-												color="COLORBLK"
-												color_t="COLORWHT1"
-												text="Edit promotion"
+												icon={faTrash}
+												color="transparent"
+												custom_style="border border-COLORHPK"
+												color_t="COLORHPK"
+												text="Delete promotion"
 											/>
-										</div></a
-									>
-								</div>
-							</PromoPill>
-						</div>
-					{/each}{:else}<div class="font-light">
-						There was a problem while displaying the data.
-					</div>{/if}
+										</div>
+										<a href="/admin/dashboard/promo/manage?promo_code={promo._id}">
+											<div
+												class="edit-wrap w-fit h-fit"
+												on:click={() =>
+													goto(`/admin/dashboard/promo/manage?promo_code=${promo._id}`)}
+											>
+												<Button
+													icon={faCog}
+													color="COLORBLK"
+													color_t="COLORWHT1"
+													text="Edit promotion"
+												/>
+											</div></a
+										>
+									</div>
+								</PromoPill>
+							</div>
+						{/each}{:else}<div class="font-light">
+							There was a problem while displaying the data.
+						</div>{/if}
+				</div>
 			</div>
 		</div>
 	</div>

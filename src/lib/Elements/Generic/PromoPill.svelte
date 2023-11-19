@@ -3,6 +3,7 @@
 	import type { Promo } from '$lib/types/Promo';
 	import { faTag } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { getDate } from '../Utility/Promo';
 	export let promo: Promo;
 	export let description: string;
 </script>
@@ -24,7 +25,10 @@
 				<div class="text-base lg:text-lg font-semibold flex items-center">
 					{promo.description ? promo.description : 'Untitled Promotion'}
 				</div>
-				<div class="text-md font-light text-COLORBLE">
+				<div class="text-sm lg:text-base font-light flex items-center text-COLORBLK opacity-75">
+					{promo.expiry_date ? `Expires: ${getDate(promo.expiry_date)}` : 'Unset expiry date'}
+				</div>
+				<div class="text-sm font-light text-COLORBLE">
 					{@html description}
 				</div>
 			</div>
