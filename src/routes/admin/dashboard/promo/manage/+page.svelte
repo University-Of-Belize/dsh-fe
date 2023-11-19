@@ -201,7 +201,7 @@
 								<div class="label font-semibold w-full text-lg">Promo code</div>
 								<TextInput
 									icon={faTag}
-									name="name"
+									name="code"
 									placeholder="Enter a promo code"
 									custom_style="bg-transparent"
 									value={data ? data.code : ''}
@@ -212,7 +212,7 @@
 								<div class="label font-semibold w-full text-lg">Nickname (optional)</div>
 								<TextInput
 									icon={faSortAlphaAsc}
-									name="alias"
+									name="nickname"
 									placeholder="Enter a nickname"
 									custom_style="bg-transparent"
 									value={data ? data.nickname : ''}
@@ -240,7 +240,7 @@
 								<div class="label font-semibold w-full text-lg">Discount percentage</div>
 								<TextInput
 									icon={faTag}
-									name="alias"
+									name="discount"
 									placeholder="Enter a discount percentage (e.g. 10)"
 									custom_style="bg-transparent"
 									value={data ? data.discount_percentage : ''}
@@ -250,7 +250,7 @@
 								<div class="label font-semibold w-full text-lg">Start Date</div>
 								<DateInput
 									icon={faCalendarAlt}
-									name="alias"
+									name="p_start"
 									placeholder="Enter a discount percentage (e.g. 10)"
 									custom_style="bg-transparent"
 									value={data ? getDate(data.start_date) : new Date().toISOString().split('T')[0]}
@@ -260,7 +260,7 @@
 								<div class="label font-semibold w-full text-lg">End Date</div>
 								<DateInput
 									icon={faCalendarAlt}
-									name="alias"
+									name="p_end"
 									placeholder="Enter a discount percentage (e.g. 10)"
 									custom_style="bg-transparent"
 									value={data ? getDate(data.expiry_date) : new Date().toISOString().split('T')[0]}
