@@ -178,7 +178,7 @@
 			</div>
 			<div class="flex flex-wrap w-full">
 				{#if data != undefined}
-					{#if !isNaN(user.id) && staff}
+					{#if !isNaN(user.id)}
 						<div class="user_wrap w-full">
 							<UserBanner
 								user={data}
