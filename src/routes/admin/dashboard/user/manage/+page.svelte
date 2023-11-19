@@ -67,7 +67,7 @@
 			.filter((el) => el.name)
 			.map((el) => el.value);
 		console.log(valueArray);
-		if (valueArray[valueArray.length - 3] === valueArray[valueArray.length - 4]) {
+		if ((valueArray[valueArray.length - 3] === valueArray[valueArray.length - 4]) && !user_id || (value array[value array.length - 2] === valueArray[valueArray - 3] && user_id)){
 			if (user_id) {
 				editUser(
 					/* (alias) editUser(action: "f" | "m", actionNum: number | undefined, 
