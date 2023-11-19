@@ -6,8 +6,10 @@
 	let form: HTMLFormElement;
 
 	export let options: string[] = [];
+	export let name: string | undefined;
 	export let icon: IconDefinition;
 	export let selectedOption: string = '';
+	export let value: string = '';
 	export let placeholder = '';
 	export let toUrl: string;
 
@@ -25,8 +27,9 @@
 		</div>
 		<select
 			name="filter"
+			name={name}
 			class="block appearance-none w-full bg-transparent px-4 py-2 pr-8 rounded leading-tight focus:outline-none"
-			value={selectedOption}
+			value={value ?? selectedOption}
 			on:change={handleChange}
 		>
 			{#if placeholder}

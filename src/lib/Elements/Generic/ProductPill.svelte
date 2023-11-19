@@ -10,6 +10,7 @@
 	export let tagColor_t: string = 'COLORWHT';
 	export let tagText: string = '';
 	export let description: string;
+	let pimg: HTMLImageElement;
 </script>
 
 <!-- Color stub -->
@@ -35,11 +36,16 @@
 		<div class="flex bg-opacity-100">
 			<div class="product-pfp flex flex-col items-center justify-start pr-4">
 				<img
+					bind:this={pimg}
 					class="rounded-md object-cover"
-					src={product.image ?? config['product-showcase']['default-image']}
+					src={product.image
+						? product.image.trim() === ''
+							? config['product-showcase']['default-image']
+							: product.image
+						: config['product-showcase']['default-image']}
 					alt={product.productName}
 					on:error={() => {
-						product.image = config['product-showcase']['default-image'];
+						pimg.src = config['product-showcase']['default-image'];
 					}}
 					style="width: 50px; height: 50px;"
 				/>

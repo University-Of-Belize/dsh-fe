@@ -279,7 +279,7 @@
 										>
 											<Button
 												icon={faLock}
-												text="Trigger verification flow"
+												text="Delete Category"
 												color="transparent"
 												color_t="COLORHPK"
 												custom_style="border border-COLORHPK my-2"

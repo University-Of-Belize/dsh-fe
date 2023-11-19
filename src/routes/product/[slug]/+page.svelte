@@ -20,15 +20,16 @@
 	import StarCount from '$lib/Elements/Generic/StarCount.svelte';
 	import { addToCart } from '$lib/Elements/Utility/Cart';
 	import { createReview, deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
-	import type { EngineProduct } from '$lib/types/Product.ts';
+	import type { Product } from '$lib/types/Product.ts';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
 	import type { User } from '$lib/types/User';
 	// let hero_image: HTMLDivElement;
+	const staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // The user
 	const user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // The user
-	const product = writable<EngineProduct | null>(null);
+	const product = writable<Product | null>(null);
 	let product_id: string;
 	const params = $page.params.slug;
 	let newReviewContent: HTMLTextAreaElement;
@@ -72,7 +73,7 @@
 	// Thread run everytime the params change
 	$: (async () => {
 		const response = await fetch(
-			`${config.server.HTTPOrigin}/api/v1/search?filter=productName&q=${params}`
+			`${config.server.HTTPOrigin}/api/v1/menu/lookup?slug=${params}`
 		);
 		if (response.body == null) return;
 		let r;
@@ -84,14 +85,16 @@
 			return;
 		}
 
-		if (r && r.length > 0) {
-			product.set(r[0]); // take the first result
-			product_id = r[0].id;
-		} else {
-			product.set(null);
-		}
+		// if (r && r.length > 0) {
+			// product.set(r[0]); // take the first result
+			// product_id = r[0].id;
+			product.set(r.is); // take the first result
+			product_id = r.is._id;
+		// } else {
+		// 	product.set(null);
+		// }
 	})();
-	function calculateRating(reviews: EngineProduct['reviews'], count: boolean = false) {
+	function calculateRating(reviews: Product['reviews'], count: boolean = false) {
 		let sum = 0;
 		let index = 0;
 		reviews.forEach((review, i) => {
@@ -104,7 +107,7 @@
 		if (Number.isNaN(parseFloat(result))) return 'No reviews yet';
 		return count ? index + 1 : result; // I know this is bad and unscalable, but I'm lazy
 	}
-	function getPercentage(reviews: EngineProduct['reviews'], rating: Number) {
+	function getPercentage(reviews: Product['reviews'], rating: Number) {
 		const totalReviews = reviews.length;
 		const ratingCount = reviews.filter((review) => review.rating === rating).length;
 		const percentage = (ratingCount / totalReviews) * 100;
@@ -171,16 +174,24 @@
 									class="details font-semibold bg-COLORRED text-COLORWHT1 button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-4 py-2 items-center text-sm select-none mr-2"
 									on:click={() => {
 										localStorage.setItem('wants_single_cart', 'true');
-										goto(`/product/checkout?single_cart=${$product?.id}`);
+										goto(`/product/checkout?single_cart=${$product?._id}`);
 									}}
 									role="link"
 								>
 									Purchase Now
 								</div>
 
-								<div class="addToCart" on:click={() => addToCart($product?.id, 1)}>
+								<div class="addToCart" on:click={() => addToCart($product?._id, 1)}>
 									<IconButton icon={faCartPlus} color="COLORYLW" />
 								</div>
+								{#if staff}
+									<div
+										class="addToCart"
+										on:click={() =>
+											goto(`/admin/dashboard/product/manage?product_id=${$product?._id}`)}
+									>
+										<IconButton icon={faPencil} color="COLORBLK" />
+									</div>{/if}
 								<!-- <IconButton icon={faHeart} color="COLORRED" /> -->
 							</div>
 						</div>{/if}

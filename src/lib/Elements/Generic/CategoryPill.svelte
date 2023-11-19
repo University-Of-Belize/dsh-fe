@@ -21,9 +21,13 @@
 			<img
 				class="rounded-md w-12 h-12 object-cover"
 				bind:this={cImage}
-				src={category.image ?? config['product-view']['default-image']}
+				src={category.image
+					? category.image.trim() === ''
+						? config['product-view']['default-image']
+						: category.image
+					: config['product-view']['default-image']}
 				alt=""
-				on:error={(cImage.src = config['product-view']['default-image'])}
+				on:error={()=>(cImage.src = config['product-view']['default-image'])}
 			/>
 		</div>
 		<div class="user-wrap flex flex-wrap items-center w-full">
