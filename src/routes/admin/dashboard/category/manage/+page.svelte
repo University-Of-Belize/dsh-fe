@@ -15,7 +15,8 @@
 		faListAlt,
 		faLock,
 		faPencil,
-		faSortAlphaAsc	} from '@fortawesome/free-solid-svg-icons';
+		faSortAlphaAsc
+	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
@@ -182,7 +183,8 @@
 									icon={faListAlt}
 									name="name"
 									placeholder="Type in a category name"
-									custom_style="bg-transparent" value={data ? data.name: ""}
+									custom_style="bg-transparent"
+									value={data ? data.name : ''}
 								/>
 							</div>
 
@@ -192,7 +194,8 @@
 									icon={faSortAlphaAsc}
 									name="alias"
 									placeholder="Type in a category alias (optional)"
-									custom_style="bg-transparent" value={data ? data.alias === data.name ? "": data.alias : ""}
+									custom_style="bg-transparent"
+									value={data ? (data.alias === data.name ? '' : data.alias) : ''}
 								/>
 							</div>
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
@@ -209,7 +212,7 @@
 										class="text-md font-light text-COLORBLE h-full w-full px-2 py-1 mx-6 bg-transparent focus:outline-none"
 										rows="6"
 										placeholder="Category description goes here"
-										value={data ? data.description: ""}
+										value={data ? data.description : ''}
 									/>
 								</div>
 							</div>
@@ -231,7 +234,9 @@
 							<div class="flex flex-col lg:flex-row">
 								<div class="flex flex-col">
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label font-semibold w-full text-lg">Hide category (currently {data.hidden ? "hidden" : "unhidden"})</div>
+										<div class="label font-semibold w-full text-lg">
+											Hide category (currently {data.hidden ? 'hidden' : 'unhidden'})
+										</div>
 										<div
 											class="btn_wrp"
 											on:click={() => {
@@ -241,10 +246,14 @@
 													data.name,
 													data.description,
 													data.alias,
-													data.hidden? false : true
-												);  // This is correct backwards like this. Because it's toggling the visibility, not displaying it.
+													data.hidden ? false : true
+												); // This is correct backwards like this. Because it's toggling the visibility, not displaying it.
 												toast.push(
-													`You have ${data.hidden ? "unhidden" : "hidden"} the category ${data.name}. It will be ${data.hidden? "visible in" : "removed from"} search results.`
+													`You have ${data.hidden ? 'unhidden' : 'hidden'} the category ${
+														data.name
+													}. It will be ${
+														data.hidden ? 'visible in' : 'removed from'
+													} search results.`
 												);
 											}}
 										>
@@ -252,8 +261,8 @@
 												icon={faLock}
 												text="Toggle visibility"
 												color="transparent"
-												color_t="{data.hidden? "COLORBLE" : "COLORHPK"}"
-												custom_style="border border-{data.hidden? "COLORBLE" : "COLORHPK"} my-2"
+												color_t={data.hidden ? 'COLORBLE' : 'COLORHPK'}
+												custom_style="border border-{data.hidden ? 'COLORBLE' : 'COLORHPK'} my-2"
 											/>
 										</div>
 									</div>

@@ -5,11 +5,25 @@ import what from '$lib/vendor/dishout/Whats';
 import { toast } from '@zerodevx/svelte-toast';
 let debounceTimeout: number;
 
-const createPromo = async (newCode: string, nickname: string, description: string, discount_percentage: number, start_date: number, end_date: number) =>{
+const createPromo = async (
+	newCode: string,
+	nickname: string,
+	description: string,
+	discount_percentage: number,
+	start_date: number,
+	end_date: number
+) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-		const payload =  [newCode, nickname, description? description : "", discount_percentage, start_date, end_date];
+			const payload = [
+				newCode,
+				nickname,
+				description ? description : '',
+				discount_percentage,
+				start_date,
+				end_date
+			];
 			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/promo/manage`, {
 				method: 'POST',
 				headers: {
@@ -34,15 +48,33 @@ const createPromo = async (newCode: string, nickname: string, description: strin
 		}, 500); // 500ms break
 	} catch (error) {
 		console.log(error);
-		toast.push(`Oops. Something unexpected happened while creating the promotion: ${error.message}`);
+		toast.push(
+			`Oops. Something unexpected happened while creating the promotion: ${error.message}`
+		);
 	}
-}
+};
 
-const editPromo = async (oldCode: string, newCode: string, nickname: string, description: string, discount_percentage: number, start_date: number, end_date: number) =>{
+const editPromo = async (
+	oldCode: string,
+	newCode: string,
+	nickname: string,
+	description: string,
+	discount_percentage: number,
+	start_date: number,
+	end_date: number
+) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-		const payload =  [oldCode, newCode, nickname, description? description : "", discount_percentage, start_date, end_date];
+			const payload = [
+				oldCode,
+				newCode,
+				nickname,
+				description ? description : '',
+				discount_percentage,
+				start_date,
+				end_date
+			];
 			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/promo/manage`, {
 				method: 'PUT',
 				headers: {
@@ -67,9 +99,11 @@ const editPromo = async (oldCode: string, newCode: string, nickname: string, des
 		}, 500); // 500ms break
 	} catch (error) {
 		console.log(error);
-		toast.push(`Oops. Something unexpected happened while modifying the promotion: ${error.message}`);
+		toast.push(
+			`Oops. Something unexpected happened while modifying the promotion: ${error.message}`
+		);
 	}
-}
+};
 
 const deletePromo = async (code: string) => {
 	try {
@@ -99,7 +133,9 @@ const deletePromo = async (code: string) => {
 		}, 500); // 500ms break
 	} catch (error) {
 		console.log(error);
-		toast.push(`Oops. Something unexpected happened while deleting the promotion: ${error.message}`);
+		toast.push(
+			`Oops. Something unexpected happened while deleting the promotion: ${error.message}`
+		);
 	}
 };
 

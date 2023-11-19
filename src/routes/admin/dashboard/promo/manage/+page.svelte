@@ -68,7 +68,6 @@
 		}
 	}
 
-
 	onMount(async () => {
 		try {
 			await catchAll();

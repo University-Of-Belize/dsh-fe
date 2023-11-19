@@ -60,13 +60,16 @@
 		<Navigation
 			transparency={5}
 			search={true}
-			titleText="Cafe {staff ? '' : "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
+			titleText="Cafe {staff
+				? ''
+				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
 			titleWhere="/admin/dashboard"
 		/>
 	</div>
 	<div class="main-content flex items-center justify-start h-full text-COLORBLK">
 		<div
-			class="drawer bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4">
+			class="drawer bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4"
+		>
 			<div class="section py-6">
 				<div class="title font-semibold pb-5">My Account</div>
 				<div

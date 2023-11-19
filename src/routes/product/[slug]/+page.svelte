@@ -136,7 +136,6 @@
 	function setRating(value: number) {
 		rating = value;
 	}
-
 </script>
 
 <main class="w-full h-screen">

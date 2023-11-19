@@ -5,11 +5,16 @@ import what from '$lib/vendor/dishout/Whats';
 import { toast } from '@zerodevx/svelte-toast';
 let debounceTimeout: number;
 
-const createCategory = async (newName: string, description: string, alias: string, hidden: boolean) =>{
+const createCategory = async (
+	newName: string,
+	description: string,
+	alias: string,
+	hidden: boolean
+) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-		const payload =  [newName, description, alias.trim() === "" ? newName : alias, hidden];
+			const payload = [newName, description, alias.trim() === '' ? newName : alias, hidden];
 			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/category/manage`, {
 				method: 'POST',
 				headers: {
@@ -36,12 +41,24 @@ const createCategory = async (newName: string, description: string, alias: strin
 		console.log(error);
 		toast.push(`Oops. Something unexpected happened while creating the category: ${error.message}`);
 	}
-}
-const editCategory = async (oldName: string, newName: string, description: string, alias: string, hidden: boolean) =>{
+};
+const editCategory = async (
+	oldName: string,
+	newName: string,
+	description: string,
+	alias: string,
+	hidden: boolean
+) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-		const payload =  [oldName, newName, description, alias.trim() === "" ? newName : alias, hidden];
+			const payload = [
+				oldName,
+				newName,
+				description,
+				alias.trim() === '' ? newName : alias,
+				hidden
+			];
 			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/category/manage`, {
 				method: 'PUT',
 				headers: {
@@ -66,9 +83,11 @@ const editCategory = async (oldName: string, newName: string, description: strin
 		}, 500); // 500ms break
 	} catch (error) {
 		console.log(error);
-		toast.push(`Oops. Something unexpected happened while modifying the category: ${error.message}`);
+		toast.push(
+			`Oops. Something unexpected happened while modifying the category: ${error.message}`
+		);
 	}
-}
+};
 
 const deleteCategory = async (categoryName: string) => {
 	try {
@@ -101,6 +120,5 @@ const deleteCategory = async (categoryName: string) => {
 		toast.push(`Oops. Something unexpected happened while deleting the category: ${error.message}`);
 	}
 };
-
 
 export { createCategory, editCategory, deleteCategory };

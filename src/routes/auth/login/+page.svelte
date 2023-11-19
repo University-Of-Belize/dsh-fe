@@ -40,7 +40,7 @@
 			postData(payload, 'login');
 		}, 500); // bounce every 500ms - let's hope they don't try to fucking spam the API
 	}
-	
+
 	const handleSubmit = (event: Event) => {
 		event.preventDefault();
 		// @ts-ignore

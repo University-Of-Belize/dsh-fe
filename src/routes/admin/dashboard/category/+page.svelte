@@ -49,14 +49,17 @@
 		<Navigation
 			transparency={5}
 			search={true}
-			titleText="Cafe {staff ? '' : "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
+			titleText="Cafe {staff
+				? ''
+				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
 			titleWhere="/admin/dashboard"
 		/>
 	</div>
 
 	<div class="main-content flex items-center justify-start h-full text-COLORBLK">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4">
+			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4"
+		>
 			<div class="section py-6">
 				<div class="title font-semibold pb-5">My Account</div>
 				<div
@@ -126,7 +129,8 @@
 									<a href="/admin/dashboard/category/manage?category_id={category._id}">
 										<div
 											class="edit-wrap w-fit h-fit"
-											on:click={() => goto(`/admin/dashboard/category/manage?category_id=${category._id}`)}
+											on:click={() =>
+												goto(`/admin/dashboard/category/manage?category_id=${category._id}`)}
 										>
 											<Button
 												icon={faCog}

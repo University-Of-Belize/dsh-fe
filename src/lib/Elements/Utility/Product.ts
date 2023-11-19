@@ -37,5 +37,4 @@ const deleteProduct = async (productId: string) => {
 	}
 };
 
-
 export { deleteProduct };

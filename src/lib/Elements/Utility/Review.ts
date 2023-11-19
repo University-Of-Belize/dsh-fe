@@ -37,7 +37,6 @@ const deleteReview = async (reviewId: string) => {
 	}
 };
 
-
 async function createReview(product_id: string, rating: number, comment: string) {
 	try {
 		clearTimeout(debounceTimeout);
@@ -83,4 +82,3 @@ function escapeHtml(unsafe) {
 }
 
 export { createReview, deleteReview, escapeHtml };
-

@@ -67,7 +67,10 @@
 			.filter((el) => el.name)
 			.map((el) => el.value);
 		console.log(valueArray);
-		if ((valueArray[valueArray.length - 3] === valueArray[valueArray.length - 4]) && !user_id || (value array[value array.length - 2] === valueArray[valueArray - 3] && user_id)){
+		if (
+			(valueArray[valueArray.length - 3] === valueArray[valueArray.length - 4] && !user_id) ||
+			(valueArray[valueArray.length - 2] === valueArray[valueArray.length - 3] && user_id)
+		) {
 			if (user_id) {
 				editUser(
 					/* (alias) editUser(action: "f" | "m", actionNum: number | undefined, 
@@ -135,8 +138,9 @@
 
 	<div class="main-content flex items-center justify-start h-full text-COLORBLK overflow-hidden">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4">
-		<div class="section py-6">
+			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4"
+		>
+			<div class="section py-6">
 				<div class="title font-semibold pb-5">My Account</div>
 				<div
 					on:click={async () => {

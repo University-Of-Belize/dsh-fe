@@ -18,7 +18,8 @@
 <div class="review my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-2 rounded-md">
 	<div class="flex bg-opacity-100">
 		<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
-			<img class="rounded-md w-12 h-12 object-cover"
+			<img
+				class="rounded-md w-12 h-12 object-cover"
 				bind:this={cImage}
 				src={category.image ?? config['product-view']['default-image']}
 				alt=""
