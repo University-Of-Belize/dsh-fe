@@ -338,7 +338,7 @@
 											icon={faCog}
 											color="COLORBLK"
 											color_t="COLORWHT1"
-											text={product_id ? 'Apply changes' : 'Create category'}
+											text={product_id ? 'Apply changes' : 'Create product'}
 											custom_style="my-2"
 										/>
 									</button>
