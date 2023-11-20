@@ -5,6 +5,7 @@
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import ProductBanner from '$lib/Elements/Generic/ProductBanner.svelte';
 	import config from '$lib/config/settings';
+	import type { Category } from '$lib/types/Category';
 	import type { Product as Product_ } from '$lib/types/Product.ts';
 	import { faGift, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
@@ -28,7 +29,8 @@
 	async function getCategories() {
 		const response = await fetch(`${config.server.HTTPOrigin}/api/v1/category`);
 		const data = await response.json();
-		categories = data.is;
+		categories = data.is; // Category[]
+		categories = categories.filter((category: Category) => !category.hidden);
 		if (localStorage.categories) {
 			if (localStorage.categories !== JSON.stringify(categories)) {
 				localStorage.removeItem('categories'); // Time for an update
