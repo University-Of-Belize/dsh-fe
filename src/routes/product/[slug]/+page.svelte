@@ -160,7 +160,7 @@
 							</div>
 							<StarCount reviews={$product.reviews} />
 							<div class="text-sm lg:text-lg font-light text-COLORWHT">
-								{@html $product.description}
+								{@html escapeHtml($product.description).replace(/\n/g, '<br>')}
 							</div>
 							<div class="text-md lg:text-xl py-4 font-semibold text-COLORWHT">
 								{parseFloat($product.price.$numberDecimal).toLocaleString('en-US', {
