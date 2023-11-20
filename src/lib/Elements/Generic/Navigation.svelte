@@ -55,7 +55,7 @@
 					// console.log(data);
 					user = data.is; // Get the user
 					localStorage.setItem('user', JSON.stringify(user));
-					localStorage.setItem('user_id', data._id);
+					localStorage.setItem('user_id', data._id); // Ensure token login is possible
 				} catch (error) {
 					console.log(error);
 					toast.push(
