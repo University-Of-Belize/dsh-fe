@@ -87,7 +87,8 @@
 		if (!cachedCategories) {
 			const response = await fetch(`${config.server.HTTPOrigin}/api/v1/category`);
 			const data = await response.json();
-			categories = data.is;
+			categories = data.is; // Category[]
+			categories = categories.filter((category: Category) => !category.hidden);
 			localStorage.setItem('categories', JSON.stringify(categories));
 		} else {
 			categories = JSON.parse(cachedCategories);
