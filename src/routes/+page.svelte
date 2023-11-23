@@ -97,7 +97,13 @@
 						<div
 							class="content-wrapper w-full h-full absolute flex items-center justify-center text-7xl font-semibold text-COLORWHT z-10"
 							on:click={() => {
-								goto(`/product?filter=${category.name.toString().toLowerCase()}`);
+								goto(
+									`/product?filter=${
+										category.alias
+											? category.alias.toString().toLowerCase()
+											: category.name.toString().toLowerCase()
+									}`
+								);
 							}}
 						>
 							{category.alias ?? category.name}

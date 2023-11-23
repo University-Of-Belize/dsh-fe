@@ -39,7 +39,7 @@
 		} else {
 			try {
 				const namePromise = fetch(
-					`${config.server.HTTPOrigin}/api/v1/search?filter=name&q=${
+					`${config.server.HTTPOrigin}/api/v1/search?filter=alias&q=${
 						params_filter?.toString().toLowerCase() ?? params?.toString().toLowerCase()
 					}`
 				);

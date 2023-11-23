@@ -277,7 +277,13 @@
 						<div
 							class="two pt-1"
 							on:click={() => {
-								goto(`/product?filter=${category.name.toString().toLowerCase()}`);
+								goto(
+									`/product?filter=${
+										category.alias
+											? category.alias.toString().toLowerCase()
+											: category.name.toString().toLowerCase()
+									}`
+								);
 							}}
 						>
 							<Button
