@@ -3,7 +3,7 @@ import { version } from '$app/environment';
 const settings = {
 	server: {
 		HTTPOrigin: 'https://winter-darkness-1705.fly.dev',
-		'support-email': 'cafe@ub.edu.bz',
+		'support-email': 'cafeteria@ub.edu.bz',
 		'bound-organization': 'University of Belize',
 		'indexing-interval': "3 minutes", "s3": {
 			'bucket-id': "https://6fdadd342786403cfcd687d3475d1234.r2.cloudflarestorage.com/primary-uswest",

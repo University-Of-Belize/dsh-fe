@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+# Recrawl every now and then
+Crawl-delay: 10
