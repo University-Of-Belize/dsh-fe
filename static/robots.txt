@@ -1,4 +1,42 @@
 User-agent: *
 Allow: /
+Disallow: /admin?
+Disallow: /admin
+Disallow: /admin/
+Disallow: /category?
+Disallow: /category
+Disallow: /category/
+Disallow: /category/manage?
+Disallow: /category/manage
+Disallow: /category/manage/
+Disallow: /user?
+Disallow: /user
+Disallow: /user/
+Disallow: /user/manage?
+Disallow: /user/manage
+Disallow: /user/manage/
+Disallow: /order?
+Disallow: /order
+Disallow: /order/
+Disallow: /product?
+Disallow: /product
+Disallow: /product/
+Disallow: /product/manage?
+Disallow: /product/manage
+Disallow: /product/manage/
+Disallow: /promo/
+Disallow: /promo?
+Disallow: /promo
+Disallow: /promo/manage?
+Disallow: /promo/manage
+Disallow: /promo/manage/
+Disallow: /product/checkout?
+Disallow: /product/checkout/
+Disallow: /product/checkout/confirmed?
+Disallow: /product/checkout/confirmed
+Disallow: /product/checkout/confirmed/
+
 # Recrawl every now and then
 Crawl-delay: 10
+
+Sitemap: https://cafe.ub.edu.bz/sitemap.xml
