@@ -66,7 +66,7 @@
 	<div class="navigation w-full z-20">
 		<Navigation transparency={5} search={true} value={params ?? undefined} />
 	</div>
-	<div class="content-wrapper w-full h-full absolute flex items-start justify-start z-10">
+	<div class="content-wrapper w-full h-full absolute flex items-start justify-start overflow-auto z-10 pb-40">
 		{#if $products && $products.length > 0}
 			<div class="flex flex-wrap">
 				{#each $products as product}<!-- This way, we filter out all the products from reviews -->
@@ -135,6 +135,7 @@
 		{/if}
 	</div>
 </main>
+<div class="footer relative z-10">
 <Footer text="Looks like you've reached the end.">
 	<div class="block">
 		<!-- <div class="text-xl font-light">Shop our entire menu by creating an account</div> -->
@@ -143,3 +144,4 @@
 		</div>
 	</div>
 </Footer>
+</div>
