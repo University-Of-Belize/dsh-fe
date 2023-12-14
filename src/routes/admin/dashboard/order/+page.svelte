@@ -152,7 +152,7 @@
 							</div>
 
 							<div
-								class="orderPane flex flex-col lg:flex-row justify-around w-full bg-COLORWHT py-4 px-4 rounded-sm border border-COLORWHT3 my-8"
+								class="orderPane flex flex-col lg:flex-row justify-start w-full bg-COLORWHT py-4 px-4 rounded-sm border border-COLORWHT3 my-8"
 								bind:this={editPane}
 							>
 								<div class="editGroup flex flex-col pb-8 px-4">
