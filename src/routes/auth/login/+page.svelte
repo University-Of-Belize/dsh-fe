@@ -126,6 +126,7 @@
 					<input
 						type="text"
 						name="username"
+						autocomplete="username"
 						class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
 						placeholder="Enter a username or email"
 					/>
@@ -152,6 +153,7 @@
 					<input
 						type="password"
 						name="password"
+						autocomplete="current-password"
 						class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
 						placeholder="Enter your password"
 					/>
