@@ -33,7 +33,7 @@
 			<option value="placeholder" disabled selected>{@html placeholder}</option>
 		{/if}
 		{#each options as option}
-			<option value={option._id}>{option.name}</option>
+			<option value={option._id ?? option}>{option.name ?? option}</option>
 		{/each}
 	</select>
 	<div class="icon w-fit">

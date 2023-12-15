@@ -107,6 +107,7 @@
 	<div class="navigation bg-COLORWHT bg-opacity-{transparency} w-full pl-2 pr-4 py-4 text-lg">
 		<div class="content bg-opacity-100 flex items-center">
 			<div
+				title="Pop open the navigation"
 				class="sidenav bg-COLORBLK bg-opacity-5 cursor-pointer hover:bg-opacity-20 px-4 py-3 rounded-sm mr-2"
 				bind:this={navToggle}
 				on:click={toggleNav}
@@ -130,6 +131,7 @@
 					<input
 						{value}
 						type="text"
+						title="Click to search for snacks, drinks and lunch"
 						name="search"
 						class="w-full font-regular focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
 						placeholder="Search for snacks, drinks and lunch"
@@ -145,6 +147,7 @@
 
 			{#if !user}
 				<div
+					title="Sign in to access content"
 					class="btn-wrp"
 					on:click={async () => {
 						await goto('/auth/login');
@@ -155,14 +158,15 @@
 			{:else}
 				<div class="pnav flex items-center justify-center lg:space-x-4">
 					{#if staff}
-						<div class="btn-wrp" on:click={() => goto('/admin/dashboard')}>
+						<div class="btn-wrp" title="Admin dashboard" on:click={() => goto('/admin/dashboard')}>
 							<IconButton icon={faCogs} color="COLORWHT" color_t="COLORBLE" />
 						</div>{/if}
-					<div class="btn-wrp" on:click={() => goto('/product/checkout')}>
+					<div class="btn-wrp" title="My shopping cart" on:click={() => goto('/product/checkout')}>
 						<IconButton icon={faCartShopping} color="COLORWHT" color_t="COLORBLK" />
 					</div>
 					<img
 						src={user.profile_picture ?? config['user']['default-image']}
+						title="My profile"
 						alt="{user.username}'s photo"
 						width="40px"
 						class="rounded-full cursor-pointer hover:opacity-80"

@@ -26,8 +26,7 @@
 			<Fa {icon} size="1.01x" class="pr-4" />
 		</div>
 		<select
-			name="filter"
-			name={name}
+			{name}
 			class="block appearance-none w-full bg-transparent px-4 py-2 pr-8 rounded leading-tight focus:outline-none"
 			value={value ?? selectedOption}
 			on:change={handleChange}

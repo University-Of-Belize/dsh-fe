@@ -1,37 +1,38 @@
 <script lang="ts">
+	import Select from '$lib/Elements/Generic/Select2.svelte';
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import TextInput from '$lib/Elements/Generic/TextInput.svelte';
-	import Select from '$lib/Elements/Generic/Select2.svelte';
-	import { createProduct, deleteProduct, editProduct } from '$lib/Elements/Utility/Product';
-	import { R2S3Upload } from '$lib/Elements/Utility/vendor/dishout/r2_s3';
 	import config from '$lib/config/settings';
-	import type { CartProduct, Product } from '$lib/types/Product';
 	import type { User } from '$lib/types/User';
 	import {
-		faBox,
+		faCalendar,
+		faCheck,
+		faClone,
 		faCog,
-		faList,
-		faLock,
-		faPencil,
-		faSign,
-		faSortAlphaAsc,
-		faTag
+		faCopy,
+		faDollarSign,
+		faQuestionCircle,
+		faShare,
+		faTag,
+		faX
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import Fa from 'svelte-fa';
 	import _ from 'lodash';
 	import type { Order } from '$lib/types/Order';
+	import Fa from 'svelte-fa';
+	import DateInput from '$lib/Elements/Generic/DateInput.svelte';
+	import { getPromo } from '$lib/Elements/Utility/Promo';
+	import type { Promo } from '$lib/types/Promo';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // User data
 	let data: Order[]; // List of orders
-
+	let promos: Promo['code'][];
 	async function catchAll() {
 		// Do not run if there is no product_id provided
 
@@ -94,13 +95,56 @@
 	onMount(async () => {
 		try {
 			await catchAll();
+			const pR = await getPromo();
+			promos = pR.is.map((item: Promo) => item.code);
+
+			console.log(promos); // This will log an array of codes
 		} catch (error) {
 			console.log(error);
 			toast.push(`Oops. Something unexpected happened while loading the user: ${error.message}`);
 		}
 	});
+
+	const getId = (id: string) => document.getElementById(id);
+	function go_order(action: number, orderId: string) {
+		switch (action) {
+			case 1:
+				toast.push('You accepted this order.');
+				getId(`order-${orderId}`)?.classList.remove('border-red-300'); // @ts-ignore
+				getId(`order-${orderId}`)?.classList.remove('border-COLORYLW'); // @ts-ignore
+				getId(`pulldown-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
+				getId(`pulldown-content-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
+				getId(`modify-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
+				getId(`title-${orderId}`).innerHTML =
+					'You <b class="font-normal text-COLORBLK">accepted</b> this order.';
+				break;
+			case 2:
+				toast.push('You rejected this order.');
+				getId(`order-${orderId}`)?.classList.remove('border-COLORYLW'); // @ts-ignore
+				getId(`order-${orderId}`)?.classList.add('border-red-300'); // @ts-ignore
+				getId(`pulldown-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
+				getId(`pulldown-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
+				getId(`modify-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
+				getId(`title-${orderId}`).innerHTML =
+					'You <b class="font-normal text-COLORHPK">rejected</b> this order.';
+				break;
+			case 3:
+				toast.push("You're altering this order.");
+				getId(`order-${orderId}`)?.classList.remove('border-red-300'); // @ts-ignore
+				getId(`order-${orderId}`)?.classList.add('border-COLORYLW'); // @ts-ignore
+				getId(`pulldown-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
+				getId(`pulldown-content-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
+				getId(`modify-content-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
+				getId(`title-${orderId}`).innerHTML =
+					'You\'re <b class="font-normal text-COLORYLW">altering</b> this order.';
+				break;
+			default:
+				toast.push('The parameters provided are incorrect.');
+		}
+	}
 </script>
 
+<div class="stub hidden border border-"></div>
 <main class="w-full h-screen overflow-hidden">
 	<div class="navigation w-full z-20">
 		<Navigation
@@ -137,13 +181,15 @@
 			<DashList {staff} />
 		</div>
 		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto pb-40">
-			<div class="flex-header flex items-center w-full flex-wrap">
+			<div class="flex-header flex items-start w-full flex-wrap">
 				<div class="block">
 					<div class="flex text-2xl font-semibold pb-2">What's Queued?</div>
 					<div class="flex text-xl font-semibold pb-12">Accept, decline and modify orders</div>
 				</div>
+				<div class="flex flex-1 justify-end text-2xl font-semibold pb-2">Open Orders: {data? data.length : "--"}</div>
+
 			</div>
-			<div class="flex flex-wrap w-full">
+			<div class="flex flex-wrap flex-col-reverse w-full">
 				{#if data != undefined}
 					{#if !isNaN(user.id) && staff}
 						{#each data as order}
@@ -152,10 +198,10 @@
 							</div>
 
 							<div
+								id="order-{order._id}"
 								class="orderPane flex flex-col lg:flex-row justify-start w-full bg-COLORWHT py-4 px-4 rounded-sm border border-COLORWHT3 my-8"
-								bind:this={editPane}
 							>
-								<div class="editGroup flex flex-col pb-8 px-4">
+								<div class="editGroup flex flex-col pb-8 px-4 w-full">
 									<div class="flex space-x-4">
 										<div class="pfp">
 											<img
@@ -170,11 +216,15 @@
 											/>
 										</div>
 										<div class="block">
-											<div class="flex text-2xl text-COLORBLK font-medium space-x-2">
-												<div class="g-wrap">
-													{order.order_from ? '@' + order.order_from.username : '@anonymous'}
+											<div class="flex">
+												<div
+													class="flex flex-wrap text-lg lg:text-2xl text-COLORBLK font-medium space-x-2"
+												>
+													<div class="g-wrap">
+														{order.order_from ? '@' + order.order_from.username : '@anonymous'}
+													</div>
+													<div class="font-semibold">just ordered</div>
 												</div>
-												<div class="font-semibold">just ordered</div>
 											</div>
 											<div class="text-base text-COLORBLK font-semibold flex">
 												Review or manage this order
@@ -182,17 +232,50 @@
 										</div>
 									</div>
 
-									{#each order.products as product}
-										<div class="product-order-container bxg-red-200 mt-4">
-											<div class="text-2xl font-semibold my-4">
-												{product.product?.productName ?? 'Ghost'}
+									{#each order.products as product, index (product.product?._id)}
+										<div class="product-order-container w-full mt-4">
+											<div class="flex flex-wrap">
+												<div class="text-2xl font-semibold my-4">
+													{product.product?.productName ?? 'Product Unavailable'}
+												</div>
+												<div class="flex flex-1 justify-end items-center space-x-2">
+													<button
+														class="btn_wrp w-fit h-fit"
+														on:click={() =>
+															goto(
+																`/admin/dashboard/product/manage?product_id=${
+																	product.product?._id ?? 'back'
+																}`
+															)}
+													>
+														<Button
+															icon={faCog}
+															color="COLORBLK"
+															color_t="COLORWHT1"
+															text="Edit Listing"
+															custom_style="my-2"
+														/>
+													</button>
+													<button
+														class="btn_wrp w-fit h-fit"
+														on:click={() => goto(`/product/${product.product?.slug ?? 'back'}`)}
+													>
+														<Button
+															icon={faShare}
+															color="COLORBLK"
+															color_t="COLORWHT1"
+															text="Go to Listing"
+															custom_style="my-2"
+														/>
+													</button>
+												</div>
 											</div>
 											<div class="banner-top flex flex-wrap w-full space-x-4 items-top">
 												<div class="pimg_wrp block bg-COLORBLE h-fit w-fit rounded-md">
 													<div class="pimg_wrp2 relative">
 														<div
 															class="product-image relative block overflow-clip rounded-md hover:opacity-80 cursor-pointer"
-															on:click={goto(`/product/${product.product?.slug ?? 'back'}`)}
+															on:click={() => goto(`/product/${product.product?.slug ?? 'back'}`)}
 														>
 															<img
 																src={product.product?.image ??
@@ -252,59 +335,153 @@
 											}
 										)}
 									</div>
-									<div class="text-xl font-light my-4">
-										ORDER #{order.order_code}
+									<div class="flex flex-wrap flex-1 justify-start items-center space-x-2">
+										<button
+											class="btn_wrp w-fit h-fit"
+											title="Accept this order"
+											on:click={() => go_order(1, order._id)}
+										>
+											<Button
+												icon={faCheck}
+												color="COLORBLK"
+												color_t="COLORWHT1"
+												text="Accept"
+												custom_style="my-2"
+											/>
+										</button>
+										<button
+											class="btn_wrp w-fit h-fit"
+											title="Reject/Decline this order"
+											on:click={() => go_order(2, order._id)}
+										>
+											<Button
+												icon={faX}
+												color="transparent"
+												color_t="COLORHPK"
+												text="Decline"
+												custom_style="my-2 border border-COLORHPK"
+											/>
+										</button>
+										<button
+											class="btn_wrp w-fit h-fit"
+											title="Modify this order"
+											on:click={() => go_order(3, order._id)}
+										>
+											<Button
+												icon={faClone}
+												color="COLORYLW"
+												color_t="COLORBLK"
+												text="Override"
+												custom_style="my-2"
+											/>
+										</button>
+										<div class="flex flex-1 items-center justify-end">
+											<div
+												role="button"
+												tabindex="0"
+												title="Copy the order code for reference"
+												class="flex items-center justify-center px-4 space-x-2 rounded-md hover:bg-gray-400 hover:bg-opacity-25 opacity-50 cursor-pointer select-none"
+												on:click={() => {
+													// Copy the selected text to the clipboard
+													navigator.clipboard.writeText(order.order_code);
+													toast.push('Order code copied to clipboard.');
+												}}
+												on:keypress={() => {
+													// Copy the selected text to the clipboard
+													navigator.clipboard.writeText(order.order_code);
+													toast.push('Order code copied to clipboard.');
+												}}
+											>
+												<div class="flex text-lg font-light my-4">
+													<div class="font-semibold">ORDER #</div>
+													{order.order_code}
+												</div>
+												<div class="copy rounded-md hover:bg-gray-200 opacity-80 p-4">
+													<Fa icon={faCopy} size="1.25x" class="text-black" />
+												</div>
+											</div>
+										</div>
 									</div>
-									<div class="settings-pulldown hidden my-8">
-										<div class="text-2xl font-semibold">General Settings</div>
-										<div
-											class="inputgroup flex flex-wrap items-start justify-start lg:items-center"
-										>
-											<div class="label font-semibold w-full text-lg">Slug</div>
-											<TextInput
-												icon={faSign}
-												name="slug"
-												placeholder="Enter a slug (e.g. coca-cola-canned)"
-												custom_style="bg-transparent"
-												value={data ? data.slug : ''}
-											/>
-										</div>
+									<div id="pulldown-{order._id}" class="settings-pulldown hidden my-8 space-y-4">
+										<div id="title-{order._id}" class="text-2xl font-semibold">Take Action</div>
+										<div id="pulldown-content-{order._id}">
+											<div
+												class="inputgroup flex flex-wrap items-start justify-start lg:items-center"
+											>
+												<div
+													class="flex label font-semibold w-full text-lg justify-start items-center space-x-2"
+												>
+													<div class="title">Expected ETA</div>
+													<div
+														title="When should this order arrive?"
+														class="icon cursor-pointer select-none"
+													>
+														<Fa icon={faQuestionCircle} size="1x" />
+													</div>
+												</div>
+												<DateInput
+													icon={faCalendar}
+													name="ETA"
+													placeholder="Expected Time of Arrival (e.g. 2021-12-31)"
+													value=""
+													custom_style="bg-transparent"
+												/>
+											</div>
 
-										<div
-											class="inputgroup flex flex-wrap items-start justify-start lg:items-center"
-										>
-											<div class="label font-semibold w-full text-lg">Product name</div>
-											<TextInput
-												icon={faSortAlphaAsc}
-												name="name"
-												placeholder="Enter a product name (e.g. 'Coca Cola (Canned)')"
-												custom_style="bg-transparent"
-												value={data ? data.productName : ''}
-											/>
-										</div>
-										<div
-											class="inputgroup flex flex-wrap items-start justify-start lg:items-center"
-										>
-											<div class="label font-semibold w-full text-lg">Listed price</div>
-											<TextInput
-												icon={faTag}
-												name="price"
-												placeholder="Enter a price (e.g. 10.75)"
-												custom_style="bg-transparent"
-												value={data ? (data.price ? data.price.$numberDecimal : '') : ''}
-											/>
-										</div>
-										<div
-											class="inputgroup flex flex-wrap items-start justify-start lg:items-center"
-										>
-											<div class="label font-semibold w-full text-lg">In stock</div>
-											<TextInput
-												icon={faBox}
-												name="in_stock"
-												placeholder="How many of this item are available (e.g. 35)"
-												custom_style="bg-transparent"
-												value={data ? data.in_stock : ''}
-											/>
+											<div
+												id="modify-content-{order._id}"
+												class="modify-content space-y-4 mt-4 hidden"
+											>
+												<div
+													class="inputgroup flex flex-wrap items-start justify-start lg:items-center"
+												>
+													<div
+														class="flex label font-semibold w-full text-lg justify-start items-center space-x-2"
+													>
+														<div class="title">Total amount due</div>
+														<div
+															title="How much does the customer have to pay?"
+															class="icon cursor-pointer select-none"
+														>
+															<Fa icon={faQuestionCircle} size="1x" />
+														</div>
+													</div>
+													<TextInput
+														icon={faDollarSign}
+														name="name"
+														placeholder="Enter a total (e.g. 10.75)"
+														custom_style="bg-transparent"
+														value={order ? order.total_amount.$numberDecimal : ''}
+													/>
+												</div>
+												<div
+													class="inputgroup flex flex-wrap items-start justify-start lg:items-center"
+												>
+													<div
+														class="flex label font-semibold w-full text-lg justify-start items-center space-x-2"
+													>
+														<div class="title">Discount code</div>
+														<div
+															title="Apply or modify the discount on the order"
+															class="icon cursor-pointer select-none"
+														>
+															<Fa icon={faQuestionCircle} size="1x" />
+														</div>
+													</div>
+													<Select
+														icon={faTag}
+														name="discountCode"
+														placeholder="Select a discount code"
+														value={order
+															? order.promo_code
+																? order.promo_code.code
+																: 'placeholder'
+															: 'placeholder'}
+														custom_style="bg-transparent border border-COLORBLK"
+														options={promos}
+													/>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>

@@ -139,10 +139,39 @@ const deletePromo = async (code: string) => {
 	}
 };
 
+const getPromo = async () => {
+	try {
+		const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/promo/manage`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${localStorage.token}`
+			}
+		});
+		if (res.status === 403) {
+			localStorage.removeItem('token');
+			localStorage.removeItem('user_id');
+			localStorage.removeItem('user');
+			toast.push('You need to log in.');
+			goto('/auth/login');
+		}
+		const r = await res.json();
+		if (!res.ok) {
+			return toast.push(r.message);
+		}
+		return r;
+	} catch (error) {
+		console.log(error);
+		toast.push(
+			`Oops. Something unexpected happened while fetching the available promotions: ${error.message}`
+		);
+	}
+};
+
 function getDate(unixTimestamp: number) {
 	return unixTimestamp
 		? new Date(unixTimestamp * 1000).toISOString().split('T')[0]
 		: new Date().toISOString().split('T')[0];
 }
 
-export { createPromo, editPromo, deletePromo, getDate };
+export { createPromo, editPromo, deletePromo, getPromo, getDate };

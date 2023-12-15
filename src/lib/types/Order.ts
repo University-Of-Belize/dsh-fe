@@ -1,4 +1,5 @@
 import type { CartProduct } from "./Product";
+import type { Promo } from "./Promo";
 import type { User } from "./User";
 
 interface Order {
@@ -10,6 +11,7 @@ interface Order {
         $numberDecimal: string;
     };
     delay_time: number;
+    promo_code?: Promo;
     products: CartProduct[];
     __v: number;
 }
