@@ -16,7 +16,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
-	$: next_url = $page.url.searchParams.get('next');
+	$: continue_url = $page.url.searchParams.get('continue');
 	let debounceTimeout: number;
 
 	onMount(() => {
@@ -26,7 +26,7 @@
 		if (token && !blocked) {
 			// token exists, do something
 			toast.push("You're already logged in");
-			goto(next_url ?? '/admin/dashboard');
+			goto(continue_url ?? '/admin/dashboard');
 		}
 		if (blocked) {
 			toast.push("Sorry, you've been blocked from our services.");
@@ -91,7 +91,7 @@
 			localStorage.removeItem('blocked');
 			toast.push('Welcome back!');
 			setTimeout(() => {
-				goto(next_url ?? '/admin/dashboard');
+				goto(continue_url ?? '/admin/dashboard');
 			}, 2000);
 		} catch (error) {
 			toast.push(`${error.message}. Try again later.`, {

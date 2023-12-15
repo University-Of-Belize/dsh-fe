@@ -212,10 +212,30 @@
 														class="product-description text-md font-light text-COLORBLE h-full w-full py-1 rounded-md mb-4 bg-transparent"
 													>
 														<div class="text">
-															{product.product?.description.length > 250
-																? `${product.product?.description.slice(0, 250)}...`
+															{@html product.product?.description.length > 250
+																? `${product.product?.description.slice(
+																		0,
+																		250
+																  )}... <a class='font-semibold hover:underline' href='/product/${
+																		product.product?.slug
+																  }'>Read more</a>`
 																: product.product?.description ??
 																  'This product entry is corrupt, failed to load or has been deleted.'}
+														</div>
+														<div class="product-price text-xl font-semibold my-2">
+															{parseFloat(product.product?.price.$numberDecimal).toLocaleString(
+																'en-US',
+																{
+																	style: 'currency',
+																	currency: config['checkout']['currency'],
+																	minimumFractionDigits: 2
+																}
+															) ??
+																parseFloat('0.00').toLocaleString('en-US', {
+																	style: 'currency',
+																	currency: config['checkout']['currency'],
+																	minimumFractionDigits: 2
+																})}
 														</div>
 														<div class="quantity font-semibold text-4xl">x{product.quantity}</div>
 													</div>
@@ -233,7 +253,7 @@
 										)}
 									</div>
 									<div class="text-xl font-light my-4">
-									ORDER #{order.order_code}
+										ORDER #{order.order_code}
 									</div>
 									<div class="settings-pulldown hidden my-8">
 										<div class="text-2xl font-semibold">General Settings</div>
