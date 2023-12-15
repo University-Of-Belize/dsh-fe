@@ -12,17 +12,12 @@
 	import type { Promo } from '$lib/types/Promo';
 	import type { User } from '$lib/types/User';
 	import {
-		faAd,
-		faCalendar,
 		faCalendarAlt,
 		faCog,
-		faDollar,
-		faListAlt,
 		faLock,
 		faPencil,
 		faSortAlphaAsc,
-		faTag,
-		faUserCog
+		faTag
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
@@ -104,7 +99,7 @@
 				valueArray[4], // start date
 				valueArray[5] // end date
 			);
-			toast.push(`You have updated ${data.name}'s details successfully.`);
+			toast.push(`You have updated ${data.code}'s details successfully.`);
 		} else {
 			createPromo(
 				/* (alias) createPromo(newCode, nickname, description, discount_percentage, start_date, end_date) */

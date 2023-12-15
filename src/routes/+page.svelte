@@ -10,7 +10,7 @@
 	import { faGift, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	let categories = [];
+	let categories: Category[] = [];
 	let product: Product_[] | null;
 	onMount(async () => {
 		try {

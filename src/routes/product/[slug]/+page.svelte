@@ -21,8 +21,6 @@
 	import { addToCart } from '$lib/Elements/Utility/Cart';
 	import { createReview, deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
 	import type { Product } from '$lib/types/Product.ts';
-	import { what_is } from '$lib/vendor/dishout/What_Is';
-	import what from '$lib/vendor/dishout/Whats';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
 	import type { User } from '$lib/types/User';
