@@ -10,6 +10,7 @@
 	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
 	import type { User } from '$lib/types/User';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
 		faCog,
 		faListAlt,
@@ -30,11 +31,7 @@
 	async function catchAll() {
 		// Do not run if there is no category_id provided
 		if (category_id) {
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/category`, {
-				headers: {
-					Authorization: `Bearer ${localStorage.token}`
-				}
-			});
+			const res = await fetchWebApi('v1/category', 'GET');
 			const r = await res.json();
 			if (res.status === 403) {
 				localStorage.removeItem('token');

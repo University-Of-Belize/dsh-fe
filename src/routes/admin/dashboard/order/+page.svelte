@@ -27,6 +27,7 @@
 	import DateInput from '$lib/Elements/Generic/DateInput.svelte';
 	import { getPromo } from '$lib/Elements/Utility/Promo';
 	import type { Promo } from '$lib/types/Promo';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
@@ -36,11 +37,7 @@
 	async function catchAll() {
 		// Do not run if there is no product_id provided
 
-		const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/order/manage`, {
-			headers: {
-				Authorization: `Bearer ${localStorage.token}`
-			}
-		});
+		const res = await fetchWebApi('v1/order/manage', 'GET');
 		const r = await res.json();
 		if (res.status === 403) {
 			localStorage.removeItem('token');

@@ -7,6 +7,7 @@
 	import { deleteCategory } from '$lib/Elements/Utility/Category';
 	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faCog, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
@@ -14,11 +15,7 @@
 	let data: Category[]; // List of users
 
 	async function catchAll() {
-		const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/category`, {
-			headers: {
-				Authorization: `Bearer ${localStorage.token}`
-			}
-		});
+		const res = await fetchWebApi('v1/category', 'GET');
 		if (res.status === 403) {
 			localStorage.removeItem('token');
 			localStorage.removeItem('user_id');

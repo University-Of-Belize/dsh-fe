@@ -1,7 +1,7 @@
 import { goto } from '$app/navigation';
-import config from '$lib/config/settings';
 import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
+import { fetchWebApi } from '$lib/vendor/dishout/api';
 import { toast } from '@zerodevx/svelte-toast';
 let debounceTimeout: number;
 
@@ -24,14 +24,7 @@ const createPromo = async (
 				start_date,
 				end_date
 			];
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/promo/manage`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${localStorage.token}`
-				},
-				body: JSON.stringify(what_is(what.private.promos, payload))
-			});
+			const res = await fetchWebApi('v1/admin/promo/manage', 'POST', what_is(what.private.promos, payload));
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');
@@ -75,14 +68,7 @@ const editPromo = async (
 				start_date,
 				end_date
 			];
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/promo/manage`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${localStorage.token}`
-				},
-				body: JSON.stringify(what_is(what.private.promos, payload))
-			});
+			const res = await fetchWebApi('v1/admin/promo/manage', 'PUT', what_is(what.private.promos, payload));
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');
@@ -109,14 +95,7 @@ const deletePromo = async (code: string) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/promo/manage`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${localStorage.token}`
-				},
-				body: JSON.stringify(what_is(what.private.promos, code))
-			});
+			const res = await fetchWebApi('v1/admin/promo/manage', 'DELETE', what_is(what.private.promos, code));
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');
@@ -141,13 +120,7 @@ const deletePromo = async (code: string) => {
 
 const getPromo = async () => {
 	try {
-		const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/promo/manage`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${localStorage.token}`
-			}
-		});
+		const res = await fetchWebApi('v1/admin/promo/manage', 'GET');
 		if (res.status === 403) {
 			localStorage.removeItem('token');
 			localStorage.removeItem('user_id');

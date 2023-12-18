@@ -21,6 +21,7 @@
 	import Button from './Button.svelte';
 	import IconButton from './IconButton.svelte';
 	import type { User } from '$lib/types/User';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	export let transparency: number = 0;
 	export let search: boolean = true;
 	export let value: string = '';
@@ -43,14 +44,7 @@
 		if (!localStorage.user) {
 			if (localStorage.token) {
 				try {
-					const response = await fetch(
-						`${config['server']['HTTPOrigin']}/api/v1/admin/user/lookup`,
-						{
-							headers: {
-								Authorization: `Bearer ${localStorage.token}`
-							}
-						}
-					);
+					const response = await fetchWebApi('v1/admin/user/lookup', 'GET');
 					const data = await response.json();
 					// console.log(data);
 					user = data.is; // Get the user
@@ -85,7 +79,7 @@
 
 	async function getCategories() {
 		if (!cachedCategories) {
-			const response = await fetch(`${config.server.HTTPOrigin}/api/v1/category`);
+			const response = await fetchWebApi('v1/category', 'GET');
 			const data = await response.json();
 			categories = data.is; // Category[]
 			categories = categories.filter((category: Category) => !category.hidden);

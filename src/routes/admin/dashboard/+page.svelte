@@ -4,6 +4,7 @@
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import config from '$lib/config/settings';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
 		faCog,
 		faHamburger,
@@ -27,11 +28,7 @@
 
 	onMount(async () => {
 		try {
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/dash`, {
-				headers: {
-					Authorization: `Bearer ${localStorage.token}`
-				}
-			});
+			const res = await fetchWebApi('v1/dash', 'GET');
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');

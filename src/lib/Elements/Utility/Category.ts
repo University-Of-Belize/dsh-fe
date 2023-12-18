@@ -1,7 +1,7 @@
 import { goto } from '$app/navigation';
-import config from '$lib/config/settings';
 import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
+import { fetchWebApi } from '$lib/vendor/dishout/api';
 import { toast } from '@zerodevx/svelte-toast';
 let debounceTimeout: number;
 
@@ -15,14 +15,7 @@ const createCategory = async (
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
 			const payload = [newName, description, alias.trim() === '' ? newName : alias, hidden];
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/category/manage`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${localStorage.token}`
-				},
-				body: JSON.stringify(what_is(what.private.category, payload))
-			});
+			const res = await fetchWebApi('v1/admin/category/manage', 'POST', what_is(what.private.category, payload));
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');
@@ -59,14 +52,7 @@ const editCategory = async (
 				alias.trim() === '' ? newName : alias,
 				hidden
 			];
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/category/manage`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${localStorage.token}`
-				},
-				body: JSON.stringify(what_is(what.private.category, payload))
-			});
+			const res = await fetchWebApi('v1/admin/category/manage', 'PUT', what_is(what.private.category, payload));
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');
@@ -93,14 +79,7 @@ const deleteCategory = async (categoryName: string) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/category/manage`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${localStorage.token}`
-				},
-				body: JSON.stringify(what_is(what.private.category, categoryName))
-			});
+			const res = await fetchWebApi('v1/admin/category/manage', 'DELETE', what_is(what.private.category, categoryName));
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');

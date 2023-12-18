@@ -2,12 +2,12 @@
 	import '../app.css';
 	// For reading storage
 	import { goto } from '$app/navigation';
-	import config from '$lib/config/settings';
 	import { SvelteToast, toast } from '@zerodevx/svelte-toast';
 	import 'node-localstorage/register';
 	import { onMount } from 'svelte';
 	import { beforeNavigate } from '$app/navigation';
 	import { updated } from '$app/stores';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	const options = {
 		dismissable: true,
 		theme: {
@@ -34,11 +34,7 @@
 		if (localStorage.token) {
 			try {
 				// Run login checks
-				const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/dash`, {
-					headers: {
-						Authorization: `Bearer ${localStorage.token}`
-					}
-				});
+				const res = await fetchWebApi('v1/dash', 'GET');
 				if (res.status === 403) {
 					localStorage.removeItem('token');
 					localStorage.removeItem('user_id');

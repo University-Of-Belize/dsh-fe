@@ -7,6 +7,7 @@
 	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
 	import type { Product as Product_ } from '$lib/types/Product.ts';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faGift, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
@@ -14,7 +15,7 @@
 	let product: Product_[] | null;
 	onMount(async () => {
 		try {
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/menu/random`);
+			const res = await fetchWebApi('v1/menu/random', 'GET');
 			const r = await res.json();
 			product = r.is;
 			// console.log(product);
@@ -27,7 +28,7 @@
 	});
 
 	async function getCategories() {
-		const response = await fetch(`${config.server.HTTPOrigin}/api/v1/category`);
+		const response = await fetchWebApi('v1/category', 'GET');
 		const data = await response.json();
 		categories = data.is; // Category[]
 		categories = categories.filter((category: Category) => !category.hidden);

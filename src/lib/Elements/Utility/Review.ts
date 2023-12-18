@@ -2,6 +2,7 @@ import { goto } from '$app/navigation';
 import config from '$lib/config/settings';
 import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
+import { fetchWebApi } from '$lib/vendor/dishout/api';
 import { toast } from '@zerodevx/svelte-toast';
 let debounceTimeout: number;
 
@@ -9,14 +10,7 @@ const deleteReview = async (reviewId: string) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/review/manage`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${localStorage.token}`
-				},
-				body: JSON.stringify(what_is(what.private.review, reviewId))
-			});
+			const res = await fetchWebApi('v1/admin/review/manage', 'DELETE', what_is(what.private.review, reviewId));
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');
@@ -41,14 +35,7 @@ async function createReview(product_id: string, rating: number, comment: string)
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const response = await fetch(`${config['server']['HTTPOrigin']}/api/v1/review/create`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${localStorage.token}`
-				},
-				body: JSON.stringify(what_is(what.public.review, [product_id, rating, comment]))
-			});
+			const response = await fetchWebApi('v1/review/create', 'POST', what_is(what.public.review, [product_id, rating, comment]));
 			const data = await response.json();
 			if (!response.ok) {
 				return toast.push(data.message, {
@@ -72,7 +59,7 @@ async function createReview(product_id: string, rating: number, comment: string)
 	}
 }
 
-function escapeHtml(unsafe) {
+function escapeHtml(unsafe: string) {
 	return unsafe
 		.replace(/&/g, '&amp;')
 		.replace(/</g, '&lt;')

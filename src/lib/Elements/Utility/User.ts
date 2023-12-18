@@ -1,8 +1,8 @@
 import { goto } from '$app/navigation';
-import config from '$lib/config/settings';
 import { toast } from '@zerodevx/svelte-toast';
 import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
+import { fetchWebApi } from '$lib/vendor/dishout/api';
 /*
 Make this function compatible with these calls
 
@@ -62,7 +62,6 @@ async function editUser(
 	username?: string,
 	password?: string | null
 ) {
-	const url = `${config['server']['HTTPOrigin']}/api/v1/admin/user/manage`;
 	const payload = what_is(what.private.user, [
 		oldUsername,
 		username,
@@ -78,15 +77,7 @@ async function editUser(
 	]);
 
 	try {
-		const res = await fetch(url, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${localStorage.token}`
-			},
-			body: JSON.stringify(payload)
-		});
-
+		const res = await fetchWebApi('v1/admin/user/manage', 'PUT', payload);
 		if (res.status === 403) {
 			localStorage.removeItem('token');
 			localStorage.removeItem('user_id');
@@ -121,16 +112,7 @@ async function registerUser(payload: string[]) {
 		clearTimeout(debounceTimeout);
 		console.log(payload);
 		debounceTimeout = setTimeout(async () => {
-			const response = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/user/manage`, {
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${localStorage.token}`
-				},
-				method: 'POST',
-				body: JSON.stringify(what_is(what.private.user, payload))
-			});
-
+			const response = await fetchWebApi('v1/user/register', 'POST', what_is(what.private.user, payload));
 			if (!response.ok) {
 				const json = await response.json();
 				return toast.push(`${json.message}`, {
