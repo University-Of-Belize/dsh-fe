@@ -37,7 +37,7 @@
 	async function catchAll() {
 		// Do not run if there is no product_id provided
 
-		const res = await fetchWebApi('v1/order/manage', 'GET');
+		const res = await fetchWebApi('v1/admin/order/manage', 'GET');
 		const r = await res.json();
 		if (res.status === 403) {
 			localStorage.removeItem('token');

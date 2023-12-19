@@ -112,7 +112,7 @@ async function registerUser(payload: string[]) {
 		clearTimeout(debounceTimeout);
 		console.log(payload);
 		debounceTimeout = setTimeout(async () => {
-			const response = await fetchWebApi('v1/user/register', 'POST', what_is(what.private.user, payload));
+			const response = await fetchWebApi('v1/admin/user/manage', 'POST', what_is(what.private.user, payload));
 			if (!response.ok) {
 				const json = await response.json();
 				return toast.push(`${json.message}`, {
@@ -123,7 +123,7 @@ async function registerUser(payload: string[]) {
 				});
 			}
 			const json = await response.json();
-			toast.push(`${json.message}`);
+			toast.push(`'${json.is.username}' has been created successfully.`);
 		}, 500); // debounce every 500ms
 	} catch (error) {
 		toast.push(

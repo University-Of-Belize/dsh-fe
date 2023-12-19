@@ -6,6 +6,7 @@
 	export let placeholder: string; // Required
 	export let custom_style: string | undefined = '';
 	export let value: string | undefined = '';
+	export let required: boolean = false; // Optional
 
 	const dispatch = createEventDispatcher();
 
@@ -27,5 +28,6 @@
 		{name}
 		class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
 		{placeholder}
+		{required}
 	/>
 </div>

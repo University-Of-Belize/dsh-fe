@@ -63,6 +63,8 @@
 			.map((el) => el.value);
 		console.log(valueArray);
 		if (
+			(valueArray[valueArray.length - 3].trim() !== '' && !user_id) ||
+			(valueArray[valueArray.length - 4].trim() !== '' && !user_id) ||
 			(valueArray[valueArray.length - 3] === valueArray[valueArray.length - 4] && !user_id) ||
 			(valueArray[valueArray.length - 2] === valueArray[valueArray.length - 3] && user_id)
 		) {
@@ -94,10 +96,11 @@
 					valueArray.splice(2, 1);
 					// [valueArray[1], valueArray[2]] = [valueArray[2], valueArray[1]];
 					valueArray[valueArray.length - 1] = JSON.parse(
-						parseFloat(valueArray[valueArray.length - 1]).toFixed(2)
+						parseFloat(valueArray[valueArray.length - 1] ?? 0).toFixed(2)
 					);
 					valueArray.push(0); // Push the restrictions
 					valueArray.push(true); // Bypass user activation
+					console.log(valueArray, "ss")
 					registerUser(valueArray);
 				} else {
 					toast.push('Staff member must be <b>YES</b> or <b>NO</b>', {
@@ -216,6 +219,7 @@
 									name="username"
 									placeholder="Type in a username"
 									custom_style="bg-transparent"
+									required
 								/>
 							</div>
 							{#if !user_id}
@@ -226,6 +230,7 @@
 										name="email"
 										placeholder="Type in a {config['server']['bound-organization']} email address"
 										custom_style="bg-transparent"
+										required
 									/>
 								</div>{/if}
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
@@ -262,6 +267,7 @@
 										name="staff"
 										placeholder="Type 'YES' or 'NO'"
 										custom_style="bg-transparent"
+										required
 									/>
 								</div>
 								<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
@@ -271,6 +277,7 @@
 										name="credit"
 										placeholder="Type a decimal number (e.g. 1.00)"
 										custom_style="bg-transparent"
+										required
 									/>
 								</div>{/if}
 							<button class="btn_wrp w-fit h-fit" type="submit">
