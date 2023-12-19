@@ -7,6 +7,7 @@
 	import { deleteProduct } from '$lib/Elements/Utility/Product';
 	import config from '$lib/config/settings';
 	import type { Product } from '$lib/types/Product';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faCog, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
@@ -16,11 +17,7 @@
 	let data = writable<Product[]>([]); // Declare the data variable
 
 	async function catchAll() {
-		const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/menu/`, {
-			headers: {
-				Authorization: `Bearer ${localStorage.token}`
-			}
-		});
+		const res = await fetchWebApi('v1/menu/', 'GET')
 		if (res.status === 403) {
 			localStorage.removeItem('token');
 			localStorage.removeItem('user_id');

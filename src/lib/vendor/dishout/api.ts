@@ -1,7 +1,6 @@
-// Stolen code from: https://developer.spotify.com/
-
 import settings from '$lib/config/settings';
 
+// Stolen code from: https://developer.spotify.com/
 // It's a great idea though! 😅😅
 async function fetchWebApi(endpoint: string, method: string, body?: object, json?: boolean): Promise<Response> {
 	const res = await fetch(`${settings.server.HTTPOrigin}/api/${endpoint}`, {

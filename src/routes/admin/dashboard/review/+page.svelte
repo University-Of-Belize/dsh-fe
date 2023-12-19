@@ -7,6 +7,7 @@
 	import { deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
 	import config from '$lib/config/settings';
 	import type { Review } from '$lib/types/Review';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
@@ -16,11 +17,7 @@
 	$: data; // List of reviews (Review[])
 
 	async function catchAll() {
-		const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/review/manage`, {
-			headers: {
-				Authorization: `Bearer ${localStorage.token}`
-			}
-		});
+		const res = await fetchWebApi('v1/admin/review/manage', 'GET');
 		if (res.status === 403) {
 			localStorage.removeItem('token');
 			localStorage.removeItem('user_id');

@@ -10,6 +10,7 @@
 	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
 	import type { EngineProduct } from '$lib/types/Product';
 	import Fa from 'svelte-fa';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 
 	const products = writable<EngineProduct[]>([]);
 	$: params = $page.url.searchParams.get('search');
@@ -17,10 +18,8 @@
 
 	// Thread run everytime the params change
 	$: (async () => {
-		const searchPromise = fetch(
-			`${config.server.HTTPOrigin}/api/v1/search?filter=productName&q=${params
-				?.toString()
-				.toLowerCase()}`
+		const searchPromise = await fetchWebApi(
+			`v1/search?filter=productName&q=${params?.toString().toLowerCase()}`, 'GET'
 		);
 		let searchResults, nameResults;
 		try {
@@ -38,10 +37,8 @@
 			products.set(searchResults); // @ts-ignore
 		} else {
 			try {
-				const namePromise = fetch(
-					`${config.server.HTTPOrigin}/api/v1/search?filter=alias&q=${
-						params_filter?.toString().toLowerCase() ?? params?.toString().toLowerCase()
-					}`
+				const namePromise = fetchWebApi(
+					`v1/search?filter=alias&q=${params_filter?.toString().toLowerCase() ?? params?.toString().toLowerCase()}`, 'GET'
 				);
 				const nameResponse = await namePromise;
 				if (nameResponse.status === 404) {

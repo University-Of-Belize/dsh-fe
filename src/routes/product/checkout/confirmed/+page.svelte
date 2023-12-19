@@ -6,6 +6,7 @@
 	import config from '$lib/config/settings';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	$: branding_text = 'One second...';
@@ -18,14 +19,7 @@
 
 	async function postData(data: any, token?: string) {
 		try {
-			const response = await fetch(`${config['server']['HTTPOrigin']}/api/v1/order/place`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`
-				},
-				body: JSON.stringify(what_is(what.public.order, '')) ?? null
-			});
+			const response = await fetchWebApi('v1/order/place', 'POST', what_is(what.public.order, ''));
 			if (!response.ok) {
 				const json = await response.json();
 				branding_text = 'Order not placed';

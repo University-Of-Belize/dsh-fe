@@ -9,6 +9,7 @@
 	import { editUser, registerUser } from '$lib/Elements/Utility/User';
 	import config from '$lib/config/settings';
 	import type { User } from '$lib/types/User';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faAd, faCog, faDollar, faLock, faUserCog } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
@@ -21,14 +22,8 @@
 	async function catchAll() {
 		// Do not run if there is no user_id provided
 		if (user_id) {
-			const res = await fetch(
-				`${config['server']['HTTPOrigin']}/api/v1/admin/user/lookup?user_id=${user_id}`,
-				{
-					headers: {
-						Authorization: `Bearer ${localStorage.token}`
-					}
-				}
-			);
+			const res = await fetchWebApi(`v1/admin/user/lookup?user_id=${user_id}`, 'GET');
+
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');

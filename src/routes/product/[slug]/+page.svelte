@@ -24,6 +24,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
 	import type { User } from '$lib/types/User';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	// let hero_image: HTMLDivElement;
 	const staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // The user
 	const user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // The user
@@ -56,7 +57,7 @@
 
 		try {
 			// Check if the slug even exists
-			const response = await fetch(`${config.server.HTTPOrigin}/api/v1/menu/slug?id=${params}`);
+			const response = await fetchWebApi(`v1/menu/slug?id=${params}`, 'GET');
 			if (!response.ok) {
 				history.back();
 			}
@@ -70,9 +71,7 @@
 
 	// Thread run everytime the params change
 	$: (async () => {
-		const response = await fetch(
-			`${config.server.HTTPOrigin}/api/v1/menu/lookup?slug=${params}`
-		);
+		const response = await fetchWebApi(`v1/menu/slug?id=${params}`, 'GET');
 		if (response.body == null) return;
 		let r;
 		try {

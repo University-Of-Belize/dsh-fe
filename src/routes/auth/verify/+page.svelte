@@ -8,6 +8,7 @@
 	import config from '$lib/config/settings';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	const VerifyToken = $page.url.searchParams.get('activation_token') || false;
@@ -77,14 +78,7 @@
 	}
 	async function postData(data: any, path: string, token?: string) {
 		try {
-			const response = await fetch(`${config['server']['HTTPOrigin']}/api/v1/auth/${path}`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`
-				},
-				body: data ? JSON.stringify(what_is(what.public.auth, data)) : null
-			});
+			const response = await fetchWebApi(`v1/auth/${path}`, 'POST', what_is(what.public.auth, data))
 			if (!response.ok) {
 				const json = await response.json();
 				text = 'Something hitched over on our side. You should try that again one more time.';

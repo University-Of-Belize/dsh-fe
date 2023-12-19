@@ -5,6 +5,7 @@
 	import config from '$lib/config/settings';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
 		faGift,
 		faLock,
@@ -21,15 +22,11 @@
 		try {
 			clearTimeout(debounceTimeout);
 			debounceTimeout = setTimeout(async () => {
-				const response = await fetch(`${config['server']['HTTPOrigin']}/api/v1/auth/signup`, {
-					headers: {
-						Accept: 'application/json',
-						'Content-Type': 'application/json'
-					},
-					method: 'POST',
-					body: JSON.stringify(what_is(what.public.auth, payload))
-				});
-
+				const response = await fetchWebApi(
+					`v1/auth/signup`,
+					'POST',
+					what_is(what.public.auth, payload)
+				);
 				if (!response.ok) {
 					const json = await response.json();
 					return toast.push(`${json.message}`, {

@@ -3,9 +3,9 @@
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import config from '$lib/config/settings';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
 		faGift,
 		faLock,
@@ -50,16 +50,13 @@
 
 		Login(valueArray);
 	};
-	async function postData(data: any, path: string, token?: string) {
+	async function postData(data: any, path: string) {
 		try {
-			const response = await fetch(`${config['server']['HTTPOrigin']}/api/v1/auth/${path}`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`
-				},
-				body: data ? JSON.stringify(what_is(what.public.auth, data)) : null
-			});
+			const response = await fetchWebApi(
+				`v1/auth/${path}`,
+				'POST',
+				what_is(what.public.auth, data)
+			);
 			const json = await response.json();
 			if (response.status === 403) {
 				// Hackish asf lmfao

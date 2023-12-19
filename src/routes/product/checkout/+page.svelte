@@ -8,6 +8,7 @@
 	import { addToCart, emptyCart } from '$lib/Elements/Utility/Cart';
 	import config from '$lib/config/settings';
 	import type { CartProduct } from '$lib/types/Product';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faPrint, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
@@ -35,11 +36,7 @@
 					});
 			}
 			setTimeout(async () => {
-				const response = await fetch(`${config['server']['HTTPOrigin']}/api/v1/user/cart`, {
-					headers: {
-						Authorization: `Bearer ${localStorage.token}`
-					}
-				});
+				const response = await fetchWebApi('v1/user/cart', 'GET');
 				if (response.ok) {
 					const r = await response.json(); // Copilot logic (efficiently group the same items together)
 					data = r.is.reduce((acc: CartProduct[], curr: CartProduct) => {

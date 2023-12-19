@@ -7,6 +7,7 @@
 	import { deletePromo } from '$lib/Elements/Utility/Promo';
 	import config from '$lib/config/settings';
 	import type { Promo } from '$lib/types/Promo';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faCog, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
@@ -15,11 +16,7 @@
 	let data: Promo[]; // List of promos
 
 	async function catchAll() {
-		const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/promo/manage`, {
-			headers: {
-				Authorization: `Bearer ${localStorage.token}`
-			}
-		});
+		const res = await fetchWebApi('v1/admin/promo/manage', 'GET');
 		if (res.status === 403) {
 			localStorage.removeItem('token');
 			localStorage.removeItem('user_id');

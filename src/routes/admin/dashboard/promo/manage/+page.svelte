@@ -11,6 +11,7 @@
 	import config from '$lib/config/settings';
 	import type { Promo } from '$lib/types/Promo';
 	import type { User } from '$lib/types/User';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
 		faCalendarAlt,
 		faCog,
@@ -32,11 +33,7 @@
 	async function catchAll() {
 		// Do not run if there is no promo_id provided
 		if (promo_id) {
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/promo/manage`, {
-				headers: {
-					Authorization: `Bearer ${localStorage.token}`
-				}
-			});
+			const res = await fetchWebApi('v1/admin/promo/manage', 'GET');
 			const r = await res.json();
 			if (res.status === 403) {
 				localStorage.removeItem('token');

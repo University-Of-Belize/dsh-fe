@@ -7,6 +7,7 @@
 	import UserPill from '$lib/Elements/Generic/UserPill.svelte';
 	import config from '$lib/config/settings';
 	import type { User } from '$lib/types/User';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faCog, faPlus, faUserCog } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
@@ -52,10 +53,9 @@
 				query = user.detail;
 				search = query;
 			}
-			const response = await fetch(
-				`${config['server']['HTTPOrigin']}/api/v1/search?filter=${
-					currentFilter ?? filter?.detail
-				}&q=${query}`
+			const response = await fetchWebApi(
+				`v1/search?filter=${currentFilter ?? filter?.detail}&q=${query}`,
+				'GET'
 			);
 			data = await response.json();
 			if (filter && filter.detail === 'staff') {
@@ -65,11 +65,7 @@
 	}
 
 	async function catchAll() {
-		const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/admin/user/manage`, {
-			headers: {
-				Authorization: `Bearer ${localStorage.token}`
-			}
-		});
+		const res = await fetchWebApi('v1/admin/user/manage', 'GET');
 		if (res.status === 403) {
 			localStorage.removeItem('token');
 			localStorage.removeItem('user_id');

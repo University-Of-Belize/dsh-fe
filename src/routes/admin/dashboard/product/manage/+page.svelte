@@ -25,6 +25,7 @@
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import type { Category } from '$lib/types/Category';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
@@ -37,11 +38,7 @@
 	let categories: Category[] = [];
 
 	async function populateCategories() {
-		const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/category`, {
-			headers: {
-				Authorization: `Bearer ${localStorage.token}`
-			}
-		});
+		const res = await fetchWebApi('v1/category', 'GET');
 		if (res.status === 403) {
 			localStorage.removeItem('token');
 			localStorage.removeItem('user_id');
@@ -62,11 +59,7 @@
 		populateCategories();
 		// Do not run if there is no product_id provided
 		if (product_id) {
-			const res = await fetch(`${config['server']['HTTPOrigin']}/api/v1/menu/lookup?product_id=${product_id}`, {
-				headers: {
-					Authorization: `Bearer ${localStorage.token}`
-				}
-			});
+			const res = await fetchWebApi(`v1/menu/lookup?product_id=${product_id}`, 'GET');
 			const r = await res.json();
 			if (res.status === 403) {
 				localStorage.removeItem('token');
