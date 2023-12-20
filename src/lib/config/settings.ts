@@ -3,6 +3,7 @@ import { version } from '$app/environment';
 const settings = {
 	server: {
 		HTTPOrigin: 'https://winter-darkness-1705.fly.dev',
+		// HTTPOrigin: 'http://127.0.0.1:8080',
 		'support-email': 'cafeteria@ub.edu.bz',
 		'bound-organization': 'University of Belize',
 		'indexing-interval': "3 minutes", "s3": {
