@@ -15,6 +15,7 @@
 		faCopy,
 		faDollarSign,
 		faQuestionCircle,
+		faSave,
 		faShare,
 		faTag,
 		faX
@@ -28,8 +29,10 @@
 	import { getPromo } from '$lib/Elements/Utility/Promo';
 	import type { Promo } from '$lib/types/Promo';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
+	import { getLocaleDateTime } from '$lib/Elements/Utility/time';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
+	let orderProcessingForm: HTMLFormElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // User data
 	let data: Order[]; // List of orders
@@ -139,9 +142,13 @@
 				toast.push('The parameters provided are incorrect.');
 		}
 	}
+
+	function processRequest() {
+		console.log('Processing request...');
+	}
 </script>
 
-<div class="stub hidden border border-"></div>
+<div class="stub hidden border border-" />
 <main class="w-full h-screen overflow-hidden">
 	<div class="navigation w-full z-20">
 		<Navigation
@@ -183,8 +190,9 @@
 					<div class="flex text-2xl font-semibold pb-2">What's Queued?</div>
 					<div class="flex text-xl font-semibold pb-12">Accept, decline and modify orders</div>
 				</div>
-				<div class="flex flex-1 justify-end text-2xl font-semibold pb-2">Open Orders: {data? data.length : "--"}</div>
-
+				<div class="flex flex-1 justify-end text-2xl font-semibold pb-2">
+					Open Orders: {data ? data.length : '--'}
+				</div>
 			</div>
 			<div class="flex flex-wrap flex-col-reverse w-full">
 				{#if data != undefined}
@@ -224,7 +232,8 @@
 												</div>
 											</div>
 											<div class="text-base text-COLORBLK font-semibold flex">
-												Review or manage this order
+												Ordered at {getLocaleDateTime(order.order_date)}
+												<!-- <br/>Review or manage this order -->
 											</div>
 										</div>
 									</div>
@@ -401,7 +410,11 @@
 									</div>
 									<div id="pulldown-{order._id}" class="settings-pulldown hidden my-8 space-y-4">
 										<div id="title-{order._id}" class="text-2xl font-semibold">Take Action</div>
-										<div id="pulldown-content-{order._id}">
+										<form
+											id="pulldown-content-{order._id}"
+											bind:this={orderProcessingForm}
+											on:submit={() => processRequest()}
+										>
 											<div
 												class="inputgroup flex flex-wrap items-start justify-start lg:items-center"
 											>
@@ -411,7 +424,7 @@
 													<div class="title">Expected ETA</div>
 													<div
 														title="When should this order arrive?"
-														class="icon cursor-pointer select-none"
+														class="icon cursor-help select-none"
 													>
 														<Fa icon={faQuestionCircle} size="1x" />
 													</div>
@@ -438,7 +451,7 @@
 														<div class="title">Total amount due</div>
 														<div
 															title="How much does the customer have to pay?"
-															class="icon cursor-pointer select-none"
+															class="icon cursor-help select-none"
 														>
 															<Fa icon={faQuestionCircle} size="1x" />
 														</div>
@@ -460,7 +473,7 @@
 														<div class="title">Discount code</div>
 														<div
 															title="Apply or modify the discount on the order"
-															class="icon cursor-pointer select-none"
+															class="icon cursor-help select-none"
 														>
 															<Fa icon={faQuestionCircle} size="1x" />
 														</div>
@@ -479,7 +492,21 @@
 													/>
 												</div>
 											</div>
-										</div>
+											<button
+												class="btn_wrp w-fit h-fit"
+												type="submit"
+												title="Process this request"
+												on:click={() => orderProcessingForm.submit()}
+											>
+												<Button
+													icon={faSave}
+													color="COLORBLK"
+													color_t="COLORWHT1"
+													text="Save"
+													custom_style="my-2"
+												/>
+											</button>
+										</form>
 									</div>
 								</div>
 							</div>{/each}{/if}{/if}

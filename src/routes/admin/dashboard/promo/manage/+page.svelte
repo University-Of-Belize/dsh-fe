@@ -7,8 +7,8 @@
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import PromoPill from '$lib/Elements/Generic/PromoPill.svelte';
 	import TextInput from '$lib/Elements/Generic/TextInput.svelte';
-	import { createPromo, deletePromo, editPromo, getDate } from '$lib/Elements/Utility/Promo';
-	import config from '$lib/config/settings';
+	import { createPromo, deletePromo, editPromo } from '$lib/Elements/Utility/Promo';
+	import { getDate } from '$lib/Elements/Utility/time';
 	import type { Promo } from '$lib/types/Promo';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';

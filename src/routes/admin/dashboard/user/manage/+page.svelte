@@ -61,14 +61,31 @@
 		const valueArray = Array.from(event.target)
 			.filter((el) => el.name)
 			.map((el) => el.value);
-		console.log(valueArray);
+		console.log(
+			valueArray,
+			(!user_id &&
+				valueArray[valueArray.length - 3].trim() !== '' &&
+				valueArray[valueArray.length - 4].trim() !== '' &&
+				valueArray[valueArray.length - 3] === valueArray[valueArray.length - 4]) ||
+				(!staff &&
+					user_id &&
+					valueArray[valueArray.length - 2].trim() !== '' &&
+					valueArray[valueArray.length - 1].trim() !== '' &&
+					valueArray[valueArray.length - 2] === valueArray[valueArray.length - 1])
+		);
 		if (
-			(valueArray[valueArray.length - 3].trim() !== '' && !user_id) ||
-			(valueArray[valueArray.length - 4].trim() !== '' && !user_id) ||
-			(valueArray[valueArray.length - 3] === valueArray[valueArray.length - 4] && !user_id) ||
-			(valueArray[valueArray.length - 2] === valueArray[valueArray.length - 3] && user_id)
+			(!user_id &&
+				valueArray[valueArray.length - 3].trim() !== '' &&
+				valueArray[valueArray.length - 4].trim() !== '' &&
+				valueArray[valueArray.length - 3] === valueArray[valueArray.length - 4]) ||
+			staff ||
+			(user_id &&
+				valueArray[valueArray.length - 2].trim() !== '' &&
+				valueArray[valueArray.length - 1].trim() !== '' &&
+				valueArray[valueArray.length - 2] === valueArray[valueArray.length - 1])
 		) {
 			if (user_id) {
+				console.table(['DATA TO BE SENT TO SERVER', valueArray]);
 				editUser(
 					/* (alias) editUser(action: "f" | "m", actionNum: number | undefined, 
 					oldUsername: string, email: string, staff: boolean, credit: number, 
@@ -99,8 +116,7 @@
 						parseFloat(valueArray[valueArray.length - 1] ?? 0).toFixed(2)
 					);
 					valueArray.push(0); // Push the restrictions
-					valueArray.push(true); // Bypass user activation
-					console.log(valueArray, "ss")
+					console.table(['DATA TO BE SENT TO SERVER', valueArray]);
 					registerUser(valueArray);
 				} else {
 					toast.push('Staff member must be <b>YES</b> or <b>NO</b>', {
@@ -218,7 +234,10 @@
 									icon={faAd}
 									name="username"
 									placeholder="Type in a username"
+									value={data ? data.username : ''}
 									custom_style="bg-transparent"
+									disabled={data ? (data.username === 'root' ? true : false) : false}
+									disabled_text="You cannot change the root user's username."
 									required
 								/>
 							</div>

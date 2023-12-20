@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {
+		faClone,
 		faHamburger,
-		faList,
 		faMessage,
 		faPlus,
 		faTag,
@@ -48,7 +48,7 @@
 	<div class="title font-semibold pb-5">Order Management</div>
 	<div class="three pt-1" on:click={() => goto('/admin/dashboard/order')}>
 		<Button
-			icon={faList}
+			icon={faClone}
 			color="COLORWHT3"
 			text="What's queued?"
 			color_t="COLORBLK"

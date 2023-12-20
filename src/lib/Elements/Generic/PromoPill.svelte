@@ -1,9 +1,8 @@
 <script lang="ts">
-	import config from '$lib/config/settings';
 	import type { Promo } from '$lib/types/Promo';
 	import { faTag } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { getDate } from '../Utility/Promo';
+	import { getDate } from '../Utility/time';
 	export let promo: Promo;
 	export let description: string;
 </script>

@@ -6,6 +6,7 @@
 	import config from '$lib/config/settings';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
+		faClone,
 		faCog,
 		faHamburger,
 		faList,
@@ -111,6 +112,9 @@
 													size={data.is[1][0] ?? '4x'}
 												/>{:else if icons[i] === 'list'}<Fa
 													icon={faList}
+													size={data.is[1][0] ?? '4x'}
+												/>{:else if icons[i] === 'clone'}<Fa
+													icon={faClone}
 													size={data.is[1][0] ?? '4x'}
 												/>{:else if icons[i] === 'plus'}<Fa
 													icon={faPlus}
