@@ -66,6 +66,8 @@
 
 		if (valueArray[valueArray.length - 1] === valueArray[valueArray.length - 2]) {
 			[valueArray[0], valueArray[1]] = [valueArray[1], valueArray[0]];
+			// Push the user's timezone (overwrites the last element "retypePassword")
+			valueArray[valueArray.length - 1] = Intl.DateTimeFormat().resolvedOptions().timeZone;
 			Register(valueArray);
 		} else {
 			toast.push("<b>Retype password</b> and <b>password</b> aren't the same", {
@@ -125,6 +127,7 @@
 					<input
 						type="password"
 						name="password"
+						autocomplete="new-password"
 						class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
 						placeholder="Enter your password"
 					/>
@@ -138,6 +141,7 @@
 					<input
 						type="password"
 						name="password2"
+						autocomplete="new-password"
 						class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
 						placeholder="Retype your password"
 					/>

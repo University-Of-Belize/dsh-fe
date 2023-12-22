@@ -18,6 +18,7 @@
 		faSave,
 		faShare,
 		faTag,
+		faTrash,
 		faX
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
@@ -25,18 +26,20 @@
 	import _ from 'lodash';
 	import type { Order } from '$lib/types/Order';
 	import Fa from 'svelte-fa';
-	import DateInput from '$lib/Elements/Generic/DateInput.svelte';
+	import DateTimeInput from '$lib/Elements/Generic/DateTimeInput.svelte';
 	import { getPromo } from '$lib/Elements/Utility/Promo';
 	import type { Promo } from '$lib/types/Promo';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { getLocaleDateTime } from '$lib/Elements/Utility/time';
+	import { getLocalDateTime, getLocaleDateTime } from '$lib/Elements/Utility/time';
+	import { what_is } from '$lib/vendor/dishout/What_Is';
+	import what from '$lib/vendor/dishout/Whats'; // What is what?
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
-	let orderProcessingForm: HTMLFormElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // User data
 	let data: Order[]; // List of orders
 	let promos: Promo['code'][];
+	let currentAction: [number, string] = [-1, '']; // Not selected
 	async function catchAll() {
 		// Do not run if there is no product_id provided
 
@@ -87,7 +90,7 @@
 		// data = data[0];
 		// @ts-ignore
 		if (data.length === 0) {
-			toast.push('Product not found.');
+			toast.push('Nothing here to see! 👻');
 		}
 		console.log(data);
 	}
@@ -108,7 +111,7 @@
 	const getId = (id: string) => document.getElementById(id);
 	function go_order(action: number, orderId: string) {
 		switch (action) {
-			case 1:
+			case 1: // Accept
 				toast.push('You accepted this order.');
 				getId(`order-${orderId}`)?.classList.remove('border-red-300'); // @ts-ignore
 				getId(`order-${orderId}`)?.classList.remove('border-COLORYLW'); // @ts-ignore
@@ -117,8 +120,9 @@
 				getId(`modify-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
 				getId(`title-${orderId}`).innerHTML =
 					'You <b class="font-normal text-COLORBLK">accepted</b> this order.';
+				currentAction = [action, orderId];
 				break;
-			case 2:
+			case 2: // Decline
 				toast.push('You rejected this order.');
 				getId(`order-${orderId}`)?.classList.remove('border-COLORYLW'); // @ts-ignore
 				getId(`order-${orderId}`)?.classList.add('border-red-300'); // @ts-ignore
@@ -127,8 +131,9 @@
 				getId(`modify-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
 				getId(`title-${orderId}`).innerHTML =
 					'You <b class="font-normal text-COLORHPK">rejected</b> this order.';
+				currentAction = [action, orderId];
 				break;
-			case 3:
+			case 3: // Modify
 				toast.push("You're altering this order.");
 				getId(`order-${orderId}`)?.classList.remove('border-red-300'); // @ts-ignore
 				getId(`order-${orderId}`)?.classList.add('border-COLORYLW'); // @ts-ignore
@@ -137,14 +142,73 @@
 				getId(`modify-content-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
 				getId(`title-${orderId}`).innerHTML =
 					'You\'re <b class="font-normal text-COLORYLW">altering</b> this order.';
+				currentAction = [action, orderId];
 				break;
-			default:
+			default: // WTF
 				toast.push('The parameters provided are incorrect.');
 		}
 	}
 
-	function processRequest() {
+	async function processRequest(event: Event) {
+		event.preventDefault();
 		console.log('Processing request...');
+		// @ts-ignore
+		const valueArray = Array.from(event.target)
+			.filter((el) => el.name)
+			.map((el) => el.value);
+
+		// If we're not deleting
+		if (currentAction[0] !== 2) {
+			// Convert back to timestamps because, we need those.
+			valueArray[valueArray.length - 3] = Date.parse(valueArray[valueArray.length - 3]) / 1000;
+		} else {
+			valueArray[1] = null; // JSON parseable value
+		}
+		console.log(valueArray);
+		['a', 'ORDER_ID', 2.45, 'NEW_PROMO', 999999];
+		switch (
+			currentAction[0] // The action
+		) {
+			case 1: // Accept
+			case 2: // Decline
+			case 3: // Modify
+				const r = await fetchWebApi(
+					'v1/admin/order/manage',
+					'POST',
+					what_is(what.private.order, [
+						currentAction[0] === 1
+							? 'a'
+							: currentAction[0] === 2
+							? 'd'
+							: currentAction[0] === 3
+							? 'm'
+							: '?', // Ternary statement to map 'a' for ACCEPT /
+						// 'd' for DELETE / 'm' for MODIFY
+						currentAction[1], // Order ID
+						JSON.parse(valueArray[1]), // The price (We use JSON.parse to turn the string back into a 'real' number/float)
+						valueArray[2], // The promotion
+						valueArray[0] // The ETA
+					]) // Lol
+				);
+				if (!r.ok) {
+					toast.push('Failed');
+					return;
+				}
+				const res = await r.json();
+				toast.push(
+					currentAction[0] === 1
+						? 'Order accepted.'
+						: currentAction[0] === 2
+						? res.is
+						: currentAction[0] === 3
+						? 'Update successfully issued.'
+						: 'Update successfully issued.'
+				);
+				break;
+
+			default: // What?
+				break;
+		}
 	}
 </script>
 
@@ -410,10 +474,25 @@
 									</div>
 									<div id="pulldown-{order._id}" class="settings-pulldown hidden my-8 space-y-4">
 										<div id="title-{order._id}" class="text-2xl font-semibold">Take Action</div>
+										{#if currentAction[0] === 2}
+											<button
+												class="btn_wrp w-fit h-fit"
+												title="Reject/Decline this order"
+												on:click={(e) => processRequest(e)}
+											>
+												<Button
+													icon={faTrash}
+													color="transparent"
+													color_t="COLORHPK"
+													text="DELETE"
+													custom_style="my-2 border border-COLORHPK"
+												/>
+											</button>
+										{/if}
 										<form
 											id="pulldown-content-{order._id}"
-											bind:this={orderProcessingForm}
-											on:submit={() => processRequest()}
+											action="#"
+											on:submit={(e) => processRequest(e)}
 										>
 											<div
 												class="inputgroup flex flex-wrap items-start justify-start lg:items-center"
@@ -429,11 +508,11 @@
 														<Fa icon={faQuestionCircle} size="1x" />
 													</div>
 												</div>
-												<DateInput
+												<DateTimeInput
 													icon={faCalendar}
 													name="ETA"
 													placeholder="Expected Time of Arrival (e.g. 2021-12-31)"
-													value=""
+													value={data ? getLocaleDateTime(order.delay_time) : new Date().toISOString().split('T')[0]}
 													custom_style="bg-transparent"
 												/>
 											</div>
@@ -496,7 +575,6 @@
 												class="btn_wrp w-fit h-fit"
 												type="submit"
 												title="Process this request"
-												on:click={() => orderProcessingForm.submit()}
 											>
 												<Button
 													icon={faSave}

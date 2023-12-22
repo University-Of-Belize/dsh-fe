@@ -71,7 +71,7 @@
 
 	// Thread run everytime the params change
 	$: (async () => {
-		const response = await fetchWebApi(`v1/menu/slug?id=${params}`, 'GET');
+		const response = await fetchWebApi(`v1/menu/lookup?slug=${params}`, 'GET');
 		if (response.body == null) return;
 		let r;
 		try {
