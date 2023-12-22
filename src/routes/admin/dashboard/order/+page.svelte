@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ProductPill from './../../../../lib/Elements/Generic/ProductPill.svelte';
 	import Select from '$lib/Elements/Generic/Select2.svelte';
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Generic/Button.svelte';
@@ -33,11 +34,13 @@
 	import { getLocalDateTime, getLocaleDateTime } from '$lib/Elements/Utility/time';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats'; // What is what?
+	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // User data
 	let data: Order[]; // List of orders
+	let data_raw: Order[]; // Order data (raw, ungrouped)
 	let promos: Promo['code'][];
 	let currentAction: [number, string] = [-1, '']; // Not selected
 	async function catchAll() {
@@ -57,6 +60,7 @@
 		}
 
 		// data = r.is; // Rizz
+		data_raw = r.is; // Rizzler
 		// Group duplicate products together
 		// Copilot logic (very efficient it says, lol)
 		let copy = _.cloneDeep(r.is);
@@ -102,13 +106,12 @@
 				const pR = await getPromo();
 				promos = pR.is.map((item: Promo) => item.code);
 				console.log(promos); // This will log an array of codes
-			} else {
-				getId(`pulldown-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
-				getId(`pulldown-content-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
 			}
 		} catch (error) {
 			console.log(error);
-			toast.push(`Oops. Something unexpected happened while loading the order page: ${error.message}`);
+			toast.push(
+				`Oops. Something unexpected happened while loading the order page: ${error.message}`
+			);
 		}
 	});
 
@@ -140,13 +143,22 @@
 				break;
 			case 3: // Modify
 				toast.push("You're altering this order.");
-				getId(`order-${orderId}`)?.classList.remove('border-red-300'); // @ts-ignore
-				getId(`order-${orderId}`)?.classList.add('border-COLORYLW'); // @ts-ignore
-				getId(`pulldown-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
-				getId(`pulldown-content-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
-				getId(`modify-content-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
+				// @ts-ignore
 				getId(`title-${orderId}`).innerHTML =
 					'You\'re <b class="font-normal text-COLORYLW">altering</b> this order.';
+				getId(`order-${orderId}`)?.classList.remove('border-red-300'); // @ts-ignore
+				getId(`order-${orderId}`)?.classList.add('border-COLORYLW'); // @ts-ignore
+				if (staff) {
+					getId(`pulldown-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
+					getId(`pulldown-content-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
+					getId(`modify-content-${orderId}`)?.classList.remove('hidden');
+					getId(`user-modify-content-${orderId}`)?.classList.remove('hidden');
+				} else {
+					getId(`pulldown-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
+					getId(`pulldown-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
+					getId(`modify-content-${orderId}`)?.classList.add('hidden');
+					getId(`user-modify-content-${orderId}`)?.classList.remove('hidden');
+				}
 				currentAction = [action, orderId];
 				break;
 			default: // WTF
@@ -170,7 +182,6 @@
 			valueArray[1] = null; // JSON parseable value
 		}
 		console.log(valueArray);
-		['a', 'ORDER_ID', 2.45, 'NEW_PROMO', 999999];
 		switch (
 			currentAction[0] // The action
 		) {
@@ -191,7 +202,7 @@
 						// 'd' for DELETE / 'm' for MODIFY
 						currentAction[1], // Order ID
 						JSON.parse(valueArray[1]), // The price (We use JSON.parse to turn the string back into a 'real' number/float)
-						valueArray[2], // The promotion
+						valueArray[2] === 'placeholder' ? null : valueArray[2], // The promotion
 						valueArray[0] // The ETA
 					]) // Lol
 				);
@@ -262,7 +273,9 @@
 			<div class="flex-header flex items-start w-full flex-wrap">
 				<div class="block">
 					<div class="flex text-2xl font-semibold pb-2">What's Queued?</div>
-					<div class="flex text-xl font-semibold pb-12">Accept, decline and modify orders</div>
+					<div class="flex text-xl font-semibold pb-12">
+						{staff ? 'Accept, decline and modify orders' : 'View and modify your open orders.'}
+					</div>
 				</div>
 				<div class="flex flex-1 justify-end text-2xl font-semibold pb-2">
 					Open Orders: {data ? data.length : '--'}
@@ -271,7 +284,7 @@
 			<div class="flex flex-wrap flex-col-reverse w-full">
 				{#if data != undefined}
 					{#if !isNaN(user.id)}
-						{#each data as order}
+						{#each data as order, index}
 							<div class="user_wrap w-full">
 								<div class="ctg_wrp w-full" />
 							</div>
@@ -306,7 +319,7 @@
 																: '@' + order.order_from.username
 															: '@anonymous'}
 													</div>
-													<div class="font-semibold">just ordered</div>
+													<div class="font-semibold">issued an order for</div>
 												</div>
 											</div>
 											<div class="text-base text-COLORBLK font-semibold flex">
@@ -490,8 +503,13 @@
 											</div>
 										</div>
 									</div>
-									<div id="pulldown-{order._id}" class="settings-pulldown hidden my-8 space-y-4">
-										<div id="title-{order._id}" class="text-2xl font-semibold">Take Action</div>
+									<div
+										id="pulldown-{order._id}"
+										class="settings-pulldown {staff ? 'hidden' : ''} my-8 space-y-4"
+									>
+										<div id="title-{order._id}" class="text-2xl font-semibold">
+											{staff ? 'Take Action' : 'Order Details'}
+										</div>
 										{#if currentAction[0] === 2}
 											<button
 												class="btn_wrp w-fit h-fit"
@@ -534,12 +552,13 @@
 														? getLocaleDateTime(order.delay_time)
 														: new Date().toISOString().split('T')[0]}
 													custom_style="bg-transparent"
+													disabled={staff ? false : true}
 												/>
 											</div>
 
 											<div
 												id="modify-content-{order._id}"
-												class="modify-content space-y-4 mt-4 hidden"
+												class="modify-content space-y-4 mt-4 {staff ? 'hidden' : ''}"
 											>
 												<div
 													class="inputgroup flex flex-wrap items-start justify-start lg:items-center"
@@ -549,7 +568,9 @@
 													>
 														<div class="title">Total amount due</div>
 														<div
-															title="How much does the customer have to pay?"
+															title={staff
+																? 'How much does the customer have to pay?'
+																: 'The total amount you have to pay--not including any discounts that may have been applied'}
 															class="icon cursor-help select-none"
 														>
 															<Fa icon={faQuestionCircle} size="1x" />
@@ -560,7 +581,18 @@
 														name="name"
 														placeholder="Enter a total (e.g. 10.75)"
 														custom_style="bg-transparent"
-														value={order ? order.total_amount.$numberDecimal : ''}
+														value={order
+															? parseFloat(order.total_amount.$numberDecimal).toFixed(2)
+															: ''}
+														disabled={staff ? false : true}
+														disabled_text={staff
+															? ''
+															: `Your total ${
+																	order
+																		? 'is $' +
+																		  parseFloat(order.total_amount.$numberDecimal).toFixed(2)
+																		: 'failed to load'
+															  }`}
 													/>
 												</div>
 												<div
@@ -571,40 +603,112 @@
 													>
 														<div class="title">Discount code</div>
 														<div
-															title="Apply or modify the discount on the order"
+															title={staff
+																? 'Apply or modify the discount on the order'
+																: order
+																? order.promo_code
+																	? order.promo_code.description
+																	: 'No discounts were applied to this order'
+																: 'Discount codes that were applied to this order will be here'}
 															class="icon cursor-help select-none"
 														>
 															<Fa icon={faQuestionCircle} size="1x" />
 														</div>
 													</div>
-													<Select
-														icon={faTag}
-														name="discountCode"
-														placeholder="Select a discount code"
-														value={order
-															? order.promo_code
-																? order.promo_code.code
-																: 'placeholder'
-															: 'placeholder'}
-														custom_style="bg-transparent border border-COLORBLK"
-														options={promos}
-													/>
+													{#if staff}
+														<Select
+															icon={faTag}
+															name="discountCode"
+															placeholder="Select a discount code"
+															value={order
+																? order.promo_code
+																	? order.promo_code.code
+																	: 'placeholder'
+																: 'placeholder'}
+															custom_style="bg-transparent border border-COLORBLK"
+															options={promos}
+														/>
+													{:else}
+														<TextInput
+															icon={faTag}
+															name="discountCode"
+															placeholder="Select a discount code"
+															value={order
+																? order.promo_code
+																	? order.promo_code.code
+																	: 'NO DISCOUNT APPLIED'
+																: 'NO DISCOUNT APPLIED'}
+															custom_style="bg-transparent border border-COLORBLK"
+															disabled
+															disabled_text={order
+																? order.promo_code
+																	? `This discount is worth ${order.promo_code.discount_percentage}%`
+																	: 'No discounts were applied to this order'
+																: 'NO DISCOUNT APPLIED'}
+														/>
+													{/if}
 												</div>
 											</div>
-											<button
-												class="btn_wrp w-fit h-fit"
-												type="submit"
-												title="Process this request"
-											>
-												<Button
-													icon={faSave}
-													color="COLORBLK"
-													color_t="COLORWHT1"
-													text="Save"
-													custom_style="my-2"
-												/>
-											</button>
+											<!--- END user-modify-content-${order.order_code} -->
+											{#if staff}
+												<button
+													class="btn_wrp w-fit h-fit"
+													type="submit"
+													title="Process this request"
+												>
+													<Button
+														icon={faSave}
+														color="COLORBLK"
+														color_t="COLORWHT1"
+														text="Save"
+														custom_style="my-2"
+													/>
+												</button>
+											{/if}
 										</form>
+										<!--- user-modify-content-${order.order_code}-->
+										<div id="user-modify-content-{order._id}" class="hidden">
+											{#each data_raw[index].products as product, index}
+												<ProductPill
+													product={product.product}
+													description={product.product?.description}
+													image={product.product?.image}
+													widget={false}
+													tag={true}
+													tagText={'x' + product.quantity}
+												>
+													<div class="controls flex justify-center items-center space-x-2">
+														<div
+															class="edit-wrap w-fit h-fit"
+															on:click={() => {
+																// Delete the product
+																userDeleteOrderProduct(order._id, index);
+																setTimeout(() => {
+																	catchAll();
+																}, 800);
+															}}
+														>
+															<Button
+																icon={faTrash}
+																color="transparent"
+																custom_style="border border-COLORHPK py-2 m-0"
+																color_t="COLORHPK"
+																text="Delete product"
+															/>
+														</div>
+
+														<div class="edit-wrap w-fit h-fit">
+															<TextInput
+																icon={faCog}
+																name="quantity"
+																placeholder="Input a new quantity"
+																custom_style="py-2 m-0"
+															/>
+														</div>
+													</div>
+												</ProductPill>
+											{/each}
+										</div>
 									</div>
 								</div>
 							</div>{/each}{/if}{/if}

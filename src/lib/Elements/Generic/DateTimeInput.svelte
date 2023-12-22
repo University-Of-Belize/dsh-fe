@@ -6,6 +6,8 @@
 	export let placeholder: string; // Required
 	export let custom_style: string | undefined = '';
 	export let value: string | undefined = '';
+	export let disabled: boolean; // Optional
+	export let disabled_text: string = 'You cannot type here.'; // Optional
 
 	const dispatch = createEventDispatcher();
 
@@ -15,7 +17,9 @@
 </script>
 
 <div
-	class="username flex-1 flex mt-2 rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORBLK {custom_style}"
+	aria-disabled={disabled}
+	title={disabled ? disabled_text : ''}
+	class="username flex-1 flex mt-2 rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORBLK aria-disabled:opacity-40 aria-disabled:cursor-not-allowed {custom_style}"
 >
 	<div class="icon w-fit">
 		<Fa {icon} size="1.25x" class="text-COLORBLK pr-4" />
@@ -25,7 +29,8 @@
 		{value}
 		type="datetime-local"
 		{name}
-		class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
+		class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent disabled:text-black disabled:cursor-not-allowed"
 		{placeholder}
+		{disabled}
 	/>
 </div>

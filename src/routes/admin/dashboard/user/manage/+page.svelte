@@ -18,6 +18,7 @@
 	const user_id = $page.url.searchParams.get('user_id');
 	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // User data
 	let data: User; // List of users
+	let debounceTimeout: number;
 
 	async function catchAll() {
 		// Do not run if there is no user_id provided
@@ -51,7 +52,9 @@
 			await catchAll();
 		} catch (error) {
 			console.log(error);
-			toast.push(`Oops. Something unexpected happened while loading the user page: ${error.message}`);
+			toast.push(
+				`Oops. Something unexpected happened while loading the user page: ${error.message}`
+			);
 		}
 	});
 
@@ -86,23 +89,32 @@
 		) {
 			if (user_id) {
 				console.table(['DATA TO BE SENT TO SERVER', valueArray]);
-				editUser(
-					/* (alias) editUser(action: "f" | "m", actionNum: number | undefined, 
+				// Debounce 500ms
+				try {
+					// @ts-ignore
+					clearTimeout(debounceTimeout);
+					debounceTimeout = setTimeout(async () => {
+						editUser(
+							/* (alias) editUser(action: "f" | "m", actionNum: number | undefined, 
 					oldUsername: string, email: string, staff: boolean, credit: number, 
 					restrictions: number, username?: string | undefined, 
 					password?: string | ... 1 more ... | undefined, 
 					bypassActivation?: boolean | undefined) */
-					'm', // Action (modify)
-					undefined, // Action Number (unused)
-					data.username, // Identification (username)
-					data.email, // Email (new, but stays the same here)
-					data.staff, // Promote at all (no, stays the same)
-					JSON.parse(parseFloat(data.credit.$numberDecimal).toFixed(2)), // Change credit (no, stays the same)
-					data.restrictions, // Restrictions (no, stays the same)
-					valueArray[0], // New username (yes, entered)
-					valueArray[1] // New password (yes, entered)
-				);
-				toast.push(`You have updated ${data.username}'s details successfully.`);
+							'm', // Action (modify)
+							undefined, // Action Number (unused)
+							data.username, // Identification (username)
+							data.email, // Email (new, but stays the same here)
+							data.staff, // Promote at all (no, stays the same)
+							JSON.parse(parseFloat(data.credit.$numberDecimal).toFixed(2)), // Change credit (no, stays the same)
+							data.restrictions, // Restrictions (no, stays the same)
+							valueArray[0], // New username (yes, entered)
+							valueArray[1] // New password (yes, entered)
+						);
+						toast.push(`You have updated ${data.username}'s details successfully.`);
+					}, 500); // 500ms break
+				} catch (error) {
+					console.log(error);
+				}
 			} else {
 				if (
 					valueArray[valueArray.length - 2] == 'YES' ||
@@ -117,7 +129,16 @@
 					);
 					valueArray.push(0); // Push the restrictions
 					console.table(['DATA TO BE SENT TO SERVER', valueArray]);
-					registerUser(valueArray);
+					// Debounce 500ms
+					try {
+						// @ts-ignore
+						clearTimeout(debounceTimeout);
+						debounceTimeout = setTimeout(async () => {
+							registerUser(valueArray);
+						}, 500); // 500ms break
+					} catch (error) {
+						console.log(error);
+					}
 				} else {
 					toast.push('Staff member must be <b>YES</b> or <b>NO</b>', {
 						dismissable: false,
@@ -218,7 +239,9 @@
 						</div>
 					{/if}{/if}
 				<div
-					class="editPane hidden flex flex-col lg:flex-row justify-around w-full bg-COLORWHT py-4 px-4"
+					class="editPane hidden flex flex-col lg:flex-row {staff
+						? 'justify-around'
+						: 'justify-start'} w-full bg-COLORWHT py-4 px-4"
 					bind:this={editPane}
 				>
 					<div class="editGroup flex flex-col pb-8 px-4">
@@ -310,7 +333,7 @@
 							</button>
 						</form>
 					</div>
-					<div class="editGroup flex flex-col pb-8 px-4">
+					<div class="editGroup {staff ? '' : 'hidden'} flex flex-col pb-8 px-4">
 						{#if staff && data != undefined}
 							<div class="flex text-xl font-semibold pb-12">Take Action</div>
 							<div class="flex flex-col lg:flex-row">

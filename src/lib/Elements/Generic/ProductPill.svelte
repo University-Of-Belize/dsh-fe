@@ -10,6 +10,7 @@
 	export let tagColor_t: string = 'COLORWHT';
 	export let tagText: string = '';
 	export let description: string;
+	export let widget: boolean = true;
 	let pimg: HTMLImageElement;
 </script>
 
@@ -21,17 +22,18 @@
 </div>
 
 <div class="product-wrp relative">
-	<div
-		style="top: -23%; right: -1%;"
-		class="widget-wrp absolute flex w-full items-center justify-end"
-	>
+	{#if widget}
 		<div
-			on:click={() => goto(`/admin/dashboard/product/manage?product_id=${product._id}`)}
-			class="widget shadow-md cursor-pointer hover:opacity-80 bg-COLORBLK px-2 py-2 text-COLORWHT w-fit rounded-md"
+			style="top: -23%; right: -1%;"
+			class="widget-wrp absolute flex w-full items-center justify-end"
 		>
-			<Fa icon={faPencil} size="0.85x" />
-		</div>
-	</div>
+			<div
+				on:click={() => goto(`/admin/dashboard/product/manage?product_id=${product._id}`)}
+				class="widget shadow-md cursor-pointer hover:opacity-80 bg-COLORBLK px-2 py-2 text-COLORWHT w-fit rounded-md"
+			>
+				<Fa icon={faPencil} size="0.85x" />
+			</div>
+		</div>{/if}
 	<div class="product my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-2 rounded-md">
 		<div class="flex bg-opacity-100">
 			<div class="product-pfp flex flex-col items-center justify-start pr-4">
