@@ -98,13 +98,17 @@
 	onMount(async () => {
 		try {
 			await catchAll();
-			const pR = await getPromo();
-			promos = pR.is.map((item: Promo) => item.code);
-
-			console.log(promos); // This will log an array of codes
+			if (staff) {
+				const pR = await getPromo();
+				promos = pR.is.map((item: Promo) => item.code);
+				console.log(promos); // This will log an array of codes
+			} else {
+				getId(`pulldown-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
+				getId(`pulldown-content-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
+			}
 		} catch (error) {
 			console.log(error);
-			toast.push(`Oops. Something unexpected happened while loading the user: ${error.message}`);
+			toast.push(`Oops. Something unexpected happened while loading the order page: ${error.message}`);
 		}
 	});
 
@@ -123,14 +127,15 @@
 				currentAction = [action, orderId];
 				break;
 			case 2: // Decline
-				toast.push('You rejected this order.');
+				toast.push(staff ? 'You rejected this order.' : "You're about to delete this order.");
 				getId(`order-${orderId}`)?.classList.remove('border-COLORYLW'); // @ts-ignore
 				getId(`order-${orderId}`)?.classList.add('border-red-300'); // @ts-ignore
 				getId(`pulldown-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
 				getId(`pulldown-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
 				getId(`modify-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
-				getId(`title-${orderId}`).innerHTML =
-					'You <b class="font-normal text-COLORHPK">rejected</b> this order.';
+				getId(`title-${orderId}`).innerHTML = staff
+					? 'You <b class="font-normal text-COLORHPK">rejected</b> this order.'
+					: 'Are you <b class="font-normal text-COLORHPK underline">absolutely sure</b> you want to remove this order?';
 				currentAction = [action, orderId];
 				break;
 			case 3: // Modify
@@ -191,7 +196,12 @@
 					]) // Lol
 				);
 				if (!r.ok) {
-					toast.push('Failed');
+					try {
+						const res = await r.json();
+						toast.push(res.message);
+					} catch (error) {
+						toast.push(`Failed: ${error}`);
+					}
 					return;
 				}
 				const res = await r.json();
@@ -260,7 +270,7 @@
 			</div>
 			<div class="flex flex-wrap flex-col-reverse w-full">
 				{#if data != undefined}
-					{#if !isNaN(user.id) && staff}
+					{#if !isNaN(user.id)}
 						{#each data as order}
 							<div class="user_wrap w-full">
 								<div class="ctg_wrp w-full" />
@@ -290,7 +300,11 @@
 													class="flex flex-wrap text-lg lg:text-2xl text-COLORBLK font-medium space-x-2"
 												>
 													<div class="g-wrap">
-														{order.order_from ? '@' + order.order_from.username : '@anonymous'}
+														{order.order_from
+															? order.order_from.username === user.username
+																? 'You'
+																: '@' + order.order_from.username
+															: '@anonymous'}
 													</div>
 													<div class="font-semibold">just ordered</div>
 												</div>
@@ -309,23 +323,25 @@
 													{product.product?.productName ?? 'Product Unavailable'}
 												</div>
 												<div class="flex flex-1 justify-end items-center space-x-2">
-													<button
-														class="btn_wrp w-fit h-fit"
-														on:click={() =>
-															goto(
-																`/admin/dashboard/product/manage?product_id=${
-																	product.product?._id ?? 'back'
-																}`
-															)}
-													>
-														<Button
-															icon={faCog}
-															color="COLORBLK"
-															color_t="COLORWHT1"
-															text="Edit Listing"
-															custom_style="my-2"
-														/>
-													</button>
+													{#if staff}
+														<button
+															class="btn_wrp w-fit h-fit"
+															on:click={() =>
+																goto(
+																	`/admin/dashboard/product/manage?product_id=${
+																		product.product?._id ?? 'back'
+																	}`
+																)}
+														>
+															<Button
+																icon={faCog}
+																color="COLORBLK"
+																color_t="COLORWHT1"
+																text="Edit Listing"
+																custom_style="my-2"
+															/>
+														</button>
+													{/if}
 													<button
 														class="btn_wrp w-fit h-fit"
 														on:click={() => goto(`/product/${product.product?.slug ?? 'back'}`)}
@@ -406,29 +422,31 @@
 										)}
 									</div>
 									<div class="flex flex-wrap flex-1 justify-start items-center space-x-2">
+										{#if staff}
+											<button
+												class="btn_wrp w-fit h-fit"
+												title="Accept this order"
+												on:click={() => go_order(1, order._id)}
+											>
+												<Button
+													icon={faCheck}
+													color="COLORBLK"
+													color_t="COLORWHT1"
+													text="Accept"
+													custom_style="my-2"
+												/>
+											</button>
+										{/if}
 										<button
 											class="btn_wrp w-fit h-fit"
-											title="Accept this order"
-											on:click={() => go_order(1, order._id)}
-										>
-											<Button
-												icon={faCheck}
-												color="COLORBLK"
-												color_t="COLORWHT1"
-												text="Accept"
-												custom_style="my-2"
-											/>
-										</button>
-										<button
-											class="btn_wrp w-fit h-fit"
-											title="Reject/Decline this order"
+											title={staff ? 'Reject/Decline this order' : 'Dequeue this order'}
 											on:click={() => go_order(2, order._id)}
 										>
 											<Button
 												icon={faX}
 												color="transparent"
 												color_t="COLORHPK"
-												text="Decline"
+												text={staff ? 'Decline' : 'Delete'}
 												custom_style="my-2 border border-COLORHPK"
 											/>
 										</button>
@@ -441,7 +459,7 @@
 												icon={faClone}
 												color="COLORYLW"
 												color_t="COLORBLK"
-												text="Override"
+												text={staff ? 'Override' : 'Modify'}
 												custom_style="my-2"
 											/>
 										</button>
@@ -512,7 +530,9 @@
 													icon={faCalendar}
 													name="ETA"
 													placeholder="Expected Time of Arrival (e.g. 2021-12-31)"
-													value={data ? getLocaleDateTime(order.delay_time) : new Date().toISOString().split('T')[0]}
+													value={data
+														? getLocaleDateTime(order.delay_time)
+														: new Date().toISOString().split('T')[0]}
 													custom_style="bg-transparent"
 												/>
 											</div>

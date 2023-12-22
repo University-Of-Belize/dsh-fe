@@ -65,7 +65,7 @@
 			await catchAll();
 		} catch (error) {
 			console.log(error);
-			toast.push(`Oops. Something unexpected happened while loading the user: ${error.message}`);
+			toast.push(`Oops. Something unexpected happened while loading the promo page: ${error.message}`);
 		}
 	});
 
