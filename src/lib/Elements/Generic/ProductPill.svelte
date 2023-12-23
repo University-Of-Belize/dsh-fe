@@ -10,6 +10,7 @@
 	export let tagColor_t: string = 'COLORWHT';
 	export let tagText: string = '';
 	export let description: string;
+	export let image: string | undefined;
 	export let widget: boolean = true;
 	let pimg: HTMLImageElement;
 </script>
@@ -40,7 +41,7 @@
 				<img
 					bind:this={pimg}
 					class="rounded-md object-cover"
-					src={product.image
+					src={image ?? product.image
 						? product.image.trim() === ''
 							? config['product-showcase']['default-image']
 							: product.image
