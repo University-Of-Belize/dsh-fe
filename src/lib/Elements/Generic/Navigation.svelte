@@ -45,7 +45,9 @@
 			if (localStorage.token) {
 				try {
 					const response = await fetchWebApi('v1/admin/user/lookup', 'GET');
+					if (!response) return;
 					const data = await response.json();
+					getCategories();
 					// console.log(data);
 					user = data.is; // Get the user
 					localStorage.setItem('user', JSON.stringify(user));
@@ -88,7 +90,6 @@
 			categories = JSON.parse(cachedCategories);
 		}
 	}
-	getCategories();
 </script>
 
 <div

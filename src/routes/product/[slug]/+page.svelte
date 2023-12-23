@@ -72,24 +72,23 @@
 	// Thread run everytime the params change
 	$: (async () => {
 		const response = await fetchWebApi(`v1/menu/lookup?slug=${params}`, 'GET');
-		if (response.body == null) return;
+		if (!response || response.body == null) return;
 		let r;
 		try {
 			r = await response.json();
+			// if (r && r.length > 0) {
+			// product.set(r[0]); // take the first result
+			// product_id = r[0].id;
+			product.set(r.is); // take the first result
+			product_id = r.is._id;
+			// } else {
+			// 	product.set(null);
+			// }
 		} catch (e) {
 			console.error('Error parsing JSON:', e);
 			product.set(null);
 			return;
 		}
-
-		// if (r && r.length > 0) {
-			// product.set(r[0]); // take the first result
-			// product_id = r[0].id;
-			product.set(r.is); // take the first result
-			product_id = r.is._id;
-		// } else {
-		// 	product.set(null);
-		// }
 	})();
 	function calculateRating(reviews: Product['reviews'], count: boolean = false) {
 		let sum = 0;

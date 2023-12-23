@@ -16,7 +16,7 @@
 			text = 'Whoops, looks like we messed up 😅';
 		}
 		if (navigator.onLine) {
-			subtitle = `Technical details: HTTP_${localStorage.status} ${
+			subtitle = localStorage.watchDogReason ?? `Technical details: HTTP_${localStorage.status} ${
 				localStorage.error
 					? JSON.parse(localStorage.error).message
 					: 'Could not connect. Please try again'
@@ -47,7 +47,7 @@
 					<SearchBar />
 				{/if}
 				{#if offLine}
-					🌐 Functionality may be limited, or unavailable. 🦕
+					🌐 Functionality may be limited, or completely unavailable. 🦕
 				{/if}
 			</div></EscrowBanner
 		>

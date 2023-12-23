@@ -16,8 +16,10 @@
 	onMount(async () => {
 		try {
 			const res = await fetchWebApi('v1/menu/random', 'GET');
+			if(!res) return;
 			const r = await res.json();
 			product = r.is;
+			getCategories();
 			// console.log(product);
 		} catch (error) {
 			console.log(error);
@@ -39,7 +41,6 @@
 		}
 	}
 
-	getCategories();
 </script>
 
 <main class="w-full h-screen">

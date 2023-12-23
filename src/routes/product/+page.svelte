@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import config from '$lib/config/settings';
 	import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 	import { writable } from 'svelte/store';
 
@@ -18,11 +17,12 @@
 
 	// Thread run everytime the params change
 	$: (async () => {
+		let searchResults, nameResults;
+		try {
 		const searchPromise = await fetchWebApi(
 			`v1/search?filter=productName&q=${params?.toString().toLowerCase()}`, 'GET'
 		);
-		let searchResults, nameResults;
-		try {
+		
 			const searchResponse = await searchPromise;
 			if (searchResponse.status === 404) {
 				throw new Error('Search not found');

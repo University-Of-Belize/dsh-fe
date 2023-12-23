@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import '../app.css';
 	// For reading storage
 	import { goto } from '$app/navigation';
@@ -8,6 +8,8 @@
 	import { beforeNavigate } from '$app/navigation';
 	import { updated } from '$app/stores';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
+	let clocation: URL;
+	let isNavigating: boolean = false;
 	const options = {
 		dismissable: true,
 		theme: {
@@ -21,7 +23,21 @@
 	function checkBlocked() {
 		// Check if we're offline
 		if (!navigator.onLine) {
+			// Enable the error page
+			localStorage.setItem('watchdog', 'true');
 			location.href = '/watchdog/error';
+		}
+		// Check for the server being offline
+		if (localStorage.serverOffline) {
+			// Set the technical reason for the error
+			localStorage.setItem(
+				'watchDogReason',
+				'The server seems to be offline. Please try again later.'
+			);
+			// Enable the error page
+			localStorage.setItem('watchdog', 'true');
+			location.href = '/watchdog/error';
+			goto('/watchdog/error');
 		}
 		// We're not going to be vicious ~~or anything~~ and everything, ~~but~~ and we're going to be a little bit mean.
 		if (localStorage.blocked == 'true') {
@@ -33,22 +49,42 @@
 			// Again (automatically)
 			goto('/auth/verify');
 		}
-		setTimeout(() => {
-			localStorage.setItem('watchdog', 'true');
-		}, Math.random() * 100);
 	}
 
 	// Seamless updates
 	// Function runs every time upon software-based navigational updates/changes
-	beforeNavigate(({ willUnload, to }) => {
+	beforeNavigate(async ({ willUnload, to }) => {
+		clocation = new URL(to?.url.href ?? window.location.href); // New URL ahead
+		// console.log(
+		// 	// clocation,
+		// 	to?.url.href,
+		// 	window.location.href,
+		// 	isNavigating
+		// );
 		// Run in automatic mode
 		if (!localStorage.watchdog && !localStorage.enableDevMode) {
 			// Run only once
 			checkBlocked();
 		} else {
-			setTimeout(() => {
-				localStorage.setItem('watchdog', 'true');
-			}, Math.random() * 100);
+			if (!localStorage.watchDogReason) {
+				localStorage.removeItem('watchdog');
+			}
+			if (localStorage.watchdog && !isNavigating && clocation.pathname !== '/watchdog/error') {
+				isNavigating = true;
+				try {
+					console.log('[LOAD]: Navigating to error page');
+					setTimeout(async () => {
+						let oldHistory = clocation;
+						await goto('/watchdog/error', { replaceState: true });
+						window.history.replaceState(history.state, '', oldHistory.pathname);
+						// @ts-ignore
+						oldHistory = undefined; // Free up memory
+					}, 500);
+				} catch (error) {
+					location.href = '/watchdog/error';
+				}
+				isNavigating = false;
+			}
 		}
 		if ($updated && !willUnload && to?.url) {
 			location.href = to.url.href;
@@ -56,12 +92,29 @@
 	});
 	// Function runs every time upon manual, traditional-based navigation
 	onMount(async () => {
+		clocation = new URL(window.location.href);
 		// Run in manual mode
 		if (!localStorage.watchdog && !localStorage.enableDevMode) {
 			// Run only once
 			checkBlocked();
 		} else {
-			localStorage.removeItem('watchdog');
+			if (!localStorage.watchDogReason) {
+				localStorage.removeItem('watchdog');
+			}
+			if (localStorage.watchdog && !isNavigating && clocation.pathname !== '/watchdog/error') {
+				isNavigating = true;
+				try {
+					console.log('[MOUNT]: Navigating to error page');
+					let oldHistory = clocation;
+					await goto('/watchdog/error', { replaceState: true });
+					window.history.replaceState(history.state, '', oldHistory.pathname);
+					// @ts-ignore
+					oldHistory = undefined; // Free up memory
+				} catch (error) {
+					location.href = '/watchdog/error';
+				}
+				isNavigating = false;
+			}
 		}
 
 		// Should just run once in manual mode since we don't want to pester users
@@ -69,6 +122,7 @@
 			try {
 				// Run login checks
 				const res = await fetchWebApi('v1/dash', 'GET');
+				if (!res) return;
 				if (res.status === 403) {
 					localStorage.removeItem('token');
 					localStorage.removeItem('user_id');

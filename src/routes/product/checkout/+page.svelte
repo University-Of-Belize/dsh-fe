@@ -51,6 +51,7 @@
 					dataLength = data?.length;
 					// console.log(data, dataLength === 0);
 				} else {
+					toast.push('Failed to fetch cart data.');
 					console.error('Failed to fetch cart data.');
 				}
 			}, 500);
