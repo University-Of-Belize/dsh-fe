@@ -45,6 +45,7 @@
 		"@zerodevx/svelte-toast": "^0.9.5",
 		"lodash": "^4.17.21",
 		"node-localstorage": "^3.0.5",
-		"svelte-fa": "^3.0.4"
+		"svelte-fa": "^3.0.4",
+		"xml-formatter": "^3.6.0"
 	}
 }
