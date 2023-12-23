@@ -27,7 +27,7 @@ async function userDeleteOrderProduct(order_id: string, index: number) {
 		}
 	}
 	const res = await r.json();
-	toast.push(res.message);
+	toast.push(res.is[0]);
 }
 
 export { userDeleteOrderProduct };

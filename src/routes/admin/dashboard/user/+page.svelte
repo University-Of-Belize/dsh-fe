@@ -5,7 +5,6 @@
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import UserPill from '$lib/Elements/Generic/UserPill.svelte';
-	import config from '$lib/config/settings';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faCog, faPlus, faUserCog } from '@fortawesome/free-solid-svg-icons';
@@ -110,7 +109,7 @@
 
 	<div class="main-content flex items-center justify-start h-full text-COLORBLK">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4"
+			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4 overflow-auto"
 		>
 			<div class="section py-6">
 				<div class="title font-semibold pb-5">My Account</div>

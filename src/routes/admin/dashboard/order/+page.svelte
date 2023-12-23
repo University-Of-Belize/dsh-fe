@@ -1,13 +1,20 @@
 <script lang="ts">
-	import ProductPill from './../../../../lib/Elements/Generic/ProductPill.svelte';
-	import Select from '$lib/Elements/Generic/Select2.svelte';
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
+	import DateTimeInput from '$lib/Elements/Generic/DateTimeInput.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import Select from '$lib/Elements/Generic/Select2.svelte';
 	import TextInput from '$lib/Elements/Generic/TextInput.svelte';
+	import { getPromo } from '$lib/Elements/Utility/Promo';
+	import { getLocaleDateTime } from '$lib/Elements/Utility/time';
 	import config from '$lib/config/settings';
+	import type { Order } from '$lib/types/Order';
+	import type { Promo } from '$lib/types/Promo';
 	import type { User } from '$lib/types/User';
+	import { what_is } from '$lib/vendor/dishout/What_Is';
+	import what from '$lib/vendor/dishout/Whats';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
 		faCalendar,
 		faCheck,
@@ -23,17 +30,11 @@
 		faX
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
-	import { onMount } from 'svelte';
 	import _ from 'lodash';
-	import type { Order } from '$lib/types/Order';
+	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
-	import DateTimeInput from '$lib/Elements/Generic/DateTimeInput.svelte';
-	import { getPromo } from '$lib/Elements/Utility/Promo';
-	import type { Promo } from '$lib/types/Promo';
-	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { getLocaleDateTime } from '$lib/Elements/Utility/time';
-	import { what_is } from '$lib/vendor/dishout/What_Is';
-	import what from '$lib/vendor/dishout/Whats'; // What is what?
+	import ProductPill from './../../../../lib/Elements/Generic/ProductPill.svelte';
+// What is what?
 	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
@@ -225,6 +226,7 @@
 						? 'Update successfully issued.'
 						: 'Update successfully issued.'
 				);
+				catchAll(); // Issue UI update
 				break;
 
 			default: // What?
@@ -248,7 +250,7 @@
 
 	<div class="main-content flex items-center justify-start h-full text-COLORBLK overflow-hidden">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4"
+			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4 overflow-auto"
 			bind:this={navDrawer}
 		>
 			<div class="section py-6">

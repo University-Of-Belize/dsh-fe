@@ -28,7 +28,7 @@
 					localStorage.removeItem('watchdog');
 					localStorage.removeItem('watchDogReason');
 					toast.push('Back online! 🎉');
-					await goto('/');
+					await goto(window.location.href ?? "/");
 					clearInterval(onlinePoller); // Remove this shizz (lol)
 					clearInterval(statusTextDecrementer); // Remove this shizz too!! (lollol)
 				} else {

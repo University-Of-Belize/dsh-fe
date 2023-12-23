@@ -5,7 +5,6 @@
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import ProductPill from '$lib/Elements/Generic/ProductPill.svelte';
 	import { deleteProduct } from '$lib/Elements/Utility/Product';
-	import config from '$lib/config/settings';
 	import type { Product } from '$lib/types/Product';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faCog, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -58,7 +57,7 @@
 
 	<div class="main-content flex items-center justify-start h-full text-COLORBLK">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4"
+			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4 overflow-auto"
 			bind:this={navDrawer}
 		>
 			<div class="section py-6">

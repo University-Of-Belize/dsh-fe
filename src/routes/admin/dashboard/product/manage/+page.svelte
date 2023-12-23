@@ -4,13 +4,15 @@
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import TextInput from '$lib/Elements/Generic/TextInput.svelte';
 	import Select from '$lib/Elements/Generic/Select2.svelte';
+	import TextInput from '$lib/Elements/Generic/TextInput.svelte';
 	import { createProduct, deleteProduct, editProduct } from '$lib/Elements/Utility/Product';
 	import { R2S3Upload } from '$lib/Elements/Utility/vendor/dishout/r2_s3';
 	import config from '$lib/config/settings';
+	import type { Category } from '$lib/types/Category';
 	import type { Product } from '$lib/types/Product';
 	import type { User } from '$lib/types/User';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
 		faBox,
 		faCog,
@@ -24,8 +26,6 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
-	import type { Category } from '$lib/types/Category';
-	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
@@ -150,7 +150,7 @@
 
 	<div class="main-content flex items-center justify-start h-full text-COLORBLK overflow-hidden">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4"
+			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4 overflow-auto"
 			bind:this={navDrawer}
 		>
 			<div class="section py-6">

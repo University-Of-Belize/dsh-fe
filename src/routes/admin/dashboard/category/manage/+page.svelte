@@ -7,7 +7,6 @@
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import TextInput from '$lib/Elements/Generic/TextInput.svelte';
 	import { createCategory, deleteCategory, editCategory } from '$lib/Elements/Utility/Category';
-	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -111,7 +110,7 @@
 
 	<div class="main-content flex items-center justify-start h-full text-COLORBLK overflow-hidden">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4"
+			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4 overflow-auto"
 			bind:this={navDrawer}
 		>
 			<div class="section py-6">

@@ -53,7 +53,7 @@
 		text = 'Thanks for your order';
 		subtitle = 'You will be redirected to your dashboard shortly.';
 		setTimeout(() => {
-			goto('/admin/dashboard');
+			goto('/admin/dashboard/order'); // Redirect to order management page
 		}, 5000);
 	}
 </script>
