@@ -47,7 +47,6 @@
 					const response = await fetchWebApi('v1/admin/user/lookup', 'GET');
 					if (!response) return;
 					const data = await response.json();
-					getCategories();
 					// console.log(data);
 					user = data.is; // Get the user
 					localStorage.setItem('user', JSON.stringify(user));
@@ -56,12 +55,13 @@
 					console.log(error);
 					toast.push(
 						`Oops. Something unexpected happened while loading the navigation: ${error.message}`
-					);
+						);
+					}
 				}
+			} else {
+				user = JSON.parse(localStorage.user);
 			}
-		} else {
-			user = JSON.parse(localStorage.user);
-		}
+			getCategories(); // Always do this on mount
 	});
 
 	function toggleNav() {
@@ -82,6 +82,7 @@
 	async function getCategories() {
 		if (!cachedCategories) {
 			const response = await fetchWebApi('v1/category', 'GET');
+			if(!response) return;
 			const data = await response.json();
 			categories = data.is; // Category[]
 			categories = categories.filter((category: Category) => !category.hidden);
