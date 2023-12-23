@@ -1,5 +1,3 @@
-import { version } from '$app/environment';
-
 const settings = {
 	server: {
 		HTTPOrigin: 'https://winter-darkness-1705.fly.dev',
@@ -33,7 +31,7 @@ const settings = {
 	},
 	ui: {
 		notice: 'You are viewing <br/><b>A PREVIEW</b>',
-		version: version,
+		// version: version,
 		'default-product': {
 			category: { _id: 'placeholder', name: 'Uncategorized' },
 			description: null,
