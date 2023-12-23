@@ -34,7 +34,7 @@
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import ProductPill from './../../../../lib/Elements/Generic/ProductPill.svelte';
-// What is what?
+	// What is what?
 	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
@@ -285,7 +285,11 @@
 			</div>
 			<div class="flex flex-wrap flex-col-reverse w-full">
 				{#if data != undefined}
+					{#if data.length === 0}
+						<div class="font-light">No orders are currently available to manage.</div>
+					{/if}
 					{#if !isNaN(user.id)}
+						<!-- This will never run if there are no orders -->
 						{#each data as order, index}
 							<div class="user_wrap w-full">
 								<div class="ctg_wrp w-full" />
@@ -713,9 +717,10 @@
 										</div>
 									</div>
 								</div>
-							</div>{/each}{/if}{/if}
-				<!-- {/if}
+							</div>{/each}
+					{/if}
 				{:else}<div class="font-light">There was a problem while displaying the data.</div>{/if}
+				<!-- {/if}
 		-->
 			</div>
 		</div>
