@@ -3,8 +3,6 @@
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import { what_is } from '$lib/vendor/dishout/What_Is';
-	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
 		faGift,

@@ -8,14 +8,15 @@ async function fetchWebApi(
 	method: string,
 	body?: object,
 	json?: boolean,
-	token?: string
+	token?: string,
+	silent?: boolean // Silences any toast messages
 ): Promise<Response> | Promise<number | void> {
 	try {
 		// If the server is offline, don't even try to fetch
 		if (localStorage.getItem('serverOffline') === 'true') {
 			toast.push('Server offline. Please refresh the page.');
-			 console.error('Server offline. Please refresh the page.');
-			 return 0;
+			console.error('Server offline. Please refresh the page.');
+			return 0;
 		}
 		const res = await fetch(`${settings.server.HTTPOrigin}/api/${endpoint}`, {
 			headers: {
@@ -33,15 +34,19 @@ async function fetchWebApi(
 			if (error.type === 'system') {
 				// The request failed due to a network error
 				localStorage.setItem('serverOffline', 'true');
-				// Throw to the UI and to the console
-				toast.push('Network error. Check your internet connection.');
+				if (silent) {
+					// Throw to the UI and to the console
+					toast.push('Network error. Check your internet connection.');
+				}
 				throw console.error('Network error. Check your internet connection.');
 			}
 		}
 		localStorage.setItem('serverOffline', 'true'); // Make the next refresh go to watchdog
 		console.log(JSON.stringify(error));
-		// Throw to the UI and the console
-		toast.push(`FetchWebAPI '${method} ${endpoint}': Failed—Fatal error: ${error}`);
+		if (silent) {
+			// Throw to the UI and the console
+			toast.push(`FetchWebAPI '${method} ${endpoint}': Failed—Fatal error: ${error}`);
+		}
 		throw console.error(`FetchWebAPI '${method} ${endpoint}': Failed—Fatal error: ${error}`);
 	}
 }

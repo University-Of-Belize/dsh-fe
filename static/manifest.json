@@ -1,0 +1,24 @@
+{
+    "dir": "ltr",
+    "lang": "en-US",
+    "name": "Firebase Push Notification",
+    "short_name": "Firebase Push",
+    "scope": "/",
+    "display": "standalone",
+    "start_url": "/",
+    "background_color": "#3182CE",
+    "theme_color": "#3182CE",
+    "description": "Online Firebase Cloud Messaging tool. Try it before you implement it.",
+    "orientation": "portrait",
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "/icons/256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "url": "https://cafe.ub.edu.bz",
+    "splash_pages": null
+}

@@ -31,7 +31,7 @@
 	import { getPromo } from '$lib/Elements/Utility/Promo';
 	import type { Promo } from '$lib/types/Promo';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { getLocalDateTime, getLocaleDateTime } from '$lib/Elements/Utility/time';
+	import { getLocaleDateTime } from '$lib/Elements/Utility/time';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats'; // What is what?
 	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';

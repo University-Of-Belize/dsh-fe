@@ -25,7 +25,7 @@
 		if (!navigator.onLine) {
 			// Enable the error page
 			localStorage.setItem('watchdog', 'true');
-			location.href = '/watchdog/error';
+			// location.href = '/watchdog/error';
 		}
 		// Check for the server being offline
 		if (localStorage.serverOffline) {
@@ -81,6 +81,7 @@
 						oldHistory = undefined; // Free up memory
 					}, 500);
 				} catch (error) {
+					console.log('[LOAD_ERR]: Navigating to error page');
 					location.href = '/watchdog/error';
 				}
 				isNavigating = false;
@@ -93,6 +94,12 @@
 	// Function runs every time upon manual, traditional-based navigation
 	onMount(async () => {
 		clocation = new URL(window.location.href);
+		// Check for service worker and register if needed
+		if (!(await navigator.serviceWorker.getRegistration())) {
+			const x = await navigator.serviceWorker.register('/sw.js');
+			console.log(x); // Log out registration output
+		}
+
 		// Run in manual mode
 		if (!localStorage.watchdog && !localStorage.enableDevMode) {
 			// Run only once
@@ -111,6 +118,7 @@
 					// @ts-ignore
 					oldHistory = undefined; // Free up memory
 				} catch (error) {
+					console.log('[MOUNT_ERR]: Navigating to error page');
 					location.href = '/watchdog/error';
 				}
 				isNavigating = false;
