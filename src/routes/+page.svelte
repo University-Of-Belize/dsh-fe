@@ -16,7 +16,7 @@
 	onMount(async () => {
 		try {
 			const res = await fetchWebApi('v1/menu/random', 'GET');
-			if(!res) return;
+			if (!res) return;
 			const r = await res.json();
 			product = r.is;
 			getCategories();
