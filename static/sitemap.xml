@@ -1,91 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://ubcafe.fly.dev/</loc>
+        <loc>https://cafe.ub.edu.bz/</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/admin</loc>
+        <loc>https://cafe.ub.edu.bz/admin</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/admin/dashboard</loc>
+        <loc>https://cafe.ub.edu.bz/admin/dashboard</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/admin/dashboard/category</loc>
+        <loc>https://cafe.ub.edu.bz/admin/dashboard/category</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/admin/dashboard/category/manage</loc>
+        <loc>https://cafe.ub.edu.bz/admin/dashboard/category/manage</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/admin/dashboard/order</loc>
+        <loc>https://cafe.ub.edu.bz/admin/dashboard/order</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/admin/dashboard/product</loc>
+        <loc>https://cafe.ub.edu.bz/admin/dashboard/product</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/admin/dashboard/product/manage</loc>
+        <loc>https://cafe.ub.edu.bz/admin/dashboard/product/manage</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/admin/dashboard/promo</loc>
+        <loc>https://cafe.ub.edu.bz/admin/dashboard/promo</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/admin/dashboard/promo/manage</loc>
+        <loc>https://cafe.ub.edu.bz/admin/dashboard/promo/manage</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/admin/dashboard/review</loc>
+        <loc>https://cafe.ub.edu.bz/admin/dashboard/review</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/admin/dashboard/user</loc>
+        <loc>https://cafe.ub.edu.bz/admin/dashboard/user</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/admin/dashboard/user/manage</loc>
+        <loc>https://cafe.ub.edu.bz/admin/dashboard/user/manage</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/auth</loc>
+        <loc>https://cafe.ub.edu.bz/auth</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/auth/login</loc>
+        <loc>https://cafe.ub.edu.bz/auth/login</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/auth/register</loc>
+        <loc>https://cafe.ub.edu.bz/auth/register</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/auth/signup</loc>
+        <loc>https://cafe.ub.edu.bz/auth/signup</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/auth/verify</loc>
+        <loc>https://cafe.ub.edu.bz/auth/verify</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/product</loc>
+        <loc>https://cafe.ub.edu.bz/product</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/product/checkout</loc>
+        <loc>https://cafe.ub.edu.bz/product/checkout</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/product/checkout/confirmed</loc>
+        <loc>https://cafe.ub.edu.bz/product/checkout/confirmed</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
     <url>
-        <loc>https://ubcafe.fly.dev/product/[slug]</loc>
+        <loc>https://cafe.ub.edu.bz/product/[slug]</loc>
         <lastmod>2023-11-20</lastmod>
     </url>
 </urlset>
