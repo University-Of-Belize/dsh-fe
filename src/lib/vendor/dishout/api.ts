@@ -34,7 +34,7 @@ async function fetchWebApi(
 			if (error.type === 'system') {
 				// The request failed due to a network error
 				localStorage.setItem('serverOffline', 'true');
-				if (silent) {
+				if (!silent) {
 					// Throw to the UI and to the console
 					toast.push('Network error. Check your internet connection.');
 				}
@@ -43,7 +43,7 @@ async function fetchWebApi(
 		}
 		localStorage.setItem('serverOffline', 'true'); // Make the next refresh go to watchdog
 		console.log(JSON.stringify(error));
-		if (silent) {
+		if (!silent) {
 			// Throw to the UI and the console
 			toast.push(`FetchWebAPI '${method} ${endpoint}': Failed—Fatal error: ${error}`);
 		}
