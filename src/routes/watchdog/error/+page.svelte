@@ -6,14 +6,30 @@
 	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
 	let text: string, branding_text: string, subtitle: string;
 	let notFound: boolean = false;
+	let offLine: boolean = false;
+	
 	onMount(() => {
-		if ($page.status === 404) {
+		if (localStorage.status === 404) {
 			text = "Sorry, looks like we couldn't find that one 😅";
 			notFound = true;
 		} else {
 			text = 'Whoops, looks like we messed up 😅';
 		}
-		subtitle = `Technical details: HTTP_${$page.status} ${$page.error?.message}`;
+		if (navigator.onLine) {
+			subtitle = `Technical details: HTTP_${localStorage.status} ${
+				localStorage.error
+					? JSON.parse(localStorage.error).message
+					: 'Could not connect. Please try again'
+			}`;
+		} else {
+			offLine = true;
+			// Looks like you're not connected to the server and you're
+			// not connected to the server yet and you should disconnect
+			// from the server and try again later
+			branding_text = '🔗💔';
+			text = "Looks like you're not connected.";
+			subtitle = "You've been disconnected from the server. Try again later! 😭";
+		}
 	});
 </script>
 
@@ -25,11 +41,13 @@
 		<EscrowBanner
 			branding_text={branding_text ?? "You've hit an error"}
 			text={text ?? 'One moment while we fetch what went wrong'}
-			subtitle={subtitle ??
-				"Getting error details. If this doesn't change and you can still see this text, please get in touch with one of our team members."}
+			subtitle={subtitle ?? "Getting error details. If this doesn't change and you can still see this text, please get in touch with one of our team members."}
 			><div class="flex justify-center items-center w-full pt-8 pb-4">
 				{#if notFound}
 					<SearchBar />
+				{/if}
+				{#if offLine}
+					🌐 Functionality may be limited, or unavailable. 🦕
 				{/if}
 			</div></EscrowBanner
 		>

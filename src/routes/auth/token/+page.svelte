@@ -40,6 +40,8 @@
 			toast.push('Redirecting you to the authentication provider to finish setup.');
 			localStorage.clear(); // Clear the storage
 			localStorage.setItem('token', payload[0]); // Set the token
+			// Enable dev mode
+			localStorage.setItem('enableDevMode', 'true');
 			setTimeout(() => {
 				goto('/auth/login'); // Redirect to the login page to download the current user state.
 			}, 2000);

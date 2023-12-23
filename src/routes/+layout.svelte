@@ -17,20 +17,54 @@
 		}
 	};
 
+	// Blocking function so that nothing else gets a chance to run
+	function checkBlocked() {
+		// Check if we're offline
+		if (!navigator.onLine) {
+			location.href = '/watchdog/error';
+		}
+		// We're not going to be vicious ~~or anything~~ and everything, ~~but~~ and we're going to be a little bit mean.
+		if (localStorage.blocked == 'true') {
+			// Run blocked checks
+			// Set blocked (again)
+			localStorage.setItem('blocked', 'true');
+			// Redirect to blocked screen (manually)
+			location.href = '/auth/verify';
+			// Again (automatically)
+			goto('/auth/verify');
+		}
+		setTimeout(() => {
+			localStorage.setItem('watchdog', 'true');
+		}, Math.random() * 100);
+	}
+
 	// Seamless updates
+	// Function runs every time upon software-based navigational updates/changes
 	beforeNavigate(({ willUnload, to }) => {
+		// Run in automatic mode
+		if (!localStorage.watchdog && !localStorage.enableDevMode) {
+			// Run only once
+			checkBlocked();
+		} else {
+			setTimeout(() => {
+				localStorage.setItem('watchdog', 'true');
+			}, Math.random() * 100);
+		}
 		if ($updated && !willUnload && to?.url) {
 			location.href = to.url.href;
 		}
 	});
+	// Function runs every time upon manual, traditional-based navigation
 	onMount(async () => {
-		// We're not going to be vicious or anything, but we're going to be a little bit mean.
-		if (localStorage.blocked == 'true') {
-			// Run blocked checks
-			// localStorage.setItem('blocked', 'true');
-			goto('/auth/verify');
+		// Run in manual mode
+		if (!localStorage.watchdog && !localStorage.enableDevMode) {
+			// Run only once
+			checkBlocked();
+		} else {
+			localStorage.removeItem('watchdog');
 		}
 
+		// Should just run once in manual mode since we don't want to pester users
 		if (localStorage.token) {
 			try {
 				// Run login checks
