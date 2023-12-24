@@ -1,24 +1,180 @@
 {
-    "dir": "ltr",
-    "lang": "en-US",
-    "name": "Plattr — Streamlined Ordering Anytime, Anywhere.",
-    "short_name": "Plattr",
-    "scope": "/",
-    "display": "standalone",
-    "start_url": "/",
-    "background_color": "#F0EDE6",
-    "theme_color": "#F5A12F",
-    "description": "Plattr by University of Belize (UB) — Streamlined Ordering Anytime, Anywhere. For students, by students. From beverages to snacks, with Plattr, you can browse through a diverse menu featuring a wide array of beverages and snacks. From energizing coffee blends to refreshing soft drinks, and from savory bites to sweet treats, Plattr caters to a variety of tastes and preferences. The user-friendly app allows you to place orders anytime, anywhere, ensuring that your favorite items are just a few taps away.",
-    "orientation": "portrait",
-    "related_applications": [],
-    "prefer_related_applications": false,
-    "icons": [
-        {
-            "src": "/icons/256.png",
-            "sizes": "256x256",
-            "type": "image/png"
-        }
-    ],
-    "url": "https://cafe.ub.edu.bz",
-    "splash_pages": null
+	"id": "edu.cafeteam.plattr.prod",
+	"dir": "ltr",
+	"lang": "en-US",
+	"name": "Plattr (UB) Web Ordering",
+	"short_name": "Plattr",
+	"scope": "/",
+	"display": "standalone",
+	"start_url": "/",
+	"background_color": "#F0EDE6",
+	"theme_color": "#F5A12F",
+	"description": "Plattr by University of Belize (UB) — Streamlined Ordering Anytime, Anywhere. For students, by students.",
+	"orientation": "natural",
+	"related_applications": [],
+	"prefer_related_applications": false,
+	"shortcuts": [
+		{
+			"start_url": "/admin/dashboard",
+			"url": "/admin/dashboard",
+			"name": "Dashboard",
+			"short_name": "Dashboard",
+			"description": "Open my dashboard",
+			"icons": [
+				{
+					"src": "/mstile-70x70.png",
+					"sizes": "128x128",
+					"type": "image/png"
+				}
+			]
+		},
+		{
+			"start_url": "/admin/dashboard/user",
+			"url": "/admin/dashboard/user",
+			"name": "Account",
+			"short_name": "Account",
+			"description": "Open my account",
+			"icons": [
+				{
+					"src": "/mstile-70x70.png",
+					"sizes": "128x128",
+					"type": "image/png"
+				}
+			]
+		},
+		{
+			"start_url": "/product/checkout",
+			"url": "/product/checkout",
+			"name": "Cart",
+			"short_name": "Cart",
+			"description": "View my shopping cart",
+			"icons": [
+				{
+					"src": "/mstile-70x70.png",
+					"sizes": "128x128",
+					"type": "image/png"
+				}
+			]
+		},
+		{
+			"start_url": "/admin/dashboard/order",
+			"url": "/admin/dashboard/order",
+			"name": "Orders",
+			"short_name": "Orders",
+			"description": "Open my orders",
+			"icons": [
+				{
+					"src": "/mstile-70x70.png",
+					"sizes": "128x128",
+					"type": "image/png"
+				}
+			]
+		},
+		{
+			"start_url": "/admin/dashboard/review",
+			"url": "/admin/dashboard/review",
+			"name": "Reviews",
+			"short_name": "Reviews",
+			"description": "Open my reviews",
+			"icons": [
+				{
+					"src": "/mstile-70x70.png",
+					"sizes": "128x128",
+					"type": "image/png"
+				}
+			]
+		}
+	],
+	"icons": [
+		{
+			"src": "/android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "/icons/256.png",
+			"sizes": "256x256",
+			"type": "image/png"
+		},
+		{
+			"src": "/android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		},
+		{
+			"src": "/safari-pinned-tab.svg",
+			"sizes": "933x933",
+			"type": "image/svg+xml",
+			"purpose": "maskable"
+		}
+	],
+	"screenshots": [
+		{
+			"src": "/pwa/screenshots/0_narrow.png",
+			"type": "image/png",
+			"sizes": "580x888",
+			"form_factor": "narrow"
+		},
+		{
+			"src": "/pwa/screenshots/1_narrow.png",
+			"type": "image/png",
+			"sizes": "580x888",
+			"form_factor": "narrow"
+		},
+		{
+			"src": "/pwa/screenshots/2_narrow.png",
+			"type": "image/png",
+			"sizes": "580x888",
+			"form_factor": "narrow"
+		},
+		{
+			"src": "/pwa/screenshots/3_narrow.png",
+			"type": "image/png",
+			"sizes": "580x888",
+			"form_factor": "narrow"
+		},
+		{
+			"src": "/pwa/screenshots/4_narrow.png",
+			"type": "image/png",
+			"sizes": "580x888",
+			"form_factor": "narrow"
+		},
+		{
+			"src": "/pwa/screenshots/0_wide.png",
+			"type": "image/png",
+			"sizes": "2588x1576",
+			"form_factor": "wide"
+		},
+		{
+			"src": "/pwa/screenshots/1_wide.png",
+			"type": "image/png",
+			"sizes": "2588x1576",
+			"form_factor": "wide"
+		},
+		{
+			"src": "/pwa/screenshots/2_wide.png",
+			"type": "image/png",
+			"sizes": "2588x1576",
+			"form_factor": "wide"
+		},
+		{
+			"src": "/pwa/screenshots/3_wide.png",
+			"type": "image/png",
+			"sizes": "2588x1576",
+			"form_factor": "wide"
+		},
+		{
+			"src": "/pwa/screenshots/4_wide.png",
+			"type": "image/png",
+			"sizes": "2588x1576",
+			"form_factor": "wide"
+		}
+	],
+	"url": "https://cafe.ub.edu.bz",
+
+	"splash_pages": {
+		"tablet": "/pwa/splash/tablet-splash.html",
+		"phone": "/pwa/splash/phone-splash.html",
+		"desktop": "/pwa/splash/splash.html"
+	}
 }
