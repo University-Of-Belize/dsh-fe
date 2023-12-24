@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="suppress_site_styles" content="true" />
+		<meta name="auto_height" content="true" />
+		<meta name="auto_width" content="true" />
+		<meta name="enable_widgets" content="true" />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="color-scheme" content="dark light" />
+		<link rel="manifest" href="/pwa/installable/examples/manifest.json" />
+		<title>How to add Richer Install UI to your web app</title>
+		<style>
+			html {
+				font-family: system-ui, sans-serif;
+			}
+			own-window {
+				border: dashed red 2px;
+				padding: 0.25rem;
+			}
+		</style>
+	</head>
+	<body style="height: auto; overflow: hidden; padding: 16px; --devsite-panel-height: 0px" ready="">
+		<h1>How to create app shortcuts</h1>
+
+		<script>
+			function loadScript(url, type) {
+				const s = document.createElement('script');
+				s.src = url;
+				s.onload = () => {
+					document.dispatchEvent(new CustomEvent('scriptLoaded', { detail: { url } }));
+				};
+				if (type) {
+					s.type = type;
+				}
+				if (type === 'module') {
+					s.async = false; // Preserve load order.
+					const pre = document.createElement('link');
+					pre.rel = 'modulepreload';
+					pre.href = url;
+					document.head.append(pre);
+					// We use DOMContentLoaded as the loader script is running sync, and inserting a module script here doesn't defer. This brings back normal type="module" behavior.
+					window.addEventListener('DOMContentLoaded', () => {
+						document.head.append(s);
+					});
+				} else {
+					document.head.append(s);
+				}
+			}
+		</script>
+
+		<script>
+			loadScript('/js/app.js?v=3ff087b32b316', 'module');
+
+			loadScript('/js/default.js?v=ac44aeeaf6099', 'module');
+		</script>
+
+		<script>
+			loadScript('https://unpkg.com/own-window@1.0.3/dist/index.min.js', null);
+		</script>
+
+		<own-window
+			href="https://web-dot-devsite-v2-prod-3p.appspot.com/patterns/web-apps/richer-install-ui/index_35224c954756e07737edf4689d70424ca4434cc744a6e8a5401f49d4d117a06b.frame"
+			buttontext="Click to open in its own window."
+			style="display: none"
+		>
+			<div>This demo needs to run in its own window, not in an iframe.</div>
+			<button type="button">Open in new window</button>
+		</own-window>
+
+		<h1>How to add Richer Install UI to your web app</h1>
+		<ol>
+			<li>
+				Install the app by clicking the button below. After the installation, the button is
+				disabled.
+				<p>
+					<button id="install" disabled="" type="button">Install</button>
+				</p>
+			</li>
+			<li>
+				When you click on install a dialog similar to the ones from app stores will be displayed.
+			</li>
+			<li>The dialog includes the `description` and `screenshots` set in the app manifest.</li>
+			<li>
+				Screenshots should be different depending if the app is being installed on a mobile or
+				desktop device, according to the `form_factor` value set for the screenshots on the manifest
+			</li>
+		</ol>
+
+		<script>
+			if ('serviceWorker' in navigator) {
+				window.addEventListener('load', () => {
+					navigator.serviceWorker.register('sw.js');
+				});
+			}
+		</script>
+
+		<script>
+			const installButton = document.querySelector('#install');
+			if ('BeforeInstallPromptEvent' in window) {
+				let installEvent = null;
+				const onInstall = () => {
+					installButton.disabled = true;
+					installEvent = null;
+				};
+				window.addEventListener('beforeinstallprompt', (event) => {
+					event.preventDefault();
+					installEvent = event;
+					installButton.disabled = false;
+				});
+				installButton.addEventListener('click', async () => {
+					if (!installEvent) {
+						return;
+					}
+					installEvent.prompt();
+					const result = await installEvent.userChoice;
+					if (result.outcome === 'accepted') {
+						onInstall();
+					}
+				});
+				window.addEventListener('appinstalled', (event) => {
+					onInstall();
+				});
+			}
+		</script>
+	</body>
+</html>
