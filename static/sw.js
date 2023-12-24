@@ -65,8 +65,8 @@ self.addEventListener('fetch', async (event) => {
 
 	// This function runs whenever the fetch request fails
 	event.respondWith(
-		response.catch(function (error) {
-			console.log(request, error);
+		response.catch(function () {
+			// console.log(request, error);
 			return caches.open(CACHE_NAME).then((cache) => {
 				const url = new URL(request.url);
 				const pathname = url.pathname;

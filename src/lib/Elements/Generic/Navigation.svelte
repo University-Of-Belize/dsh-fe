@@ -9,6 +9,7 @@
 		faCartShopping,
 		faCog,
 		faCogs,
+		faDownload,
 		// faDashboard,
 		faGift,
 		faRightToBracket,
@@ -39,8 +40,10 @@
 	let navTransparency: number = 0;
 	let cachedCategories = localStorage.getItem('categories');
 	let categories: Category[] = [];
+	let installPrompt;
 
 	onMount(async () => {
+		installPrompt = window.installPrompt;
 		if (!localStorage.user) {
 			if (localStorage.token) {
 				try {
@@ -55,13 +58,13 @@
 					console.log(error);
 					toast.push(
 						`Oops. Something unexpected happened while loading the navigation: ${error.message}`
-						);
-					}
+					);
 				}
-			} else {
-				user = JSON.parse(localStorage.user);
 			}
-			getCategories(); // Always do this on mount
+		} else {
+			user = JSON.parse(localStorage.user);
+		}
+		getCategories(); // Always do this on mount
 	});
 
 	function toggleNav() {
@@ -82,7 +85,7 @@
 	async function getCategories() {
 		if (!cachedCategories) {
 			const response = await fetchWebApi('v1/category', 'GET');
-			if(!response) return;
+			if (!response) return;
 			const data = await response.json();
 			categories = data.is; // Category[]
 			categories = categories.filter((category: Category) => !category.hidden);
@@ -142,14 +145,28 @@
 			</div>
 
 			{#if !user}
-				<div
-					title="Sign in to access content"
-					class="btn-wrp"
-					on:click={async () => {
-						await goto('/auth/login');
-					}}
-				>
-					<Button icon={faRightToBracket} color="COLORYLW" text="Log in" />
+				<div class="flex space-x-4">
+					<div
+						title="Sign in to access content"
+						class="btn-wrp"
+						on:click={async () => {
+							await goto('/auth/login');
+						}}
+					>
+						<Button icon={faRightToBracket} color="COLORYLW" text="Log in" />
+					</div>
+					{#if installPrompt}
+					<div
+						title="Install the app onto your device"
+						class="btn-wrp"
+						on:click={async () => {
+							await window.installPrompt.prompt();
+							window.location.reload();
+						}}
+					>
+						<Button icon={faDownload} color="COLORBLE" color_t="COLORWHT" text="Install" />
+					</div>
+					{/if}
 				</div>
 			{:else}
 				<div class="pnav flex items-center justify-center lg:space-x-4">
