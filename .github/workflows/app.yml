@@ -7,9 +7,9 @@ on:
   schedule:
   - cron: "0 * * * 0" # Every Sunday of the month
   push:
-    branches: ['overhaul-001']
+    branches: ['master']
   pull_request:
-    branches: ['overhaul-001']
+    branches: ['master']
   workflow_dispatch:
 
 jobs:
