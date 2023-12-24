@@ -3,7 +3,6 @@
     "files": [
         "/manifest.json",
         "/icons/256.png",
-        "/favicon.png",
-        "/watchdog/error"
+        "/favicon.png"
     ]
 }
