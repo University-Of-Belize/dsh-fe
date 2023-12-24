@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SearchBar from './../../../../lib/Elements/Generic/SearchBar.svelte';
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
@@ -83,6 +84,17 @@
 			<div class="flex text-xl font-semibold pb-12">Reviews & Comment Management</div>
 			<div class="flex flex-wrap flex-col-reverse w-full">
 				{#if data != undefined}
+					{#if data.length === 0}
+						<!-- Note that the reversal of UI elements is intentional because of "flex-reverse-column" -->
+						{#if !staff}
+							<div class="py-4">
+								<SearchBar placeholder="Create a review. Search for something else?" nomargin />
+							</div>
+						{/if}
+						<div class="font-light">
+							{staff ? 'Nobody has made a review as yet.' : 'You have not made any reviews as yet.'}
+						</div>
+					{/if}
 					{#each data as review, i}
 						<div class="user_wrap w-full">
 							<UserPill

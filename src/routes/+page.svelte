@@ -194,7 +194,7 @@
 	}
 
 	.hero-image {
-		background-image: url('/homepage/hero.png');
+		background-image: url('/homepage/hero-min.png');
 		background-size: cover;
 	}
 	.hero-image-base {
