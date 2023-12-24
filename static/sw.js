@@ -67,11 +67,16 @@ self.addEventListener('fetch', async (event) => {
 	event.respondWith(
 		response.catch(function () {
 			// console.log(request, error);
-			return caches.open(CACHE_NAME).then((cache) => {
-				const url = new URL(request.url);
-				const pathname = url.pathname;
-				return cache.match(pathname === '/' ? OFFLINE_ROUTE : pathname);
-			});
+			return caches
+				.open(CACHE_NAME)
+				.then((cache) => {
+					const url = new URL(request.url);
+					const pathname = url.pathname;
+					return cache.match(pathname === '/' ? OFFLINE_ROUTE : pathname);
+				})
+				.catch(() => { // If not in cache storage, return the online fetch request
+					return fetch(request);
+				});
 		})
 	);
 });
