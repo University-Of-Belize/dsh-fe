@@ -13,6 +13,7 @@
 	import { onMount } from 'svelte';
 	let categories: Category[] = [];
 	let product: Product_[] | null;
+
 	onMount(async () => {
 		try {
 			const res = await fetchWebApi('v1/menu/random', 'GET');
@@ -28,7 +29,6 @@
 			);
 		}
 	});
-
 	async function getCategories() {
 		const response = await fetchWebApi('v1/category', 'GET');
 		const data = await response.json();
@@ -40,7 +40,6 @@
 			}
 		}
 	}
-
 </script>
 
 <main class="w-full h-screen">
