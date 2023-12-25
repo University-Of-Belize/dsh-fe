@@ -1,3 +1,4 @@
+# SvelteKit typicals
 .DS_Store
 node_modules
 /build
@@ -9,3 +10,11 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+package.json
+
+# Service worker
+static/sw.js
+static/sw.js.map
+static/sw.old.js
+static/workbox-48631b28.js
+static/workbox-48631b28.js.map

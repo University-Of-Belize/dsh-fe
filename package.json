@@ -7,6 +7,7 @@
 		"dev": "vite dev",
 		"sitemap": "npx tsx ./scripts/generate-sitemap.ts",
 		"prep": "npx svelte-kit prepare && npm run check && npm run lint && npm run format",
+		"prebuild-next": "npx workbox-cli generateSW workbox-config.cjs",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -46,6 +47,7 @@
 		"lodash": "^4.17.21",
 		"node-localstorage": "^3.0.5",
 		"svelte-fa": "^3.0.4",
+		"workbox": "^0.0.0",
 		"xml-formatter": "^3.6.0"
 	}
 }

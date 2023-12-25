@@ -10,7 +10,8 @@
 		faGift,
 		faLock,
 		faRectangleAd,
-		faRightToBracket
+		faRightToBracket,
+		faUnlockKeyhole
 		// faUserCog
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
@@ -18,6 +19,7 @@
 	import Fa from 'svelte-fa';
 	$: continue_url = $page.url.searchParams.get('continue');
 	let debounceTimeout: number;
+	let logging_in: boolean = false;
 
 	onMount(() => {
 		// Check if we're already logged in
@@ -37,7 +39,8 @@
 	async function Login(payload: any) {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			postData(payload, 'login');
+			logging_in = true;
+			await postData(payload, 'login');
 		}, 500); // bounce every 500ms - let's hope they don't try to fucking spam the API
 	}
 
@@ -74,6 +77,9 @@
 				}
 			}
 			if (!response.ok) {
+				setTimeout(() => {
+					logging_in = false; // Slight "bounce"
+				}, 450);
 				return toast.push(`${json.message}`, {
 					dismissable: false,
 					theme: {
@@ -91,6 +97,9 @@
 				goto(continue_url ?? '/admin/dashboard');
 			}, 2000);
 		} catch (error) {
+			setTimeout(() => {
+				logging_in = false; // Reenable after such time
+			}, 3000);
 			toast.push(`${error.message}. Try again later.`, {
 				dismissable: false,
 				theme: {
@@ -156,17 +165,31 @@
 					/>
 				</div>
 
-				<div class="submit flex flex-1 mx-8 mt-6 items-center justify-center">
-					<button class="submit w-full" type="submit">
+				<div
+					class="submit flex flex-1 mx-8 mt-6 items-center justify-center"
+					title={logging_in ? 'Please wait for the request to complete' : ''}
+				>
+					<button class="submit w-full" type="submit" disabled={logging_in}>
 						<Button
 							icon={faRightToBracket}
 							color="COLORBLK"
 							color_t="COLORWHT"
 							custom_style="w-full justify-center"
 							text="Log in"
+							disabled={logging_in}
 						/>
 					</button>
 				</div>
+				<a href="/auth/password_reset" class="block w-fit mx-8">
+					<div
+						on:keypress={() => goto('/auth/password_reset')}
+						on:click={() => goto('/auth/password_reset')}
+						class="forgot-password flex text-sm text-COLORBLK font-semibold pt-4 space-x-2 hover:underline cursor-pointer w-fit"
+					>
+						<div class="icon"><Fa icon={faUnlockKeyhole} /></div>
+						<div>Forgot Password?</div>
+					</div></a
+				>
 			</form>
 
 			<div class="block mx-8 my-8">
@@ -174,6 +197,7 @@
 				<div
 					class="signup flex flex-1 mt-6 items-center justify-start"
 					on:click={() => goto('/auth/register')}
+					on:keypress={() => goto('/auth/register')}
 				>
 					<Button
 						icon={faGift}

@@ -15,6 +15,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
 	let debounceTimeout: number;
+	let signing_up: boolean = false;
 
 	// Register the user
 	async function Register(payload: string[]) {
@@ -27,6 +28,9 @@
 					what_is(what.public.auth, payload)
 				)) as Response;
 				if (!response.ok) {
+					setTimeout(() => {
+					signing_up = false; // Slight "bounce"
+				}, 450);
 					const json = await response.json();
 					return toast.push(`${json.message}`, {
 						dismissable: false,
@@ -42,6 +46,9 @@
 				goto('/auth/verify');
 			}, 500); // debounce every 500ms
 		} catch (error) {
+			setTimeout(() => {
+				signing_up = false; // Reenable after such time
+			}, 3000);
 			toast.push(
 				`${error.message}: You have been temporarily blocked from our services. Do not persist. Try again later.`,
 				{
@@ -58,6 +65,7 @@
 	// @ts-ignore
 	const handleSubmit = (event) => {
 		event.preventDefault();
+		signing_up = true;
 		// @ts-ignore
 		const valueArray = Array.from(event.target)
 			.filter((el) => el.name)
@@ -69,6 +77,9 @@
 			valueArray[valueArray.length - 1] = Intl.DateTimeFormat().resolvedOptions().timeZone;
 			Register(valueArray);
 		} else {
+			setTimeout(() => {
+					signing_up = false; // Slight "bounce"
+				}, 450);
 			toast.push("<b>Retype password</b> and <b>password</b> aren't the same", {
 				dismissable: false,
 				theme: {
@@ -147,13 +158,16 @@
 				</div>
 
 				<div class="submit flex flex-1 mx-8 mt-6 items-center justify-center">
-					<button class="submit w-full" type="submit">
+					<button class="submit w-full" type="submit"
+					title={signing_up ? "Please wait for the request to complete..." : ""}
+					disabled={signing_up}>
 						<Button
 							icon={faGift}
 							color="COLORBLK"
 							color_t="COLORWHT"
 							custom_style="w-full justify-center"
 							text="Sign Up"
+							disabled={signing_up}
 						/>
 					</button>
 				</div>
