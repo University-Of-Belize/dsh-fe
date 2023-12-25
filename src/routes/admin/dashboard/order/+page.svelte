@@ -45,6 +45,7 @@
 	let data_raw: Order[]; // Order data (raw, ungrouped)
 	let promos: Promo['code'][];
 	let currentAction: [number, string] = [-1, '']; // Not selected
+	let drawerOpenBy: number;
 	async function catchAll() {
 		// Do not run if there is no product_id provided
 
@@ -124,9 +125,15 @@
 				toast.push('You accepted this order.');
 				getId(`order-${orderId}`)?.classList.remove('border-red-300'); // @ts-ignore
 				getId(`order-${orderId}`)?.classList.remove('border-COLORYLW'); // @ts-ignore
-				getId(`pulldown-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
+				if (drawerOpenBy != 1) {
+					// Keepthe drawer open as long as we're switching tabs
+					getId(`pulldown-${orderId}`)?.classList.add('hidden'); // @ts-ignore
+					drawerOpenBy = 1;
+				}
+				getId(`pulldown-${orderId}`)?.classList.toggle('hidden'); // @ts-ignore
 				getId(`pulldown-content-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
 				getId(`modify-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
+				getId(`user-modify-content-${orderId}`)?.classList.add('hidden');
 				getId(`title-${orderId}`).innerHTML =
 					'You <b class="font-normal text-COLORBLK">accepted</b> this order.';
 				currentAction = [action, orderId];
@@ -135,9 +142,15 @@
 				toast.push(staff ? 'You rejected this order.' : "You're about to delete this order.");
 				getId(`order-${orderId}`)?.classList.remove('border-COLORYLW'); // @ts-ignore
 				getId(`order-${orderId}`)?.classList.add('border-red-300'); // @ts-ignore
-				getId(`pulldown-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
+				if (drawerOpenBy != 2) {
+					// Keep the drawer open as long as we're switching tabs
+					getId(`pulldown-${orderId}`)?.classList.add('hidden'); // @ts-ignore
+					drawerOpenBy = 2;
+				}
+				getId(`pulldown-${orderId}`)?.classList.toggle('hidden'); // @ts-ignore
 				getId(`pulldown-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
 				getId(`modify-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
+				getId(`user-modify-content-${orderId}`)?.classList.add('hidden');
 				getId(`title-${orderId}`).innerHTML = staff
 					? 'You <b class="font-normal text-COLORHPK">rejected</b> this order.'
 					: 'Are you <b class="font-normal text-COLORHPK underline">absolutely sure</b> you want to remove this order?';
@@ -150,13 +163,17 @@
 					'You\'re <b class="font-normal text-COLORYLW">altering</b> this order.';
 				getId(`order-${orderId}`)?.classList.remove('border-red-300'); // @ts-ignore
 				getId(`order-${orderId}`)?.classList.add('border-COLORYLW'); // @ts-ignore
+				if (drawerOpenBy != 3) {
+					// Keep the drawer open as long as we're switching tabs
+					getId(`pulldown-${orderId}`)?.classList.add('hidden'); // @ts-ignore
+					drawerOpenBy = 3;
+				}
+				getId(`pulldown-${orderId}`)?.classList.toggle('hidden'); // @ts-ignore
 				if (staff) {
-					getId(`pulldown-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
 					getId(`pulldown-content-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
 					getId(`modify-content-${orderId}`)?.classList.remove('hidden');
 					getId(`user-modify-content-${orderId}`)?.classList.remove('hidden');
 				} else {
-					getId(`pulldown-${orderId}`)?.classList.remove('hidden'); // @ts-ignore
 					getId(`pulldown-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
 					getId(`modify-content-${orderId}`)?.classList.add('hidden');
 					getId(`user-modify-content-${orderId}`)?.classList.remove('hidden');
@@ -188,7 +205,11 @@
 			currentAction[0] // The action
 		) {
 			case 1: // Accept
+				// Hide this so that we can't use the accept button anymore
+				getId(`pulldown-${currentAction[1]}`)?.classList.add('hidden');
 			case 2: // Decline
+				// Hide this because it's bugged
+				getId(`pulldown-${currentAction[1]}`)?.classList.add('hidden');
 			case 3: // Modify
 				const r = (await fetchWebApi(
 					'v1/admin/order/manage',
@@ -445,7 +466,10 @@
 										{#if staff}
 											<button
 												class="btn_wrp w-fit h-fit"
-												title="Accept this order"
+												title={order.is_accepted
+													? 'You have already accepted this order'
+													: 'Accept this order'}
+												disabled={order.is_accepted}
 												on:click={() => go_order(1, order._id)}
 											>
 												<Button
@@ -454,6 +478,8 @@
 													color_t="COLORWHT1"
 													text="Accept"
 													custom_style="my-2"
+													disabled={order.is_accepted}
+													disabled_text="You have already accepted this order"
 												/>
 											</button>
 										{/if}
@@ -675,6 +701,9 @@
 										</form>
 										<!--- user-modify-content-${order.order_code}-->
 										<div id="user-modify-content-{order._id}" class="hidden">
+											<div class="title text-2xl font-semibold">
+												Products Ordered
+											</div>
 											{#each data_raw[index].products as product, index}
 												<ProductPill
 													product={product.product ?? config.ui['default-product']}
