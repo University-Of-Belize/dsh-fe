@@ -16,7 +16,7 @@
 
 	onMount(async () => {
 		try {
-			const res = await fetchWebApi('v1/menu/random', 'GET');
+			const res = (await fetchWebApi('v1/menu/random', 'GET')) as Response;
 			if (!res) return;
 			const r = await res.json();
 			product = r.is;
@@ -30,7 +30,7 @@
 		}
 	});
 	async function getCategories() {
-		const response = await fetchWebApi('v1/category', 'GET');
+		const response = (await fetchWebApi('v1/category', 'GET')) as Response;
 		const data = await response.json();
 		categories = data.is; // Category[]
 		categories = categories.filter((category: Category) => !category.hidden);

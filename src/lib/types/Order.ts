@@ -12,6 +12,8 @@ interface Order {
     };
     delay_time: number;
     promo_code?: Promo;
+    is_accepted?: boolean;
+    override_by?: User;
     products: CartProduct[];
     __v: number;
 }

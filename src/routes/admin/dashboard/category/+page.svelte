@@ -14,7 +14,7 @@
 	let data: Category[]; // List of users
 
 	async function catchAll() {
-		const res = await fetchWebApi('v1/category', 'GET');
+		const res = (await fetchWebApi('v1/category', 'GET')) as Response;
 		if (res.status === 403) {
 			localStorage.removeItem('token');
 			localStorage.removeItem('user_id');

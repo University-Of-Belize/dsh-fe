@@ -36,7 +36,7 @@
 					});
 			}
 			setTimeout(async () => {
-				const response = await fetchWebApi('v1/user/cart', 'GET');
+				const response = (await fetchWebApi('v1/user/cart', 'GET')) as Response;
 				if (response.ok) {
 					const r = await response.json(); // Copilot logic (efficiently group the same items together)
 					data = r.is.reduce((acc: CartProduct[], curr: CartProduct) => {

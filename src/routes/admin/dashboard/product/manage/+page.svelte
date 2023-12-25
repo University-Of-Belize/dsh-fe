@@ -31,14 +31,14 @@
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	const product_id = $page.url.searchParams.get('product_id');
 	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // User data
-	let data: Product = config["ui"]["default-product"]; // List of users
+	let data: Product = config['ui']['default-product']; // List of users
 	let productImage: HTMLImageElement;
 	let photoInput: HTMLInputElement;
 	let photoValue: HTMLInputElement;
 	let categories: Category[] = [];
 
 	async function populateCategories() {
-		const res = await fetchWebApi('v1/category', 'GET');
+		const res = (await fetchWebApi('v1/category', 'GET')) as Response;
 		if (res.status === 403) {
 			localStorage.removeItem('token');
 			localStorage.removeItem('user_id');
@@ -59,7 +59,7 @@
 		populateCategories();
 		// Do not run if there is no product_id provided
 		if (product_id) {
-			const res = await fetchWebApi(`v1/menu/lookup?product_id=${product_id}`, 'GET');
+			const res = (await fetchWebApi(`v1/menu/lookup?product_id=${product_id}`, 'GET')) as Response;
 			const r = await res.json();
 			if (res.status === 403) {
 				localStorage.removeItem('token');
@@ -91,7 +91,9 @@
 			await catchAll();
 		} catch (error) {
 			console.log(error);
-			toast.push(`Oops. Something unexpected happened while loading the product page: ${error.message}`);
+			toast.push(
+				`Oops. Something unexpected happened while loading the product page: ${error.message}`
+			);
 		}
 	});
 
@@ -194,10 +196,20 @@
 							<div class="editGroup flex flex-col pb-8 px-4">
 								<form action="#" on:submit={(event) => handleSubmit(event)} class="space-y-3">
 									<div class="block">
-										<div class="text-2xl text-COLORBLK font-semibold">{data? data.productName? data.productName: "Untitled Product" : "Untitled Product"}</div>
+										<div class="text-2xl text-COLORBLK font-semibold">
+											{data
+												? data.productName
+													? data.productName
+													: 'Untitled Product'
+												: 'Untitled Product'}
+										</div>
 										<div class="text-base text-COLORBLK font-semibold flex">
 											<div class="font-light pr-1">Category:</div>
-											{data? data.category? data.category.name : "Uncategorized" : "Uncategorized"}
+											{data
+												? data.category
+													? data.category.name
+													: 'Uncategorized'
+												: 'Uncategorized'}
 										</div>
 									</div>
 									<div class="banner-top flex flex-wrap w-full space-x-4 items-top">
@@ -259,17 +271,18 @@
 												>
 													<div class="icon px-2 py-2"><Fa icon={faPencil} size="1.01x" /></div>
 													Type in a description
-													
-												</div> <div class="pdsc_wrp overflow-auto ">
-												<textarea
-													name="description"
-													class="text-md font-light text-COLORBLE h-full w-full px-2 py-1 mx-6 bg-transparent focus:outline-none"
-													rows="6"
-													placeholder="Product description goes here. Add as many words as you'd like. Note each word will be counted as a keyword. So be specific, and descriptive at the same time. Products are indexed every {config[
-														'server'
-													]['indexing-interval']}"
-													value={data ? data.description : ''}
-												/></div>
+												</div>
+												<div class="pdsc_wrp overflow-auto">
+													<textarea
+														name="description"
+														class="text-md font-light text-COLORBLE h-full w-full px-2 py-1 mx-6 bg-transparent focus:outline-none"
+														rows="6"
+														placeholder="Product description goes here. Add as many words as you'd like. Note each word will be counted as a keyword. So be specific, and descriptive at the same time. Products are indexed every {config[
+															'server'
+														]['indexing-interval']}"
+														value={data ? data.description : ''}
+													/>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -302,7 +315,7 @@
 											name="price"
 											placeholder="Enter a price (e.g. 10.75)"
 											custom_style="bg-transparent"
-											value={data ? data.price? data.price.$numberDecimal : '' : ''}
+											value={data ? (data.price ? data.price.$numberDecimal : '') : ''}
 										/>
 									</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">

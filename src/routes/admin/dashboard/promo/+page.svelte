@@ -15,7 +15,7 @@
 	let data: Promo[]; // List of promos
 
 	async function catchAll() {
-		const res = await fetchWebApi('v1/admin/promo/manage', 'GET');
+		const res = await fetchWebApi('v1/admin/promo/manage', 'GET') as Response;
 		if (res.status === 403) {
 			localStorage.removeItem('token');
 			localStorage.removeItem('user_id');

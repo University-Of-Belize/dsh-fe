@@ -33,7 +33,7 @@
 	async function catchAll() {
 		// Do not run if there is no promo_id provided
 		if (promo_id) {
-			const res = await fetchWebApi('v1/admin/promo/manage', 'GET');
+			const res = (await fetchWebApi('v1/admin/promo/manage', 'GET')) as Response;
 			const r = await res.json();
 			if (res.status === 403) {
 				localStorage.removeItem('token');
@@ -65,7 +65,9 @@
 			await catchAll();
 		} catch (error) {
 			console.log(error);
-			toast.push(`Oops. Something unexpected happened while loading the promo page: ${error.message}`);
+			toast.push(
+				`Oops. Something unexpected happened while loading the promo page: ${error.message}`
+			);
 		}
 	});
 
@@ -164,7 +166,6 @@
 							<div class="ctg_wrp w-full">
 								<PromoPill promo={data} description={data.code}
 									><div slot="alias" class="my-2">
-
 										<div class="text-md font-semibold">Created by</div>
 										<ul>
 											<li class="before:content-['-⠀'] flex items-center">

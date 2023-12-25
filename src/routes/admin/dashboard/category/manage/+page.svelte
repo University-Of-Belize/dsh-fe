@@ -30,7 +30,7 @@
 	async function catchAll() {
 		// Do not run if there is no category_id provided
 		if (category_id) {
-			const res = await fetchWebApi('v1/category', 'GET');
+			const res = (await fetchWebApi('v1/category', 'GET')) as Response;
 			const r = await res.json();
 			if (res.status === 403) {
 				localStorage.removeItem('token');
@@ -62,7 +62,9 @@
 			await catchAll();
 		} catch (error) {
 			console.log(error);
-			toast.push(`Oops. Something unexpected happened while loading the category page: ${error.message}`);
+			toast.push(
+				`Oops. Something unexpected happened while loading the category page: ${error.message}`
+			);
 		}
 	});
 

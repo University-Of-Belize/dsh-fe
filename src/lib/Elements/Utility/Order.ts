@@ -17,7 +17,7 @@ async function userDeleteOrderProduct(order_id: string, index: number) {
 				// "quantity": 1
 			}
 		])
-	);
+	) as Response;
 	if (!r.ok) {
 		try {
 			const res = await r.json();

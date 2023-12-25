@@ -15,7 +15,7 @@ const createCategory = async (
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
 			const payload = [newName, description, alias.trim() === '' ? newName : alias, hidden];
-			const res = await fetchWebApi('v1/admin/category/manage', 'POST', what_is(what.private.category, payload));
+			const res = await fetchWebApi('v1/admin/category/manage', 'POST', what_is(what.private.category, payload)) as Response;
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');
@@ -52,7 +52,7 @@ const editCategory = async (
 				alias.trim() === '' ? newName : alias,
 				hidden
 			];
-			const res = await fetchWebApi('v1/admin/category/manage', 'PUT', what_is(what.private.category, payload));
+			const res = await fetchWebApi('v1/admin/category/manage', 'PUT', what_is(what.private.category, payload)) as Response;
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');
@@ -79,7 +79,7 @@ const deleteCategory = async (categoryName: string) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const res = await fetchWebApi('v1/admin/category/manage', 'DELETE', what_is(what.private.category, categoryName));
+			const res = await fetchWebApi('v1/admin/category/manage', 'DELETE', what_is(what.private.category, categoryName)) as Response;
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');

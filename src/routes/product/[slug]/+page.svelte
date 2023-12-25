@@ -57,7 +57,7 @@
 
 		try {
 			// Check if the slug even exists
-			const response = await fetchWebApi(`v1/menu/slug?id=${params}`, 'GET');
+			const response = (await fetchWebApi(`v1/menu/slug?id=${params}`, 'GET')) as Response;
 			if (!response.ok) {
 				history.back();
 			}
@@ -71,7 +71,7 @@
 
 	// Thread run everytime the params change
 	$: (async () => {
-		const response = await fetchWebApi(`v1/menu/lookup?slug=${params}`, 'GET');
+		const response = (await fetchWebApi(`v1/menu/lookup?slug=${params}`, 'GET')) as Response;
 		if (!response || response.body == null) return;
 		let r;
 		try {

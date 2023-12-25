@@ -52,11 +52,11 @@
 	};
 	async function postData(data: any, path: string) {
 		try {
-			const response = await fetchWebApi(
+			const response = (await fetchWebApi(
 				`v1/auth/${path}`,
 				'POST',
 				what_is(what.public.auth, data)
-			);
+			)) as Response;
 			const json = await response.json();
 			if (response.status === 403) {
 				// Hackish asf lmfao

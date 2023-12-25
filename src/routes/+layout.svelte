@@ -129,7 +129,7 @@
 		if (localStorage.token) {
 			try {
 				// Run login checks
-				const res = await fetchWebApi('v1/dash', 'GET');
+				const res = (await fetchWebApi('v1/dash', 'GET')) as Response;
 				if (!res) return;
 				if (res.status === 403) {
 					localStorage.removeItem('token');

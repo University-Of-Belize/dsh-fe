@@ -36,6 +36,7 @@
 	import ProductPill from './../../../../lib/Elements/Generic/ProductPill.svelte';
 	// What is what?
 	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';
+	import type { CartProduct } from '$lib/types/Product';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
@@ -47,7 +48,7 @@
 	async function catchAll() {
 		// Do not run if there is no product_id provided
 
-		const res = await fetchWebApi('v1/admin/order/manage', 'GET');
+		const res = (await fetchWebApi('v1/admin/order/manage', 'GET')) as Response;
 		const r = await res.json();
 		if (res.status === 403) {
 			localStorage.removeItem('token');
@@ -67,13 +68,13 @@
 		let copy = _.cloneDeep(r.is);
 		let productsMap = new Map();
 
-		r.is.forEach((order, i) => {
+		r.is.forEach((order: Order, i: number) => {
 			if (copy[i].products.length != 0) {
 				// Clear (if not already)
 				copy[i].products = [];
 			}
 
-			order.products.forEach((product) => {
+			order.products.forEach((product: CartProduct) => {
 				const productId = product.product?._id;
 				if (productsMap.has(productId)) {
 					const existingProduct = productsMap.get(productId);
@@ -189,7 +190,7 @@
 			case 1: // Accept
 			case 2: // Decline
 			case 3: // Modify
-				const r = await fetchWebApi(
+				const r = (await fetchWebApi(
 					'v1/admin/order/manage',
 					'POST',
 					what_is(what.private.order, [
@@ -206,7 +207,7 @@
 						valueArray[2] === 'placeholder' ? null : valueArray[2], // The promotion
 						valueArray[0] // The ETA
 					]) // Lol
-				);
+				)) as Response;
 				if (!r.ok) {
 					try {
 						const res = await r.json();

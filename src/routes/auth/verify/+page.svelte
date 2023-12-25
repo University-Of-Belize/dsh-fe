@@ -78,7 +78,11 @@
 	}
 	async function postData(data: any, path: string, token?: string) {
 		try {
-			const response = await fetchWebApi(`v1/auth/${path}`, 'POST', what_is(what.public.auth, data))
+			const response = (await fetchWebApi(
+				`v1/auth/${path}`,
+				'POST',
+				what_is(what.public.auth, data)
+			)) as Response;
 			if (!response.ok) {
 				const json = await response.json();
 				text = 'Something hitched over on our side. You should try that again one more time.';

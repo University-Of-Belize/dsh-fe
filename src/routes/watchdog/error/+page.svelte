@@ -23,12 +23,19 @@
 			onlinePoller = setInterval(async () => {
 				status_text = 11; // Start again
 				localStorage.removeItem('serverOffline');
-				const isOnline = await fetchWebApi('v1/dash', 'GET', undefined, undefined, undefined, true);
+				const isOnline = (await fetchWebApi(
+					'v1/dash',
+					'GET',
+					undefined,
+					undefined,
+					undefined,
+					true
+				)) as Response;
 				if (isOnline) {
 					localStorage.removeItem('watchdog');
 					localStorage.removeItem('watchDogReason');
 					toast.push('Back online! 🎉');
-					await goto(window.location.href ?? "/");
+					await goto(window.location.href ?? '/');
 					clearInterval(onlinePoller); // Remove this shizz (lol)
 					clearInterval(statusTextDecrementer); // Remove this shizz too!! (lollol)
 				} else {
@@ -86,7 +93,9 @@
 						🌐 Functionality may be limited, or completely unavailable. 🦕
 					{/if}
 
-					<div class="font-light">Feel free to retry reloading at any time, or coming back later.</div>
+					<div class="font-light">
+						Feel free to retry reloading at any time, or coming back later.
+					</div>
 					<div class="font-semibold">Retrying in: {status_text}</div>
 				</div>
 			</div></EscrowBanner

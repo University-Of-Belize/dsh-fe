@@ -13,13 +13,17 @@ const createProduct = async (
 	description: string,
 	image_url: string,
 	price: number,
-	discount: number,
+	discount: number
 ) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
 			const payload = [category_id, slug, productName, description, image_url, price, discount];
-			const res = await fetchWebApi('v1/admin/menu/manage', 'POST', what_is(what.private.menu, payload));
+			const res = (await fetchWebApi(
+				'v1/admin/menu/manage',
+				'POST',
+				what_is(what.private.menu, payload)
+			)) as Response;
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');
@@ -49,13 +53,26 @@ const editProduct = async (
 	description: string,
 	image_url: string,
 	price: number,
-	discount: number,
+	discount: number
 ) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const payload = [oldSlug, category_id, slug, productName, description, image_url, price, discount];
-			const res = await fetchWebApi('v1/admin/menu/manage', 'PUT', what_is(what.private.menu, payload));
+			const payload = [
+				oldSlug,
+				category_id,
+				slug,
+				productName,
+				description,
+				image_url,
+				price,
+				discount
+			];
+			const res = (await fetchWebApi(
+				'v1/admin/menu/manage',
+				'PUT',
+				what_is(what.private.menu, payload)
+			)) as Response;
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');
@@ -80,7 +97,11 @@ const deleteProduct = async (productId: string) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const res = await fetchWebApi('v1/admin/menu/manage', 'DELETE', what_is(what.private.menu, productId));
+			const res = (await fetchWebApi(
+				'v1/admin/menu/manage',
+				'DELETE',
+				what_is(what.private.menu, productId)
+			)) as Response;
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');

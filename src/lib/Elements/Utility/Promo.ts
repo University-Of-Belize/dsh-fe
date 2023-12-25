@@ -24,7 +24,11 @@ const createPromo = async (
 				start_date,
 				end_date
 			];
-			const res = await fetchWebApi('v1/admin/promo/manage', 'POST', what_is(what.private.promos, payload));
+			const res = (await fetchWebApi(
+				'v1/admin/promo/manage',
+				'POST',
+				what_is(what.private.promos, payload)
+			)) as Response;
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');
@@ -68,7 +72,11 @@ const editPromo = async (
 				start_date,
 				end_date
 			];
-			const res = await fetchWebApi('v1/admin/promo/manage', 'PUT', what_is(what.private.promos, payload));
+			const res = (await fetchWebApi(
+				'v1/admin/promo/manage',
+				'PUT',
+				what_is(what.private.promos, payload)
+			)) as Response;
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');
@@ -95,7 +103,11 @@ const deletePromo = async (code: string) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const res = await fetchWebApi('v1/admin/promo/manage', 'DELETE', what_is(what.private.promos, code));
+			const res = (await fetchWebApi(
+				'v1/admin/promo/manage',
+				'DELETE',
+				what_is(what.private.promos, code)
+			)) as Response;
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');
@@ -120,7 +132,7 @@ const deletePromo = async (code: string) => {
 
 const getPromo = async () => {
 	try {
-		const res = await fetchWebApi('v1/admin/promo/manage', 'GET');
+		const res = (await fetchWebApi('v1/admin/promo/manage', 'GET')) as Response;
 		if (res.status === 403) {
 			localStorage.removeItem('token');
 			localStorage.removeItem('user_id');

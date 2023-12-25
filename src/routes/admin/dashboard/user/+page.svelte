@@ -52,10 +52,10 @@
 				query = user.detail;
 				search = query;
 			}
-			const response = await fetchWebApi(
+			const response = (await fetchWebApi(
 				`v1/search?filter=${currentFilter ?? filter?.detail}&q=${query}`,
 				'GET'
-			);
+			)) as Response;
 			data = await response.json();
 			if (filter && filter.detail === 'staff') {
 				data = data.filter((item) => item.staff !== false);
@@ -64,7 +64,7 @@
 	}
 
 	async function catchAll() {
-		const res = await fetchWebApi('v1/admin/user/manage', 'GET');
+		const res = (await fetchWebApi('v1/admin/user/manage', 'GET')) as Response;
 		if (res.status === 403) {
 			localStorage.removeItem('token');
 			localStorage.removeItem('user_id');

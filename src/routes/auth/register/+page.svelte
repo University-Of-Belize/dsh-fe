@@ -21,11 +21,11 @@
 		try {
 			clearTimeout(debounceTimeout);
 			debounceTimeout = setTimeout(async () => {
-				const response = await fetchWebApi(
+				const response = (await fetchWebApi(
 					`v1/auth/signup`,
 					'POST',
 					what_is(what.public.auth, payload)
-				);
+				)) as Response;
 				if (!response.ok) {
 					const json = await response.json();
 					return toast.push(`${json.message}`, {

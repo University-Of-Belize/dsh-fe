@@ -18,7 +18,11 @@
 
 	async function postData(data: any, token?: string) {
 		try {
-			const response = await fetchWebApi('v1/order/place', 'POST', what_is(what.public.order, ''));
+			const response = (await fetchWebApi(
+				'v1/order/place',
+				'POST',
+				what_is(what.public.order, '')
+			)) as Response;
 			if (!response.ok) {
 				const json = await response.json();
 				branding_text = 'Order not placed';

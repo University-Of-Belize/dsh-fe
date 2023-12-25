@@ -10,7 +10,11 @@ const deleteReview = async (reviewId: string) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const res = await fetchWebApi('v1/admin/review/manage', 'DELETE', what_is(what.private.review, reviewId));
+			const res = (await fetchWebApi(
+				'v1/admin/review/manage',
+				'DELETE',
+				what_is(what.private.review, reviewId)
+			)) as Response;
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');
@@ -35,7 +39,11 @@ async function createReview(product_id: string, rating: number, comment: string)
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const response = await fetchWebApi('v1/review/create', 'POST', what_is(what.public.review, [product_id, rating, comment]));
+			const response = (await fetchWebApi(
+				'v1/review/create',
+				'POST',
+				what_is(what.public.review, [product_id, rating, comment])
+			)) as Response;
 			const data = await response.json();
 			if (!response.ok) {
 				return toast.push(data.message, {

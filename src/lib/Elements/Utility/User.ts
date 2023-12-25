@@ -77,7 +77,7 @@ async function editUser(
 	]);
 
 	try {
-		const res = await fetchWebApi('v1/admin/user/manage', 'PUT', payload);
+		const res = (await fetchWebApi('v1/admin/user/manage', 'PUT', payload)) as Response;
 		if (res.status === 403) {
 			localStorage.removeItem('token');
 			localStorage.removeItem('user_id');
@@ -112,7 +112,11 @@ async function registerUser(payload: string[]) {
 		clearTimeout(debounceTimeout);
 		console.log(payload);
 		debounceTimeout = setTimeout(async () => {
-			const response = await fetchWebApi('v1/admin/user/manage', 'POST', what_is(what.private.user, payload));
+			const response = (await fetchWebApi(
+				'v1/admin/user/manage',
+				'POST',
+				what_is(what.private.user, payload)
+			)) as Response;
 			if (!response.ok) {
 				const json = await response.json();
 				return toast.push(`${json.message}`, {

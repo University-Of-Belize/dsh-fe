@@ -47,7 +47,7 @@
 		if (!localStorage.user) {
 			if (localStorage.token) {
 				try {
-					const response = await fetchWebApi('v1/admin/user/lookup', 'GET');
+					const response = await fetchWebApi('v1/admin/user/lookup', 'GET') as Response;
 					if (!response) return;
 					const data = await response.json();
 					// console.log(data);
@@ -84,7 +84,7 @@
 
 	async function getCategories() {
 		if (!cachedCategories) {
-			const response = await fetchWebApi('v1/category', 'GET');
+			const response = await fetchWebApi('v1/category', 'GET') as Response;
 			if (!response) return;
 			const data = await response.json();
 			categories = data.is; // Category[]

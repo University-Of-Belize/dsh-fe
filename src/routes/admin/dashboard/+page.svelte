@@ -29,7 +29,7 @@
 
 	onMount(async () => {
 		try {
-			const res = await fetchWebApi('v1/dash', 'GET');
+			const res = (await fetchWebApi('v1/dash', 'GET')) as Response;
 			if (res.status === 403) {
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');

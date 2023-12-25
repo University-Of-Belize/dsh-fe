@@ -26,7 +26,7 @@
 	async function Login(payload: any) {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const r = await fetchWebApi('v1/dash', 'GET', undefined, undefined, payload[0]);
+			const r = (await fetchWebApi('v1/dash', 'GET', undefined, undefined, payload[0])) as Response;
 			if (!r.ok) {
 				return toast.push('That token was not valid.', {
 					dismissable: false,
