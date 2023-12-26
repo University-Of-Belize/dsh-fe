@@ -35,7 +35,7 @@
 	>
 		<div class="content flex-1 flex items-center justify-center">
 			<div class="block p-8 text-left">
-				<div class="title text-2xl font-semibold pb-5">INstall for desktop</div>
+				<div class="title text-2xl font-semibold pb-5">Install for desktop</div>
 				<CardPicker
 					title="Desktop 🧑‍💻"
 					subtitle="Select this option if you're on desktop (PC or laptop)"
