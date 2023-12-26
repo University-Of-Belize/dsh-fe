@@ -44,10 +44,12 @@
 			// Run blocked checks
 			// Set blocked (again)
 			localStorage.setItem('blocked', 'true');
-			// Redirect to blocked screen (manually)
-			location.href = '/auth/verify';
-			// Again (automatically)
-			goto('/auth/verify');
+			if (clocation.pathname !== '/auth/verify') {
+				// Redirect to blocked screen (manually)
+				location.href = '/auth/verify';
+				// Again (automatically)
+				goto('/auth/verify');
+			}
 		}
 	}
 
