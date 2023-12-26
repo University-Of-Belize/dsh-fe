@@ -39,7 +39,7 @@
 				<CardPicker
 					title="Desktop 🧑‍💻"
 					subtitle="Select this option if you're on desktop (PC or laptop)"
-					body="Plattr's user-friendly desktop interface provides a seamless ordering experience. Effortlessly explore our menu, customize your selections, and complete your order with ease. Enjoy the convenience of ordering your favorite dishes from the comfort of your computer. Elevate your dining experience with Plattr's intuitive desktop platform."
+					body="Please take a moment to carefully read and review the installation agreement. Your understanding and acceptance of the terms outlined in the agreement are essential before proceeding with the installation. Thank you for choosing our mobile app—we appreciate your commitment to a smooth and secure experience."
 					image="/pwa/screenshots/desktop_1.jpg"
 					image_alt="Plattr Desktop App"
 					button_icon={faCheck}
