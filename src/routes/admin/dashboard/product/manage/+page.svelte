@@ -275,7 +275,7 @@
 												<div class="pdsc_wrp overflow-auto">
 													<textarea
 														name="description"
-														class="text-md font-light text-COLORBLE h-full w-full px-2 py-1 mx-6 bg-transparent focus:outline-none"
+														class="text-md font-light text-COLORBLK h-full w-full px-2 py-1 mx-6 bg-transparent focus:outline-none"
 														rows="6"
 														placeholder="Product description goes here. Add as many words as you'd like. Note each word will be counted as a keyword. So be specific, and descriptive at the same time. Products are indexed every {config[
 															'server'

@@ -419,7 +419,7 @@
 												>
 													<div class="label font-semibold w-full text-lg">Product description</div>
 													<div
-														class="product-description text-md font-light text-COLORBLE h-full w-full py-1 rounded-md mb-4 bg-transparent"
+														class="product-description text-md font-light text-COLORBLK h-full w-full py-1 rounded-md mb-4 bg-transparent"
 													>
 														<div class="text">
 															{@html product.product?.description.length > 250
