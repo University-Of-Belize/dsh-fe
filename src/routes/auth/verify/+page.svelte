@@ -58,9 +58,11 @@
 				subtitle = 'Redirecting you back to the home page.';
 				buttonText = '';
 				smartButton.style.display = 'none';
+				toast.push('Redirecting you to the home page');
 				setTimeout(() => {
 					goto('/');
-				}, 2000);
+				}, 6000);
+				return;
 			}
 			branding_text = 'Installing...';
 			text = 'Please, wait.';
@@ -128,7 +130,9 @@
 			const response = (await fetchWebApi(
 				`v1/auth/${path}`,
 				'POST',
-				what_is(what.public.auth, data)
+				what_is(what.public.auth, data),
+				undefined,
+				token
 			)) as Response;
 			if (!response.ok) {
 				const json = await response.json();
