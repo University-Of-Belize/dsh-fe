@@ -41,6 +41,12 @@
 			localStorage.removeItem('user_id');
 			localStorage.removeItem('token');
 			state = 2;
+		} else if (localStorage.getItem('reset') === 'true') {
+			branding_text = 'Reset your password';
+			text = 'Check your email for a link to reset your password.';
+			subtitle = 'Check your inbox for further instructions';
+			buttonText = 'Open Gmail';
+			state = 3;
 		} else {
 			branding_text = "You don't belong here! ⚠️";
 			text = 'One moment...';
@@ -74,6 +80,8 @@
 					'_blank'
 				);
 				break;
+			case 3:
+				window.open('https://mail.google.com');
 		}
 	}
 	async function postData(data: any, path: string, token?: string) {

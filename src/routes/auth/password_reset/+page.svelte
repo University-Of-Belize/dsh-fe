@@ -3,44 +3,71 @@
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import { what_is } from '$lib/vendor/dishout/What_Is';
+	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
 		faBuildingLock,
+		faEnvelopeCircleCheck,
 		faGift,
-		faRightToBracket
+		faKey,
+		faUnlockKeyhole,
+		faUserLock,
+		faWarning
 
 		// faUserCog
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
-	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
-	$: continue_url = $page.url.searchParams.get('continue');
 	let debounceTimeout: number;
+	let logging_in: boolean = false;
+	const ResetToken = $page.url.searchParams.get('reset_token') || false;
 
-	onMount(() => {
-		// token exists, do something
-		toast.push('Entering an invalid token will result in an error.');
-	});
-
-	async function Login(payload: any) {
+	async function Reset(payload: any) {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const r = (await fetchWebApi('v1/dash', 'GET', undefined, undefined, payload[0])) as Response;
+			const r = (await fetchWebApi(
+				'v1/auth/passwordreset',
+				ResetToken ? 'PATCH' : 'POST',
+				what_is(what.public.auth, payload[0]),
+				undefined,
+				(ResetToken as string) ?? 'NO_TOKEN'
+			)) as Response;
 			if (!r.ok) {
-				return toast.push('That token was not valid.', {
-					dismissable: false,
-					theme: {
-						'--toastBarBackground': '#842d69'
-					}
-				});
+				setTimeout(() => {
+					logging_in = false; // Slight "bounce"
+				}, 450);
+				try {
+					const res = await r.json();
+					return toast.push(res.message, {
+						dismissable: false,
+						theme: {
+							'--toastBarBackground': '#842d69'
+						}
+					});
+				} catch {
+					return toast.push(
+						'Oops. Something hitched over on our side while requesting a password reset.<br/>Try that again one more time.',
+						{
+							dismissable: false,
+							theme: {
+								'--toastBarBackground': '#842d69'
+							}
+						}
+					);
+				}
 			}
-			toast.push('Redirecting you to the authentication provider to finish setup.');
+			toast.push(
+				ResetToken
+					? 'Your password has been reset. Redirecting you to the authentication provider.'
+					: 'Reset requested.'
+			);
 			localStorage.clear(); // Clear the storage
-			localStorage.setItem('token', payload[0]); // Set the token
-			// Enable dev mode
-			localStorage.setItem('enableDevMode', 'true');
+			if (!ResetToken) {
+				localStorage.setItem('reset', 'true');
+			}
 			setTimeout(() => {
-				goto('/auth/login'); // Redirect to the login page to download the current user state.
+				goto(ResetToken ? '/auth/login' : '/auth/verify'); // Redirect to the login page to download the current user state.
 			}, 2000);
 		}, 500); // bounce every 500ms - let's hope they don't try to fucking spam the API
 	}
@@ -53,7 +80,8 @@
 			.map((el) => el.value);
 
 		if (valueArray[0].trim() != '') {
-			Login(valueArray);
+			logging_in = true;
+			Reset(valueArray);
 		}
 	};
 </script>
@@ -75,24 +103,36 @@
 					class="password flex-1 flex mt-2 rounded-sm bg-COLORWHT5 px-4 py-2 mx-8 items-center text-sm border border-COLORBLK"
 				>
 					<div class="icon w-fit">
-						<Fa icon={faBuildingLock} size="1.25x" class="text-COLORBLK pr-4" />
+						<Fa
+							icon={ResetToken ? faUserLock : faBuildingLock}
+							size="1.25x"
+							class="text-COLORBLK pr-4"
+						/>
 					</div>
 					<input
 						type="text"
 						name="token"
 						class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
-						placeholder="Enter a valid user token"
+						placeholder={ResetToken ? 'Enter a new password' : 'Enter a registered username'}
 					/>
 				</div>
-
+				{#if ResetToken}
+					<div
+						class="forgot-password-warning flex text-sm text-COLORRED font-semibold pt-4 space-x-2 w-fit mx-8"
+					>
+						<div class="icon"><Fa icon={faWarning} /></div>
+						<div>Note that doing this will also sign out all of your devices</div>
+					</div>
+				{/if}
 				<div class="submit flex flex-1 mx-8 mt-6 items-center justify-center">
-					<button class="submit w-full" type="submit">
+					<button class="submit w-full" type="submit" disabled={logging_in}>
 						<Button
-							icon={faRightToBracket}
+							icon={ResetToken ? faKey : faEnvelopeCircleCheck}
 							color="COLORBLK"
 							color_t="COLORWHT"
 							custom_style="w-full justify-center"
-							text="Log in"
+							text={ResetToken ? 'Change your password' : 'Request a password reset'}
+							disabled={logging_in}
 						/>
 					</button>
 				</div>
