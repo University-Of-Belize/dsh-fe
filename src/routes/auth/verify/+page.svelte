@@ -13,6 +13,7 @@
 	import { onMount } from 'svelte';
 	const VerifyToken = $page.url.searchParams.get('activation_token') || false;
 	const InstallToken = $page.url.searchParams.get('jo') || false;
+	let installPrompt;
 	let smartButton: HTMLDivElement;
 	let search = false;
 	let state = -1; // What is this?
@@ -49,6 +50,18 @@
 			buttonText = 'Open Gmail';
 			state = 3;
 		} else if ((InstallToken as string) === 'shwanesgae') {
+			// @ts-ignore
+			installPrompt = window.installPrompt;
+			if (!installPrompt) {
+				branding_text = 'The app is already installed';
+				text = 'You already have the app installed. No need to reinstall again.';
+				subtitle = 'Redirecting you back to the home page.';
+				buttonText = '';
+				smartButton.style.display = 'none';
+				setTimeout(() => {
+					goto('/');
+				}, 2000);
+			}
 			branding_text = 'Installing...';
 			text = 'Please, wait.';
 			subtitle = 'You can click the button to proceed.';
@@ -91,7 +104,7 @@
 				window.open('https://mail.google.com');
 				break;
 			case 4:
-				await window.installPrompt.prompt().then((choiceResult: any) => {
+				await installPrompt.prompt().then((choiceResult: any) => {
 					if (choiceResult.outcome === 'accepted') {
 						console.log('User accepted the install prompt');
 						toast.push('You can now register your account.');
