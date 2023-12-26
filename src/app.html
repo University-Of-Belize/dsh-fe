@@ -78,5 +78,8 @@
 			event.preventDefault();
 			window.installPrompt = event;
 		});
+		window.addEventListener("appinstalled", (event) => {
+			window.isInstalled = true;
+		});
 	</script>
 </html>

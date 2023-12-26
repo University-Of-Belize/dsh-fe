@@ -13,6 +13,7 @@
 		faUserCog
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
+	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	let debounceTimeout: number;
 	let signing_up: boolean = false;
@@ -29,8 +30,8 @@
 				)) as Response;
 				if (!response.ok) {
 					setTimeout(() => {
-					signing_up = false; // Slight "bounce"
-				}, 450);
+						signing_up = false; // Slight "bounce"
+					}, 450);
 					const json = await response.json();
 					return toast.push(`${json.message}`, {
 						dismissable: false,
@@ -78,8 +79,8 @@
 			Register(valueArray);
 		} else {
 			setTimeout(() => {
-					signing_up = false; // Slight "bounce"
-				}, 450);
+				signing_up = false; // Slight "bounce"
+			}, 450);
 			toast.push("<b>Retype password</b> and <b>password</b> aren't the same", {
 				dismissable: false,
 				theme: {
@@ -88,6 +89,23 @@
 			});
 		}
 	};
+
+	// Check if user has agreed to the EULA first before signing-up
+	// @todo Remove after stable release
+	onMount(() => {
+		if (localStorage.getItem('eula') !== 'true') {
+			toast.push(
+				'Please agree to the EULA first before signing up by clicking on your choice of platform and selecting "AGREE"',
+				{
+					dismissable: false,
+					theme: {
+						'--toastBarBackground': '#842d69'
+					}
+				}
+			);
+			goto('/app/onboarding');
+		}
+	});
 </script>
 
 <main class="w-full h-screen">
@@ -158,9 +176,12 @@
 				</div>
 
 				<div class="submit flex flex-1 mx-8 mt-6 items-center justify-center">
-					<button class="submit w-full" type="submit"
-					title={signing_up ? "Please wait for the request to complete..." : ""}
-					disabled={signing_up}>
+					<button
+						class="submit w-full"
+						type="submit"
+						title={signing_up ? 'Please wait for the request to complete...' : ''}
+						disabled={signing_up}
+					>
 						<Button
 							icon={faGift}
 							color="COLORBLK"

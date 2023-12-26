@@ -12,6 +12,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	const VerifyToken = $page.url.searchParams.get('activation_token') || false;
+	const InstallToken = $page.url.searchParams.get('jo') || false;
 	let smartButton: HTMLDivElement;
 	let search = false;
 	let state = -1; // What is this?
@@ -47,6 +48,12 @@
 			subtitle = 'Check your inbox for further instructions';
 			buttonText = 'Open Gmail';
 			state = 3;
+		} else if ((InstallToken as string) === 'shwanesgae') {
+			branding_text = 'Installing...';
+			text = 'Please, wait.';
+			subtitle = 'You can click the button to proceed.';
+			buttonText = 'Install Application';
+			state = 4;
 		} else {
 			branding_text = "You don't belong here! ⚠️";
 			text = 'One moment...';
@@ -60,7 +67,7 @@
 	});
 
 	// SmartAction based on the "state"
-	function smartAction() {
+	async function smartAction() {
 		switch (state) {
 			case 0:
 				break;
@@ -82,6 +89,25 @@
 				break;
 			case 3:
 				window.open('https://mail.google.com');
+				break;
+			case 4:
+				await window.installPrompt.prompt().then((choiceResult: any) => {
+					if (choiceResult.outcome === 'accepted') {
+						console.log('User accepted the install prompt');
+						toast.push('You can now register your account.');
+						setTimeout(() => {
+							goto('/auth/register');
+						}, 2000);
+					} else {
+						toast.push("You've dismissed the install prompt.", {
+							theme: {
+								'--toastBarBackground': '#842d69'
+							}
+						});
+						console.log('User dismissed the install prompt');
+					}
+				});
+				break;
 		}
 	}
 	async function postData(data: any, path: string, token?: string) {
@@ -145,7 +171,7 @@
 						bind:this={smartButton}
 					>
 						<Button
-							icon={null}
+							icon={undefined}
 							color="COLORWHT1"
 							color_t="COLORBLK"
 							custom_style="justify-center"

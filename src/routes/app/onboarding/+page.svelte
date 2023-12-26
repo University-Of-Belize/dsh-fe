@@ -7,7 +7,7 @@
 	import { faDesktopAlt, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
 </script>
 
-<main class="w-full h-screen">
+<main class="w-full h-screen overflow-hidden">
 	<div class="navigation w-full z-20">
 		<Navigation transparency={5} search={true} />
 	</div>
@@ -53,3 +53,16 @@
 		</div>
 	</Footer>
 </div>
+
+<style>
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	:global(body)::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Hide scrollbar for IE, Edge and Firefox */
+	:global(body) {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+</style>
