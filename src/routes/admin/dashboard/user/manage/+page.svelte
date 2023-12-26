@@ -23,7 +23,7 @@
 	async function catchAll() {
 		// Do not run if there is no user_id provided
 		if (user_id) {
-			const res = await fetchWebApi(`v1/admin/user/lookup?user_id=${user_id}`, 'GET') as Response;
+			const res = (await fetchWebApi(`v1/admin/user/lookup?user_id=${user_id}`, 'GET')) as Response;
 
 			if (res.status === 403) {
 				localStorage.removeItem('token');
@@ -222,6 +222,8 @@
 								tagColor_t={data?.staff ? 'COLORBLK' : 'COLORWHT1'}
 								tagText={data?.staff ? 'Admin' : 'User'}
 								description="Token: {data?.token ?? '<b>Redacted</b>'}"
+								editProfilePicture={// Admins only have so much control over users
+								data._id == user._id}
 							>
 								<div
 									class="edit-wrap w-full lg:w-fit h-fit py-2 lg:p-0"

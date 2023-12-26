@@ -227,7 +227,7 @@
 													accept="image/*"
 													bind:this={photoInput}
 													on:change={async (e) => {
-														const pub_url = await R2S3Upload(e);
+														const pub_url = await R2S3Upload(e, 'product_photos');
 														photoValue.value = pub_url;
 														productImage.src = pub_url;
 													}}

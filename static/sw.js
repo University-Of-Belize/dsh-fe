@@ -47,35 +47,38 @@ self.addEventListener('fetch', async (event) => {
 	// filesList.push(request.url);
 	// const accept = request.headers.get('accept');
 
-	// if (
-	// 	request.mode !== 'navigate' ||
-	// 	request.method !== 'GET' ||
-	// 	(accept && !accept.includes('text/html'))
-	// ) {
-	// 	return;
-	// }
+	// We do not intercept requests other than 'GET' requests because
+	// they cause issues with the ServiceWorker
+	if (
+		// request.mode !== 'navigate' ||
+		request.method !== 'GET' //||
+		// (accept && !accept.includes('text/html'))
+	) {
+		return;
+	}
 
 	const response = Promise.resolve(event.preloadResponse).then(async (r) => {
 		// We don't want to save any of the API requests
-		if (!request.url.includes('/api/')) {
+		if (!request.url.includes('/api/' || 'cloudflarestorage.com')) {
 			await caches.open(CACHE_NAME).then((cache) => cache.add(request.url));
 		}
-		return fetch(request) ?? r; // Prefer fetch over cached response
+		return fetch(request, { method: request.method }) ?? r; // Prefer fetch over cached response
 	});
 
 	// This function runs whenever the fetch request fails
 	event.respondWith(
-		response.catch(function () {
-			// console.log(request, error);
-			return caches
+		response.catch(async () => {
+			// console.log(request);
+			return await caches
 				.open(CACHE_NAME)
 				.then((cache) => {
 					const url = new URL(request.url);
 					const pathname = url.pathname;
 					return cache.match(pathname === '/' ? OFFLINE_ROUTE : pathname);
 				})
-				.catch(() => { // If not in cache storage, return the online fetch request
-					return fetch(request);
+				.catch(() => {
+					// If not in cache storage, return the online fetch request
+					return fetch(request, { method: request.method });
 				});
 		})
 	);
