@@ -16,11 +16,11 @@
 	});
 </script>
 
-<main class="text-COLORBLK p-8">
+<main class="text-COLORWHT p-8">
 	<div class="text-2xl font-semibold mt-6 mb-2">Development Area</div>
 	<div
 		bind:this={terminal}
-		class="consoleEventLog block font-mono bg-COLORBLK text-COLORBLE rounded-sm w-full p-8"
+		class="consoleEventLog block font-mono bg-COLORWHT text-COLORBLE rounded-sm w-full p-8"
 	>
 		<div class="consoleEvent">[TERMINAL] Ready to accept input</div>
 	</div>

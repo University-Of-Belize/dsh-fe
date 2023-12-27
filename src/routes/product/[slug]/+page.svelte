@@ -21,10 +21,10 @@
 	import { addToCart } from '$lib/Elements/Utility/Cart';
 	import { createReview, deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
 	import type { Product } from '$lib/types/Product.ts';
-	import { toast } from '@zerodevx/svelte-toast';
-	import Fa from 'svelte-fa';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
+	import { toast } from '@zerodevx/svelte-toast';
+	import Fa from 'svelte-fa';
 	// let hero_image: HTMLDivElement;
 	const staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // The user
 	const user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // The user
@@ -155,10 +155,10 @@
 								{$product.productName || "Oops, this product doesn't exist!"}
 							</div>
 							<StarCount reviews={$product.reviews} />
-							<div class="text-sm lg:text-lg font-light text-COLORWHT">
+							<div class="text-sm lg:text-lg font-light text-COLORWHT4">
 								{@html escapeHtml($product.description).replace(/\n/g, '<br>')}
 							</div>
-							<div class="text-md lg:text-xl py-4 font-semibold text-COLORWHT">
+							<div class="text-md lg:text-xl py-4 font-semibold text-COLORWHT1">
 								{parseFloat($product.price.$numberDecimal).toLocaleString('en-US', {
 									style: 'currency',
 									currency: config['checkout']['currency'],
@@ -167,7 +167,7 @@
 							</div>
 							<div class="comboBox flex absolute py-4 h-16">
 								<div
-									class="details font-semibold bg-COLORRED text-COLORWHT1 button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-4 py-2 items-center text-sm select-none mr-2"
+									class="details font-semibold bg-COLORRED text-COLORWHT button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-4 py-2 items-center text-sm select-none mr-2"
 									on:click={() => {
 										localStorage.setItem('wants_single_cart', 'true');
 										goto(`/product/checkout?single_cart=${$product?._id}`);
@@ -178,7 +178,7 @@
 								</div>
 
 								<div class="addToCart" on:click={() => addToCart($product?._id, 1)}>
-									<IconButton icon={faCartPlus} color="COLORYLW" />
+									<IconButton icon={faCartPlus} color="COLORBLE" />
 								</div>
 								{#if staff}
 									<div
@@ -186,7 +186,7 @@
 										on:click={() =>
 											goto(`/admin/dashboard/product/manage?product_id=${$product?._id}`)}
 									>
-										<IconButton icon={faPencil} color="COLORBLK" />
+										<IconButton icon={faPencil} color="COLORBLK4" />
 									</div>{/if}
 								<!-- <IconButton icon={faHeart} color="COLORRED" /> -->
 							</div>
@@ -206,12 +206,12 @@
 				/>{/if}
 		</div>
 	</div>
-	<div class="main-content mx-8 py-8">
+	<div class="main-content mx-8 py-8 text-COLORWHT">
 		{#if $product}
-			<div class="text-4xl text-COLORBLK font-semibold pt-2">Reviews</div>
+			<div class="text-4xl text-COLORWHT font-semibold pt-2">Reviews</div>
 			<div class="review-graph flex w-full py-2 pb-2">
 				<div class="rating">
-					<div class="rating-as-text font-bold text-6xl">
+					<div class="rating-as-text font-bold text-6xl text-COLORWHT1">
 						{calculateRating($product.reviews)}
 					</div>
 					<div
@@ -219,17 +219,17 @@
 					>
 						<StarCount reviews={$product.reviews} />
 					</div>
-					<div class="rating-as-text w-full flex items-center justify-start pl-1 py-2">
+					<div class="rating-as-text w-full flex items-center justify-start pl-1 py-2 text-COLORWHT3">
 						{calculateRating($product.reviews, true)} Reviews
 					</div>
 				</div>
 				<div class="graphed-reviews w-1/4 px-8 flex-1 lg:flex-none">
 					{#each Array.from({ length: 5 }, (_, i) => i + 1) as rating}
 						<div class="flex items-center justify-between py-1">
-							<div class="text-COLORBLK px-2">{rating}</div>
-							<div class="w-full bg-COLORBLK h-2 rounded-sm">
+							<div class="text-COLORWHT px-2">{rating}</div>
+							<div class="w-full bg-COLORBLK1 h-2 rounded-sm">
 								<div
-									class="bg-COLORYLW h-full rounded-sm"
+									class="bg-COLORHPK h-full rounded-sm"
 									style="width: {getPercentage($product.reviews, rating)}%"
 								/>
 							</div>
@@ -244,7 +244,7 @@
 				{#each $product.reviews as review}
 					{#if !review.hidden}
 						<div
-							class="review my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-2 rounded-md"
+							class="review my-4 bg-COLORBLK2 bg-opacity-50 px-4 py-2 rounded-md"
 							id={review._id}
 						>
 							<div class="flex bg-opacity-100">
@@ -259,7 +259,7 @@
 										style="width: 50px; height: 50px;"
 									/>
 								</div>
-								<div class="review-content text-COLORBLK">
+								<div class="review-content text-COLORWHT">
 									<div class="text-lg font-semibold flex">
 										{review.reviewer?.username || 'Anonymous'}
 										<div class="starcount flex text-COLORYLW items-center justify-center px-2">
@@ -280,7 +280,7 @@
 									</div>
 									{#if JSON.parse(localStorage.staff ?? false)}
 										<div
-											class="actions flex items-center justify-start lg:justify-end flex-1 text-COLORBLK my-4"
+											class="actions flex items-center justify-start lg:justify-end flex-1 text-COLORWHT my-4"
 										>
 											<div class="controls flex space-x-2">
 												<div class="stub hidden bg-COLORRED" />
@@ -321,8 +321,8 @@
 												>
 													<Button
 														icon={faLink}
-														color="COLORBLK"
-														color_t="COLORWHT1"
+														color="COLORGRN2"
+														color_t="COLORWHT"
 														text="Copy link to review"
 													/>
 												</div>
@@ -348,11 +348,11 @@
 							/>
 						</div>
 						<form
-							class="review-content text-COLORBLK w-full h-full px-1 py-1 rounded-md"
+							class="review-content text-COLORWHT w-full h-full px-1 py-1 rounded-md"
 							action="#"
 							on:submit={(event) => handleSubmit(event)}
 						>
-							<div class="review-wrap border border-black rounded-md mb-4">
+							<div class="review-wrap border border-COLORBLE rounded-md mb-4">
 								<div
 									class="text-i-combo flex font-semibold items-center justify-start text-COLORGRY"
 								>
@@ -393,8 +393,8 @@
 								><Button
 									icon={faCog}
 									text="Apply Changes"
+									color="COLORGRN2"
 									color_t="COLORWHT"
-									color="COLORBLK"
 								/></button
 							>
 						</form>
@@ -414,7 +414,7 @@
 	}
 
 	.star-rating .star-wrapper label {
-		color: #c79f1f;
+		color: rgb(var(--COLORYLW));
 		opacity: 0.5;
 	}
 	.star-rating .star-wrapper label.active {

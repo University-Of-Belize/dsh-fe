@@ -95,12 +95,12 @@
 	}
 </script>
 
-<main class="text-COLORBLK p-8">
+<main class="text-COLORWHT p-8">
 	<div class="text-2xl font-semibold mt-6 mb-2">Development Area</div>
 	<div
 		bind:this={terminal}
 		style="font-family: 'Courier New', Courier, monospace;"
-		class="consoleEventLog block font-mono bg-COLORBLK text-COLORBLE rounded-sm w-full p-8"
+		class="consoleEventLog block font-mono bg-COLORWHT text-COLORBLE rounded-sm w-full p-8"
 	>
 		<div>[TERMINAL] Ready to accept input</div>
 	</div>
@@ -113,7 +113,7 @@
 	</div>
 	<div class="text-xl font-semibold mt-6">Tag Input</div>
 	<div
-		class="tagInput flex mt-2 w-full rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORBLK aria-disabled:opacity-40 aria-disabled:cursor-not-allowed {custom_style}"
+		class="tagInput flex mt-2 w-full rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORWHT aria-disabled:opacity-40 aria-disabled:cursor-not-allowed {custom_style}"
 	>
 		<div bind:this={tagArea} class="tagArea flex px-2 bg-red-500" />
 		<TextInput

@@ -8,8 +8,8 @@
 	import Product from '$lib/Elements/Generic/ProductElement.svelte';
 	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
 	import type { EngineProduct } from '$lib/types/Product';
-	import Fa from 'svelte-fa';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
+	import Fa from 'svelte-fa';
 
 	const products = writable<EngineProduct[]>([]);
 	$: params = $page.url.searchParams.get('search');
@@ -108,7 +108,7 @@
 								</p>
 								<div class="comboBox flex flex-wrap absolute bottom-1">
 									<div
-										class="details font-semibold bg-COLORRED text-COLORWHT1 button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-4 py-2 items-center text-sm select-none mr-2"
+										class="details font-semibold bg-COLORRED text-COLORWHT button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-4 py-2 items-center text-sm select-none mr-2"
 										on:click={() => {
 											window.location = `/product/${product.slug}`;
 										}}

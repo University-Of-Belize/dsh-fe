@@ -3,25 +3,56 @@
 @tailwind components;
 @layer base {
 	:root {
-		/* --COLORWHT: 227 223 209; */
-		--COLORWHT: 227 226 222;
-		--COLORWHT1: 244 238 226;
-		/* --COLORWHT2: 239 235 222; */
-		--COLORWHT2: 240 237 230;
-		/* --COLORWHT3: 212 208 195; */
-		--COLORWHT3: 209 207 201;
-		--COLORWHT4: 225 214 218;
-		--COLORWHT5: 241 235 223;
-		--COLORBLK: 42 26 31;
-		--COLORGRY: 122 119 113;
-		/* --COLORYLW: 199 159 31; */
-		--COLORYLW: 214 169 24;
-		--COLORBLE: 112 164 255;
-		--COLORBYW: 214 182 15;
-		--COLORHPK: 255 0 80;
-		--COLORPNK: 155 70 117;
-		/* --COLORRED: 132 45 10; */
-		--COLORRED: 214 77 21;
+		/* --COLORWHT: 227 223 209; */ /* old */
+		/* --COLORWHT: 227 226 222; */
+		/* --COLORWHT1: 244 238 226; */
+		/* --COLORWHT2: 239 235 222; */ /* old */
+		/* --COLORWHT2: 240 237 230; */
+		/* --COLORWHT3: 212 208 195; */ /* old */
+		/* --COLORWHT3: 209 207 201; */
+		/* --COLORWHT4: 225 214 218; */
+		/* --COLORWHT5: 241 235 223; */
+		/* --COLORBLK: 42 26 31; */
+		/* --COLORGRY: 122 119 113; */
+		/* --COLORYLW: 199 159 31; */ /* old */
+		/* --COLORYLW: 214 169 24; */
+		/* --COLORBLE: 112 164 255; */
+		/* --COLORBYW: 214 182 15; */
+		/* --COLORHPK: 255 0 80; */
+		/* --COLORPNK: 155 70 117; */
+		/* --COLORRED: 132 45 10; */ /* old */
+		/* --COLORRED: 214 77 21; */
+		/************************************************************************/
+		--COLORWHT: 255 255 255; /* White */
+		--COLORWHT1: 200 200 200; /* Slightly Lighter White */
+		--COLORWHT2: 190 190 190; /* Dark Gray */
+		--COLORWHT3: 180 180 180; /* Light Gray */
+		--COLORWHT4: 170 170 170; /* Lighter Gray */
+		--COLORWHT5: 160 160 160; /* Lightest Gray */
+
+		--COLORBLK: 0 0 0; /* Black */
+		--COLORBLK1: 55 55 55; /* Slightly Lighter Black */
+		--COLORBLK2: 65 65 65; /* Dark Gray */
+		--COLORBLK3: 75 75 75; /* Light Gray */
+		--COLORBLK4: 85 85 85; /* Lighter Gray */
+		--COLORBLK5: 95 95 95; /* Lightest Gray */
+
+		--COLORGRY: 128 128 128; /* Gray */
+		--COLORGRN: 0 255 23; /* Green */
+		--COLORGRN1: 0 242 21; /* Green */
+		--COLORGRN2: 0 191 16; /* Green */
+
+		--COLORYLW: 255 212 0; /* Yellow */
+
+		--COLORBLE: 0 163 255;
+
+		--COLORBYW: 71 207 115; /* A shade similar to the specified color */
+
+		--COLORHPK: 255 0 168; /* Hot pink */
+
+		--COLORPNK: 255 80 234; /* Pink */
+
+		--COLORRED: 190 0 0; /* Red */
 	}
 }
 @tailwind utilities;

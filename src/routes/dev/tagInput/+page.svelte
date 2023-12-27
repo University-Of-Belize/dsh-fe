@@ -84,19 +84,19 @@
 	}
 </script>
 
-<main class="text-COLORBLK p-8">
+<main class="text-COLORWHT p-8">
 	<div class="text-2xl font-semibold mt-6 mb-2">Development Area</div>
 	<div
 		bind:this={terminal}
 		style="font-family: 'Courier New', Courier, monospace;"
-		class="consoleEventLog block font-mono bg-COLORBLK text-COLORBLE rounded-sm w-full p-8"
+		class="consoleEventLog block font-mono bg-COLORWHT text-COLORBLE rounded-sm w-full p-8"
 	>
 		<div>[TERMINAL] Ready to accept input</div>
 	</div>
 	<div class="text-xl font-semibold mt-6">Tag</div>
 	<div class="tag w-fit">This is what a tag looks like<div class="ml-1 tag-close">×</div></div>
 	<div class="text-xl font-semibold mt-6">Tag Input</div>
-	<div class="tagInput flex bg-COLORBLK w-fit py-4 px-4 border border-COLORWHT">
+	<div class="tagInput flex bg-COLORWHT w-fit py-4 px-4 border border-COLORWHT">
 		<div bind:this={tagArea} class="tagArea flex px-2" />
 		<input
 			class="tagInputArea bg-transparent w-full focus:outline-none text-COLORWHT"

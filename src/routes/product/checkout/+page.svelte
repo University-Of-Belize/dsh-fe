@@ -9,7 +9,7 @@
 	import config from '$lib/config/settings';
 	import type { CartProduct } from '$lib/types/Product';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { faPrint, faTrash } from '@fortawesome/free-solid-svg-icons';
+	import { faClone, faPrint, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	const wants_single_cart = localStorage.wants_single_cart ?? false;
@@ -68,7 +68,7 @@
 	<div class="navigation w-full z-20">
 		<Navigation transparency={5} search={true} titleText="Cafe" titleWhere="/" />
 	</div>
-	<div class="main-content flex items-center justify-start h-full text-COLORBLK">
+	<div class="main-content flex items-center justify-start h-full text-COLORWHT">
 		<div class="page-content block px-16 py-16 w-full h-full bg-transparent">
 			<div class="flex items-center w-full">
 				<div class="block">
@@ -77,13 +77,13 @@
 				</div>
 				<div class="flex flex-1 justify-end space-x-2">
 					<div class="btn-wrp" on:click={() => history.back()}>
-						<Button text="Go Back" color="COLORBLK" color_t="COLORWHT1" icon={undefined} />
+						<Button text="Go Back" color="COLORBLK4" color_t="COLORWHT" icon={undefined} />
 					</div>
 					<div class="btn-wrp" on:click={() => emptyCart(null)}>
-						<IconButton icon={faTrash} color="COLORWHT" color_t="COLORHPK" />
+						<IconButton icon={faTrash} color="COLORBLK4" color_t="COLORHPK" />
 					</div>
 					<div class="btn-wrp" on:click={() => window.print()}>
-						<IconButton icon={faPrint} color="COLORWHT" color_t="COLORBLK" />
+						<IconButton icon={faPrint} color="COLORBLK4" color_t="COLORWHT" />
 					</div>
 				</div>
 			</div>
@@ -96,7 +96,7 @@
 							return ''; // Weird hack
 						})()}
 						<div
-							class="cart_item bg-COLORWHT1 flex flex-wrap items-center w-full text-COLORBLK rounded-sm"
+							class="cart_item bg-COLORBLK2 flex flex-wrap items-center w-full text-COLORWHT rounded-sm"
 						>
 							<div class="product-image h-full">
 								<img
@@ -113,7 +113,7 @@
 								>
 									{item.product.productName ?? ''}
 								</div>
-								<div class="product-quantity font-light text-sm text-COLORBLK">
+								<div class="product-quantity font-light text-sm text-COLORWHT">
 									(x{item.quantity ?? ''})
 								</div>
 							</div>
@@ -139,13 +139,13 @@
 					{/each}
 					<div class="total_amount flex flex-col items-center w-full my-8">
 						<div
-							class="flex text-2xl font-semibold w-full items-center justify-start text-COLORBLK my-8"
+							class="flex text-2xl font-semibold w-full items-center justify-start text-COLORWHT my-8"
 						>
 							Total Amount
 						</div>
 						<div class="total_block flex w-full items-center">
 							<div
-								class="total_item bg-COLORWHT1 flex items-center w-full text-COLORBLK rounded-sm py-4"
+								class="total_item bg-COLORBLK3 flex items-center w-full text-COLORWHT rounded-sm py-4"
 							>
 								<div class="content block flex-1 mx-4">
 									<div class="product-name text-xl font-base">Total amount due today</div>
@@ -171,7 +171,7 @@
 						</div>
 						<div class="pay_now flex w-full justify-start items-center py-4">
 							<div class="btn_wrp" on:click={() => goto('/product/checkout/confirmed')}>
-								<Button color="COLORRED" color_t="COLORWHT1" text="Queue Now" icon={undefined} />
+								<Button color="COLORHPK" color_t="COLORWHT" text="Queue Now" icon={faClone} />
 							</div>
 						</div>
 					</div>
@@ -191,7 +191,7 @@
 		--tw-bg-opacity: 1;
 	}
 	.page-content {
-		background: linear-gradient(rgba(239, 235, 222, 0.75), rgba(239, 235, 222, 0.75)),
-			url('/patterns/checkout.svg');
+		/* background: linear-gradient(rgba(239, 235, 222, 0.75), rgba(239, 235, 222, 0.75)),
+			url('/patterns/checkout.svg'); */
 	}
 </style>

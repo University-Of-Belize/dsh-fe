@@ -1,5 +1,4 @@
 <script lang="ts">
-	import SearchBar from './../../../../lib/Elements/Generic/SearchBar.svelte';
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
@@ -11,6 +10,7 @@
 	import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
+	import SearchBar from './../../../../lib/Elements/Generic/SearchBar.svelte';
 	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let data: Review[]; // Declare the data variable
@@ -56,21 +56,21 @@
 		/>
 	</div>
 
-	<div class="main-content flex items-center justify-start h-full text-COLORBLK overflow-hidden">
+	<div class="main-content flex items-center justify-start h-full text-COLORWHT overflow-hidden">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4 overflow-auto"
+			class="drawer hidden lg:block bg-COLORWHT4 bg-opacity-20 px-4 py-2 flex-col justify-start h-screen w-full lg:w-1/4 overflow-auto"
 			bind:this={navDrawer}
 		>
-			<div class="section py-6">
+			<div class="section py-6 bg-opacity-100">
 				<div class="title font-semibold pb-5">My Account</div>
 				<div
 					on:click={async () => {
 						await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
 					}}
 				>
-					<Button
+										<Button
 						icon={faCog}
-						color="COLORBLK"
+						color="COLORBLK3"
 						text="My account settings"
 						color_t="COLORWHT"
 						custom_style="w-full"
@@ -133,8 +133,8 @@
 										>
 											<Button
 												icon={faCog}
-												color="COLORBLK"
-												color_t="COLORWHT1"
+												color="COLORWHT"
+												color_t="COLORBLK"
 												text="Go to listing"
 											/>
 										</div></a

@@ -20,7 +20,7 @@
 
 <form action={toUrl} bind:this={form}>
 	<div
-		class="select flex-1 flex rounded-sm bg-COLORWHT1 px-4 py-2 mx-8 items-center text-sm bg-opacity-90 justify-between w-full hover:bg-opacity-80 cursor-pointer text-COLORBLK select-none"
+		class="select flex-1 flex rounded-sm bg-COLORWHT px-4 py-2 mx-8 items-center text-sm bg-opacity-90 justify-between w-full hover:bg-opacity-80 cursor-pointer text-COLORWHT select-none"
 	>
 		<div class="icon w-fit">
 			<Fa {icon} size="1.01x" class="pr-4" />

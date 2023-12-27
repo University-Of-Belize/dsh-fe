@@ -52,20 +52,20 @@
 		/>
 	</div>
 
-	<div class="main-content flex items-center justify-start h-full text-COLORBLK">
+	<div class="main-content flex items-center justify-start h-full text-COLORWHT">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4 overflow-auto"
+			class="drawer hidden lg:block bg-COLORWHT4 bg-opacity-20 px-4 py-2 flex-col justify-start h-screen w-full lg:w-1/4 overflow-auto"
 		>
-			<div class="section py-6">
+			<div class="section py-6 bg-opacity-100">
 				<div class="title font-semibold pb-5">My Account</div>
 				<div
 					on:click={async () => {
 						await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
 					}}
 				>
-					<Button
+										<Button
 						icon={faCog}
-						color="COLORBLK"
+						color="COLORBLK3"
 						text="My account settings"
 						color_t="COLORWHT"
 						custom_style="w-full"
@@ -83,7 +83,7 @@
 				<div class="flex items-center justify-end flex-1">
 					<div class="flex flex-col items-end space-y-2">
 						<div class="btn_wrp" on:click={() => goto('/admin/dashboard/category/manage')}>
-							<Button color="COLORBLK" color_t="COLORWHT1" text="New category" icon={faPlus} />
+							<Button color="COLORGRN2" color_t="COLORWHT" text="New category" icon={faPlus} />
 						</div>
 					</div>
 				</div>
@@ -130,8 +130,8 @@
 										>
 											<Button
 												icon={faCog}
-												color="COLORBLK"
-												color_t="COLORWHT1"
+												color="COLORWHT"
+												color_t="COLORBLK"
 												text="Edit category"
 											/>
 										</div></a

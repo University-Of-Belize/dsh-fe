@@ -125,21 +125,21 @@
 		/>
 	</div>
 
-	<div class="main-content flex items-center justify-start h-full text-COLORBLK overflow-hidden">
+	<div class="main-content flex items-center justify-start h-full text-COLORWHT overflow-hidden">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4 overflow-auto"
+			class="drawer hidden lg:block bg-COLORWHT4 bg-opacity-20 px-4 py-2 flex-col justify-start h-screen w-full lg:w-1/4 overflow-auto"
 			bind:this={navDrawer}
 		>
-			<div class="section py-6">
+			<div class="section py-6 bg-opacity-100">
 				<div class="title font-semibold pb-5">My Account</div>
 				<div
 					on:click={async () => {
 						await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
 					}}
 				>
-					<Button
+										<Button
 						icon={faCog}
-						color="COLORBLK"
+						color="COLORBLK3"
 						text="My account settings"
 						color_t="COLORWHT"
 						custom_style="w-full"
@@ -180,7 +180,7 @@
 						</div>
 					{/if}{/if}
 				<div
-					class="editPane flex flex-col lg:flex-row justify-around w-full bg-COLORWHT py-4 px-4"
+					class="editPane flex flex-col lg:flex-row justify-around w-full bg-COLORBLK1 py-4 px-4"
 					bind:this={editPane}
 				>
 					<div class="editGroup flex flex-col pb-8 px-4">
@@ -261,8 +261,8 @@
 							<button class="btn_wrp w-fit h-fit" type="submit">
 								<Button
 									icon={faCog}
-									color="COLORBLK"
-									color_t="COLORWHT1"
+									color="COLORWHT"
+									color_t="COLORBLK"
 									text={promo_id ? 'Apply changes' : 'Create promotion'}
 									custom_style="my-2"
 								/>

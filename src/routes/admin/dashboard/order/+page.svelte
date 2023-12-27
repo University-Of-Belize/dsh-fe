@@ -34,7 +34,7 @@
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import ProductPill from './../../../../lib/Elements/Generic/ProductPill.svelte';
-	// What is what?
+// What is what?
 	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';
 	import type { CartProduct } from '$lib/types/Product';
 	let navDrawer: HTMLDivElement;
@@ -135,7 +135,7 @@
 				getId(`modify-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
 				getId(`user-modify-content-${orderId}`)?.classList.add('hidden');
 				getId(`title-${orderId}`).innerHTML =
-					'You <b class="font-normal text-COLORBLK">accepted</b> this order.';
+					'You <b class="font-normal text-COLORWHT">accepted</b> this order.';
 				currentAction = [action, orderId];
 				break;
 			case 2: // Decline
@@ -270,21 +270,21 @@
 		/>
 	</div>
 
-	<div class="main-content flex items-center justify-start h-full text-COLORBLK overflow-hidden">
+	<div class="main-content flex items-center justify-start h-full text-COLORWHT overflow-hidden">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4 overflow-auto"
+			class="drawer hidden lg:block bg-COLORWHT4 bg-opacity-20 px-4 py-2 flex-col justify-start h-screen w-full lg:w-1/4 overflow-auto"
 			bind:this={navDrawer}
 		>
-			<div class="section py-6">
+			<div class="section py-6 bg-opacity-100">
 				<div class="title font-semibold pb-5">My Account</div>
 				<div
 					on:click={async () => {
 						await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
 					}}
 				>
-					<Button
+										<Button
 						icon={faCog}
-						color="COLORBLK"
+						color="COLORBLK3"
 						text="My account settings"
 						color_t="COLORWHT"
 						custom_style="w-full"
@@ -319,7 +319,7 @@
 
 							<div
 								id="order-{order._id}"
-								class="orderPane flex flex-col lg:flex-row justify-start w-full bg-COLORWHT py-4 px-4 rounded-sm border border-COLORWHT3 my-8"
+								class="orderPane flex flex-col lg:flex-row justify-start w-full bg-COLORBLK1 py-4 px-4 rounded-sm border border-COLORWHT3 my-8"
 							>
 								<div class="editGroup flex flex-col pb-8 px-4 w-full">
 									<div class="flex space-x-4">
@@ -338,7 +338,7 @@
 										<div class="block">
 											<div class="flex">
 												<div
-													class="flex flex-wrap text-lg lg:text-2xl text-COLORBLK font-medium space-x-2"
+													class="flex flex-wrap text-lg lg:text-2xl text-COLORWHT font-medium space-x-2"
 												>
 													<div class="g-wrap">
 														{order.order_from
@@ -350,7 +350,7 @@
 													<div class="font-semibold">issued an order for</div>
 												</div>
 											</div>
-											<div class="text-base text-COLORBLK font-semibold flex">
+											<div class="text-base text-COLORWHT font-semibold flex">
 												Ordered at {getLocaleDateTime(order.order_date)}
 												<!-- <br/>Review or manage this order -->
 											</div>
@@ -376,8 +376,8 @@
 														>
 															<Button
 																icon={faCog}
-																color="COLORBLK"
-																color_t="COLORWHT1"
+																color="COLORBLE"
+																color_t="COLORWHT"
 																text="Edit Listing"
 																custom_style="my-2"
 															/>
@@ -389,8 +389,8 @@
 													>
 														<Button
 															icon={faShare}
-															color="COLORBLK"
-															color_t="COLORWHT1"
+															color="COLORWHT"
+															color_t="COLORBLK"
 															text="Go to Listing"
 															custom_style="my-2"
 														/>
@@ -419,7 +419,7 @@
 												>
 													<div class="label font-semibold w-full text-lg">Product description</div>
 													<div
-														class="product-description text-md font-light text-COLORBLK h-full w-full py-1 rounded-md mb-4 bg-transparent"
+														class="product-description text-md font-light text-COLORWHT h-full w-full py-1 rounded-md mb-4 bg-transparent"
 													>
 														<div class="text">
 															{@html product.product?.description.length > 250
@@ -474,8 +474,8 @@
 											>
 												<Button
 													icon={faCheck}
-													color="COLORBLK"
-													color_t="COLORWHT1"
+													color="COLORWHT"
+													color_t="COLORBLK"
 													text="Accept"
 													custom_style="my-2"
 													disabled={order.is_accepted}
@@ -531,7 +531,7 @@
 													{order.order_code}
 												</div>
 												<div class="copy rounded-md hover:bg-gray-200 opacity-80 p-4">
-													<Fa icon={faCopy} size="1.25x" class="text-black" />
+													<Fa icon={faCopy} size="1.25x" class="text-COLORWHT" />
 												</div>
 											</div>
 										</div>
@@ -658,7 +658,7 @@
 																	? order.promo_code.code
 																	: 'placeholder'
 																: 'placeholder'}
-															custom_style="bg-transparent border border-COLORBLK"
+															custom_style="bg-transparent border border-COLORWHT"
 															options={promos}
 														/>
 													{:else}
@@ -671,7 +671,7 @@
 																	? order.promo_code.code
 																	: 'NO DISCOUNT APPLIED'
 																: 'NO DISCOUNT APPLIED'}
-															custom_style="bg-transparent border border-COLORBLK"
+															custom_style="bg-transparent border border-COLORWHT"
 															disabled
 															disabled_text={order
 																? order.promo_code
@@ -691,8 +691,8 @@
 												>
 													<Button
 														icon={faSave}
-														color="COLORBLK"
-														color_t="COLORWHT1"
+														color="COLORWHT"
+														color_t="COLORBLK"
 														text="Save"
 														custom_style="my-2"
 													/>

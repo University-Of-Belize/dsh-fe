@@ -88,7 +88,7 @@
 
 <div class="stub hidden bg-COLORBLE" />
 <div
-	class="tagInput flex mt-2 w-full rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORBLK aria-disabled:opacity-40 aria-disabled:cursor-not-allowed {custom_style}"
+	class="tagInput flex mt-2 w-full rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORWHT aria-disabled:opacity-40 aria-disabled:cursor-not-allowed {custom_style}"
 >
 	<div bind:this={tagArea} class="tagArea flex px-2" />
 	<TextInput
@@ -107,7 +107,7 @@
 <style>
 	/* Tag component */
 	:global(.tag) {
-		/* w-full rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORBLK aria-disabled:opacity-40 aria-disabled:cursor-not-allowed */
+		/* w-full rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORWHT aria-disabled:opacity-40 aria-disabled:cursor-not-allowed */
 		display: flex;
 		justify-content: center;
 		align-items: center;

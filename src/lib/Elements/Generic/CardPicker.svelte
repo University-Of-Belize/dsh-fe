@@ -10,7 +10,7 @@
     export let where_to: string;
     export let image_alt: string = "No image alt provided";
     export let button_icon: IconDefinition;
-    export let button_color: string = "COLORBLK"
+    export let button_color: string = "COLORWHT"
     export let button_text_color: string = "COLORWHT"
 </script>
 

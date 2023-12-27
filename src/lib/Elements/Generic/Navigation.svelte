@@ -2,6 +2,8 @@
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
+	import type { User } from '$lib/types/User';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
 		faArrowRightFromBracket,
 		faBars,
@@ -12,6 +14,7 @@
 		faDownload,
 		// faDashboard,
 		faGift,
+		faQuestionCircle,
 		faRightToBracket,
 		faSearch,
 		faStar
@@ -21,8 +24,6 @@
 	import Fa from 'svelte-fa';
 	import Button from './Button.svelte';
 	import IconButton from './IconButton.svelte';
-	import type { User } from '$lib/types/User';
-	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	export let transparency: number = 0;
 	export let search: boolean = true;
 	export let value: string = '';
@@ -103,36 +104,36 @@
 </div>
 
 <div class="navigator w-full h-full select-none">
-	<div class="navigation bg-COLORWHT bg-opacity-{transparency} w-full pl-2 pr-4 py-4 text-lg">
+	<div class="navigation bg-COLORBLK bg-opacity-{transparency} w-full pl-2 pr-4 py-4 text-lg">
 		<div class="content bg-opacity-100 flex items-center">
 			<div
 				title="Pop open the navigation"
-				class="sidenav bg-COLORBLK bg-opacity-5 cursor-pointer hover:bg-opacity-20 px-4 py-3 rounded-sm mr-2"
+				class="sidenav bg-COLORBLK1 cursor-pointer hover:bg-opacity-70 px-4 py-3 rounded-sm mr-2"
 				bind:this={navToggle}
 				on:click={toggleNav}
 			>
-				<Fa icon={faBars} size="1.01x" class="text-black" />
+				<Fa icon={faBars} size="1.01x" class="text-COLORWHT" />
 			</div>
 			<h1
-				class="flex text-COLORBLK font-semibold hover:underline cursor-pointer"
+				class="flex text-COLORWHT font-semibold hover:underline cursor-pointer"
 				on:click={() => goto(`${titleWhere}`)}
 			>
 				{@html staff ? titleText + ' | Staff Mode' : titleText}
 			</h1>
 			{#if search}
 				<form
-					class="searchbar flex-1 hidden lg:flex rounded-sm bg-COLORWHT1 px-4 py-2 lg:mx-8 items-center text-sm bg-opacity-90"
+					class="searchbar flex-1 hidden lg:flex rounded-sm bg-COLORBLK focus:bg-COLORBLK1 active:bg-COLORBLK1 border border-COLORWHT5 px-4 py-2 lg:mx-8 items-center text-sm bg-opacity-90"
 					action="/product"
 				>
 					<div class="searchicon w-fit">
-						<Fa icon={faSearch} size="1.01x" class="text-COLORBLK pr-4" />
+						<Fa icon={faSearch} size="1.01x" class="text-COLORWHT pr-4" />
 					</div>
 					<input
 						{value}
 						type="text"
 						title="Click to search for snacks, drinks and lunch"
 						name="search"
-						class="w-full font-regular focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
+						class="w-full font-regular focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"
 						placeholder="Search for snacks, drinks and lunch"
 					/>
 				</form>
@@ -153,7 +154,7 @@
 							await goto('/auth/login');
 						}}
 					>
-						<Button icon={faRightToBracket} color="COLORYLW" text="Log in" />
+						<Button icon={faRightToBracket} color="COLORYLW" color_t="COLORBLK4" text="Log in" />
 					</div>
 					{#if installPrompt}
 						<div
@@ -164,7 +165,7 @@
 								window.location.reload();
 							}}
 						>
-							<Button icon={faDownload} color="COLORBLE" color_t="COLORWHT" text="Install" />
+							<Button icon={faDownload} color="COLORBLE" color_t="COLORBLK4" text="Install" />
 						</div>
 					{/if}
 				</div>
@@ -172,17 +173,17 @@
 				<div class="pnav flex items-center justify-center lg:space-x-4">
 					{#if staff}
 						<div class="btn-wrp" title="Admin dashboard" on:click={() => goto('/admin/dashboard')}>
-							<IconButton icon={faCogs} color="COLORWHT" color_t="COLORBLE" />
+							<IconButton icon={faCogs} color="COLORBLK1" color_t="COLORBLE" />
 						</div>{/if}
 					<div class="btn-wrp" title="My shopping cart" on:click={() => goto('/product/checkout')}>
-						<IconButton icon={faCartShopping} color="COLORWHT" color_t="COLORBLK" />
+						<IconButton icon={faCartShopping} color="COLORBLK1" color_t="COLORWHT" />
 					</div>
 					<img
 						src={user.profile_picture ?? config['user']['default-image']}
 						title="My profile"
 						alt="{user.username}'s photo"
 						width="40px"
-						class="rounded-full cursor-pointer hover:opacity-80"
+						class="rounded-full cursor-pointer hover:opacity-80 border border-COLORWHT bg-COLORBLK1"
 						style="height: 40px;"
 						on:click={async () => {
 							await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
@@ -193,7 +194,7 @@
 		</div>
 		{#if staff}
 			<div
-				class="cursor-pointer hover:underline bg-opacity-50 bg-COLORWHT px-2 my-1"
+				class="cursor-pointer hover:underline bg-opacity-50 bg-COLORBLK4 text-COLORWHT px-2 my-1"
 				bind:this={debug_selection}
 				on:click={() => {
 					if (hidden) {
@@ -204,9 +205,9 @@
 					debug_panel.classList.toggle('hidden');
 				}}
 			>
-				<div class="bg-opacity-100 text-COLORBLK">Show debug...</div>
+				<div class="bg-opacity-100 text-COLORWHT">Show debug...</div>
 			</div>
-			<div class="flex hidden debug w-full my-4" bind:this={debug_panel}>
+			<div class="flex hidden text-COLORWHT debug w-full my-4" bind:this={debug_panel}>
 				<div class="lefthand block">
 					<div class="lefthand-contents block px-2 select-text">
 						<div class="origin w-full"><b>Origin:</b> {config['server']['HTTPOrigin']}</div>
@@ -223,27 +224,27 @@
 	</div>
 
 	<div
-		class="sidebar flex justify-start items-center w-full h-screen bg-black bg-opacity-25"
-		style="opacity: 0; display: none"
+		class="sidebar flex justify-start items-center w-full h-screen bg-COLORWHT bg-opacity-25"
+		style="opacity: 0; display: none;"
 		bind:this={nav}
 	>
 		<div
-			class="drawer bg-COLORWHT px-2 py-2 flex-col justify-start h-screen bg-opacity-100"
+			class="drawer bg-COLORBLK text-COLORWHT px-2 py-2 flex-col justify-start h-screen bg-opacity-100"
 			bind:this={navDrawer}
 		>
 			{#if search}
 				<form
-					class="searchbar flex-1 lg:hidden flex rounded-sm bg-COLORWHT1 px-4 py-2 lg:mx-8 my-1 items-center text-sm bg-opacity-90"
+					class="searchbar flex-1 lg:hidden rounded-sm bg-COLORBLK focus:bg-COLORBLK1 active:bg-COLORBLK1 border border-COLORWHT5 px-4 py-2 items-center text-sm bg-opacity-90"
 					action="/product"
 				>
 					<div class="searchicon w-fit">
-						<Fa icon={faSearch} size="1.01x" class="text-COLORBLK pr-4" />
+						<Fa icon={faSearch} size="1.01x" class="text-COLORWHT pr-4" />
 					</div>
 					<input
 						{value}
 						type="text"
 						name="search"
-						class="w-full font-regular focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
+						class="w-full font-regular focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"
 						placeholder="Search for snacks, drinks and lunch"
 					/>
 				</form>
@@ -252,10 +253,10 @@
 			{#if !user}
 				<div class="top-row flex justify-between items-center w-full pt-2">
 					<div class="btn-wrp pr-1" on:click={() => goto('/auth/login')}>
-						<Button icon={faRightToBracket} color="COLORYLW" text="Log in" />
+						<Button icon={faRightToBracket} color="COLORYLW" color_t="COLORBLK3" text="Log in" />
 					</div>
 					<div class="btn-wrp pl-2" on:click={() => goto('/auth/register')}>
-						<Button icon={faGift} color="COLORPNK" text="Sign up" color_t="COLORWHT" />
+						<Button icon={faGift} color="COLORPNK" color_t="COLORBLK3" text="Sign up" />
 					</div>
 				</div>{:else}
 				<div class="two py-6 space-y-2">
@@ -268,7 +269,7 @@
 					>
 						<Button
 							icon={faArrowRightFromBracket}
-							color="COLORBLK"
+							color="COLORBLK3"
 							text="Logout"
 							color_t="COLORWHT"
 							custom_style="w-full"
@@ -281,7 +282,7 @@
 					>
 						<Button
 							icon={faCog}
-							color="COLORBLK"
+							color="COLORBLK1"
 							text="My account settings"
 							color_t="COLORWHT"
 							custom_style="w-full"
@@ -306,20 +307,20 @@
 						>
 							<Button
 								icon={faStar}
-								color="COLORWHT3"
+								color="COLORBLK1"
 								text={category.name ?? category.alias}
-								color_t="COLORBLK"
-								custom_style="w-full font-semibold"
+								color_t="COLORWHT"
+								custom_style="w-full font-medium"
 							/>
 						</div>
 					{/each}
 				{:else}
 					<div class="two pt-1">
 						<Button
-							icon={faStar}
-							color="COLORWHT3"
+							icon={faQuestionCircle}
+							color="COLORBLK4"
 							text="Looks like you caught us! Just a moment."
-							color_t="COLORBLK"
+							color_t="COLORWHT"
 							custom_style="w-full font-semibold"
 						/>
 					</div>

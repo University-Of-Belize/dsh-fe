@@ -141,7 +141,10 @@
 			}
 
 			// Pull the user back into setup
-			if (window.matchMedia('(display-mode: standalone)').matches && clocation.pathname !== '/auth/register') {
+			if (
+				window.matchMedia('(display-mode: standalone)').matches &&
+				clocation.pathname !== '/auth/register'
+			) {
 				toast.push('Thanks for completing setup. You can now register your account.');
 				localStorage.clear();
 				localStorage.setItem('eula', 'true');
@@ -177,6 +180,9 @@
 
 <style>
 	:global(body) {
-		background: #f0ede6;
+		/* background: #f0ede6; */
+		/* background: #202124 */
+		/* background: #d5d6dc */
+		background: rgb(0, 0, 0);
 	}
 </style>

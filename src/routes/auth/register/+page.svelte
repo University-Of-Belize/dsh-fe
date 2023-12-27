@@ -116,61 +116,61 @@
 		<div class="block">
 			<form class="block" action="#" on:submit={(event) => handleSubmit(event)}>
 				<div
-					class="flex flex-1 mb-6 mx-8 text-COLORBLK font-semibold justify-center items-center text-3xl"
+					class="flex flex-1 mb-6 mx-8 text-COLORWHT font-semibold justify-center items-center text-3xl"
 				>
 					Cafe
 				</div>
 				<div
-					class="username flex-1 flex mt-2 rounded-sm bg-COLORWHT5 px-4 py-2 mx-8 items-center text-sm border border-COLORBLK"
+					class="username flex-1 flex mt-2 rounded-sm bg-transparent px-4 py-2 mx-8 items-center text-sm border border-COLORWHT"
 				>
 					<div class="icon w-fit">
-						<Fa icon={faRectangleAd} size="1.25x" class="text-COLORBLK pr-4" />
+						<Fa icon={faRectangleAd} size="1.25x" class="text-COLORWHT pr-4" />
 					</div>
 					<input
 						type="text"
 						name="username"
-						class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
+						class="w-full font-medium focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"
 						placeholder="Enter a username"
 					/>
 				</div>
 				<div
-					class="email flex-1 flex mt-2 rounded-sm bg-COLORWHT5 px-4 py-2 mx-8 items-center text-sm border border-COLORBLK"
+					class="email flex-1 flex mt-2 rounded-sm bg-transparent px-4 py-2 mx-8 items-center text-sm border border-COLORWHT"
 				>
 					<div class="icon w-fit">
-						<Fa icon={faUserCog} size="1.25x" class="text-COLORBLK pr-4" />
+						<Fa icon={faUserCog} size="1.25x" class="text-COLORWHT pr-4" />
 					</div>
 					<input
 						type="email"
 						name="email"
-						class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
+						class="w-full font-medium focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"
 						placeholder="Enter your email address"
 					/>
 				</div>
 				<div
-					class="password flex-1 flex mt-2 rounded-sm bg-COLORWHT5 px-4 py-2 mx-8 items-center text-sm border border-COLORBLK"
+					class="password flex-1 flex mt-2 rounded-sm bg-transparent px-4 py-2 mx-8 items-center text-sm border border-COLORWHT"
 				>
 					<div class="icon w-fit">
-						<Fa icon={faLock} size="1.25x" class="text-COLORBLK pr-4" />
+						<Fa icon={faLock} size="1.25x" class="text-COLORWHT pr-4" />
 					</div>
 					<input
 						type="password"
 						name="password"
 						autocomplete="new-password"
-						class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
+						class="w-full font-medium focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"
 						placeholder="Enter your password"
 					/>
 				</div>
 				<div
-					class="password2 flex-1 flex mt-2 rounded-sm bg-COLORWHT5 px-4 py-2 mx-8 items-center text-sm border border-COLORBLK"
+					class="password2 flex-1 flex mt-2 rounded-sm bg-transparent px-4 py-2 mx-8 items-center text-sm border border-COLORWHT"
 				>
 					<div class="icon w-fit">
-						<Fa icon={faLock} size="1.25x" class="text-COLORBLK pr-4" />
+						<Fa icon={faLock} size="1.25x" class="text-COLORWHT pr-4" />
 					</div>
 					<input
 						type="password"
 						name="password2"
 						autocomplete="new-password"
-						class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
+						class="w-full font-medium focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"
 						placeholder="Retype your password"
 					/>
 				</div>
@@ -184,8 +184,8 @@
 					>
 						<Button
 							icon={faGift}
-							color="COLORBLK"
-							color_t="COLORWHT"
+							color="COLORWHT"
+							color_t="COLORBLK"
 							custom_style="w-full justify-center"
 							text="Sign Up"
 							disabled={signing_up}
@@ -194,7 +194,7 @@
 				</div>
 			</form>
 
-			<div class="block mx-8 my-8">
+			<div class="block mx-8 my-8 text-COLORWHT">
 				<div class="text-2xl font-light">Have an account?</div>
 				<div
 					class="login flex flex-1 mt-6 items-center justify-start"

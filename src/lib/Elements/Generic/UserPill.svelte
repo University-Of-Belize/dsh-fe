@@ -3,7 +3,7 @@
 	import type { User } from '$lib/types/User';
 	export let user: User;
 	export let tag: boolean = false;
-	export let tagColor: string = 'COLORBLK';
+	export let tagColor: string = 'COLORGRN2';
 	export let tagColor_t: string = 'COLORWHT';
 	export let tagText: string = '';
 	export let description: string;
@@ -11,12 +11,12 @@
 
 <!-- Color stub -->
 <div
-	class="placeholder bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORBLK bg-COLORYLW bg-COLORBYW bg-COLORPNK bg-COLORRED hidden w-full"
+	class="placeholder bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORWHT4 bg-COLORWHT5 bg-COLORBLK bg-COLORBLK1 bg-COLORBLK2 bg-COLORBLK3 bg-COLORBLK4 bg-COLORBLK5 bg-COLORGRN bg-COLORGRN1 bg-COLORGRN2 bg-COLORYLW bg-COLORBLE bg-COLORPNK bg-COLORRED hidden w-full"
 >
 	&nbsp;
 </div>
 
-<div class="review my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-2 rounded-md">
+<div class="review my-4 bg-COLORBLK4 bg-opacity-50 px-4 py-2 rounded-md">
 	<div class="flex bg-opacity-100">
 		<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
 			<img
@@ -30,7 +30,7 @@
 			/>
 		</div>
 		<div class="user-wrap flex flex-wrap items-center lg:w-full">
-			<div class="review-content text-COLORBLK" style="word-break: break-word;">
+			<div class="review-content text-COLORWHT" style="word-break: break-word;">
 				<div class="text-base lg:text-lg font-semibold flex items-center">
 					{user.username
 						? user._id == localStorage.user_id
@@ -49,7 +49,7 @@
 					{@html description}
 				</div>
 			</div>
-			<div class="actions flex items-center justify-start lg:justify-end flex-1 text-COLORBLK">
+			<div class="actions flex items-center justify-start lg:justify-end flex-1 text-COLORWHT">
 				<slot />
 			</div>
 		</div>

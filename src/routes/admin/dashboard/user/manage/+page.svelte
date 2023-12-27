@@ -171,20 +171,20 @@
 		/>
 	</div>
 
-	<div class="main-content flex items-center justify-start h-full text-COLORBLK overflow-hidden">
+	<div class="main-content flex items-center justify-start h-full text-COLORWHT overflow-hidden">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4 overflow-auto"
+			class="drawer hidden lg:block bg-COLORWHT4 bg-opacity-20 px-4 py-2 flex-col justify-start h-screen w-full lg:w-1/4 overflow-auto"
 		>
-			<div class="section py-6">
+			<div class="section py-6 bg-opacity-100">
 				<div class="title font-semibold pb-5">My Account</div>
 				<div
 					on:click={async () => {
 						await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
 					}}
 				>
-					<Button
+										<Button
 						icon={faCog}
-						color="COLORBLK"
+						color="COLORBLK3"
 						text="My account settings"
 						color_t="COLORWHT"
 						custom_style="w-full"
@@ -218,8 +218,8 @@
 							<UserBanner
 								user={data}
 								tag
-								tagColor={data?.staff ? 'COLORWHT1' : 'COLORBLK'}
-								tagColor_t={data?.staff ? 'COLORBLK' : 'COLORWHT1'}
+								tagColor={data?.staff ? 'COLORHPK' : 'COLORGRN2'}
+								tagColor_t={data?.staff ? 'COLORWHT' : 'COLORWHT'}
 								tagText={data?.staff ? 'Admin' : 'User'}
 								description="Token: {data?.token ?? '<b>Redacted</b>'}"
 								editProfilePicture={// Admins only have so much control over users
@@ -231,8 +231,8 @@
 								>
 									<Button
 										icon={faCog}
-										color="COLORBLK"
-										color_t="COLORWHT1"
+										color="COLORBLE"
+										color_t="COLORWHT"
 										text="Edit Account"
 										custom_style="w-full lg:w-fit justify-center lg:justify-start"
 									/>
@@ -243,7 +243,7 @@
 				<div
 					class="editPane hidden flex flex-col lg:flex-row {staff
 						? 'justify-around'
-						: 'justify-start'} w-full bg-COLORWHT py-4 px-4"
+						: 'justify-start'} w-full bg-COLORBLK1 py-4 px-4"
 					bind:this={editPane}
 				>
 					<div class="editGroup flex flex-col pb-8 px-4">
@@ -327,8 +327,8 @@
 							<button class="btn_wrp w-fit h-fit" type="submit">
 								<Button
 									icon={faCog}
-									color="COLORBLK"
-									color_t="COLORWHT1"
+									color="COLORWHT"
+									color_t="COLORBLK"
 									text={user_id ? 'Apply changes' : 'Create account'}
 									custom_style="my-2"
 								/>
@@ -363,8 +363,8 @@
 												icon={faLock}
 												text="Invalidate token"
 												color="transparent"
-												color_t="COLORBLK"
-												custom_style="border border-COLORBLK my-2"
+												color_t="COLORWHT"
+												custom_style="border border-COLORWHT my-2"
 											/>
 										</div>
 									</div>
@@ -393,8 +393,8 @@
 												icon={faUserCog}
 												text="{data.staff ? 'Demote' : 'Promote'} user"
 												color="transparent"
-												color_t={data.staff ? 'COLORHPK' : 'COLORBLK'}
-												custom_style="border border-{data.staff ? 'COLORHPK' : 'COLORBLK'} my-2"
+												color_t={data.staff ? 'COLORHPK' : 'COLORWHT'}
+												custom_style="border border-{data.staff ? 'COLORHPK' : 'COLORWHT'} my-2"
 											/>
 										</div>
 									</div>

@@ -62,7 +62,7 @@
 									goto('/auth/login');
 								}}
 							>
-								<Button icon={faRightToBracket} color="COLORYLW" text="Log in" />
+								<Button icon={faRightToBracket} color="COLORYLW" color_t="COLORBLK" text="Log in" />
 							</div>
 						</div>
 					</div>
@@ -70,7 +70,7 @@
 				<div class="hidden lg:block fix flex-1">&nbsp;</div>
 			</div>
 			<div
-				class="wrapper bg-black opacity-50 w-full h-full absolute flex items-center justify-center"
+				class="wrapper bg-COLORBLK opacity-20 w-full h-full absolute flex items-center justify-center"
 			>
 				<!-- Nothing, this is an overlay-->
 			</div>
@@ -79,7 +79,7 @@
 	</div>
 	<div class="content block">
 		<div class="category-grid flex justify-center items-center w-full flex-wrap">
-			<div class="gridelement h-16 w-full flex justify-center items-center relative">
+			<div class="gridelement h-16 w-full flex justify-center items-center relative bg-COLORBLK">
 				<div
 					class="content-wrapper w-full h-full absolute flex items-center justify-start text-2xl font-semibold text-COLORWHT bg-COLORBLK px-8 z-10"
 				>
@@ -111,7 +111,7 @@
 						</div>
 
 						<div
-							class="wrapper bg-black opacity-50 w-full h-full absolute flex items-center justify-center"
+							class="wrapper bg-COLORBLK opacity-50 w-full h-full absolute flex items-center justify-center"
 						>
 							<!-- Nothing, this is an overlay-->
 						</div>
@@ -136,7 +136,7 @@
 					</div>
 
 					<div
-						class="wrapper bg-black opacity-50 w-full h-full absolute flex items-center justify-center"
+						class="wrapper bg-COLORBLK1 opacity-50 w-full h-full absolute flex items-center justify-center"
 					>
 						<!-- Nothing, this is an overlay-->
 					</div>
@@ -147,13 +147,13 @@
 
 		<div class="gridelement h-16 w-full flex justify-center items-center relative">
 			<div
-				class="content-wrapper w-full h-full absolute flex items-center justify-start text-2xl font-semibold text-COLORWHT bg-COLORBLK px-8 z-10"
+				class="content-wrapper w-full h-full absolute flex items-center justify-start text-2xl font-semibold text-COLORWHT bg-COLORBLK1 px-8 z-10"
 			/>
 		</div>
 	</div>
 	<div class="featured block">
 		<div
-			class="banner-featured flex justify-start items-center text-2xl bg-COLORWHT font-semibold text-COLORBLK px-8 py-12"
+			class="banner-featured flex justify-start items-center text-2xl bg-COLORBLK1 font-semibold text-COLORWHT px-8 py-12"
 		>
 			Daily Special
 		</div>

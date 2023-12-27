@@ -10,7 +10,7 @@
 	import { R2S3Upload } from '../Utility/vendor/dishout/r2_s3';
 	export let user: User;
 	export let tag: boolean = false;
-	export let tagColor: string = 'COLORBLK';
+	export let tagColor: string = 'COLORWHT';
 	export let tagColor_t: string = 'COLORWHT';
 	export let tagText: string = '';
 	export let description: string;
@@ -42,12 +42,12 @@
 
 <!-- Color stub -->
 <div
-	class="placeholder bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORBLK bg-COLORYLW bg-COLORBYW bg-COLORPNK bg-COLORRED hidden w-full"
+	class="placeholder bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORWHT bg-COLORYLW bg-COLORBYW bg-COLORPNK bg-COLORRED hidden w-full"
 >
 	&nbsp;
 </div>
 
-<div class="review my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-4 rounded-md">
+<div class="review my-4 bg-COLORBLK3 bg-opacity-50 px-4 py-4 rounded-md">
 	<div class="flex flex-wrap bg-opacity-100 space-y-4 lg:space-y-2">
 		<div
 			class="reviewer-pfp flex flex-row items-center justify-center lg:justify-start w-full lg:w-auto pr-4"
@@ -86,7 +86,7 @@
 							class="widget-wrp z-10 absolute flex w-full items-center justify-end"
 						>
 							<div
-								class="widget shadow-md cursor-pointer hover:opacity-80 bg-COLORBLK px-2 py-2 text-COLORWHT w-fit rounded-md"
+								class="widget shadow-md cursor-pointer hover:opacity-80 bg-COLORBLE px-2 py-2 text-COLORWHT w-fit rounded-md"
 							>
 								<Fa icon={faPencil} size="0.85x" />
 							</div>
@@ -138,7 +138,7 @@
 			<div class="hidden lg:block text-md font-light text-COLORBLE mt-4 mb-2 lg:m-0">
 				{@html description}
 			</div>
-			<div class="actions flex items-center justify-start flex-1 text-COLORBLK w-full lg:w-auto">
+			<div class="actions flex items-center justify-start flex-1 text-COLORWHT w-full lg:w-auto">
 				<slot />
 			</div>
 		</div>

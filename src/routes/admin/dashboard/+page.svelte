@@ -3,7 +3,6 @@
 	import Button from '$lib/Elements/Generic/Button.svelte';
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import config from '$lib/config/settings';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
 		faClone,
@@ -64,11 +63,11 @@
 			titleWhere="/admin/dashboard"
 		/>
 	</div>
-	<div class="main-content flex items-center justify-start h-full text-COLORBLK">
+	<div class="main-content flex items-center justify-start h-full text-COLORWHT">
 		<div
-			class="drawer bg-COLORWHT px-4 py-2 flex-col justify-start h-screen bg-opacity-100 w-full lg:w-1/4"
+			class="drawer bg-COLORWHT4 bg-opacity-20 px-4 py-2 flex-col justify-start h-screen w-full lg:w-1/4"
 		>
-			<div class="section py-6">
+			<div class="section py-6 bg-opacity-100">
 				<div class="title font-semibold pb-5">My Account</div>
 				<div
 					on:click={async () => {
@@ -77,7 +76,7 @@
 				>
 					<Button
 						icon={faCog}
-						color="COLORBLK"
+						color="COLORBLK3"
 						text="My account settings"
 						color_t="COLORWHT"
 						custom_style="w-full"
@@ -97,7 +96,7 @@
 				{#if data != undefined}
 					{#each data.is[0][1] as shortcut, i}
 						<div
-							class="w-56 h-56 rounded-sm bg-COLORWHT3 text-COLORBLK mx-4 my-4 hover:opacity-80 cursor-pointer select-none"
+							class="w-56 h-56 rounded-sm bg-COLORBLK1 text-COLORWHT mx-4 my-4 hover:opacity-80 cursor-pointer select-none"
 							on:click={() => goto(data.is[1][1][i] ?? '/admin/dashboard')}
 						>
 							<div class="flex items-center justify-center w-full h-full text-center">

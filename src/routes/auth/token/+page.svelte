@@ -5,7 +5,6 @@
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
-		faGift,
 		faKey,
 		faRightToBracket
 		// faUserCog
@@ -70,21 +69,21 @@
 		<div class="block">
 			<form class="block" action="#" on:submit={(event) => handleSubmit(event)}>
 				<div
-					class="flex flex-1 mb-6 mx-8 text-COLORBLK font-semibold justify-center items-center text-3xl"
+					class="flex flex-1 mb-6 mx-8 text-COLORWHT font-semibold justify-center items-center text-3xl"
 				>
 					Cafe
 				</div>
 
 				<div
-					class="password flex-1 flex mt-2 rounded-sm bg-COLORWHT5 px-4 py-2 mx-8 items-center text-sm border border-COLORBLK"
+					class="password flex-1 flex mt-2 rounded-sm bg-transparent px-4 py-2 mx-8 items-center text-sm border border-COLORWHT"
 				>
 					<div class="icon w-fit">
-						<Fa icon={faKey} size="1.25x" class="text-COLORBLK pr-4" />
+						<Fa icon={faKey} size="1.25x" class="text-COLORWHT pr-4" />
 					</div>
 					<input
 						type="text"
 						name="token"
-						class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent"
+						class="w-full font-medium focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"
 						placeholder="Enter a valid user token"
 					/>
 				</div>
@@ -98,8 +97,8 @@
 					>
 						<Button
 							icon={faRightToBracket}
-							color="COLORBLK"
-							color_t="COLORWHT"
+							color="COLORWHT"
+							color_t="COLORBLK"
 							custom_style="w-full justify-center"
 							text="Log in"
 							disabled={logging_in}
@@ -108,18 +107,18 @@
 				</div>
 			</form>
 
-			<div class="block mx-8 my-8">
-				<div class="text-2xl font-light">New around here?</div>
+			<div class="block mx-8 my-8 text-COLORWHT">
+				<div class="text-2xl font-light">Have an account?</div>
 				<div
-					class="signup flex flex-1 mt-6 items-center justify-start"
-					on:click={() => goto('/auth/register')}
+					class="login flex flex-1 mt-6 items-center justify-start"
+					on:click={() => goto('/auth/login')}
 				>
 					<Button
-						icon={faGift}
-						color="COLORPNK"
-						text="Sign up"
-						color_t="COLORWHT"
+						icon={faRightToBracket}
+						color="COLORYLW"
+						color_t="COLORBLK"
 						custom_style="w-18 justify-center"
+						text="Log in"
 					/>
 				</div>
 			</div>

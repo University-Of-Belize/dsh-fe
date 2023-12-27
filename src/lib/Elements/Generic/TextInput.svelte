@@ -30,10 +30,10 @@
 	aria-disabled={disabled}
 	title={disabled ? disabled_text : ''}
 	style={container_style}
-	class="textinput_generic flex-1 flex mt-2 rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORBLK aria-disabled:opacity-40 aria-disabled:cursor-not-allowed {custom_style}"
+	class="textinput_generic flex-1 flex mt-2 rounded-sm bg-COLORBLK2 px-4 py-2 items-center text-sm border border-COLORWHT aria-disabled:opacity-40 aria-disabled:cursor-not-allowed {custom_style}"
 >
 	<div class="icon w-fit">
-		<Fa {icon} size="1.25x" class="text-COLORBLK pr-4" />
+		<Fa {icon} size="1.25x" class="text-COLORWHT pr-4" />
 	</div>
 	<input
 	bind:this={inputBox}
@@ -42,7 +42,7 @@
 		{value}
 		type="text"
 		{name}
-		class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent disabled:text-black disabled:cursor-not-allowed {class_}"
+		class="w-full font-medium focus:outline-none text-COLORWHT py-1 px-2 bg-transparent disabled:text-COLORWHT5 disabled:cursor-not-allowed {class_}"
 		{placeholder}
 		{required}
 		{disabled}

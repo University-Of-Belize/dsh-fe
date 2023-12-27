@@ -18,7 +18,7 @@
 </script>
 
 <div
-	class="select flex-1 flex rounded-sm bg-COLORWHT1 px-4 py-2 items-center text-sm bg-opacity-90 justify-between w-full hover:bg-opacity-80 cursor-pointer text-COLORBLK select-none {custom_style}"
+	class="select flex-1 flex rounded-sm bg-COLORWHT px-4 py-2 items-center text-sm bg-opacity-90 justify-between w-full hover:bg-opacity-80 cursor-pointer text-COLORWHT select-none {custom_style}"
 >
 	<div class="icon w-fit">
 		<Fa {icon} size="1.01x" class="pr-4" />

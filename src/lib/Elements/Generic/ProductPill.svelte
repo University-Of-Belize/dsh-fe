@@ -1,12 +1,12 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
 	import type { Product } from '$lib/types/Product';
-	import Fa from 'svelte-fa';
 	import { faPencil } from '@fortawesome/free-solid-svg-icons';
-	import { goto } from '$app/navigation';
+	import Fa from 'svelte-fa';
 	export let product: Product;
 	export let tag: boolean = false;
-	export let tagColor: string = 'COLORBLK';
+	export let tagColor: string = 'COLORWHT';
 	export let tagColor_t: string = 'COLORWHT';
 	export let tagText: string = '';
 	export let description: string;
@@ -17,7 +17,7 @@
 
 <!-- Color stub -->
 <div
-	class="placeholder bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORBLK bg-COLORYLW bg-COLORBYW bg-COLORPNK bg-COLORRED hidden w-full"
+	class="placeholder bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORWHT bg-COLORYLW bg-COLORBYW bg-COLORPNK bg-COLORRED hidden w-full"
 >
 	&nbsp;
 </div>
@@ -30,12 +30,12 @@
 		>
 			<div
 				on:click={() => goto(`/admin/dashboard/product/manage?product_id=${product._id}`)}
-				class="widget shadow-md cursor-pointer hover:opacity-80 bg-COLORBLK px-2 py-2 text-COLORWHT w-fit rounded-md"
+				class="widget shadow-md cursor-pointer hover:opacity-80 bg-COLORBLE px-2 py-2 text-COLORWHT w-fit rounded-md"
 			>
 				<Fa icon={faPencil} size="0.85x" />
 			</div>
 		</div>{/if}
-	<div class="product my-4 bg-COLORWHT3 bg-opacity-50 px-4 py-2 rounded-md">
+	<div class="product my-4 bg-COLORBLK4 bg-opacity-50 px-4 py-2 rounded-md">
 		<div class="flex bg-opacity-100">
 			<div class="product-pfp flex flex-col items-center justify-start pr-4">
 				<img
@@ -54,7 +54,7 @@
 				/>
 			</div>
 			<div class="user-wrap flex flex-wrap items-center w-full">
-				<div class="product-content text-COLORBLK" style="word-break: break-word;">
+				<div class="product-content text-COLORWHT" style="word-break: break-word;">
 					<div class="text-base lg:text-lg font-semibold flex items-center">
 						{product.productName ?? 'Untitled Product'}
 						{#if tag}
@@ -69,7 +69,7 @@
 						{@html description}
 					</div>
 				</div>
-				<div class="actions flex items-center justify-start lg:justify-end flex-1 text-COLORBLK">
+				<div class="actions flex items-center justify-start lg:justify-end flex-1 text-COLORWHT">
 					<slot />
 				</div>
 			</div>
