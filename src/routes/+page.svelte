@@ -100,9 +100,9 @@
 							on:click={() => {
 								goto(
 									`/product?filter=${
-										category.alias
-											? category.alias.toString().toLowerCase()
-											: category.name.toString().toLowerCase()
+										category.name
+											? category.name.toString().toLowerCase()
+											: category.alias.toString().toLowerCase()
 									}`
 								);
 							}}

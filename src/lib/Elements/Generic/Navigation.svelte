@@ -295,10 +295,11 @@
 							class="two pt-1"
 							on:click={() => {
 								goto(
+									// We filter by alias, display by name
 									`/product?filter=${
 										category.alias
-											? category.name.toString().toLowerCase()
-											: category.alias.toString().toLowerCase()
+											? category.alias.toString().toLowerCase()
+											: category.name.toString().toLowerCase()
 									}`
 								);
 							}}
