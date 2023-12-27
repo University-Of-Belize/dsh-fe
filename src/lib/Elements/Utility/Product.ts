@@ -11,6 +11,7 @@ const createProduct = async (
 	slug: string,
 	productName: string,
 	description: string,
+	keywords: string[],
 	image_url: string,
 	price: number,
 	discount: number
@@ -18,7 +19,7 @@ const createProduct = async (
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const payload = [category_id, slug, productName, description, image_url, price, discount];
+			const payload = [category_id, slug, productName, description, keywords, image_url, price, discount];
 			const res = (await fetchWebApi(
 				'v1/admin/menu/manage',
 				'POST',
@@ -51,6 +52,7 @@ const editProduct = async (
 	slug: string,
 	productName: string,
 	description: string,
+	keywords: string[],
 	image_url: string,
 	price: number,
 	discount: number
@@ -64,6 +66,7 @@ const editProduct = async (
 				slug,
 				productName,
 				description,
+				keywords,
 				image_url,
 				price,
 				discount

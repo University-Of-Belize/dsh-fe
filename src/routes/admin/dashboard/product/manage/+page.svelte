@@ -84,6 +84,7 @@
 			// data = data[0];
 
 			// Restore the keywords
+			keywords_input.results = data.keywords;
 			if (data.keywords && data.keywords.length > 0) {
 				data.keywords.forEach((element) => {
 					keywords_input.addTag(element);
@@ -155,6 +156,7 @@
 				valueArray[2], // slug
 				valueArray[3], // name
 				valueArray[1], // description
+				valueArray[7], // keywords array
 				valueArray[0], // image url
 				valueArray[4], // price
 				valueArray[5] // discount
@@ -167,6 +169,7 @@
 				valueArray[2], // slug
 				valueArray[3], // name
 				valueArray[1], // description
+				valueArray[7], // keywords array
 				valueArray[0], // image url
 				valueArray[4], // price
 				valueArray[5] // discount
@@ -215,7 +218,7 @@
 				<div class="block">
 					<div class="flex text-2xl font-semibold pb-2">Product Wizard</div>
 					<div class="flex text-xl font-semibold pb-12">
-						{product_id ? 'Edit' : 'Create'} a new product listing
+						{product_id ? 'Edit' : 'Create a new'} product listing
 					</div>
 				</div>
 			</div>
