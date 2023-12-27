@@ -122,9 +122,25 @@
 			JSON.parse(valueArray[5])
 		]; // back to a number
 
+		// Require at least one keyword
+		if (!keywords_input.results || keywords_input.results.length === 0) {
+			console.error('Product validation failed.');
+			return toast.push(
+				'Add at least one keyword to make searching easier and enhance product searchability.'
+			);
+		}
 		// Return an error if duplicates of the same entry is found in keywords_input.results
-		if (new Set(keywords_input.results).size !== keywords_input.results.length ?? 0) {
-			return toast.push('You cannot have duplicate keywords. Remove any duplicate keywords and press submit to continue.');
+		if (new Set(keywords_input.results).size !== keywords_input.results?.length ?? 0) {
+			console.error('Product validation failed.');
+			return toast.push(
+				'You cannot have duplicate keywords. Remove any duplicate keywords and press submit to continue.'
+			);
+		}
+
+		// Require a product image
+		if (valueArray[0] === '') {
+			console.error('Product validation failed.');
+			return toast.push('You need to upload an image.');
 		}
 		// Make the last element the value of the keywords_input array
 		// Minus one to overwrite the last entry, which is supposed to be an empty/blank string

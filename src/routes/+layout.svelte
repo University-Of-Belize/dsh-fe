@@ -139,6 +139,8 @@
 					goto('/watchdog/error');
 				}, 2000);
 			}
+
+			// Pull the user back into setup
 			if (window.matchMedia('(display-mode: standalone)').matches && clocation.pathname !== '/auth/register') {
 				toast.push('Thanks for completing setup. You can now register your account.');
 				localStorage.clear();
