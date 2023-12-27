@@ -1,36 +1,48 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import Fa from 'svelte-fa';
-	export let icon: import('@fortawesome/free-solid-svg-icons').IconDefinition; // Required
+	export let icon: import('@fortawesome/free-solid-svg-icons').IconDefinition | undefined = undefined; // Optional
 	export let name: string; // Required
 	export let placeholder: string; // Required
 	export let custom_style: string | undefined = '';
-	export let value: string | undefined = '';
+	export let container_style: string = "";
+	export let value: string = '';
 	export let required: boolean = false; // Optional
 	export let disabled: boolean = false; // Optional
 	export let disabled_text: string = 'You cannot type here.'; // Optional
+	let class_: string | undefined = '';
+	export { class_ as class };
 
+	let inputBox: HTMLInputElement;
 	const dispatch = createEventDispatcher();
 
-	function handleChange(event: Event) {
+	function handleInput(event: Event) {
 		dispatch('input', event?.target?.value);
+	}
+	function handleKeyDown(event: Event) {
+		value = inputBox.value;
+		dispatch('keydown', event);
 	}
 </script>
 
+<svelte:options accessors />
 <div
 	aria-disabled={disabled}
 	title={disabled ? disabled_text : ''}
-	class="username flex-1 flex mt-2 rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORBLK aria-disabled:opacity-40 aria-disabled:cursor-not-allowed {custom_style}"
+	style={container_style}
+	class="textinput_generic flex-1 flex mt-2 rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORBLK aria-disabled:opacity-40 aria-disabled:cursor-not-allowed {custom_style}"
 >
 	<div class="icon w-fit">
 		<Fa {icon} size="1.25x" class="text-COLORBLK pr-4" />
 	</div>
 	<input
-		on:input={handleChange}
+	bind:this={inputBox}
+		on:keydown={handleKeyDown}
+		on:input={handleInput}
 		{value}
 		type="text"
 		{name}
-		class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent disabled:text-black disabled:cursor-not-allowed"
+		class="w-full font-medium focus:outline-none text-COLORBLK py-1 px-2 bg-transparent disabled:text-black disabled:cursor-not-allowed {class_}"
 		{placeholder}
 		{required}
 		{disabled}
