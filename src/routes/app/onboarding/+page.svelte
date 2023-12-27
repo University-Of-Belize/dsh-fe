@@ -26,6 +26,7 @@
 					image="/pwa/screenshots/mobile_1.jpg"
 					image_alt="Plattr Mobile App"
 					button_icon={faMobileAlt}
+					button_color="COLORGRN2"
 					button_text="Install for mobile"
 					where_to="/app/mobile"
 				/>
@@ -36,6 +37,7 @@
 					image="/pwa/screenshots/desktop_1.jpg"
 					image_alt="Plattr Mobile App"
 					button_icon={faDesktopAlt}
+					button_color="COLORGRN2"
 					button_text="Install for desktop"
 					where_to="/app/desktop"
 				/>

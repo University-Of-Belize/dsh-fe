@@ -43,6 +43,7 @@
 					image="/pwa/screenshots/desktop_1.jpg"
 					image_alt="Plattr Desktop App"
 					button_icon={faCheck}
+					button_color="COLORGRN2"
 					button_text="Read the terms and conditions"
 					where_to="/app/desktop#terms"
 				/>
@@ -53,7 +54,7 @@
 					subtitle="Please carefully review and acknowledge the terms outlined in the Beta Testers Terms before proceeding.<br/>This is required in order to keep your experience safe and smooth as possible"
 					body="Please carefully review and acknowledge the terms outlined in the Beta Testers Agreement before proceeding."
 					body_optional={`
-						<div class="block">
+						<div class="block text-COLORWHT">
 						Are you interested in testing our brand-new cafeteria ordering system?
 						<br />If so, we are excited to have you as an early tester.<br /><br />
 						Your participation in our beta testing program is vital to refining and
@@ -139,6 +140,7 @@
 					
 					`}
 					button_icon={faCheckDouble}
+					button_color="COLORBLE"
 					button_text="I have read and agree to the terms provided here"
 					button_reloads={true}
 					where_to="/app/desktop?eula=true"

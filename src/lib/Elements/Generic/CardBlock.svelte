@@ -24,18 +24,18 @@
     </div> -->
 
 	<div
-		class="flex-1 basis-full lg:basis-0 border border-gray-300 rounded-md overflow-hidden lg:mx-1 p-6"
+		class="flex-1 basis-full lg:basis-0 border border-COLORHPK bg-COLORBLK1 text-COLORWHT rounded-md overflow-hidden lg:mx-1 p-6"
 	>
 		<div class="font-semibold text-xl mb-6">
 			{@html title}
 
-			<div class="text-gray-500 mb-6 text-sm">
+			<div class="text-COLORWHT2 mb-6 text-sm">
 				{@html subtitle}
 			</div>
-			<div class="text-gray-600 text-xl mb-6">
+			<div class="text-COLORWHT2 text-xl mb-6">
 				{@html body}
 			</div>
-			<div class="text-gray-600 text-lg font-normal mb-6">
+			<div class="text-COLORWHT2 text-lg font-normal mb-6">
 				{@html body_optional}
 			</div>
 

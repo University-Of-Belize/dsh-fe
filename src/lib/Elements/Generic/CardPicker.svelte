@@ -16,19 +16,19 @@
 
 <div class="card-picker flex flex-wrap w-full my-4">
     <div class="m-1 flex-1">
-        <div class="flex w-full border border-gray-300 rounded-md overflow-hidden">
+        <div class="flex w-full border border-COLORBLE rounded-md overflow-hidden">
             <img src={image} alt={image_alt} class="w-full object-cover" />
         </div>
     </div>
 
-    <div class="flex-1 basis-full lg:basis-0 border border-gray-300 rounded-md overflow-hidden lg:mx-6 p-6">
+    <div class="flex-1 basis-full text-COLORWHT lg:basis-0 border border-gray-300 rounded-md overflow-hidden lg:mx-6 p-6">
         <div class="font-semibold text-xl mb-6">
            {title}
 
-            <div class="text-gray-500 mb-6 text-sm">
+            <div class="text-COLORWHT2 mb-6 text-sm">
                 {subtitle}
             </div>
-            <div class="text-gray-600 text-xl mb-6">
+            <div class="text-COLORWHT text-xl mb-6">
                 {body}
             </div>
 

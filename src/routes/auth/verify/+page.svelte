@@ -195,7 +195,7 @@
 					>
 						<Button
 							icon={undefined}
-							color="COLORWHT1"
+							color="COLORBLK2"
 							color_t="COLORWHT"
 							custom_style="justify-center"
 							text={buttonText}
