@@ -193,7 +193,7 @@
 	}
 
 	.hero-image {
-		background-image: url('/homepage/hero-min.png');
+		background-image: url('/homepage/hero-shapes.webp');
 		background-size: cover;
 	}
 	.hero-image-base {

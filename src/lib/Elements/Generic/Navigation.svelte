@@ -47,7 +47,7 @@
 		if (!localStorage.user) {
 			if (localStorage.token) {
 				try {
-					const response = await fetchWebApi('v1/admin/user/lookup', 'GET') as Response;
+					const response = (await fetchWebApi('v1/admin/user/lookup', 'GET')) as Response;
 					if (!response) return;
 					const data = await response.json();
 					// console.log(data);
@@ -84,7 +84,7 @@
 
 	async function getCategories() {
 		if (!cachedCategories) {
-			const response = await fetchWebApi('v1/category', 'GET') as Response;
+			const response = (await fetchWebApi('v1/category', 'GET')) as Response;
 			if (!response) return;
 			const data = await response.json();
 			categories = data.is; // Category[]
@@ -156,16 +156,16 @@
 						<Button icon={faRightToBracket} color="COLORYLW" text="Log in" />
 					</div>
 					{#if installPrompt}
-					<div
-						title="Install the app onto your device"
-						class="btn-wrp"
-						on:click={async () => {
-							await window.installPrompt.prompt();
-							window.location.reload();
-						}}
-					>
-						<Button icon={faDownload} color="COLORBLE" color_t="COLORWHT" text="Install" />
-					</div>
+						<div
+							title="Install the app onto your device"
+							class="btn-wrp"
+							on:click={async () => {
+								await window.installPrompt.prompt();
+								window.location.reload();
+							}}
+						>
+							<Button icon={faDownload} color="COLORBLE" color_t="COLORWHT" text="Install" />
+						</div>
 					{/if}
 				</div>
 			{:else}
@@ -297,8 +297,8 @@
 								goto(
 									`/product?filter=${
 										category.alias
-											? category.alias.toString().toLowerCase()
-											: category.name.toString().toLowerCase()
+											? category.name.toString().toLowerCase()
+											: category.alias.toString().toLowerCase()
 									}`
 								);
 							}}
@@ -306,7 +306,7 @@
 							<Button
 								icon={faStar}
 								color="COLORWHT3"
-								text={category.alias ?? category.name}
+								text={category.name ?? category.alias}
 								color_t="COLORBLK"
 								custom_style="w-full font-semibold"
 							/>
