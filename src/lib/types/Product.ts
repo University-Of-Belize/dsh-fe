@@ -14,7 +14,7 @@ interface Product {
 	reviews: Review[];
 	slug: string;
 	__v: number;
-	search_terms: string[];
+	keywords: string[];
 }
 
 interface CartProduct {
@@ -31,7 +31,7 @@ interface CartProduct {
 		reviews: Review[];
 		slug: string;
 		__v: number;
-		search_terms: string[];
+		keywords: string[];
 	};
 	quantity: number;
 	_id: string;

@@ -1,3 +1,5 @@
+<svelte:options accessors />
+
 <script lang="ts">
 	import TextInput from '$lib/Elements/Generic/TextInput.svelte';
 	export let placeholder: string = 'Type a tag and press Enter';
@@ -7,7 +9,7 @@
 	let tagInputArea: TextInput;
 	let wantsBackspace: boolean = false;
 
-	async function addTag(tag: string) {
+	export async function addTag(tag: string) {
 		const tagElement = document.createElement('div');
 		const closeElement = document.createElement('span');
 

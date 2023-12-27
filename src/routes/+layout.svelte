@@ -127,6 +127,28 @@
 			}
 		}
 
+		// If we're in setup, we pull the user back to the setup screen
+		if (localStorage.setup_inProgress) {
+			// If we're not in the app and our setup is incomplete
+			if (
+				!window.matchMedia('(display-mode: standalone)').matches &&
+				clocation.pathname !== '/watchdog/error'
+			) {
+				toast.push('You have an incomplete setup. Please open the app on your device.');
+				setTimeout(() => {
+					goto('/watchdog/error');
+				}, 2000);
+			}
+			if (window.matchMedia('(display-mode: standalone)').matches && clocation.pathname !== '/auth/register') {
+				toast.push('Thanks for completing setup. You can now register your account.');
+				localStorage.clear();
+				localStorage.setItem('eula', 'true');
+				setTimeout(() => {
+					goto('/auth/register');
+				}, 2000);
+			}
+		}
+
 		// Should just run once in manual mode since we don't want to pester users
 		if (localStorage.token) {
 			try {

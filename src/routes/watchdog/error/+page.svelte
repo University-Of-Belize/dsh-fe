@@ -19,32 +19,34 @@
 				'You have been disconnected from the server. Please wait while we try to reconnect you.'
 			);
 
-			// Poll the server and check to see if the API is online/working
-			onlinePoller = setInterval(async () => {
-				status_text = 11; // Start again
-				localStorage.removeItem('serverOffline');
-				const isOnline = (await fetchWebApi(
-					'v1/dash',
-					'GET',
-					undefined,
-					undefined,
-					undefined,
-					true
-				)) as Response;
-				if (isOnline) {
-					localStorage.removeItem('watchdog');
-					localStorage.removeItem('watchDogReason');
-					toast.push('Back online! 🎉');
-					await goto(window.location.href ?? '/');
-					clearInterval(onlinePoller); // Remove this shizz (lol)
-					clearInterval(statusTextDecrementer); // Remove this shizz too!! (lollol)
-				} else {
-					localStorage.setItem('serverOffline', 'true');
-				}
-			}, 10000); // 10s
-			statusTextDecrementer = setInterval(async () => {
-				status_text -= 1;
-			}, 1000); // 1s
+			if (!localStorage.customReason) {
+				// Poll the server and check to see if the API is online/working
+				onlinePoller = setInterval(async () => {
+					status_text = 11; // Start again
+					localStorage.removeItem('serverOffline');
+					const isOnline = (await fetchWebApi(
+						'v1/dash',
+						'GET',
+						undefined,
+						undefined,
+						undefined,
+						true
+					)) as Response;
+					if (isOnline) {
+						localStorage.removeItem('watchdog');
+						localStorage.removeItem('watchDogReason');
+						toast.push('Back online! 🎉');
+						await goto(window.location.href ?? '/');
+						clearInterval(onlinePoller); // Remove this shizz (lol)
+						clearInterval(statusTextDecrementer); // Remove this shizz too!! (lollol)
+					} else {
+						localStorage.setItem('serverOffline', 'true');
+					}
+				}, 10000); // 10s
+				statusTextDecrementer = setInterval(async () => {
+					status_text -= 1;
+				}, 1000); // 1s
+			}
 		} else {
 			location.href = '/';
 		}
@@ -55,13 +57,15 @@
 			text = 'Whoops, looks like we messed up 😅';
 		}
 		if (navigator.onLine) {
-			subtitle =
-				localStorage.watchDogReason ??
-				`Technical details: HTTP_${localStorage.status} ${
-					localStorage.error
-						? JSON.parse(localStorage.error).message
-						: 'Could not connect. Please try again'
-				}`;
+			if (localStorage.customReason) {
+				subtitle =
+					localStorage.watchDogReason ??
+					`Technical details: HTTP_${localStorage.status} ${
+						localStorage.error
+							? JSON.parse(localStorage.error).message
+							: 'Could not connect. Please try again'
+					}`;
+			}
 		} else {
 			offLine = true;
 			// Looks like you're not connected to the server and you're
@@ -92,11 +96,12 @@
 					{#if offLine}
 						🌐 Functionality may be limited, or completely unavailable. 🦕
 					{/if}
-
-					<div class="font-light">
-						Feel free to retry reloading at any time, or coming back later.
-					</div>
-					<div class="font-semibold">Retrying in: {status_text}</div>
+					{#if !localStorage.customReason}
+						<div class="font-light">
+							Feel free to retry reloading at any time, or coming back later.
+						</div>
+						<div class="font-semibold">Retrying in: {status_text}</div>
+					{/if}
 				</div>
 			</div></EscrowBanner
 		>

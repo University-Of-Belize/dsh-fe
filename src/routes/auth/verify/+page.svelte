@@ -106,6 +106,12 @@
 				window.open('https://mail.google.com');
 				break;
 			case 4:
+				toast.push('Open the app after installation is complete.');
+				// Block the user from doing anything much
+				localStorage.watchdog = 'true';
+				localStorage.customReason = 'true';
+				localStorage.watchDogReason = 'To continue setup, open the app on your device.';
+				localStorage.setup_inProgress = "true";
 				await installPrompt.prompt().then((choiceResult: any) => {
 					if (choiceResult.outcome === 'accepted') {
 						console.log('User accepted the install prompt');

@@ -19,6 +19,7 @@
 		faList,
 		faLock,
 		faPencil,
+		faQuestionCircle,
 		faSign,
 		faSortAlphaAsc,
 		faTag
@@ -26,16 +27,19 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
+	import TagInput from './../../../../../lib/Elements/Generic/TagInput.svelte';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	const product_id = $page.url.searchParams.get('product_id');
 	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // User data
 	let data: Product = config['ui']['default-product']; // List of users
+	let productForm: HTMLFormElement;
 	let productImage: HTMLImageElement;
 	let photoInput: HTMLInputElement;
 	let photoValue: HTMLInputElement;
 	let categories: Category[] = [];
+	let keywords_input: TagInput;
 
 	async function populateCategories() {
 		const res = (await fetchWebApi('v1/category', 'GET')) as Response;
@@ -78,6 +82,15 @@
 			// Flatten
 			// @ts-ignore
 			// data = data[0];
+
+			// Restore the keywords
+			if (data.keywords && data.keywords.length > 0) {
+				data.keywords.forEach((element) => {
+					keywords_input.addTag(element);
+				});
+				// Remove the placeholder as there will already be tags
+				keywords_input.placeholder = '';
+			}
 			// @ts-ignore
 			if (data.length === 0) {
 				toast.push('Product not found.');
@@ -108,6 +121,14 @@
 			JSON.parse(parseFloat(valueArray[4]).toFixed(2)),
 			JSON.parse(valueArray[5])
 		]; // back to a number
+
+		// Return an error if duplicates of the same entry is found in keywords_input.results
+		if (new Set(keywords_input.results).size !== keywords_input.results.length ?? 0) {
+			return toast.push('You cannot have duplicate keywords. Remove any duplicate keywords and press submit to continue.');
+		}
+		// Make the last element the value of the keywords_input array
+		// Minus one to overwrite the last entry, which is supposed to be an empty/blank string
+		valueArray[valueArray.length - 1] = keywords_input.results;
 		console.log(valueArray);
 
 		if (product_id) {
@@ -194,7 +215,13 @@
 							bind:this={editPane}
 						>
 							<div class="editGroup flex flex-col pb-8 px-4">
-								<form action="#" on:submit={(event) => handleSubmit(event)} class="space-y-3">
+								<form
+									action="#"
+									bind:this={productForm}
+									on:keydown={(e) => e.key === 'Enter' && e.preventDefault()}
+									on:submit={(event) => handleSubmit(event)}
+									class="space-y-3"
+								>
 									<div class="block">
 										<div class="text-2xl text-COLORBLK font-semibold">
 											{data
@@ -337,6 +364,26 @@
 											value={data ? data.category._id : 'placeholder'}
 											custom_style="bg-transparent border border-COLORBLK"
 											options={categories}
+										/>
+									</div>
+									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
+										<div
+											class="label flex items-center justify-start font-semibold w-fit text-lg space-x-2"
+										>
+											<div>Keywords</div>
+											<div
+												title="Keywords can help users in searching for what they need. Add as many as you'd like. Each word will be counted as a keyword. So be specific, and descriptive at the same time. Products are indexed every {config[
+													'server'
+												]['indexing-interval']}, so it may take a while before it takes effect."
+												class="icon cursor-help select-none"
+											>
+												<Fa icon={faQuestionCircle} size="1x" />
+											</div>
+										</div>
+										<TagInput
+											bind:this={keywords_input}
+											custom_style="bg-transparent"
+											placeholder="Type in a keyword and press 'Enter'"
 										/>
 									</div>
 									<button class="btn_wrp w-fit h-fit" type="submit">
