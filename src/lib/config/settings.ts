@@ -17,13 +17,13 @@ const settings = {
 		}
 	},
 	'product-view': {
-		'default-image': 'https://via.placeholder.com/500'
+		'default-image': '/placeholder/via-placeholder/500.png'
 	},
 	'product-showcase': {
-		'default-image': 'https://via.placeholder.com/50'
+		'default-image': '/placeholder/via-placeholder/50.png'
 	},
 	'home-page': {
-		'default-image': 'https://via.placeholder.com/100'
+		'default-image': '/placeholder/via-placeholder/100.png'
 	},
 	user: {
 		'default-image': '/placeholder/avatar/128.png'
