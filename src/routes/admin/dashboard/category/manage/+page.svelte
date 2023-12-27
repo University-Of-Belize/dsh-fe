@@ -11,19 +11,23 @@
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
+		faBoltLightning,
 		faCog,
 		faListAlt,
 		faLock,
 		faPencil,
+		faQuestionCircle,
 		faSortAlphaAsc
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
+	import { v4 } from 'uuid';
 	import Fa from 'svelte-fa';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	const category_id = $page.url.searchParams.get('category_id');
+	let category_identity_input: TextInput;
 	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // User data
 	let data: Category; // List of users
 
@@ -176,7 +180,17 @@
 						</div>
 						<form action="#" on:submit={(event) => handleSubmit(event)} class="space-y-3">
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label font-semibold w-full text-lg">Category name</div>
+								<div
+									class="label flex items-center justify-start font-semibold w-full text-lg space-x-2"
+								>
+									<div class="title">Category name</div>
+									<div
+										title="This is what users will see in their sidebars, and you will see in your dashboard."
+										class="icon cursor-help select-none"
+									>
+										<Fa icon={faQuestionCircle} size="1x" />
+									</div>
+								</div>
 								<TextInput
 									icon={faListAlt}
 									name="name"
@@ -187,11 +201,31 @@
 							</div>
 
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label font-semibold w-full text-lg">Category alias (optional)</div>
+								<div
+									class="label flex items-center justify-start font-semibold w-full text-lg space-x-2"
+								>
+									<div class="title">Category identity (recommended)</div>
+									<div
+										title="Autogenerate a category ID"
+										class="icon cursor-pointer select-none hover:opacity-70"
+										on:click={() => {
+											category_identity_input.value = v4(); // Assign the category ID to a v4 UUID
+										}}
+									>
+										<Fa icon={faBoltLightning} size="1x" />
+									</div>
+									<div
+										title="Narrow down search results by adding a category identity. This is used to identify the category in search results. For example the category identity for food can be 'food'. Although, this has its downsides. First of all, a category identity must not have the same group of words. Otherwise, this will cause the search engine to group all categories with similar characteristics together-which in some cases is a good thing, but in this case it's not what you want. This means that if you have a category called 'food' and another called 'food-and-drinks', the search engine will group them together. This is because they both have the word 'food' in them. This is why it is recommended to use a category ID that is not a word, or to use the generator by clicking on the 'lightning bolt' icon above. For example, 'food' can be 'fd' and this will prevent the search engine from grouping them together."
+										class="icon cursor-help select-none"
+									>
+										<Fa icon={faQuestionCircle} size="1x" />
+									</div>
+								</div>
 								<TextInput
+									bind:this={category_identity_input}
 									icon={faSortAlphaAsc}
 									name="alias"
-									placeholder="Type in a category alias (optional)"
+									placeholder="Type in a category ID (recommended)"
 									custom_style="bg-transparent"
 									value={data ? (data.alias === data.name ? '' : data.alias) : ''}
 								/>

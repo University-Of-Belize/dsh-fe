@@ -391,7 +391,7 @@
 										>
 											<div>Keywords</div>
 											<div
-												title="Keywords can help users in searching for what they need. Add as many as you'd like. Each word will be counted as a keyword. So be specific, and descriptive at the same time. Products are indexed every {config[
+												title="You can think of these as subcategories. Keywords can help users in searching for what they need. Add as many as you'd like, but be strategic when using them. Each word will be counted as a keyword. So be specific, and descriptive at the same time. Like for example, you can tag all drinks (hot or cold) as 'beverages' just as you'd tag all breakfast and lunch items as 'food'. Products are indexed every {config[
 													'server'
 												]['indexing-interval']}, so it may take a while before it takes effect."
 												class="icon cursor-help select-none"
