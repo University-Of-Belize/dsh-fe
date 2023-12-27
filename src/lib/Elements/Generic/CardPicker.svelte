@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div class="flex-1 basis-full text-COLORWHT lg:basis-0 border border-gray-300 rounded-md overflow-hidden lg:mx-6 p-6">
+    <div class="flex-1 basis-full text-COLORWHT lg:basis-0 border border-COLORBLE rounded-md overflow-hidden lg:mx-6 p-6">
         <div class="font-semibold text-xl mb-6">
            {title}
 
