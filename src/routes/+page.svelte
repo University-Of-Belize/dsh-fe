@@ -77,6 +77,7 @@
 			<div class="hero-image h-full w-full" />
 		</div>
 	</div>
+	<!--
 	<div class="content block">
 		<div class="category-grid flex justify-center items-center w-full flex-wrap">
 			<div class="gridelement h-16 w-full flex justify-center items-center relative bg-COLORBLK">
@@ -113,7 +114,7 @@
 						<div
 							class="wrapper bg-COLORBLK opacity-50 w-full h-full absolute flex items-center justify-center"
 						>
-							<!-- Nothing, this is an overlay-->
+							<!-- Nothing, this is an overlay--
 						</div>
 						<div
 							class="hero-image-base h-full w-full"
@@ -132,13 +133,13 @@
 					<div
 						class="content-wrapper w-full h-full absolute flex items-center justify-center text-7xl font-semibold text-COLORWHT z-10"
 					>
-						<!-- Loading data... -->
+						<!-- Loading data... --
 					</div>
 
 					<div
 						class="wrapper bg-COLORBLK1 opacity-50 w-full h-full absolute flex items-center justify-center"
 					>
-						<!-- Nothing, this is an overlay-->
+						<!-- Nothing, this is an overlay--
 					</div>
 					<div class="hero-image-1 h-full w-full" />
 				</div>
@@ -172,6 +173,7 @@
 				</div>{/each}
 		{/if}
 	</div>
+	--->
 	<Footer text="There's more to explore">
 		<div class="block">
 			<div class="text-xl font-light">Shop our entire menu by creating an account</div>
