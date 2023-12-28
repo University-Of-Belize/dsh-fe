@@ -79,7 +79,15 @@
 					<div class="btn-wrp" on:click={() => history.back()}>
 						<Button text="Go Back" color="COLORBLK4" color_t="COLORWHT" icon={undefined} />
 					</div>
-					<div class="btn-wrp" on:click={() => emptyCart(null)}>
+					<div
+						class="btn-wrp"
+						on:click={() => {
+							emptyCart(null);
+							setTimeout(() => {
+								window.location.reload();
+							}, 3000);
+						}}
+					>
 						<IconButton icon={faTrash} color="COLORBLK4" color_t="COLORHPK" />
 					</div>
 					<div class="btn-wrp" on:click={() => window.print()}>
