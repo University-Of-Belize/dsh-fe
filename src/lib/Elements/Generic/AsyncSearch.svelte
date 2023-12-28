@@ -32,7 +32,7 @@
 		<Fa icon={faSearch} size="1.01x" class="text-COLORWHT pr-4" />
 	</div>
 	<input
-		{value}
+		value={value ?? ''}
 		type="text"
 		name="search"
 		class="w-full font-regular focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"

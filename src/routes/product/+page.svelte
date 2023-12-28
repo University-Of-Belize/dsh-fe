@@ -38,12 +38,12 @@
 			products.set(searchResults); // @ts-ignore
 		} else {
 			try {
-				const namePromise = fetchWebApi(
+				const namePromise = (await fetchWebApi(
 					`v1/search?filter=alias&q=${
 						params_filter?.toString().toLowerCase() ?? params?.toString().toLowerCase()
 					}`,
 					'GET'
-				);
+				)) as Response;
 				const nameResponse = await namePromise;
 				if (nameResponse.status === 404) {
 					throw new Error('Name not found');
@@ -65,10 +65,11 @@
 
 <main class="w-full h-screen">
 	<div class="navigation w-full z-20">
-		<Navigation transparency={5} search={true} value={params ?? undefined} />
+		<!-- Params to empty string--not undefined otherwise it will make the value actually be the string 'undefined' -->
+		<Navigation transparency={5} search={true} value={params ?? ''} />
 	</div>
 	<div
-		class="content-wrapper w-full h-full absolute flex items-start justify-start overflow-auto z-10 pb-40"
+		class="content-wrapper w-full h-full absolute lg:flex items-start justify-start overflow-auto z-10 pb-40"
 	>
 		{#if $products && $products.length > 0}
 			<div class="flex flex-wrap">
@@ -127,9 +128,11 @@
 				{/each}
 			</div>
 		{:else}
-			<div class="flex items-center justify-center item-center h-full w-full flex-wrap">
+			<div
+				class="flex items-center justify-center item-center h-full w-full flex-wrap text-COLORWHT4"
+			>
 				<div class="flex items-center justify-center item-center h-fit w-full flex-wrap">
-					<div class="icon basis-full h-fit flex items-center justify-center w-full text-gray-800">
+					<div class="icon basis-full h-fit flex items-center justify-center w-full">
 						<Fa icon={faShoppingCart} size="2x" />
 					</div>
 					<p class="font-semibold">No products found</p>

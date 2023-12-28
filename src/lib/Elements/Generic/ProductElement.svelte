@@ -19,7 +19,7 @@
 	export { productSlug as slug };
 </script>
 
-<div class="bg-COLORBLK1 rounded-lg shadow-lg p-4 m-4 flex max-w-lg">
+<div class="bg-COLORBLK1 rounded-lg shadow-lg p-4 m-4 flex w-full lg:500px">
 	<div class="flex-none">
 		<img
 			src={productImage || config['product-view']['default-image']}
@@ -62,3 +62,11 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	@media (min-width: 1024px) {
+		.lg\:500px {
+			width: 500px;
+		}
+	}
+</style>
