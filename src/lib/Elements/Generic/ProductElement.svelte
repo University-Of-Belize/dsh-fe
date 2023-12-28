@@ -56,7 +56,7 @@
 				Details
 			</div>
 			<div class="addToCart" on:click={() => addToCart(productId, 1)}>
-				<IconButton icon={faCartPlus} color="COLORBLE" />
+				<IconButton icon={faCartPlus} color="COLORBLE" color_t="COLORWHT" />
 			</div>
 			<!-- <IconButton icon={faHeart} color="COLORRED" class="hidden lg:flex"/> -->
 		</div>

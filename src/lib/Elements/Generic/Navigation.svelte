@@ -173,7 +173,7 @@
 				<div class="pnav flex items-center justify-center lg:space-x-4">
 					{#if staff}
 						<div class="btn-wrp" title="Admin dashboard" on:click={() => goto('/admin/dashboard')}>
-							<IconButton icon={faCogs} color="COLORBLK1" color_t="COLORBLE" />
+							<IconButton icon={faCogs} color="COLORBLE" color_t="COLORWHT" />
 						</div>{/if}
 					<div class="btn-wrp" title="My shopping cart" on:click={() => goto('/product/checkout')}>
 						<IconButton icon={faCartShopping} color="COLORBLK1" color_t="COLORWHT" />
