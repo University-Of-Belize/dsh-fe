@@ -112,21 +112,29 @@
 				bind:this={navToggle}
 				on:click={toggleNav}
 			>
-				<Fa icon={faBars} size="1.01x" class="text-COLORWHT" />
+				<Fa icon={faBars} size="1.25x" class="text-COLORWHT" />
 			</div>
-			<h1
-				class="flex text-COLORWHT font-semibold hover:underline cursor-pointer"
+			<div
+				class="flex items-center justify-center bg-COLORBLK1 {config.ui['branding-logo'].trim() !=
+				''
+					? 'pr-4'
+					: 'px-4 py-2'} rounded-sm text-COLORWHT font-semibold overflow-clip hover:underline cursor-pointer space-x-4"
 				on:click={() => goto(`${titleWhere}`)}
 			>
-				{@html staff ? titleText + ' | Staff Mode' : titleText}
-			</h1>
+				{#if config.ui['branding-logo'] && config.ui['branding-logo'].trim() != ''}
+					<div class="bg-COLORBLK4 px-2 py-2">
+						<img src={config.ui['branding-logo']} style="height: 30px;" />
+					</div>
+				{/if}
+				<div>{@html staff ? titleText + ' | Staff Mode' : titleText}</div>
+			</div>
 			{#if search}
 				<form
 					class="searchbar flex-1 hidden lg:flex rounded-sm bg-COLORBLK focus:bg-COLORBLK1 active:bg-COLORBLK1 border border-COLORWHT5 px-4 py-2 lg:mx-8 items-center text-sm bg-opacity-90"
 					action="/product"
 				>
 					<div class="searchicon w-fit">
-						<Fa icon={faSearch} size="1.01x" class="text-COLORWHT pr-4" />
+						<Fa icon={faSearch} size="1.25x" class="text-COLORWHT pr-4" />
 					</div>
 					<input
 						{value}
@@ -170,13 +178,21 @@
 					{/if}
 				</div>
 			{:else}
-				<div class="pnav flex items-center justify-center lg:space-x-4 rounded-r-full rounded-l-full" style="background: rgb(var(--COLORWHT) / 0.18);">
+				<div
+					class="pnav flex items-center justify-center lg:space-x-4 rounded-r-full rounded-l-full"
+					style="background: rgb(var(--COLORWHT) / 0.18);"
+				>
 					{#if staff}
 						<div class="btn-wrp" title="Admin dashboard" on:click={() => goto('/admin/dashboard')}>
 							<IconButton icon={faCogs} color="COLORBLE" color_t="COLORWHT" class="px-6 py-3" />
 						</div>{/if}
 					<div class="btn-wrp" title="My shopping cart" on:click={() => goto('/product/checkout')}>
-						<IconButton icon={faCartShopping} color="COLORBLK3" color_t="COLORWHT" class="px-6 py-3" />
+						<IconButton
+							icon={faCartShopping}
+							color="COLORBLK3"
+							color_t="COLORWHT"
+							class="px-6 py-3"
+						/>
 					</div>
 					<img
 						src={user.profile_picture ?? config['user']['default-image']}
