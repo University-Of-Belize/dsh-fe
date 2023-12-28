@@ -16,6 +16,6 @@
 	class="button w-fit flex rounded-sm bg-{color} h-full hover:bg-opacity-80 cursor-pointer text-{color_t} px-4 py-2 items-center text-sm select-none mr-2 {className}"
 >
 	<div class="icon w-fit">
-		<Fa {icon} size="1.01x" />
+		<Fa {icon} size="1.25x" />
 	</div>
 </div>

@@ -170,13 +170,13 @@
 					{/if}
 				</div>
 			{:else}
-				<div class="pnav flex items-center justify-center lg:space-x-4">
+				<div class="pnav flex items-center justify-center lg:space-x-4 rounded-r-full rounded-l-full" style="background: rgb(var(--COLORWHT) / 0.18);">
 					{#if staff}
 						<div class="btn-wrp" title="Admin dashboard" on:click={() => goto('/admin/dashboard')}>
-							<IconButton icon={faCogs} color="COLORBLE" color_t="COLORWHT" />
+							<IconButton icon={faCogs} color="COLORBLE" color_t="COLORWHT" class="px-6 py-3" />
 						</div>{/if}
 					<div class="btn-wrp" title="My shopping cart" on:click={() => goto('/product/checkout')}>
-						<IconButton icon={faCartShopping} color="COLORBLK1" color_t="COLORWHT" />
+						<IconButton icon={faCartShopping} color="COLORBLK3" color_t="COLORWHT" class="px-6 py-3" />
 					</div>
 					<img
 						src={user.profile_picture ?? config['user']['default-image']}
@@ -184,7 +184,7 @@
 						alt="{user.username}'s photo"
 						width="40px"
 						class="rounded-full cursor-pointer hover:opacity-80 border border-COLORWHT bg-COLORBLK1"
-						style="height: 40px;"
+						style="height: 42px; width: 42px;"
 						on:click={async () => {
 							await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
 						}}
