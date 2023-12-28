@@ -46,6 +46,9 @@
 		--COLORYLW: 255 217 31; /* Yellow */
 
 		--COLORBLE: 0 163 255;
+		--COLORBLE: 0 93 255;
+		/* --COLORBLE: 0 127 255; */ /* Pass */
+		/* --COLORBLE: 39 84 216; */ /* Pass */
 
 		--COLORBYW: 71 207 115; /* A shade similar to the specified color */
 

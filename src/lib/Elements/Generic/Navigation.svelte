@@ -154,7 +154,7 @@
 							await goto('/auth/login');
 						}}
 					>
-						<Button icon={faRightToBracket} color="COLORYLW" color_t="COLORBLK4" text="Log in" />
+						<Button icon={faRightToBracket} color="COLORBLK2" color_t="COLORYLW" text="Log in" />
 					</div>
 					{#if installPrompt}
 						<div
@@ -165,7 +165,7 @@
 								window.location.reload();
 							}}
 						>
-							<Button icon={faDownload} color="COLORBLE" color_t="COLORBLK4" text="Install" />
+							<Button icon={faDownload} color="COLORBLE" color_t="COLORWHT" text="Install" />
 						</div>
 					{/if}
 				</div>
@@ -253,7 +253,7 @@
 			{#if !user}
 				<div class="top-row flex justify-between items-center w-full pt-2">
 					<div class="btn-wrp pr-1" on:click={() => goto('/auth/login')}>
-						<Button icon={faRightToBracket} color="COLORYLW" color_t="COLORBLK3" text="Log in" />
+						<Button icon={faRightToBracket} color="COLORBLK2" color_t="COLORYLW" text="Log in" />
 					</div>
 					<div class="btn-wrp pl-2" on:click={() => goto('/auth/register')}>
 						<Button icon={faGift} color="COLORPNK" color_t="COLORWHT" text="Sign up" />
