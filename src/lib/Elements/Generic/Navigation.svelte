@@ -186,7 +186,7 @@
 						class="rounded-full cursor-pointer hover:opacity-80 border border-COLORWHT bg-COLORBLK1"
 						style="height: 40px;"
 						on:click={async () => {
-							await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
+							await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
 						}}
 					/>
 				</div>
@@ -277,7 +277,7 @@
 					</div>
 					<div
 						on:click={async () => {
-							await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
+							await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
 						}}
 					>
 						<Button

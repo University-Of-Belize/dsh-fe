@@ -5,20 +5,33 @@
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import TextInput from '$lib/Elements/Generic/TextInput.svelte';
-	import UserBanner from '$lib/Elements/Generic/UserBanner.svelte';
+	import UserBanner from '$lib/Elements/Generic/UserBanner2.svelte';
 	import { editUser, registerUser } from '$lib/Elements/Utility/User';
+	import { R2S3Upload } from '$lib/Elements/Utility/vendor/dishout/r2_s3';
 	import config from '$lib/config/settings';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { faAd, faCog, faDollar, faLock, faUserCog } from '@fortawesome/free-solid-svg-icons';
+	import {
+		faAd,
+		faCog,
+		faDollar,
+		faImage,
+		faLock,
+		faUserCog
+	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
+	import Fa from 'svelte-fa';
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	const user_id = $page.url.searchParams.get('user_id');
 	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // User data
 	let data: User; // List of users
 	let debounceTimeout: number;
+	let profileManagement: UserBanner;
+	let photoBannerInput: HTMLInputElement;
+	let photoBannerValue: HTMLInputElement;
+	let userBannerImage: HTMLImageElement;
 
 	async function catchAll() {
 		// Do not run if there is no user_id provided
@@ -182,7 +195,7 @@
 						await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
 					}}
 				>
-										<Button
+					<Button
 						icon={faCog}
 						color="COLORBLK3"
 						text="My account settings"
@@ -193,35 +206,27 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto pb-40">
-			<div class="flex-header flex items-center w-full flex-wrap">
-				<div class="block">
-					<div class="flex text-2xl font-semibold pb-2">
-						{user_id
-							? user_id == user._id
-								? 'My'
-								: data
-								? `${data.username}'s`
-								: "User's"
-							: 'Create'} User Account
-					</div>
-					<div class="flex text-xl font-semibold pb-12">
-						{user_id ? 'Edit' : 'Create'}
-						{user_id ? (user_id == user._id ? 'Your' : data ? `${data.username}'s` : 'An') : 'An'} Account
-					</div>
-				</div>
-			</div>
+		<div class="content block lg:px-16 lg:py-16 w-full h-full bg-transparent overflow-auto pb-40">
 			<div class="flex flex-wrap w-full">
 				{#if data != undefined}
 					{#if !isNaN(user.id)}
-						<div class="user_wrap w-full">
+						<div
+							class="user_wrap relative flex justify-center items-end w-full rounded-md bg-COLORBLK2 h-56"
+						>
+							<img
+								class="absolute w-full h-full object-cover rounded-md"
+								bind:this={userBannerImage}
+								src={(user?.banner ?? user?.profile_picture) || config['user']['default-image']}
+								alt="{user?.username}'s banner"
+								on:error={() => {
+									user.banner = config['user']['default-image'];
+								}}
+							/>
+							<!-- tag--->
 							<UserBanner
+								bind:this={profileManagement}
 								user={data}
-								tag
-								tagColor={data?.staff ? 'COLORHPK' : 'COLORGRN2'}
-								tagColor_t={data?.staff ? 'COLORWHT' : 'COLORWHT'}
-								tagText={data?.staff ? 'Admin' : 'User'}
-								description="Token: {data?.token ?? '<b>Redacted</b>'}"
+								description={data?.staff ? 'Administrator' : 'Standard Account'}
 								editProfilePicture={// Admins only have so much control over users
 								data._id == user._id}
 							>
@@ -238,12 +243,50 @@
 									/>
 								</div>
 							</UserBanner>
+							<div
+								class="widget_andInput"
+								on:click={() => {
+									photoBannerInput.click();
+								}}
+							>
+								<!-- Don't show the default input -->
+								<input
+									class="hidden"
+									type="file"
+									accept="image/*"
+									bind:this={photoBannerInput}
+									on:change={async (e) => {
+										toast.push('Uploading...');
+										const pub_url = await R2S3Upload(e, 'banner_photos');
+										await profileManagement.updateBannerPhoto(pub_url);
+										photoBannerValue.value = pub_url;
+										userBannerImage.src = pub_url;
+									}}
+								/>
+								<input
+									type="hidden"
+									name="photoValue"
+									class="photoValue"
+									bind:this={photoBannerValue}
+									value={user ? user.banner : undefined}
+								/>
+								<div
+									style="bottom: -4%; right: -0.8%;"
+									class="widget-wrp z-10 absolute flex w-full items-center justify-end"
+								>
+									<div
+										class="widget shadow-md cursor-pointer hover:opacity-80 bg-COLORBLE px-2 py-2 text-COLORWHT w-fit rounded-md"
+									>
+										<Fa icon={faImage} size="0.85x" />
+									</div>
+								</div>
+							</div>
 						</div>
 					{/if}{/if}
 				<div
 					class="editPane hidden flex flex-col lg:flex-row {staff
 						? 'justify-around'
-						: 'justify-start'} w-full bg-COLORBLK1 py-4 px-4"
+						: 'justify-start'} w-full bg-COLORBLK1 py-4 pt-9 px-4"
 					bind:this={editPane}
 				>
 					<div class="editGroup flex flex-col pb-8 px-4">

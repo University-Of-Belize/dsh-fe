@@ -4,10 +4,10 @@
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
+	import { faImage } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
 	import { R2S3Upload } from '../Utility/vendor/dishout/r2_s3';
-	import { faImage } from '@fortawesome/free-solid-svg-icons';
 	export let user: User;
 	export let tag: boolean = false;
 	export let tagColor: string = 'COLORWHT';
@@ -38,6 +38,25 @@
 		user.profile_picture = pub_url;
 		localStorage.setItem('user', JSON.stringify(user)); // Update the user
 	}
+	export async function updateBannerPhoto(pub_url: string) {
+		const r = (await fetchWebApi(
+			'v1/admin/user/manage/banner_picture',
+			'PUT',
+			what_is(what.private.user, pub_url)
+		)) as Response; // JS doesn't allow type declarations
+		if (!r) return;
+		if (!r.ok) {
+			try {
+				const res = await r.json();
+				return toast.push(res.message);
+			} catch (error) {
+				return toast.push(`There was an issue while updating the banner photo: ${error.message}`);
+			}
+		}
+		toast.push('Updated banner photo. It may take a while to show up around the site.');
+		user.banner = pub_url;
+		localStorage.setItem('user', JSON.stringify(user)); // Update the user
+	}
 </script>
 
 <!-- Color stub -->
@@ -47,10 +66,10 @@
 	&nbsp;
 </div>
 
-<div class="review my-4 bg-COLORBLK3 bg-opacity-50 px-4 py-4 rounded-md">
+<div class="review bg-COLORBLK3 w-full bg-opacity-50 px-4 py-4 rounded-md z-10">
 	<div class="flex flex-wrap bg-opacity-100 space-y-4 lg:space-y-2">
 		<div
-			class="reviewer-pfp flex flex-row items-center justify-center lg:justify-start w-full lg:w-auto pr-4"
+			class="reviewer-pfp flex flex-row items-center justify-start w-full lg:w-auto pr-4"
 		>
 			{#if editProfilePicture}
 				<div
@@ -92,10 +111,10 @@
 							</div>
 						</div>
 						<div
-							class="product-image relative block overflow-clip rounded-md hover:opacity-80 cursor-pointer"
+							class="profile-image relative block overflow-clip rounded-md hover:opacity-80 cursor-pointer"
 						>
 							<img
-								class="rounded-md w-64 h-64 lg:w-32 lg:h-32"
+								class="rounded-md w-16 h-16 lg:w-32 lg:h-32"
 								bind:this={userImage}
 								src={user?.profile_picture || config['user']['default-image']}
 								alt="{user?.username}'s avatar"

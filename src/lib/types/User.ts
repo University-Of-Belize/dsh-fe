@@ -5,6 +5,7 @@ interface User {
 	password: string;
 	email: string;
 	profile_picture?: string;
+	banner?: string;
 	staff: boolean;
 	credit: {
 		$numberDecimal: string;

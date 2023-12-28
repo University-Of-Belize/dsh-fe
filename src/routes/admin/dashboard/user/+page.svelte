@@ -115,7 +115,7 @@
 				<div class="title font-semibold pb-5">My Account</div>
 				<div
 					on:click={async () => {
-						await goto(`/admin/dashboard/user/manage?user_id=${localStorage.user_id}`);
+						await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
 					}}
 				>
 										<Button
@@ -137,7 +137,7 @@
 				</div>
 				<div class="flex items-center justify-end flex-1">
 					{#if staff}
-						<div class="btn_wrp" on:click={() => goto('/admin/dashboard/user/manage')}>
+						<div class="btn_wrp" on:click={() => goto('/admin/dashboard/user/manage2')}>
 							<Button color="COLORGRN2" color_t="COLORWHT" text="New user" icon={faPlus} />
 						</div>{/if}
 					<!-- <div class="flex flex-col items-end space-y-2">
@@ -204,7 +204,7 @@
 											</div>{/if}
 										<div
 											class="edit-wrap w-fit h-fit"
-											on:click={() => goto(`/admin/dashboard/user/manage?user_id=${user?._id}`)}
+											on:click={() => goto(`/admin/dashboard/user/manage2?user_id=${user?._id}`)}
 										>
 											<Button
 												icon={faCog}

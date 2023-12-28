@@ -35,7 +35,7 @@
 			/>
 		</div>
 		{#if staff}
-			<div class="three pt-1" on:click={() => goto('/admin/dashboard/user/manage')}>
+			<div class="three pt-1" on:click={() => goto('/admin/dashboard/user/manage2')}>
 				<Button
 					icon={faPlus}
 					color="transparent"
