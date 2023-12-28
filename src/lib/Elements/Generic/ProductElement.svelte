@@ -19,18 +19,18 @@
 	export { productSlug as slug };
 </script>
 
-<div class="bg-COLORBLK1 rounded-lg shadow-lg p-4 m-4 flex w-full lg:500px">
-	<div class="flex-none">
+<div class="bg-COLORBLK1 rounded-lg shadow-lg p-4 m-4 flex flex-wrap lg:flex-nowrap w-full lg:500px">
+	<div class="flex-none w-full md:w-auto">
 		<img
 			src={productImage || config['product-view']['default-image']}
 			alt={productName}
-			class="w-48 h-48 object-cover rounded-lg"
+			class="w-full h-48 lg:w-48 object-cover rounded-lg"
 			on:error={() => {
 				productImage = config['product-view']['default-image'];
 			}}
 		/>
 	</div>
-	<div class="relative flex-grow ml-4">
+	<div class="relative flex-grow ml-4 pt-8 md:pt-2 lg:p-0">
 		<h2 class="text-lg font-semibold text-COLORWHT">{productName}</h2>
 		<p class="mt-2 text-COLORWHT4 font-light">
 			{productDescription.length > 100

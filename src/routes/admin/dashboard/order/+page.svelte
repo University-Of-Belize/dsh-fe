@@ -293,7 +293,7 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto pb-40">
+		<div class="content block px-2 md:px-16 py-16 w-full h-full bg-transparent overflow-auto pb-40">
 			<div class="flex-header flex items-start w-full flex-wrap">
 				<div class="block">
 					<div class="flex text-2xl font-semibold pb-2">What's Queued?</div>
@@ -363,7 +363,7 @@
 												<div class="text-2xl font-semibold my-4">
 													{product.product?.productName ?? 'Product Unavailable'}
 												</div>
-												<div class="flex flex-1 justify-end items-center space-x-2">
+												<div class="flex flex-1 basis-full md:basis-0 justify-start md:justify-end items-center space-x-2">
 													{#if staff}
 														<button
 															class="btn_wrp w-fit h-fit"
@@ -380,6 +380,7 @@
 																color_t="COLORWHT"
 																text="Edit Listing"
 																custom_style="my-2"
+																icon_on_sm
 															/>
 														</button>
 													{/if}
@@ -393,6 +394,7 @@
 															color_t="COLORBLK"
 															text="Go to Listing"
 															custom_style="my-2"
+															icon_on_sm
 														/>
 													</button>
 												</div>

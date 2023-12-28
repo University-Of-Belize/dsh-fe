@@ -105,7 +105,8 @@
 
 <div class="navigator w-full h-full select-none">
 	<div class="navigation bg-COLORBLK bg-opacity-{transparency} w-full pl-2 pr-4 py-4 text-lg">
-		<div class="content bg-opacity-100 flex items-center">
+		<div class="content bg-opacity-100 flex items-center justify-between lg:justify-start">
+			<div class="meta-controls flex space-x-1">
 			<div
 				title="Pop open the navigation"
 				class="sidenav bg-COLORBLK1 cursor-pointer hover:bg-opacity-70 px-4 py-3 rounded-sm mr-2"
@@ -126,11 +127,12 @@
 						<img src={config.ui['branding-logo']} style="height: 30px;" />
 					</div>
 				{/if}
-				<div>{@html staff ? titleText + ' | Staff Mode' : titleText}</div>
+				<div class="hidden md:block">{@html staff ? titleText + ' | Staff Mode' : titleText}</div>
 			</div>
+		</div>
 			{#if search}
 				<form
-					class="searchbar flex-1 hidden lg:flex rounded-sm bg-COLORBLK focus:bg-COLORBLK1 active:bg-COLORBLK1 border border-COLORWHT5 px-4 py-2 lg:mx-8 items-center text-sm bg-opacity-90"
+					class="searchbar hidden lg:flex flex-1 rounded-sm bg-COLORBLK focus:bg-COLORBLK1 active:bg-COLORBLK1 border border-COLORWHT5 px-4 py-2 lg:mx-8 items-center text-sm bg-opacity-90"
 					action="/product"
 				>
 					<div class="searchicon w-fit">
@@ -148,7 +150,7 @@
 			{:else}<div class="searchbar flex-1 flex px-4 py-2 mx-8 items-center text-sm" />
 			{/if}
 			<div
-				class="block lg:hidden mobile-flex-fix flex-1 lg:flex-none w-full items-center justify-center text-sm mx-8"
+				class="hidden md:block lg:hidden mobile-flex-fix flex-1 lg:flex-none w-full items-center justify-center text-sm mx-8"
 			>
 				{@html staff ? '' : config['ui']['notice']}
 			</div>
@@ -162,7 +164,7 @@
 							await goto('/auth/login');
 						}}
 					>
-						<Button icon={faRightToBracket} color="COLORBLK2" color_t="COLORYLW" text="Log in" />
+						<Button icon={faRightToBracket} color="COLORBLK2" color_t="COLORYLW" text="Log in" custom_style="py-4 md:py-2" />
 					</div>
 					{#if installPrompt}
 						<div
@@ -250,7 +252,7 @@
 		>
 			{#if search}
 				<form
-					class="searchbar flex-1 lg:hidden rounded-sm bg-COLORBLK focus:bg-COLORBLK1 active:bg-COLORBLK1 border border-COLORWHT5 px-4 py-2 items-center text-sm bg-opacity-90"
+					class="searchbar flex lg:hidden rounded-sm bg-COLORBLK focus:bg-COLORBLK1 active:bg-COLORBLK1 border border-COLORWHT5 px-4 py-2 items-center text-sm bg-opacity-90"
 					action="/product"
 				>
 					<div class="searchicon w-fit">
