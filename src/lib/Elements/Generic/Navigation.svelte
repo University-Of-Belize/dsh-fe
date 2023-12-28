@@ -256,7 +256,7 @@
 						<Button icon={faRightToBracket} color="COLORYLW" color_t="COLORBLK3" text="Log in" />
 					</div>
 					<div class="btn-wrp pl-2" on:click={() => goto('/auth/register')}>
-						<Button icon={faGift} color="COLORPNK" color_t="COLORBLK3" text="Sign up" />
+						<Button icon={faGift} color="COLORPNK" color_t="COLORWHT" text="Sign up" />
 					</div>
 				</div>{:else}
 				<div class="two py-6 space-y-2">

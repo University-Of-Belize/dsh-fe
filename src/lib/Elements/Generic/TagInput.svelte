@@ -130,6 +130,7 @@
 		color: white; /* Corresponds to text-white in Tailwind */
 		border-radius: 0.375rem; /* Corresponds to rounded-md in Tailwind */
 		background-color: #93c5fd; /* Corresponds to bg-blue-300 in Tailwind */
+		background-color: rgb(var(--COLORBLE));
 		width: fit-content; /* Corresponds to w-fit in Tailwind */
 	}
 	:global(.tag-close) {
