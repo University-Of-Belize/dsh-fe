@@ -195,7 +195,7 @@
 	}
 
 	.hero-image {
-		background-image: url('/homepage/hero-shapes.webp');
+		background-image: url('/homepage/digital-art-neon-bubbles.webp');
 		background-size: cover;
 	}
 	.hero-image-base {

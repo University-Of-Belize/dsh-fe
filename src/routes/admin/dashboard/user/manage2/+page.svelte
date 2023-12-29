@@ -206,7 +206,7 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block lg:px-16 lg:py-16 w-full h-full bg-transparent overflow-auto pb-40">
+		<div class="content block md:px-2 lg:px-16 lg:py-16 w-full h-full bg-transparent overflow-auto pb-40">
 			<div class="flex flex-wrap w-full">
 				{#if data != undefined}
 					{#if !isNaN(user.id)}
@@ -216,10 +216,10 @@
 							<img
 								class="absolute w-full h-full object-cover rounded-md"
 								bind:this={userBannerImage}
-								src={(user?.banner ?? user?.profile_picture) || config['user']['default-image']}
-								alt="{user?.username}'s banner"
+								src={(data?.banner ?? '/homepage/eNkPGV.webp') || config['user']['default-image']}
+								alt="{data?.username}'s banner"
 								on:error={() => {
-									user.banner = config['user']['default-image'];
+									data.banner = config['user']['default-image'];
 								}}
 							/>
 							<!-- tag--->
@@ -268,7 +268,7 @@
 									name="photoValue"
 									class="photoValue"
 									bind:this={photoBannerValue}
-									value={user ? user.banner : undefined}
+									value={data ? data.banner : undefined}
 								/>
 								<div
 									style="bottom: -4%; right: -0.8%;"
