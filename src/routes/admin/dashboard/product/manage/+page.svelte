@@ -178,6 +178,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Plattr | Dashboard / Product / Manage '{data? data.productName: "Product"}'</title>
+</svelte:head>
+
 <main class="w-full h-screen overflow-hidden">
 	<div class="navigation w-full z-20">
 		<Navigation

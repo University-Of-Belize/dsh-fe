@@ -172,6 +172,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Plattr | Dashboard / User / Manage {data ? `@${data.username}` : 'User'}</title>
+</svelte:head>
+
 <main class="w-full h-screen overflow-hidden">
 	<div class="navigation w-full z-20">
 		<Navigation
@@ -206,7 +210,9 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block md:px-2 lg:px-16 lg:py-16 w-full h-full bg-transparent overflow-auto pb-40">
+		<div
+			class="content block md:px-2 lg:px-16 lg:py-16 w-full h-full bg-transparent overflow-auto pb-40"
+		>
 			<div class="flex flex-wrap w-full">
 				{#if data != undefined}
 					{#if !isNaN(user.id)}

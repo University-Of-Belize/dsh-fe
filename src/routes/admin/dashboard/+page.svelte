@@ -52,6 +52,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Plattr | Dashboard / Home</title>
+</svelte:head>
+
 <main class="w-full h-screen">
 	<div class="navigation w-full z-20">
 		<Navigation

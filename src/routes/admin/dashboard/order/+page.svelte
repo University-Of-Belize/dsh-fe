@@ -257,6 +257,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Plattr | Dashboard / Orders</title>
+</svelte:head>
+
 <div class="stub hidden border border-" />
 <main class="w-full h-screen overflow-hidden">
 	<div class="navigation w-full z-20">
