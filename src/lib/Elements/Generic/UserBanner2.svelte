@@ -154,7 +154,7 @@
 					</div>
 				{/if}
 			</div>
-			<div class="hidden lg:block text-md font-light text-COLORBLE mt-4 mb-2 lg:m-0">
+			<div class="hidden lg:block text-md font-light text-COLORWHT1 mt-4 mb-2 lg:m-0">
 				{@html description}
 			</div>
 			<div class="actions flex items-center justify-start flex-1 text-COLORWHT w-full lg:w-auto">
