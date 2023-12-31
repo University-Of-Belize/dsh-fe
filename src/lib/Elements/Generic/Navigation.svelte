@@ -292,7 +292,7 @@
 					</div>
 					<div>
 						And, if by chance you do experience any bugs, be sure to tell us using the <a
-							href="/app/help/feedback-hub"
+							href="/app/help-center/feedback-hub"
 							class="underline">Feedback Hub</a
 						>
 					</div>
