@@ -52,7 +52,7 @@
 				<div class="content flex-1 flex items-center justify-center">
 					<div class="block content-wrapper px-4 md:px-8 lg:px-0">
 						<div
-							class="running-heading text-COLORWHT py-10 text-7xl font-medium flex w-full justify-center items-center"
+							class="running-heading text-COLORWHT py-10 text-5xl md:text-7xl font-medium flex w-full justify-center items-center"
 						>
 							Order Anytime,<br /> Anywhere
 						</div>

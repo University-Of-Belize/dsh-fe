@@ -9,6 +9,7 @@
 		faBars,
 		// faBasketShopping,
 		faCartShopping,
+		faCheckDouble,
 		faCog,
 		faCogs,
 		faDownload,
@@ -17,7 +18,10 @@
 		faQuestionCircle,
 		faRightToBracket,
 		faSearch,
-		faStar
+		faStar,
+
+		faX
+
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
@@ -107,29 +111,29 @@
 	<div class="navigation bg-COLORBLK bg-opacity-{transparency} w-full pl-2 pr-4 py-4 text-lg">
 		<div class="content bg-opacity-100 flex items-center justify-between lg:justify-start">
 			<div class="meta-controls flex space-x-1">
-			<div
-				title="Pop open the navigation"
-				class="sidenav bg-COLORBLK1 cursor-pointer hover:bg-opacity-70 px-4 py-3 rounded-sm mr-2"
-				bind:this={navToggle}
-				on:click={toggleNav}
-			>
-				<Fa icon={faBars} size="1.25x" class="text-COLORWHT" />
+				<div
+					title="Pop open the navigation"
+					class="sidenav bg-COLORBLK1 cursor-pointer hover:bg-opacity-70 px-4 py-3 rounded-sm mr-2"
+					bind:this={navToggle}
+					on:click={toggleNav}
+				>
+					<Fa icon={faBars} size="1.25x" class="text-COLORWHT" />
+				</div>
+				<div
+					class="flex items-center justify-center bg-COLORBLK1 {config.ui['branding-logo'].trim() !=
+					''
+						? 'pr-4'
+						: 'px-4 py-2'} rounded-sm text-COLORWHT font-semibold overflow-clip hover:underline cursor-pointer space-x-4"
+					on:click={() => goto(`${titleWhere}`)}
+				>
+					{#if config.ui['branding-logo'] && config.ui['branding-logo'].trim() != ''}
+						<div class="bg-COLORBLK4 px-2 py-2">
+							<img src={config.ui['branding-logo']} style="height: 30px;" />
+						</div>
+					{/if}
+					<div class="hidden md:flex">{@html staff ? titleText + ' | Staff Mode' : titleText}</div>
+				</div>
 			</div>
-			<div
-				class="flex items-center justify-center bg-COLORBLK1 {config.ui['branding-logo'].trim() !=
-				''
-					? 'pr-4'
-					: 'px-4 py-2'} rounded-sm text-COLORWHT font-semibold overflow-clip hover:underline cursor-pointer space-x-4"
-				on:click={() => goto(`${titleWhere}`)}
-			>
-				{#if config.ui['branding-logo'] && config.ui['branding-logo'].trim() != ''}
-					<div class="bg-COLORBLK4 px-2 py-2">
-						<img src={config.ui['branding-logo']} style="height: 30px;" />
-					</div>
-				{/if}
-				<div class="hidden md:flex">{@html staff ? titleText + ' | Staff Mode' : titleText}</div>
-			</div>
-		</div>
 			{#if search}
 				<form
 					class="searchbar hidden lg:flex flex-1 rounded-sm bg-COLORBLK focus:bg-COLORBLK1 active:bg-COLORBLK1 border border-COLORWHT5 px-4 py-2 lg:mx-8 items-center text-sm bg-opacity-90"
@@ -164,7 +168,13 @@
 							await goto('/auth/login');
 						}}
 					>
-						<Button icon={faRightToBracket} color="COLORBLK2" color_t="COLORYLW" text="Log in" custom_style="py-4 md:py-2" />
+						<Button
+							icon={faRightToBracket}
+							color="COLORBLK2"
+							color_t="COLORYLW"
+							text="Log in"
+							custom_style="py-4 md:py-2"
+						/>
 					</div>
 					{#if installPrompt}
 						<div
@@ -240,6 +250,75 @@
 			</div>
 		{/if}
 	</div>
+	{#if localStorage.acknowledged_cookies != 'true'}
+		<div
+			class="announcements-container flex text-center text-COLORWHT bg-COLORHPK bg-opacity-50 py-1 z-20"
+		>
+			<div class="container-wrap flex flex-wrap justify-center items-center w-full bg-opacity-100">
+				<div class="container flex flex-wrap items-center justify-center bg-opacity-100">
+					<div class="bg-opacity-100 text-COLORWHT">
+						We use cookies to ensure you get the best experience on our website. By continuing to
+						use our site, you agree to our{' '}
+						<a
+							class="underline"
+							href="#"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							privacy policy
+						</a>
+						.
+					</div>
+				</div>
+				<div
+					class="btn-wrp flex items-center justify-end md:w-auto mt-2 md:mt-0 md:ml-2"
+					on:click={() => {
+						localStorage.setItem('acknowledged_cookies', 'true');
+						window.location.reload();
+					}}
+				>
+					<Button icon={faCheckDouble} color="COLORBLK2" color_t="COLORYLW" text="Got it" />
+				</div>
+			</div>
+		</div>
+	{/if}
+	{#if localStorage.acknowledged_announcements != 'true'}
+		<div
+			class="announcements-container flex text-center text-COLORWHT bg-COLORBLE bg-opacity-50 py-1 z-20"
+		>
+			<div class="container-wrap flex flex-wrap justify-center items-center w-full bg-opacity-100">
+				<div class="container flex flex-wrap items-center justify-center bg-opacity-100">
+					<div class="bg-opacity-100 text-COLORWHT">
+						Hey, thanks for visiting! We're still in beta, so please bear with us as we work out all the bugs. You can sign up {' '}
+						<a href="/app/onboarding" class="underline">here.</a>
+					</div>
+				</div>
+				<div
+					class="btn-wrp flex items-center justify-end md:w-auto mt-2 md:mt-0 md:ml-2"
+					on:click={() => {
+						localStorage.setItem('acknowledged_announcements', 'true');
+						window.location.reload();
+					}}
+				>
+					<IconButton icon={faX} color="COLORRED" color_t="COLORWHT" />
+				</div>
+			</div>
+		</div>
+	{/if}
+	<!-- <div
+	class="announcements-container text-center text-COLORWHT bg-COLORHPK bg-opacity-50 py-1 z-20"
+	bind:this={debug_selection}
+	on:click={() => {
+		if (hidden) {
+			debug_selection.innerText = 'Show debug...';
+		} else {
+			debug_selection.innerText = 'Hide debug...';
+		}
+		debug_panel.classList.toggle('hidden');
+	}}
+>
+	<div class="bg-opacity-100 text-COLORWHT">Show debug...</div>
+</div> -->
 
 	<div
 		class="sidebar flex justify-start items-center w-full h-screen bg-COLORWHT bg-opacity-25"
