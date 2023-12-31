@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import {
 		faClone,
+		faFeed,
 		faHamburger,
 		faMessage,
 		faPlus,
@@ -30,6 +31,15 @@
 				icon={faMessage}
 				color="COLORBLK3"
 				text="Review management"
+				color_t="COLORWHT"
+				custom_style="w-full font-medium"
+			/>
+		</div>
+		<div class="three pt-1" on:click={() => goto('/admin/dashboard/feedback')}>
+			<Button
+				icon={faFeed}
+				color="COLORBLK3"
+				text="Feedback hub"
 				color_t="COLORWHT"
 				custom_style="w-full font-medium"
 			/>

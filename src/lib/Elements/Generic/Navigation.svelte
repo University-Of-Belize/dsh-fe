@@ -10,8 +10,10 @@
 		// faBasketShopping,
 		faCartShopping,
 		faCheckDouble,
+		faCodePullRequest,
 		faCog,
 		faCogs,
+		faCookieBite,
 		faDownload,
 		// faDashboard,
 		faGift,
@@ -19,9 +21,7 @@
 		faRightToBracket,
 		faSearch,
 		faStar,
-
 		faX
-
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
@@ -256,15 +256,11 @@
 		>
 			<div class="container-wrap flex flex-wrap justify-center items-center w-full bg-opacity-100">
 				<div class="container flex flex-wrap items-center justify-center bg-opacity-100">
-					<div class="bg-opacity-100 text-COLORWHT">
-						We use cookies to ensure you get the best experience on our website. By continuing to
-						use our site, you agree to our{' '}
-						<a
-							class="underline"
-							href="#"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
+					<div class="flex bg-opacity-100 text-COLORWHT space-x-1">
+						<div class="icon mx-2"><Fa icon={faCookieBite} size="1.25x" /></div>
+						We use cookies to ensure you get the best experience on our website. By continuing to use
+						our site, you agree to our
+						<a class="underline" href="#" target="_blank" rel="noopener noreferrer">
 							privacy policy
 						</a>
 						.
@@ -287,10 +283,18 @@
 			class="announcements-container flex text-center text-COLORWHT bg-COLORBLE bg-opacity-50 py-1 z-20"
 		>
 			<div class="container-wrap flex flex-wrap justify-center items-center w-full bg-opacity-100">
-				<div class="container flex flex-wrap items-center justify-center bg-opacity-100">
-					<div class="bg-opacity-100 text-COLORWHT">
-						Hey, thanks for visiting! We're still in beta, so please bear with us as we work out all the bugs. You can sign up {' '}
+				<div class="container flex flex-wrap items-center justify-center bg-opacity-100 text-COLORWHT">
+					<div class="flex bg-opacity-100 text-COLORWHT space-x-1">
+						<div class="icon mx-2"><Fa icon={faCodePullRequest} size="1.25x" /></div>
+						Hey, thanks for visiting! We're still in beta, so please bear with us as we sort out all
+						the bugs. You can sign up
 						<a href="/app/onboarding" class="underline">here.</a>
+					</div>
+					<div>
+						And, if by chance you do experience any bugs, be sure to tell us using the <a
+							href="/app/help/feedback-hub"
+							class="underline">Feedback Hub</a
+						>
 					</div>
 				</div>
 				<div
