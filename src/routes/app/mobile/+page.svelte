@@ -12,7 +12,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	onMount(() => {
-		document.title = 'Plattr | Mobile App Beta Testers Agreement';
+		document.title = 'Plattr | Mobile App / Beta Testers Agreement';
 
 		if (eula) {
 			localStorage.setItem('eula', 'true');
@@ -26,7 +26,7 @@
 	});
 </script>
 
-<main class="w-full h-screen overflow-hidden">
+<main class="w-full h-screen overflow-hidden text-COLORWHT">
 	<div class="navigation w-full z-20">
 		<Navigation transparency={5} search={true} />
 	</div>

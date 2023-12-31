@@ -9,7 +9,7 @@
 	import type { Article } from '$lib/types/Article';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { faCog, faPaperPlane, faTrash } from '@fortawesome/free-solid-svg-icons';
+	import { faCog, faPaperPlane, faReply, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import SearchBar from './../../../../lib/Elements/Generic/SearchBar.svelte';
@@ -95,6 +95,7 @@
 							bind:this={articleInput}
 							placeholder="MarkDown is supported."
 							textOnly
+							unsanitized
 							{user}
 						/>
 						<div
@@ -131,14 +132,11 @@
 							You have not created any help articles as yet. Compose a new one.
 						</div>
 					{/if}
-                    <div class="text-2xl font-semibold pt-8">Previous Submissions</div>
+					<div class="text-2xl font-semibold pt-8">Previous Submissions</div>
 					<div class="flex flex-col-reverse">
 						{#each data as article, i}
 							<div class="user_wrap w-full">
-								<UserPill
-									user={article.author ?? {}}
-									description={`Article ID: ${article._id}<br/>Content: ${article.content}`}
-								>
+								<UserPill user={article.author ?? {}} description={`Article ID: ${article._id}`}>
 									<div class="controls flex space-x-2">
 										<div
 											class="edit-wrap w-fit h-fit"
@@ -155,6 +153,20 @@
 												custom_style="border border-COLORHPK"
 												color_t="COLORHPK"
 												text="Delete article"
+											/>
+										</div>
+										<div
+											class="edit-wrap w-fit h-fit"
+											on:click={() => {
+												goto(`/app/help-center/${article._id}`);
+											}}
+										>
+											<Button
+												icon={faReply}
+												color="transparent"
+												custom_style="border border-COLORGRN1"
+												color_t="COLORGRN"
+												text="View article"
 											/>
 										</div>
 									</div>

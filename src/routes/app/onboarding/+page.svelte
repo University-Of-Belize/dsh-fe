@@ -11,7 +11,7 @@
 	<title>Plattr | Onboarding</title>
 </svelte:head>
 
-<main class="w-full h-screen overflow-hidden">
+<main class="w-full h-screen overflow-hidden text-COLORWHT">
 	<div class="navigation w-full z-20">
 		<Navigation transparency={5} search={true} />
 	</div>

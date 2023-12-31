@@ -56,18 +56,20 @@
 				/>
 			</div>{/if}
 	</div>
-	<div class="section py-6 border-t border-COLORBLK1 border-dashed border-opacity-5">
-		<div class="title font-semibold pb-5">Help Center</div>
-		<div class="three pt-1" on:click={() => goto('/admin/dashboard/new-article')}>
-			<Button
-				icon={faNoteSticky}
-				color="COLORBLK3"
-				text="Write a new article"
-				color_t="COLORWHT"
-				custom_style="w-full font-medium"
-			/>
+	{#if staff}
+		<div class="section py-6 border-t border-COLORBLK1 border-dashed border-opacity-5">
+			<div class="title font-semibold pb-5">Help Center</div>
+			<div class="three pt-1" on:click={() => goto('/admin/dashboard/new-article')}>
+				<Button
+					icon={faNoteSticky}
+					color="COLORBLK3"
+					text="Write a new article"
+					color_t="COLORWHT"
+					custom_style="w-full font-medium"
+				/>
+			</div>
 		</div>
-	</div>
+	{/if}
 	<div class="section py-6 border-t border-COLORBLK1 border-dashed border-opacity-5">
 		<div class="title font-semibold pb-5">Order Management</div>
 		<div class="three pt-1" on:click={() => goto('/admin/dashboard/order')}>

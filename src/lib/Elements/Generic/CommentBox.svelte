@@ -10,16 +10,25 @@
 	export let placeholder: string | undefined = undefined;
 	export let value: string = '';
 	export let textOnly: boolean = false;
+	export let unsanitized: boolean = false;
 	let newReviewContent: HTMLDivElement;
 	let placeholderRemoved = false;
 
 	const dispatch = createEventDispatcher();
 
 	function handleInput(event: Event) {
-		value = escapeHtml(textOnly ? newReviewContent.innerText : newReviewContent.innerHTML);
+		value = unsanitized
+			? textOnly
+				? newReviewContent.innerText
+				: newReviewContent.innerHTML
+			: escapeHtml(textOnly ? newReviewContent.innerText : newReviewContent.innerHTML);
 		dispatch(
 			'input',
-			escapeHtml(textOnly ? newReviewContent.innerText : newReviewContent.innerHTML)
+			unsanitized
+				? textOnly
+					? newReviewContent.innerText
+					: newReviewContent.innerHTML
+				: escapeHtml(textOnly ? newReviewContent.innerText : newReviewContent.innerHTML)
 		);
 	}
 
