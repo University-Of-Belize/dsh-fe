@@ -26,6 +26,7 @@
 			if (!response.ok) {
 				const json = await response.json();
 				branding_text = 'Order not placed';
+				document.title = 'Plattr | Checkout / Error';
 				text = json.message;
 				return toast.push(`${json.message}`, {
 					dismissable: false,
@@ -35,11 +36,13 @@
 				});
 			}
 			text = 'Order placed!';
+			document.title = 'Plattr | Checkout / Confirmed';
 			const json = await response.json();
 			toast.push(`${json.message ?? 'All good to go!'}`);
 		} catch (error) {
 			branding_text = 'Order not placed';
 			text = 'There was an error.';
+			document.title = 'Plattr | Checkout / Error';
 			toast.push(`${error.message}. Try again later.`, {
 				dismissable: false,
 				theme: {
@@ -61,6 +64,10 @@
 		}, 5000);
 	}
 </script>
+
+<svelte:head>
+	<title>Plattr | Checkout / Run Order</title>
+</svelte:head>
 
 <main class="w-full h-screen">
 	<div class="navigation w-full z-20">

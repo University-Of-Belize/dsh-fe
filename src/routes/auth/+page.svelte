@@ -8,3 +8,7 @@
 	}
 	onMount(() => redirectToLogin());
 </script>
+
+<svelte:head>
+	<title>Plattr | Login / Register</title>
+</svelte:head>

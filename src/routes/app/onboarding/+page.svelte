@@ -7,6 +7,10 @@
 	import { faDesktopAlt, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
 </script>
 
+<svelte:head>
+	<title>Plattr | Onboarding</title>
+</svelte:head>
+
 <main class="w-full h-screen overflow-hidden">
 	<div class="navigation w-full z-20">
 		<Navigation transparency={5} search={true} />

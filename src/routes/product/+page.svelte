@@ -63,6 +63,10 @@
 	})();
 </script>
 
+<svelte:head>
+	<title>Plattr | Product Search / {params?.toString().toLowerCase() ?? "Product Search"}</title>
+</svelte:head>
+
 <main class="w-full h-screen">
 	<div class="navigation w-full z-20">
 		<!-- Params to empty string--not undefined otherwise it will make the value actually be the string 'undefined' -->

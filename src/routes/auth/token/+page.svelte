@@ -61,6 +61,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Plattr | Login using a security token</title>
+</svelte:head>
+
 <main class="w-full h-screen">
 	<div class="navigation w-full z-20">
 		<Navigation transparency={5} search={true} />

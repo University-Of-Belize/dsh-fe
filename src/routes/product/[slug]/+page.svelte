@@ -81,6 +81,7 @@
 			// product_id = r[0].id;
 			product.set(r.is); // take the first result
 			product_id = r.is._id;
+			document.title = `Plattr | Product / ${r.is.productName}`;
 			// } else {
 			// 	product.set(null);
 			// }
@@ -136,6 +137,10 @@
 		rating = value;
 	}
 </script>
+
+<svelte:head>
+	<title>Plattr | Product</title>
+</svelte:head>
 
 <main class="w-full h-screen">
 	<div class="navigation w-full z-20">
@@ -219,7 +224,9 @@
 					>
 						<StarCount reviews={$product.reviews} />
 					</div>
-					<div class="rating-as-text w-full flex items-center justify-start pl-1 py-2 text-COLORWHT3">
+					<div
+						class="rating-as-text w-full flex items-center justify-start pl-1 py-2 text-COLORWHT3"
+					>
 						{calculateRating($product.reviews, true)} Reviews
 					</div>
 				</div>
