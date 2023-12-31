@@ -25,6 +25,7 @@
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
+	import { locateNodeUsingHash } from '$lib/Elements/Utility/page';
 	// let hero_image: HTMLDivElement;
 	const staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // The user
 	const user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // The user
@@ -36,24 +37,7 @@
 
 	onMount(async () => {
 		// Mounted scrolling to anchors
-
-		const { hash } = document.location;
-		if (hash) {
-			toast.push('Locating...');
-		}
-		setTimeout(() => {
-			const scrollTo = hash && document.getElementById(hash.slice(1));
-			if (scrollTo) {
-				scrollTo.scrollIntoView();
-			} else if (hash && !scrollTo) {
-				toast.push("Couldn't find that one.<br/>No review found with that ID.", {
-					dismissable: false,
-					theme: {
-						'--toastBarBackground': '#842d69'
-					}
-				});
-			}
-		}, 2000);
+		locateNodeUsingHash('review');
 
 		try {
 			// Check if the slug even exists

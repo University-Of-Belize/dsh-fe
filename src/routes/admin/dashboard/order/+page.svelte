@@ -37,6 +37,7 @@
 // What is what?
 	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';
 	import type { CartProduct } from '$lib/types/Product';
+	import { locateNodeUsingHash } from '$lib/Elements/Utility/page';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
@@ -47,8 +48,9 @@
 	let currentAction: [number, string] = [-1, '']; // Not selected
 	let drawerOpenBy: number;
 	async function catchAll() {
-		// Do not run if there is no product_id provided
-
+		// Try to see if we provided an order ID to search for
+		locateNodeUsingHash("order");
+		// Fetch all orders
 		const res = (await fetchWebApi('v1/admin/order/manage', 'GET')) as Response;
 		const r = await res.json();
 		if (res.status === 403) {
@@ -70,6 +72,8 @@
 		let productsMap = new Map();
 
 		r.is.forEach((order: Order, i: number) => {
+			// Rewrite the universe a bit.
+			copy[i].order_code = order.order_code.substring(0,8).toUpperCase(); // Make a little bit shorter and easier to read
 			if (copy[i].products.length != 0) {
 				// Clear (if not already)
 				copy[i].products = [];
@@ -317,15 +321,11 @@
 					{#if !isNaN(user.id)}
 						<!-- This will never run if there are no orders -->
 						{#each data as order, index}
-							<div class="user_wrap w-full">
-								<div class="ctg_wrp w-full" />
-							</div>
-
 							<div
 								id="order-{order._id}"
 								class="orderPane flex flex-col lg:flex-row justify-start w-full bg-COLORBLK1 py-4 px-4 rounded-sm border border-COLORWHT3 my-8"
 							>
-								<div class="editGroup flex flex-col pb-8 px-4 w-full">
+								<div class="order-details flex flex-col pb-8 px-4 w-full" id={order.order_code}>
 									<div class="flex space-x-4">
 										<div class="pfp">
 											<img
@@ -523,12 +523,12 @@
 												class="flex items-center justify-center px-4 space-x-2 rounded-md hover:bg-gray-400 hover:bg-opacity-25 opacity-50 cursor-pointer select-none"
 												on:click={() => {
 													// Copy the selected text to the clipboard
-													navigator.clipboard.writeText(order.order_code);
+													navigator.clipboard.writeText(`${config.server['bound-domain']}/admin/dashboard/order#${order.order_code}`);
 													toast.push('Order code copied to clipboard.');
 												}}
 												on:keypress={() => {
 													// Copy the selected text to the clipboard
-													navigator.clipboard.writeText(order.order_code);
+													navigator.clipboard.writeText(`${config.server['bound-domain']}/admin/dashboard/order#${order.order_code}`);
 													toast.push('Order code copied to clipboard.');
 												}}
 											>
