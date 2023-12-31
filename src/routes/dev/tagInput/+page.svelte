@@ -89,7 +89,7 @@
 	<div
 		bind:this={terminal}
 		style="font-family: 'Courier New', Courier, monospace;"
-		class="consoleEventLog block font-mono bg-COLORWHT text-COLORBLE rounded-sm w-full p-8"
+		class="consoleEventLog block font-mono border border-COLORWHT text-COLORBLE rounded-sm w-full p-8"
 	>
 		<div>[TERMINAL] Ready to accept input</div>
 	</div>

@@ -45,7 +45,7 @@
 						</div>
 					{/if}
 				</div>
-				<div class="text-md font-light text-COLORBLE">
+				<div class="text-md font-light text-COLORWHT1">
 					{@html description}
 				</div>
 			</div>
