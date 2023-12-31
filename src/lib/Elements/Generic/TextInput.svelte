@@ -1,11 +1,14 @@
+<svelte:options accessors />
+
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import Fa from 'svelte-fa';
-	export let icon: import('@fortawesome/free-solid-svg-icons').IconDefinition | undefined = undefined; // Optional
+	export let icon: import('@fortawesome/free-solid-svg-icons').IconDefinition | undefined =
+		undefined; // Optional
 	export let name: string; // Required
 	export let placeholder: string; // Required
 	export let custom_style: string | undefined = '';
-	export let container_style: string = "";
+	export let container_style: string = '';
 	export let value: string = '';
 	export let required: boolean = false; // Optional
 	export let disabled: boolean = false; // Optional
@@ -25,7 +28,6 @@
 	}
 </script>
 
-<svelte:options accessors />
 <div
 	aria-disabled={disabled}
 	title={disabled ? disabled_text : ''}
@@ -36,7 +38,7 @@
 		<Fa {icon} size="1.25x" class="text-COLORWHT pr-4" />
 	</div>
 	<input
-	bind:this={inputBox}
+		bind:this={inputBox}
 		on:keydown={handleKeyDown}
 		on:input={handleInput}
 		{value}

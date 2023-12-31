@@ -1,20 +1,24 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Generic/Button.svelte';
+	import CommentBox from '$lib/Elements/Generic/CommentBox.svelte';
 	import DashList from '$lib/Elements/Generic/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import UserPill from '$lib/Elements/Generic/UserPill.svelte';
-	import { deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
-	import type { Review } from '$lib/types/Review';
+	import { createFeedback, deleteFeedback } from '$lib/Elements/Utility/Feedback';
+	import type { Feedback } from '$lib/types/Feedback';
+	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
+	import { faCog, faPaperPlane, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import SearchBar from './../../../../lib/Elements/Generic/SearchBar.svelte';
 	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
-	let data: Review[]; // Declare the data variable
-	$: data; // List of reviews (Review[])
+	let data: Feedback[]; // Declare the data variable
+	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {};
+	let feedbackInput: CommentBox;
+	$: data; // List of feedback (Feedback[])
 
 	async function catchAll() {
 		const res = (await fetchWebApi('v1/admin/feedback/manage', 'GET')) as Response;
@@ -70,7 +74,7 @@
 						await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
 					}}
 				>
-										<Button
+					<Button
 						icon={faCog}
 						color="COLORBLK3"
 						text="My account settings"
@@ -86,45 +90,72 @@
 			<div class="flex text-xl font-semibold pb-12">Submit or manage your feedback</div>
 			<div class="flex flex-wrap flex-col-reverse w-full">
 				{#if data != undefined}
+					<div class="block">
+						<CommentBox
+							bind:this={feedbackInput}
+							placeholder="Press 'Enter' and write some feedback"
+							{user}
+						/>
+						<div
+							class="edit-wrap w-fit h-fit"
+							on:click={() => {
+								createFeedback(feedbackInput.value ?? '');
+								feedbackInput.clear();
+								setTimeout(() => {
+									catchAll();
+								}, 800);
+							}}
+						>
+							<Button
+								icon={faPaperPlane}
+								color="transparent"
+								custom_style="border border-COLORGRN1"
+								color_t="COLORGRN"
+								text="Submit feedback"
+							/>
+						</div>
+					</div>
+					<!-- on:input={(e) => outTerminal('INFO', JSON.stringify(e.detail))} -->
 					{#if data.length === 0}
 						<!-- Note that the reversal of UI elements is intentional because of "flex-reverse-column" -->
 						{#if !staff}
 							<div class="py-4">
-								<SearchBar placeholder="Create a review. Search for something else?" nomargin />
+								<SearchBar
+									placeholder="Browse around, make an order, and tell us here if you experience any issues."
+									nomargin
+								/>
 							</div>
 						{/if}
 						<div class="font-light">
-							{staff ? 'Nobody has made a review as yet.' : 'You have not made any reviews as yet.'}
+							{staff
+								? 'Nobody has submitted any feedback as yet.'
+								: 'You have not submitted any feedback as yet.'}
 						</div>
 					{/if}
-					{#each data as review, i}
+					{#each data as feedback, i}
 						<div class="user_wrap w-full">
 							<UserPill
-								user={review.reviewer ?? {}}
-								description={`Feedback ID: ${review._id}<br/>Subject: ${
-									review.product.productName
-								}`}
+								user={feedback.author ?? {}}
+								description={`Feedback ID: ${feedback._id}<br/>Content: ${feedback.content}`}
 							>
 								<div class="controls flex space-x-2">
-									
-										<div
-											class="edit-wrap w-fit h-fit"
-											on:click={() => {
-												deleteReview(review._id);
-												setTimeout(() => {
-													catchAll();
-												}, 800);
-											}}
-										>
-											<Button
-												icon={faTrash}
-												color="transparent"
-												custom_style="border border-COLORHPK"
-												color_t="COLORHPK"
-												text="Delete feedback"
-											/>
-										</div>
-								
+									<div
+										class="edit-wrap w-fit h-fit"
+										on:click={() => {
+											deleteFeedback(feedback._id);
+											setTimeout(() => {
+												catchAll();
+											}, 800);
+										}}
+									>
+										<Button
+											icon={faTrash}
+											color="transparent"
+											custom_style="border border-COLORHPK"
+											color_t="COLORHPK"
+											text="Delete feedback"
+										/>
+									</div>
 								</div>
 							</UserPill>
 						</div>

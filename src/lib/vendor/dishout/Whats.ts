@@ -10,6 +10,7 @@ const WhatDB = {
 	private: {
 		promos: '__promo',
 		review: '__review',
+		feedback: '__feedback',
 		category: '__category',
 		order: '__order',
 		menu: '__menu',

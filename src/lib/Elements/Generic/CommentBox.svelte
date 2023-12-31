@@ -1,3 +1,5 @@
+<svelte:options accessors />
+
 <script lang="ts">
 	import { escapeHtml } from '$lib/Elements/Utility/Review';
 	import config from '$lib/config/settings';
@@ -6,13 +8,19 @@
 	import Fa from 'svelte-fa';
 	export let user: import('$lib/types/User').User;
 	export let placeholder: string | undefined = undefined;
+	export let value: string = '';
 	let newReviewContent: HTMLDivElement;
 	let placeholderRemoved = false;
 
 	const dispatch = createEventDispatcher();
 
 	function handleInput(event: Event) {
+		value = escapeHtml(newReviewContent.innerHTML);
 		dispatch('input', escapeHtml(newReviewContent.innerHTML));
+	}
+
+	export function clear() {
+		newReviewContent.innerHTML = '';
 	}
 </script>
 
@@ -47,8 +55,8 @@
 					class="text-md font-light text-COLORGRN h-full w-full px-2 py-1 mx-6 bg-transparent focus:outline-none cursor-text"
 					contenteditable="true"
 				>
-                <div class="select-none text-COLORWHT1" contenteditable="false">What's on your mind?</div>
-                <div contenteditable="true">&nbsp;</div>
+					<div class="select-none text-COLORWHT1" contenteditable="false">What's on your mind?</div>
+					<div contenteditable="true">&nbsp;</div>
 				</div>
 			</div>
 		</div>
