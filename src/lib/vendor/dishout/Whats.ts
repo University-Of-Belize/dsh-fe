@@ -5,6 +5,7 @@ const WhatDB = {
 		category: 'category',
 		menu: 'menu',
 		order: 'order',
+		post: 'post',
 		user: 'user'
 	},
 	private: {
@@ -13,6 +14,7 @@ const WhatDB = {
 		feedback: '__feedback',
 		category: '__category',
 		order: '__order',
+		post: '__post',
 		menu: '__menu',
 		user: '__user'
 	}

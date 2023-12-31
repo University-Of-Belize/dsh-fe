@@ -283,7 +283,9 @@
 			class="announcements-container flex text-center text-COLORWHT bg-COLORBLE bg-opacity-50 py-1 z-20"
 		>
 			<div class="container-wrap flex flex-wrap justify-center items-center w-full bg-opacity-100">
-				<div class="container flex flex-wrap items-center justify-center bg-opacity-100 text-COLORWHT">
+				<div
+					class="container flex flex-wrap items-center justify-center bg-opacity-100 text-COLORWHT space-x-1"
+				>
 					<div class="flex bg-opacity-100 text-COLORWHT space-x-1">
 						<div class="icon mx-2"><Fa icon={faCodePullRequest} size="1.25x" /></div>
 						Hey, thanks for visiting! We're still in beta, so please bear with us as we sort out all

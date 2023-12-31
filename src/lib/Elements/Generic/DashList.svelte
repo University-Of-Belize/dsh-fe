@@ -5,6 +5,7 @@
 		faFeed,
 		faHamburger,
 		faMessage,
+		faNoteSticky,
 		faPlus,
 		faTag,
 		faUserCog
@@ -15,7 +16,7 @@
 </script>
 
 <div class="dashList bg-opacity-100">
-	<div class="section py-6 border-t border-black border-dashed border-opacity-5">
+	<div class="section py-6 border-t border-COLORBLK1 border-dashed border-opacity-5">
 		<div class="title font-semibold pb-5">Server Configuration</div>
 		<div class="three pt-1" on:click={() => goto('/admin/dashboard/user')}>
 			<Button
@@ -55,7 +56,19 @@
 				/>
 			</div>{/if}
 	</div>
-	<div class="section py-6 border-t border-black border-dashed border-opacity-5">
+	<div class="section py-6 border-t border-COLORBLK1 border-dashed border-opacity-5">
+		<div class="title font-semibold pb-5">Help Center</div>
+		<div class="three pt-1" on:click={() => goto('/admin/dashboard/new-article')}>
+			<Button
+				icon={faNoteSticky}
+				color="COLORBLK3"
+				text="Write a new article"
+				color_t="COLORWHT"
+				custom_style="w-full font-medium"
+			/>
+		</div>
+	</div>
+	<div class="section py-6 border-t border-COLORBLK1 border-dashed border-opacity-5">
 		<div class="title font-semibold pb-5">Order Management</div>
 		<div class="three pt-1" on:click={() => goto('/admin/dashboard/order')}>
 			<Button
@@ -68,7 +81,7 @@
 		</div>
 	</div>
 	{#if staff}
-		<div class="section py-6 border-t border-black border-dashed border-opacity-5">
+		<div class="section py-6 border-t border-COLORBLK1 border-dashed border-opacity-5">
 			<div class="title font-semibold pb-5">Product Management</div>
 			<div class="three pt-1" on:click={() => goto('/admin/dashboard/category')}>
 				<Button

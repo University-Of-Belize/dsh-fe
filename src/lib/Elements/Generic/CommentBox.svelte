@@ -9,14 +9,18 @@
 	export let user: import('$lib/types/User').User;
 	export let placeholder: string | undefined = undefined;
 	export let value: string = '';
+	export let textOnly: boolean = false;
 	let newReviewContent: HTMLDivElement;
 	let placeholderRemoved = false;
 
 	const dispatch = createEventDispatcher();
 
 	function handleInput(event: Event) {
-		value = escapeHtml(newReviewContent.innerHTML);
-		dispatch('input', escapeHtml(newReviewContent.innerHTML));
+		value = escapeHtml(textOnly ? newReviewContent.innerText : newReviewContent.innerHTML);
+		dispatch(
+			'input',
+			escapeHtml(textOnly ? newReviewContent.innerText : newReviewContent.innerHTML)
+		);
 	}
 
 	export function clear() {
