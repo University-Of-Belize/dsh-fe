@@ -127,7 +127,7 @@
 						<img src={config.ui['branding-logo']} style="height: 30px;" />
 					</div>
 				{/if}
-				<div class="hidden md:block">{@html staff ? titleText + ' | Staff Mode' : titleText}</div>
+				<div class="hidden md:flex">{@html staff ? titleText + ' | Staff Mode' : titleText}</div>
 			</div>
 		</div>
 			{#if search}
