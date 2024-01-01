@@ -18,7 +18,8 @@ Disallow: /user/manage/
 Disallow: /order?
 Disallow: /order
 Disallow: /order/
-Disallow: /product?
+# Allow searches and filters to be indexed
+# Disallow: /product?
 Disallow: /product
 Disallow: /product/
 Disallow: /product/manage?
