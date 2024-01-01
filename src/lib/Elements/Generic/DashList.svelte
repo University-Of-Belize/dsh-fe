@@ -16,8 +16,8 @@
 </script>
 
 <div class="dashList bg-opacity-100">
-	<div class="section py-6 border-t border-COLORBLK1 border-dashed border-opacity-5">
-		<div class="title font-semibold pb-5">Server Configuration</div>
+	<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
+		<div class="title pb-5 font-semibold">Server Configuration</div>
 		<div class="three pt-1" on:click={() => goto('/admin/dashboard/user')}>
 			<Button
 				icon={faUserCog}
@@ -57,8 +57,8 @@
 			</div>{/if}
 	</div>
 	{#if staff}
-		<div class="section py-6 border-t border-COLORBLK1 border-dashed border-opacity-5">
-			<div class="title font-semibold pb-5">Help Center</div>
+		<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
+			<div class="title pb-5 font-semibold">Help Center</div>
 			<div class="three pt-1" on:click={() => goto('/admin/dashboard/new-article')}>
 				<Button
 					icon={faNoteSticky}
@@ -70,8 +70,8 @@
 			</div>
 		</div>
 	{/if}
-	<div class="section py-6 border-t border-COLORBLK1 border-dashed border-opacity-5">
-		<div class="title font-semibold pb-5">Order Management</div>
+	<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
+		<div class="title pb-5 font-semibold">Order Management</div>
 		<div class="three pt-1" on:click={() => goto('/admin/dashboard/order')}>
 			<Button
 				icon={faClone}
@@ -83,8 +83,8 @@
 		</div>
 	</div>
 	{#if staff}
-		<div class="section py-6 border-t border-COLORBLK1 border-dashed border-opacity-5">
-			<div class="title font-semibold pb-5">Product Management</div>
+		<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
+			<div class="title pb-5 font-semibold">Product Management</div>
 			<div class="three pt-1" on:click={() => goto('/admin/dashboard/category')}>
 				<Button
 					icon={faPlus}

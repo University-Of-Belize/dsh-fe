@@ -112,74 +112,74 @@
 	<title>Plattr | Login / Register</title>
 </svelte:head>
 
-<main class="w-full h-screen">
-	<div class="navigation w-full z-20">
+<main class="h-screen w-full">
+	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} />
 	</div>
-	<div class="main-content mx-8 py-8 flex items-center justify-center h-full">
+	<div class="main-content mx-8 flex h-full items-center justify-center py-8">
 		<div class="block">
 			<form class="block" action="#" on:submit={(event) => handleSubmit(event)}>
 				<div
-					class="flex flex-1 mb-6 mx-8 text-COLORWHT font-semibold justify-center items-center text-3xl"
+					class="mx-8 mb-6 flex flex-1 items-center justify-center text-3xl font-semibold text-COLORWHT"
 				>
 					Cafe
 				</div>
 				<div
-					class="username flex-1 flex mt-2 rounded-sm bg-transparent px-4 py-2 mx-8 items-center text-sm border border-COLORWHT"
+					class="username mx-8 mt-2 flex flex-1 items-center rounded-sm border border-COLORWHT bg-transparent px-4 py-2 text-sm"
 				>
 					<div class="icon w-fit">
-						<Fa icon={faRectangleAd} size="1.25x" class="text-COLORWHT pr-4" />
+						<Fa icon={faRectangleAd} size="1.25x" class="pr-4 text-COLORWHT" />
 					</div>
 					<input
 						type="text"
 						name="username"
-						class="w-full font-medium focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"
+						class="w-full bg-transparent px-2 py-1 font-medium text-COLORWHT focus:outline-none"
 						placeholder="Enter a username"
 					/>
 				</div>
 				<div
-					class="email flex-1 flex mt-2 rounded-sm bg-transparent px-4 py-2 mx-8 items-center text-sm border border-COLORWHT"
+					class="email mx-8 mt-2 flex flex-1 items-center rounded-sm border border-COLORWHT bg-transparent px-4 py-2 text-sm"
 				>
 					<div class="icon w-fit">
-						<Fa icon={faUserCog} size="1.25x" class="text-COLORWHT pr-4" />
+						<Fa icon={faUserCog} size="1.25x" class="pr-4 text-COLORWHT" />
 					</div>
 					<input
 						type="email"
 						name="email"
-						class="w-full font-medium focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"
+						class="w-full bg-transparent px-2 py-1 font-medium text-COLORWHT focus:outline-none"
 						placeholder="Enter your email address"
 					/>
 				</div>
 				<div
-					class="password flex-1 flex mt-2 rounded-sm bg-transparent px-4 py-2 mx-8 items-center text-sm border border-COLORWHT"
+					class="password mx-8 mt-2 flex flex-1 items-center rounded-sm border border-COLORWHT bg-transparent px-4 py-2 text-sm"
 				>
 					<div class="icon w-fit">
-						<Fa icon={faLock} size="1.25x" class="text-COLORWHT pr-4" />
+						<Fa icon={faLock} size="1.25x" class="pr-4 text-COLORWHT" />
 					</div>
 					<input
 						type="password"
 						name="password"
 						autocomplete="new-password"
-						class="w-full font-medium focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"
+						class="w-full bg-transparent px-2 py-1 font-medium text-COLORWHT focus:outline-none"
 						placeholder="Enter your password"
 					/>
 				</div>
 				<div
-					class="password2 flex-1 flex mt-2 rounded-sm bg-transparent px-4 py-2 mx-8 items-center text-sm border border-COLORWHT"
+					class="password2 mx-8 mt-2 flex flex-1 items-center rounded-sm border border-COLORWHT bg-transparent px-4 py-2 text-sm"
 				>
 					<div class="icon w-fit">
-						<Fa icon={faLock} size="1.25x" class="text-COLORWHT pr-4" />
+						<Fa icon={faLock} size="1.25x" class="pr-4 text-COLORWHT" />
 					</div>
 					<input
 						type="password"
 						name="password2"
 						autocomplete="new-password"
-						class="w-full font-medium focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"
+						class="w-full bg-transparent px-2 py-1 font-medium text-COLORWHT focus:outline-none"
 						placeholder="Retype your password"
 					/>
 				</div>
 
-				<div class="submit flex flex-1 mx-8 mt-6 items-center justify-center">
+				<div class="submit mx-8 mt-6 flex flex-1 items-center justify-center">
 					<button
 						class="submit w-full"
 						type="submit"
@@ -198,10 +198,10 @@
 				</div>
 			</form>
 
-			<div class="block mx-8 my-8 text-COLORWHT">
+			<div class="mx-8 my-8 block text-COLORWHT">
 				<div class="text-2xl font-light">Have an account?</div>
 				<div
-					class="login flex flex-1 mt-6 items-center justify-start"
+					class="login mt-6 flex flex-1 items-center justify-start"
 					on:click={() => goto('/auth/login')}
 				>
 					<Button

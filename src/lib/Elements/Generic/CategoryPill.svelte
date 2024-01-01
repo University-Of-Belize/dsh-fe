@@ -8,16 +8,16 @@
 
 <!-- Color stub -->
 <div
-	class="placeholder bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORWHT bg-COLORYLW bg-COLORBYW bg-COLORPNK bg-COLORRED hidden w-full"
+	class="placeholder hidden w-full bg-COLORBYW bg-COLORPNK bg-COLORRED bg-COLORWHT bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORYLW"
 >
 	&nbsp;
 </div>
 
-<div class="review my-4 bg-COLORBLK4 bg-opacity-50 px-4 py-2 rounded-md">
+<div class="review my-4 rounded-md bg-COLORBLK4 bg-opacity-50 px-4 py-2">
 	<div class="flex bg-opacity-100">
 		<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
 			<img
-				class="rounded-md w-12 h-12 object-cover"
+				class="h-12 w-12 rounded-md object-cover"
 				bind:this={cImage}
 				src={category.image
 					? category.image.trim() === ''
@@ -25,19 +25,19 @@
 						: category.image
 					: config['product-view']['default-image']}
 				alt=""
-				on:error={()=>(cImage.src = config['product-view']['default-image'])}
+				on:error={() => (cImage.src = config['product-view']['default-image'])}
 			/>
 		</div>
-		<div class="user-wrap flex flex-wrap items-center w-full">
+		<div class="user-wrap flex w-full flex-wrap items-center">
 			<div class="review-content text-COLORWHT" style="word-break: break-word;">
-				<div class="text-base lg:text-lg font-semibold flex items-center">
+				<div class="flex items-center text-base font-semibold lg:text-lg">
 					{category.name ? category.name : 'Untitled Category'}
 				</div>
 				<div class="text-md font-light text-COLORBLE">
 					{@html description}
 				</div>
 			</div>
-			<div class="actions flex items-center justify-start lg:justify-end flex-1 text-COLORWHT">
+			<div class="actions flex flex-1 items-center justify-start text-COLORWHT lg:justify-end">
 				<slot />
 			</div>
 		</div>

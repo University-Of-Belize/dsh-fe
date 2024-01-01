@@ -103,11 +103,11 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Dashboard / Categories / Manage '{data? data.name: "Category"}'</title>
+	<title>Plattr | Dashboard / Categories / Manage '{data ? data.name : 'Category'}'</title>
 </svelte:head>
 
-<main class="w-full h-screen overflow-hidden">
-	<div class="navigation w-full z-20">
+<main class="h-screen w-full overflow-hidden">
+	<div class="navigation z-20 w-full">
 		<Navigation
 			transparency={5}
 			search={true}
@@ -118,13 +118,13 @@
 		/>
 	</div>
 
-	<div class="main-content flex items-center justify-start h-full text-COLORWHT overflow-hidden">
+	<div class="main-content flex h-full items-center justify-start overflow-hidden text-COLORWHT">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT4 bg-opacity-20 px-4 py-2 flex-col justify-start h-screen w-full lg:w-1/4 overflow-auto"
+			class="drawer hidden h-screen w-full flex-col justify-start overflow-auto bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:block lg:w-1/4"
 			bind:this={navDrawer}
 		>
-			<div class="section py-6 bg-opacity-100">
-				<div class="title font-semibold pb-5">My Account</div>
+			<div class="section bg-opacity-100 py-6">
+				<div class="title pb-5 font-semibold">My Account</div>
 				<div
 					on:click={async () => {
 						await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
@@ -141,18 +141,18 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto pb-40">
-			<div class="flex-header flex items-center w-full flex-wrap">
+		<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
+			<div class="flex-header flex w-full flex-wrap items-center">
 				<div class="block">
-					<div class="flex text-2xl font-semibold pb-2">
+					<div class="flex pb-2 text-2xl font-semibold">
 						{category_id ? 'Edit' : 'New'} Product Category
 					</div>
-					<div class="flex text-xl font-semibold pb-12">
+					<div class="flex pb-12 text-xl font-semibold">
 						{category_id ? 'Edit a' : 'Create a'} product category
 					</div>
 				</div>
 			</div>
-			<div class="flex flex-wrap w-full">
+			<div class="flex w-full flex-wrap">
 				{#if data != undefined}
 					{#if !isNaN(user.id) && staff}
 						<div class="user_wrap w-full">
@@ -163,8 +163,8 @@
 										{#if data.alias != undefined && data.alias != data.name}
 											<div class="text-md font-semibold">Also known as</div>
 											<ul>
-												<li class="before:content-['-⠀'] flex items-center">
-													<div class="font-light text-sm">{data.alias}</div>
+												<li class="flex items-center before:content-['-⠀']">
+													<div class="text-sm font-light">{data.alias}</div>
 												</li>
 											</ul>
 										{/if}
@@ -174,18 +174,18 @@
 						</div>
 					{/if}{/if}
 				<div
-					class="editPane flex flex-col lg:flex-row justify-around w-full bg-COLORBLK1 py-4 px-4"
+					class="editPane flex w-full flex-col justify-around bg-COLORBLK1 px-4 py-4 lg:flex-row"
 					bind:this={editPane}
 				>
-					<div class="editGroup flex flex-col pb-8 px-4">
-						<div class="flex text-xl font-semibold pb-12">
+					<div class="editGroup flex flex-col px-4 pb-8">
+						<div class="flex pb-12 text-xl font-semibold">
 							{category_id ? 'Edit' : 'Create a'}
 							category
 						</div>
 						<form action="#" on:submit={(event) => handleSubmit(event)} class="space-y-3">
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
 								<div
-									class="label flex items-center justify-start font-semibold w-full text-lg space-x-2"
+									class="label flex w-full items-center justify-start space-x-2 text-lg font-semibold"
 								>
 									<div class="title">Category name</div>
 									<div
@@ -206,7 +206,7 @@
 
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
 								<div
-									class="label flex items-center justify-start font-semibold w-full text-lg space-x-2"
+									class="label flex w-full items-center justify-start space-x-2 text-lg font-semibold"
 								>
 									<div class="title">Category identity (recommended)</div>
 									<div
@@ -235,17 +235,17 @@
 								/>
 							</div>
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label font-semibold w-full text-lg">Category description</div>
-								<div class="review-wrap border border-black rounded-md mb-4 w-full">
+								<div class="label w-full text-lg font-semibold">Category description</div>
+								<div class="review-wrap mb-4 w-full rounded-md border border-black">
 									<div
-										class="text-i-combo flex font-semibold items-center justify-start text-COLORGRY"
+										class="text-i-combo flex items-center justify-start font-semibold text-COLORGRY"
 									>
 										<div class="icon px-2 py-2"><Fa icon={faPencil} size="1.01x" /></div>
 										Type in a description
 									</div>
 									<textarea
 										name="description"
-										class="text-md font-light text-COLORBLE h-full w-full px-2 py-1 mx-6 bg-transparent focus:outline-none"
+										class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORBLE focus:outline-none"
 										rows="6"
 										placeholder="Category description goes here"
 										value={data ? data.description : ''}
@@ -253,7 +253,7 @@
 								</div>
 							</div>
 
-							<button class="btn_wrp w-fit h-fit" type="submit">
+							<button class="btn_wrp h-fit w-fit" type="submit">
 								<Button
 									icon={faCog}
 									color="COLORWHT"
@@ -264,13 +264,13 @@
 							</button>
 						</form>
 					</div>
-					<div class="editGroup flex flex-col pb-8 px-4">
+					<div class="editGroup flex flex-col px-4 pb-8">
 						{#if staff && data != undefined}
-							<div class="flex text-xl font-semibold pb-12">Take Action</div>
+							<div class="flex pb-12 text-xl font-semibold">Take Action</div>
 							<div class="flex flex-col lg:flex-row">
 								<div class="flex flex-col">
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label font-semibold w-full text-lg">
+										<div class="label w-full text-lg font-semibold">
 											Hide category (currently {data.hidden ? 'hidden' : 'unhidden'})
 										</div>
 										<div
@@ -303,7 +303,7 @@
 										</div>
 									</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label font-semibold w-full text-lg">Delete category</div>
+										<div class="label w-full text-lg font-semibold">Delete category</div>
 										<div
 											class="btn_wrp"
 											on:click={() => {

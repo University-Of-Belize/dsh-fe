@@ -64,16 +64,16 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Product Search / {params?.toString().toLowerCase() ?? "Product Search"}</title>
+	<title>Plattr | Product Search / {params?.toString().toLowerCase() ?? 'Product Search'}</title>
 </svelte:head>
 
-<main class="w-full h-screen">
-	<div class="navigation w-full z-20">
+<main class="h-screen w-full">
+	<div class="navigation z-20 w-full">
 		<!-- Params to empty string--not undefined otherwise it will make the value actually be the string 'undefined' -->
 		<Navigation transparency={5} search={true} value={params ?? ''} />
 	</div>
 	<div
-		class="content-wrapper w-full h-full absolute lg:flex items-start justify-start overflow-auto z-10 pb-40"
+		class="content-wrapper absolute z-10 h-full w-full items-start justify-start overflow-auto pb-40 lg:flex"
 	>
 		{#if $products && $products.length > 0}
 			<div class="flex flex-wrap">
@@ -133,10 +133,10 @@
 			</div>
 		{:else}
 			<div
-				class="flex items-center justify-center item-center h-full w-full flex-wrap text-COLORWHT4"
+				class="item-center flex h-full w-full flex-wrap items-center justify-center text-COLORWHT4"
 			>
-				<div class="flex items-center justify-center item-center h-fit w-full flex-wrap">
-					<div class="icon basis-full h-fit flex items-center justify-center w-full">
+				<div class="item-center flex h-fit w-full flex-wrap items-center justify-center">
+					<div class="icon flex h-fit w-full basis-full items-center justify-center">
 						<Fa icon={faShoppingCart} size="2x" />
 					</div>
 					<p class="font-semibold">No products found</p>
@@ -149,7 +149,7 @@
 	<Footer text="Looks like you've reached the end.">
 		<div class="block">
 			<!-- <div class="text-xl font-light">Shop our entire menu by creating an account</div> -->
-			<div class="flex justify-center items-center w-full pt-8 pb-4">
+			<div class="flex w-full items-center justify-center pb-4 pt-8">
 				<SearchBar />
 			</div>
 		</div>

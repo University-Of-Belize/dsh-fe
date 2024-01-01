@@ -16,15 +16,15 @@
 	});
 </script>
 
-<main class="text-COLORWHT p-8">
-	<div class="text-2xl font-semibold mt-6 mb-2">Development Area</div>
+<main class="p-8 text-COLORWHT">
+	<div class="mb-2 mt-6 text-2xl font-semibold">Development Area</div>
 	<div
 		bind:this={terminal}
-		class="consoleEventLog block font-mono border border-COLORWHT text-COLORBLE rounded-sm w-full p-8"
+		class="consoleEventLog block w-full rounded-sm border border-COLORWHT p-8 font-mono text-COLORBLE"
 	>
 		<div class="consoleEvent">[TERMINAL] Ready to accept input</div>
 	</div>
-	<div class="text-xl font-semibold mt-6">Boilerplate code — Nothing here to see!</div>
+	<div class="mt-6 text-xl font-semibold">Boilerplate code — Nothing here to see!</div>
 </main>
 
 <style>

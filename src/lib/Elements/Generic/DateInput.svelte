@@ -15,17 +15,17 @@
 </script>
 
 <div
-	class="username flex-1 flex mt-2 rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORWHT {custom_style}"
+	class="username mt-2 flex flex-1 items-center rounded-sm border border-COLORWHT bg-COLORWHT5 px-4 py-2 text-sm {custom_style}"
 >
 	<div class="icon w-fit">
-		<Fa {icon} size="1.25x" class="text-COLORWHT pr-4" />
+		<Fa {icon} size="1.25x" class="pr-4 text-COLORWHT" />
 	</div>
 	<input
 		on:input={handleChange}
 		{value}
 		type="date"
 		{name}
-		class="w-full font-medium focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"
+		class="w-full bg-transparent px-2 py-1 font-medium text-COLORWHT focus:outline-none"
 		{placeholder}
 	/>
 </div>

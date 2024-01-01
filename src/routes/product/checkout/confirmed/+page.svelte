@@ -69,13 +69,13 @@
 	<title>Plattr | Checkout / Run Order</title>
 </svelte:head>
 
-<main class="w-full h-screen">
-	<div class="navigation w-full z-20">
+<main class="h-screen w-full">
+	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} />
 	</div>
-	<div class="main-content flex items-center justify-center h-full">
+	<div class="main-content flex h-full items-center justify-center">
 		<EscrowBanner {branding_text} {text} {subtitle}>
-			<div class="flex justify-center items-center w-full pt-8 pb-4">
+			<div class="flex w-full items-center justify-center pb-4 pt-8">
 				<SearchBar />
 			</div>
 		</EscrowBanner>

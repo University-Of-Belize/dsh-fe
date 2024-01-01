@@ -179,11 +179,11 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Dashboard / Product / Manage '{data? data.productName: "Product"}'</title>
+	<title>Plattr | Dashboard / Product / Manage '{data ? data.productName : 'Product'}'</title>
 </svelte:head>
 
-<main class="w-full h-screen overflow-hidden">
-	<div class="navigation w-full z-20">
+<main class="h-screen w-full overflow-hidden">
+	<div class="navigation z-20 w-full">
 		<Navigation
 			transparency={5}
 			search={true}
@@ -194,19 +194,19 @@
 		/>
 	</div>
 
-	<div class="main-content flex items-center justify-start h-full text-COLORWHT overflow-hidden">
+	<div class="main-content flex h-full items-center justify-start overflow-hidden text-COLORWHT">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT4 bg-opacity-20 px-4 py-2 flex-col justify-start h-screen w-full lg:w-1/4 overflow-auto"
+			class="drawer hidden h-screen w-full flex-col justify-start overflow-auto bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:block lg:w-1/4"
 			bind:this={navDrawer}
 		>
-			<div class="section py-6 bg-opacity-100">
-				<div class="title font-semibold pb-5">My Account</div>
+			<div class="section bg-opacity-100 py-6">
+				<div class="title pb-5 font-semibold">My Account</div>
 				<div
 					on:click={async () => {
 						await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
 					}}
 				>
-										<Button
+					<Button
 						icon={faCog}
 						color="COLORBLK3"
 						text="My account settings"
@@ -217,16 +217,16 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto pb-40">
-			<div class="flex-header flex items-center w-full flex-wrap">
+		<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
+			<div class="flex-header flex w-full flex-wrap items-center">
 				<div class="block">
-					<div class="flex text-2xl font-semibold pb-2">Product Wizard</div>
-					<div class="flex text-xl font-semibold pb-12">
+					<div class="flex pb-2 text-2xl font-semibold">Product Wizard</div>
+					<div class="flex pb-12 text-xl font-semibold">
 						{product_id ? 'Edit' : 'Create a new'} product listing
 					</div>
 				</div>
 			</div>
-			<div class="flex flex-wrap w-full">
+			<div class="flex w-full flex-wrap">
 				{#if data != undefined}
 					{#if !isNaN(user.id) && staff}
 						<div class="user_wrap w-full">
@@ -234,10 +234,10 @@
 						</div>
 
 						<div
-							class="editPane flex flex-col lg:flex-row justify-around w-full bg-COLORBLK1 py-4 px-4 rounded-sm border border-COLORWHT3"
+							class="editPane flex w-full flex-col justify-around rounded-sm border border-COLORWHT3 bg-COLORBLK1 px-4 py-4 lg:flex-row"
 							bind:this={editPane}
 						>
-							<div class="editGroup flex flex-col pb-8 px-4">
+							<div class="editGroup flex flex-col px-4 pb-8">
 								<form
 									action="#"
 									bind:this={productForm}
@@ -246,15 +246,15 @@
 									class="space-y-3"
 								>
 									<div class="block">
-										<div class="text-2xl text-COLORWHT font-semibold">
+										<div class="text-2xl font-semibold text-COLORWHT">
 											{data
 												? data.productName
 													? data.productName
 													: 'Untitled Product'
 												: 'Untitled Product'}
 										</div>
-										<div class="text-base text-COLORWHT font-semibold flex">
-											<div class="font-light pr-1">Category:</div>
+										<div class="flex text-base font-semibold text-COLORWHT">
+											<div class="pr-1 font-light">Category:</div>
 											{data
 												? data.category
 													? data.category.name
@@ -262,9 +262,9 @@
 												: 'Uncategorized'}
 										</div>
 									</div>
-									<div class="banner-top flex flex-wrap w-full space-x-4 items-top">
+									<div class="banner-top items-top flex w-full flex-wrap space-x-4">
 										<div
-											class="pimg_wrp block bg-COLORBLE h-fit w-fit rounded-md"
+											class="pimg_wrp block h-fit w-fit rounded-md bg-COLORBLE"
 											on:click={() => {
 												photoInput.click();
 											}}
@@ -291,22 +291,22 @@
 												/>
 												<div
 													style="top: -4%; right: -4%;"
-													class="widget-wrp z-10 absolute flex w-full items-center justify-end"
+													class="widget-wrp absolute z-10 flex w-full items-center justify-end"
 												>
 													<div
-														class="widget shadow-md cursor-pointer hover:opacity-80 bg-COLORBLE px-2 py-2 text-COLORWHT w-fit rounded-md"
+														class="widget w-fit cursor-pointer rounded-md bg-COLORBLE px-2 py-2 text-COLORWHT shadow-md hover:opacity-80"
 													>
 														<Fa icon={faPencil} size="0.85x" />
 													</div>
 												</div>
 												<div
-													class="product-image relative block overflow-clip rounded-md hover:opacity-80 cursor-pointer"
+													class="product-image relative block cursor-pointer overflow-clip rounded-md hover:opacity-80"
 												>
 													<img
 														bind:this={productImage}
 														src={data.image}
 														alt={data.productName}
-														class="productImage rounded-sm w-72 h-56 object-cover"
+														class="productImage h-56 w-72 rounded-sm object-cover"
 													/>
 												</div>
 											</div>
@@ -314,10 +314,10 @@
 										<div
 											class="inputgroup flex flex-wrap items-start justify-start lg:items-center"
 										>
-											<div class="label font-semibold w-full text-lg">Product description</div>
-											<div class="review-wrap border border-black rounded-md mb-4 w-full">
+											<div class="label w-full text-lg font-semibold">Product description</div>
+											<div class="review-wrap mb-4 w-full rounded-md border border-black">
 												<div
-													class="text-i-combo flex font-semibold items-center justify-start text-COLORGRY"
+													class="text-i-combo flex items-center justify-start font-semibold text-COLORGRY"
 												>
 													<div class="icon px-2 py-2"><Fa icon={faPencil} size="1.01x" /></div>
 													Type in a description
@@ -325,7 +325,7 @@
 												<div class="pdsc_wrp overflow-auto">
 													<textarea
 														name="description"
-														class="text-md font-light text-COLORWHT h-full w-full px-2 py-1 mx-6 bg-transparent focus:outline-none"
+														class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORWHT focus:outline-none"
 														rows="6"
 														placeholder="Product description goes here. Add as many words as you'd like. Note each word will be counted as a keyword. So be specific, and descriptive at the same time. Products are indexed every {config[
 															'server'
@@ -338,7 +338,7 @@
 									</div>
 									<div class="text-2xl font-semibold">General Settings</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label font-semibold w-full text-lg">Slug</div>
+										<div class="label w-full text-lg font-semibold">Slug</div>
 										<TextInput
 											icon={faSign}
 											name="slug"
@@ -349,7 +349,7 @@
 									</div>
 
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label font-semibold w-full text-lg">Product name</div>
+										<div class="label w-full text-lg font-semibold">Product name</div>
 										<TextInput
 											icon={faSortAlphaAsc}
 											name="name"
@@ -359,7 +359,7 @@
 										/>
 									</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label font-semibold w-full text-lg">Listed price</div>
+										<div class="label w-full text-lg font-semibold">Listed price</div>
 										<TextInput
 											icon={faTag}
 											name="price"
@@ -369,7 +369,7 @@
 										/>
 									</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label font-semibold w-full text-lg">In stock</div>
+										<div class="label w-full text-lg font-semibold">In stock</div>
 										<TextInput
 											icon={faBox}
 											name="in_stock"
@@ -379,7 +379,7 @@
 										/>
 									</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label font-semibold w-full text-lg">Category</div>
+										<div class="label w-full text-lg font-semibold">Category</div>
 										<Select
 											icon={faList}
 											name="category"
@@ -391,7 +391,7 @@
 									</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
 										<div
-											class="label flex items-center justify-start font-semibold w-fit text-lg space-x-2"
+											class="label flex w-fit items-center justify-start space-x-2 text-lg font-semibold"
 										>
 											<div>Keywords</div>
 											<div
@@ -409,7 +409,7 @@
 											placeholder="Type in a keyword and press 'Enter'"
 										/>
 									</div>
-									<button class="btn_wrp w-fit h-fit" type="submit">
+									<button class="btn_wrp h-fit w-fit" type="submit">
 										<Button
 											icon={faCog}
 											color="COLORWHT"
@@ -420,15 +420,15 @@
 									</button>
 								</form>
 							</div>
-							<div class="editGroup flex flex-col pb-8 px-4">
+							<div class="editGroup flex flex-col px-4 pb-8">
 								{#if staff && data != undefined}
-									<div class="flex text-xl font-semibold pb-12">Take Action</div>
+									<div class="flex pb-12 text-xl font-semibold">Take Action</div>
 									<div class="flex flex-col lg:flex-row">
 										<div class="flex flex-col">
 											<div
 												class="inputgroup flex flex-wrap items-start justify-start lg:items-center"
 											>
-												<div class="label font-semibold w-full text-lg">Delete product</div>
+												<div class="label w-full text-lg font-semibold">Delete product</div>
 												<div
 													class="btn_wrp"
 													on:click={() => {

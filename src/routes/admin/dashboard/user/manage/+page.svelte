@@ -159,8 +159,8 @@
 	};
 </script>
 
-<main class="w-full h-screen overflow-hidden">
-	<div class="navigation w-full z-20">
+<main class="h-screen w-full overflow-hidden">
+	<div class="navigation z-20 w-full">
 		<Navigation
 			transparency={5}
 			search={true}
@@ -171,18 +171,18 @@
 		/>
 	</div>
 
-	<div class="main-content flex items-center justify-start h-full text-COLORWHT overflow-hidden">
+	<div class="main-content flex h-full items-center justify-start overflow-hidden text-COLORWHT">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT4 bg-opacity-20 px-4 py-2 flex-col justify-start h-screen w-full lg:w-1/4 overflow-auto"
+			class="drawer hidden h-screen w-full flex-col justify-start overflow-auto bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:block lg:w-1/4"
 		>
-			<div class="section py-6 bg-opacity-100">
-				<div class="title font-semibold pb-5">My Account</div>
+			<div class="section bg-opacity-100 py-6">
+				<div class="title pb-5 font-semibold">My Account</div>
 				<div
 					on:click={async () => {
 						await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
 					}}
 				>
-										<Button
+					<Button
 						icon={faCog}
 						color="COLORBLK3"
 						text="My account settings"
@@ -193,25 +193,25 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto pb-40">
-			<div class="flex-header flex items-center w-full flex-wrap">
+		<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
+			<div class="flex-header flex w-full flex-wrap items-center">
 				<div class="block">
-					<div class="flex text-2xl font-semibold pb-2">
+					<div class="flex pb-2 text-2xl font-semibold">
 						{user_id
 							? user_id == user._id
 								? 'My'
 								: data
-								? `${data.username}'s`
-								: "User's"
+									? `${data.username}'s`
+									: "User's"
 							: 'Create'} User Account
 					</div>
-					<div class="flex text-xl font-semibold pb-12">
+					<div class="flex pb-12 text-xl font-semibold">
 						{user_id ? 'Edit' : 'Create'}
 						{user_id ? (user_id == user._id ? 'Your' : data ? `${data.username}'s` : 'An') : 'An'} Account
 					</div>
 				</div>
 			</div>
-			<div class="flex flex-wrap w-full">
+			<div class="flex w-full flex-wrap">
 				{#if data != undefined}
 					{#if !isNaN(user.id)}
 						<div class="user_wrap w-full">
@@ -226,7 +226,7 @@
 								data._id == user._id}
 							>
 								<div
-									class="edit-wrap w-full lg:w-fit h-fit py-2 lg:p-0"
+									class="edit-wrap h-fit w-full py-2 lg:w-fit lg:p-0"
 									on:click={() => editPane.classList.toggle('hidden')}
 								>
 									<Button
@@ -241,20 +241,20 @@
 						</div>
 					{/if}{/if}
 				<div
-					class="editPane hidden flex flex-col lg:flex-row {staff
+					class="editPane flex hidden flex-col lg:flex-row {staff
 						? 'justify-around'
-						: 'justify-start'} w-full bg-COLORBLK1 py-4 px-4"
+						: 'justify-start'} w-full bg-COLORBLK1 px-4 py-4"
 					bind:this={editPane}
 				>
-					<div class="editGroup flex flex-col pb-8 px-4">
-						<div class="flex text-xl font-semibold pb-12">
+					<div class="editGroup flex flex-col px-4 pb-8">
+						<div class="flex pb-12 text-xl font-semibold">
 							{user_id ? 'Edit' : 'Create'}
 							{user_id ? (user_id == user._id ? 'Your' : data ? `${data.username}'s` : 'An') : 'An'}
 							Account
 						</div>
 						<form action="#" on:submit={(event) => handleSubmit(event)} class="space-y-3">
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label font-semibold w-full text-lg">New username</div>
+								<div class="label w-full text-lg font-semibold">New username</div>
 								<TextInput
 									icon={faAd}
 									name="username"
@@ -268,7 +268,7 @@
 							</div>
 							{#if !user_id}
 								<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-									<div class="label font-semibold w-full text-lg">New email</div>
+									<div class="label w-full text-lg font-semibold">New email</div>
 									<TextInput
 										icon={faUserCog}
 										name="email"
@@ -278,7 +278,7 @@
 									/>
 								</div>{/if}
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label font-semibold w-full text-lg">New password</div>
+								<div class="label w-full text-lg font-semibold">New password</div>
 								<TextInput
 									icon={faLock}
 									name="password"
@@ -289,7 +289,7 @@
 								/>
 							</div>
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label font-semibold w-full text-lg">New password</div>
+								<div class="label w-full text-lg font-semibold">New password</div>
 								<TextInput
 									icon={faLock}
 									name="password2"
@@ -297,15 +297,15 @@
 										? user_id == user._id
 											? 'your'
 											: data
-											? `${data.username}'s`
-											: 'the'
+												? `${data.username}'s`
+												: 'the'
 										: 'the'} password"
 									custom_style="bg-transparent"
 								/>
 							</div>
 							{#if !user_id}
 								<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-									<div class="label font-semibold w-full text-lg">Staff member</div>
+									<div class="label w-full text-lg font-semibold">Staff member</div>
 									<TextInput
 										icon={faLock}
 										name="staff"
@@ -315,7 +315,7 @@
 									/>
 								</div>
 								<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-									<div class="label font-semibold w-full text-lg">Credit</div>
+									<div class="label w-full text-lg font-semibold">Credit</div>
 									<TextInput
 										icon={faDollar}
 										name="credit"
@@ -324,7 +324,7 @@
 										required
 									/>
 								</div>{/if}
-							<button class="btn_wrp w-fit h-fit" type="submit">
+							<button class="btn_wrp h-fit w-fit" type="submit">
 								<Button
 									icon={faCog}
 									color="COLORWHT"
@@ -335,13 +335,13 @@
 							</button>
 						</form>
 					</div>
-					<div class="editGroup {staff ? '' : 'hidden'} flex flex-col pb-8 px-4">
+					<div class="editGroup {staff ? '' : 'hidden'} flex flex-col px-4 pb-8">
 						{#if staff && data != undefined}
-							<div class="flex text-xl font-semibold pb-12">Take Action</div>
+							<div class="flex pb-12 text-xl font-semibold">Take Action</div>
 							<div class="flex flex-col lg:flex-row">
 								<div class="flex flex-col">
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label font-semibold w-full text-lg">Invalidate token</div>
+										<div class="label w-full text-lg font-semibold">Invalidate token</div>
 										<div
 											class="btn_wrp"
 											on:click={() => {
@@ -369,7 +369,7 @@
 										</div>
 									</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label font-semibold w-full text-lg">
+										<div class="label w-full text-lg font-semibold">
 											{data.staff ? 'Demote' : 'Promote'}
 										</div>
 										<div
@@ -399,7 +399,7 @@
 										</div>
 									</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label font-semibold w-full text-lg">Trigger verification flow</div>
+										<div class="label w-full text-lg font-semibold">Trigger verification flow</div>
 										<div
 											class="btn_wrp"
 											on:click={() => {
@@ -429,7 +429,7 @@
 								</div>
 								<div class="flex flex-col">
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label font-semibold w-full text-lg">Ban</div>
+										<div class="label w-full text-lg font-semibold">Ban</div>
 										<div
 											class="btn_wrp"
 											on:click={() => {
@@ -457,7 +457,7 @@
 										</div>
 									</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label font-semibold w-full text-lg">Lockout</div>
+										<div class="label w-full text-lg font-semibold">Lockout</div>
 										<div
 											class="btn_wrp"
 											on:click={() => {
@@ -485,7 +485,7 @@
 										</div>
 									</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label font-semibold w-full text-lg">Delete account</div>
+										<div class="label w-full text-lg font-semibold">Delete account</div>
 										<div
 											class="btn_w"
 											on:click={() => {

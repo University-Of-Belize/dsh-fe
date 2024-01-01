@@ -255,10 +255,12 @@
 			class="announcements-container z-20 flex bg-COLORHPK bg-opacity-50 py-1 text-center text-COLORWHT"
 		>
 			<div class="container-wrap flex w-full flex-wrap items-center justify-center bg-opacity-100">
-				<div class="container flex flex-wrap items-center justify-center bg-opacity-100 text-COLORWHT space-x-1">
+				<div
+					class="container flex flex-wrap items-center justify-center space-x-1 bg-opacity-100 text-COLORWHT"
+				>
 					<div class="flex space-x-1 bg-opacity-100 text-COLORWHT">
 						<div class="icon mx-2"><Fa icon={faCookieBite} size="1.25x" /></div>
-						We use cookies to ensure you get the best experience on our website. By continuing to use
+						We use site-data to ensure you get the best experience on our website. By continuing to use
 						our site, you agree to our
 					</div>
 					<div>

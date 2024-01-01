@@ -5,7 +5,7 @@ name: SvelteKit Deploy (App)
 
 on:
   schedule:
-  - cron: "0 * * * 0" # Every Sunday of the month
+    - cron: '0 * * * 0' # Every Sunday of the month
   push:
     branches: ['master']
   pull_request:

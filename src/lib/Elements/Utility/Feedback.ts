@@ -31,7 +31,9 @@ const deleteFeedback = async (feedbackId: string) => {
 		}, 500); // 500ms break
 	} catch (error) {
 		console.log(error);
-		toast.push(`Oops. Something unexpected happened while deleting the submission: ${error.message}`);
+		toast.push(
+			`Oops. Something unexpected happened while deleting the submission: ${error.message}`
+		);
 	}
 };
 

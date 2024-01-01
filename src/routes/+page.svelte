@@ -42,17 +42,17 @@
 	}
 </script>
 
-<main class="w-full h-screen">
+<main class="h-screen w-full">
 	<div class="hero">
 		<div class="image-and-wrapper relative" style="height: 800px">
-			<div class="navigation absolute w-full top-0 z-20">
+			<div class="navigation absolute top-0 z-20 w-full">
 				<Navigation transparency={5} search={true} />
 			</div>
-			<div class="content-wrapper w-full h-full absolute flex items-center justify-center z-10">
-				<div class="content flex-1 flex items-center justify-center">
-					<div class="block content-wrapper px-4 md:px-8 lg:px-0">
+			<div class="content-wrapper absolute z-10 flex h-full w-full items-center justify-center">
+				<div class="content flex flex-1 items-center justify-center">
+					<div class="content-wrapper block px-4 md:px-8 lg:px-0">
 						<div
-							class="running-heading text-COLORWHT py-10 text-5xl md:text-7xl font-medium flex w-full justify-center items-center"
+							class="running-heading flex w-full items-center justify-center py-10 text-5xl font-medium text-COLORWHT md:text-7xl"
 						>
 							Order Anytime,<br /> Anywhere
 						</div>
@@ -67,10 +67,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="hidden lg:block fix flex-1">&nbsp;</div>
+				<div class="fix hidden flex-1 lg:block">&nbsp;</div>
 			</div>
 			<div
-				class="wrapper bg-COLORBLK opacity-20 w-full h-full absolute flex items-center justify-center"
+				class="wrapper absolute flex h-full w-full items-center justify-center bg-COLORBLK opacity-20"
 			>
 				<!-- Nothing, this is an overlay-->
 			</div>
@@ -178,7 +178,7 @@
 		<div class="block">
 			<div class="text-xl font-light">Shop our entire menu by creating an account</div>
 			<div
-				class="btn-wrp p-2 w-full flex justify-center items-center"
+				class="btn-wrp flex w-full items-center justify-center p-2"
 				on:click={async () => {
 					await goto('/auth/signup');
 				}}

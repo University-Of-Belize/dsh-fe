@@ -37,7 +37,7 @@
 	}
 </script>
 
-<div class="review my-4 bg-transparent px-4 py-2 rounded-md">
+<div class="review my-4 rounded-md bg-transparent px-4 py-2">
 	<div class="flex bg-opacity-100">
 		<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
 			<img
@@ -50,9 +50,9 @@
 				style="width: 50px; height: 50px;"
 			/>
 		</div>
-		<div class="review-content text-COLORWHT w-full h-full px-1 py-1 rounded-md">
-			<div class="review-wrap border border-COLORBLE rounded-md mb-4">
-				<div class="text-i-combo flex font-semibold items-center justify-start text-COLORGRY">
+		<div class="review-content h-full w-full rounded-md px-1 py-1 text-COLORWHT">
+			<div class="review-wrap mb-4 rounded-md border border-COLORBLE">
+				<div class="text-i-combo flex items-center justify-start font-semibold text-COLORGRY">
 					<div class="icon px-2 py-2"><Fa icon={faPencil} size="1.01x" /></div>
 					{placeholder ?? 'Write a review...'}
 				</div>
@@ -65,7 +65,7 @@
 						}
 						handleInput(e);
 					}}
-					class="text-md font-light text-COLORGRN h-full w-full px-2 py-1 mx-6 bg-transparent focus:outline-none cursor-text"
+					class="text-md mx-6 h-full w-full cursor-text bg-transparent px-2 py-1 font-light text-COLORGRN focus:outline-none"
 					contenteditable="true"
 				>
 					<div class="select-none text-COLORWHT1" contenteditable="false">What's on your mind?</div>

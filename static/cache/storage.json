@@ -1,8 +1,4 @@
 {
-    "key": "PRIMARY",
-    "files": [
-        "/manifest.json",
-        "/icons/256.png",
-        "/favicon.png"
-    ]
+	"key": "PRIMARY",
+	"files": ["/manifest.json", "/icons/256.png", "/favicon.png"]
 }

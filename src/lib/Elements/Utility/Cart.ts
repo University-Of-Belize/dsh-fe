@@ -8,11 +8,11 @@ const addToCart = async (item: string | undefined, quantity: number) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const response = await fetchWebApi(
+			const response = (await fetchWebApi(
 				'v1/user/cart',
 				'POST',
 				what_is(what.public.user, [item, quantity])
-			) as Response;
+			)) as Response;
 			const data = await response.json();
 			if (response.ok) {
 				toast.push('Added item to cart.');
@@ -37,11 +37,11 @@ async function emptyCart(index: number | null) {
 		clearTimeout(debounceTimeout);
 
 		debounceTimeout = setTimeout(async () => {
-			const response = await fetchWebApi(
+			const response = (await fetchWebApi(
 				'v1/user/cart',
 				'DELETE',
 				what_is(what.public.user, index?.toString())
-			) as Response;
+			)) as Response;
 			const data = await response.json();
 			if (response.ok) {
 				toast.push('Emptied the cart.');

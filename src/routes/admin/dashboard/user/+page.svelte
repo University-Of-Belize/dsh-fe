@@ -99,8 +99,8 @@
 	<title>Plattr | Dashboard / User</title>
 </svelte:head>
 
-<main class="w-full h-screen overflow-hidden">
-	<div class="navigation w-full z-20">
+<main class="h-screen w-full overflow-hidden">
+	<div class="navigation z-20 w-full">
 		<Navigation
 			transparency={5}
 			search={true}
@@ -111,18 +111,18 @@
 		/>
 	</div>
 
-	<div class="main-content flex items-center justify-start h-full text-COLORWHT">
+	<div class="main-content flex h-full items-center justify-start text-COLORWHT">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT4 bg-opacity-20 px-4 py-2 flex-col justify-start h-screen w-full lg:w-1/4 overflow-auto"
+			class="drawer hidden h-screen w-full flex-col justify-start overflow-auto bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:block lg:w-1/4"
 		>
-			<div class="section py-6 bg-opacity-100">
-				<div class="title font-semibold pb-5">My Account</div>
+			<div class="section bg-opacity-100 py-6">
+				<div class="title pb-5 font-semibold">My Account</div>
 				<div
 					on:click={async () => {
 						await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
 					}}
 				>
-										<Button
+					<Button
 						icon={faCog}
 						color="COLORBLK3"
 						text="My account settings"
@@ -133,13 +133,13 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto pb-40">
-			<div class="flex-header flex items-center w-full flex-wrap">
+		<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
+			<div class="flex-header flex w-full flex-wrap items-center">
 				<div class="block">
-					<div class="flex text-2xl font-semibold pb-2">User Management</div>
-					<div class="flex text-xl font-semibold pb-12">Who would you like to edit?</div>
+					<div class="flex pb-2 text-2xl font-semibold">User Management</div>
+					<div class="flex pb-12 text-xl font-semibold">Who would you like to edit?</div>
 				</div>
-				<div class="flex items-center justify-end flex-1">
+				<div class="flex flex-1 items-center justify-end">
 					{#if staff}
 						<div class="btn_wrp" on:click={() => goto('/admin/dashboard/user/manage2')}>
 							<Button color="COLORGRN2" color_t="COLORWHT" text="New user" icon={faPlus} />
@@ -165,7 +165,7 @@
 					</div> -->
 				</div>
 			</div>
-			<div class="flex flex-wrap w-full">
+			<div class="flex w-full flex-wrap">
 				{#if data != undefined}
 					{#each data as user, i}
 						{#if !isNaN(user.id)}
@@ -183,7 +183,7 @@
 									<div class="actions flex space-x-2">
 										{#if staff}
 											<div
-												class="btn-wrp w-fit h-fit bg-opacity-100"
+												class="btn-wrp h-fit w-fit bg-opacity-100"
 												on:click={() => {
 													// Wipe ourselves
 													localStorage.clear(); // Load all the settings
@@ -207,7 +207,7 @@
 												/>
 											</div>{/if}
 										<div
-											class="edit-wrap w-fit h-fit"
+											class="edit-wrap h-fit w-fit"
 											on:click={() => goto(`/admin/dashboard/user/manage2?user_id=${user?._id}`)}
 										>
 											<Button

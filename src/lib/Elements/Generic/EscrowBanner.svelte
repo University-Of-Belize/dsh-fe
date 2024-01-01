@@ -4,15 +4,15 @@
 	export let branding_text: string = 'Cafe';
 </script>
 
-<div class="footer block text-center text-COLORWHT bg-COLORBLK5 w-full">
-	<div class="chunk-one flex justify-center items-center py-14">
+<div class="footer block w-full bg-COLORBLK5 text-center text-COLORWHT">
+	<div class="chunk-one flex items-center justify-center py-14">
 		<div class="block">
-			<div class="branding-text w-full justify-center items-center font-semibold text-4xl">
+			<div class="branding-text w-full items-center justify-center text-4xl font-semibold">
 				{branding_text}
 			</div>
 			<div class="text text-xl font-light">{text}</div>
 			<div class="text text-sm font-light">{subtitle}</div>
-			<div class="content flex w-full justify-center items-center">
+			<div class="content flex w-full items-center justify-center">
 				<slot />
 			</div>
 		</div>

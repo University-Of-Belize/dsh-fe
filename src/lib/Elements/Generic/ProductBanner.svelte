@@ -22,26 +22,26 @@
 	export { productSlug as slug };
 </script>
 
-<div class="bg-COLORWHT2 flex w-full">
-	<div class="flex-none w-2/5 h-96">
+<div class="flex w-full bg-COLORWHT2">
+	<div class="h-96 w-2/5 flex-none">
 		<img
 			src={productImage || config['product-view']['default-image']}
 			alt={productName}
-			class="h-full w-full lg:w-full lg:h-full object-cover"
+			class="h-full w-full object-cover lg:h-full lg:w-full"
 			on:error={() => {
 				productImage = config['product-view']['default-image'];
 			}}
 		/>
 	</div>
 	<div class="relative ml-4 p-2 lg:p-10">
-		<h2 class="text-2xl lg:text-6xl font-semibold text-gray-700">{productName}</h2>
+		<h2 class="text-2xl font-semibold text-gray-700 lg:text-6xl">{productName}</h2>
 		<StarCount {reviews} />
-		<p class="mt-2 text-gray-600 font-light text-xl lg:text-4xl">
+		<p class="mt-2 text-xl font-light text-gray-600 lg:text-4xl">
 			{productDescription.length > 100
 				? `${productDescription.slice(0, 100)}...`
 				: productDescription}
 		</p>
-		<p class="mb-16 py-2 text-gray-600 font-bold text-lg lg:text-2xl">
+		<p class="mb-16 py-2 text-lg font-bold text-gray-600 lg:text-2xl">
 			{parseFloat(productPrice).toLocaleString('en-US', {
 				style: 'currency',
 				currency: config['checkout']['currency'],
@@ -49,9 +49,9 @@
 			})}
 		</p>
 		<div class="flex items-center">
-			<div class="comboBox flex flex-wrap absolute bottom-2 lg:bottom-6">
+			<div class="comboBox absolute bottom-2 flex flex-wrap lg:bottom-6">
 				<div
-					class="details font-semibold bg-COLORRED text-COLORWHT button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-12 py-4 items-center text-md select-none mr-2"
+					class="details button text-md mr-2 flex w-fit cursor-pointer select-none items-center rounded-sm bg-COLORRED px-12 py-4 font-semibold text-COLORWHT hover:bg-opacity-80"
 					on:click={() => {
 						// @ts-ignore
 						goto(`/product/${productSlug}`);

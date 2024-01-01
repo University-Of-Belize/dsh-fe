@@ -19,34 +19,36 @@
 	export { productSlug as slug };
 </script>
 
-<div class="bg-COLORBLK1 rounded-lg shadow-lg p-4 m-4 flex flex-wrap lg:flex-nowrap w-full lg:500px">
-	<div class="flex-none w-full md:w-auto">
+<div
+	class="lg:500px m-4 flex w-full flex-wrap rounded-lg bg-COLORBLK1 p-4 shadow-lg lg:flex-nowrap"
+>
+	<div class="w-full flex-none md:w-auto">
 		<img
 			src={productImage || config['product-view']['default-image']}
 			alt={productName}
-			class="w-full h-48 lg:w-48 object-cover rounded-lg"
+			class="h-48 w-full rounded-lg object-cover lg:w-48"
 			on:error={() => {
 				productImage = config['product-view']['default-image'];
 			}}
 		/>
 	</div>
-	<div class="relative flex-grow ml-4 pt-8 md:pt-2 lg:p-0">
+	<div class="relative ml-4 flex-grow pt-8 md:pt-2 lg:p-0">
 		<h2 class="text-lg font-semibold text-COLORWHT">{productName}</h2>
-		<p class="mt-2 text-COLORWHT4 font-light">
+		<p class="mt-2 font-light text-COLORWHT4">
 			{productDescription.length > 100
 				? `${productDescription.slice(0, 100)}...`
 				: productDescription}
 		</p>
-		<p class="mb-16 text-COLORWHT1 font-bold">
+		<p class="mb-16 font-bold text-COLORWHT1">
 			{parseFloat(productPrice).toLocaleString('en-US', {
 				style: 'currency',
 				currency: config['checkout']['currency'],
 				minimumFractionDigits: 2
 			})}
 		</p>
-		<div class="comboBox flex flex-wrap absolute bottom-1 h-9">
+		<div class="comboBox absolute bottom-1 flex h-9 flex-wrap">
 			<div
-				class="details font-semibold bg-COLORRED text-COLORWHT button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-4 py-2 items-center text-sm select-none mr-2"
+				class="details button mr-2 flex w-fit cursor-pointer select-none items-center rounded-sm bg-COLORRED px-4 py-2 text-sm font-semibold text-COLORWHT hover:bg-opacity-80"
 				on:click={() => {
 					// @ts-ignore
 					goto(`/product/${productSlug}`);

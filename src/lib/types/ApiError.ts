@@ -8,6 +8,6 @@ interface APIError {
 	};
 }
 
-type ErrCode = "ECONNREFUSED" | "ECONNRESET";
+type ErrCode = 'ECONNREFUSED' | 'ECONNRESET';
 
 export type { APIError };

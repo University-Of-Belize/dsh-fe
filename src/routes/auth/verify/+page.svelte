@@ -111,7 +111,7 @@
 				localStorage.watchdog = 'true';
 				localStorage.customReason = 'true';
 				localStorage.watchDogReason = 'To continue setup, open the app on your device.';
-				localStorage.setup_inProgress = "true";
+				localStorage.setup_inProgress = 'true';
 				await installPrompt.prompt().then((choiceResult: any) => {
 					if (choiceResult.outcome === 'accepted') {
 						console.log('User accepted the install prompt');
@@ -182,18 +182,18 @@
 	<title>Plattr | Verify your identity</title>
 </svelte:head>
 
-<main class="w-full h-screen">
-	<div class="navigation w-full z-20">
+<main class="h-screen w-full">
+	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} />
 	</div>
-	<div class="main-content flex items-center justify-center h-full">
+	<div class="main-content flex h-full items-center justify-center">
 		<EscrowBanner {branding_text} {text} {subtitle}>
-			<div class="flex justify-center items-center w-full pt-8 pb-4">
+			<div class="flex w-full items-center justify-center pb-4 pt-8">
 				{#if search}
 					<SearchBar />
 				{:else}
 					<div
-						class="reactive_wrapper w-fit h-fit"
+						class="reactive_wrapper h-fit w-fit"
 						on:click={() => smartAction()}
 						bind:this={smartButton}
 					>

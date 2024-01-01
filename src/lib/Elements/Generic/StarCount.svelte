@@ -18,7 +18,7 @@
 	}
 </script>
 
-<div class="text-lg flex items-center justify-start text-COLORYLW">
+<div class="flex items-center justify-start text-lg text-COLORYLW">
 	<!-- Don't ask. It's copilot-->
 	<div class="rating-as-text mt-1 pr-2">
 		{calculateRating(reviews)}

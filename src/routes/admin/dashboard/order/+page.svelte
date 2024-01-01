@@ -34,7 +34,7 @@
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import ProductPill from './../../../../lib/Elements/Generic/ProductPill.svelte';
-// What is what?
+	// What is what?
 	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';
 	import type { CartProduct } from '$lib/types/Product';
 	import { locateNodeUsingHash } from '$lib/Elements/Utility/page';
@@ -49,7 +49,7 @@
 	let drawerOpenBy: number;
 	async function catchAll() {
 		// Try to see if we provided an order ID to search for
-		locateNodeUsingHash("order");
+		locateNodeUsingHash('order');
 		// Fetch all orders
 		const res = (await fetchWebApi('v1/admin/order/manage', 'GET')) as Response;
 		const r = await res.json();
@@ -73,7 +73,7 @@
 
 		r.is.forEach((order: Order, i: number) => {
 			// Rewrite the universe a bit.
-			copy[i].order_code = order.order_code.substring(0,8).toUpperCase(); // Make a little bit shorter and easier to read
+			copy[i].order_code = order.order_code.substring(0, 8).toUpperCase(); // Make a little bit shorter and easier to read
 			if (copy[i].products.length != 0) {
 				// Clear (if not already)
 				copy[i].products = [];
@@ -222,10 +222,10 @@
 						currentAction[0] === 1
 							? 'a'
 							: currentAction[0] === 2
-							? 'd'
-							: currentAction[0] === 3
-							? 'm'
-							: '?', // Ternary statement to map 'a' for ACCEPT /
+								? 'd'
+								: currentAction[0] === 3
+									? 'm'
+									: '?', // Ternary statement to map 'a' for ACCEPT /
 						// 'd' for DELETE / 'm' for MODIFY
 						currentAction[1], // Order ID
 						JSON.parse(valueArray[1]), // The price (We use JSON.parse to turn the string back into a 'real' number/float)
@@ -247,10 +247,10 @@
 					currentAction[0] === 1
 						? 'Order accepted.'
 						: currentAction[0] === 2
-						? res.is
-						: currentAction[0] === 3
-						? 'Update successfully issued.'
-						: 'Update successfully issued.'
+							? res.is
+							: currentAction[0] === 3
+								? 'Update successfully issued.'
+								: 'Update successfully issued.'
 				);
 				catchAll(); // Issue UI update
 				break;
@@ -265,9 +265,9 @@
 	<title>Plattr | Dashboard / Orders</title>
 </svelte:head>
 
-<div class="stub hidden border border-" />
-<main class="w-full h-screen overflow-hidden">
-	<div class="navigation w-full z-20">
+<div class="stub border- hidden border" />
+<main class="h-screen w-full overflow-hidden">
+	<div class="navigation z-20 w-full">
 		<Navigation
 			transparency={5}
 			search={true}
@@ -278,19 +278,19 @@
 		/>
 	</div>
 
-	<div class="main-content flex items-center justify-start h-full text-COLORWHT overflow-hidden">
+	<div class="main-content flex h-full items-center justify-start overflow-hidden text-COLORWHT">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT4 bg-opacity-20 px-4 py-2 flex-col justify-start h-screen w-full lg:w-1/4 overflow-auto"
+			class="drawer hidden h-screen w-full flex-col justify-start overflow-auto bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:block lg:w-1/4"
 			bind:this={navDrawer}
 		>
-			<div class="section py-6 bg-opacity-100">
-				<div class="title font-semibold pb-5">My Account</div>
+			<div class="section bg-opacity-100 py-6">
+				<div class="title pb-5 font-semibold">My Account</div>
 				<div
 					on:click={async () => {
 						await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
 					}}
 				>
-										<Button
+					<Button
 						icon={faCog}
 						color="COLORBLK3"
 						text="My account settings"
@@ -301,19 +301,19 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block px-2 md:px-16 py-16 w-full h-full bg-transparent overflow-auto pb-40">
-			<div class="flex-header flex items-start w-full flex-wrap">
+		<div class="content block h-full w-full overflow-auto bg-transparent px-2 py-16 pb-40 md:px-16">
+			<div class="flex-header flex w-full flex-wrap items-start">
 				<div class="block">
-					<div class="flex text-2xl font-semibold pb-2">What's Queued?</div>
-					<div class="flex text-xl font-semibold pb-12">
+					<div class="flex pb-2 text-2xl font-semibold">What's Queued?</div>
+					<div class="flex pb-12 text-xl font-semibold">
 						{staff ? 'Accept, decline and modify orders' : 'View and modify your open orders.'}
 					</div>
 				</div>
-				<div class="flex flex-1 justify-end text-2xl font-semibold pb-2">
+				<div class="flex flex-1 justify-end pb-2 text-2xl font-semibold">
 					Open Orders: {data ? data.length : '--'}
 				</div>
 			</div>
-			<div class="flex flex-wrap flex-col-reverse w-full">
+			<div class="flex w-full flex-col-reverse flex-wrap">
 				{#if data != undefined}
 					{#if data.length === 0}
 						<div class="font-light">No orders are currently available to manage.</div>
@@ -323,9 +323,9 @@
 						{#each data as order, index}
 							<div
 								id="order-{order._id}"
-								class="orderPane flex flex-col lg:flex-row justify-start w-full bg-COLORBLK1 py-4 px-4 rounded-sm border border-COLORWHT3 my-8"
+								class="orderPane my-8 flex w-full flex-col justify-start rounded-sm border border-COLORWHT3 bg-COLORBLK1 px-4 py-4 lg:flex-row"
 							>
-								<div class="order-details flex flex-col pb-8 px-4 w-full" id={order.order_code}>
+								<div class="order-details flex w-full flex-col px-4 pb-8" id={order.order_code}>
 									<div class="flex space-x-4">
 										<div class="pfp">
 											<img
@@ -342,7 +342,7 @@
 										<div class="block">
 											<div class="flex">
 												<div
-													class="flex flex-wrap text-lg lg:text-2xl text-COLORWHT font-medium space-x-2"
+													class="flex flex-wrap space-x-2 text-lg font-medium text-COLORWHT lg:text-2xl"
 												>
 													<div class="g-wrap">
 														{order.order_from
@@ -354,7 +354,7 @@
 													<div class="font-semibold">issued an order for</div>
 												</div>
 											</div>
-											<div class="text-base text-COLORWHT font-semibold flex">
+											<div class="flex text-base font-semibold text-COLORWHT">
 												Ordered at {getLocaleDateTime(order.order_date)}
 												<!-- <br/>Review or manage this order -->
 											</div>
@@ -362,15 +362,17 @@
 									</div>
 
 									{#each order.products as product, index (product.product?._id)}
-										<div class="product-order-container w-full mt-4">
+										<div class="product-order-container mt-4 w-full">
 											<div class="flex flex-wrap">
-												<div class="text-2xl font-semibold my-4">
+												<div class="my-4 text-2xl font-semibold">
 													{product.product?.productName ?? 'Product Unavailable'}
 												</div>
-												<div class="flex flex-1 basis-full md:basis-0 justify-start md:justify-end items-center space-x-2">
+												<div
+													class="flex flex-1 basis-full items-center justify-start space-x-2 md:basis-0 md:justify-end"
+												>
 													{#if staff}
 														<button
-															class="btn_wrp w-fit h-fit"
+															class="btn_wrp h-fit w-fit"
 															on:click={() =>
 																goto(
 																	`/admin/dashboard/product/manage?product_id=${
@@ -389,7 +391,7 @@
 														</button>
 													{/if}
 													<button
-														class="btn_wrp w-fit h-fit"
+														class="btn_wrp h-fit w-fit"
 														on:click={() => goto(`/product/${product.product?.slug ?? 'back'}`)}
 													>
 														<Button
@@ -403,11 +405,11 @@
 													</button>
 												</div>
 											</div>
-											<div class="banner-top flex flex-wrap w-full space-x-4 items-top">
-												<div class="pimg_wrp block bg-COLORBLE h-fit w-fit rounded-md">
+											<div class="banner-top items-top flex w-full flex-wrap space-x-4">
+												<div class="pimg_wrp block h-fit w-fit rounded-md bg-COLORBLE">
 													<div class="pimg_wrp2 relative">
 														<div
-															class="product-image relative block overflow-clip rounded-md hover:opacity-80 cursor-pointer"
+															class="product-image relative block cursor-pointer overflow-clip rounded-md hover:opacity-80"
 															on:click={() => goto(`/product/${product.product?.slug ?? 'back'}`)}
 														>
 															<img
@@ -415,30 +417,30 @@
 																	config['product-showcase']['default-image']}
 																alt={product.product?.productName ?? 'Untitled Product'}
 																title={product.product?.productName ?? 'Untitled Product'}
-																class="productImage rounded-sm w-72 h-56 object-cover"
+																class="productImage h-56 w-72 rounded-sm object-cover"
 															/>
 														</div>
 													</div>
 												</div>
 												<div
-													class="inputgroup flex-1 block items-start justify-start lg:items-center my-2"
+													class="inputgroup my-2 block flex-1 items-start justify-start lg:items-center"
 												>
-													<div class="label font-semibold w-full text-lg">Product description</div>
+													<div class="label w-full text-lg font-semibold">Product description</div>
 													<div
-														class="product-description text-md font-light text-COLORWHT h-full w-full py-1 rounded-md mb-4 bg-transparent"
+														class="product-description text-md mb-4 h-full w-full rounded-md bg-transparent py-1 font-light text-COLORWHT"
 													>
 														<div class="text">
 															{@html product.product?.description.length > 250
 																? `${product.product?.description.slice(
 																		0,
 																		250
-																  )}... <a class='font-semibold hover:underline' href='/product/${
+																	)}... <a class='font-semibold hover:underline' href='/product/${
 																		product.product?.slug
-																  }'>Read more</a>`
+																	}'>Read more</a>`
 																: product.product?.description ??
-																  'This product entry is corrupt, failed to load or has been deleted.'}
+																	'This product entry is corrupt, failed to load or has been deleted.'}
 														</div>
-														<div class="product-price text-xl font-semibold my-2">
+														<div class="product-price my-2 text-xl font-semibold">
 															{parseFloat(product.product?.price.$numberDecimal).toLocaleString(
 																'en-US',
 																{
@@ -453,12 +455,12 @@
 																	minimumFractionDigits: 2
 																})}
 														</div>
-														<div class="quantity font-semibold text-4xl">x{product.quantity}</div>
+														<div class="quantity text-4xl font-semibold">x{product.quantity}</div>
 													</div>
 												</div>
 											</div>
 										</div>{/each}
-									<div class="text-2xl font-semibold my-4">
+									<div class="my-4 text-2xl font-semibold">
 										{parseFloat(order.total_amount.$numberDecimal ?? '0.00').toLocaleString(
 											'en-US',
 											{
@@ -468,10 +470,10 @@
 											}
 										)}
 									</div>
-									<div class="flex flex-wrap flex-1 justify-start items-center space-x-2">
+									<div class="flex flex-1 flex-wrap items-center justify-start space-x-2">
 										{#if staff}
 											<button
-												class="btn_wrp w-fit h-fit"
+												class="btn_wrp h-fit w-fit"
 												title={order.is_accepted
 													? 'You have already accepted this order'
 													: 'Accept this order'}
@@ -490,7 +492,7 @@
 											</button>
 										{/if}
 										<button
-											class="btn_wrp w-fit h-fit"
+											class="btn_wrp h-fit w-fit"
 											title={staff ? 'Reject/Decline this order' : 'Dequeue this order'}
 											on:click={() => go_order(2, order._id)}
 										>
@@ -503,7 +505,7 @@
 											/>
 										</button>
 										<button
-											class="btn_wrp w-fit h-fit"
+											class="btn_wrp h-fit w-fit"
 											title="Modify this order"
 											on:click={() => go_order(3, order._id)}
 										>
@@ -520,23 +522,27 @@
 												role="button"
 												tabindex="0"
 												title="Copy the order code for reference"
-												class="flex items-center justify-center px-4 space-x-2 rounded-md hover:bg-gray-400 hover:bg-opacity-25 opacity-50 cursor-pointer select-none"
+												class="flex cursor-pointer select-none items-center justify-center space-x-2 rounded-md px-4 opacity-50 hover:bg-gray-400 hover:bg-opacity-25"
 												on:click={() => {
 													// Copy the selected text to the clipboard
-													navigator.clipboard.writeText(`${config.server['bound-domain']}/admin/dashboard/order#${order.order_code}`);
+													navigator.clipboard.writeText(
+														`${config.server['bound-domain']}/admin/dashboard/order#${order.order_code}`
+													);
 													toast.push('Order code copied to clipboard.');
 												}}
 												on:keypress={() => {
 													// Copy the selected text to the clipboard
-													navigator.clipboard.writeText(`${config.server['bound-domain']}/admin/dashboard/order#${order.order_code}`);
+													navigator.clipboard.writeText(
+														`${config.server['bound-domain']}/admin/dashboard/order#${order.order_code}`
+													);
 													toast.push('Order code copied to clipboard.');
 												}}
 											>
-												<div class="flex text-lg font-light my-4">
+												<div class="my-4 flex text-lg font-light">
 													<div class="font-semibold">ORDER #</div>
 													{order.order_code}
 												</div>
-												<div class="copy rounded-md hover:bg-gray-200 opacity-80 p-4">
+												<div class="copy rounded-md p-4 opacity-80 hover:bg-gray-200">
 													<Fa icon={faCopy} size="1.25x" class="text-COLORWHT" />
 												</div>
 											</div>
@@ -551,7 +557,7 @@
 										</div>
 										{#if currentAction[0] === 2}
 											<button
-												class="btn_wrp w-fit h-fit"
+												class="btn_wrp h-fit w-fit"
 												title="Reject/Decline this order"
 												on:click={(e) => processRequest(e)}
 											>
@@ -573,7 +579,7 @@
 												class="inputgroup flex flex-wrap items-start justify-start lg:items-center"
 											>
 												<div
-													class="flex label font-semibold w-full text-lg justify-start items-center space-x-2"
+													class="label flex w-full items-center justify-start space-x-2 text-lg font-semibold"
 												>
 													<div class="title">Expected ETA</div>
 													<div
@@ -597,13 +603,13 @@
 
 											<div
 												id="modify-content-{order._id}"
-												class="modify-content space-y-4 mt-4 {staff ? 'hidden' : ''}"
+												class="modify-content mt-4 space-y-4 {staff ? 'hidden' : ''}"
 											>
 												<div
 													class="inputgroup flex flex-wrap items-start justify-start lg:items-center"
 												>
 													<div
-														class="flex label font-semibold w-full text-lg justify-start items-center space-x-2"
+														class="label flex w-full items-center justify-start space-x-2 text-lg font-semibold"
 													>
 														<div class="title">Total amount due</div>
 														<div
@@ -629,26 +635,26 @@
 															: `Your total ${
 																	order
 																		? 'is $' +
-																		  parseFloat(order.total_amount.$numberDecimal).toFixed(2)
+																			parseFloat(order.total_amount.$numberDecimal).toFixed(2)
 																		: 'failed to load'
-															  }`}
+																}`}
 													/>
 												</div>
 												<div
 													class="inputgroup flex flex-wrap items-start justify-start lg:items-center"
 												>
 													<div
-														class="flex label font-semibold w-full text-lg justify-start items-center space-x-2"
+														class="label flex w-full items-center justify-start space-x-2 text-lg font-semibold"
 													>
 														<div class="title">Discount code</div>
 														<div
 															title={staff
 																? 'Apply or modify the discount on the order'
 																: order
-																? order.promo_code
-																	? order.promo_code.description
-																	: 'No discounts were applied to this order'
-																: 'Discount codes that were applied to this order will be here'}
+																	? order.promo_code
+																		? order.promo_code.description
+																		: 'No discounts were applied to this order'
+																	: 'Discount codes that were applied to this order will be here'}
 															class="icon cursor-help select-none"
 														>
 															<Fa icon={faQuestionCircle} size="1x" />
@@ -691,7 +697,7 @@
 											<!--- END user-modify-content-${order.order_code} -->
 											{#if staff}
 												<button
-													class="btn_wrp w-fit h-fit"
+													class="btn_wrp h-fit w-fit"
 													type="submit"
 													title="Process this request"
 												>
@@ -707,9 +713,7 @@
 										</form>
 										<!--- user-modify-content-${order.order_code}-->
 										<div id="user-modify-content-{order._id}" class="hidden">
-											<div class="title text-2xl font-semibold">
-												Products Ordered
-											</div>
+											<div class="title text-2xl font-semibold">Products Ordered</div>
 											{#each data_raw[index].products as product, index}
 												<ProductPill
 													product={product.product ?? config.ui['default-product']}
@@ -719,9 +723,9 @@
 													tag={true}
 													tagText={'x' + product.quantity}
 												>
-													<div class="controls flex justify-center items-center space-x-2">
+													<div class="controls flex items-center justify-center space-x-2">
 														<div
-															class="edit-wrap w-fit h-fit"
+															class="edit-wrap h-fit w-fit"
 															on:click={() => {
 																// Delete the product
 																userDeleteOrderProduct(order._id, index);
@@ -739,7 +743,7 @@
 															/>
 														</div>
 
-														<div class="edit-wrap w-fit h-fit">
+														<div class="edit-wrap h-fit w-fit">
 															<TextInput
 																icon={faCog}
 																name="quantity"

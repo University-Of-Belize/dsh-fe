@@ -4,7 +4,7 @@ import { fetchWebApi } from '$lib/vendor/dishout/api';
 import { toast } from '@zerodevx/svelte-toast';
 
 async function userDeleteOrderProduct(order_id: string, index: number) {
-	const r = await fetchWebApi(
+	const r = (await fetchWebApi(
 		'v1/order/place',
 		'PUT',
 		what_is(what.public.order, [
@@ -17,7 +17,7 @@ async function userDeleteOrderProduct(order_id: string, index: number) {
 				// "quantity": 1
 			}
 		])
-	) as Response;
+	)) as Response;
 	if (!r.ok) {
 		try {
 			const res = await r.json();

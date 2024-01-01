@@ -17,16 +17,16 @@
 	});
 </script>
 
-<main class="text-COLORWHT p-8">
-	<div class="text-2xl font-semibold mt-6 mb-2">Development Area</div>
+<main class="p-8 text-COLORWHT">
+	<div class="mb-2 mt-6 text-2xl font-semibold">Development Area</div>
 	<div
 		bind:this={terminal}
-		class="consoleEventLog block font-mono border boarder-COLORWHT text-COLORBLE rounded-sm w-full p-8"
+		class="consoleEventLog boarder-COLORWHT block w-full rounded-sm border p-8 font-mono text-COLORBLE"
 	>
 		<div class="consoleEvent">[TERMINAL] Ready to accept input</div>
 	</div>
-	<div class="text-xl font-semibold mt-6">commentBox component</div>
-	<div class="block text-md font-light mt-2 mb-6">
+	<div class="mt-6 text-xl font-semibold">commentBox component</div>
+	<div class="text-md mb-6 mt-2 block font-light">
 		<code>src/lib/Elements/Generic/CommentBox.svelte</code>
 		<div>Takes in a `user` object, returns the content as a custom <code>input</code> event</div>
 	</div>

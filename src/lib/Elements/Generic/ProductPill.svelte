@@ -17,7 +17,7 @@
 
 <!-- Color stub -->
 <div
-	class="placeholder bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORWHT bg-COLORYLW bg-COLORBYW bg-COLORPNK bg-COLORRED hidden w-full"
+	class="placeholder hidden w-full bg-COLORBYW bg-COLORPNK bg-COLORRED bg-COLORWHT bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORYLW"
 >
 	&nbsp;
 </div>
@@ -30,12 +30,12 @@
 		>
 			<div
 				on:click={() => goto(`/admin/dashboard/product/manage?product_id=${product._id}`)}
-				class="widget shadow-md cursor-pointer hover:opacity-80 bg-COLORBLE px-2 py-2 text-COLORWHT w-fit rounded-md"
+				class="widget w-fit cursor-pointer rounded-md bg-COLORBLE px-2 py-2 text-COLORWHT shadow-md hover:opacity-80"
 			>
 				<Fa icon={faPencil} size="0.85x" />
 			</div>
 		</div>{/if}
-	<div class="product my-4 bg-COLORBLK4 bg-opacity-50 px-4 py-2 rounded-md">
+	<div class="product my-4 rounded-md bg-COLORBLK4 bg-opacity-50 px-4 py-2">
 		<div class="flex bg-opacity-100">
 			<div class="product-pfp flex flex-col items-center justify-start pr-4">
 				<img
@@ -53,13 +53,13 @@
 					style="width: 50px; height: 50px;"
 				/>
 			</div>
-			<div class="user-wrap flex flex-wrap items-center w-full">
+			<div class="user-wrap flex w-full flex-wrap items-center">
 				<div class="product-content text-COLORWHT" style="word-break: break-word;">
-					<div class="text-base lg:text-lg font-semibold flex items-center">
+					<div class="flex items-center text-base font-semibold lg:text-lg">
 						{product.productName ?? 'Untitled Product'}
 						{#if tag}
 							<div
-								class="tag px-4 py-1 bg-{tagColor} text-{tagColor_t} mx-4 font-light lg:text-sm flex items-center justify-center"
+								class="tag px-4 py-1 bg-{tagColor} text-{tagColor_t} mx-4 flex items-center justify-center font-light lg:text-sm"
 							>
 								{tagText}
 							</div>
@@ -69,7 +69,7 @@
 						{@html description}
 					</div>
 				</div>
-				<div class="actions flex items-center justify-start lg:justify-end flex-1 text-COLORWHT">
+				<div class="actions flex flex-1 items-center justify-start text-COLORWHT lg:justify-end">
 					<slot />
 				</div>
 			</div>

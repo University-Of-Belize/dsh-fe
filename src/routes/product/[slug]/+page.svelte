@@ -126,37 +126,37 @@
 	<title>Plattr | Product</title>
 </svelte:head>
 
-<main class="w-full h-screen">
-	<div class="navigation w-full z-20">
+<main class="h-screen w-full">
+	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} />
 	</div>
 	<div class="hero">
 		<div class="image-and-wrapper relative" style="height: 800px">
 			<div
-				class="content-wrapper w-full h-full absolute flex items-center justify-center z-10 flex-wrap"
+				class="content-wrapper absolute z-10 flex h-full w-full flex-wrap items-center justify-center"
 			>
-				<div class="content lg:flex-1 flex h-full items-start justify-start mx-12 py-24">
+				<div class="content mx-12 flex h-full items-start justify-start py-24 lg:flex-1">
 					{#if $product}
-						<div class="block content-wrapper">
+						<div class="content-wrapper block">
 							<div
-								class="running-heading text-COLORWHT text-4xl font-medium flex w-full justify-start items-center"
+								class="running-heading flex w-full items-center justify-start text-4xl font-medium text-COLORWHT"
 							>
 								{$product.productName || "Oops, this product doesn't exist!"}
 							</div>
 							<StarCount reviews={$product.reviews} />
-							<div class="text-sm lg:text-lg font-light text-COLORWHT4">
+							<div class="text-sm font-light text-COLORWHT4 lg:text-lg">
 								{@html escapeHtml($product.description).replace(/\n/g, '<br>')}
 							</div>
-							<div class="text-md lg:text-xl py-4 font-semibold text-COLORWHT1">
+							<div class="text-md py-4 font-semibold text-COLORWHT1 lg:text-xl">
 								{parseFloat($product.price.$numberDecimal).toLocaleString('en-US', {
 									style: 'currency',
 									currency: config['checkout']['currency'],
 									minimumFractionDigits: 2
 								})}
 							</div>
-							<div class="comboBox flex absolute py-4 h-16">
+							<div class="comboBox absolute flex h-16 py-4">
 								<div
-									class="details font-semibold bg-COLORRED text-COLORWHT button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-4 py-2 items-center text-sm select-none mr-2"
+									class="details button mr-2 flex w-fit cursor-pointer select-none items-center rounded-sm bg-COLORRED px-4 py-2 text-sm font-semibold text-COLORWHT hover:bg-opacity-80"
 									on:click={() => {
 										localStorage.setItem('wants_single_cart', 'true');
 										goto(`/product/checkout?single_cart=${$product?._id}`);
@@ -184,7 +184,7 @@
 				<div class="fix flex-1">&nbsp;</div>
 			</div>
 			<div
-				class="wrapper bg-black opacity-50 w-full h-full absolute flex items-center justify-center"
+				class="wrapper absolute flex h-full w-full items-center justify-center bg-black opacity-50"
 			>
 				<!-- Nothing, this is an overlay-->
 			</div>
@@ -197,30 +197,30 @@
 	</div>
 	<div class="main-content mx-8 py-8 text-COLORWHT">
 		{#if $product}
-			<div class="text-4xl text-COLORWHT font-semibold pt-2">Reviews</div>
+			<div class="pt-2 text-4xl font-semibold text-COLORWHT">Reviews</div>
 			<div class="review-graph flex w-full py-2 pb-2">
 				<div class="rating">
-					<div class="rating-as-text font-bold text-6xl text-COLORWHT1">
+					<div class="rating-as-text text-6xl font-bold text-COLORWHT1">
 						{calculateRating($product.reviews)}
 					</div>
 					<div
-						class="rating-as-stars flex w-full justify-start items-center pl-1 text-xl text-COLORYLW"
+						class="rating-as-stars flex w-full items-center justify-start pl-1 text-xl text-COLORYLW"
 					>
 						<StarCount reviews={$product.reviews} />
 					</div>
 					<div
-						class="rating-as-text w-full flex items-center justify-start pl-1 py-2 text-COLORWHT3"
+						class="rating-as-text flex w-full items-center justify-start py-2 pl-1 text-COLORWHT3"
 					>
 						{calculateRating($product.reviews, true)} Reviews
 					</div>
 				</div>
-				<div class="graphed-reviews w-1/4 px-8 flex-1 lg:flex-none">
+				<div class="graphed-reviews w-1/4 flex-1 px-8 lg:flex-none">
 					{#each Array.from({ length: 5 }, (_, i) => i + 1) as rating}
 						<div class="flex items-center justify-between py-1">
-							<div class="text-COLORWHT px-2">{rating}</div>
-							<div class="w-full bg-COLORBLK1 h-2 rounded-sm">
+							<div class="px-2 text-COLORWHT">{rating}</div>
+							<div class="h-2 w-full rounded-sm bg-COLORBLK1">
 								<div
-									class="bg-COLORHPK h-full rounded-sm"
+									class="h-full rounded-sm bg-COLORHPK"
 									style="width: {getPercentage($product.reviews, rating)}%"
 								/>
 							</div>
@@ -230,18 +230,18 @@
 			</div>
 
 			<!-- New reviews first -->
-			<div class="flex flex-col-reverse justify-start w-full">
+			<div class="flex w-full flex-col-reverse justify-start">
 				{#if $product.reviews.length === 0}<b>No reviews yet. Be the first.</b>{/if}
 				{#each $product.reviews as review}
 					{#if !review.hidden}
 						<div
-							class="review my-4 bg-COLORBLK2 bg-opacity-50 px-4 py-2 rounded-md"
+							class="review my-4 rounded-md bg-COLORBLK2 bg-opacity-50 px-4 py-2"
 							id={review._id}
 						>
 							<div class="flex bg-opacity-100">
 								<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
 									<img
-										class="rounded-md w-full"
+										class="w-full rounded-md"
 										src={review.reviewer?.profile_picture || config['user']['default-image']}
 										alt="{review.reviewer?.username}'s avatar"
 										on:error={() => {
@@ -251,9 +251,9 @@
 									/>
 								</div>
 								<div class="review-content text-COLORWHT">
-									<div class="text-lg font-semibold flex">
+									<div class="flex text-lg font-semibold">
 										{review.reviewer?.username || 'Anonymous'}
-										<div class="starcount flex text-COLORYLW items-center justify-center px-2">
+										<div class="starcount flex items-center justify-center px-2 text-COLORYLW">
 											<!-- Copilot Logic-->
 											{#each Array.from({ length: 5 }, (_, i) => i) as _}
 												{#if _ < Math.floor(calculateRating([review]))}
@@ -271,12 +271,12 @@
 									</div>
 									{#if JSON.parse(localStorage.staff ?? false)}
 										<div
-											class="actions flex items-center justify-start lg:justify-end flex-1 text-COLORWHT my-4"
+											class="actions my-4 flex flex-1 items-center justify-start text-COLORWHT lg:justify-end"
 										>
 											<div class="controls flex space-x-2">
 												<div class="stub hidden bg-COLORRED" />
 												<div
-													class="edit-wrap w-fit h-fit"
+													class="edit-wrap h-fit w-fit"
 													on:click={() => {
 														deleteReview(review._id);
 														try {
@@ -300,7 +300,7 @@
 												</div>
 
 												<div
-													class="edit-wrap w-fit h-fit"
+													class="edit-wrap h-fit w-fit"
 													on:click={() =>
 														navigator.clipboard
 															.writeText(
@@ -326,7 +326,7 @@
 			</div>
 			<!--- Create a review --->
 			{#if user && localStorage.token}
-			<div class="review my-4 bg-transparent px-4 py-2 rounded-md">
+				<div class="review my-4 rounded-md bg-transparent px-4 py-2">
 					<div class="flex bg-opacity-100">
 						<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
 							<img
@@ -340,13 +340,13 @@
 							/>
 						</div>
 						<form
-							class="review-content text-COLORWHT w-full h-full px-1 py-1 rounded-md"
+							class="review-content h-full w-full rounded-md px-1 py-1 text-COLORWHT"
 							action="#"
 							on:submit={(event) => handleSubmit(event)}
 						>
-							<div class="review-wrap border border-COLORBLE rounded-md mb-4">
+							<div class="review-wrap mb-4 rounded-md border border-COLORBLE">
 								<div
-									class="text-i-combo flex font-semibold items-center justify-start text-COLORGRY"
+									class="text-i-combo flex items-center justify-start font-semibold text-COLORGRY"
 								>
 									<div class="icon px-2 py-2"><Fa icon={faPencil} size="1.01x" /></div>
 									Write a review...
@@ -354,13 +354,13 @@
 								<textarea
 									bind:this={newReviewContent}
 									name="review"
-									class="text-md font-light text-COLORBLE h-full w-full px-2 py-1 mx-6 bg-transparent focus:outline-none"
+									class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORBLE focus:outline-none"
 									rows="6"
 									placeholder="What's on your mind?"
 								/>
 							</div>
 							<div
-								class="star-rating flex flex-row-reverse items-center justify-end select-none text-2xl font-light py-4"
+								class="star-rating flex select-none flex-row-reverse items-center justify-end py-4 text-2xl font-light"
 							>
 								{#each [5, 4, 3, 2, 1] as value}
 									<div class="star flex items-center justify-center text-COLORYLW hover:opacity-80">
@@ -370,7 +370,7 @@
 												id={value}
 												name="rating"
 												{value}
-												class="absolute z-10 w-8 h-8 opacity-0 cursor-pointer"
+												class="absolute z-10 h-8 w-8 cursor-pointer opacity-0"
 												on:change={() => setRating(value)}
 											/>
 											<label for={value} class="relative z-0" class:active={rating >= value}

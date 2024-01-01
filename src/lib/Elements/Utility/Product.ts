@@ -19,7 +19,16 @@ const createProduct = async (
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const payload = [category_id, slug, productName, description, keywords, image_url, price, discount];
+			const payload = [
+				category_id,
+				slug,
+				productName,
+				description,
+				keywords,
+				image_url,
+				price,
+				discount
+			];
 			const res = (await fetchWebApi(
 				'v1/admin/menu/manage',
 				'POST',

@@ -61,19 +61,17 @@
 
 <!-- Color stub -->
 <div
-	class="placeholder bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORWHT bg-COLORYLW bg-COLORBYW bg-COLORPNK bg-COLORRED hidden w-full"
+	class="placeholder hidden w-full bg-COLORBYW bg-COLORPNK bg-COLORRED bg-COLORWHT bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORYLW"
 >
 	&nbsp;
 </div>
 
-<div class="review bg-COLORBLK3 w-full bg-opacity-50 px-4 py-4 rounded-md z-10">
-	<div class="flex flex-wrap bg-opacity-100 space-y-4 lg:space-y-2">
-		<div
-			class="reviewer-pfp flex flex-row items-center justify-start w-full lg:w-auto pr-4"
-		>
+<div class="review z-10 w-full rounded-md bg-COLORBLK3 bg-opacity-50 px-4 py-4">
+	<div class="flex flex-wrap space-y-4 bg-opacity-100 lg:space-y-2">
+		<div class="reviewer-pfp flex w-full flex-row items-center justify-start pr-4 lg:w-auto">
 			{#if editProfilePicture}
 				<div
-					class="pimg_wrp block bg-COLORBLE h-fit w-fit rounded-md"
+					class="pimg_wrp block h-fit w-fit rounded-md bg-COLORBLE"
 					on:click={() => {
 						photoInput.click();
 					}}
@@ -102,19 +100,19 @@
 						/>
 						<div
 							style="top: -4%; right: -4%;"
-							class="widget-wrp z-10 absolute flex w-full items-center justify-end"
+							class="widget-wrp absolute z-10 flex w-full items-center justify-end"
 						>
 							<div
-								class="widget shadow-md cursor-pointer hover:opacity-80 bg-COLORBLE px-2 py-2 text-COLORWHT w-fit rounded-md"
+								class="widget w-fit cursor-pointer rounded-md bg-COLORBLE px-2 py-2 text-COLORWHT shadow-md hover:opacity-80"
 							>
 								<Fa icon={faImage} size="0.85x" />
 							</div>
 						</div>
 						<div
-							class="profile-image relative block overflow-clip rounded-md hover:opacity-80 cursor-pointer"
+							class="profile-image relative block cursor-pointer overflow-clip rounded-md hover:opacity-80"
 						>
 							<img
-								class="rounded-md w-16 h-16 lg:w-32 lg:h-32"
+								class="h-16 w-16 rounded-md lg:h-32 lg:w-32"
 								bind:this={userImage}
 								src={user?.profile_picture || config['user']['default-image']}
 								alt="{user?.username}'s avatar"
@@ -127,7 +125,7 @@
 				</div>
 			{:else}
 				<img
-					class="rounded-md w-16 h-16 lg:w-32 lg:h-32"
+					class="h-16 w-16 rounded-md lg:h-32 lg:w-32"
 					src={user?.profile_picture || config['user']['default-image']}
 					alt="{user?.username}'s avatar"
 					on:error={() => {
@@ -137,10 +135,10 @@
 			{/if}
 		</div>
 		<div
-			class="user-wrap flex w-full lg:w-auto flex-wrap flex-col items-start"
+			class="user-wrap flex w-full flex-col flex-wrap items-start lg:w-auto"
 			style="word-break: break-word;"
 		>
-			<div class="text-2xl lg:text-2xl w-full lg:w-auto font-semibold flex flex-wrap items-center">
+			<div class="flex w-full flex-wrap items-center text-2xl font-semibold lg:w-auto lg:text-2xl">
 				{user.username
 					? user._id == localStorage.user_id
 						? `${user?.username} (You)`
@@ -148,16 +146,16 @@
 					: 'Anonymous'}
 				{#if tag}
 					<div
-						class="tag px-4 my-2 lg:my-0 py-1 bg-{tagColor} text-{tagColor_t} md:mx-4 font-light lg:text-sm flex items-center justify-center w-full lg:w-auto"
+						class="tag my-2 px-4 py-1 lg:my-0 bg-{tagColor} text-{tagColor_t} flex w-full items-center justify-center font-light md:mx-4 lg:w-auto lg:text-sm"
 					>
 						{tagText}
 					</div>
 				{/if}
 			</div>
-			<div class="hidden lg:block text-md font-light text-COLORWHT1 mt-4 mb-2 lg:m-0">
+			<div class="text-md mb-2 mt-4 hidden font-light text-COLORWHT1 lg:m-0 lg:block">
 				{@html description}
 			</div>
-			<div class="actions flex items-center justify-start flex-1 text-COLORWHT w-full lg:w-auto">
+			<div class="actions flex w-full flex-1 items-center justify-start text-COLORWHT lg:w-auto">
 				<slot />
 			</div>
 		</div>

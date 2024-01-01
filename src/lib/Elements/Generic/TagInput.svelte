@@ -88,7 +88,7 @@
 
 <div class="stub hidden bg-COLORBLE" />
 <div
-	class="tagInput flex mt-2 w-full rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORWHT aria-disabled:opacity-40 aria-disabled:cursor-not-allowed {custom_style}"
+	class="tagInput mt-2 flex w-full items-center rounded-sm border border-COLORWHT bg-COLORWHT5 px-4 py-2 text-sm aria-disabled:cursor-not-allowed aria-disabled:opacity-40 {custom_style}"
 >
 	<div bind:this={tagArea} class="tagArea flex px-2" />
 	<TextInput

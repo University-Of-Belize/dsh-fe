@@ -16,7 +16,7 @@
 	export let button_reloads: boolean = false;
 </script>
 
-<div class="card-picker flex flex-wrap w-full my-4">
+<div class="card-picker my-4 flex w-full flex-wrap">
 	<!-- <div class="m-1 flex-1">
         <div class="flex w-full border border-gray-300 rounded-md overflow-hidden">
             <img src={image} alt={image_alt} class="w-full object-cover" />
@@ -24,18 +24,18 @@
     </div> -->
 
 	<div
-		class="flex-1 basis-full lg:basis-0 border border-COLORHPK bg-COLORBLK1 text-COLORWHT rounded-md overflow-hidden lg:mx-1 p-6"
+		class="flex-1 basis-full overflow-hidden rounded-md border border-COLORHPK bg-COLORBLK1 p-6 text-COLORWHT lg:mx-1 lg:basis-0"
 	>
-		<div class="font-semibold text-xl mb-6">
+		<div class="mb-6 text-xl font-semibold">
 			{@html title}
 
-			<div class="text-COLORWHT2 mb-6 text-sm">
+			<div class="mb-6 text-sm text-COLORWHT2">
 				{@html subtitle}
 			</div>
-			<div class="text-COLORWHT2 text-xl mb-6">
+			<div class="mb-6 text-xl text-COLORWHT2">
 				{@html body}
 			</div>
-			<div class="text-COLORWHT2 text-lg font-normal mb-6">
+			<div class="mb-6 text-lg font-normal text-COLORWHT2">
 				{@html body_optional}
 			</div>
 

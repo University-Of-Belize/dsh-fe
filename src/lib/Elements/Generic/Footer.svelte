@@ -3,19 +3,19 @@
 	export let branding_text: string = 'Cafe';
 </script>
 
-<div class="footer block text-center text-COLORWHT bg-COLORBLK3">
-	<div class="chunk-one flex justify-center items-center py-14">
+<div class="footer block bg-COLORBLK3 text-center text-COLORWHT">
+	<div class="chunk-one flex items-center justify-center py-14">
 		<div class="block">
-			<div class="branding-text w-full justify-center items-center font-semibold text-4xl">
+			<div class="branding-text w-full items-center justify-center text-4xl font-semibold">
 				{branding_text}
 			</div>
 			<div class="text text-xl font-bold">{text}</div>
-			<div class="content flex w-full justify-center items-center">
+			<div class="content flex w-full items-center justify-center">
 				<slot />
 			</div>
 		</div>
 	</div>
-	<div class="chunk-two flex justify-start items-center text-2xl bg-COLORPNK text-white px-8 py-4">
+	<div class="chunk-two flex items-center justify-start bg-COLORPNK px-8 py-4 text-2xl text-white">
 		{branding_text}
 	</div>
 </div>

@@ -95,27 +95,27 @@
 	}
 </script>
 
-<main class="text-COLORWHT p-8">
-	<div class="text-2xl font-semibold mt-6 mb-2">Development Area</div>
+<main class="p-8 text-COLORWHT">
+	<div class="mb-2 mt-6 text-2xl font-semibold">Development Area</div>
 	<div
 		bind:this={terminal}
 		style="font-family: 'Courier New', Courier, monospace;"
-		class="consoleEventLog block font-mono border border-COLORWHT text-COLORBLE rounded-sm w-full p-8"
+		class="consoleEventLog block w-full rounded-sm border border-COLORWHT p-8 font-mono text-COLORBLE"
 	>
 		<div>[TERMINAL] Ready to accept input</div>
 	</div>
-	<div class="text-xl font-semibold mt-6">Tag</div>
+	<div class="mt-6 text-xl font-semibold">Tag</div>
 	<div class="content mt-4">
 		<div class="tag w-fit">
 			This is what a tag looks like
-			<div class="ml-1 tag-close">×</div>
+			<div class="tag-close ml-1">×</div>
 		</div>
 	</div>
-	<div class="text-xl font-semibold mt-6">Tag Input</div>
+	<div class="mt-6 text-xl font-semibold">Tag Input</div>
 	<div
-		class="tagInput flex mt-2 w-full rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORWHT aria-disabled:opacity-40 aria-disabled:cursor-not-allowed {custom_style}"
+		class="tagInput mt-2 flex w-full items-center rounded-sm border border-COLORWHT bg-COLORWHT5 px-4 py-2 text-sm aria-disabled:cursor-not-allowed aria-disabled:opacity-40 {custom_style}"
 	>
-		<div bind:this={tagArea} class="tagArea flex px-2 bg-red-500" />
+		<div bind:this={tagArea} class="tagArea flex bg-red-500 px-2" />
 		<TextInput
 			{placeholder}
 			name="tagInputArea"

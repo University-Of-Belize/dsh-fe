@@ -56,8 +56,8 @@
 	<title>Plattr | Dashboard / Home</title>
 </svelte:head>
 
-<main class="w-full h-screen">
-	<div class="navigation w-full z-20">
+<main class="h-screen w-full">
+	<div class="navigation z-20 w-full">
 		<Navigation
 			transparency={5}
 			search={true}
@@ -67,12 +67,12 @@
 			titleWhere="/admin/dashboard"
 		/>
 	</div>
-	<div class="main-content flex items-center justify-start h-full text-COLORWHT">
+	<div class="main-content flex h-full items-center justify-start text-COLORWHT">
 		<div
-			class="drawer bg-COLORWHT4 bg-opacity-20 px-4 py-2 flex-col justify-start h-screen w-full lg:w-1/4"
+			class="drawer h-screen w-full flex-col justify-start bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:w-1/4"
 		>
-			<div class="section py-6 bg-opacity-100">
-				<div class="title font-semibold pb-5">My Account</div>
+			<div class="section bg-opacity-100 py-6">
+				<div class="title pb-5 font-semibold">My Account</div>
 				<div
 					on:click={async () => {
 						await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
@@ -89,23 +89,23 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content hidden lg:block px-16 py-16 w-full h-full bg-transparent">
-			<div class="flex text-2xl font-semibold pb-2">
+		<div class="content hidden h-full w-full bg-transparent px-16 py-16 lg:block">
+			<div class="flex pb-2 text-2xl font-semibold">
 				Cafe | {@html staff
 					? "<div class='font-bold pl-1'>SuperUser Mode</div>"
 					: `<div class='font-bold pl-1'>Dashboard</div>`}
 			</div>
-			<div class="flex text-xl font-semibold pb-12">What would you like to do?</div>
-			<div class="flex flex-wrap w-full">
+			<div class="flex pb-12 text-xl font-semibold">What would you like to do?</div>
+			<div class="flex w-full flex-wrap">
 				{#if data != undefined}
 					{#each data.is[0][1] as shortcut, i}
 						<div
-							class="w-56 h-56 rounded-sm bg-COLORBLK1 text-COLORWHT mx-4 my-4 hover:opacity-80 cursor-pointer select-none"
+							class="mx-4 my-4 h-56 w-56 cursor-pointer select-none rounded-sm bg-COLORBLK1 text-COLORWHT hover:opacity-80"
 							on:click={() => goto(data.is[1][1][i] ?? '/admin/dashboard')}
 						>
-							<div class="flex items-center justify-center w-full h-full text-center">
+							<div class="flex h-full w-full items-center justify-center text-center">
 								<div class="block">
-									<div class="flex justify-center items-center w-full py-6">
+									<div class="flex w-full items-center justify-center py-6">
 										{#if icons[i]}{#if icons[i] === 'user'}
 												<Fa
 													icon={faUserCog}

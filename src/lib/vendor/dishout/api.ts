@@ -5,7 +5,7 @@ import { toast } from '@zerodevx/svelte-toast';
 // It's a great idea though! 😅😅
 async function fetchWebApi(
 	endpoint: string,
-	method: "POST" | "GET" | "PUT" | "PATCH" | "DELETE" | "OPTIONS",
+	method: 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS',
 	body?: object,
 	json?: boolean,
 	token?: string,

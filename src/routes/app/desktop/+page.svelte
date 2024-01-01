@@ -26,16 +26,16 @@
 	});
 </script>
 
-<main class="w-full h-screen overflow-hidden text-COLORWHT">
-	<div class="navigation w-full z-20">
+<main class="h-screen w-full overflow-hidden text-COLORWHT">
+	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} />
 	</div>
 	<div
-		class="content-wrapper w-full h-full absolute flex items-start justify-start overflow-auto z-10 pb-40"
+		class="content-wrapper absolute z-10 flex h-full w-full items-start justify-start overflow-auto pb-40"
 	>
-		<div class="content flex-1 flex items-center justify-center">
+		<div class="content flex flex-1 items-center justify-center">
 			<div class="block p-8 text-left">
-				<div class="title text-2xl font-semibold pb-5">Install for desktop</div>
+				<div class="title pb-5 text-2xl font-semibold">Install for desktop</div>
 				<CardPicker
 					title="Desktop 🧑‍💻"
 					subtitle="Select this option if you're on desktop (PC or laptop)"
@@ -153,7 +153,7 @@
 	<Footer text="Looks like you've reached the end.">
 		<div class="block">
 			<!-- <div class="text-xl font-light">Shop our entire menu by creating an account</div> -->
-			<div class="flex justify-center items-center w-full pt-8 pb-4">
+			<div class="flex w-full items-center justify-center pb-4 pt-8">
 				<SearchBar />
 			</div>
 		</div>

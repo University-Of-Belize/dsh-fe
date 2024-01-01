@@ -52,8 +52,8 @@
 	<title>Plattr | Dashboard / Help Article Composer</title>
 </svelte:head>
 
-<main class="w-full h-screen overflow-hidden">
-	<div class="navigation w-full z-20">
+<main class="h-screen w-full overflow-hidden">
+	<div class="navigation z-20 w-full">
 		<Navigation
 			transparency={5}
 			search={true}
@@ -62,13 +62,13 @@
 		/>
 	</div>
 
-	<div class="main-content flex items-center justify-start h-full text-COLORWHT overflow-hidden">
+	<div class="main-content flex h-full items-center justify-start overflow-hidden text-COLORWHT">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT4 bg-opacity-20 px-4 py-2 flex-col justify-start h-screen w-full lg:w-1/4 overflow-auto"
+			class="drawer hidden h-screen w-full flex-col justify-start overflow-auto bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:block lg:w-1/4"
 			bind:this={navDrawer}
 		>
-			<div class="section py-6 bg-opacity-100">
-				<div class="title font-semibold pb-5">My Account</div>
+			<div class="section bg-opacity-100 py-6">
+				<div class="title pb-5 font-semibold">My Account</div>
 				<div
 					on:click={async () => {
 						await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
@@ -85,10 +85,10 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto pb-40">
-			<div class="flex text-2xl font-semibold pb-2">Help Center Article Management</div>
-			<div class="flex text-xl font-semibold pb-12">Submit or delete help center articles</div>
-			<div class="flex flex-wrap flex-col w-full">
+		<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
+			<div class="flex pb-2 text-2xl font-semibold">Help Center Article Management</div>
+			<div class="flex pb-12 text-xl font-semibold">Submit or delete help center articles</div>
+			<div class="flex w-full flex-col flex-wrap">
 				{#if data != undefined}
 					<div class="block">
 						<CommentBox
@@ -99,7 +99,7 @@
 							{user}
 						/>
 						<div
-							class="edit-wrap w-fit h-fit"
+							class="edit-wrap h-fit w-fit"
 							on:click={() => {
 								createArticle(articleInput.value ?? '');
 								articleInput.clear();
@@ -132,14 +132,14 @@
 							You have not created any help articles as yet. Compose a new one.
 						</div>
 					{/if}
-					<div class="text-2xl font-semibold pt-8">Previous Submissions</div>
+					<div class="pt-8 text-2xl font-semibold">Previous Submissions</div>
 					<div class="flex flex-col-reverse">
 						{#each data as article, i}
 							<div class="user_wrap w-full">
 								<UserPill user={article.author ?? {}} description={`Article ID: ${article._id}`}>
 									<div class="controls flex space-x-2">
 										<div
-											class="edit-wrap w-fit h-fit"
+											class="edit-wrap h-fit w-fit"
 											on:click={() => {
 												deleteArticle(article._id);
 												setTimeout(() => {
@@ -156,7 +156,7 @@
 											/>
 										</div>
 										<div
-											class="edit-wrap w-fit h-fit"
+											class="edit-wrap h-fit w-fit"
 											on:click={() => {
 												goto(`/app/help-center/${article._id}`);
 											}}

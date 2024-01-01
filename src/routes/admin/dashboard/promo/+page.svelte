@@ -15,7 +15,7 @@
 	let data: Promo[]; // List of promos
 
 	async function catchAll() {
-		const res = await fetchWebApi('v1/admin/promo/manage', 'GET') as Response;
+		const res = (await fetchWebApi('v1/admin/promo/manage', 'GET')) as Response;
 		if (res.status === 403) {
 			localStorage.removeItem('token');
 			localStorage.removeItem('user_id');
@@ -46,8 +46,8 @@
 	<title>Plattr | Dashboard / Promotions</title>
 </svelte:head>
 
-<main class="w-full h-screen overflow-hidden">
-	<div class="navigation w-full z-20">
+<main class="h-screen w-full overflow-hidden">
+	<div class="navigation z-20 w-full">
 		<Navigation
 			transparency={5}
 			search={true}
@@ -58,18 +58,18 @@
 		/>
 	</div>
 
-	<div class="main-content flex items-center justify-start h-full text-COLORWHT overflow-hidden">
+	<div class="main-content flex h-full items-center justify-start overflow-hidden text-COLORWHT">
 		<div
-			class="drawer hidden lg:block bg-COLORWHT4 bg-opacity-20 px-4 py-2 flex-col justify-start h-screen w-full lg:w-1/4 overflow-auto"
+			class="drawer hidden h-screen w-full flex-col justify-start overflow-auto bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:block lg:w-1/4"
 		>
-			<div class="section py-6 bg-opacity-100">
-				<div class="title font-semibold pb-5">My Account</div>
+			<div class="section bg-opacity-100 py-6">
+				<div class="title pb-5 font-semibold">My Account</div>
 				<div
 					on:click={async () => {
 						await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
 					}}
 				>
-										<Button
+					<Button
 						icon={faCog}
 						color="COLORBLK3"
 						text="My account settings"
@@ -80,20 +80,20 @@
 			</div>
 			<DashList {staff} />
 		</div>
-		<div class="content block px-16 py-16 w-full h-full bg-transparent overflow-auto pb-40">
-			<div class="flex-header flex items-center w-full flex-wrap">
+		<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
+			<div class="flex-header flex w-full flex-wrap items-center">
 				<div class="block">
-					<div class="flex text-2xl font-semibold pb-2">Promo Code Management</div>
-					<div class="flex text-xl font-semibold pb-12">Manage promo codes</div>
+					<div class="flex pb-2 text-2xl font-semibold">Promo Code Management</div>
+					<div class="flex pb-12 text-xl font-semibold">Manage promo codes</div>
 				</div>
-				<div class="flex items-center justify-end flex-1">
+				<div class="flex flex-1 items-center justify-end">
 					<div class="flex flex-col items-end space-y-2">
 						<div class="btn_wrp" on:click={() => goto('/admin/dashboard/promo/manage')}>
 							<Button color="COLORGRN2" color_t="COLORWHT" text="New promo" icon={faPlus} />
 						</div>
 					</div>
 				</div>
-				<div class="flex flex-wrap w-full">
+				<div class="flex w-full flex-wrap">
 					{#if data != undefined}
 						{#each data as promo, i}
 							<div class="ctg_wrp w-full">
@@ -103,8 +103,8 @@
 
 										<div class="text-md font-semibold">Created by</div>
 										<ul>
-											<li class="before:content-['-⠀'] flex items-center">
-												<div class="font-light text-sm">
+											<li class="flex items-center before:content-['-⠀']">
+												<div class="text-sm font-light">
 													{promo.created_by ? promo.created_by.username : 'Cannot retrieve author.'}
 												</div>
 											</li>
@@ -112,7 +112,7 @@
 									</div>
 									<div class="controls flex space-x-2">
 										<div
-											class="edit-wrap w-fit h-fit"
+											class="edit-wrap h-fit w-fit"
 											on:click={() => {
 												deletePromo(promo.code);
 												setTimeout(() => {
@@ -130,7 +130,7 @@
 										</div>
 										<a href="/admin/dashboard/promo/manage?promo_code={promo._id}">
 											<div
-												class="edit-wrap w-fit h-fit"
+												class="edit-wrap h-fit w-fit"
 												on:click={() =>
 													goto(`/admin/dashboard/promo/manage?promo_code=${promo._id}`)}
 											>

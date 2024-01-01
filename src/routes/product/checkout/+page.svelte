@@ -68,16 +68,16 @@
 	<title>Plattr | Checkout</title>
 </svelte:head>
 
-<main class="w-full h-screen">
-	<div class="navigation w-full z-20">
+<main class="h-screen w-full">
+	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} titleText="Cafe" titleWhere="/" />
 	</div>
-	<div class="main-content flex items-center justify-start h-full text-COLORWHT">
-		<div class="page-content block px-16 py-16 w-full h-full bg-transparent">
-			<div class="flex items-center w-full">
+	<div class="main-content flex h-full items-center justify-start text-COLORWHT">
+		<div class="page-content block h-full w-full bg-transparent px-16 py-16">
+			<div class="flex w-full items-center">
 				<div class="block">
-					<div class="flex text-2xl font-semibold pb-2">Checkout / My Cart</div>
-					<div class="flex text-xl font-semibold pb-12">Confirm your order</div>
+					<div class="flex pb-2 text-2xl font-semibold">Checkout / My Cart</div>
+					<div class="flex pb-12 text-xl font-semibold">Confirm your order</div>
 				</div>
 				<div class="flex flex-1 justify-end space-x-2">
 					<div class="btn-wrp" on:click={() => history.back()}>
@@ -100,7 +100,7 @@
 				</div>
 			</div>
 
-			<div class="cart_items flex flex-col space-y-2 flex-wrap w-full">
+			<div class="cart_items flex w-full flex-col flex-wrap space-y-2">
 				{#if data != undefined && dataLength > 0}
 					{#each data as item}
 						{(() => {
@@ -108,7 +108,7 @@
 							return ''; // Weird hack
 						})()}
 						<div
-							class="cart_item bg-COLORBLK2 flex flex-wrap items-center w-full text-COLORWHT rounded-sm"
+							class="cart_item flex w-full flex-wrap items-center rounded-sm bg-COLORBLK2 text-COLORWHT"
 						>
 							<div class="product-image h-full">
 								<img
@@ -118,18 +118,18 @@
 									width="128px"
 								/>
 							</div>
-							<div class="content block flex-1 mx-4">
+							<div class="content mx-4 block flex-1">
 								<div
-									class="product-name text-xl font-base hover:underline cursor-pointer"
+									class="product-name font-base cursor-pointer text-xl hover:underline"
 									on:click={() => goto(`/product/${item.product.slug}`)}
 								>
 									{item.product.productName ?? ''}
 								</div>
-								<div class="product-quantity font-light text-sm text-COLORWHT">
+								<div class="product-quantity text-sm font-light text-COLORWHT">
 									(x{item.quantity ?? ''})
 								</div>
 							</div>
-							<div class="price block mx-4 font-semibold">
+							<div class="price mx-4 block font-semibold">
 								<!-- Product price = product_quantity * product_price -->
 								<div class="product-price">
 									{(parseFloat(item.product.price.$numberDecimal) * item.quantity).toLocaleString(
@@ -149,23 +149,23 @@
 							</div>
 						</div>
 					{/each}
-					<div class="total_amount flex flex-col items-center w-full my-8">
+					<div class="total_amount my-8 flex w-full flex-col items-center">
 						<div
-							class="flex text-2xl font-semibold w-full items-center justify-start text-COLORWHT my-8"
+							class="my-8 flex w-full items-center justify-start text-2xl font-semibold text-COLORWHT"
 						>
 							Total Amount
 						</div>
 						<div class="total_block flex w-full items-center">
 							<div
-								class="total_item bg-COLORBLK3 flex items-center w-full text-COLORWHT rounded-sm py-4"
+								class="total_item flex w-full items-center rounded-sm bg-COLORBLK3 py-4 text-COLORWHT"
 							>
-								<div class="content block flex-1 mx-4">
-									<div class="product-name text-xl font-base">Total amount due today</div>
-									<div class="product-quantity font-light text-sm text-COLORRED">
+								<div class="content mx-4 block flex-1">
+									<div class="product-name font-base text-xl">Total amount due today</div>
+									<div class="product-quantity text-sm font-light text-COLORRED">
 										Your total amount to pay
 									</div>
 								</div>
-								<div class="price block mx-4 font-semibold">
+								<div class="price mx-4 block font-semibold">
 									<div class="product-price">
 										{parseFloat(cartTotal).toLocaleString('en-US', {
 											style: 'currency',
@@ -181,14 +181,14 @@
 								</div>
 							</div>
 						</div>
-						<div class="pay_now flex w-full justify-start items-center py-4">
+						<div class="pay_now flex w-full items-center justify-start py-4">
 							<div class="btn_wrp" on:click={() => goto('/product/checkout/confirmed')}>
 								<Button color="COLORHPK" color_t="COLORWHT" text="Queue Now" icon={faClone} />
 							</div>
 						</div>
 					</div>
 				{:else if dataLength === 0}
-					<div class="font-light space-y-4">
+					<div class="space-y-4 font-light">
 						<div class="cartEmptyMessage">Your cart is empty. Try adding some items to it!</div>
 						<SearchBar nomargin />
 					</div>{:else}
