@@ -22,6 +22,7 @@ WORKDIR /app
 COPY . .
 
 RUN npm install
+RUN npm run sitemap
 RUN npm run build
 FROM debian:bullseye
 
