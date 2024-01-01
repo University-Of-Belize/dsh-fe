@@ -292,9 +292,9 @@
 						the bugs. You can sign up
 						<a href="/app/onboarding" class="underline">here.</a>
 					</div>
-					<div>
+					<div> <!--- @remind This isn't portable @todo make this portable. -->
 						And, if by chance you do experience any bugs, be sure to tell us using the <a
-							href="/app/help-center/feedback-hub"
+							href="/app/help-center/6592452880c49849aa984f1c"
 							class="underline">Feedback Hub</a
 						>
 					</div>

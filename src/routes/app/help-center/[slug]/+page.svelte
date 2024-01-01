@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import config from '$lib/config/settings';
+	// import config from '$lib/config/settings';
 	import { onMount } from 'svelte';
 
-	import { goto } from '$app/navigation';
-	import Button from '$lib/Elements/Generic/Button.svelte';
+	// import { goto } from '$app/navigation';
+	// import Button from '$lib/Elements/Generic/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import type { User } from '$lib/types/User';
 	import type { Article } from '$lib/types/Article';
