@@ -102,18 +102,18 @@
 </script>
 
 <div
-	class="placeholder bg-opacity-25 bg-opacity-50 bg-opacity-75 bg-opacity-0 bg-opacity-10 hidden"
+	class="placeholder hidden bg-opacity-0 bg-opacity-10 bg-opacity-25 bg-opacity-50 bg-opacity-75"
 >
 	&nbsp;
 </div>
 
-<div class="navigator w-full h-full select-none">
-	<div class="navigation bg-COLORBLK bg-opacity-{transparency} w-full pl-2 pr-4 py-4 text-lg">
-		<div class="content bg-opacity-100 flex items-center justify-between lg:justify-start">
+<div class="navigator h-full w-full select-none">
+	<div class="navigation bg-COLORBLK bg-opacity-{transparency} w-full py-4 pl-2 pr-4 text-lg">
+		<div class="content flex items-center justify-between bg-opacity-100 lg:justify-start">
 			<div class="meta-controls flex space-x-1">
 				<div
 					title="Pop open the navigation"
-					class="sidenav bg-COLORBLK1 cursor-pointer hover:bg-opacity-70 px-4 py-3 rounded-sm mr-2"
+					class="sidenav mr-2 cursor-pointer rounded-sm bg-COLORBLK1 px-4 py-3 hover:bg-opacity-70"
 					bind:this={navToggle}
 					on:click={toggleNav}
 				>
@@ -123,7 +123,7 @@
 					class="flex items-center justify-center bg-COLORBLK1 {config.ui['branding-logo'].trim() !=
 					''
 						? 'pr-4'
-						: 'px-4 py-2'} rounded-sm text-COLORWHT font-semibold overflow-clip hover:underline cursor-pointer space-x-4"
+						: 'px-4 py-2'} cursor-pointer space-x-4 overflow-clip rounded-sm font-semibold text-COLORWHT hover:underline"
 					on:click={() => goto(`${titleWhere}`)}
 				>
 					{#if config.ui['branding-logo'] && config.ui['branding-logo'].trim() != ''}
@@ -136,25 +136,25 @@
 			</div>
 			{#if search}
 				<form
-					class="searchbar hidden lg:flex flex-1 rounded-sm bg-COLORBLK focus:bg-COLORBLK1 active:bg-COLORBLK1 border border-COLORWHT5 px-4 py-2 lg:mx-8 items-center text-sm bg-opacity-90"
+					class="searchbar hidden flex-1 items-center rounded-sm border border-COLORWHT5 bg-COLORBLK bg-opacity-90 px-4 py-2 text-sm focus:bg-COLORBLK1 active:bg-COLORBLK1 lg:mx-8 lg:flex"
 					action="/product"
 				>
 					<div class="searchicon w-fit">
-						<Fa icon={faSearch} size="1.25x" class="text-COLORWHT pr-4" />
+						<Fa icon={faSearch} size="1.25x" class="pr-4 text-COLORWHT" />
 					</div>
 					<input
 						{value}
 						type="text"
 						title="Click to search for snacks, drinks and lunch"
 						name="search"
-						class="w-full font-regular focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"
+						class="font-regular w-full bg-transparent px-2 py-1 text-COLORWHT focus:outline-none"
 						placeholder="Search for snacks, drinks and lunch"
 					/>
 				</form>
-			{:else}<div class="searchbar flex-1 flex px-4 py-2 mx-8 items-center text-sm" />
+			{:else}<div class="searchbar mx-8 flex flex-1 items-center px-4 py-2 text-sm" />
 			{/if}
 			<div
-				class="hidden md:block lg:hidden mobile-flex-fix flex-1 lg:flex-none w-full items-center justify-center text-sm mx-8"
+				class="mobile-flex-fix mx-8 hidden w-full flex-1 items-center justify-center text-sm md:block lg:hidden lg:flex-none"
 			>
 				{@html staff ? '' : config['ui']['notice']}
 			</div>
@@ -191,7 +191,7 @@
 				</div>
 			{:else}
 				<div
-					class="pnav flex items-center justify-center lg:space-x-4 rounded-r-full rounded-l-full"
+					class="pnav flex items-center justify-center rounded-l-full rounded-r-full lg:space-x-4"
 					style="background: rgb(var(--COLORWHT) / 0.18);"
 				>
 					{#if staff}
@@ -211,7 +211,7 @@
 						title="My profile"
 						alt="{user.username}'s photo"
 						width="40px"
-						class="rounded-full cursor-pointer hover:opacity-80 border border-COLORWHT bg-COLORBLK1"
+						class="cursor-pointer rounded-full border border-COLORWHT bg-COLORBLK1 hover:opacity-80"
 						style="height: 42px; width: 42px;"
 						on:click={async () => {
 							await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
@@ -222,7 +222,7 @@
 		</div>
 		{#if staff}
 			<div
-				class="cursor-pointer hover:underline bg-opacity-50 bg-COLORBLK4 text-COLORWHT px-2 my-1"
+				class="my-1 cursor-pointer bg-COLORBLK4 bg-opacity-50 px-2 text-COLORWHT hover:underline"
 				bind:this={debug_selection}
 				on:click={() => {
 					if (hidden) {
@@ -235,9 +235,9 @@
 			>
 				<div class="bg-opacity-100 text-COLORWHT">Show debug...</div>
 			</div>
-			<div class="flex hidden text-COLORWHT debug w-full my-4" bind:this={debug_panel}>
+			<div class="debug my-4 flex hidden w-full text-COLORWHT" bind:this={debug_panel}>
 				<div class="lefthand block">
-					<div class="lefthand-contents block px-2 select-text">
+					<div class="lefthand-contents block select-text px-2">
 						<div class="origin w-full"><b>Origin:</b> {config['server']['HTTPOrigin']}</div>
 						<div class="currency w-full"><b>Currency:</b> {config['checkout']['currency']}</div>
 						<div class="support-email w-full">
@@ -252,22 +252,23 @@
 	</div>
 	{#if localStorage.acknowledged_cookies != 'true'}
 		<div
-			class="announcements-container flex text-center text-COLORWHT bg-COLORHPK bg-opacity-50 py-1 z-20"
+			class="announcements-container z-20 flex bg-COLORHPK bg-opacity-50 py-1 text-center text-COLORWHT"
 		>
-			<div class="container-wrap flex flex-wrap justify-center items-center w-full bg-opacity-100">
-				<div class="container flex flex-wrap items-center justify-center bg-opacity-100">
-					<div class="flex bg-opacity-100 text-COLORWHT space-x-1">
+			<div class="container-wrap flex w-full flex-wrap items-center justify-center bg-opacity-100">
+				<div class="container flex flex-wrap items-center justify-center bg-opacity-100 text-COLORWHT space-x-1">
+					<div class="flex space-x-1 bg-opacity-100 text-COLORWHT">
 						<div class="icon mx-2"><Fa icon={faCookieBite} size="1.25x" /></div>
 						We use cookies to ensure you get the best experience on our website. By continuing to use
 						our site, you agree to our
+					</div>
+					<div>
 						<a class="underline" href="#" target="_blank" rel="noopener noreferrer">
-							privacy policy
+							privacy policy.
 						</a>
-						.
 					</div>
 				</div>
 				<div
-					class="btn-wrp flex items-center justify-end md:w-auto mt-2 md:mt-0 md:ml-2"
+					class="btn-wrp mt-2 flex items-center justify-end md:ml-2 md:mt-0 md:w-auto"
 					on:click={() => {
 						localStorage.setItem('acknowledged_cookies', 'true');
 						window.location.reload();
@@ -280,27 +281,28 @@
 	{/if}
 	{#if localStorage.acknowledged_announcements != 'true'}
 		<div
-			class="announcements-container flex text-center text-COLORWHT bg-COLORBLE bg-opacity-50 py-1 z-20"
+			class="announcements-container z-20 flex bg-COLORBLE bg-opacity-50 py-1 text-center text-COLORWHT"
 		>
-			<div class="container-wrap flex flex-wrap justify-center items-center w-full bg-opacity-100">
+			<div class="container-wrap flex w-full flex-wrap items-center justify-center bg-opacity-100">
 				<div
-					class="container flex flex-wrap items-center justify-center bg-opacity-100 text-COLORWHT space-x-1"
+					class="container flex flex-wrap items-center justify-center space-x-1 bg-opacity-100 text-COLORWHT"
 				>
-					<div class="flex bg-opacity-100 text-COLORWHT space-x-1">
+					<div class="flex space-x-1 bg-opacity-100 text-COLORWHT">
 						<div class="icon mx-2"><Fa icon={faCodePullRequest} size="1.25x" /></div>
-						Hey, thanks for visiting! We're still in beta, so please bear with us as we sort out all
-						the bugs. You can sign up
-						<a href="/app/onboarding" class="underline">here.</a>
+						<div>
+							Hey, thanks for visiting! We're still in beta, so please bear with us as we sort out
+							all the bugs. You can sign up
+							<a href="/app/onboarding" class="underline">here.</a>
+						</div>
 					</div>
-					<div> <!--- @remind This isn't portable @todo make this portable. -->
-						And, if by chance you do experience any bugs, be sure to tell us using the <a
-							href="/app/help-center/6592452880c49849aa984f1c"
-							class="underline">Feedback Hub</a
-						>
+					<div>
+						<!--- @remind This isn't portable @todo make this portable. -->
+						And, if by chance you do experience any bugs, be sure to tell us using the
+						<a href="/app/help-center/6592452880c49849aa984f1c" class="underline">Feedback Hub</a>
 					</div>
 				</div>
 				<div
-					class="btn-wrp flex items-center justify-end md:w-auto mt-2 md:mt-0 md:ml-2"
+					class="btn-wrp mt-2 flex items-center justify-end md:ml-2 md:mt-0 md:w-auto"
 					on:click={() => {
 						localStorage.setItem('acknowledged_announcements', 'true');
 						window.location.reload();
@@ -327,34 +329,34 @@
 </div> -->
 
 	<div
-		class="sidebar flex justify-start items-center w-full h-screen bg-COLORWHT bg-opacity-25"
+		class="sidebar flex h-screen w-full items-center justify-start bg-COLORWHT bg-opacity-25"
 		style="opacity: 0; display: none;"
 		bind:this={nav}
 	>
 		<div
-			class="drawer bg-COLORBLK text-COLORWHT px-2 py-2 flex-col justify-start h-screen bg-opacity-100"
+			class="drawer h-screen flex-col justify-start bg-COLORBLK bg-opacity-100 px-2 py-2 text-COLORWHT"
 			bind:this={navDrawer}
 		>
 			{#if search}
 				<form
-					class="searchbar flex lg:hidden rounded-sm bg-COLORBLK focus:bg-COLORBLK1 active:bg-COLORBLK1 border border-COLORWHT5 px-4 py-2 items-center text-sm bg-opacity-90"
+					class="searchbar flex items-center rounded-sm border border-COLORWHT5 bg-COLORBLK bg-opacity-90 px-4 py-2 text-sm focus:bg-COLORBLK1 active:bg-COLORBLK1 lg:hidden"
 					action="/product"
 				>
 					<div class="searchicon w-fit">
-						<Fa icon={faSearch} size="1.01x" class="text-COLORWHT pr-4" />
+						<Fa icon={faSearch} size="1.01x" class="pr-4 text-COLORWHT" />
 					</div>
 					<input
 						{value}
 						type="text"
 						name="search"
-						class="w-full font-regular focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"
+						class="font-regular w-full bg-transparent px-2 py-1 text-COLORWHT focus:outline-none"
 						placeholder="Search for snacks, drinks and lunch"
 					/>
 				</form>
-			{:else}<div class="searchbar flex-1 flex px-4 py-2 mx-8 items-center text-sm" />
+			{:else}<div class="searchbar mx-8 flex flex-1 items-center px-4 py-2 text-sm" />
 			{/if}
 			{#if !user}
-				<div class="top-row flex justify-between items-center w-full pt-2">
+				<div class="top-row flex w-full items-center justify-between pt-2">
 					<div class="btn-wrp pr-1" on:click={() => goto('/auth/login')}>
 						<Button icon={faRightToBracket} color="COLORBLK2" color_t="COLORYLW" text="Log in" />
 					</div>
@@ -362,8 +364,8 @@
 						<Button icon={faGift} color="COLORPNK" color_t="COLORWHT" text="Sign up" />
 					</div>
 				</div>{:else}
-				<div class="two py-6 space-y-2">
-					<div class="title font-semibold pb-5">My Account</div>
+				<div class="two space-y-2 py-6">
+					<div class="title pb-5 font-semibold">My Account</div>
 					<div
 						on:click={async () => {
 							localStorage.clear();
@@ -392,7 +394,7 @@
 						/>
 					</div>
 				</div>{/if}
-			<div class="three py-6 border-t border-black border-dashed border-opacity-5">
+			<div class="three border-t border-dashed border-black border-opacity-5 py-6">
 				{#if categories.length > 0}
 					{#each categories as category}
 						<div
@@ -430,7 +432,7 @@
 				{/if}
 			</div>
 		</div>
-		<div class="outerNav bg-transparent h-full flex-1" bind:this={navClose} on:click={toggleNav}>
+		<div class="outerNav h-full flex-1 bg-transparent" bind:this={navClose} on:click={toggleNav}>
 			&nbsp;
 		</div>
 	</div>
