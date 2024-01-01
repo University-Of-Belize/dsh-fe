@@ -11,12 +11,47 @@
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { marked } from 'marked';
-	import insane from 'insane';
+	// import insane from 'insane';
 	// let hero_image: HTMLDivElement;
 	const staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // The user
 	const user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // The user
 	const params = $page.params.slug;
 	let data: Article;
+
+	// Options for the "marked" renderer
+
+	// Create a custom renderer
+	const customRenderer = new marked.Renderer();
+
+	// Override rendering for tables
+	customRenderer.table = function (header, body) {
+		return `
+    <div class="flex flex-col border border-COLORBLK2 mt-8">
+      <div class="flex flex-row bg-COLORBLK2 font-semibold border border-COLORBLK3">
+        ${header}
+      </div>
+      <div class="flex flex-row border border-COLORBLK2">
+        ${body}
+      </div>
+    </div>`;
+	};
+
+	// Override rendering for table rows
+	customRenderer.tablerow = function (content) {
+		return `<div class="flex flex-wrap md:flex-nowrap w-full h-full items-start justify-around p-2 border border-COLORBLK2">${content}</div>`;
+	};
+
+	// Override rendering for table cells
+	customRenderer.tablecell = function (content, flags) {
+		const alignClass = flags.align ? `text-${flags.align}` : '';
+		return `<div class="${alignClass} flex items-center justify-start space-x-2 p-2 border border-COLORBLK2"><div class="block">${content}</div></div>`;
+	};
+
+	// Set the custom renderer when calling marked
+	marked.setOptions({
+		renderer: customRenderer
+	});
+	/************************************/
 
 	async function catchAll() {
 		const post = (await fetchWebApi(
@@ -51,6 +86,10 @@
 <svelte:head>
 	<title>Plattr | Help Center / Article View</title>
 </svelte:head>
+
+<div
+	class="stub flex hidden flex-row flex-col flex-wrap items-start justify-start justify-center justify-between justify-around space-x-2 bg-COLORBLK1 md:flex-nowrap"
+></div>
 
 <main class="h-screen w-full text-COLORWHT">
 	<div class="navigation z-20 w-full">
