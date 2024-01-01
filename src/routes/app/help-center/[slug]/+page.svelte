@@ -52,19 +52,28 @@
 	<title>Plattr | Help Center / Article View</title>
 </svelte:head>
 
-<main class="w-full h-screen text-COLORWHT">
-	<div class="navigation w-full z-20">
-		<Navigation transparency={5} search={true} />
+<main class="h-screen w-full text-COLORWHT">
+	<div class="navigation z-20 w-full">
+		<Navigation
+			transparency={5}
+			search={true}
+			titleText="Help Center"
+			titleWhere="/app/help-center"
+		/>
 	</div>
 
 	<div
-		class="content-wrapper w-full h-full absolute flex items-center justify-center z-10 flex-wrap"
+		class="content-wrapper absolute z-10 flex h-full w-full flex-wrap items-center justify-center"
 	>
-		<div class="content lg:flex-1 flex h-full w-full items-start justify-start mx-12 pt-12 pb-27">
+		<div class="content pb-27 mx-12 flex h-full w-full items-start justify-start pt-12 lg:flex-1">
 			{#if data != undefined}
-				<div class="block content-wrapper">
+				<section
+					class="content-wrapper prose prose-neutral block w-full max-w-full rounded-sm bg-COLORBLK1 p-8 text-COLORWHT1 prose-h1:text-COLORWHT prose-h2:text-COLORWHT2 prose-h3:text-COLORWHT3 prose-h4:text-COLORWHT4 prose-h5:text-COLORWHT5 prose-h6:text-COLORWHT5 prose-a:text-COLORWHT2 prose-strong:text-COLORWHT1 prose-code:text-COLORYLW prose-ol:text-COLORWHT1 prose-ul:text-COLORWHT2 prose-li:text-COLORWHT"
+				>
 					{@html marked.parse(data.content) || "Oops, this post doesn't exist!"}
-				</div>
+				</section>
+			{:else}
+				<div class="text-2xl text-COLORWHT">Loading article...</div>
 			{/if}
 		</div>
 	</div>
@@ -75,7 +84,7 @@
 		--tw-bg-opacity: 1;
 	}
 
-	:global(h1) {
+	/* :global(h1) {
 		font-size: 2rem;
 		margin-top: 1.5rem;
 	}
@@ -112,18 +121,18 @@
 	}
 	:global(li) {
 		counter-increment: my-counter;
-		margin-bottom: 10px; /* Adjust as needed */
-	}
+		margin-bottom: 10px; /* Adjust as needed /
+	} */
 
-	:global(li:before) {
+	/* :global(li:before) {
 		content: counter(my-counter) '. ';
-		font-weight: bold; /* Optional: make the numbers bold */
-		color: #007bff; /* Optional: change the color of the numbers */
-		margin-right: 5px; /* Optional: adjust the spacing between number and text */
-	}
+		font-weight: bold; /* Optional: make the numbers bold /
+		color: #007bff; /* Optional: change the color of the numbers /
+		margin-right: 5px; /* Optional: adjust the spacing between number and text /
+	} */
 
 	/* Terminal */
-	:global(code) {
+	/* :global(code) {
 		display: inline-block;
 		font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode',
 			Geneva, Verdana, sans-serif;
@@ -135,8 +144,8 @@
 		margin-top: 1rem;
         width: fit-content;
         max-width: 75%;
-	}
-	:global(.language-js) {
+	} 
+	 :global(.language-js) {
 		display: block;
 		padding: 1.125rem 1.125rem 1.125rem 1.125rem;
         margin-bottom: 0.5rem;
@@ -149,5 +158,5 @@
 	}
 	:global(.INFO) {
 		color: #00ff00;
-	}
+	} */
 </style>

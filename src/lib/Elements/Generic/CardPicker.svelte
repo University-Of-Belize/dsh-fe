@@ -28,8 +28,8 @@
             <div class="text-COLORWHT2 mb-6 text-sm">
                 {subtitle}
             </div>
-            <div class="text-COLORWHT text-xl mb-6">
-                {body}
+            <div class="text-COLORWHT text-xl mb-6 prose prose-neutral block w-full max-w-full rounded-sm prose-h1:text-COLORWHT prose-h2:text-COLORWHT2 prose-h3:text-COLORWHT3 prose-h4:text-COLORWHT4 prose-h5:text-COLORWHT5 prose-h6:text-COLORWHT5 prose-a:text-COLORWHT2 prose-strong:text-COLORWHT1 prose-code:text-COLORYLW prose-ol:text-COLORWHT1 prose-ul:text-COLORWHT2 prose-li:text-COLORWHT">
+                {@html body}
             </div>
 
             

@@ -8,8 +8,9 @@
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let data: Article[];
-	import { faBookOpenReader, faDesktopAlt, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
+	import { faBookOpenReader } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
+	import { marked } from 'marked';
 	import { onMount } from 'svelte';
 
 	async function catchAll() {
@@ -46,21 +47,21 @@
 	<title>Plattr | Help Center</title>
 </svelte:head>
 
-<main class="w-full h-screen overflow-hidden text-COLORWHT">
-	<div class="navigation w-full z-20">
+<main class="h-screen w-full overflow-hidden text-COLORWHT">
+	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} titleText="Help Center" />
 	</div>
 	<div
-		class="content-wrapper w-full h-full absolute flex items-start justify-start overflow-auto z-10 pb-40"
+		class="content-wrapper absolute z-10 flex h-full w-full items-start justify-start overflow-auto pb-40"
 	>
-	<div class="content flex-1 flex items-center justify-center w-full">
-		<div class="block p-8 text-left">
+		<div class="content flex w-full flex-1 items-center justify-center">
+			<div class="block p-8 text-left">
 				<div
-					class="title flex justify-center items-center text-4xl font-semibold pb-5 w-full h-48 bg-COLORBLK4 rounded-md"
+					class="title flex h-48 w-full items-center justify-center rounded-md bg-COLORBLK4 pb-5 text-4xl font-semibold"
 				>
 					<div class="block text-center">
 						<div>Help Center (Beta)</div>
-						<div class="text-COLORWHT1 mt-2 text-sm font-light">Find help articles here</div>
+						<div class="mt-2 text-sm font-light text-COLORWHT1">Find help articles here</div>
 					</div>
 				</div>
 				{#if data != undefined}
@@ -69,8 +70,8 @@
 							title="By @{article.author?.username}"
 							subtitle=""
 							body={article.content.length > 500
-								? article.content.substring(0, 500) + '...'
-								: article.content}
+								? marked.parse(article.content.substring(0, 500)) + '...'
+								: marked.parse(article.content)}
 							image="/placeholder/via-placeholder/50.png"
 							image_alt="Plattr Mobile App"
 							button_icon={faBookOpenReader}
@@ -87,7 +88,7 @@
 	<Footer text="Looks like you've reached the end.">
 		<div class="block">
 			<!-- <div class="text-xl font-light">Shop our entire menu by creating an account</div> -->
-			<div class="flex justify-center items-center w-full pt-8 pb-4">
+			<div class="flex w-full items-center justify-center pb-4 pt-8">
 				<SearchBar />
 			</div>
 		</div>
