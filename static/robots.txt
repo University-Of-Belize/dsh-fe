@@ -3,6 +3,9 @@ Allow: /
 Disallow: /admin?
 Disallow: /admin
 Disallow: /admin/
+# Disallow the verify screen
+Disallow: /auth/verify?
+Disallow: /auth/verify
 Disallow: /category?
 Disallow: /category
 Disallow: /category/
