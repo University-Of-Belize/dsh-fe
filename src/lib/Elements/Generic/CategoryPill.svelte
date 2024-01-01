@@ -33,7 +33,7 @@
 				<div class="flex items-center text-base font-semibold lg:text-lg">
 					{category.name ? category.name : 'Untitled Category'}
 				</div>
-				<div class="text-md font-light text-COLORBLE">
+				<div class="text-md font-light text-COLORWHT1">
 					{@html description}
 				</div>
 			</div>

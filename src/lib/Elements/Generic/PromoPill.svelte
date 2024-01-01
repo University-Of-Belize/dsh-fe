@@ -20,14 +20,14 @@
 			<Fa icon={faTag} size="3x" class="text-COLORWHT" />
 		</div>
 		<div class="user-wrap flex w-full flex-wrap items-center">
-			<div class="review-content text-COLORWHT" style="word-break: break-word;">
+			<div class="promo-content text-COLORWHT" style="word-break: break-word;">
 				<div class="flex items-center text-base font-semibold lg:text-lg">
 					{promo.description ? promo.description : 'Untitled Promotion'}
 				</div>
-				<div class="flex items-center text-sm font-light text-COLORWHT opacity-75 lg:text-base">
+				<div class="flex items-center text-sm font-light text-COLORWHT1 lg:text-base">
 					{promo.expiry_date ? `Expires: ${getDate(promo.expiry_date)}` : 'Unset expiry date'}
 				</div>
-				<div class="text-sm font-light text-COLORBLE">
+				<div class="text-sm font-light text-COLORWHT4">
 					{@html description}
 				</div>
 			</div>

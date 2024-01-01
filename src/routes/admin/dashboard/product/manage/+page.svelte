@@ -84,7 +84,7 @@
 			// data = data[0];
 
 			// Restore the keywords
-			keywords_input.results = data.keywords;
+			keywords_input.results = data.keywords ?? [];
 			if (data.keywords && data.keywords.length > 0) {
 				data.keywords.forEach((element) => {
 					keywords_input.addTag(element);

@@ -7,7 +7,7 @@
 	export let product: Product;
 	export let tag: boolean = false;
 	export let tagColor: string = 'COLORWHT';
-	export let tagColor_t: string = 'COLORWHT';
+	export let tagColor_t: string = 'COLORBLK';
 	export let tagText: string = '';
 	export let description: string;
 	export let image: string | undefined;
@@ -65,7 +65,7 @@
 							</div>
 						{/if}
 					</div>
-					<div class="text-md font-light text-COLORBLE">
+					<div class="text-md font-light text-COLORWHT1">
 						{@html description}
 					</div>
 				</div>

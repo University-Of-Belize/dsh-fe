@@ -216,7 +216,7 @@
 							</div>
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
 								<div class="label w-full text-lg font-semibold">Description</div>
-								<div class="review-wrap mb-4 w-full rounded-md border border-black">
+								<div class="review-wrap mb-4 w-full rounded-md border border-COLORWHT">
 									<div
 										class="text-i-combo flex items-center justify-start font-semibold text-COLORGRY"
 									>
@@ -225,7 +225,7 @@
 									</div>
 									<textarea
 										name="description"
-										class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORBLE focus:outline-none"
+										class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORWHT focus:outline-none"
 										rows="6"
 										placeholder="Promotion description goes here"
 										value={data ? data.description : ''}
