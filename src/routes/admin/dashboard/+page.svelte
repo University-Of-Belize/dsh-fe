@@ -64,7 +64,7 @@
 			titleText="Cafe {staff
 				? ''
 				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
-			titleWhere="/admin/dashboard"
+			titleWhere="/"
 		/>
 	</div>
 	<div class="main-content flex h-full items-center justify-start text-COLORWHT">
