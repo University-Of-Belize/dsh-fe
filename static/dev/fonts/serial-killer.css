@@ -1,0 +1,7 @@
+@font-face {
+  font-family: serial killer;
+  font-style: normal;
+  font-weight: 400;
+  src: local("serial killer"),
+    url("./serial killer.woff") format("woff");
+}

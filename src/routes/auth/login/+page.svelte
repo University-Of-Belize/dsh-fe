@@ -1,4 +1,5 @@
 <script lang="ts">
+	// import config from '$lib/config/settings';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Generic/Button.svelte';
@@ -17,11 +18,18 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
+	import html2canvas from 'html2canvas';
 	$: continue_url = $page.url.searchParams.get('continue');
 	let debounceTimeout: number;
 	let logging_in: boolean = false;
+	let canvas: HTMLCanvasElement;
+	let data: string = '';
 
 	onMount(() => {
+		// Take a screenshot
+		html2canvas(document.body).then((c) => {
+			data = c.toDataURL();
+		});
 		// Check if we're already logged in
 		const token = localStorage.token || localStorage.getItem('token');
 		const blocked = localStorage.blocked || localStorage.getItem('blocked');
@@ -77,6 +85,26 @@
 				}
 			}
 			if (!response.ok) {
+				// Special cases
+				if (response.status === 418) {
+					localStorage.setItem('token', json.is[1]);
+					toast.push(json.is[0]);
+					document.body.style.background = 'red';
+					document.body.insertAdjacentHTML(
+						'afterbegin',
+						"<h1 id='__x' class='text-4xl' style='color: white'>/???/THERE/IS/NO/GOING_BACK/FROM_WHATYOUDID</h1>"
+					);
+					// Hide the state
+					window.history.replaceState(undefined, '???', '/auth/login');
+					return setTimeout(() => {
+						meltScreen();
+						setTimeout(() => {
+							goto('/dev/EDGECASEZERO', { replaceState: false });
+							// window.open(`${config.server['bound-domain']}/dev/EDGECASEZERO`);
+						}, 4000);
+					}, 1000);
+				}
+				// special cases
 				setTimeout(() => {
 					logging_in = false; // Slight "bounce"
 				}, 450);
@@ -109,12 +137,141 @@
 			console.log(error);
 		}
 	}
+
+	// ----------------------------------- MELT -------------------------------------- //
+	function meltScreen() {
+		canvas.classList.remove('hidden');
+		document.body.style.overflow = 'hidden';
+
+		(function () {
+			var requestAnimationFrame =
+				window.requestAnimationFrame ||
+				window.mozRequestAnimationFrame ||
+				window.webkitRequestAnimationFrame ||
+				window.msRequestAnimationFrame ||
+				function (callback) {
+					window.setTimeout(callback, 1000 / 60);
+				};
+			window.requestAnimationFrame = requestAnimationFrame;
+		})();
+
+		var image1 = new Image(),
+			image2 = new Image();
+
+		var ctx = canvas.getContext('2d');
+
+		const width = document.body.clientWidth;
+		const height = document.body.clientHeight;
+
+		canvas.width = width;
+		canvas.height = height;
+
+		// wipe effect
+		var meltCan = document.createElement('canvas'),
+			meltCtx = meltCan.getContext('2d'),
+			images = [image1, image2],
+			bgImage = 1,
+			meltImage = 0,
+			settings = {
+				colSize: 2, // width of the columns
+				maxDev: 100, // max deviation a column can have
+				maxDiff: 50, // max difference in height a column can have to its neighbor
+				fallSpeed: 16 // how fast the columns fall
+			},
+			columns = width / settings.colSize, // total number of columns
+			y = [], // holds the current y pos of each column
+			done = true; // used to tell when the effect is actually done
+
+		meltCan.width = width;
+		meltCan.height = height;
+
+		function init() {
+			meltCtx.drawImage(images[meltImage], 0, 0);
+			// seed the rest of the y array
+			for (var x = 0; x < columns; x++) {
+				// seed the first element of the y array with a value between 0 and -maxDeviation
+				if (x === 0) {
+					y[x] = -Math.floor(Math.random() * settings.maxDev);
+				} else {
+					// assign a random value thats within maxDiff of our previous value;
+					y[x] = y[x - 1] + (Math.floor(Math.random() * settings.maxDiff) - settings.maxDiff / 2);
+				}
+
+				// keep the value between 0 and -maxDev
+				if (y[x] > 0) {
+					y[x] = 0;
+				} else if (y[x] < -settings.maxDev) {
+					y[x] = -settings.maxDev;
+				}
+			}
+		}
+
+		// wipe render
+		var col = 0,
+			yPos = 0;
+
+		function doMelt() {
+			ctx.drawImage(images[bgImage], 0, 0);
+			done = true;
+
+			for (col = 0; col < columns; col++) {
+				y[col] += settings.fallSpeed;
+
+				// if within bounds of the canvas do the melt.
+				if (y[col] < 0) {
+					done = false;
+					yPos = 0;
+				} else if (y[col] < height) {
+					done = false;
+					yPos = y[col];
+				}
+
+				ctx.drawImage(
+					meltCan,
+					col * settings.colSize,
+					0,
+					settings.colSize,
+					height,
+					col * settings.colSize,
+					yPos,
+					settings.colSize,
+					height
+				);
+			}
+
+			if (done) {
+				var swap = meltImage;
+				meltImage = bgImage;
+				bgImage = swap;
+				init();
+			}
+			requestAnimationFrame(doMelt);
+		}
+
+		// var gui = new dat.GUI();
+		// gui.add(settings, 'colSize');
+		// gui.add(settings, 'fallSpeed', 1, 40);
+		// gui.add(settings, 'maxDev');
+		// gui.add(settings, 'maxDiff');
+
+		// Data urls for the 2 image.. they are pretty long
+		// Data urls for the 2 image.. they are pretty long
+		// console.log(data);
+		image1.src =
+			'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAP8AAADGCAMAAAAqo6adAAAACVBMVEX///9/rff///yOlBTYAAABgUlEQVR4nO3PMQEAMAyAsG7+RVdGjhIFMO/Paf3rAqt/XWD1rwus/nWB1b8usPrXBVb/usDqXxdY/esCq39dYPWvC6z+dYHVvy6w+tcFVv+6wOpfF1j96wKrf11g9a8LrP51gdW/LrD61wVW/7rA6l8XWP3rAqt/XWD1rwus/nWB1b8usPrXBVb/usDqXxdY/esCq39dYPWvC6z+dYHVvy6w+tcFVv+6wOpfF1j96wKrf11g9a8LrP51gdW/LrD61wVW/7rA6l8XWP3rAqt/XWD1rwus/nWB1b8usPrXBVb/usDqXxdY/esCq39dYPWvC6z+dYHVvy6w+tcFVv+6wOpfF1j96wKrf11g9a8LrP51gdW/LrD61wVW/7rA6l8XWP3rAqt/XWD1rwus/nWB1b8usPrXBVb/usDqXxdY/esCq39dYPWvC6z+dYHVvy6w+tcFVv+6wOpfF1j96wKrf11g9a8LrP51gdW/LrD61wVW/7rA6l8XWP3rAqt/XWAd/1+uqwJT58ldTAAAAABJRU5ErkJggg==';
+		image2.src = data;
+		image2.onload = function () {
+			init();
+			doMelt();
+		};
+	}
 </script>
 
 <svelte:head>
 	<title>Plattr | Login / Register</title>
 </svelte:head>
 
+<canvas bind:this={canvas} class="hidden" style="height: 100vh; width: 100vw;" />
 <main class="h-screen w-full">
 	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} />
