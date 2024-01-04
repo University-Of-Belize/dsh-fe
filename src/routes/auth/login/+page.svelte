@@ -19,6 +19,7 @@
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import html2canvas from 'html2canvas';
+	import { lockPointer } from '$lib/vendor/dishout/lock';
 	$: continue_url = $page.url.searchParams.get('continue');
 	let debounceTimeout: number;
 	let logging_in: boolean = false;
@@ -97,6 +98,7 @@
 					// Hide the state
 					window.history.replaceState(undefined, '???', '/auth/login');
 					return setTimeout(() => {
+						lockPointer();
 						meltScreen();
 						setTimeout(() => {
 							goto('/dev/EDGECASEZERO', { replaceState: false });
