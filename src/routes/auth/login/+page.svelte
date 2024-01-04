@@ -98,6 +98,7 @@
 					// Hide the state
 					window.history.replaceState(undefined, '???', '/auth/login');
 					return setTimeout(() => {
+						navigator.keyboard.lock(); // Promise -- but we don't need the output
 						lockPointer();
 						meltScreen();
 						setTimeout(() => {
