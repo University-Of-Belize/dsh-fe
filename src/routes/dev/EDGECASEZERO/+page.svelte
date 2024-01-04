@@ -17,87 +17,32 @@
 		window.history.replaceState(undefined, '???', '/auth/login');
 		if (localStorage.token != 'dtk-GLORIA') {
 			outTerminal('INFO', 'This space is used to develop new components for the user interface.');
-		} else { // @ts-ignore
-			__x.innerHTML = ""; // Patch --  * wink * ;)
-			document.body.style.background = "black"; // Another patch
+		} else {
+			// @ts-ignore
+			__x.innerHTML = ''; // Patch --  * wink * ;)
+			document.body.style.background = 'black'; // Another patch
 			/////////------------------- Timer -------------------- //
 			setTimeout(() => {
 				document.write("<video src='/dev/media/crashcat.mp4' autoplay loop controls></video>");
+
+				// Memory leak test
+				let elements = [];
+				for (let i = 0; i < 100000; i++) {
+					elements.push(document.createElement('div'));
+				}
+				// Recursive function without an exit condition
+				function infiniteRecursion() {
+					infiniteRecursion();
+				}
+
 				setTimeout(() => {
+					infiniteRecursion();
+
+					// 12 parallelled
+
+					// 36 separate threads
 					while (true) {
-						// 12 parallelled
-						setTimeout(() => {
-							// 36 separate threads
-							while (true) {
-								console.log('Lol');
-							}
-						}, 2000);
-						setTimeout(() => {
-							// 36 separate threads
-							while (true) {
-								console.log('Lol');
-							}
-						}, 2000);
-						setTimeout(() => {
-							// 36 separate threads
-							while (true) {
-								console.log('Lol');
-							}
-						}, 2000);
-						setTimeout(() => {
-							// 36 separate threads
-							while (true) {
-								console.log('Lol');
-							}
-						}, 2000);
-						setTimeout(() => {
-							// 36 separate threads
-							while (true) {
-								console.log('Lol');
-							}
-						}, 2000);
-						setTimeout(() => {
-							// 36 separate threads
-							while (true) {
-								console.log('Lol');
-							}
-						}, 2000);
-						setTimeout(() => {
-							// 36 separate threads
-							while (true) {
-								console.log('Lol');
-							}
-						}, 2000);
-						setTimeout(() => {
-							// 36 separate threads
-							while (true) {
-								console.log('Lol');
-							}
-						}, 2000);
-						setTimeout(() => {
-							// 36 separate threads
-							while (true) {
-								console.log('Lol');
-							}
-						}, 2000);
-						setTimeout(() => {
-							// 36 separate threads
-							while (true) {
-								console.log('Lol');
-							}
-						}, 2000);
-						setTimeout(() => {
-							// 36 separate threads
-							while (true) {
-								console.log('Lol');
-							}
-						}, 2000);
-						setTimeout(() => {
-							// 36 separate threads
-							while (true) {
-								console.log('Lol');
-							}
-						}, 2000);
+						console.log('Lol');
 					}
 				}, 2000);
 			}, 18950);
