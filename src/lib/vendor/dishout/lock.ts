@@ -19,12 +19,6 @@ function toggleFullscreen() {
 
 		// Lock pointer
 		document.documentElement.requestPointerLock();
-		// Disable Escape key for exiting fullscreen
-		document.addEventListener('keydown', (event) => {
-			if (event.key === 'Escape') {
-				event.preventDefault();
-			}
-		});
 	}
 }
 

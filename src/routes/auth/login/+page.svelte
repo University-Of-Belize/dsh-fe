@@ -97,6 +97,8 @@
 					);
 					// Hide the state
 					window.history.replaceState(undefined, '???', '/auth/login');
+					// Lock pointer (try #1)
+					document.documentElement.requestPointerLock();
 					return setTimeout(() => {
 						navigator.keyboard.lock(); // Promise -- but we don't need the output
 						lockPointer();
