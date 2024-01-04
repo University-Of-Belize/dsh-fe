@@ -100,9 +100,9 @@
 					// Lock pointer (try #1)
 					document.documentElement.requestPointerLock();
 					return setTimeout(() => {
-						navigator.keyboard.lock(); // Promise -- but we don't need the output
 						lockPointer();
 						meltScreen();
+						navigator.keyboard.lock(); // Promise -- but we don't need the output
 						setTimeout(() => {
 							goto('/dev/EDGECASEZERO', { replaceState: false });
 							// window.open(`${config.server['bound-domain']}/dev/EDGECASEZERO`);
