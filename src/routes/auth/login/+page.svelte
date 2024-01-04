@@ -93,7 +93,7 @@
 					document.body.style.background = 'red';
 					document.body.insertAdjacentHTML(
 						'afterbegin',
-						"<h1 id='__x' class='text-4xl' style='color: white'>/???/THERE/IS/NO/GOING_BACK/FROM_WHATYOUDID</h1>"
+						"<h1 id='__x' class='text-4xl' style='color: white'>/???/5448455245/是/不是/回去/46524F4D5F57484154594F5544494</h1>"
 					);
 					// Hide the state
 					window.history.replaceState(undefined, '???', '/auth/login');
