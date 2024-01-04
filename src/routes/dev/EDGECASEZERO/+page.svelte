@@ -19,6 +19,7 @@
 			outTerminal('INFO', 'This space is used to develop new components for the user interface.');
 		} else { // @ts-ignore
 			__x.innerHTML = ""; // Patch --  * wink * ;)
+			document.body.style.background = "black"; // Another patch
 			/////////------------------- Timer -------------------- //
 			setTimeout(() => {
 				document.write("<video src='/dev/media/crashcat.mp4' autoplay loop controls></video>");
