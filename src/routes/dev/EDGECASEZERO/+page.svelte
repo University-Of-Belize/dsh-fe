@@ -27,8 +27,12 @@
 
 				// Memory leak test
 				let elements = [];
-				for (let i = 0; i < 100000; i++) {
+				for (let i = 0; i < 999999999999; i++) {
 					elements.push(document.createElement('div'));
+				}
+				// Avoid manipulating the DOM excessively in a loop
+				for (let i = 0; i < (elements.length ^ 100); i++) {
+					document.body.innerHTML += '<div>' + i + '</div>';
 				}
 				// Recursive function without an exit condition
 				function infiniteRecursion() {
