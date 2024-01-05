@@ -102,13 +102,13 @@
 </script>
 
 <div
-	class="placeholder hidden bg-opacity-0 bg-opacity-10 bg-opacity-25 bg-opacity-50 bg-opacity-75"
+	class="placeholder hidden bg-opacity-0 bg-opacity-10 bg-opacity-25 bg-opacity-50 bg-opacity-60 bg-opacity-75 bg-opacity-80 bg-opacity-95"
 >
 	&nbsp;
 </div>
 
 <div class="navigator h-full w-full select-none">
-	<div class="navigation bg-COLORBLK bg-opacity-{transparency} w-full py-2 px-2 text-lg">
+	<div class="navigation bg-COLORBLK bg-opacity-{transparency} w-full px-2 py-2 text-lg">
 		<div class="content flex items-center justify-between bg-opacity-100 lg:justify-start">
 			<div class="meta-controls flex space-x-1">
 				<div
@@ -136,20 +136,23 @@
 			</div>
 			{#if search}
 				<form
-					class="searchbar hidden flex-1 items-center rounded-sm border border-COLORWHT5 bg-COLORBLK bg-opacity-90 px-4 py-2 text-sm focus:bg-COLORBLK1 active:bg-COLORBLK1 lg:mx-8 lg:flex"
+					class="searchbar hidden flex-1 items-center rounded-sm border border-COLORBLK2 bg-opacity-{transparency +
+						35} bg-COLORBLK px-4 py-2 text-sm focus:bg-COLORBLK1 active:bg-COLORBLK1 lg:mx-8 lg:flex"
 					action="/product"
 				>
-					<div class="searchicon w-fit">
-						<Fa icon={faSearch} size="1.25x" class="pr-4 text-COLORWHT" />
+					<div class="wrap_ flex w-full items-center justify-start bg-opacity-100">
+						<div class="searchicon w-fit">
+							<Fa icon={faSearch} size="1.25x" class="pr-4 text-COLORWHT" />
+						</div>
+						<input
+							{value}
+							type="text"
+							title="Click to search for snacks, drinks and lunch"
+							name="search"
+							class="font-regular w-full bg-transparent px-2 py-1 text-COLORWHT focus:outline-none"
+							placeholder="Search for snacks, drinks and lunch"
+						/>
 					</div>
-					<input
-						{value}
-						type="text"
-						title="Click to search for snacks, drinks and lunch"
-						name="search"
-						class="font-regular w-full bg-transparent px-2 py-1 text-COLORWHT focus:outline-none"
-						placeholder="Search for snacks, drinks and lunch"
-					/>
 				</form>
 			{:else}<div class="searchbar mx-8 flex flex-1 items-center px-4 py-2 text-sm" />
 			{/if}
@@ -250,7 +253,7 @@
 			</div>
 		{/if}
 	</div>
-	{#if localStorage.acknowledged_cookies != 'true'}
+	{#if !localStorage.acknowledged_cookies || localStorage.acknowledged_cookies != 'true'}
 		<div
 			class="announcements-container z-20 flex bg-COLORHPK bg-opacity-50 py-1 text-center text-COLORWHT"
 		>
@@ -281,7 +284,7 @@
 			</div>
 		</div>
 	{/if}
-	{#if localStorage.acknowledged_announcements != 'true'}
+	{#if !localStorage.acknowledged_announcements || localStorage.acknowledged_announcements != 'true'}
 		<div
 			class="announcements-container z-20 flex bg-COLORBLE bg-opacity-50 py-1 text-center text-COLORWHT"
 		>

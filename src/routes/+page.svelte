@@ -46,7 +46,7 @@
 	<div class="hero">
 		<div class="image-and-wrapper relative" style="height: 800px">
 			<div class="navigation absolute top-0 z-20 w-full">
-				<Navigation transparency={5} search={true} />
+				<Navigation transparency={25} search={true} />
 			</div>
 			<div class="content-wrapper absolute z-10 flex h-full w-full items-center justify-center">
 				<div class="content flex flex-1 items-center justify-center">
