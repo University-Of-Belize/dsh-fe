@@ -108,7 +108,7 @@
 </div>
 
 <div class="navigator h-full w-full select-none">
-	<div class="navigation bg-COLORBLK bg-opacity-{transparency} w-full py-4 pl-2 pr-4 text-lg">
+	<div class="navigation bg-COLORBLK bg-opacity-{transparency} w-full py-2 px-2 text-lg">
 		<div class="content flex items-center justify-between bg-opacity-100 lg:justify-start">
 			<div class="meta-controls flex space-x-1">
 				<div
