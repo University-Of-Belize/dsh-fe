@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import EscrowBanner from '$lib/Elements/Generic/Banners/EscrowBanner.svelte';
-	import { onMount } from 'svelte';
-	import SearchBar from '$lib/Elements/Generic/Search/SearchBar.svelte';
-	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { goto } from '$app/navigation';
+	import EscrowBanner from '$lib/Elements/Banners/EscrowBanner.svelte';
+	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
+	import { onMount } from 'svelte';
 	let text: string, branding_text: string, subtitle: string, status_text: number;
 	let onlinePoller: number;
 	let statusTextDecrementer: number;

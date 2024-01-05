@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import CommentBox from '../../../lib/Elements/Generic/Inputs/CommentBox.svelte';
+	import CommentBox from '../../../lib/Elements/Inputs/CommentBox.svelte';
 
 	let terminal: HTMLDivElement;
 
@@ -27,7 +27,7 @@
 	</div>
 	<div class="mt-6 text-xl font-semibold">commentBox component</div>
 	<div class="text-md mb-6 mt-2 block font-light">
-		<code>src/lib/Elements/Generic/CommentBox.svelte</code>
+		<code>src/lib/Elements/Inputs/CommentBox.svelte</code>
 		<div>Takes in a `user` object, returns the content as a custom <code>input</code> event</div>
 	</div>
 	<CommentBox

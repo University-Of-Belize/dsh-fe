@@ -4,10 +4,10 @@
 	import { onMount } from 'svelte';
 
 	// import { goto } from '$app/navigation';
-	// import Button from '$lib/Elements/Generic/Button.svelte';
+	// import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import type { User } from '$lib/types/User';
 	import type { Article } from '$lib/types/Article';
+	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { marked } from 'marked';
@@ -107,7 +107,7 @@
 		<div class="content pb-27 mx-12 flex h-full w-full items-start justify-start pt-12 lg:flex-1">
 			{#if data != undefined}
 				<section
-					class="content-wrapper prose prose-neutral block w-full max-w-full rounded-sm bg-COLORBLK1 p-8 text-COLORWHT1 prose-h1:text-COLORWHT prose-h2:text-COLORWHT2 prose-h3:text-COLORWHT3 prose-h4:text-COLORWHT4 prose-h5:text-COLORWHT5 prose-h6:text-COLORWHT5 prose-a:text-COLORWHT2 prose-strong:text-COLORWHT1 prose-code:text-COLORYLW prose-ol:text-COLORWHT1 prose-ul:text-COLORWHT2 prose-li:text-COLORWHT"
+					class="content-wrapper prose prose-neutral block w-full max-w-full rounded-sm bg-COLORBLK1 p-8 text-COLORWHT1 prose-h1:text-COLORWHT prose-h2:text-COLORWHT2 prose-h3:text-COLORWHT3 prose-h4:text-COLORWHT4 prose-h5:text-COLORWHT5 prose-h6:text-COLORWHT5 prose-a:text-COLORWHT2 prose-blockquote:text-COLORWHT1 prose-strong:text-COLORWHT1 prose-code:text-COLORYLW prose-ol:text-COLORWHT1 prose-ul:text-COLORWHT2 prose-li:text-COLORWHT"
 				>
 					{@html marked.parse(data.content) || "Oops, this post doesn't exist!"}
 				</section>

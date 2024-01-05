@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
+	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 	// export let image: string;
 	export let title: string;

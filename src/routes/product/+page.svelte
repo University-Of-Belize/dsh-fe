@@ -3,10 +3,10 @@
 	import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 	import { writable } from 'svelte/store';
 
+	import Product from '$lib/Elements/Dashboard/ProductElement.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import Product from '$lib/Elements/Generic/Dashboard/ProductElement.svelte';
-	import SearchBar from '$lib/Elements/Generic/Search/SearchBar.svelte';
+	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	import type { EngineProduct } from '$lib/types/Product';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import Fa from 'svelte-fa';

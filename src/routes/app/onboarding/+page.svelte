@@ -1,8 +1,8 @@
 <script lang="ts">
-	import CardPicker from '$lib/Elements/Generic/Cards/CardPicker.svelte';
+	import CardPicker from '$lib/Elements/Cards/CardPicker.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import SearchBar from '$lib/Elements/Generic/Search/SearchBar.svelte';
+	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 
 	import { faDesktopAlt, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
 </script>

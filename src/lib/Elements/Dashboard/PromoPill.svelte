@@ -2,7 +2,7 @@
 	import type { Promo } from '$lib/types/Promo';
 	import { faTag } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { getDate } from '../../Utility/time';
+	import { getDate } from '../Utility/time';
 	export let promo: Promo;
 	export let description: string;
 </script>

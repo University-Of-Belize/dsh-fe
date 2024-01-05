@@ -1,17 +1,16 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import CardPicker from '$lib/Elements/Generic/Cards/CardPicker.svelte';
+	import CardPicker from '$lib/Elements/Cards/CardPicker.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import SearchBar from '$lib/Elements/Generic/Search/SearchBar.svelte';
+	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	import type { Article } from '$lib/types/Article';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
-	let data: Article[];
 	import { faBookOpenReader } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { marked } from 'marked';
 	import { onMount } from 'svelte';
+	let data: Article[];
 
 	async function catchAll() {
 		const res = (await fetchWebApi('v1/admin/post/manage', 'GET')) as Response;

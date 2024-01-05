@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Generic/Dashboard/DashList.svelte';
+	import Button from '$lib/Elements/Buttons/Button.svelte';
+	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import Select from '$lib/Elements/Generic/Inputs/Select2.svelte';
-	import TextInput from '$lib/Elements/Generic/Inputs/TextInput.svelte';
+	import Select from '$lib/Elements/Inputs/Select2.svelte';
+	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import { createProduct, deleteProduct, editProduct } from '$lib/Elements/Utility/Product';
 	import { R2S3Upload } from '$lib/Elements/Utility/vendor/dishout/r2_s3';
 	import config from '$lib/config/settings';
@@ -27,7 +27,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
-	import TagInput from '../../../../../lib/Elements/Generic/Inputs/TagInput.svelte';
+	import TagInput from '../../../../../lib/Elements/Inputs/TagInput.svelte';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this

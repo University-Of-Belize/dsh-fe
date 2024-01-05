@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
+	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import ProductBanner from '$lib/Elements/Generic/Banners/ProductBanner.svelte';
-	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
 	import type { Product as Product_ } from '$lib/types/Product.ts';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';

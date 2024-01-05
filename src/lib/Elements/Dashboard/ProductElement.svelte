@@ -3,7 +3,7 @@
 
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
-	import { addToCart } from '../../Utility/Cart';
+	import { addToCart } from '../Utility/Cart';
 	import IconButton from '../Buttons/IconButton.svelte';
 	let productImage: string;
 	let productId: string;

@@ -26,8 +26,8 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
-	import Button from './Buttons/Button.svelte';
-	import IconButton from './Buttons/IconButton.svelte';
+	import Button from '../Buttons/Button.svelte';
+	import IconButton from '../Buttons/IconButton.svelte';
 	export let transparency: number = 0;
 	export let search: boolean = true;
 	export let value: string = '';

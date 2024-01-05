@@ -4,9 +4,9 @@
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
 	import type { Product } from '$lib/types/Product';
-	import { addToCart } from '../../Utility/Cart';
+	import { addToCart } from '../Utility/Cart';
 	import IconButton from '../Buttons/IconButton.svelte';
-	import StarCount from '../StarCount.svelte';
+	import StarCount from '../Generic/StarCount.svelte';
 	let productImage: string;
 	let productId: string;
 	let productName: string;

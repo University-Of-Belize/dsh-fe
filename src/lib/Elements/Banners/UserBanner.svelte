@@ -6,7 +6,7 @@
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
-	import { R2S3Upload } from '../../Utility/vendor/dishout/r2_s3';
+	import { R2S3Upload } from '../Utility/vendor/dishout/r2_s3';
 	import { faImage } from '@fortawesome/free-solid-svg-icons';
 	export let user: User;
 	export let tag: boolean = false;

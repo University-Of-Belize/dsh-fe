@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Generic/Dashboard/DashList.svelte';
-	import DateInput from '$lib/Elements/Generic/Inputs/DateInput.svelte';
+	import Button from '$lib/Elements/Buttons/Button.svelte';
+	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
+	import PromoPill from '$lib/Elements/Dashboard/PromoPill.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import PromoPill from '$lib/Elements/Generic/Dashboard/PromoPill.svelte';
-	import TextInput from '$lib/Elements/Generic/Inputs/TextInput.svelte';
+	import DateInput from '$lib/Elements/Inputs/DateInput.svelte';
+	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import { createPromo, deletePromo, editPromo } from '$lib/Elements/Utility/Promo';
 	import { getDate } from '$lib/Elements/Utility/time';
 	import type { Promo } from '$lib/types/Promo';

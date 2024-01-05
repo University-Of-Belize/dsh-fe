@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Generic/Dashboard/DashList.svelte';
+	import Button from '$lib/Elements/Buttons/Button.svelte';
+	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
+	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import UserPill from '$lib/Elements/Generic/Dashboard/UserPill.svelte';
 	import { deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
 	import type { Review } from '$lib/types/Review';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import SearchBar from '../../../../lib/Elements/Generic/Search/SearchBar.svelte';
+	import SearchBar from '../../../../lib/Elements/Search/SearchBar.svelte';
 	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let data: Review[]; // Declare the data variable

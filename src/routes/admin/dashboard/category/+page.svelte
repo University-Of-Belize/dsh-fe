@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
-	import CategoryPill from '$lib/Elements/Generic/Dashboard/CategoryPill.svelte';
-	import DashList from '$lib/Elements/Generic/Dashboard/DashList.svelte';
+	import Button from '$lib/Elements/Buttons/Button.svelte';
+	import CategoryPill from '$lib/Elements/Dashboard/CategoryPill.svelte';
+	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import { deleteCategory } from '$lib/Elements/Utility/Category';
 	import type { Category } from '$lib/types/Category';

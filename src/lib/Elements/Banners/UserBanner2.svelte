@@ -7,7 +7,7 @@
 	import { faImage } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
-	import { R2S3Upload } from '../../Utility/vendor/dishout/r2_s3';
+	import { R2S3Upload } from '../Utility/vendor/dishout/r2_s3';
 	export let user: User;
 	export let tag: boolean = false;
 	export let tagColor: string = 'COLORWHT';

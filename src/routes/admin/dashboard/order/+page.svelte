@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Generic/Dashboard/DashList.svelte';
-	import DateTimeInput from '$lib/Elements/Generic/Inputs/DateTimeInput.svelte';
+	import Button from '$lib/Elements/Buttons/Button.svelte';
+	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import Select from '$lib/Elements/Generic/Inputs/Select2.svelte';
-	import TextInput from '$lib/Elements/Generic/Inputs/TextInput.svelte';
+	import DateTimeInput from '$lib/Elements/Inputs/DateTimeInput.svelte';
+	import Select from '$lib/Elements/Inputs/Select2.svelte';
+	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import { getPromo } from '$lib/Elements/Utility/Promo';
 	import { getLocaleDateTime } from '$lib/Elements/Utility/time';
 	import config from '$lib/config/settings';
@@ -33,11 +33,11 @@
 	import _ from 'lodash';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
-	import ProductPill from '../../../../lib/Elements/Generic/Dashboard/ProductPill.svelte';
-	// What is what?
+	import ProductPill from '../../../../lib/Elements/Dashboard/ProductPill.svelte';
+// What is what?
 	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';
-	import type { CartProduct } from '$lib/types/Product';
 	import { locateNodeUsingHash } from '$lib/Elements/Utility/page';
+	import type { CartProduct } from '$lib/types/Product';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this

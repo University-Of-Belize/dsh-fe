@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Generic/Dashboard/DashList.svelte';
+	import UserBanner from '$lib/Elements/Banners/UserBanner.svelte';
+	import Button from '$lib/Elements/Buttons/Button.svelte';
+	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import TextInput from '$lib/Elements/Generic/Inputs/TextInput.svelte';
-	import UserBanner from '$lib/Elements/Generic/Banners/UserBanner.svelte';
+	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import { editUser, registerUser } from '$lib/Elements/Utility/User';
 	import config from '$lib/config/settings';
 	import type { User } from '$lib/types/User';

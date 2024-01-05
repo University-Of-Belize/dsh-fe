@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import CardBlock from '$lib/Elements/Generic/Cards/CardBlock.svelte';
-	import CardPicker from '$lib/Elements/Generic/Cards/CardPicker.svelte';
+	import CardBlock from '$lib/Elements/Cards/CardBlock.svelte';
+	import CardPicker from '$lib/Elements/Cards/CardPicker.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import SearchBar from '$lib/Elements/Generic/Search/SearchBar.svelte';
+	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	const eula = ($page.url.searchParams.get('eula') as string) == 'true';
 
-	import { faCheckDouble, faCheck } from '@fortawesome/free-solid-svg-icons';
+	import { faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	onMount(() => {

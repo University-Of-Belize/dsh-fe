@@ -14,18 +14,18 @@
 	import { writable } from 'svelte/store';
 
 	import { goto } from '$app/navigation';
-	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
-	import IconButton from '$lib/Elements/Generic/Buttons/IconButton.svelte';
+	import Button from '$lib/Elements/Buttons/Button.svelte';
+	import IconButton from '$lib/Elements/Buttons/IconButton.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import StarCount from '$lib/Elements/Generic/StarCount.svelte';
 	import { addToCart } from '$lib/Elements/Utility/Cart';
 	import { createReview, deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
+	import { locateNodeUsingHash } from '$lib/Elements/Utility/page';
 	import type { Product } from '$lib/types/Product.ts';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
-	import { locateNodeUsingHash } from '$lib/Elements/Utility/page';
 	// let hero_image: HTMLDivElement;
 	const staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // The user
 	const user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // The user

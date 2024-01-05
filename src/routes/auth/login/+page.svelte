@@ -2,11 +2,12 @@
 	// import config from '$lib/config/settings';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
+	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
+	import { lockPointer } from '$lib/vendor/dishout/lock';
 	import {
 		faGift,
 		faLock,
@@ -16,10 +17,9 @@
 		// faUserCog
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
+	import html2canvas from 'html2canvas';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
-	import html2canvas from 'html2canvas';
-	import { lockPointer } from '$lib/vendor/dishout/lock';
 	$: continue_url = $page.url.searchParams.get('continue');
 	let debounceTimeout: number;
 	let logging_in: boolean = false;

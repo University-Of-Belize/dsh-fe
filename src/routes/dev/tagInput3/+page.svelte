@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TextInput from '$lib/Elements/Generic/Inputs/TextInput.svelte';
+	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 
 	let tagArea: HTMLDivElement;
 	let tagInputArea: TextInput;
