@@ -128,6 +128,7 @@ async function registerUser(payload: string[]) {
 			}
 			const json = await response.json();
 			toast.push(`'${json.is.username}' has been created successfully.`);
+			localStorage.setItem('next_', JSON.stringify(json.is._id));
 		}, 500); // debounce every 500ms
 	} catch (error) {
 		toast.push(

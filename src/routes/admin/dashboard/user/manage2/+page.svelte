@@ -26,7 +26,7 @@
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	const user_id = $page.url.searchParams.get('user_id');
 	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // User data
-	let data: User; // List of users
+	let data: User; // User object data
 	let debounceTimeout: number;
 	let profileManagement: UserBanner;
 	let photoBannerInput: HTMLInputElement;
@@ -62,7 +62,7 @@
 
 	onMount(async () => {
 		try {
-			await catchAll();
+			await catchAll(); // Fetch the user for updates
 		} catch (error) {
 			console.log(error);
 			toast.push(
@@ -124,6 +124,10 @@
 							valueArray[1] // New password (yes, entered)
 						);
 						toast.push(`You have updated ${data.username}'s details successfully.`);
+						setTimeout(() => {
+							catchAll(); // Fetch the user for updates -- we don't need the return
+							// value so we're fine doing this
+						}, 1250);
 					}, 500); // 500ms break
 				} catch (error) {
 					console.log(error);
@@ -147,7 +151,19 @@
 						// @ts-ignore
 						clearTimeout(debounceTimeout);
 						debounceTimeout = setTimeout(async () => {
-							registerUser(valueArray);
+							(await registerUser(valueArray)) as unknown as User;
+							setTimeout(() => {
+								// Wait for storaage to write before we run this
+								if (localStorage.next_) {
+									const next_ = JSON.parse(localStorage.next_);
+									// Remove the item from storage (we don't need it anymore+clean-up)
+									localStorage.removeItem('next_');
+									setTimeout(() => {
+										// Wait for write to complete before navigating
+										window.location.href = `/admin/dashboard/user/manage2?user_id=${next_}`; // Hard reload+'destringify' (???)
+									}, 550);
+								}
+							}, 1250);
 						}, 500); // 500ms break
 					} catch (error) {
 						console.log(error);
@@ -406,6 +422,10 @@
 												toast.push(
 													`You have invalidated ${data.username}'s token. They will be signed out.`
 												);
+												setTimeout(() => {
+													catchAll(); // Fetch the user for updates -- we don't need the return
+													// value so we're fine doing this
+												}, 1250);
 											}}
 										>
 											<Button
@@ -436,6 +456,10 @@
 												toast.push(
 													`You have ${data.staff ? 'demoted' : 'promoted'} ${data.username}.`
 												);
+												setTimeout(() => {
+													catchAll(); // Fetch the user for updates -- we don't need the return
+													// value so we're fine doing this
+												}, 1250);
 											}}
 										>
 											<Button
@@ -464,6 +488,10 @@
 												toast.push(
 													`You have triggered the verification flow on ${data.username}. They will have to reverify their account.`
 												);
+												setTimeout(() => {
+													catchAll(); // Fetch the user for updates -- we don't need the return
+													// value so we're fine doing this
+												}, 1250);
 											}}
 										>
 											<Button
@@ -494,6 +522,10 @@
 												toast.push(
 													`You have banned ${data.username}. Their account has been blocked from all services.`
 												);
+												setTimeout(() => {
+													catchAll(); // Fetch the user for updates -- we don't need the return
+													// value so we're fine doing this
+												}, 1250);
 											}}
 										>
 											<Button
@@ -522,6 +554,10 @@
 												toast.push(
 													`You have locked out ${data.username}. Their account has been disabled.`
 												);
+												setTimeout(() => {
+													catchAll(); // Fetch the user for updates -- we don't need the return
+													// value so we're fine doing this
+												}, 1250);
 											}}
 										>
 											<Button
@@ -550,6 +586,10 @@
 												toast.push(
 													`You have deleted ${data.username}'s account. They will be signed out.`
 												);
+												setTimeout(() => {
+													history.back(); // User's gone. Go backwards
+													// Should trigger a hard-reload
+												}, 1250);
 											}}
 										>
 											<Button
