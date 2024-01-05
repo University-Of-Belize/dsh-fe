@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import CardBlock from '$lib/Elements/Generic/CardBlock.svelte';
-	import CardPicker from '$lib/Elements/Generic/CardPicker.svelte';
+	import CardBlock from '$lib/Elements/Generic/Cards/CardBlock.svelte';
+	import CardPicker from '$lib/Elements/Generic/Cards/CardPicker.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
+	import SearchBar from '$lib/Elements/Generic/Search/SearchBar.svelte';
 	const eula = ($page.url.searchParams.get('eula') as string) == 'true';
 
 	import { faCheckDouble, faCheck } from '@fortawesome/free-solid-svg-icons';

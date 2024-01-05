@@ -1,7 +1,7 @@
 <svelte:options accessors />
 
 <script lang="ts">
-	import TextInput from '$lib/Elements/Generic/TextInput.svelte';
+	import TextInput from '$lib/Elements/Generic/Inputs/TextInput.svelte';
 	export let placeholder: string = 'Type a tag and press Enter';
 	export let custom_style: string | undefined = '';
 	export let results: string[] = [];

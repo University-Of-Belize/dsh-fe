@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from '$lib/Elements/Generic/Button.svelte';
-	import DashList from '$lib/Elements/Generic/DashList.svelte';
-	import DateTimeInput from '$lib/Elements/Generic/DateTimeInput.svelte';
+	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
+	import DashList from '$lib/Elements/Generic/Dashboard/DashList.svelte';
+	import DateTimeInput from '$lib/Elements/Generic/Inputs/DateTimeInput.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import Select from '$lib/Elements/Generic/Select2.svelte';
-	import TextInput from '$lib/Elements/Generic/TextInput.svelte';
+	import Select from '$lib/Elements/Generic/Inputs/Select2.svelte';
+	import TextInput from '$lib/Elements/Generic/Inputs/TextInput.svelte';
 	import { getPromo } from '$lib/Elements/Utility/Promo';
 	import { getLocaleDateTime } from '$lib/Elements/Utility/time';
 	import config from '$lib/config/settings';
@@ -33,7 +33,7 @@
 	import _ from 'lodash';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
-	import ProductPill from './../../../../lib/Elements/Generic/ProductPill.svelte';
+	import ProductPill from '../../../../lib/Elements/Generic/Dashboard/ProductPill.svelte';
 	// What is what?
 	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';
 	import type { CartProduct } from '$lib/types/Product';

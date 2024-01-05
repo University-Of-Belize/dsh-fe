@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from '$lib/Elements/Generic/Button.svelte';
-	import DashList from '$lib/Elements/Generic/DashList.svelte';
+	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
+	import DashList from '$lib/Elements/Generic/Dashboard/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import ProductPill from '$lib/Elements/Generic/ProductPill.svelte';
+	import ProductPill from '$lib/Elements/Generic/Dashboard/ProductPill.svelte';
 	import { deleteProduct } from '$lib/Elements/Utility/Product';
 	import type { Product } from '$lib/types/Product';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';

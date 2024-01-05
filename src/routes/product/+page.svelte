@@ -5,8 +5,8 @@
 
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import Product from '$lib/Elements/Generic/ProductElement.svelte';
-	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
+	import Product from '$lib/Elements/Generic/Dashboard/ProductElement.svelte';
+	import SearchBar from '$lib/Elements/Generic/Search/SearchBar.svelte';
 	import type { EngineProduct } from '$lib/types/Product';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import Fa from 'svelte-fa';

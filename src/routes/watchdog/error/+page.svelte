@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import EscrowBanner from '$lib/Elements/Generic/EscrowBanner.svelte';
+	import EscrowBanner from '$lib/Elements/Generic/Banners/EscrowBanner.svelte';
 	import { onMount } from 'svelte';
-	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
+	import SearchBar from '$lib/Elements/Generic/Search/SearchBar.svelte';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { goto } from '$app/navigation';
 	import { toast } from '@zerodevx/svelte-toast';

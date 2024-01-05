@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import EscrowBanner from '$lib/Elements/Generic/EscrowBanner.svelte';
+	import EscrowBanner from '$lib/Elements/Generic/Banners/EscrowBanner.svelte';
 	import { onMount } from 'svelte';
-	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
+	import SearchBar from '$lib/Elements/Generic/Search/SearchBar.svelte';
 	let text: string, branding_text: string, subtitle: string;
 	let notFound: boolean = false;
 	onMount(() => {

@@ -10,7 +10,7 @@
 		faTag,
 		faUserCog
 	} from '@fortawesome/free-solid-svg-icons';
-	import Button from './Button.svelte';
+	import Button from '../Buttons/Button.svelte';
 
 	export let staff = false;
 </script>

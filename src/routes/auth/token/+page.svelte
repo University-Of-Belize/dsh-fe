@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Button from '$lib/Elements/Generic/Button.svelte';
+	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {

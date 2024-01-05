@@ -4,10 +4,10 @@
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
+	import { faImage } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
-	import { R2S3Upload } from '../Utility/vendor/dishout/r2_s3';
-	import { faImage } from '@fortawesome/free-solid-svg-icons';
+	import { R2S3Upload } from '../../Utility/vendor/dishout/r2_s3';
 	export let user: User;
 	export let tag: boolean = false;
 	export let tagColor: string = 'COLORWHT';
@@ -38,6 +38,25 @@
 		user.profile_picture = pub_url;
 		localStorage.setItem('user', JSON.stringify(user)); // Update the user
 	}
+	export async function updateBannerPhoto(pub_url: string) {
+		const r = (await fetchWebApi(
+			'v1/admin/user/manage/banner_picture',
+			'PUT',
+			what_is(what.private.user, pub_url)
+		)) as Response; // JS doesn't allow type declarations
+		if (!r) return;
+		if (!r.ok) {
+			try {
+				const res = await r.json();
+				return toast.push(res.message);
+			} catch (error) {
+				return toast.push(`There was an issue while updating the banner photo: ${error.message}`);
+			}
+		}
+		toast.push('Updated banner photo. It may take a while to show up around the site.');
+		user.banner = pub_url;
+		localStorage.setItem('user', JSON.stringify(user)); // Update the user
+	}
 </script>
 
 <!-- Color stub -->
@@ -47,11 +66,9 @@
 	&nbsp;
 </div>
 
-<div class="review my-4 rounded-md bg-COLORBLK3 bg-opacity-50 px-4 py-4">
+<div class="review z-10 w-full rounded-md bg-COLORBLK3 bg-opacity-50 px-4 py-4">
 	<div class="flex flex-wrap space-y-4 bg-opacity-100 lg:space-y-2">
-		<div
-			class="reviewer-pfp flex w-full flex-row items-center justify-center pr-4 lg:w-auto lg:justify-start"
-		>
+		<div class="reviewer-pfp flex w-full flex-row items-center justify-start pr-4 lg:w-auto">
 			{#if editProfilePicture}
 				<div
 					class="pimg_wrp block h-fit w-fit rounded-md bg-COLORBLE"
@@ -92,10 +109,10 @@
 							</div>
 						</div>
 						<div
-							class="product-image relative block cursor-pointer overflow-clip rounded-md hover:opacity-80"
+							class="profile-image relative block cursor-pointer overflow-clip rounded-md hover:opacity-80"
 						>
 							<img
-								class="h-64 w-64 rounded-md lg:h-32 lg:w-32"
+								class="h-16 w-16 rounded-md lg:h-32 lg:w-32"
 								bind:this={userImage}
 								src={user?.profile_picture || config['user']['default-image']}
 								alt="{user?.username}'s avatar"
@@ -108,7 +125,7 @@
 				</div>
 			{:else}
 				<img
-					class="h-64 w-64 rounded-md lg:h-32 lg:w-32"
+					class="h-16 w-16 rounded-md lg:h-32 lg:w-32"
 					src={user?.profile_picture || config['user']['default-image']}
 					alt="{user?.username}'s avatar"
 					on:error={() => {
@@ -135,7 +152,7 @@
 					</div>
 				{/if}
 			</div>
-			<div class="text-md mb-2 mt-4 hidden font-light text-COLORBLE lg:m-0 lg:block">
+			<div class="text-md mb-2 mt-4 hidden font-light text-COLORWHT1 lg:m-0 lg:block">
 				{@html description}
 			</div>
 			<div class="actions flex w-full flex-1 items-center justify-start text-COLORWHT lg:w-auto">

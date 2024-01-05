@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from '$lib/Elements/Generic/Button.svelte';
-	import DashList from '$lib/Elements/Generic/DashList.svelte';
+	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
+	import DashList from '$lib/Elements/Generic/Dashboard/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import PromoPill from '$lib/Elements/Generic/PromoPill.svelte';
+	import PromoPill from '$lib/Elements/Generic/Dashboard/PromoPill.svelte';
 	import { deletePromo } from '$lib/Elements/Utility/Promo';
 	import type { Promo } from '$lib/types/Promo';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';

@@ -14,8 +14,8 @@
 	import { writable } from 'svelte/store';
 
 	import { goto } from '$app/navigation';
-	import Button from '$lib/Elements/Generic/Button.svelte';
-	import IconButton from '$lib/Elements/Generic/IconButton.svelte';
+	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
+	import IconButton from '$lib/Elements/Generic/Buttons/IconButton.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import StarCount from '$lib/Elements/Generic/StarCount.svelte';
 	import { addToCart } from '$lib/Elements/Utility/Cart';

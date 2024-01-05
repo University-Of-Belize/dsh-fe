@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import EscrowBanner from '$lib/Elements/Generic/EscrowBanner.svelte';
+	import EscrowBanner from '$lib/Elements/Generic/Banners/EscrowBanner.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import SearchBar from '$lib/Elements/Generic/SearchBar.svelte';
+	import SearchBar from '$lib/Elements/Generic/Search/SearchBar.svelte';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';

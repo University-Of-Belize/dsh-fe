@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import CommentBox from './../../../lib/Elements/Generic/CommentBox.svelte';
+	import CommentBox from '../../../lib/Elements/Generic/Inputs/CommentBox.svelte';
 
 	let terminal: HTMLDivElement;
 

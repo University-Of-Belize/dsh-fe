@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Button from '$lib/Elements/Generic/Button.svelte';
-	import DashList from '$lib/Elements/Generic/DashList.svelte';
+	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
+	import DashList from '$lib/Elements/Generic/Dashboard/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import UserPill from '$lib/Elements/Generic/UserPill.svelte';
+	import UserPill from '$lib/Elements/Generic/Dashboard/UserPill.svelte';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faCog, faPlus, faUserCog } from '@fortawesome/free-solid-svg-icons';

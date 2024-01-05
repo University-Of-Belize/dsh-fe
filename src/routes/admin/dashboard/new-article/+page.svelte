@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from '$lib/Elements/Generic/Button.svelte';
-	import CommentBox from '$lib/Elements/Generic/CommentBox.svelte';
-	import DashList from '$lib/Elements/Generic/DashList.svelte';
+	import Button from '$lib/Elements/Generic/Buttons/Button.svelte';
+	import CommentBox from '$lib/Elements/Generic/Inputs/CommentBox.svelte';
+	import DashList from '$lib/Elements/Generic/Dashboard/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import UserPill from '$lib/Elements/Generic/UserPill.svelte';
+	import UserPill from '$lib/Elements/Generic/Dashboard/UserPill.svelte';
 	import { createArticle, deleteArticle } from '$lib/Elements/Utility/Article';
 	import type { Article } from '$lib/types/Article';
 	import type { User } from '$lib/types/User';
@@ -12,7 +12,7 @@
 	import { faCog, faPaperPlane, faReply, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import SearchBar from './../../../../lib/Elements/Generic/SearchBar.svelte';
+	import SearchBar from '../../../../lib/Elements/Generic/Search/SearchBar.svelte';
 	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let data: Article[]; // Declare the data variable
