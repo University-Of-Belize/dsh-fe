@@ -17,7 +17,7 @@
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	const user_id = $page.url.searchParams.get('user_id');
 	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // User data
-	let data: User; // List of users
+	let data: User; // User object
 	let debounceTimeout: number;
 
 	async function catchAll() {
@@ -49,7 +49,7 @@
 
 	onMount(async () => {
 		try {
-			await catchAll();
+			await catchAll(); // Fetch the user
 		} catch (error) {
 			console.log(error);
 			toast.push(
@@ -111,6 +111,7 @@
 							valueArray[1] // New password (yes, entered)
 						);
 						toast.push(`You have updated ${data.username}'s details successfully.`);
+						await catchAll(); // Fetch the user for updates
 					}, 500); // 500ms break
 				} catch (error) {
 					console.log(error);
@@ -344,7 +345,7 @@
 										<div class="label w-full text-lg font-semibold">Invalidate token</div>
 										<div
 											class="btn_wrp"
-											on:click={() => {
+											on:click={async () => {
 												editUser(
 													'f',
 													1,
@@ -357,6 +358,7 @@
 												toast.push(
 													`You have invalidated ${data.username}'s token. They will be signed out.`
 												);
+												await catchAll(); // Fetch the user for updates
 											}}
 										>
 											<Button
@@ -374,7 +376,7 @@
 										</div>
 										<div
 											class="btn_wrp"
-											on:click={() => {
+											on:click={async () => {
 												editUser(
 													'm',
 													undefined,
@@ -387,6 +389,7 @@
 												toast.push(
 													`You have ${data.staff ? 'demoted' : 'promoted'} ${data.username}.`
 												);
+												await catchAll(); // Fetch the user for updates
 											}}
 										>
 											<Button
@@ -402,7 +405,7 @@
 										<div class="label w-full text-lg font-semibold">Trigger verification flow</div>
 										<div
 											class="btn_wrp"
-											on:click={() => {
+											on:click={async () => {
 												editUser(
 													'f',
 													2,
@@ -415,6 +418,7 @@
 												toast.push(
 													`You have triggered the verification flow on ${data.username}. They will have to reverify their account.`
 												);
+												await catchAll(); // Fetch the user for updates
 											}}
 										>
 											<Button
@@ -432,7 +436,7 @@
 										<div class="label w-full text-lg font-semibold">Ban</div>
 										<div
 											class="btn_wrp"
-											on:click={() => {
+											on:click={async () => {
 												editUser(
 													'f',
 													5,
@@ -445,6 +449,7 @@
 												toast.push(
 													`You have banned ${data.username}. Their account has been blocked from all services.`
 												);
+												await catchAll(); // Fetch the user for updates
 											}}
 										>
 											<Button
@@ -460,7 +465,7 @@
 										<div class="label w-full text-lg font-semibold">Lockout</div>
 										<div
 											class="btn_wrp"
-											on:click={() => {
+											on:click={async () => {
 												editUser(
 													'f',
 													3,
@@ -473,6 +478,7 @@
 												toast.push(
 													`You have locked out ${data.username}. Their account has been disabled.`
 												);
+												await catchAll(); // Fetch the user for updates
 											}}
 										>
 											<Button
@@ -488,7 +494,7 @@
 										<div class="label w-full text-lg font-semibold">Delete account</div>
 										<div
 											class="btn_w"
-											on:click={() => {
+											on:click={async () => {
 												editUser(
 													'f',
 													4,
@@ -501,6 +507,7 @@
 												toast.push(
 													`You have deleted ${data.username}'s account. They will be signed out.`
 												);
+												await catchAll(); // Fetch the user for updates
 											}}
 										>
 											<Button
