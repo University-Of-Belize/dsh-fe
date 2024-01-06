@@ -1,5 +1,11 @@
 // Thank you "https://xdaforums.com/" !!
 'use strict';
+// Give the service worker access to Firebase Messaging.
+// Note that you can only use Firebase Messaging here. Other Firebase libraries
+// are not available in the service worker.
+self.importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js');
+self.importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js');
+// Firebase is now in the global namespace
 
 // ################################## CONSTANTS #################################
 
@@ -202,3 +208,37 @@ function createCache() {
 			console.error('There was an error setting up the cache:', error);
 		});
 }
+
+/*********** FIREBASE */
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+	apiKey: 'AIzaSyBXolTmpW_6vwf7ryhmBxAGDVZr3vEaEU8',
+	authDomain: 'plattr-32d57.firebaseapp.com',
+	projectId: 'plattr-32d57',
+	storageBucket: 'plattr-32d57.appspot.com',
+	messagingSenderId: '955312324775',
+	appId: '1:955312324775:web:fa4d3755462265f83a1b82',
+	measurementId: 'G-N0E9QJVTK4'
+};
+// Initialize Firebase with the provided configuration
+firebase.initializeApp(firebaseConfig);
+
+// Handle background messages
+self.addEventListener('push', function (event) {
+	console.log('[firebase-messaging-sw.js] Received background message ', event.data.json());
+
+	// Extract notification details from the received data
+	const push = event.data.json().notification;
+	const title = push.title;
+	const notificationOptions = {
+		body: push.body,
+		icon:
+			push.image ??
+			'https://www.gstatic.com/devrel-devsite/prod/v4c72fb03a7a581549fb317877b3b0627265bda97bd9ba2a29365d1ada8a00354/firebase/images/favicon.png'
+	};
+
+	// Show the notification
+	event.waitUntil(self.registration.showNotification(title, notificationOptions));
+});

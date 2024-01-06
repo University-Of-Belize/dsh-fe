@@ -1,13 +1,19 @@
 <script lang="ts">
 	import '../app.css';
 	// For reading storage
-	import { goto } from '$app/navigation';
+	import { beforeNavigate, goto } from '$app/navigation';
+	import { updated } from '$app/stores';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { SvelteToast, toast } from '@zerodevx/svelte-toast';
 	import 'node-localstorage/register';
 	import { onMount } from 'svelte';
-	import { beforeNavigate } from '$app/navigation';
-	import { updated } from '$app/stores';
-	import { fetchWebApi } from '$lib/vendor/dishout/api';
+	// Import the functions you need from the SDKs you need
+	import config from '$lib/config/settings';
+	import type { FirebaseMessage } from '$lib/types/Firebase';
+	import { initializeApp } from '@firebase/app';
+	import { getMessaging, onMessage } from '@firebase/messaging';
+	// import { getAnalytics } from '@firebase/analytics';
+	// const analytics = getAnalytics(app);
 	let clocation: URL;
 	let isNavigating: boolean = false;
 	const options = {
@@ -22,11 +28,14 @@
 	const options_firebase = {
 		dismissable: true,
 		theme: {
-			'--toastBackground': '#f0ede6',
-			'--toastColor': '#2a1a1f',
-			'--toastBarBackground': '#70a4ff'
+			'--toastBackground': 'rgb(var(--COLORBLK1))',
+			'--toastColor': 'rgb(var(--COLORWHT)) ',
+			'--toastBarBackground': '#ff7f4c' // Firebase color
 		}
 	};
+	// Initialize Firebase
+	const app = initializeApp(config.ui.firebase['config']);
+	localStorage.setItem('fb_instance_id', JSON.stringify(app)); // Store the instance in storage so that the rest of the app can access it
 
 	// Blocking function so that nothing else gets a chance to run
 	function checkBlocked() {
@@ -105,10 +114,34 @@
 	// Function runs every time upon manual, traditional-based navigation
 	onMount(async () => {
 		clocation = new URL(window.location.href);
+
+		// ********* Firebase (run in browser--not server) ********* /
+
+		const messaging = getMessaging(app);
+		// getToken(messaging, {
+		// 	vapidKey: config.ui.firebase['vapid-key'],
+		// 	serviceWorkerRegistration: await navigator.serviceWorker.getRegistration()
+		// });
+
+		// Handle incoming messages. Called when:
+		// - a message is received while the app has focus
+		// - the user clicks on an app notification created by a service worker
+		//   `messaging.onBackgroundMessage` handler.
+		onMessage(messaging, (payload) => {
+			console.log('Message received. ', payload);
+			// toast.push(
+			// 	payload.notification?.body ?? 'You received a message, but the client does not support it.',
+			// 	options_firebase
+			// );
+			// ...
+		});
+
+		/*******************************/
+
 		// Check for service worker and register if needed
 		if (!(await navigator.serviceWorker.getRegistration())) {
-			const x = await navigator.serviceWorker.register('/sw.js');
-			console.log(x); // Log out registration output
+			await navigator.serviceWorker.register('/sw.js');
+			// console.log(x); // Log out registration output
 		}
 
 		// Run in manual mode

@@ -1,3 +1,5 @@
+import type { CartProduct } from "./Product";
+
 interface User {
 	_id: string;
 	id: number;
@@ -10,7 +12,8 @@ interface User {
 	credit: {
 		$numberDecimal: string;
 	};
-	cart: any[];
+	cart: CartProduct[];
+	channel_id: string;
 	reset_token: string | null;
 	restrictions: number;
 	__v: number;
