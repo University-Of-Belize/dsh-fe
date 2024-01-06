@@ -31,7 +31,7 @@
 				return toast.push(`${json.message}`, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': '#842d69'
+						'--toastBarBackground': 'rgb(var(--COLORRED))'
 					}
 				});
 			}
@@ -46,7 +46,7 @@
 			toast.push(`${error.message}. Try again later.`, {
 				dismissable: false,
 				theme: {
-					'--toastBarBackground': '#842d69'
+					'--toastBarBackground': 'rgb(var(--COLORRED))'
 				}
 			});
 			console.log(error);

@@ -32,7 +32,7 @@
 				return toast.push('That token was not valid.', {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': '#842d69'
+						'--toastBarBackground': 'rgb(var(--COLORRED))'
 					}
 				});
 			}

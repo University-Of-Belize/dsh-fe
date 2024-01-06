@@ -108,7 +108,7 @@
 				{
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': '#842d69'
+						'--toastBarBackground': 'rgb(var(--COLORRED))'
 					}
 				}
 			);

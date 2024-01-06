@@ -36,7 +36,7 @@
 					return toast.push(`${json.message}`, {
 						dismissable: false,
 						theme: {
-							'--toastBarBackground': '#842d69'
+							'--toastBarBackground': 'rgb(var(--COLORRED))'
 						}
 					});
 				}
@@ -55,7 +55,7 @@
 				{
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': '#842d69'
+						'--toastBarBackground': 'rgb(var(--COLORRED))'
 					}
 				}
 			);
@@ -84,7 +84,7 @@
 			toast.push("<b>Retype password</b> and <b>password</b> aren't the same", {
 				dismissable: false,
 				theme: {
-					'--toastBarBackground': '#842d69'
+					'--toastBarBackground': 'rgb(var(--COLORRED))'
 				}
 			});
 		}
@@ -99,7 +99,7 @@
 				{
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': '#842d69'
+						'--toastBarBackground': 'rgb(var(--COLORRED))'
 					}
 				}
 			);

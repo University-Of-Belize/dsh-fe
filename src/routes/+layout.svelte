@@ -12,6 +12,15 @@
 	let isNavigating: boolean = false;
 	const options = {
 		dismissable: true,
+		pausable: true,
+		theme: {
+			'--toastBackground': 'rgb(var(--COLORBLK1))',
+			'--toastColor': 'rgb(var(--COLORWHT))',
+			'--toastBarBackground': 'rgb(var(--COLORBLE))'
+		}
+	};
+	const options_firebase = {
+		dismissable: true,
 		theme: {
 			'--toastBackground': '#f0ede6',
 			'--toastColor': '#2a1a1f',

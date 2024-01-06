@@ -1,5 +1,4 @@
 import { goto } from '$app/navigation';
-import config from '$lib/config/settings';
 import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
 import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -49,7 +48,7 @@ async function createReview(product_id: string, rating: number, comment: string)
 				return toast.push(data.message, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': '#842d69'
+						'--toastBarBackground': 'rgb(var(--COLORRED))'
 					}
 				});
 			}
@@ -77,3 +76,4 @@ function escapeHtml(unsafe: string) {
 }
 
 export { createReview, deleteReview, escapeHtml };
+

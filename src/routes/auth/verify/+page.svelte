@@ -122,7 +122,7 @@
 					} else {
 						toast.push("You've dismissed the install prompt.", {
 							theme: {
-								'--toastBarBackground': '#842d69'
+								'--toastBarBackground': 'rgb(var(--COLORRED))'
 							}
 						});
 						console.log('User dismissed the install prompt');
@@ -146,7 +146,7 @@
 				return toast.push(`${json.message}`, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': '#842d69'
+						'--toastBarBackground': 'rgb(var(--COLORRED))'
 					}
 				});
 			}
@@ -158,7 +158,7 @@
 			toast.push(`${error.message}. Try again later.`, {
 				dismissable: false,
 				theme: {
-					'--toastBarBackground': '#842d69'
+					'--toastBarBackground': 'rgb(var(--COLORRED))'
 				}
 			});
 			console.log(error);

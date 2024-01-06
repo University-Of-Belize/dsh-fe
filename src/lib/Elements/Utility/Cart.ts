@@ -22,7 +22,7 @@ const addToCart = async (item: string | undefined, quantity: number) => {
 				toast.push(`Failed to add item to cart. ${data.message}`, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': '#842d69'
+						'--toastBarBackground': 'rgb(var(--COLORRED))'
 					}
 				});
 			}
@@ -51,7 +51,7 @@ async function emptyCart(index: number | null) {
 				toast.push(`Failed to empty cart. ${data.message}`, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': '#842d69'
+						'--toastBarBackground': 'rgb(var(--COLORRED))'
 					}
 				});
 			}
@@ -62,3 +62,4 @@ async function emptyCart(index: number | null) {
 }
 
 export { addToCart, emptyCart };
+

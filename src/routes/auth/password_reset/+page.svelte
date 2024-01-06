@@ -40,7 +40,7 @@
 					return toast.push(res.message, {
 						dismissable: false,
 						theme: {
-							'--toastBarBackground': '#842d69'
+							'--toastBarBackground': 'rgb(var(--COLORRED))'
 						}
 					});
 				} catch {
@@ -49,7 +49,7 @@
 						{
 							dismissable: false,
 							theme: {
-								'--toastBarBackground': '#842d69'
+								'--toastBarBackground': 'rgb(var(--COLORRED))'
 							}
 						}
 					);

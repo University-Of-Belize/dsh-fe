@@ -1,8 +1,8 @@
 import { goto } from '$app/navigation';
-import { toast } from '@zerodevx/svelte-toast';
 import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
 import { fetchWebApi } from '$lib/vendor/dishout/api';
+import { toast } from '@zerodevx/svelte-toast';
 /*
 Make this function compatible with these calls
 
@@ -91,7 +91,7 @@ async function editUser(
 			return toast.push(r.message, {
 				dismissable: false,
 				theme: {
-					'--toastBarBackground': '#842d69'
+					'--toastBarBackground': 'rgb(var(--COLORRED))'
 				}
 			});
 		}
@@ -122,7 +122,7 @@ async function registerUser(payload: string[]) {
 				return toast.push(`${json.message}`, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': '#842d69'
+						'--toastBarBackground': 'rgb(var(--COLORRED))'
 					}
 				});
 			}
@@ -136,7 +136,7 @@ async function registerUser(payload: string[]) {
 			{
 				dismissable: false,
 				theme: {
-					'--toastBarBackground': '#842d69'
+					'--toastBarBackground': 'rgb(var(--COLORRED))'
 				}
 			}
 		);
@@ -145,3 +145,4 @@ async function registerUser(payload: string[]) {
 }
 
 export { editUser, registerUser };
+

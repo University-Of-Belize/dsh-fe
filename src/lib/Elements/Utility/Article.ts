@@ -51,7 +51,7 @@ async function createArticle(comment: string) {
 				return toast.push(data.message, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': '#842d69'
+						'--toastBarBackground': 'rgb(var(--COLORRED))'
 					}
 				});
 			}
@@ -70,3 +70,4 @@ async function createArticle(comment: string) {
 }
 
 export { createArticle, deleteArticle };
+

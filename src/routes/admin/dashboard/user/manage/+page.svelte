@@ -144,7 +144,7 @@
 					toast.push('Staff member must be <b>YES</b> or <b>NO</b>', {
 						dismissable: false,
 						theme: {
-							'--toastBarBackground': '#842d69'
+							'--toastBarBackground': 'rgb(var(--COLORRED))'
 						}
 					});
 				}
@@ -153,7 +153,7 @@
 			toast.push("<b>Retype password</b> and <b>password</b> aren't the same", {
 				dismissable: false,
 				theme: {
-					'--toastBarBackground': '#842d69'
+					'--toastBarBackground': 'rgb(var(--COLORRED))'
 				}
 			});
 		}
