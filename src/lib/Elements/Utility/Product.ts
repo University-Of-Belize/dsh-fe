@@ -34,13 +34,6 @@ const createProduct = async (
 				'POST',
 				what_is(what.private.menu, payload)
 			)) as Response;
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
-			}
 			const r = await res.json();
 			if (!res.ok) {
 				return toast.push(r.message);
@@ -85,13 +78,6 @@ const editProduct = async (
 				'PUT',
 				what_is(what.private.menu, payload)
 			)) as Response;
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
-			}
 			const r = await res.json();
 			if (!res.ok) {
 				return toast.push(r.message);
@@ -114,13 +100,6 @@ const deleteProduct = async (productId: string) => {
 				'DELETE',
 				what_is(what.private.menu, productId)
 			)) as Response;
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
-			}
 			const r = await res.json();
 			if (!res.ok) {
 				return toast.push(r.message);

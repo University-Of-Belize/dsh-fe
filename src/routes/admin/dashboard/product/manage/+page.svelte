@@ -43,13 +43,6 @@
 
 	async function populateCategories() {
 		const res = (await fetchWebApi('v1/category', 'GET')) as Response;
-		if (res.status === 403) {
-			localStorage.removeItem('token');
-			localStorage.removeItem('user_id');
-			localStorage.removeItem('user');
-			toast.push('You need to log in.');
-			goto('/auth/login');
-		}
 		if (!res.ok) {
 			const r = await res.json();
 			return toast.push(r.message);
@@ -65,13 +58,6 @@
 		if (product_id) {
 			const res = (await fetchWebApi(`v1/menu/lookup?product_id=${product_id}`, 'GET')) as Response;
 			const r = await res.json();
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
-			}
 			if (!res.ok) {
 				return toast.push(r.message);
 			}

@@ -35,13 +35,6 @@
 		if (promo_id) {
 			const res = (await fetchWebApi('v1/admin/promo/manage', 'GET')) as Response;
 			const r = await res.json();
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
-			}
 			if (!res.ok) {
 				return toast.push(r.message);
 			}

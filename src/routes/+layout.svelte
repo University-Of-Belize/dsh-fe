@@ -16,7 +16,7 @@
 		theme: {
 			'--toastBackground': 'rgb(var(--COLORBLK1))',
 			'--toastColor': 'rgb(var(--COLORWHT))',
-			'--toastBarBackground': 'rgb(var(--COLORBLE))'
+			'--toastBarBackground': 'rgb(var(--COLORGRN))'
 		}
 	};
 	const options_firebase = {
@@ -167,13 +167,26 @@
 		if (localStorage.token) {
 			try {
 				// Run login checks
-				const res = (await fetchWebApi('v1/dash', 'GET')) as Response;
+				const res = (await fetchWebApi(
+					'v1/dash',
+					'GET',
+					undefined,
+					false,
+					undefined,
+					true
+				)) as Response;
 				if (!res) return;
 				if (res.status === 403) {
+					// We need this here as to not confuse the user
 					localStorage.removeItem('token');
 					localStorage.removeItem('user_id');
 					localStorage.removeItem('user');
-					toast.push('Your session is invalidated. Please sign in.');
+					toast.push('Your session is invalidated. Please sign in.', {
+						dismissable: false,
+						theme: {
+							'--toastBarBackground': 'rgb(var(--COLORRED))'
+						}
+					});
 					goto('/auth/login');
 				}
 			} catch (error) {

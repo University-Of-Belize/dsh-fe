@@ -1,3 +1,4 @@
+import { goto } from '$app/navigation';
 import settings from '$lib/config/settings';
 import { toast } from '@zerodevx/svelte-toast';
 
@@ -9,8 +10,8 @@ async function fetchWebApi(
 	body?: object,
 	json?: boolean,
 	token?: string,
-	silent?: boolean // Silences any toast messages
-): Promise<Response> | Promise<number | void> {
+	silent?: boolean // Silences any toast messages. Do not emit any toast messages
+): Promise<Response> | Promise<number | object | void> {
 	try {
 		// If the server is offline, don't even try to fetch
 		if (localStorage.getItem('serverOffline') === 'true') {
@@ -26,6 +27,22 @@ async function fetchWebApi(
 			method,
 			body: JSON.stringify(body)
 		});
+		if (!silent) {
+			// Moved from countless different files
+			if (res.status === 403) {
+				localStorage.removeItem('token');
+				localStorage.removeItem('user_id');
+				localStorage.removeItem('user');
+				toast.push('Hey, you need to log in.', {
+					dismissable: false,
+					theme: {
+						'--toastBarBackground': 'rgb(var(--COLORRED))'
+					}
+				});
+				goto('/auth/login');
+				return { status: 500, message: 'WebAPI: The user is not authenticated.' };
+			}
+		}
 		// Depending on what we want to do
 		return json ? await res.json() : res;
 	} catch (error: unknown) {
@@ -45,7 +62,12 @@ async function fetchWebApi(
 		console.log(JSON.stringify(error));
 		if (!silent) {
 			// Throw to the UI and the console
-			toast.push(`FetchWebAPI '${method} ${endpoint}': Failed—Fatal error: ${error}`);
+			toast.push(`FetchWebAPI '${method} ${endpoint}': Failed—Fatal error: ${error}`, {
+				dismissable: false,
+				theme: {
+					'--toastBarBackground': 'rgb(var(--COLORRED))'
+				}
+			});
 		}
 		throw console.error(`FetchWebAPI '${method} ${endpoint}': Failed—Fatal error: ${error}`);
 	}

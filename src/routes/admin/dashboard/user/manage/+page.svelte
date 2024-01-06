@@ -24,14 +24,6 @@
 		// Do not run if there is no user_id provided
 		if (user_id) {
 			const res = (await fetchWebApi(`v1/admin/user/lookup?user_id=${user_id}`, 'GET')) as Response;
-
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
-			}
 			if (!res.ok) {
 				const r = await res.json();
 				return toast.push(r.message);

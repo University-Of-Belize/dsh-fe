@@ -29,13 +29,6 @@ const createPromo = async (
 				'POST',
 				what_is(what.private.promos, payload)
 			)) as Response;
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
-			}
 			const r = await res.json();
 			if (!res.ok) {
 				return toast.push(r.message);
@@ -77,13 +70,6 @@ const editPromo = async (
 				'PUT',
 				what_is(what.private.promos, payload)
 			)) as Response;
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
-			}
 			const r = await res.json();
 			if (!res.ok) {
 				return toast.push(r.message);
@@ -108,13 +94,6 @@ const deletePromo = async (code: string) => {
 				'DELETE',
 				what_is(what.private.promos, code)
 			)) as Response;
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
-			}
 			const r = await res.json();
 			if (!res.ok) {
 				return toast.push(r.message);
@@ -133,13 +112,6 @@ const deletePromo = async (code: string) => {
 const getPromo = async () => {
 	try {
 		const res = (await fetchWebApi('v1/admin/promo/manage', 'GET')) as Response;
-		if (res.status === 403) {
-			localStorage.removeItem('token');
-			localStorage.removeItem('user_id');
-			localStorage.removeItem('user');
-			toast.push('You need to log in.');
-			goto('/auth/login');
-		}
 		const r = await res.json();
 		if (!res.ok) {
 			return toast.push(r.message);
