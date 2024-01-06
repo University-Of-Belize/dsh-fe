@@ -14,13 +14,6 @@ const deleteReview = async (reviewId: string) => {
 				'DELETE',
 				what_is(what.private.review, reviewId)
 			)) as Response;
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
-			}
 			const r = await res.json();
 			if (!res.ok) {
 				return toast.push(r.message);

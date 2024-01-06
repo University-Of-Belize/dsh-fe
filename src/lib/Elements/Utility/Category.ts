@@ -20,13 +20,6 @@ const createCategory = async (
 				'POST',
 				what_is(what.private.category, payload)
 			)) as Response;
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
-			}
 			const r = await res.json();
 			if (!res.ok) {
 				return toast.push(r.message);
@@ -61,13 +54,6 @@ const editCategory = async (
 				'PUT',
 				what_is(what.private.category, payload)
 			)) as Response;
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
-			}
 			const r = await res.json();
 			if (!res.ok) {
 				return toast.push(r.message);
@@ -92,13 +78,6 @@ const deleteCategory = async (categoryName: string) => {
 				'DELETE',
 				what_is(what.private.category, categoryName)
 			)) as Response;
-			if (res.status === 403) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('user_id');
-				localStorage.removeItem('user');
-				toast.push('You need to log in.');
-				goto('/auth/login');
-			}
 			const r = await res.json();
 			if (!res.ok) {
 				return toast.push(r.message);
