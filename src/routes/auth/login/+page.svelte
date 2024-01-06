@@ -67,7 +67,10 @@
 			const response = (await fetchWebApi(
 				`v1/auth/${path}`,
 				'POST',
-				what_is(what.public.auth, data)
+				what_is(what.public.auth, data),
+				false,
+				undefined,
+				true
 			)) as Response;
 			const json = await response.json();
 			if (response.status === 403) {
