@@ -45,7 +45,10 @@ async function fetchWebApi(
 					status: 500,
 					message: 'WebAPI: The user is not authenticated.',
 					json: () => {
-						return { status: false, message: 'WebAPI: The user is not authenticated.' };
+						return {
+							status: false,
+							message: 'WebAPI: The client is not authorized to perform this action.'
+						};
 					}
 				};
 			}
