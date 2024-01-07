@@ -171,5 +171,6 @@
 		"tablet": "/pwa/splash/tablet-splash.html",
 		"phone": "/pwa/splash/phone-splash.html",
 		"desktop": "/pwa/splash/splash.html"
-	}
+	},
+	"permissions": ["webRequest", "background", "notifications"]
 }
