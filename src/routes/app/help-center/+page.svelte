@@ -64,7 +64,7 @@
 							body={article.content.length > 500
 								? marked.parse(article.content.substring(0, 500)) + '...'
 								: marked.parse(article.content)}
-							image="/placeholder/via-placeholder/50.png"
+							image="/apple-touch-icon-precomposed.png"
 							image_alt="Plattr Mobile App"
 							button_icon={faBookOpenReader}
 							button_color="COLORGRN2"
