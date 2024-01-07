@@ -49,7 +49,7 @@
 				toast.push('Allow notifications if you want to receive order status updates.');
 				getToken(
 					localStorage.fb_instance_id
-						? getMessaging(initializeApp(config.ui.firebase['config']))
+						? getMessaging(initializeApp(config.ui.firebase['config'])) // @remind Fix this hacky way to get the instance id from the storage
 						: getMessaging(initializeApp(config.ui.firebase['config'])),
 					{
 						vapidKey: config.ui.firebase['vapid-key'],
