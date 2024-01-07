@@ -127,7 +127,7 @@
 		// - a message is received while the app has focus
 		// - the user clicks on an app notification created by a service worker
 		//   `messaging.onBackgroundMessage` handler.
-		onMessage(messaging, (payload) => {
+		onMessage(messaging, (payload: FirebaseMessage) => {
 			console.log('Message received. ', payload);
 			// toast.push(
 			// 	payload.notification?.body ?? 'You received a message, but the client does not support it.',

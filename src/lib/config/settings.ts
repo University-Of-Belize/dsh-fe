@@ -44,6 +44,19 @@ const settings = {
 			price: null,
 			productName: null,
 			slug: null
+		},
+		firebase: {
+			config: {
+				apiKey: 'AIzaSyBXolTmpW_6vwf7ryhmBxAGDVZr3vEaEU8',
+				authDomain: 'plattr-32d57.firebaseapp.com',
+				projectId: 'plattr-32d57',
+				storageBucket: 'plattr-32d57.appspot.com',
+				messagingSenderId: '955312324775',
+				appId: '1:955312324775:web:fa4d3755462265f83a1b82',
+				measurementId: 'G-N0E9QJVTK4'
+			},
+			'vapid-key':
+				'BC3R5IsVxkK7bPwc47qAqC4NmKhLnkspqNl7gILUJU2dFyDfwmlvIyYSJYGxAu7cuFq86dndLTH19ZV3Bkqq_ec'
 		}
 	}
 };

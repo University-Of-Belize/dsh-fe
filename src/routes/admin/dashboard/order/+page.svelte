@@ -13,11 +13,14 @@
 	import type { Promo } from '$lib/types/Promo';
 	import type { User } from '$lib/types/User';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
+	// What is what?
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
 		faCalendar,
 		faCheck,
+		faCheckCircle,
+		faCheckDouble,
 		faClone,
 		faCog,
 		faCopy,
@@ -34,7 +37,6 @@
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import ProductPill from '../../../../lib/Elements/Dashboard/ProductPill.svelte';
-// What is what?
 	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';
 	import { locateNodeUsingHash } from '$lib/Elements/Utility/page';
 	import type { CartProduct } from '$lib/types/Product';
@@ -177,6 +179,23 @@
 				}
 				currentAction = [action, orderId];
 				break;
+			case 4: // Ready
+				toast.push("You're readying this order.");
+				getId(`order-${orderId}`)?.classList.remove('border-COLORYLW'); // @ts-ignore
+				getId(`order-${orderId}`)?.classList.add('border-red-300'); // @ts-ignore
+				if (drawerOpenBy != 4) {
+					// Keep the drawer open as long as we're switching tabs
+					getId(`pulldown-${orderId}`)?.classList.add('hidden'); // @ts-ignore
+					drawerOpenBy = 4;
+				}
+				getId(`pulldown-${orderId}`)?.classList.toggle('hidden'); // @ts-ignore
+				getId(`pulldown-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
+				getId(`modify-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
+				getId(`user-modify-content-${orderId}`)?.classList.add('hidden');
+				getId(`title-${orderId}`).innerHTML =
+					'This will send out the "ready" status to the user.<br/>Are you <b class="font-normal text-COLORHPK underline">absolutely sure</b> this order is ready for pick-up?';
+				currentAction = [action, orderId];
+				break;
 			default: // WTF
 				toast.push('The parameters provided are incorrect.');
 		}
@@ -190,8 +209,9 @@
 			.filter((el) => el.name)
 			.map((el) => el.value);
 
-		// If we're not deleting
-		if (currentAction[0] !== 2) {
+		// If we're not deleting, or readying the order...
+		// convert the delivery time back to a UNIX_TS
+		if (currentAction[0] !== 2 && currentAction[0] !== 4) {
 			// Convert back to timestamps because, we need those.
 			valueArray[valueArray.length - 3] = Date.parse(valueArray[valueArray.length - 3]) / 1000;
 		} else {
@@ -208,6 +228,7 @@
 				// Hide this because it's bugged
 				getId(`pulldown-${currentAction[1]}`)?.classList.add('hidden');
 			case 3: // Modify
+			case 4: // Ready
 				const r = (await fetchWebApi(
 					'v1/admin/order/manage',
 					'POST',
@@ -218,8 +239,10 @@
 								? 'd'
 								: currentAction[0] === 3
 									? 'm'
-									: '?', // Ternary statement to map 'a' for ACCEPT /
-						// 'd' for DELETE / 'm' for MODIFY
+									: currentAction[0] === 4
+										? 'r'
+										: '?', // Ternary statement to map 'a' for ACCEPT /
+						// 'd' for DELETE / 'm' for MODIFY / 'r' for READY
 						currentAction[1], // Order ID
 						JSON.parse(valueArray[1]), // The price (We use JSON.parse to turn the string back into a 'real' number/float)
 						valueArray[2] === 'placeholder' ? null : valueArray[2], // The promotion
@@ -510,6 +533,21 @@
 												custom_style="my-2"
 											/>
 										</button>
+										{#if staff}
+											<button
+												class="btn_wrp h-fit w-fit"
+												title="Ready this order"
+												on:click={() => go_order(4, order._id)}
+											>
+												<Button
+													icon={faCheckDouble}
+													color="COLORBLE"
+													color_t="COLORWHT"
+													text="Ready"
+													custom_style="my-2"
+												/>
+											</button>
+										{/if}
 										<div class="flex flex-1 items-center justify-end">
 											<div
 												role="button"
@@ -560,6 +598,20 @@
 													color_t="COLORHPK"
 													text="DELETE"
 													custom_style="my-2 border border-COLORHPK"
+												/>
+											</button>
+										{:else if currentAction[0] === 4}
+											<button
+												class="btn_wrp h-fit w-fit"
+												title="Ready this order"
+												on:click={(e) => processRequest(e)}
+											>
+												<Button
+													icon={faCheckCircle}
+													color="COLORBLE"
+													color_t="COLORWHT"
+													text="THIS ORDER IS READY"
+													custom_style="my-2 border border-COLORWHT"
 												/>
 											</button>
 										{/if}
