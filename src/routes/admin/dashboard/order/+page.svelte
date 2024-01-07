@@ -536,19 +536,20 @@
 												custom_style="my-2 border border-COLORHPK"
 											/>
 										</button>
-										<button
-											class="btn_wrp h-fit w-fit"
-											title="Modify this order"
-											on:click={() => go_order(3, order._id)}
-										>
-											<Button
-												icon={faClone}
-												color="COLORYLW"
-												color_t="COLORBLK"
-												text={staff ? 'Override' : 'Modify'}
-												custom_style="my-2"
-											/>
-										</button>
+										{#if staff && order.is_accepted}
+											<button
+												class="btn_wrp h-fit w-fit"
+												title="Modify this order"
+												on:click={() => go_order(3, order._id)}
+											>
+												<Button
+													icon={faClone}
+													color="COLORYLW"
+													color_t="COLORBLK"
+													text={staff ? 'Override' : 'Modify'}
+													custom_style="my-2"
+												/>
+											</button>{/if}
 										<div class="flex flex-1 items-center justify-end">
 											<div
 												role="button"
