@@ -507,6 +507,22 @@
 												/>
 											</button>
 										{/if}
+										{#if staff && order.is_accepted}
+											<!-- You have to accept the order first before readying it -->
+											<button
+												class="btn_wrp h-fit w-fit"
+												title="Ready this order"
+												on:click={() => go_order(4, order._id)}
+											>
+												<Button
+													icon={faCheckDouble}
+													color="COLORBLE"
+													color_t="COLORWHT"
+													text="Ready"
+													custom_style="my-2"
+												/>
+											</button>
+										{/if}
 										<button
 											class="btn_wrp h-fit w-fit"
 											title={staff ? 'Reject/Decline this order' : 'Dequeue this order'}
@@ -533,21 +549,6 @@
 												custom_style="my-2"
 											/>
 										</button>
-										{#if staff}
-											<button
-												class="btn_wrp h-fit w-fit"
-												title="Ready this order"
-												on:click={() => go_order(4, order._id)}
-											>
-												<Button
-													icon={faCheckDouble}
-													color="COLORBLE"
-													color_t="COLORWHT"
-													text="Ready"
-													custom_style="my-2"
-												/>
-											</button>
-										{/if}
 										<div class="flex flex-1 items-center justify-end">
 											<div
 												role="button"
