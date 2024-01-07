@@ -172,5 +172,5 @@
 		"phone": "/pwa/splash/phone-splash.html",
 		"desktop": "/pwa/splash/splash.html"
 	},
-	"permissions": ["webRequest", "background", "notifications"]
+	"permissions": ["webRequest", "background", "background-sync", "notifications", "push", "clipboard-read", "clipboard-write"]
 }
