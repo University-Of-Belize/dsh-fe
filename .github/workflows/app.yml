@@ -12,7 +12,7 @@ on:
     branches: ['master']
   workflow_dispatch:
 
-concurrency:
+concurrency: # Multiple jobs should NOT run at the same time
   group: ${{ github.workflow }}
   cancel-in-progress: true
 
