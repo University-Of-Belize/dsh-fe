@@ -236,6 +236,7 @@ self.addEventListener('push', function (event) {
 		body: push.body,
 		icon:
 			push.image ??
+			'https://cafe.ub.edu.bz/apple-touch-icon-precomposed.png' ??
 			'https://www.gstatic.com/devrel-devsite/prod/v4c72fb03a7a581549fb317877b3b0627265bda97bd9ba2a29365d1ada8a00354/firebase/images/favicon.png'
 	};
 
