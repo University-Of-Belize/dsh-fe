@@ -38,7 +38,7 @@
 	localStorage.setItem('fb_instance_id', JSON.stringify(app)); // Store the instance in storage so that the rest of the app can access it
 
 	// Blocking function so that nothing else gets a chance to run
-	function checkBlocked() {
+	function checkBlocked(write?: URL) {
 		// Check if we're offline
 		if (!navigator.onLine) {
 			// Enable the error page
@@ -54,8 +54,13 @@
 			);
 			// Enable the error page
 			localStorage.setItem('watchdog', 'true');
-			location.href = '/watchdog/error';
-			goto('/watchdog/error');
+			try {
+				goto('/watchdog/error');
+				window.history.replaceState(history.state, '', write?.pathname ?? "/");
+			} catch (e) {
+				console.warn("[WATCHDOG] Error: 'goto' failed! " + e.message);
+				location.href = '/watchdog/error';
+			}
 		}
 		// We're not going to be vicious ~~or anything~~ and everything, ~~but~~ and we're going to be a little bit mean.
 		if (localStorage.blocked == 'true') {
@@ -63,10 +68,15 @@
 			// Set blocked (again)
 			localStorage.setItem('blocked', 'true');
 			if (clocation.pathname !== '/auth/verify') {
-				// Redirect to blocked screen (manually)
-				location.href = '/auth/verify';
-				// Again (automatically)
-				goto('/auth/verify');
+				try {
+					// Again (automatically)
+					goto('/auth/verify');
+					window.history.replaceState(history.state, '', write?.pathname ?? "/");
+				} catch (e) {
+					console.warn("[WATCHDOG] Error: 'goto' failed! " + e.message);
+					// Redirect to blocked screen (manually)
+					location.href = '/auth/verify';
+				}
 			}
 		}
 	}
@@ -84,7 +94,7 @@
 		// Run in automatic mode
 		if (!localStorage.watchdog && !localStorage.enableDevMode) {
 			// Run only once
-			checkBlocked();
+			checkBlocked(clocation);
 		} else {
 			if (!localStorage.watchDogReason) {
 				localStorage.removeItem('watchdog');
