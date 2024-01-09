@@ -41,7 +41,7 @@ async function fetchWebApi(
 					}
 				});
 				goto(
-					`/auth/login?continue=${encodeURIComponent(continue_url.pathname + continue_url.search)}`
+					`/auth/login?continue=${window.encodeURIComponent(continue_url.pathname + continue_url.search)}`
 				); // Pathname is our intended URL
 				return {
 					ok: false,
