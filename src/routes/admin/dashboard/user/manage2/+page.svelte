@@ -57,6 +57,7 @@
 
 	onMount(async () => {
 		try {
+			fetchWebApi('v1/dash/', 'GET'); // Are we logged in?
 			await catchAll(); // Fetch the user for updates
 		} catch (error) {
 			console.log(error);
