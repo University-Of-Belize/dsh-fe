@@ -30,6 +30,7 @@ async function fetchWebApi(
 		if (!silent) {
 			// Moved from countless different files
 			if (res.status === 403) {
+				const continue_url = new URL(location.href); // Get our intended URL
 				localStorage.removeItem('token');
 				localStorage.removeItem('user_id');
 				localStorage.removeItem('user');
@@ -39,7 +40,7 @@ async function fetchWebApi(
 						'--toastBarBackground': 'rgb(var(--COLORRED))'
 					}
 				});
-				goto('/auth/login');
+				goto(`/auth/login?continue=${continue_url.pathname}`);
 				return {
 					ok: false,
 					status: 500,
