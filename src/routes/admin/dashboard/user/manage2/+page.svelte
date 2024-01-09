@@ -47,6 +47,8 @@
 			setTimeout(() => {
 				window.location.reload();
 			}, 800);
+		} else {
+			localStorage.removeItem('retry_identity'); // All checks passed! Reset counter!
 		}
 		// Do not run if there is no user_id provided
 		if (user_id) {
