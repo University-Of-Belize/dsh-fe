@@ -40,7 +40,7 @@ async function fetchWebApi(
 						'--toastBarBackground': 'rgb(var(--COLORRED))'
 					}
 				});
-				goto(`/auth/login?continue=${continue_url.pathname}`);
+				goto(`/auth/login?continue=${continue_url.pathname}`); // Pathname is our intended URL
 				return {
 					ok: false,
 					status: 500,
