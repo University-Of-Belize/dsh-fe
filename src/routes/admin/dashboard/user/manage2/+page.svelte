@@ -42,7 +42,7 @@
 		if (isNaN(user.id) && localStorage.retry_identity !== '2') {
 			localStorage.setItem(
 				'retry_identity',
-				JSON.stringify((parseInt(localStorage.retry_identity ?? '0') + 1).toString())
+				(parseInt(localStorage.retry_identity || '0') + 1).toString()
 			);
 			setTimeout(() => {
 				window.location.reload();
