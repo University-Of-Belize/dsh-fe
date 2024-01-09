@@ -34,6 +34,20 @@
 	let userBannerImage: HTMLImageElement;
 
 	async function catchAll() {
+		if (localStorage.retry_identity == '2') {
+			// @ts-ignore
+			err_loadingFailure.innerText =
+				'The user profile could not be loaded. Try going back to the dashboard and coming back here.';
+		}
+		if (!user && localStorage.retry_identity !== '2') {
+			localStorage.setItem(
+				'retry_identity',
+				JSON.stringify((parseInt(localStorage.retry_identity ?? '0') + 1).toString())
+			);
+			setTimeout(() => {
+				window.location.reload();
+			}, 800);
+		}
 		// Do not run if there is no user_id provided
 		if (user_id) {
 			const res = (await fetchWebApi(
@@ -300,7 +314,12 @@
 								</div>
 							</div>
 						</div>
-					{/if}{/if}
+					{:else}<div id="err_loadingFailure" class="font-light">
+							The user profile could not be loaded. Wait! Trying another way to load it.
+						</div>
+					{/if}
+				{:else}<div class="font-light">The server returned no data.</div>{/if}
+
 				<div
 					class="editPane flex hidden flex-col lg:flex-row {staff
 						? 'justify-around'
