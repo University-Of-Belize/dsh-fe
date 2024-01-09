@@ -39,7 +39,7 @@
 			err_loadingFailure.innerText =
 				'The user profile could not be loaded. Try going back to the dashboard and coming back here.';
 		}
-		if (!user && localStorage.retry_identity !== '2') {
+		if (isNaN(user.id) && localStorage.retry_identity !== '2') {
 			localStorage.setItem(
 				'retry_identity',
 				JSON.stringify((parseInt(localStorage.retry_identity ?? '0') + 1).toString())
