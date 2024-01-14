@@ -248,6 +248,6 @@
 		/* background: #f0ede6; */
 		/* background: #202124 */
 		/* background: #d5d6dc */
-		background: rgb(0, 0, 0);
+		background: rgb(var(--COLORBLK));
 	}
 </style>

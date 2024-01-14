@@ -50,7 +50,7 @@
 				<div class="content flex flex-1 items-center justify-center">
 					<div class="content-wrapper block px-4 md:px-8 lg:px-0">
 						<div
-							class="running-heading flex w-full items-center justify-center py-10 text-5xl font-medium text-COLORWHT md:text-7xl"
+							class="running-heading text-COLORBLK flex w-full items-center justify-center py-10 text-5xl font-medium dark:text-COLORWHT md:text-7xl"
 						>
 							Order Anytime,<br /> Anywhere
 						</div>
@@ -60,7 +60,12 @@
 									goto('/auth/login');
 								}}
 							>
-								<Button icon={faRightToBracket} color="COLORYLW" color_t="COLORBLK" text="Log in" />
+								<Button
+									icon={faRightToBracket}
+									color="COLORBLK2"
+									color_t="COLORWHT"
+									text="Log in"
+								/>
 							</div>
 						</div>
 					</div>
