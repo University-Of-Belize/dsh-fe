@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import config from '$lib/config/settings';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
@@ -9,7 +10,7 @@
 	import type { Article } from '$lib/types/Article';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { faCog, faPaperPlane, faReply, faTrash } from '@fortawesome/free-solid-svg-icons';
+	import { faPaperPlane, faReply, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import SearchBar from '../../../../lib/Elements/Search/SearchBar.svelte';
@@ -100,10 +101,7 @@
 								<div class="mb-4 text-2xl font-semibold text-COLORWHT">
 									Rich-Text+MarkDown Editor
 								</div>
-								<Editor
-									bind:value={richTextInput}
-									apiKey="zwg7kdz5ie036r4ksqxf75r5pe9jnbdn6eg93r2f6dtxa5da"
-								/>
+								<Editor bind:value={richTextInput} apiKey={config.ui['tiny-mce']['api-key']} />
 							</div>
 						{:else}
 							<div class="markDownInput mb-4">

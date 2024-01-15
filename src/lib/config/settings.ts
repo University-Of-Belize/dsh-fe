@@ -57,6 +57,9 @@ const settings = {
 			},
 			'vapid-key':
 				'BC3R5IsVxkK7bPwc47qAqC4NmKhLnkspqNl7gILUJU2dFyDfwmlvIyYSJYGxAu7cuFq86dndLTH19ZV3Bkqq_ec'
+		},
+		'tiny-mce': {
+			'api-key': 'zwg7kdz5ie036r4ksqxf75r5pe9jnbdn6eg93r2f6dtxa5da'
 		}
 	}
 };

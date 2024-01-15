@@ -1,15 +1,16 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import CommentBox from '$lib/Elements/Inputs/CommentBox.svelte';
 	import { createFeedback, deleteFeedback } from '$lib/Elements/Utility/Feedback';
+	import config from '$lib/config/settings';
 	import type { Feedback } from '$lib/types/Feedback';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { faCog, faPaperPlane, faTrash } from '@fortawesome/free-solid-svg-icons';
+	import { faPaperPlane, faTrash } from '@fortawesome/free-solid-svg-icons';
+	import Editor from '@tinymce/tinymce-svelte';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import SearchBar from '../../../../lib/Elements/Search/SearchBar.svelte';
@@ -18,6 +19,8 @@
 	let data: Feedback[]; // Declare the data variable
 	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {};
 	let feedbackInput: CommentBox;
+	let richTextInput: string;
+	let prefersRichText = true;
 	$: data; // List of feedback (Feedback[])
 
 	async function catchAll() {
@@ -64,20 +67,49 @@
 		</div>
 		<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
 			<div class="flex pb-2 text-2xl font-semibold">Feedback Hub</div>
-			<div class="flex pb-12 text-xl font-semibold">Submit or manage your feedback</div>
+			<div class="flex w-full flex-wrap justify-between pb-12 text-xl font-semibold">
+				<div>Submit or manage your feedback</div>
+				<div
+					on:click={async () => {
+						prefersRichText = prefersRichText ? false : true;
+					}}
+				>
+					<!--- Lol, well 'custom_icon' took long enough -->
+					<Button
+						custom_icon="/icons/scribble.svg"
+						color="COLORBLK3"
+						text="Swap editor views"
+						color_t="COLORWHT"
+						custom_style="w-full"
+					/>
+				</div>
+			</div>
 			<div class="flex w-full flex-col-reverse flex-wrap">
 				{#if data != undefined}
 					<div class="block">
-						<CommentBox
-							bind:this={feedbackInput}
-							placeholder="Press 'Enter' and write some feedback"
-							{user}
-						/>
+						{#if prefersRichText}
+							<div class="richTextInput mb-4">
+								<div class="mb-4 text-2xl font-semibold text-COLORWHT">Write some feedback</div>
+								<Editor bind:value={richTextInput} apiKey={config.ui['tiny-mce']['api-key']} />
+							</div>
+						{:else}
+							<div class="markDownInput mb-4">
+								<div class="mb-4 text-2xl font-semibold text-COLORWHT">Write some feedback</div>
+							</div>
+							<CommentBox
+								bind:this={feedbackInput}
+								placeholder="Press 'Enter' and write some feedback"
+								{user}
+							/>{/if}
 						<div
 							class="edit-wrap h-fit w-fit"
 							on:click={() => {
-								createFeedback(feedbackInput.value ?? '');
-								feedbackInput.clear();
+								createFeedback(
+									(feedbackInput
+										? feedbackInput.value
+										: richTextInput ?? '') ?? ''
+								);
+								feedbackInput? feedbackInput.clear(): false;
 								setTimeout(() => {
 									catchAll();
 								}, 800);
@@ -113,7 +145,8 @@
 						<div class="user_wrap w-full">
 							<UserPill
 								user={feedback.author ?? {}}
-								description={`Feedback ID: ${feedback._id}<br/>Content: ${feedback.content}`}
+								description={feedback.content}
+								html
 							>
 								<div class="controls flex space-x-2">
 									<div

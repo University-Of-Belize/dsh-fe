@@ -7,6 +7,7 @@
 	export let tagColor_t: string = 'COLORWHT';
 	export let tagText: string = '';
 	export let description: string;
+	export let html: boolean = false;
 </script>
 
 <!-- Color stub -->
@@ -46,7 +47,10 @@
 					{/if}
 				</div>
 				<div class="text-md font-light text-COLORWHT1">
-					{@html description}
+					{#if html}
+						{@html description}
+					{:else}
+						{description}{/if}
 				</div>
 			</div>
 			<div class="actions flex flex-1 items-center justify-start text-COLORWHT lg:justify-end">
