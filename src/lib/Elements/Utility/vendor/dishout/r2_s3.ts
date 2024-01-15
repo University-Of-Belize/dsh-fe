@@ -45,7 +45,7 @@ async function R2S3Upload(event: Event, custom_path?: string, custom_filename?: 
 			// Return the URL to the file
 			pub_url = `${config['server']['s3']['pub-bucket-id']}/${
 				custom_path ? `${custom_path}/` : ''
-			}${file.name}`; // Constructed URL
+			}${custom_filename ?? file.name}`; // Constructed URL
 		})
 		.catch((error) => {
 			console.error(error);

@@ -275,7 +275,7 @@
 									bind:this={photoBannerInput}
 									on:change={async (e) => {
 										toast.push('Uploading...');
-										const pub_url = await R2S3Upload(e, 'banner_photos');
+										const pub_url = await R2S3Upload(e, 'banner_photos', `${user?.id}_banner`);
 										await profileManagement.updateBannerPhoto(pub_url);
 										photoBannerValue.value = pub_url;
 										userBannerImage.src = pub_url;

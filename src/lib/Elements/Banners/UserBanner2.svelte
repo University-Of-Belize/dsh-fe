@@ -85,7 +85,7 @@
 							bind:this={photoInput}
 							on:change={async (e) => {
 								toast.push('Uploading...');
-								const pub_url = await R2S3Upload(e, 'profile_photos', JSON.stringify(user?.id));
+								const pub_url = await R2S3Upload(e, 'profile_photos', `${user?.id}`);
 								await updateProfilePhoto(pub_url);
 								photoValue.value = pub_url;
 								userImage.src = pub_url;
