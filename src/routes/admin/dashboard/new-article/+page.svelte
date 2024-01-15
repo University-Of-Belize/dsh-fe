@@ -13,11 +13,23 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import SearchBar from '../../../../lib/Elements/Search/SearchBar.svelte';
+	import Editor from '@tinymce/tinymce-svelte';
+	import TurndownService from 'turndown';
 	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let data: Article[]; // Declare the data variable
 	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {};
 	let articleInput: CommentBox;
+	let richTextInput: string;
+	let prefersRichText = true;
+	class TurndownService_ extends TurndownService {
+		// Override the escape method to disable escaping
+		escape(text: string) {
+			return text;
+		}
+	}
+	const turndownService = new TurndownService_();
+	var markdown = turndownService.turndown('<h1>Hello world!</h1>');
 	$: data; // List of article (Article[])
 
 	async function catchAll() {
@@ -79,22 +91,62 @@
 			<DashList {staff} />
 		</div>
 		<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
-			<div class="flex pb-2 text-2xl font-semibold">Help Center Article Management</div>
+			<div class="flex w-full flex-wrap justify-between pb-2 text-2xl font-semibold">
+				<div>Help Center Article Management</div>
+				<div
+					on:click={async () => {
+						prefersRichText = prefersRichText ? false : true;
+					}}
+				>
+					<!--- Lol, well 'custom_icon' took long enough -->
+					<Button
+						custom_icon="/icons/scribble.svg"
+						color="COLORBLK3"
+						text="Swap editor views"
+						color_t="COLORWHT"
+						custom_style="w-full"
+					/>
+				</div>
+			</div>
 			<div class="flex pb-12 text-xl font-semibold">Submit or delete help center articles</div>
 			<div class="flex w-full flex-col flex-wrap">
 				{#if data != undefined}
 					<div class="block">
-						<CommentBox
-							bind:this={articleInput}
-							placeholder="MarkDown is supported."
-							textOnly
-							unsanitized
-							{user}
-						/>
+						{#if prefersRichText}
+							<div class="richTextInput mb-4">
+								<div class="mb-4 text-2xl font-semibold text-COLORWHT">
+									Rich-Text+MarkDown Editor
+								</div>
+								<Editor
+									bind:value={richTextInput}
+									apiKey="zwg7kdz5ie036r4ksqxf75r5pe9jnbdn6eg93r2f6dtxa5da"
+								/>
+							</div>
+						{:else}
+							<div class="markDownInput mb-4">
+								<div class="mb-4 text-2xl font-semibold text-COLORWHT">
+									PlainText <a
+										class="text-COLORWHT underline"
+										href="https://spec.commonmark.org/0.30/"
+										target="__blank">MarkDown</a
+									> Editor
+								</div>
+								<CommentBox
+									bind:this={articleInput}
+									placeholder="MarkDown is supported."
+									textOnly
+									unsanitized
+									{user}
+								/>
+							</div>{/if}
 						<div
 							class="edit-wrap h-fit w-fit"
 							on:click={() => {
-								createArticle(articleInput.value ?? '');
+								createArticle(
+									(articleInput
+										? articleInput.value
+										: turndownService.turndown(richTextInput) ?? '') ?? ''
+								);
 								articleInput.clear();
 								setTimeout(() => {
 									catchAll();

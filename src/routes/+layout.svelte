@@ -56,7 +56,7 @@
 			localStorage.setItem('watchdog', 'true');
 			try {
 				goto('/watchdog/error');
-				window.history.replaceState(history.state, '', write?.pathname ?? "/");
+				window.history.replaceState(history.state, '', write?.pathname ?? '/');
 			} catch (e) {
 				console.warn("[WATCHDOG] Error: 'goto' failed! " + e.message);
 				location.href = '/watchdog/error';
@@ -71,7 +71,7 @@
 				try {
 					// Again (automatically)
 					goto('/auth/verify');
-					window.history.replaceState(history.state, '', write?.pathname ?? "/");
+					window.history.replaceState(history.state, '', write?.pathname ?? '/');
 				} catch (e) {
 					console.warn("[WATCHDOG] Error: 'goto' failed! " + e.message);
 					// Redirect to blocked screen (manually)
@@ -123,6 +123,9 @@
 	});
 	// Function runs every time upon manual, traditional-based navigation
 	onMount(async () => {
+		// Set the theme
+		detectColorScheme();
+		// Set the location
 		clocation = new URL(window.location.href);
 
 		// ********* Firebase (run in browser--not server) ********* /
@@ -238,6 +241,30 @@
 			}
 		}
 	});
+
+	// ********* Color-scheming ********* /
+	//determines if the user has a set theme
+	function detectColorScheme() {
+		let theme = 'light'; //default to light
+
+		//local storage is used to override OS theme settings
+		if (localStorage.getItem('theme')) {
+			if (localStorage.getItem('theme') === 'dark') {
+				theme = 'dark';
+			}
+		} else if (!window.matchMedia) {
+			//matchMedia method not supported
+			return false;
+		} else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			//OS theme setting detected as dark
+			theme = 'dark';
+		}
+
+		//dark theme preferred, set document with a `data-theme` attribute
+		if (theme === 'dark') {
+			document.documentElement.setAttribute('data-theme', 'dark');
+		}
+	}
 </script>
 
 <SvelteToast {options} />

@@ -50,7 +50,7 @@
 				<div class="content flex flex-1 items-center justify-center">
 					<div class="content-wrapper block px-4 md:px-8 lg:px-0">
 						<div
-							class="running-heading text-COLORBLK flex w-full items-center justify-center py-10 text-5xl font-medium dark:text-COLORWHT md:text-7xl"
+							class="running-heading text-COLORWHT flex w-full items-center justify-center py-10 text-5xl font-medium md:text-7xl"
 						>
 							Order Anytime,<br /> Anywhere
 						</div>
