@@ -35,7 +35,7 @@ const settings = {
 	ui: {
 		notice: 'You are viewing <br/><b>A PREVIEW</b>',
 		version: version,
-		'branding-text': "Cafe",
+		'branding-text': "Plattr",
 		'branding-logo': '/icons/ub_logo.svg',
 		'default-product': {
 			category: { _id: 'placeholder', name: 'Uncategorized' },
