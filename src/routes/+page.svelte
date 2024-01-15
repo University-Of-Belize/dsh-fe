@@ -157,66 +157,68 @@
 							</div>
 						</div>
 					</div>{/if}
-				<div class="content2 flex-1 items-center justify-center text-COLORWHT flex">
-					<div class="hidden lg:block rounded-md bg-COLORBLK1 py-16 text-center text-2xl md:w-2/4">
+				<div class="content2 flex flex-1 items-center justify-center text-COLORWHT">
+					<div class="block rounded-md bg-COLORBLK1 py-16 text-center text-2xl md:w-2/4">
 						{#if !localStorage.token}
-							<div class="mb-8">Existing user? Login.</div>
-							<form class="block" action="#" on:submit={(event) => handleSubmit(event)}>
-								<div
-									class="inputgroup mx-8 flex flex-wrap items-start justify-start lg:items-center"
-								>
-									<TextInput
-										icon={faAd}
-										name="username"
-										placeholder="Type in a username"
-										custom_style="bg-transparent"
-										required
-									/>
-								</div>
-								<div
-									class="inputgroup mx-8 flex flex-wrap items-start justify-start lg:items-center"
-								>
-									<TextInput
-										icon={faLock}
-										name="password"
-										type="password"
-										placeholder="Type in your password"
-										custom_style="bg-transparent"
-										required
-									/>
-								</div>
-								<a href="/auth/password_reset" class="mx-8 block w-fit">
+							<div class="hidden lg:block">
+								<div class="mb-8">Existing user? Login.</div>
+								<form class="block" action="#" on:submit={(event) => handleSubmit(event)}>
 									<div
-										on:keypress={() => goto('/auth/password_reset')}
-										on:click={() => goto('/auth/password_reset')}
-										class="forgot-password flex w-fit cursor-pointer space-x-2 pt-4 text-sm font-semibold text-COLORWHT hover:underline"
+										class="inputgroup mx-8 flex flex-wrap items-start justify-start lg:items-center"
 									>
-										<div class="icon"><Fa icon={faUnlockKeyhole} /></div>
-										<div>Forgot Password?</div>
-									</div></a
-								>
-								<div class="submit mx-8 mt-6 flex flex-1 items-center justify-center">
-									<button
-										class="submit w-full"
-										type="submit"
-										disabled={logging_in}
-										title={logging_in ? 'Please wait for the request to complete' : ''}
-									>
-										<Button
-											icon={faRightToBracket}
-											color="COLORWHT"
-											color_t="COLORBLK"
-											custom_style="w-full justify-center"
-											text="Log in"
-											disabled={logging_in}
+										<TextInput
+											icon={faAd}
+											name="username"
+											placeholder="Type in a username"
+											custom_style="bg-transparent"
+											required
 										/>
-									</button>
-								</div>
-							</form>
+									</div>
+									<div
+										class="inputgroup mx-8 flex flex-wrap items-start justify-start lg:items-center"
+									>
+										<TextInput
+											icon={faLock}
+											name="password"
+											type="password"
+											placeholder="Type in your password"
+											custom_style="bg-transparent"
+											required
+										/>
+									</div>
+									<a href="/auth/password_reset" class="mx-8 block w-fit">
+										<div
+											on:keypress={() => goto('/auth/password_reset')}
+											on:click={() => goto('/auth/password_reset')}
+											class="forgot-password flex w-fit cursor-pointer space-x-2 pt-4 text-sm font-semibold text-COLORWHT hover:underline"
+										>
+											<div class="icon"><Fa icon={faUnlockKeyhole} /></div>
+											<div>Forgot Password?</div>
+										</div></a
+									>
+									<div class="submit mx-8 mt-6 flex flex-1 items-center justify-center">
+										<button
+											class="submit w-full"
+											type="submit"
+											disabled={logging_in}
+											title={logging_in ? 'Please wait for the request to complete' : ''}
+										>
+											<Button
+												icon={faRightToBracket}
+												color="COLORWHT"
+												color_t="COLORBLK"
+												custom_style="w-full justify-center"
+												text="Log in"
+												disabled={logging_in}
+											/>
+										</button>
+									</div>
+								</form>
+							</div>
 						{:else}
 							<div class="mx-8 font-light">
 								<div>Thanks for logging in, <b class="font-normal">@{user.username}</b>! :)</div>
-								<div class="flex w-full items-center justify-center mt-1 text-xs font-light italic">
+								<div class="mt-1 flex w-full items-center justify-center text-xs font-light italic">
 									"{#await (async () => {
 										const quote = 'https://api.quotable.io/random?maxLength=53';
 										const r = await fetch(quote);
