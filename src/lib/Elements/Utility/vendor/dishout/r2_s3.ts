@@ -12,7 +12,7 @@ const S3 = new S3Client({
 	}
 });
 
-async function R2S3Upload(event: Event, custom_path?: string) {
+async function R2S3Upload(event: Event, custom_path?: string, custom_filename?: string) {
 	let pub_url: string; // Public URL to file
 	const file = event.target.files[0]; // File to be uploaded
 
@@ -21,7 +21,7 @@ async function R2S3Upload(event: Event, custom_path?: string) {
 		S3,
 		new PutObjectCommand({
 			Bucket: 'primary-uswest',
-			Key: (custom_path ? `${custom_path}/` : '') + event.target.files[0].name
+			Key: (custom_path ? `${custom_path}/` : '') + custom_filename ?? event.target.files[0].name
 		}),
 		{
 			expiresIn: 60 * 60 * 4 // 4h
