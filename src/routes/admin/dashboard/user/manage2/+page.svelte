@@ -226,7 +226,7 @@
 			class="content block h-full w-full overflow-auto bg-transparent pb-40 md:px-2 lg:px-16 lg:py-16"
 		>
 			<div class="flex w-full flex-wrap">
-				{#if data != undefined}
+				{#if data != undefined && user_id}
 					{#if !isNaN(user.id)}
 						<div
 							class="user_wrap relative flex h-56 w-full items-end justify-center rounded-md bg-COLORBLK2"
@@ -304,7 +304,7 @@
 							The user profile could not be loaded. Wait! Trying another way to load it.
 						</div>
 					{/if}
-				{:else}<div class="font-light">The server returned no data.</div>{/if}
+				{:else if user_id}<div class="font-light">The server returned no data.</div>{/if}
 
 				<div
 					class="editPane flex hidden flex-col lg:flex-row {staff
