@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import {
 		faClone,
+		faCog,
 		faFeed,
 		faHamburger,
 		faMessage,
@@ -16,6 +17,22 @@
 </script>
 
 <div class="dashList bg-opacity-100">
+	<div class="section bg-opacity-100 py-6">
+		<div class="title pb-5 font-semibold">My Account</div>
+		<div
+			on:click={async () => {
+				await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
+			}}
+		>
+			<Button
+				icon={faCog}
+				color="COLORBLK3"
+				text="My account settings"
+				color_t="COLORWHT"
+				custom_style="w-full"
+			/>
+		</div>
+	</div>
 	<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
 		<div class="title pb-5 font-semibold">Server Configuration</div>
 		<div class="three pt-1" on:click={() => goto('/admin/dashboard/user')}>

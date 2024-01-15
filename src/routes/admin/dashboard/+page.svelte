@@ -144,22 +144,6 @@
 		<div
 			class="drawer h-screen w-full flex-col justify-start bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:w-1/4"
 		>
-			<div class="section bg-opacity-100 py-6">
-				<div class="title pb-5 font-semibold">My Account</div>
-				<div
-					on:click={async () => {
-						await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
-					}}
-				>
-					<Button
-						icon={faCog}
-						color="COLORBLK3"
-						text="My account settings"
-						color_t="COLORWHT"
-						custom_style="w-full"
-					/>
-				</div>
-			</div>
 			<DashList {staff} />
 		</div>
 		<div class="content hidden h-full w-full bg-transparent px-16 py-16 lg:block">
