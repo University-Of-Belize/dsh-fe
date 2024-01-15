@@ -33,7 +33,7 @@
 		} catch (error) {
 			console.log(error);
 			toast.push(
-				`Oops. Something unexpected happened while contacting our servers: ${error.message}`
+				`Oops. Something unexpected happened while contacting our servers: ${error?.message ?? "Error unavailable."}`
 			);
 		}
 	});
