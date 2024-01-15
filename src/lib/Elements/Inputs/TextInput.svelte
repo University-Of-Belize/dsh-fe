@@ -10,6 +10,7 @@
 	export let custom_style: string | undefined = '';
 	export let container_style: string = '';
 	export let value: string = '';
+	export let type: 'text' | 'password' = 'text';
 	export let required: boolean = false; // Optional
 	export let disabled: boolean = false; // Optional
 	export let disabled_text: string = 'You cannot type here.'; // Optional
@@ -42,7 +43,7 @@
 		on:keydown={handleKeyDown}
 		on:input={handleInput}
 		{value}
-		type="text"
+		{type}
 		{name}
 		class="w-full bg-transparent px-2 py-1 font-medium text-COLORWHT focus:outline-none disabled:cursor-not-allowed disabled:text-COLORWHT5 {class_}"
 		{placeholder}

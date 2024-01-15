@@ -1,4 +1,4 @@
-import { goto } from '$app/navigation';
+// import { goto } from '$app/navigation';
 // import config from '$lib/config/settings';
 import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';

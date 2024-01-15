@@ -3,21 +3,30 @@
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
+	import { faAd, faLock, faUnlockKeyhole } from '@fortawesome/free-solid-svg-icons';
 	import type { Category } from '$lib/types/Category';
-	import type { Product as Product_ } from '$lib/types/Product.ts';
+	// import type { Product as Product_ } from '$lib/types/Product.ts';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
+	import { what_is } from '$lib/vendor/dishout/What_Is';
+	import what from '$lib/vendor/dishout/Whats';
 	import { faGift, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
+	import type { User } from '$lib/types/User';
+	import Fa from 'svelte-fa';
+	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {};
 	let categories: Category[] = [];
-	let product: Product_[] | null;
+	let logging_in: boolean = false;
+	let debounceTimeout: number;
+	// let product: Product_[] | null;
 
 	onMount(async () => {
 		try {
 			const res = (await fetchWebApi('v1/menu/random', 'GET')) as Response;
 			if (!res) return;
-			const r = await res.json();
-			product = r.is;
+			// const r = await res.json();
+			// product = r.is;
 			getCategories();
 			// console.log(product);
 		} catch (error) {
@@ -38,6 +47,70 @@
 			}
 		}
 	}
+
+	// Login stuff
+
+	const handleSubmit = (event: Event) => {
+		event.preventDefault();
+		// @ts-ignore
+		const valueArray = Array.from(event.target)
+			.filter((el) => el.name)
+			.map((el) => el.value);
+
+		if (valueArray[0].trim() != '') {
+			logging_in = true;
+			Login(valueArray);
+		}
+	};
+
+	async function Login(payload: any) {
+		clearTimeout(debounceTimeout);
+		debounceTimeout = setTimeout(async () => {
+			const r = (await fetchWebApi(
+				'v1/auth/login',
+				'POST',
+				what_is(what.public.auth, payload),
+				false,
+				undefined,
+				true
+			)) as Response;
+			if (!r) return;
+			if (!r.ok) {
+				setTimeout(() => {
+					logging_in = false; // Slight "bounce"
+				}, 450);
+				try {
+					const res = await r.json();
+					return toast.push(res.message, {
+						dismissable: false,
+						theme: {
+							'--toastBarBackground': 'rgb(var(--COLORRED))'
+						}
+					});
+				} catch (error) {
+					return toast.push(
+						'Could not log you in. Check your username and password and try again.',
+						{
+							dismissable: false,
+							theme: {
+								'--toastBarBackground': 'rgb(var(--COLORRED))'
+							}
+						}
+					);
+				}
+			}
+			const res = await r.json();
+			localStorage.setItem('user_id', res.is[0]);
+			localStorage.setItem('token', res.is[1]);
+			// Remove 'oops' or 'blocked' if exist
+			localStorage.removeItem('oops');
+			localStorage.removeItem('blocked');
+			toast.push('Welcome back!');
+			setTimeout(() => {
+				goto('/admin/dashboard'); // Redirect to the login page to download the current user state.
+			}, 2000);
+		}, 500); // bounce every 500ms - let's hope they don't try to fucking spam the API
+	}
 </script>
 
 <main class="h-screen w-full">
@@ -50,12 +123,21 @@
 				<div class="content flex flex-1 items-center justify-center">
 					<div class="content-wrapper block px-4 md:px-8 lg:px-0">
 						<div
-							class="running-heading text-COLORWHT flex w-full items-center justify-center py-10 text-5xl font-medium md:text-7xl"
+							class="running-heading flex w-full items-center justify-center py-10 text-5xl font-medium text-COLORWHT md:text-7xl"
 						>
-							Order Anytime,<br /> Anywhere
+							<div class="block">
+								Plattr is an online<br />ordering system.<br />
+
+								<div class="mt-6 text-sm font-light">
+									<b class="font-normal">Online Test #1 is officially here!</b> Sign up using the button
+									below 👇
+								</div>
+								<!-- Order Anytime,<br /> Anywhere -->
+							</div>
 						</div>
 						<div class="running-subheading">
 							<div
+								class="w-fit"
 								on:click={() => {
 									goto('/auth/login');
 								}}
@@ -70,7 +152,69 @@
 						</div>
 					</div>
 				</div>
-				<div class="fix hidden flex-1 lg:block">&nbsp;</div>
+				<div class="hidden lg:flex flex-1 items-center justify-center text-COLORWHT">
+					<div class="block rounded-md bg-COLORBLK1 py-20 text-center text-2xl md:w-2/4">
+						{#if !localStorage.token}
+							<div class="mb-8">Existing user? Login.</div>
+							<form class="block" action="#" on:submit={(event) => handleSubmit(event)}>
+								<div
+									class="inputgroup mx-8 flex flex-wrap items-start justify-start lg:items-center"
+								>
+									<TextInput
+										icon={faAd}
+										name="username"
+										placeholder="Type in a username"
+										custom_style="bg-transparent"
+										required
+									/>
+								</div>
+								<div
+									class="inputgroup mx-8 flex flex-wrap items-start justify-start lg:items-center"
+								>
+									<TextInput
+										icon={faLock}
+										name="password"
+										type="password"
+										placeholder="Type in your password"
+										custom_style="bg-transparent"
+										required
+									/>
+								</div>
+								<a href="/auth/password_reset" class="mx-8 block w-fit">
+									<div
+										on:keypress={() => goto('/auth/password_reset')}
+										on:click={() => goto('/auth/password_reset')}
+										class="forgot-password flex w-fit cursor-pointer space-x-2 pt-4 text-sm font-semibold text-COLORWHT hover:underline"
+									>
+										<div class="icon"><Fa icon={faUnlockKeyhole} /></div>
+										<div>Forgot Password?</div>
+									</div></a
+								>
+								<div class="submit mx-8 mt-6 flex flex-1 items-center justify-center">
+									<button
+										class="submit w-full"
+										type="submit"
+										disabled={logging_in}
+										title={logging_in ? 'Please wait for the request to complete' : ''}
+									>
+										<Button
+											icon={faRightToBracket}
+											color="COLORWHT"
+											color_t="COLORBLK"
+											custom_style="w-full justify-center"
+											text="Log in"
+											disabled={logging_in}
+										/>
+									</button>
+								</div>
+							</form>
+						{:else}
+							<div class="mx-8 font-light">
+								Thanks for logging in, <b class="font-normal">@{user.username}</b>! :)
+							</div>
+						{/if}
+					</div>
+				</div>
 			</div>
 			<div
 				class="wrapper absolute flex h-full w-full items-center justify-center bg-COLORBLK opacity-20"
