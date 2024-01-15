@@ -35,7 +35,8 @@ const settings = {
 	ui: {
 		notice: 'You are viewing <br/><b>A PREVIEW</b>',
 		version: version,
-		'branding-text': "Plattr",
+		APIretryLimit: 3,
+		'branding-text': 'Plattr',
 		'branding-logo': '/icons/icon-svgrepo.svg',
 		'default-product': {
 			category: { _id: 'placeholder', name: 'Uncategorized' },

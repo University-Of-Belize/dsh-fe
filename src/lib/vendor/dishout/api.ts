@@ -1,6 +1,7 @@
 import { goto } from '$app/navigation';
 import settings from '$lib/config/settings';
 import { toast } from '@zerodevx/svelte-toast';
+import config from '$lib/config/settings';
 
 // Stolen code from: https://developer.spotify.com/
 // It's a great idea though! 😅😅
@@ -41,7 +42,9 @@ async function fetchWebApi(
 					}
 				});
 				goto(
-					`/auth/login?continue=${window.encodeURIComponent(continue_url.pathname + continue_url.search)}`
+					`/auth/login?continue=${window.encodeURIComponent(
+						continue_url.pathname + continue_url.search
+					)}`
 				); // Pathname is our intended URL
 				return {
 					ok: false,
@@ -63,12 +66,28 @@ async function fetchWebApi(
 			// Check the type of the error for network-related issues
 			if (error.type === 'system') {
 				// The request failed due to a network error
+				const retryCount = parseInt(localStorage.APIretryCount || '0');
+				if (retryCount < config.ui['APIretryLimit']) {
+					// Increment the retry count
+					localStorage.APIretryCount = (retryCount + 1).toString();
+					// Calculate backoff time (in milliseconds)
+					const backoffTime = Math.pow(2, retryCount) * 1000;
+					// Retry after the backoff time
+					// Retry after the backoff time
+					return new Promise((resolve, reject) => {
+						setTimeout(() => {
+							// Recall the API request function
+							fetchWebApi(endpoint, method, body, json, token, silent).then(resolve).catch(reject);
+						}, backoffTime);
+					});
+				}
+				// Otherwise, we've tried 3 times already so we assume the server is offline
 				localStorage.setItem('serverOffline', 'true');
 				if (!silent) {
 					// Throw to the UI and to the console
 					toast.push('Network error. Check your internet connection.');
 				}
-				throw console.error('Network error. Check your internet connection.');
+				throw new Error('Network error. Check your internet connection.');
 			}
 		}
 		localStorage.setItem('serverOffline', 'true'); // Make the next refresh go to watchdog
