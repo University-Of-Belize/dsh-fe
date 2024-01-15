@@ -144,7 +144,7 @@
 								{$product.productName || "Oops, this product doesn't exist!"}
 							</div>
 							<StarCount reviews={$product.reviews} />
-							<div class="text-sm font-light dark:text-COLORWHT4 light:text-COLORWHT lg:text-lg">
+							<div class="light:text-COLORWHT text-sm font-light dark:text-COLORWHT4 lg:text-lg">
 								{@html escapeHtml($product.description).replace(/\n/g, '<br>')}
 							</div>
 							<div class="text-md py-4 font-semibold text-COLORWHT1 lg:text-xl">
@@ -330,7 +330,7 @@
 					<div class="flex bg-opacity-100">
 						<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
 							<img
-								class="rounded-md"
+								class="rounded-md object-cover"
 								src={user.profile_picture || config['user']['default-image']}
 								alt="{user.username}'s avatar"
 								on:error={() => {
