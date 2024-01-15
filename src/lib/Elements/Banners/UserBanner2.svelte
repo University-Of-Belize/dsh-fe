@@ -112,7 +112,7 @@
 							class="profile-image relative block cursor-pointer overflow-clip rounded-md hover:opacity-80"
 						>
 							<img
-								class="h-16 w-16 rounded-md lg:h-32 lg:w-32"
+								class="h-16 w-16 rounded-md object-cover lg:h-32 lg:w-32"
 								bind:this={userImage}
 								src={user?.profile_picture || config['user']['default-image']}
 								alt="{user?.username}'s avatar"

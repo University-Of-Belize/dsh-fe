@@ -214,7 +214,7 @@
 						title="My profile"
 						alt="{user.username}'s photo"
 						width="40px"
-						class="cursor-pointer rounded-full border border-COLORWHT bg-COLORBLK1 hover:opacity-80"
+						class="cursor-pointer rounded-full border border-COLORWHT bg-COLORBLK1 object-cover hover:opacity-80"
 						style="height: 42px; width: 42px;"
 						on:click={async () => {
 							await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
