@@ -7,6 +7,51 @@
 
 <GenericPill
 	icon="/icons/scribble.svg"
+	title="Dark mode"
+	description="Latest dark mode skin. Website default."
+>
+	<div class="controls flex space-x-2">
+		{#if localStorage.theme === 'dark'}
+			<div
+				class="deactivate h-fit w-fit"
+				on:click={() => {
+					localStorage.removeItem('theme');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORHPK"
+					color_t="COLORHPK"
+					text="DEACTIVATE"
+				/>
+			</div>
+		{:else}
+			<div
+				class="activate h-fit w-fit"
+				on:click={() => {
+					localStorage.setItem('theme', 'dark');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORGRN1"
+					color_t="COLORGRN"
+					text="ACTIVATE"
+				/>
+			</div>
+		{/if}
+	</div>
+</GenericPill>
+<GenericPill
+	icon="/icons/scribble.svg"
 	title="Light mode"
 	description="Unstable, really bad for the eyes."
 >
@@ -80,6 +125,52 @@
 				class="activate h-fit w-fit"
 				on:click={() => {
 					localStorage.setItem('staff', 'true');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORGRN1"
+					color_t="COLORGRN"
+					text="ACTIVATE"
+				/>
+			</div>
+		{/if}
+	</div>
+</GenericPill>
+
+<GenericPill
+	icon="/icons/scribble.svg"
+	title="UB Theme"
+	description="Just- don't. This is a joke. This is only here to comply with UB branding standards for the time being."
+>
+	<div class="controls flex space-x-2">
+		{#if localStorage.theme === 'ub-theme'}
+			<div
+				class="deactivate h-fit w-fit"
+				on:click={() => {
+					localStorage.removeItem('theme');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORHPK"
+					color_t="COLORHPK"
+					text="DEACTIVATE"
+				/>
+			</div>
+		{:else}
+			<div
+				class="activate h-fit w-fit"
+				on:click={() => {
+					localStorage.setItem('theme', 'ub-theme');
 					toast.push('One moment...');
 					setTimeout(() => {
 						window.location.reload();
