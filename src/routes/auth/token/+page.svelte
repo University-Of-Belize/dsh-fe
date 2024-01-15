@@ -12,6 +12,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
+	import config from '$lib/config/settings';
 	$: continue_url = $page.url.searchParams.get('continue');
 	let debounceTimeout: number;
 	let logging_in: boolean = false;
@@ -75,7 +76,7 @@
 				<div
 					class="mx-8 mb-6 flex flex-1 items-center justify-center text-3xl font-semibold text-COLORWHT"
 				>
-					Cafe
+					{config.ui['branding-text']}
 				</div>
 
 				<div

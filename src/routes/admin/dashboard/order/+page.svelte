@@ -14,6 +14,9 @@
 	import type { User } from '$lib/types/User';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	// What is what?
+	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';
+	import { locateNodeUsingHash } from '$lib/Elements/Utility/page';
+	import type { CartProduct } from '$lib/types/Product';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
@@ -37,9 +40,6 @@
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import ProductPill from '../../../../lib/Elements/Dashboard/ProductPill.svelte';
-	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';
-	import { locateNodeUsingHash } from '$lib/Elements/Utility/page';
-	import type { CartProduct } from '$lib/types/Product';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
@@ -287,7 +287,7 @@
 		<Navigation
 			transparency={5}
 			search={true}
-			titleText="Cafe {staff
+			titleText="{config.ui['branding-text']} {staff
 				? ''
 				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
 			titleWhere="/admin/dashboard"

@@ -19,6 +19,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import html2canvas from 'html2canvas';
 	import { onMount } from 'svelte';
+	import config from '$lib/config/settings';
 	import Fa from 'svelte-fa';
 	$: continue_url = $page.url.searchParams.get('continue');
 	let debounceTimeout: number;
@@ -290,7 +291,7 @@
 				<div
 					class="mx-8 mb-6 flex flex-1 items-center justify-center text-3xl font-semibold text-COLORWHT"
 				>
-					Cafe
+					{config.ui['branding-text']}
 				</div>
 				<div
 					class="username mx-8 mt-2 flex flex-1 items-center rounded-sm border border-COLORWHT bg-transparent px-4 py-2 text-sm"

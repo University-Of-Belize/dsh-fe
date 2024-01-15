@@ -10,6 +10,7 @@
 	import { faCog, faPlus, faUserCog } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
+	import config from '$lib/config/settings';
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	$: search = $page.url.searchParams.get('search');
 	$: currentFilter = $page.url.searchParams.get('filter');
@@ -97,7 +98,7 @@
 		<Navigation
 			transparency={5}
 			search={true}
-			titleText="Cafe {staff
+			titleText="{config.ui['branding-text']} {staff
 				? ''
 				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
 			titleWhere="/admin/dashboard"

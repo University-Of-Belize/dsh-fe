@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
@@ -23,6 +22,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
+	import config from '$lib/config/settings';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
@@ -115,7 +115,7 @@
 		<Navigation
 			transparency={5}
 			search={true}
-			titleText="Cafe {staff
+			titleText="{config.ui['branding-text']} {staff
 				? ''
 				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
 			titleWhere="/admin/dashboard"

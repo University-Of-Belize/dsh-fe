@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import UserBanner from '$lib/Elements/Banners/UserBanner.svelte';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
@@ -157,7 +156,7 @@
 		<Navigation
 			transparency={5}
 			search={true}
-			titleText="Cafe {staff
+			titleText="{config.ui['branding-text']} {staff
 				? ''
 				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
 			titleWhere="/admin/dashboard"

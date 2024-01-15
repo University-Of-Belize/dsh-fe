@@ -17,6 +17,7 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
+	import config from '$lib/config/settings';
 	let debounceTimeout: number;
 	let logging_in: boolean = false;
 	const ResetToken = $page.url.searchParams.get('reset_token') || false;
@@ -98,7 +99,7 @@
 				<div
 					class="mx-8 mb-6 flex flex-1 items-center justify-center text-3xl font-semibold text-COLORWHT"
 				>
-					Cafe
+					{config.ui['branding-text']}
 				</div>
 
 				<div

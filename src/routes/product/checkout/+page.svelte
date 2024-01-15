@@ -70,7 +70,7 @@
 
 <main class="h-screen w-full">
 	<div class="navigation z-20 w-full">
-		<Navigation transparency={5} search={true} titleText="Cafe" titleWhere="/" />
+		<Navigation transparency={5} search={true} titleWhere="/" />
 	</div>
 	<div class="main-content flex h-full items-center justify-start text-COLORWHT">
 		<div class="page-content block h-full w-full bg-transparent px-16 py-16">

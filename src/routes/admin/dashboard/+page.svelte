@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from '$lib/Elements/Buttons/Button.svelte';
+	// import Button from '$lib/Elements/Buttons/Button.svelte';
 	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import config from '$lib/config/settings';
@@ -134,7 +134,7 @@
 		<Navigation
 			transparency={5}
 			search={true}
-			titleText="Cafe {staff
+			titleText="{config.ui['branding-text']} {staff
 				? ''
 				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
 			titleWhere="/"
@@ -148,7 +148,7 @@
 		</div>
 		<div class="content hidden h-full w-full bg-transparent px-16 py-16 lg:block">
 			<div class="flex pb-2 text-2xl font-semibold">
-				Cafe | {@html staff
+				{config.ui['branding-text']} | {@html staff
 					? "<div class='font-bold pl-1'>SuperUser Mode</div>"
 					: `<div class='font-bold pl-1'>Dashboard</div>`}
 			</div>

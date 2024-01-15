@@ -31,7 +31,7 @@
 	export let transparency: number = 0;
 	export let search: boolean = true;
 	export let value: string = '';
-	export let titleText: string = 'Cafe';
+	export let titleText: string = config.ui['branding-text'];
 	export let titleWhere: string = '/';
 	export let user: User | undefined = undefined;
 	let nav: HTMLDivElement;

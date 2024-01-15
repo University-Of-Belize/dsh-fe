@@ -1,7 +1,8 @@
 <script lang="ts">
+	import config from '$lib/config/settings';
 	export let text: string;
 	export let subtitle: string;
-	export let branding_text: string = 'Cafe';
+	export let branding_text: string = config.ui['branding-text'];
 </script>
 
 <div class="footer block w-full bg-COLORBLK5 text-center text-COLORWHT">
