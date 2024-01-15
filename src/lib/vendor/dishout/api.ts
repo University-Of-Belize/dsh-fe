@@ -59,6 +59,7 @@ async function fetchWebApi(
 				};
 			}
 		}
+		localStorage.removeItem('APIretryCount');
 		// Depending on what we want to do
 		return json ? await res.json() : res;
 	} catch (error: unknown) {
