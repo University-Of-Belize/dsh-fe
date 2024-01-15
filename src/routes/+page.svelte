@@ -157,7 +157,11 @@
 							</div>
 						</div>
 					</div>{/if}
-				<div class="content2 flex flex-1 items-center justify-center text-COLORWHT">
+				<div
+					class="content2 {localStorage.token
+						? 'flex'
+						: 'hidden'} flex-1 items-center justify-center text-COLORWHT lg:flex"
+				>
 					<div class="block rounded-md bg-COLORBLK1 py-16 text-center text-2xl md:w-2/4">
 						{#if !localStorage.token}
 							<div class="hidden lg:block">
