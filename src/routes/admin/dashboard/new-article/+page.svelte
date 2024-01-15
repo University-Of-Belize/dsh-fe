@@ -29,7 +29,6 @@
 		}
 	}
 	const turndownService = new TurndownService_();
-	var markdown = turndownService.turndown('<h1>Hello world!</h1>');
 	$: data; // List of article (Article[])
 
 	async function catchAll() {

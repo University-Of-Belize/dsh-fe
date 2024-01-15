@@ -27,7 +27,7 @@
 >
 	<div class="icon w-fit">
 		{#if custom_icon}
-			<div bind:this={iconData} class="h-9 w-9 pr-1 first:fill-white md:pr-4"></div>
+			<div bind:this={iconData} class="h-9 w-9 pr-1 first:fill-COLORWHT md:pr-4"></div>
 			<div style="width: 0px; height: 0px; opacity: 0; overflow: hidden;">
 				<object
 					bind:this={objectData}
