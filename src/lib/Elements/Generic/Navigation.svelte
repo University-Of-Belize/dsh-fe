@@ -188,7 +188,13 @@
 								window.location.reload();
 							}}
 						>
-							<Button icon={faDownload} color="COLORBLE" color_t="COLORWHT" text="Install" />
+							<Button
+								icon={faDownload}
+								color="COLORBLE"
+								color_t="COLORWHT"
+								text="Install"
+								custom_style="py-4 md:py-2"
+							/>
 						</div>
 					{/if}
 				</div>
