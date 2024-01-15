@@ -157,8 +157,8 @@
 							</div>
 						</div>
 					</div>{/if}
-				<div class="content2 hidden flex-1 items-center justify-center text-COLORWHT lg:flex">
-					<div class="block rounded-md bg-COLORBLK1 py-16 text-center text-2xl md:w-2/4">
+				<div class="content2 flex-1 items-center justify-center text-COLORWHT flex">
+					<div class="hidden lg:block rounded-md bg-COLORBLK1 py-16 text-center text-2xl md:w-2/4">
 						{#if !localStorage.token}
 							<div class="mb-8">Existing user? Login.</div>
 							<form class="block" action="#" on:submit={(event) => handleSubmit(event)}>
