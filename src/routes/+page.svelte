@@ -33,7 +33,9 @@
 		} catch (error) {
 			console.log(error);
 			toast.push(
-				`Oops. Something unexpected happened while contacting our servers: ${error?.message ?? "Error unavailable."}`
+				`Oops. Something unexpected happened while contacting our servers: ${
+					error?.message ?? 'Error unavailable.'
+				}`
 			);
 		}
 	});
@@ -370,7 +372,7 @@
 	}
 
 	.hero-image {
-		background-image: url('/homepage/digital-art-neon-bubbles.webp');
+		background-image: var(--LANDINGPHOTO) !important;
 		background-size: cover;
 	}
 	.hero-image-base {
