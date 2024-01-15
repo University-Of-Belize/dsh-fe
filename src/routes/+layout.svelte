@@ -123,8 +123,24 @@
 	});
 	// Function runs every time upon manual, traditional-based navigation
 	onMount(async () => {
+		if (!localStorage.theme) {
+			if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				toast.push(
+					"Your OS theme is set to light mode; but light mode isn't available yet, so we'll use dark mode instead.", {
+						// Set the timeout to 5 seconds
+						duration: 5000,
+					}
+				);
+			}
+			localStorage.setItem('theme', 'dark');
+
+			setTimeout(() => {
+				detectColorScheme();
+			}, 800);
+		} else {
+			detectColorScheme();
+		}
 		// Set the theme
-		detectColorScheme();
 		// Set the location
 		clocation = new URL(window.location.href);
 
@@ -263,6 +279,9 @@
 		//dark theme preferred, set document with a `data-theme` attribute
 		if (theme === 'dark') {
 			document.documentElement.setAttribute('data-theme', 'dark');
+		}
+		if (theme === 'light') {
+			document.documentElement.setAttribute('data-theme', 'light');
 		}
 	}
 </script>
