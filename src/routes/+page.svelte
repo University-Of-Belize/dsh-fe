@@ -216,8 +216,22 @@
 						{:else}
 							<div class="mx-8 font-light">
 								<div>Thanks for logging in, <b class="font-normal">@{user.username}</b>! :)</div>
-								<div class="text-xs font-light mt-1">"some random quote, lol"</div>
-								<div class="mt-8"><SearchBar/></div>
+								<div class="flex w-full items-center justify-center mt-1 text-xs font-light italic">
+									"{#await (async () => {
+										const quote = 'https://api.quotable.io/random?maxLength=53';
+										const r = await fetch(quote);
+										if (!r.ok) return;
+										const res = await r.json();
+										return res.content;
+									})()}
+										<p>Loading quote...</p>
+									{:then quote}
+										<p>{quote}</p>
+									{:catch error}
+										<p>Error: {error.message}</p>
+									{/await}"
+								</div>
+								<div class="mt-8"><SearchBar /></div>
 							</div>
 						{/if}
 					</div>
