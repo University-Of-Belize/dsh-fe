@@ -126,9 +126,10 @@
 		if (!localStorage.theme) {
 			if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
 				toast.push(
-					"Your OS theme is set to light mode; but light mode isn't available yet, so we'll use dark mode instead.", {
+					"Your OS theme is set to light mode; but light mode isn't available yet, so we'll use dark mode instead.",
+					{
 						// Set the timeout to 5 seconds
-						duration: 5000,
+						duration: 5000
 					}
 				);
 			}
@@ -277,11 +278,14 @@
 		}
 
 		//dark theme preferred, set document with a `data-theme` attribute
-		if (theme === 'dark') {
-			document.documentElement.setAttribute('data-theme', 'dark');
-		}
-		if (theme === 'light') {
-			document.documentElement.setAttribute('data-theme', 'light');
+		switch (theme) {
+			case 'dark':
+				document.documentElement.setAttribute('data-theme', 'dark');
+				break;
+			case 'light':
+				document.documentElement.setAttribute('data-theme', 'light');
+			default:
+				document.documentElement.setAttribute('data-theme', localStorage.theme ?? 'dark');
 		}
 	}
 </script>

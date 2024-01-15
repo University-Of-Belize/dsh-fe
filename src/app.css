@@ -3,6 +3,7 @@
 @tailwind components;
 @layer base {
 	:root {
+		--LANDINGPHOTO: url('/homepage/digital-art-neon-bubbles.webp');
 		/* --COLORWHT: 227 223 209; */ /* old */
 		/* --COLORWHT: 227 226 222; */
 		/* --COLORWHT1: 244 238 226; */
@@ -64,22 +65,23 @@
 }
 @tailwind utilities;
 
+/* Themes, and the such */
 /*light theme*/
 [data-theme='light'] {
 	/************************************************************************/
-	--COLORWHT: 0 0 0; /* White */
+	--COLORWHT: 255 255 255; /* White */
 	--COLORWHT1: 55 55 55; /* Slightly Lighter White */
 	--COLORWHT2: 190 190 190; /* Dark Gray */
-	--COLORWHT3: 75 75 75; /* Light Gray */
-	--COLORWHT4: 85 85 85; /* Lighter Gray */
-	--COLORWHT5: 95 95 95; /* Lightest Gray */
+	--COLORWHT3: 180 180 180; /* Light Gray */
+	--COLORWHT4: 170 170 170; /* Lighter Gray */
+	--COLORWHT5: 160 160 160; /* Lightest Gray */
 
-	--COLORBLK: 255 255 255; /* Black */
-	--COLORBLK1: 200 200 200; /* Slightly Lighter Black */
+	--COLORBLK: 100 100 100; /* Black */
+	--COLORBLK1: 75 75 75; /* Slightly Lighter Black */
 	--COLORBLK2: 65 65 65; /* Dark Gray */
-	--COLORBLK3: 180 180 180; /* Light Gray */
-	--COLORBLK4: 170 170 170; /* Lighter Gray */
-	--COLORBLK5: 160 160 160; /* Lightest Gray */
+	--COLORBLK3: 75 75 75; /* Light Gray */
+	--COLORBLK4: 85 85 85; /* Lighter Gray */
+	--COLORBLK5: 95 95 95; /* Lightest Gray */
 
 	--COLORGRY: 128 128 128; /* Gray */
 	--COLORGRN: 0 255 23; /* Green */
@@ -90,7 +92,7 @@
 	--COLORYLW: 255 217 31; /* Yellow */
 
 	/* --COLORBLE: 0 163 255; */
-	--COLORBLE: 148 187 255;
+	--COLORBLE: 0 93 255;
 	/* --COLORBLE: 0 127 255; */ /* Pass */
 	/* --COLORBLE: 39 84 216; */ /* Pass */
 
@@ -144,6 +146,48 @@
 	/* --COLORRED: 190 0 0; */ /* Red */
 	--COLORRED: 171 28 28; /* Red */
 }
+/*ub theme*/
+[data-theme='ub-theme'] {
+	--LANDINGPHOTO: url('https://pub-25848f6979f1410bb0c611a1a9c24310.r2.dev/primary-uswest/January-2021-Slider-01.jpg');
+	/************************************************************************/
+	--COLORWHT: 255 255 255; /* White */
+	--COLORWHT1: 55 55 55; /* Slightly Lighter White */
+	--COLORWHT2: 190 190 190; /* Dark Gray */
+	--COLORWHT3: 180 180 180; /* Light Gray */
+	--COLORWHT4: 170 170 170; /* Lighter Gray */
+	--COLORWHT5: 160 160 160; /* Lightest Gray */
+
+	--COLORBLK: 144 44 140; /* Black */
+	--COLORBLK1: 255 199 44; /* Slightly Lighter Black */
+	--COLORBLK2: 65 65 65; /* Dark Gray */
+	--COLORBLK3: 75 75 75; /* Light Gray */
+	--COLORBLK4: 85 85 85; /* Lighter Gray */
+	--COLORBLK5: 95 95 95; /* Lightest Gray */
+
+	--COLORGRY: 128 128 128; /* Gray */
+	--COLORGRN: 0 255 23; /* Green */
+	--COLORGRN1: 0 242 21; /* Green */
+	--COLORGRN2: 0 191 16; /* Green */
+
+	/* --COLORYLW: 255 212 0; / Yellow */
+	--COLORYLW: 255 217 31; /* Yellow */
+
+	/* --COLORBLE: 0 163 255; */
+	--COLORBLE: 0 93 255;
+	/* --COLORBLE: 0 127 255; */ /* Pass */
+	/* --COLORBLE: 39 84 216; */ /* Pass */
+
+	--COLORBYW: 71 207 115; /* A shade similar to the specified color */
+
+	--COLORHPK: 255 0 168; /* Hot pink */
+
+	/* --COLORPNK: 255 80 234; / Pink */
+	--COLORPNK: 154 30 139; /* Hot pink */
+
+	/* --COLORRED: 190 0 0; */ /* Red */
+	--COLORRED: 171 28 28; /* Red */
+}
+/***************************** END THEMES **********/
 /* :global if in component */
 html {
 	scroll-behavior: smooth; /* nice */
