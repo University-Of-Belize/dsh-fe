@@ -2,8 +2,8 @@ import { version } from '$app/environment';
 
 const settings = {
 	server: {
-		// HTTPOrigin: 'https://winter-darkness-1705.fly.dev',
-		HTTPOrigin: 'http://127.0.0.1:8080',
+		HTTPOrigin: 'https://winter-darkness-1705.fly.dev',
+		// HTTPOrigin: 'http://127.0.0.1:8080',
 		// HTTPOrigin: 'http://192.168.1.102:8080',
 		'support-email': 'cafeteria@ub.edu.bz',
 		'bound-organization': 'University of Belize',
@@ -36,7 +36,7 @@ const settings = {
 		notice: 'You are viewing <br/><b>A PREVIEW</b>',
 		version: version,
 		'branding-text': "Plattr",
-		'branding-logo': '/icons/ub_logo.svg',
+		'branding-logo': '/icons/icon-svgrepo.svg',
 		'default-product': {
 			category: { _id: 'placeholder', name: 'Uncategorized' },
 			description: null,

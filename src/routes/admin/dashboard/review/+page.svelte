@@ -88,6 +88,7 @@
 										? `Original Content: ${escapeHtml(review.original_content)}<br/>`
 										: ''
 								}Hidden: ${review.hidden ? 'Yes' : 'No'}<br/>`}
+								html
 							>
 								<div class="controls flex space-x-2">
 									{#if staff}
