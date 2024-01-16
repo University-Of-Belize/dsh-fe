@@ -341,7 +341,9 @@
 
 <SvelteToast {options} />
 <main class="flex">
-	<slot />
+	<div class="block">
+		<slot />
+	</div>
 	{#if localStorage.theme === 'custom'}
 		<div
 			class="drawer h-screen w-1/4 flex-col justify-start overflow-auto bg-COLORBLK bg-opacity-100 px-8 py-2 text-COLORWHT"
