@@ -187,3 +187,50 @@
 		{/if}
 	</div>
 </GenericPill>
+
+<GenericPill
+	icon="/icons/scribble.svg"
+	title="Theme Creator (Experimental)"
+	description="'Theme Creator' allows the creation of new skins for the website."
+>
+	<div class="controls flex space-x-2">
+		{#if localStorage.theme === 'custom'}
+			<div
+				class="deactivate h-fit w-fit"
+				on:click={() => {
+					localStorage.removeItem('theme');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORHPK"
+					color_t="COLORHPK"
+					text="DEACTIVATE"
+				/>
+			</div>
+		{:else}
+			<div
+				class="activate h-fit w-fit"
+				on:click={() => {
+					localStorage.setItem('theme', 'custom');
+					localStorage.setItem('theme-map', '{}');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORGRN1"
+					color_t="COLORGRN"
+					text="ACTIVATE"
+				/>
+			</div>
+		{/if}
+	</div>
+</GenericPill>

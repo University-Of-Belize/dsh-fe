@@ -284,6 +284,20 @@
 				break;
 			case 'light':
 				document.documentElement.setAttribute('data-theme', 'light');
+			case 'custom':
+				// Get the CSS variables from localStorage
+				const cssVarMap = JSON.parse(localStorage.getItem('theme-map') || '{}');
+
+				// Loop over the CSS variables
+				for (let cssVar in cssVarMap) {
+					// Get the value from the CSS variable map
+					let value = cssVarMap[cssVar];
+					// If the value exists, set the CSS variable
+					if (value) {
+						document.documentElement.style.setProperty(cssVar, `rgb(${value})`);
+					}
+				}
+				break;
 			default:
 				document.documentElement.setAttribute('data-theme', localStorage.theme ?? 'dark');
 		}
