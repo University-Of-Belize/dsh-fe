@@ -99,11 +99,11 @@
 	</div>
 </GenericPill>
 
-<!-- Lol (Theme) -->
+<!-- Light v2 (Theme) -->
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
-	title="Lol (Theme)"
-	description="Generated using 'Theme Creator'."
+	title="Light v2 (Theme)"
+	description="Experimental, but not as bad. Generated using 'Theme Creator'."
 >
 	<div class="controls flex space-x-2">
 		{#if localStorage.theme === 'light-v2'}
@@ -435,7 +435,7 @@
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
 	title="Lol (Theme)"
-	description="Experimental, but not as bad. Generated using 'Theme Creator'."
+	description="Generated using 'Theme Creator'."
 >
 	<div class="controls flex space-x-2">
 		{#if localStorage.theme === 'lol'}
