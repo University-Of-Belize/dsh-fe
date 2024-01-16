@@ -91,6 +91,21 @@ async function fetchWebApi(
 				throw new Error('Network error. Check your internet connection.');
 			}
 		}
+		const retryCount = parseInt(localStorage.APIretryCount || '0');
+		if (retryCount < config.ui['APIretryLimit']) {
+			// Increment the retry count
+			localStorage.APIretryCount = (retryCount + 1).toString();
+			// Calculate backoff time (in milliseconds)
+			const backoffTime = Math.pow(2, retryCount) * 1000;
+			// Retry after the backoff time
+			// Retry after the backoff time
+			return new Promise((resolve, reject) => {
+				setTimeout(() => {
+					// Recall the API request function
+					fetchWebApi(endpoint, method, body, json, token, silent).then(resolve).catch(reject);
+				}, backoffTime);
+			});
+		}
 		localStorage.setItem('serverOffline', 'true'); // Make the next refresh go to watchdog
 		console.log(JSON.stringify(error));
 		if (!silent) {

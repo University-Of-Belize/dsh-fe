@@ -293,7 +293,7 @@
 												</div>
 												<div class="pdsc_wrp overflow-auto">
 													<textarea
-														on:keypress={(e) => {
+														on:keydown={(e) => {
 															e.stopPropagation();
 														}}
 														name="description"
