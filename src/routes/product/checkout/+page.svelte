@@ -255,9 +255,10 @@
 									imageCardNumber.innerHTML = formattedInput;
 								}}
 								on:click={() => flipCard('flipToFront')}
+								on:input={() => flipCard('flipToFront')}
 								maxlength="19"
 								placeholder="XXXX XXXX XXXX XXXX"
-								value="4256 4256 4256 4256"
+								value="1234 1234 1234 1234"
 							/>
 							<div class="mb-4 flex gap-x-2">
 								<div class="flex-1">
@@ -266,7 +267,9 @@
 										type="text"
 										class="ring-offset-background focus-visible:ring-ring mb-4 flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 										bind:this={expirationDate}
+										on:input={()=>flipCard('flipToFront')}
 										on:input={(event) => {
+											
 											// Remove all non-numeric characters from the input
 											const input = event.target.value.replace(/\D/g, '');
 
@@ -294,6 +297,7 @@
 										type="text"
 										class="ring-offset-background focus-visible:ring-ring mb-4 flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 										bind:this={inputCVVNumber}
+										on:input={() => flipCard('flipToRear')}
 										on:input={(event) => {
 											// Remove all non-numeric characters from the input
 											const input = event.target.value.replace(/\D/g, '');
@@ -302,8 +306,8 @@
 										}}
 										on:click={() => flipCard('flipToRear')}
 										maxlength="3"
-										placeholder="123"
-										value="342"
+										placeholder="456"
+										value="456"
 									/>
 								</div>
 							</div>
@@ -313,6 +317,7 @@
 								type="text"
 								class="ring-offset-background focus-visible:ring-ring flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 								bind:this={inputCardName}
+								on:input={() => flipCard('flipToFront')}
 								on:input={(event) => {
 									imageCardName.innerHTML = event.target.value;
 								}}
@@ -321,7 +326,7 @@
 								value="John Doe"
 							/>
 						</div>
-						<div class="credit-card w-1/2">
+						<div class="credit-card w-1/2 overflow-clip">
 							<div class="h-56 w-full" style="perspective: 1000px">
 								<div
 									bind:this={cardEl}
@@ -341,7 +346,7 @@
 											<div class="pt-1">
 												<p class="font-light">Card Number</p>
 												<p bind:this={imageCardNumber} class="tracking-more-wider h-6 font-medium">
-													4256 4256 4256 4256
+													1234 1234 1234 1234
 												</p>
 											</div>
 											<div class="flex justify-between pt-6">
@@ -374,7 +379,7 @@
 													bind:this={imageCVVNumber}
 													class="ml-auto pl-2 py-2 flex w-14 items-center text-COLORBLK"
 												>
-													342
+													456
 												</p>
 												<p class="pt-4 mr-2 flex justify-end text-sm font-bold text-COLORWHT">
 													security code
