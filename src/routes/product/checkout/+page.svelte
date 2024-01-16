@@ -96,7 +96,7 @@
 	<title>Plattr | Checkout</title>
 </svelte:head>
 
-<div class="stub hidden rearIsVisible"></div>
+<div class="stub rearIsVisible hidden"></div>
 
 <main class="h-screen w-full">
 	<div class="navigation z-20 w-full">
@@ -258,7 +258,6 @@
 								on:input={() => flipCard('flipToFront')}
 								maxlength="19"
 								placeholder="XXXX XXXX XXXX XXXX"
-								value="1234 1234 1234 1234"
 							/>
 							<div class="mb-4 flex gap-x-2">
 								<div class="flex-1">
@@ -267,9 +266,8 @@
 										type="text"
 										class="ring-offset-background focus-visible:ring-ring mb-4 flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 										bind:this={expirationDate}
-										on:input={()=>flipCard('flipToFront')}
+										on:input={() => flipCard('flipToFront')}
 										on:input={(event) => {
-											
 											// Remove all non-numeric characters from the input
 											const input = event.target.value.replace(/\D/g, '');
 
@@ -288,7 +286,6 @@
 										on:click={() => flipCard('flipToFront')}
 										maxlength="5"
 										placeholder="MM/YY"
-										value="12/24"
 									/>
 								</div>
 								<div class="flex-1">
@@ -307,7 +304,6 @@
 										on:click={() => flipCard('flipToRear')}
 										maxlength="3"
 										placeholder="456"
-										value="456"
 									/>
 								</div>
 							</div>
@@ -323,7 +319,6 @@
 								}}
 								on:click={() => flipCard('flipToFront')}
 								placeholder="John Doe"
-								value="John Doe"
 							/>
 						</div>
 						<div class="credit-card w-1/2 overflow-clip">
@@ -332,7 +327,7 @@
 									bind:this={cardEl}
 									class="creditCard relative cursor-pointer transition-transform duration-500"
 									style="transform-style: preserve-3d"
-									on:click={()=>flipCard('flip')}
+									on:click={() => flipCard('flip')}
 								>
 									<div
 										class="absolute m-auto w-full rounded-xl shadow-2xl"
@@ -377,11 +372,11 @@
 											<div class="mt-12 px-8">
 												<p
 													bind:this={imageCVVNumber}
-													class="ml-auto pl-2 py-2 flex w-14 items-center text-COLORBLK"
+													class="ml-auto flex w-14 items-center py-2 pl-2 text-COLORBLK"
 												>
 													456
 												</p>
-												<p class="pt-4 mr-2 flex justify-end text-sm font-bold text-COLORWHT">
+												<p class="mr-2 flex justify-end pt-4 text-sm font-bold text-COLORWHT">
 													security code
 												</p>
 											</div>
