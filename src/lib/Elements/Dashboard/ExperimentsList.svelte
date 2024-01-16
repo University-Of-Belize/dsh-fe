@@ -5,6 +5,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 </script>
 
+<!-- Dark mode -->
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
 	title="Dark mode"
@@ -50,6 +51,8 @@
 		{/if}
 	</div>
 </GenericPill>
+
+<!-- Light mode -->
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
 	title="Light mode"
@@ -96,6 +99,55 @@
 	</div>
 </GenericPill>
 
+<!-- Lol (Theme) -->
+<GenericPill
+	icon="/icons/font-awesome/scribble.svg"
+	title="Lol (Theme)"
+	description="Generated using 'Theme Creator'."
+>
+	<div class="controls flex space-x-2">
+		{#if localStorage.theme === 'light-v2'}
+			<!-- Theme name -->
+			<div
+				class="deactivate h-fit w-fit"
+				on:click={() => {
+					localStorage.removeItem('theme');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORHPK"
+					color_t="COLORHPK"
+					text="DEACTIVATE"
+				/>
+			</div>
+		{:else}
+			<div
+				class="activate h-fit w-fit"
+				on:click={() => {
+					localStorage.setItem('theme', 'light-v2'); // Theme name
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORGRN1"
+					color_t="COLORGRN"
+					text="ACTIVATE"
+				/>
+			</div>
+		{/if}
+	</div>
+</GenericPill>
+
+<!-- Staff tools V1 -->
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
 	title="Staff tools V1"
@@ -142,6 +194,7 @@
 	</div>
 </GenericPill>
 
+<!--- UB (Theme) -->
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
 	title="UB (Theme)"
@@ -188,6 +241,7 @@
 	</div>
 </GenericPill>
 
+<!--- Theme Creator (Experimental) -->
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
 	title="Theme Creator (Experimental)"
@@ -236,6 +290,7 @@
 	</div>
 </GenericPill>
 
+<!-- Fandom Wiki (Theme) -->
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
 	title="Fandom Wiki (Theme)"
@@ -282,6 +337,7 @@
 	</div>
 </GenericPill>
 
+<!--- Green (Theme) -->
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
 	title="Green (Theme)"
@@ -328,6 +384,7 @@
 	</div>
 </GenericPill>
 
+<!--- Bubblegum (Theme) -->
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
 	title="Bubblegum (Theme)"
@@ -357,6 +414,54 @@
 				class="activate h-fit w-fit"
 				on:click={() => {
 					localStorage.setItem('theme', 'bubble-gum');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORGRN1"
+					color_t="COLORGRN"
+					text="ACTIVATE"
+				/>
+			</div>
+		{/if}
+	</div>
+</GenericPill>
+
+<!-- Lol (Theme) -->
+<GenericPill
+	icon="/icons/font-awesome/scribble.svg"
+	title="Lol (Theme)"
+	description="Experimental, but not as bad. Generated using 'Theme Creator'."
+>
+	<div class="controls flex space-x-2">
+		{#if localStorage.theme === 'lol'}
+			<!-- Theme name -->
+			<div
+				class="deactivate h-fit w-fit"
+				on:click={() => {
+					localStorage.removeItem('theme');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORHPK"
+					color_t="COLORHPK"
+					text="DEACTIVATE"
+				/>
+			</div>
+		{:else}
+			<div
+				class="activate h-fit w-fit"
+				on:click={() => {
+					localStorage.setItem('theme', 'lol'); // Theme name
 					toast.push('One moment...');
 					setTimeout(() => {
 						window.location.reload();
