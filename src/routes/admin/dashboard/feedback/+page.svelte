@@ -76,7 +76,7 @@
 				>
 					<!--- Lol, well 'custom_icon' took long enough -->
 					<Button
-						custom_icon="/icons/scribble.svg"
+						custom_icon="/icons/font-awesome/scribble.svg"
 						color="COLORBLK3"
 						text="Swap editor views"
 						color_t="COLORWHT"

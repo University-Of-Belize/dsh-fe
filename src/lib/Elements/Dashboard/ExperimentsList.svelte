@@ -6,7 +6,7 @@
 </script>
 
 <GenericPill
-	icon="/icons/scribble.svg"
+	icon="/icons/font-awesome/scribble.svg"
 	title="Dark mode"
 	description="Latest dark mode skin. Website default."
 >
@@ -51,7 +51,7 @@
 	</div>
 </GenericPill>
 <GenericPill
-	icon="/icons/scribble.svg"
+	icon="/icons/font-awesome/scribble.svg"
 	title="Light mode"
 	description="Unstable, really bad for the eyes."
 >
@@ -97,7 +97,7 @@
 </GenericPill>
 
 <GenericPill
-	icon="/icons/scribble.svg"
+	icon="/icons/font-awesome/scribble.svg"
 	title="Staff tools V1"
 	description="Staff management tools."
 >
@@ -143,7 +143,7 @@
 </GenericPill>
 
 <GenericPill
-	icon="/icons/scribble.svg"
+	icon="/icons/font-awesome/scribble.svg"
 	title="UB Theme"
 	description="Just- don't. This is a joke. This is only here to comply with UB branding standards for the time being."
 >
@@ -189,7 +189,7 @@
 </GenericPill>
 
 <GenericPill
-	icon="/icons/scribble.svg"
+	icon="/icons/font-awesome/scribble.svg"
 	title="Theme Creator (Experimental)"
 	description="'Theme Creator' allows the creation of new skins for the website."
 >

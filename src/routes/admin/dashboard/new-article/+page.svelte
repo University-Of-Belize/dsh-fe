@@ -1,21 +1,21 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import config from '$lib/config/settings';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import CommentBox from '$lib/Elements/Inputs/CommentBox.svelte';
 	import { createArticle, deleteArticle } from '$lib/Elements/Utility/Article';
+	import config from '$lib/config/settings';
 	import type { Article } from '$lib/types/Article';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faPaperPlane, faReply, faTrash } from '@fortawesome/free-solid-svg-icons';
+	import Editor from '@tinymce/tinymce-svelte';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import SearchBar from '../../../../lib/Elements/Search/SearchBar.svelte';
-	import Editor from '@tinymce/tinymce-svelte';
 	import TurndownService from 'turndown';
+	import SearchBar from '../../../../lib/Elements/Search/SearchBar.svelte';
 	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let data: Article[]; // Declare the data variable
@@ -84,7 +84,7 @@
 				>
 					<!--- Lol, well 'custom_icon' took long enough -->
 					<Button
-						custom_icon="/icons/scribble.svg"
+						custom_icon="/icons/font-awesome/scribble.svg"
 						color="COLORBLK3"
 						text="Swap editor views"
 						color_t="COLORWHT"

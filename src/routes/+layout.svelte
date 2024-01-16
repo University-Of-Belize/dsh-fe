@@ -12,6 +12,9 @@
 	import type { FirebaseMessage } from '$lib/types/Firebase';
 	import { initializeApp } from '@firebase/app';
 	import { getMessaging, onMessage } from '@firebase/messaging';
+	import { faArrowRightFromBracket, faPaintbrush } from '@fortawesome/free-solid-svg-icons';
+	import Button from '$lib/Elements/Buttons/Button.svelte';
+	import Fa from 'svelte-fa';
 	// import { getAnalytics } from '@firebase/analytics';
 	// const analytics = getAnalytics(app);
 	let clocation: URL;
@@ -286,26 +289,64 @@
 				document.documentElement.setAttribute('data-theme', 'light');
 			case 'custom':
 				// Get the CSS variables from localStorage
-				const cssVarMap = JSON.parse(localStorage.getItem('theme-map') || '{}');
-
-				// Loop over the CSS variables
-				for (let cssVar in cssVarMap) {
-					// Get the value from the CSS variable map
-					let value = cssVarMap[cssVar];
-					// If the value exists, set the CSS variable
-					if (value) {
-						document.documentElement.style.setProperty(cssVar, `rgb(${value})`);
-					}
-				}
+				writeUITheme();
 				break;
 			default:
 				document.documentElement.setAttribute('data-theme', localStorage.theme ?? 'dark');
 		}
 	}
+
+	// UI Theme writer
+	function writeUITheme(thememap?: object) {
+		console.log("[WRITE_STARTED]: Writing theme to document's CSS variables.");
+		// Get the CSS variables from localStorage
+		const cssVars = thememap ?? JSON.parse(localStorage.getItem('theme-map') ?? '{}');
+		// Loop through the CSS variables and set the values
+		for (const [key, value] of Object.entries(cssVars)) {
+			// Convert the value to a string if it's not already a string
+			const stringValue = typeof value === 'string' ? value : String(value);
+			document.documentElement.style.setProperty(key, stringValue);
+		}
+	}
 </script>
 
 <SvelteToast {options} />
-<slot />
+<main class="flex">
+	<slot />
+	<div
+		class="drawer h-screen w-1/4 flex-col justify-start bg-COLORBLK bg-opacity-100 px-8 py-2 text-COLORWHT"
+	>
+		<div class="two space-y-2 py-6">
+			<div class="title block pb-5 font-semibold">
+				<div class="title flex items-center justify-start space-x-4">
+					<div class="icon">
+						<Fa icon={faPaintbrush} size="1.15x" />
+					</div>
+					<div>Theme Creator (Experimental)</div>
+				</div>
+				<div class="py-2 text-xs font-light">
+					Change CSS variables to appropriate values; then hit 'Apply style' to see changes
+				</div>
+			</div>
+			<div class="theme-input">
+				<div
+					class="submit"
+					on:click={async () => {
+						writeUITheme();
+					}}
+				>
+					<Button
+						custom_icon="/icons/font-awesome/eye-dropper-half.svg"
+						color="COLORBLK3"
+						text="Apply style"
+						color_t="COLORWHT"
+						custom_style="w-full"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
 
 <style>
 	:global(body) {
