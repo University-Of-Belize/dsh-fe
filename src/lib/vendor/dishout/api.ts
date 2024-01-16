@@ -101,6 +101,11 @@ async function fetchWebApi(
 			// Retry after the backoff time
 			return new Promise((resolve, reject) => {
 				setTimeout(() => {
+					toast.push(
+						`Checking to see if the server is asleep (${retryCount + 1}/${
+							config.ui['APIretryLimit']
+						})...`
+					);
 					// Recall the API request function
 					fetchWebApi(endpoint, method, body, json, token, silent).then(resolve).catch(reject);
 				}, backoffTime);

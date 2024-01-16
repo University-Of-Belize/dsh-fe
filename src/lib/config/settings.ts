@@ -35,7 +35,7 @@ const settings = {
 	ui: {
 		notice: 'You are viewing <br/><b>A PREVIEW</b>',
 		version: version,
-		APIretryLimit: 3,
+		APIretryLimit: 12, // Should be enough for server "wake-up"
 		'branding-text': 'Plattr',
 		'branding-logo': '/icons/icon-svgrepo.svg',
 		'default-product': {
