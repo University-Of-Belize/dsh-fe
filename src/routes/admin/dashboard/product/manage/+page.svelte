@@ -293,6 +293,9 @@
 												</div>
 												<div class="pdsc_wrp overflow-auto">
 													<textarea
+														on:keypress={(e) => {
+															e.stopPropagation();
+														}}
 														name="description"
 														class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORWHT focus:outline-none"
 														rows="6"
