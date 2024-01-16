@@ -144,7 +144,7 @@
 
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
-	title="UB Theme"
+	title="UB (Theme)"
 	description="Just- don't. This is a joke. This is only here to comply with UB branding standards for the time being."
 >
 	<div class="controls flex space-x-2">
@@ -199,6 +199,7 @@
 				class="deactivate h-fit w-fit"
 				on:click={() => {
 					localStorage.removeItem('theme');
+					localStorage.removeItem('theme-map');
 					toast.push('One moment...');
 					setTimeout(() => {
 						window.location.reload();
@@ -218,6 +219,144 @@
 				on:click={() => {
 					localStorage.setItem('theme', 'custom');
 					localStorage.setItem('theme-map', '{}');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORGRN1"
+					color_t="COLORGRN"
+					text="ACTIVATE"
+				/>
+			</div>
+		{/if}
+	</div>
+</GenericPill>
+
+<GenericPill
+	icon="/icons/font-awesome/scribble.svg"
+	title="Fandom Wiki (Theme)"
+	description="Generated using 'Theme Creator'."
+>
+	<div class="controls flex space-x-2">
+		{#if localStorage.theme === 'fandom-wiki'}
+			<div
+				class="deactivate h-fit w-fit"
+				on:click={() => {
+					localStorage.removeItem('theme');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORHPK"
+					color_t="COLORHPK"
+					text="DEACTIVATE"
+				/>
+			</div>
+		{:else}
+			<div
+				class="activate h-fit w-fit"
+				on:click={() => {
+					localStorage.setItem('theme', 'fandom-wiki');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORGRN1"
+					color_t="COLORGRN"
+					text="ACTIVATE"
+				/>
+			</div>
+		{/if}
+	</div>
+</GenericPill>
+
+<GenericPill
+	icon="/icons/font-awesome/scribble.svg"
+	title="Green (Theme)"
+	description="Generated using 'Theme Creator'."
+>
+	<div class="controls flex space-x-2">
+		{#if localStorage.theme === 'green-ish'}
+			<div
+				class="deactivate h-fit w-fit"
+				on:click={() => {
+					localStorage.removeItem('theme');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORHPK"
+					color_t="COLORHPK"
+					text="DEACTIVATE"
+				/>
+			</div>
+		{:else}
+			<div
+				class="activate h-fit w-fit"
+				on:click={() => {
+					localStorage.setItem('theme', 'green-ish');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORGRN1"
+					color_t="COLORGRN"
+					text="ACTIVATE"
+				/>
+			</div>
+		{/if}
+	</div>
+</GenericPill>
+
+<GenericPill
+	icon="/icons/font-awesome/scribble.svg"
+	title="Bubblegum (Theme)"
+	description="Generated using 'Theme Creator'."
+>
+	<div class="controls flex space-x-2">
+		{#if localStorage.theme === 'bubble-gum'}
+			<div
+				class="deactivate h-fit w-fit"
+				on:click={() => {
+					localStorage.removeItem('theme');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORHPK"
+					color_t="COLORHPK"
+					text="DEACTIVATE"
+				/>
+			</div>
+		{:else}
+			<div
+				class="activate h-fit w-fit"
+				on:click={() => {
+					localStorage.setItem('theme', 'bubble-gum');
 					toast.push('One moment...');
 					setTimeout(() => {
 						window.location.reload();
