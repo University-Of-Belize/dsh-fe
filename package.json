@@ -50,6 +50,7 @@
 		"@tailwindcss/typography": "^0.5.10",
 		"@tinymce/tinymce-svelte": "^2.0.1",
 		"@zerodevx/svelte-toast": "^0.9.5",
+		"credit-card-type": "^10.0.0",
 		"firebase": "^10.7.1",
 		"html2canvas": "^1.4.1",
 		"insane": "^2.6.2",

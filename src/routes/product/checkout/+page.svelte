@@ -11,7 +11,9 @@
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faClone, faPrint, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
+	import creditCardType from 'credit-card-type';
 	import { onMount } from 'svelte';
+
 	const wants_single_cart = localStorage.wants_single_cart ?? false;
 	$: single_cart = $page.url.searchParams.get('single_cart');
 
@@ -103,8 +105,8 @@
 		<Navigation transparency={5} search={true} titleWhere="/" />
 	</div>
 	<div class="main-content flex h-full items-center justify-start text-COLORWHT">
-		<div class="page-content block h-full w-full bg-transparent px-16 py-16">
-			<div class="flex w-full">
+		<div class="page-content block h-full w-full bg-transparent px-8 py-16 lg:px-16">
+			<div class="flex w-full flex-wrap">
 				<div class="order-summary mr-8 block flex-1">
 					<div class="flex w-full items-center">
 						<div class="block">
@@ -212,11 +214,6 @@
 										</div>
 									</div>
 								</div>
-								<div class="pay_now flex w-full items-center justify-start py-4">
-									<div class="btn_wrp" on:click={() => goto('/product/checkout/confirmed')}>
-										<Button color="COLORHPK" color_t="COLORWHT" text="Queue Now" icon={faClone} />
-									</div>
-								</div>
 							</div>
 						{:else if dataLength === 0}
 							<div class="space-y-4 font-light">
@@ -228,15 +225,17 @@
 							</div>{/if}
 					</div>
 				</div>
-				<div class="payment-form mr-l block flex-1 text-COLORBLK">
+				<div class="payment-form lg:mr-l block flex-1 text-COLORBLK">
 					<form
-						class="payment-form flex w-full flex-col-reverse items-center justify-center rounded-sm bg-COLORBLK1 px-6 py-8 text-COLORBLK shadow-md"
+						class="payment-form flex w-full flex-col-reverse items-center justify-center rounded-sm bg-opacity-10 py-8 text-COLORBLK md:bg-COLORWHT lg:px-6"
 					>
-						<div class="card-info mt-4 w-1/2 border-t-2 border-COLORBLK2 pt-8">
+						<div
+							class="card-info mt-4 w-full border-t-2 border-COLORBLK2 bg-opacity-100 pt-8 text-COLORBLK lg:w-1/2"
+						>
 							<label class="mb-2 block text-sm font-bold text-COLORWHT">Card number</label>
 							<input
 								type="text"
-								class="ring-offset-background focus-visible:ring-ring mb-4 flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+								class="ring-offset-background focus-visible:ring-ring mb-4 flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-xl focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 								bind:this={inputCardNumber}
 								on:input={(event) => {
 									//   Remove all non-numeric characters from the input
@@ -259,7 +258,7 @@
 								maxlength="19"
 								placeholder="XXXX XXXX XXXX XXXX"
 							/>
-							<div class="mb-4 flex gap-x-2">
+							<div class="expiry-date mb-4 flex gap-x-2">
 								<div class="flex-1">
 									<label class="mb-2 block text-sm font-bold text-COLORWHT">Exp. date</label>
 									<input
@@ -299,7 +298,7 @@
 											// Remove all non-numeric characters from the input
 											const input = event.target.value.replace(/\D/g, '');
 											inputCVVNumber.value = input;
-											imageCVVNumber.innerHTML = input;
+											imageCVVNumber.innerHTML = input.trim() != '' ? input : '&nbsp;';
 										}}
 										on:click={() => flipCard('flipToRear')}
 										maxlength="3"
@@ -307,25 +306,42 @@
 									/>
 								</div>
 							</div>
-
-							<label class="mb-2 block text-sm font-bold text-COLORWHT">Card holder</label>
-							<input
-								type="text"
-								class="ring-offset-background focus-visible:ring-ring flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-								bind:this={inputCardName}
-								on:input={() => flipCard('flipToFront')}
-								on:input={(event) => {
-									imageCardName.innerHTML = event.target.value;
-								}}
-								on:click={() => flipCard('flipToFront')}
-								placeholder="John Doe"
-							/>
+							<div class="card-holder">
+								<label class="mb-2 block text-sm font-bold text-COLORWHT">Card holder</label>
+								<input
+									type="text"
+									class="ring-offset-background focus-visible:ring-ring flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+									bind:this={inputCardName}
+									on:input={() => flipCard('flipToFront')}
+									on:input={(event) => {
+										imageCardName.innerHTML =
+											event.target?.value.trim() != '' ? event.target?.value : '&nbsp;';
+									}}
+									on:click={() => flipCard('flipToFront')}
+									placeholder="D'ALESSEO REQUENA"
+								/>
+							</div>
+							<div class="flex items-center justify-start space-x-2 py-4 text-sm text-COLORWHT1">
+								<div>Payment processing<br/>powered by</div>
+								<a href="https://onelink.bz" target="_blank"
+									><img
+										src="/assets/checkout/brands/one-link.svg"
+										width="50px"
+										class="cursor-pointer hover:opacity-75"
+									/></a
+								>
+							</div>
+							<div class="pay_now flex w-full items-center justify-start py-4">
+								<div class="btn_wrp" on:click={() => goto('/product/checkout/confirmed')}>
+									<Button color="COLORHPK" color_t="COLORWHT" text="Queue Now" icon={faClone} />
+								</div>
+							</div>
 						</div>
-						<div class="credit-card w-1/2 overflow-clip">
-							<div class="h-56 w-full" style="perspective: 1000px">
+						<div class="credit-card w-full select-none lg:w-1/2">
+							<div class="h-60 w-full" style="perspective: 1000px">
 								<div
 									bind:this={cardEl}
-									class="creditCard relative cursor-pointer transition-transform duration-500"
+									class="creditCard relative cursor-pointer font-mono transition-transform duration-500"
 									style="transform-style: preserve-3d"
 									on:click={() => flipCard('flip')}
 								>
@@ -337,31 +353,41 @@
 											src="/assets/checkout/card-front.svg"
 											class="relative h-full w-full rounded-xl object-cover"
 										/>
-										<div class="absolute top-12 w-full px-8 text-white">
+										<div class="absolute top-28 w-full overflow-clip px-8 text-white">
 											<div class="pt-1">
-												<p class="font-light">Card Number</p>
-												<p bind:this={imageCardNumber} class="tracking-more-wider h-6 font-medium">
+												<!-- <p class="font-light">Card Number</p> -->
+												<p
+													bind:this={imageCardNumber}
+													class="tracking-more-wider h-6 text-xl font-medium"
+												>
 													1234 1234 1234 1234
 												</p>
 											</div>
-											<div class="flex justify-between pt-6">
-												<div>
-													<p class="font-light">Name</p>
-													<p bind:this={imageCardName} class="h-6 font-medium tracking-widest">
-														John Doe
+											<div class="block pt-2 text-sm font-normal">
+												<div class="flex items-center justify-start space-x-2 pt-1">
+													<p class="text-xs font-light">VALID<br />FROM</p>
+													<p bind:this={imageExpDate} class="w-14 font-medium tracking-wider">
+														12/24
 													</p>
 												</div>
-												<div>
-													<p class="font-light">Expiry</p>
-													<p bind:this={imageExpDate} class="h-6 w-14 font-medium tracking-wider">
-														12/24
+												<div class="flex items-center justify-between">
+													<p bind:this={imageCardName} class="pt-2 font-medium tracking-widest">
+														D'ALESSEO REQUENA
+													</p>
+													<p class="absolute right-8 mb-4 font-light">
+														<img
+															src="/assets/checkout/brands/{creditCardType(
+																inputCardNumber?.value ?? ''
+															)[0]?.type ?? 'question'}.svg"
+															width="50px"
+														/>
 													</p>
 												</div>
 											</div>
 										</div>
 									</div>
 									<div
-										class="absolute m-auto w-full rounded-xl shadow-2xl"
+										class="absolute m-auto w-full rounded-xl bg-opacity-100 shadow-2xl"
 										style="backface-visibility: hidden; transform: rotateY(180deg)"
 									>
 										<img
