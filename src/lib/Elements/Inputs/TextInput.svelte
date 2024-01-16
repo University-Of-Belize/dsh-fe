@@ -10,7 +10,7 @@
 	export let custom_style: string | undefined = '';
 	export let container_style: string = '';
 	export let value: string = '';
-	export let type: 'text' | 'password' = 'text';
+	export let type: 'text' | 'password' | 'color' = 'text';
 	export let required: boolean = false; // Optional
 	export let disabled: boolean = false; // Optional
 	export let disabled_text: string = 'You cannot type here.'; // Optional
