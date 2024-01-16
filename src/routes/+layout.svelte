@@ -341,7 +341,7 @@
 
 <SvelteToast {options} />
 <main class="flex">
-	<div class="block">
+	<div class="block w-full">
 		<slot />
 	</div>
 	{#if localStorage.theme === 'custom'}
