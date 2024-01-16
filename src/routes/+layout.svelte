@@ -486,9 +486,9 @@
 									const cssString = e.detail;
 									const matches = cssString.match(/--(\w+):\s(\d+\s\d+\s\d+);/g);
 									const themeDefinition = {};
-
+									// @ts-ignore
 									matches.forEach((match) => {
-										const [property, value] = match.split(': ');
+										const [property, value] = match.split(': '); // @ts-ignore
 										themeDefinition[property.slice(2)] = value.slice(0, -1); // Remove the leading '--' from the property and the trailing ';' from the value
 									});
 
