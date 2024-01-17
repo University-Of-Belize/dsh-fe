@@ -8,6 +8,7 @@
 	import { addToCart, emptyCart } from '$lib/Elements/Utility/Cart';
 	import config from '$lib/config/settings';
 	import type { CartProduct } from '$lib/types/Product';
+	import type { User } from '$lib/types/User';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -15,6 +16,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import creditCardType from 'credit-card-type';
 	import { onMount } from 'svelte';
+	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {};
 
 	const wants_single_cart = localStorage.wants_single_cart ?? false;
 	$: single_cart = $page.url.searchParams.get('single_cart');
@@ -33,7 +35,7 @@
 	let inputCardName: HTMLInputElement;
 	let imageCardName: HTMLParagraphElement;
 	let conductingTransaction: boolean = false;
-	let transactionConfirm: boolean = false; //@remind Implement soon
+	let transactionConfirm: boolean = false;
 
 	onMount(async () => {
 		try {
@@ -442,6 +444,12 @@
 											on:click={() => {
 												conductingTransaction = true;
 												localStorage.setItem('payment_data', JSON.stringify({ method: 'credit' }));
+
+												user.credit.$numberDecimal = JSON.stringify(
+													parseFloat(user.credit.$numberDecimal) - cartTotal
+												);
+												localStorage.user = JSON.stringify(user);
+
 												setTimeout(() => {
 													goto('/product/checkout/confirmed');
 												}, 3000);

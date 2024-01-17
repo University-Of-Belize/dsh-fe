@@ -131,7 +131,13 @@
 							<img src={config.ui['branding-logo']} style="height: 30px;" />
 						</div>
 					{/if}
-					<div class="hidden md:flex">{@html staff ? titleText + ' | Staff Mode' : titleText}</div>
+					<div class="flex items-center justify-start text-sm">
+						<div>
+							{@html staff
+								? `<div class="flex lg:space-x-2">${titleText}| Staff Mode</div>`
+								: `<div class="flex flex-wrap">${titleText}</div>`}
+						</div>
+					</div>
 				</div>
 			</div>
 			{#if search}
@@ -166,7 +172,7 @@
 				<div class="flex space-x-4">
 					<div
 						title="Sign in to access content"
-						class="btn-wrp"
+						class="btn-wrp hidden lg:block"
 						on:click={async () => {
 							await goto('/auth/login');
 						}}
@@ -215,17 +221,24 @@
 							class="px-6 py-3"
 						/>
 					</div>
-					<img
-						src={user.profile_picture ?? config['user']['default-image']}
-						title="My profile"
-						alt="{user.username}'s photo"
-						width="40px"
-						class="cursor-pointer rounded-full border border-COLORWHT bg-COLORBLK1 object-cover hover:opacity-80"
-						style="height: 42px; width: 42px;"
-						on:click={async () => {
-							await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
-						}}
-					/>
+					<div
+						class="profile-picture hidden items-center justify-start space-x-2 text-sm font-medium text-white lg:flex"
+					>
+						<div>
+							<img
+								src={user.profile_picture ?? config['user']['default-image']}
+								title="My profile"
+								alt="{user.username}'s photo"
+								width="40px"
+								class="cursor-pointer rounded-full border border-COLORWHT bg-COLORBLK1 object-cover hover:opacity-80"
+								style="height: 42px; width: 42px;"
+								on:click={async () => {
+									await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
+								}}
+							/>
+						</div>
+						<div class="pr-4">${parseFloat(user.credit.$numberDecimal).toFixed(2)}</div>
+					</div>
 				</div>
 			{/if}
 		</div>
@@ -348,6 +361,28 @@
 			class="drawer h-screen flex-col justify-start bg-COLORBLK bg-opacity-100 px-2 py-2 text-COLORWHT"
 			bind:this={navDrawer}
 		>
+			{#if user}
+				<div class="mx-1 my-2 mb-4">
+					<div
+						class="profile-picture flex w-full items-center justify-start space-x-4 rounded-md bg-COLORBLK3 px-2 py-4 text-sm font-medium text-white"
+					>
+						<div>
+							<img
+								src={user?.profile_picture ?? config['user']['default-image']}
+								title="My profile"
+								alt="{user?.username}'s photo"
+								width="40px"
+								class="cursor-pointer rounded-full border border-COLORWHT bg-COLORBLK1 object-cover hover:opacity-80"
+								style="height: 42px; width: 42px;"
+								on:click={async () => {
+									await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
+								}}
+							/>
+						</div>
+						<div>Wallet (${parseFloat(user?.credit?.$numberDecimal).toFixed(2)})</div>
+					</div>
+				</div>
+			{/if}
 			{#if search}
 				<form
 					class="searchbar flex items-center rounded-sm border border-COLORWHT5 bg-COLORBLK bg-opacity-90 px-4 py-2 text-sm focus:bg-COLORBLK1 active:bg-COLORBLK1 lg:hidden"

@@ -329,7 +329,7 @@
 									<div class="flex space-x-4">
 										<div class="pfp">
 											<img
-												class="rounded-md"
+												class="rounded-md object-cover"
 												src={order.order_from
 													? order.order_from.profile_picture
 														? order.order_from.profile_picture
