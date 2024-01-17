@@ -24,8 +24,8 @@
 	let cardEl: HTMLDivElement;
 	let inputCardNumber: HTMLInputElement;
 	let imageCardNumber: HTMLParagraphElement;
-	let inputCVVNumber: HTMLInputElement;
-	let imageCVVNumber: HTMLParagraphElement;
+	let inputCVCNumber: HTMLInputElement;
+	let imageCVCNumber: HTMLParagraphElement;
 	let expirationDate: HTMLInputElement;
 	let imageExpDate: HTMLParagraphElement;
 	let inputCardName: HTMLInputElement;
@@ -235,6 +235,9 @@
 							<label class="mb-2 block text-sm font-bold text-COLORWHT">Card number</label>
 							<input
 								type="text"
+								autocomplete="cc-number"
+								autocorrect="off"
+								spellcheck="false"
 								class="ring-offset-background focus-visible:ring-ring mb-4 flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-xl focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 								bind:this={inputCardNumber}
 								on:input={(event) => {
@@ -263,6 +266,9 @@
 									<label class="mb-2 block text-sm font-bold text-COLORWHT">Exp. date</label>
 									<input
 										type="text"
+										autocomplete="cc-exp"
+										autocorrect="off"
+										spellcheck="false"
 										class="ring-offset-background focus-visible:ring-ring mb-4 flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 										bind:this={expirationDate}
 										on:input={() => flipCard('flipToFront')}
@@ -288,17 +294,20 @@
 									/>
 								</div>
 								<div class="flex-1">
-									<label class="mb-2 block text-sm font-bold text-COLORWHT">CVV</label>
+									<label class="mb-2 block text-sm font-bold text-COLORWHT">CVC</label>
 									<input
 										type="text"
+										autocomplete="cc-csc"
+										autocorrect="off"
+										spellcheck="false"
 										class="ring-offset-background focus-visible:ring-ring mb-4 flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-										bind:this={inputCVVNumber}
+										bind:this={inputCVCNumber}
 										on:input={() => flipCard('flipToRear')}
 										on:input={(event) => {
 											// Remove all non-numeric characters from the input
 											const input = event.target.value.replace(/\D/g, '');
-											inputCVVNumber.value = input;
-											imageCVVNumber.innerHTML = input.trim() != '' ? input : '&nbsp;';
+											inputCVCNumber.value = input;
+											imageCVCNumber.innerHTML = input.trim() != '' ? input : '&nbsp;';
 										}}
 										on:click={() => flipCard('flipToRear')}
 										maxlength="3"
@@ -310,6 +319,9 @@
 								<label class="mb-2 block text-sm font-bold text-COLORWHT">Card holder</label>
 								<input
 									type="text"
+									autocomplete="cc-name"
+									autocorrect="off"
+									spellcheck="false"
 									class="ring-offset-background focus-visible:ring-ring flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 									bind:this={inputCardName}
 									on:input={() => flipCard('flipToFront')}
@@ -322,7 +334,7 @@
 								/>
 							</div>
 							<div class="flex items-center justify-start space-x-2 py-4 text-sm text-COLORWHT1">
-								<div>Payment processing<br/>powered by</div>
+								<div>Payment processing<br />powered by</div>
 								<a href="https://onelink.bz" target="_blank"
 									><img
 										src="/assets/checkout/brands/one-link.svg"
@@ -397,7 +409,7 @@
 										<div class="absolute top-8 w-full">
 											<div class="mt-12 px-8">
 												<p
-													bind:this={imageCVVNumber}
+													bind:this={imageCVCNumber}
 													class="ml-auto flex w-14 items-center py-2 pl-2 text-COLORBLK"
 												>
 													456
