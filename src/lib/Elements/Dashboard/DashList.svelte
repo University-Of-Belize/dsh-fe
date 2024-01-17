@@ -93,7 +93,7 @@
 	</div>
 	{#if staff}
 		<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
-			<div class="title pb-5 font-semibold">Help Center</div>
+			<div class="title pb-5 font-semibold">Announcements</div>
 			<div class="three pt-1" on:click={() => goto('/admin/dashboard/new-article')}>
 				<Button
 					icon={faNoteSticky}

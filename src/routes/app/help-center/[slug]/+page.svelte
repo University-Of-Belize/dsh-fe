@@ -84,7 +84,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Help Center / Article View</title>
+	<title>Plattr | Announcements / Article View</title>
 </svelte:head>
 
 <div
@@ -96,7 +96,7 @@
 		<Navigation
 			transparency={5}
 			search={true}
-			titleText="Help Center"
+			titleText="Announcements"
 			titleWhere="/app/help-center"
 		/>
 	</div>

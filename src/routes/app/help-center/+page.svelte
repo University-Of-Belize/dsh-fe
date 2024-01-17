@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import CardPicker from '$lib/Elements/Cards/CardPicker.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
@@ -36,12 +35,12 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Help Center</title>
+	<title>Plattr | Announcements</title>
 </svelte:head>
 
 <main class="h-screen w-full overflow-hidden text-COLORWHT">
 	<div class="navigation z-20 w-full">
-		<Navigation transparency={5} search={true} titleText="Help Center" />
+		<Navigation transparency={5} search={true} titleText="Announcements" />
 	</div>
 	<div
 		class="content-wrapper absolute z-10 flex h-full w-full items-start justify-start overflow-auto pb-40"
@@ -52,7 +51,7 @@
 					class="title flex h-48 w-full items-center justify-center rounded-md bg-COLORBLK4 pb-5 text-4xl font-semibold"
 				>
 					<div class="block text-center">
-						<div>Help Center (Beta)</div>
+						<div>Announcements (Beta)</div>
 						<div class="mt-2 text-sm font-light text-COLORWHT1">Find help articles here</div>
 					</div>
 				</div>

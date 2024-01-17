@@ -76,7 +76,7 @@
 		</div>
 		<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
 			<div class="flex w-full flex-wrap justify-between pb-2 text-2xl font-semibold">
-				<div>Help Center Article Management</div>
+				<div>Announcements Article Management</div>
 				<div
 					on:click={async () => {
 						prefersRichText = prefersRichText ? false : true;
@@ -92,7 +92,7 @@
 					/>
 				</div>
 			</div>
-			<div class="flex pb-12 text-xl font-semibold">Submit or delete help center articles</div>
+			<div class="flex pb-12 text-xl font-semibold">Submit or delete announcements articles</div>
 			<div class="flex w-full flex-col flex-wrap">
 				{#if data != undefined}
 					<div class="block">
