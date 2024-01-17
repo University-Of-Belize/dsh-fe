@@ -239,7 +239,7 @@
 									>
 										<div class="content mx-4 block flex-1">
 											<div class="product-name font-base text-xl">Total amount due today</div>
-											<div class="product-quantity text-sm font-light text-COLORRED">
+											<div class="product-quantity text-sm font-light text-COLORWHT2">
 												Your total amount to pay
 											</div>
 										</div>
