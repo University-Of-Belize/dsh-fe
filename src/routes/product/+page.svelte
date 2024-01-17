@@ -83,7 +83,7 @@
 							id={product.id}
 							image={product.image}
 							name={product.productName}
-							description={product.description}
+							description={product.description ?? ""}
 							price={product.price?.$numberDecimal}
 							slug={product.slug}
 						/>
