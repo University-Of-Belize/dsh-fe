@@ -125,7 +125,7 @@
 				</div>
 			{:else}
 				<img
-					class="h-16 w-16 rounded-md lg:h-32 lg:w-32"
+					class="h-16 w-16 rounded-md object-cover lg:h-32 lg:w-32"
 					src={user?.profile_picture || config['user']['default-image']}
 					alt="{user?.username}'s avatar"
 					on:error={() => {

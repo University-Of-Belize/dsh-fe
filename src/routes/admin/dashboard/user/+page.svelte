@@ -157,6 +157,7 @@
 									description="Token: {data[0].score
 										? 'Not available with search'
 										: user?.token || '<b>Not Activated / Never logged in</b>'}"
+									html
 								>
 									<div class="actions flex space-x-2">
 										{#if staff}
