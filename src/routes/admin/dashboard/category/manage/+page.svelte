@@ -71,7 +71,7 @@
 		const valueArray = Array.from(event.target)
 			.filter((el) => el.name)
 			.map((el) => el.value);
-		console.log(valueArray);
+		// console.log(valueArray);
 
 		if (category_id) {
 			editCategory(

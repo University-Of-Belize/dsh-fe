@@ -21,8 +21,15 @@
 			const response = (await fetchWebApi(
 				'v1/order/place',
 				'POST',
-				what_is(what.public.order, '')
+				what_is(
+					what.public.order,
+					localStorage.payment_data ? JSON.parse(localStorage.payment_data) : ''
+				)
 			)) as Response;
+			// Immediately remove the payment information from the local storage (not card data--none is stored)
+			setTimeout(() => {	
+				localStorage.removeItem('payment_data');
+			}, 800);
 			if (!response.ok) {
 				const json = await response.json();
 				branding_text = 'Order not placed';

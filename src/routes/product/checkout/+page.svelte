@@ -8,6 +8,8 @@
 	import { addToCart, emptyCart } from '$lib/Elements/Utility/Cart';
 	import config from '$lib/config/settings';
 	import type { CartProduct } from '$lib/types/Product';
+	import { what_is } from '$lib/vendor/dishout/What_Is';
+	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faClone, faLock, faPrint, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
@@ -30,6 +32,8 @@
 	let imageExpDate: HTMLParagraphElement;
 	let inputCardName: HTMLInputElement;
 	let imageCardName: HTMLParagraphElement;
+	let conductingTransaction: boolean = false;
+	let transactionConfirm: boolean = false; //@remind Implement soon
 
 	onMount(async () => {
 		try {
@@ -92,6 +96,42 @@
 	};
 
 	/*** END card stuff*/
+
+	/*** Fulfullment of order using credit card */
+	const handleSubmit = async (event: Event) => {
+		event.preventDefault();
+		conductingTransaction = true;
+		// @ts-ignore
+		const valueArray = Array.from(event.target)
+			.filter((el) => el.name)
+			.map((el) => el.value);
+		// console.log(valueArray);
+
+		const r = (await fetchWebApi(
+			'v1/order/place',
+			'POST',
+			what_is(what.public.order, { method: 'card', data: valueArray })
+		)) as Response;
+		if (!r) return;
+		if (!r.ok) {
+			const res = await r.json();
+			toast.push(`${res.message}`, {
+				dismissable: false,
+				theme: {
+					'--toastBarBackground': 'rgb(var(--COLORRED))'
+				}
+			});
+			setTimeout(() => {
+				conductingTransaction = false; // Slight "bounce"
+			}, 450);
+			return console.error(res);
+		}
+		const res = await r.json();
+		toast.push(`${res.message ?? 'Thank you for your order.'}`);
+		setTimeout(() => {
+			goto('/admin/dashboard');
+		}, 3000);
+	};
 </script>
 
 <svelte:head>
@@ -228,6 +268,7 @@
 				<div class="payment-form lg:mr-l block flex-1 text-COLORBLK">
 					<form
 						class="payment-form flex w-full flex-col-reverse items-center justify-center rounded-sm bg-opacity-10 py-8 text-COLORWHT md:bg-COLORWHT lg:px-6"
+						on:submit={(e) => handleSubmit(e)}
 					>
 						<div
 							class="card-info mt-4 w-full border-t-2 border-COLORBLK2 bg-opacity-100 text-COLORWHT lg:w-1/2"
@@ -238,7 +279,9 @@
 							</div>
 							<label class="mb-2 block text-sm font-bold">Card number</label>
 							<input
+								required
 								type="text"
+								name="cc-number"
 								autocomplete="cc-number"
 								autocorrect="off"
 								spellcheck="false"
@@ -269,7 +312,9 @@
 								<div class="flex-1">
 									<label class="mb-2 block text-sm font-bold">Exp. date</label>
 									<input
+										required
 										type="text"
+										name="cc-exp"
 										autocomplete="cc-exp"
 										autocorrect="off"
 										spellcheck="false"
@@ -300,7 +345,9 @@
 								<div class="flex-1">
 									<label class="mb-2 block text-sm font-bold">CVC</label>
 									<input
+										required
 										type="text"
+										name="cc-csc"
 										autocomplete="cc-csc"
 										autocorrect="off"
 										spellcheck="false"
@@ -322,7 +369,9 @@
 							<div class="card-holder">
 								<label class="mb-2 block text-sm font-bold">Card holder</label>
 								<input
+									required
 									type="text"
+									name="cc-name"
 									autocomplete="cc-name"
 									autocorrect="off"
 									spellcheck="false"
@@ -339,41 +388,64 @@
 							</div>
 							<div class="mt-6 flex w-full flex-col items-center space-x-2 text-center">
 								<div class="pay_now flex w-full basis-full items-center justify-start py-4">
-									<div class="btn_wrp w-full" on:click={() => goto('/product/checkout/confirmed')}>
+									<div class="stub hidden animate-pulse"></div>
+									<button class="btn_wrp w-full {conductingTransaction ? 'animate-pulse' : ''}}" type="submit" disabled={conductingTransaction}>
 										<Button
 											color="COLORBLE"
 											color_t="COLORWHT"
 											text="Pay now"
 											icon={faLock}
-											custom_style="w-full justify-center items-center"
+											disabled={conductingTransaction}
+											disabled_text="Please wait for the current transaction to complete."
+											custom_style="w-full justify-center items-center {transactionConfirm? "bg-COLORRED" : ""}"
 										/>
-									</div>
+									</button>
 								</div>
 								<div class="flex w-full items-center justify-between">
 									<div class="pay_later flex w-full items-center justify-start py-4">
-										<div class="btn_wrp" on:click={() => goto('/product/checkout/confirmed')}>
+										<button
+											disabled
+											title="Not implemented yet"
+											class="btn_wrp"
+											on:click={() => {
+												localStorage.setItem('payment_data', JSON.stringify({ method: 'pickup' }));
+												setTimeout(() => {
+													goto('/product/checkout/confirmed');
+												}, 3000);
+											}}
+										>
 											<Button
 												color="COLORHPK"
 												color_t="COLORWHT"
 												text="Pay in-person"
+												disabled
 												icon={faClone}
 												custom_style="w-full justify-center items-center"
 											/>
-										</div>
+										</button>
 									</div>
 									<div class="pay_with_credit flex w-full items-center justify-start py-4">
-										<div
+										<button
+											disabled={conductingTransaction}
 											class="btn_wrp w-full"
-											on:click={() => goto('/product/checkout/confirmed')}
+											on:click={() => {
+												conductingTransaction = true;
+												localStorage.setItem('payment_data', JSON.stringify({ method: 'credit' }));
+												setTimeout(() => {
+													goto('/product/checkout/confirmed');
+												}, 3000);
+											}}
 										>
 											<Button
 												color="COLORPNK"
 												color_t="COLORWHT"
 												text="Pay with credit"
 												icon={faClone}
+												disabled={conductingTransaction}
+												disabled_text="Please wait for the current transaction to complete."
 												custom_style="w-full justify-center items-center"
 											/>
-										</div>
+										</button>
 									</div>
 								</div>
 							</div>
