@@ -9,7 +9,7 @@
 	import config from '$lib/config/settings';
 	import type { CartProduct } from '$lib/types/Product';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { faClone, faPrint, faTrash } from '@fortawesome/free-solid-svg-icons';
+	import { faClone, faLock, faPrint, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import creditCardType from 'credit-card-type';
 	import { onMount } from 'svelte';
@@ -227,18 +227,22 @@
 				</div>
 				<div class="payment-form lg:mr-l block flex-1 text-COLORBLK">
 					<form
-						class="payment-form flex w-full flex-col-reverse items-center justify-center rounded-sm bg-opacity-10 py-8 text-COLORBLK md:bg-COLORWHT lg:px-6"
+						class="payment-form flex w-full flex-col-reverse items-center justify-center rounded-sm bg-opacity-10 py-8 text-COLORWHT md:bg-COLORWHT lg:px-6"
 					>
 						<div
-							class="card-info mt-4 w-full border-t-2 border-COLORBLK2 bg-opacity-100 pt-8 text-COLORBLK lg:w-1/2"
+							class="card-info mt-4 w-full border-t-2 border-COLORBLK2 bg-opacity-100 text-COLORWHT lg:w-1/2"
 						>
-							<label class="mb-2 block text-sm font-bold text-COLORWHT">Card number</label>
+							<div class="mb-4 w-full border-l border-l-COLORGRN bg-COLORBLK1 p-4 text-COLORWHT">
+								Local cards are also accepted! This means you can use your local debit card here,
+								too!
+							</div>
+							<label class="mb-2 block text-sm font-bold">Card number</label>
 							<input
 								type="text"
 								autocomplete="cc-number"
 								autocorrect="off"
 								spellcheck="false"
-								class="ring-offset-background focus-visible:ring-ring mb-4 flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-xl focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+								class="ring-offset-background focus-visible:ring-ring mb-4 flex h-10 w-full rounded-sm border border-COLORBLK4 bg-transparent px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 								bind:this={inputCardNumber}
 								on:input={(event) => {
 									//   Remove all non-numeric characters from the input
@@ -261,15 +265,15 @@
 								maxlength="19"
 								placeholder="XXXX XXXX XXXX XXXX"
 							/>
-							<div class="expiry-date mb-4 flex gap-x-2">
+							<div class="expiry-date flex gap-x-2">
 								<div class="flex-1">
-									<label class="mb-2 block text-sm font-bold text-COLORWHT">Exp. date</label>
+									<label class="mb-2 block text-sm font-bold">Exp. date</label>
 									<input
 										type="text"
 										autocomplete="cc-exp"
 										autocorrect="off"
 										spellcheck="false"
-										class="ring-offset-background focus-visible:ring-ring mb-4 flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+										class="ring-offset-background focus-visible:ring-ring mb-4 flex h-10 w-full rounded-sm border border-COLORBLK4 bg-transparent px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 										bind:this={expirationDate}
 										on:input={() => flipCard('flipToFront')}
 										on:input={(event) => {
@@ -294,13 +298,13 @@
 									/>
 								</div>
 								<div class="flex-1">
-									<label class="mb-2 block text-sm font-bold text-COLORWHT">CVC</label>
+									<label class="mb-2 block text-sm font-bold">CVC</label>
 									<input
 										type="text"
 										autocomplete="cc-csc"
 										autocorrect="off"
 										spellcheck="false"
-										class="ring-offset-background focus-visible:ring-ring mb-4 flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+										class="ring-offset-background focus-visible:ring-ring mb-4 flex h-10 w-full rounded-sm border border-COLORBLK4 bg-transparent px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 										bind:this={inputCVCNumber}
 										on:input={() => flipCard('flipToRear')}
 										on:input={(event) => {
@@ -316,13 +320,13 @@
 								</div>
 							</div>
 							<div class="card-holder">
-								<label class="mb-2 block text-sm font-bold text-COLORWHT">Card holder</label>
+								<label class="mb-2 block text-sm font-bold">Card holder</label>
 								<input
 									type="text"
 									autocomplete="cc-name"
 									autocorrect="off"
 									spellcheck="false"
-									class="ring-offset-background focus-visible:ring-ring flex h-10 w-full rounded-md border-2 px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+									class="ring-offset-background focus-visible:ring-ring mb-4 flex h-10 w-full rounded-sm border border-COLORBLK4 bg-transparent px-4 py-1.5 text-lg focus-visible:border-purple-600 focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 									bind:this={inputCardName}
 									on:input={() => flipCard('flipToFront')}
 									on:input={(event) => {
@@ -333,23 +337,64 @@
 									placeholder="D'ALESSEO REQUENA"
 								/>
 							</div>
-							<div class="flex items-center justify-start space-x-2 py-4 text-sm text-COLORWHT1">
-								<div>Payment processing<br />powered by</div>
-								<a href="https://onelink.bz" target="_blank"
-									><img
+							<div class="mt-6 flex w-full flex-col items-center space-x-2 text-center">
+								<div class="pay_now flex w-full basis-full items-center justify-start py-4">
+									<div class="btn_wrp w-full" on:click={() => goto('/product/checkout/confirmed')}>
+										<Button
+											color="COLORBLE"
+											color_t="COLORWHT"
+											text="Pay now"
+											icon={faLock}
+											custom_style="w-full justify-center items-center"
+										/>
+									</div>
+								</div>
+								<div class="flex w-full items-center justify-between">
+									<div class="pay_later flex w-full items-center justify-start py-4">
+										<div class="btn_wrp" on:click={() => goto('/product/checkout/confirmed')}>
+											<Button
+												color="COLORHPK"
+												color_t="COLORWHT"
+												text="Pay in-person"
+												icon={faClone}
+												custom_style="w-full justify-center items-center"
+											/>
+										</div>
+									</div>
+									<div class="pay_with_credit flex w-full items-center justify-start py-4">
+										<div
+											class="btn_wrp w-full"
+											on:click={() => goto('/product/checkout/confirmed')}
+										>
+											<Button
+												color="COLORPNK"
+												color_t="COLORWHT"
+												text="Pay with credit"
+												icon={faClone}
+												custom_style="w-full justify-center items-center"
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div
+								class="flex items-center justify-between space-x-2 rounded-sm border border-COLORWHT5 bg-COLORBLK pl-4 text-sm text-COLORWHT1"
+							>
+								<div>Secure payment processing<br />powered by</div>
+								<a href="https://onelink.bz" target="_blank" class="bg-COLORBLK1 px-4 py-4">
+									<img
 										src="/assets/checkout/brands/one-link.svg"
 										width="50px"
 										class="cursor-pointer hover:opacity-75"
 									/></a
 								>
 							</div>
-							<div class="pay_now flex w-full items-center justify-start py-4">
-								<div class="btn_wrp" on:click={() => goto('/product/checkout/confirmed')}>
-									<Button color="COLORHPK" color_t="COLORWHT" text="Queue Now" icon={faClone} />
-								</div>
-							</div>
 						</div>
-						<div class="credit-card w-full select-none lg:w-1/2">
+						<div
+							class="credit-card w-full select-none lg:w-1/2"
+							on:mouseenter={() => flipCard('flip')}
+							on:mouseleave={() => flipCard('flip')}
+						>
 							<div class="h-60 w-full" style="perspective: 1000px">
 								<div
 									bind:this={cardEl}
@@ -408,12 +453,14 @@
 										/>
 										<div class="absolute top-8 w-full">
 											<div class="mt-12 px-8">
-												<p
-													bind:this={imageCVCNumber}
-													class="ml-auto flex w-14 items-center py-2 pl-2 text-COLORBLK"
+												<b>
+													<p
+														bind:this={imageCVCNumber}
+														class="ml-auto flex w-14 items-center py-2 pl-2 text-COLORBLK"
+													>
+														456
+													</p></b
 												>
-													456
-												</p>
 												<p class="mr-2 flex justify-end pt-4 text-sm font-bold text-COLORWHT">
 													security code
 												</p>
