@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import UserBanner from '$lib/Elements/Banners/UserBanner2.svelte';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
@@ -211,7 +210,7 @@
 			search={true}
 			titleText="{config.ui['branding-text']} {staff
 				? ''
-				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
+				: "<div class='font-bold overflow-hidden'>| Dashboard</div>"}"
 			titleWhere="/admin/dashboard"
 		/>
 	</div>

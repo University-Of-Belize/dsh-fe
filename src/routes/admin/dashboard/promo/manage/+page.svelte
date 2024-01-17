@@ -8,6 +8,7 @@
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import { createPromo, deletePromo, editPromo } from '$lib/Elements/Utility/Promo';
 	import { getDate } from '$lib/Elements/Utility/time';
+	import config from '$lib/config/settings';
 	import type { Promo } from '$lib/types/Promo';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -22,7 +23,6 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
-	import config from '$lib/config/settings';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
@@ -117,7 +117,7 @@
 			search={true}
 			titleText="{config.ui['branding-text']} {staff
 				? ''
-				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
+				: "<div class='font-bold overflow-hidden'>| Dashboard</div>"}"
 			titleWhere="/admin/dashboard"
 		/>
 	</div>

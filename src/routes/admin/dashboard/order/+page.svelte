@@ -13,7 +13,7 @@
 	import type { Promo } from '$lib/types/Promo';
 	import type { User } from '$lib/types/User';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
-	// What is what?
+// What is what?
 	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';
 	import { locateNodeUsingHash } from '$lib/Elements/Utility/page';
 	import type { CartProduct } from '$lib/types/Product';
@@ -289,7 +289,7 @@
 			search={true}
 			titleText="{config.ui['branding-text']} {staff
 				? ''
-				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
+				: "<div class='font-bold overflow-hidden'>| Dashboard</div>"}"
 			titleWhere="/admin/dashboard"
 		/>
 	</div>

@@ -5,12 +5,12 @@
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import { deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
+	import config from '$lib/config/settings';
 	import type { Review } from '$lib/types/Review';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import config from '$lib/config/settings';
 	import SearchBar from '../../../../lib/Elements/Search/SearchBar.svelte';
 	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
@@ -49,7 +49,7 @@
 			search={true}
 			titleText="{config.ui['branding-text']} {staff
 				? ''
-				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
+				: "<div class='font-bold overflow-hidden'>| Dashboard</div>"}"
 			titleWhere="/admin/dashboard"
 		/>
 	</div>

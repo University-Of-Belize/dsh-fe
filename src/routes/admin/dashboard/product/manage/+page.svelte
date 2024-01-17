@@ -174,7 +174,7 @@
 			search={true}
 			titleText="{config.ui['branding-text']} {staff
 				? ''
-				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
+				: "<div class='font-bold overflow-hidden'>| Dashboard</div>"}"
 			titleWhere="/admin/dashboard"
 		/>
 	</div>

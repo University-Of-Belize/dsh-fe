@@ -5,12 +5,12 @@
 	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import { deleteCategory } from '$lib/Elements/Utility/Category';
+	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faCog, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import config from '$lib/config/settings';
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let data: Category[]; // List of users
 
@@ -45,7 +45,7 @@
 			search={true}
 			titleText="{config.ui['branding-text']} {staff
 				? ''
-				: "<div class='font-bold pl-1 overflow-hidden'>| Dashboard</div>"}"
+				: "<div class='font-bold overflow-hidden'>| Dashboard</div>"}"
 			titleWhere="/admin/dashboard"
 		/>
 	</div>
