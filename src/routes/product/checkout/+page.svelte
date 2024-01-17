@@ -100,6 +100,11 @@
 	/*** Fulfullment of order using credit card */
 	const handleSubmit = async (event: Event) => {
 		event.preventDefault();
+		if (conductingTransaction) return toast.push('Transaction already in progress.');
+		if (!transactionConfirm && !conductingTransaction) {
+			// Ensures that the user indeed wants to conduct the payment
+			return (transactionConfirm = true);
+		}
 		conductingTransaction = true;
 		// @ts-ignore
 		const valueArray = Array.from(event.target)
@@ -389,15 +394,21 @@
 							<div class="mt-6 flex w-full flex-col items-center space-x-2 text-center">
 								<div class="pay_now flex w-full basis-full items-center justify-start py-4">
 									<div class="stub hidden animate-pulse"></div>
-									<button class="btn_wrp w-full {conductingTransaction ? 'animate-pulse' : ''}}" type="submit" disabled={conductingTransaction}>
+									<button
+										class="btn_wrp w-full {conductingTransaction ? 'animate-pulse' : ''}}"
+										type="submit"
+										disabled={conductingTransaction}
+									>
 										<Button
 											color="COLORBLE"
 											color_t="COLORWHT"
-											text="Pay now"
+											text={transactionConfirm ? 'Confirm Payment?' : 'Pay now'}
 											icon={faLock}
 											disabled={conductingTransaction}
 											disabled_text="Please wait for the current transaction to complete."
-											custom_style="w-full justify-center items-center {transactionConfirm? "bg-COLORRED" : ""}"
+											custom_style="w-full justify-center items-center {transactionConfirm
+												? 'bg-COLORRED'
+												: ''}"
 										/>
 									</button>
 								</div>
