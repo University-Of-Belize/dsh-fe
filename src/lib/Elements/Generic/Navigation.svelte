@@ -97,10 +97,9 @@
 			navTransparency = 1;
 			// document.body.style.overflow = 'hidden';
 		} else {
-			console.log('l');
 			nav.style.removeProperty('transform');
 			navClose.style.setProperty('opacity', '0');
-			navClose.style.setProperty('z-index', '-20');
+			navClose.style.setProperty('z-index', '-40');
 			// Unlock the scrollbar
 			document.body.removeAttribute('style'); // @remind Remove nav patches
 			// nav.style.opacity = '0';
@@ -377,7 +376,7 @@
 
 	<div
 		class="outerNav absolute top-0 w-full bg-COLORBLK"
-		style="height: {navScrimHeight}px; transition-duration: 200ms; transition-property: opacity; opacity: 0; z-index: -20;"
+		style="height: {navScrimHeight}px; transition-duration: 200ms; transition-property: opacity; opacity: 0; z-index: -40;"
 		bind:this={navClose}
 		on:click={toggleNav}
 	>

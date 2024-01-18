@@ -122,10 +122,11 @@
 			class="image-and-wrapper relative"
 			style="height: {localStorage.token ? '100vh' : '800px'}"
 		>
-			<div class="navigation absolute top-0 z-20 w-full">
-				<Navigation transparency={25} search={true} />
-			</div>
 			<div class="content-wrapper absolute z-10 flex h-full w-full items-center justify-center">
+				<div class="navigation absolute top-0 w-full">
+					<!--- whitespace triggers nav and needs fixing-->
+					<Navigation transparency={25} search={true} />
+				</div>
 				{#if !localStorage.token}
 					<div class="content flex flex-1 items-center justify-center">
 						<div class="content-wrapper block px-4 md:px-8 lg:px-0">
@@ -245,6 +246,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div
 				class="wrapper absolute flex h-full w-full items-center justify-center bg-COLORBLK opacity-20"
 			>

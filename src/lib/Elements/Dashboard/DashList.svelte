@@ -17,7 +17,7 @@
 	export let staff = false;
 </script>
 
-<div class="dashList bg-opacity-100">
+<div class="dashList bg-opacity-100 pb-40">
 	<div class="section bg-opacity-100 py-6">
 		<div class="title pb-5 font-semibold">My Account</div>
 		<div class="three pt-1">
