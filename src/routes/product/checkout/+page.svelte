@@ -81,21 +81,25 @@
 	}
 
 	/*** Card animations and stuff */
-	const flipCard = (flip: string) => {
+	function flipCard(flip: string) {
 		if (flip === 'flipToRear' && !cardEl.classList.contains('rearIsVisible')) {
 			cardEl.classList.add('rearIsVisible');
+			cardEl.style.setProperty('transform', 'rotateY(-180deg)');
 		}
 		if (flip === 'flipToFront' && cardEl.classList.contains('rearIsVisible')) {
 			cardEl.classList.remove('rearIsVisible');
+			cardEl.style.removeProperty('transform');
 		}
 		if (flip === 'flip') {
 			if (cardEl.classList.contains('rearIsVisible')) {
 				cardEl.classList.remove('rearIsVisible');
+				cardEl.style.removeProperty('transform');
 			} else {
 				cardEl.classList.add('rearIsVisible');
+				cardEl.style.setProperty('transform', 'rotateY(-180deg)');
 			}
 		}
-	};
+	}
 
 	/*** END card stuff*/
 
@@ -144,8 +148,6 @@
 <svelte:head>
 	<title>Plattr | Checkout</title>
 </svelte:head>
-
-<div class="stub rearIsVisible hidden"></div>
 
 <main class="h-screen w-full">
 	<div class="navigation z-20 w-full">
@@ -513,7 +515,7 @@
 											</div>
 											<div class="block pt-2 text-sm font-normal">
 												<div class="flex items-center justify-start space-x-2 pt-1">
-													<p class="text-xs font-light">VALID<br />FROM</p>
+													<p class="text-xs font-light">VALID<br />TO</p>
 													<p bind:this={imageExpDate} class="w-14 font-medium tracking-wider">
 														12/24
 													</p>
@@ -576,8 +578,4 @@
 		 background: linear-gradient(rgba(239, 235, 222, 0.75), rgba(239, 235, 222, 0.75)),
 			url('/patterns/checkout.svg'); 
 	} */
-
-	.rearIsVisible {
-		transform: rotateY(-180deg);
-	}
 </style>
