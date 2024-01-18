@@ -91,6 +91,7 @@
 		<!-- Meta Tags Generated with https://metatags.io -->
 		<title>Plattr — Streamlined Campus Ordering Anytime, Anywhere</title>
 	</head>
+
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
@@ -106,4 +107,10 @@
 			window.isInstalled = true;
 		});
 	</script>
+	<style>
+		body::-webkit-scrollbar {
+			background-color: transparent;
+			width: 0px;
+		}
+	</style>
 </html>
