@@ -153,7 +153,7 @@
 	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} titleWhere="/" />
 	</div>
-	<div class="main-content flex h-full items-center justify-start text-COLORWHT">
+	<div class="main-content flex h-full items-center justify-start text-COLORWHT overflow-auto">
 		<div class="page-content block h-full w-full bg-transparent px-8 py-16 lg:px-16">
 			<div class="flex w-full flex-wrap">
 				<div class="order-summary mr-8 block flex-1">
