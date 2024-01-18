@@ -340,7 +340,7 @@
 </script>
 
 <SvelteToast {options} />
-<main class="flex">
+<main id="main" class="flex">
 	<div class="block w-full">
 		<slot />
 	</div>

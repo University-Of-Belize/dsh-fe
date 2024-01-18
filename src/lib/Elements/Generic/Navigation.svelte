@@ -53,7 +53,7 @@
 		navTransparency = 1;
 		toggleNav();
 		// Set the scrim height
-		navScrimHeight = window.outerHeight; // Full height (inside+outside screen-view)
+		navScrimHeight = window.innerHeight; // Full height (inside screen-view)
 		installPrompt = window.installPrompt;
 		if (!localStorage.user) {
 			if (localStorage.token) {

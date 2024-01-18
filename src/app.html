@@ -108,7 +108,20 @@
 		});
 	</script>
 	<style>
+		html,
+		body,
+		#main {
+			scrollbar-width: none !important;
+		}
+		html::-webkit-scrollbar {
+			background-color: transparent;
+			width: 0px;
+		}
 		body::-webkit-scrollbar {
+			background-color: transparent;
+			width: 0px;
+		}
+		#main::-webkit-scrollbar {
 			background-color: transparent;
 			width: 0px;
 		}
