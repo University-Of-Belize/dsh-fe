@@ -139,9 +139,9 @@
 			titleWhere="/"
 		/>
 	</div>
-	<div class="main-content flex h-full items-center justify-start text-COLORWHT">
+	<div class="main-content flex h-screen items-center justify-start text-COLORWHT">
 		<div
-			class="drawer h-screen w-full flex-col justify-start bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:w-1/4"
+			class="drawer h-screen w-full flex-col justify-start bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:w-1/4 overflow-auto"
 		>
 			<DashList {staff} />
 		</div>
