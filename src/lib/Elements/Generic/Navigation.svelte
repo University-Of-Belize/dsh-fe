@@ -38,6 +38,7 @@
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let navDrawer: HTMLDivElement;
 	let navClose: HTMLDivElement;
+	let navScrimHeight: number = 0;
 	let debug_selection: HTMLDivElement;
 	let debug_panel: HTMLDivElement;
 	let hidden: boolean = true;
@@ -48,6 +49,11 @@
 	let installPrompt;
 
 	onMount(async () => {
+		// Undo our changes
+		navTransparency = 1;
+		toggleNav();
+		// Set the scrim height
+		navScrimHeight = window.outerHeight; // Full height (inside+outside screen-view)
 		installPrompt = window.installPrompt;
 		if (!localStorage.user) {
 			if (localStorage.token) {
@@ -75,15 +81,32 @@
 	function toggleNav() {
 		// Loop till the opacity reaches zero while moving the drawer to the left
 		if (navTransparency == 0) {
-			nav.style.opacity = '1';
-			nav.style.display = 'flex';
+			nav.style.setProperty('transform', 'translate3d(0, 0, 0)');
+			navClose.style.setProperty('opacity', '0.25');
+			navClose.style.setProperty('z-index', '20');
+			document.body.style.setProperty('overflow', 'hidden');
+			document.body.style.setProperty('top', '0px');
+			// Lock the scrollbar
+			document.body.style.setProperty('overflow-y', 'scroll!important');
+			document.body.style.setProperty('position', 'fixed');
+			document.body.style.setProperty('left', '0');
+			document.body.style.setProperty('right', '0');
+			document.body.style.setProperty('bottom', '0');
+			// nav.style.opacity = '1';
+			// nav.style.display = 'flex';
 			navTransparency = 1;
-			document.body.style.overflow = 'hidden';
+			// document.body.style.overflow = 'hidden';
 		} else {
-			nav.style.opacity = '0';
-			nav.style.display = 'none';
+			console.log('l');
+			nav.style.removeProperty('transform');
+			navClose.style.setProperty('opacity', '0');
+			navClose.style.setProperty('z-index', '-20');
+			// Unlock the scrollbar
+			document.body.removeAttribute('style'); // @remind Remove nav patches
+			// nav.style.opacity = '0';
+			// nav.style.display = 'none';
 			navTransparency = 0;
-			document.body.style.overflow = 'initial';
+			// document.body.style.overflow = 'initial';
 		}
 	}
 
@@ -143,7 +166,7 @@
 			{#if search}
 				<form
 					class="searchbar hidden flex-1 items-center rounded-sm border border-COLORBLK2 bg-opacity-{transparency +
-						35} bg-COLORBLK px-4 py-2 text-sm focus:bg-COLORBLK1 active:bg-COLORBLK1 lg:mx-8 lg:flex"
+						35} bg-COLORBLK px-4 py-2 text-sm focus:bg-COLORBLK1 active:bg-COLORBLK1 lg:mx-20 lg:flex"
 					action="/product"
 				>
 					<div class="wrap_ flex w-full items-center justify-start bg-opacity-100">
@@ -353,14 +376,54 @@
 </div> -->
 
 	<div
-		class="sidebar flex h-screen w-full items-center justify-start bg-COLORWHT bg-opacity-25"
-		style="opacity: 0; display: none;"
+		class="outerNav absolute top-0 w-full bg-COLORBLK"
+		style="height: {navScrimHeight}px; transition-duration: 200ms; transition-property: opacity; opacity: 0; z-index: -20;"
+		bind:this={navClose}
+		on:click={toggleNav}
+	>
+		&nbsp;
+	</div>
+
+	<div
+		class="sidebar tp-yt-app-drawer flex h-screen w-fit items-center justify-start"
+		style="transition-duration: 200ms; z-index: 30;"
 		bind:this={nav}
 	>
+		<!-- style="opacity: 0; visibility: hidden;" -->
 		<div
 			class="drawer h-screen flex-col justify-start bg-COLORBLK bg-opacity-100 px-2 py-2 text-COLORWHT"
 			bind:this={navDrawer}
 		>
+			<div class="meta-controls mb-4 flex space-x-1">
+				<div
+					title="Pop open the navigation"
+					class="sidenav mr-2 cursor-pointer rounded-sm bg-COLORBLK1 px-4 py-3 hover:bg-opacity-70"
+					bind:this={navToggle}
+					on:click={toggleNav}
+				>
+					<Fa icon={faBars} size="1.25x" class="text-COLORWHT" />
+				</div>
+				<div
+					class="flex items-center justify-center bg-COLORBLK1 {config.ui['branding-logo'].trim() !=
+					''
+						? 'pr-4'
+						: 'px-4 py-2'} cursor-pointer space-x-4 overflow-clip rounded-sm font-semibold text-COLORWHT hover:underline"
+					on:click={() => goto(`${titleWhere}`)}
+				>
+					{#if config.ui['branding-logo'] && config.ui['branding-logo'].trim() != ''}
+						<div class="bg-COLORBLK4 px-2 py-2">
+							<img src={config.ui['branding-logo']} style="height: 30px;" />
+						</div>
+					{/if}
+					<div class="flex items-center justify-start text-sm">
+						<div>
+							{@html staff
+								? `<div class="flex lg:space-x-2">${titleText}| Staff Mode</div>`
+								: `<div class="flex flex-wrap">${titleText}</div>`}
+						</div>
+					</div>
+				</div>
+			</div>
 			{#if user}
 				<div class="mx-1 my-2 mb-4">
 					<div
@@ -478,9 +541,6 @@
 				{/if}
 			</div>
 		</div>
-		<div class="outerNav h-full flex-1 bg-transparent" bind:this={navClose} on:click={toggleNav}>
-			&nbsp;
-		</div>
 	</div>
 </div>
 
@@ -490,4 +550,16 @@
 		box-shadow: 0px 4px 110px 110px rgba(42, 26, 31, 0.08);
 		backdrop-filter: blur(2.5px);
 	}
+	/* Thanks, https://youtube.com!! Haha */
+	.tp-yt-app-drawer {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		transition-property: -webkit-transform;
+		transition-property: transform;
+		-webkit-transform: translate3d(-100%, 0, 0);
+		transform: translate3d(-100%, 0, 0);
+	}
+	/* Lol */
 </style>
