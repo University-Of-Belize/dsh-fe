@@ -3,7 +3,7 @@
 @tailwind components;
 @layer base {
 	:root {
-		--LANDINGPHOTO: url('/homepage/digital-art-neon-bubbles.webp');
+		--LANDINGPHOTO: url('/homepage/abstract_KDE.webp');
 		/* --COLORWHT: 227 223 209; */ /* old */
 		/* --COLORWHT: 227 226 222; */
 		/* --COLORWHT1: 244 238 226; */
