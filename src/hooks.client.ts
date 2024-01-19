@@ -16,7 +16,13 @@ Sentry.init({
 	replaysOnErrorSampleRate: 1.0,
 
 	// If you don't want to use Session Replay, just remove the line below:
-	integrations: [new Replay()]
+	integrations: [
+		new Replay({
+			maskAllInputs: true,
+			maskAllText: false,
+			blockAllMedia: true
+		})
+	]
 });
 
 // If you have a custom error handler, pass it to `handleErrorWithSentry`
