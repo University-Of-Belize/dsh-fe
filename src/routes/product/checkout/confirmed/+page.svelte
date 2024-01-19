@@ -3,13 +3,13 @@
 	import EscrowBanner from '$lib/Elements/Banners/EscrowBanner.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
+	import type { User } from '$lib/types/User';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import type { User } from '$lib/types/User';
-	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {};
+	let user: User = localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
 	let payment_data = localStorage.payment_data
 		? JSON.parse(JSON.stringify(localStorage.payment_data))
 		: {};

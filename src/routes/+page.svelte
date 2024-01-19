@@ -7,7 +7,7 @@
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	import type { Category } from '$lib/types/Category';
 	import { faAd, faLock, faUnlockKeyhole } from '@fortawesome/free-solid-svg-icons';
-	// import type { Product as Product_ } from '$lib/types/Product.ts';
+// import type { Product as Product_ } from '$lib/types/Product.ts';
 	import type { User } from '$lib/types/User';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
@@ -16,7 +16,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
-	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {};
+	let user: User = localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
 	let categories: Category[] = [];
 	let logging_in: boolean = false;
 	let debounceTimeout: number;

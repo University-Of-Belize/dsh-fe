@@ -28,7 +28,7 @@
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	const category_id = $page.url.searchParams.get('category_id');
 	let category_identity_input: TextInput;
-	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // User data
+	let user: User = localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {}; // User data
 	let data: Category; // List of users
 
 	async function catchAll() {

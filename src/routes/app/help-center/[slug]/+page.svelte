@@ -2,7 +2,6 @@
 	import { page } from '$app/stores';
 	// import config from '$lib/config/settings';
 	import { onMount } from 'svelte';
-
 	// import { goto } from '$app/navigation';
 	// import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
@@ -14,7 +13,7 @@
 	// import insane from 'insane';
 	// let hero_image: HTMLDivElement;
 	const staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // The user
-	const user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // The user
+	const user: User = localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {}; // The user
 	const params = $page.params.slug;
 	let data: Article;
 

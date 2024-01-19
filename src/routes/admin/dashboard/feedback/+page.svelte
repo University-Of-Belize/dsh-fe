@@ -17,7 +17,7 @@
 	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let data: Feedback[]; // Declare the data variable
-	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {};
+	let user: User = localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
 	let feedbackInput: CommentBox;
 	let richTextInput: string;
 	let prefersRichText = true;

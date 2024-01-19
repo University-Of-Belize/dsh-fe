@@ -28,7 +28,7 @@
 	import Fa from 'svelte-fa';
 	// let hero_image: HTMLDivElement;
 	const staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // The user
-	const user: User = localStorage.user ? JSON.parse(localStorage.user) : {}; // The user
+	const user: User = localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {}; // The user
 	const product = writable<Product | null>(null);
 	let product_id: string;
 	const params = $page.params.slug;
