@@ -120,8 +120,11 @@
 
 		const r = (await fetchWebApi(
 			'v1/order/place',
-			'POST',
-			what_is(what.public.order, { method: 'card', data: valueArray })
+			'POST', // "silent" errors
+			what_is(what.public.order, { method: 'card', data: valueArray }),
+			undefined,
+			undefined,
+			true
 		)) as Response;
 		if (!r) return;
 		if (!r.ok) {
@@ -154,7 +157,7 @@
 		<Navigation transparency={5} search={true} titleWhere="/" />
 	</div>
 	<div class="main-content flex h-full items-center justify-start text-COLORWHT">
-		<div class="page-content block h-full w-full bg-transparent px-8 py-16 lg:px-16 overflow-auto">
+		<div class="page-content block h-full w-full overflow-auto bg-transparent px-8 py-16 lg:px-16">
 			<div class="flex w-full flex-wrap">
 				<div class="order-summary mr-8 block flex-1">
 					<div class="flex w-full items-center">
