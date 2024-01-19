@@ -8,6 +8,12 @@
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
+	import type { User } from '$lib/types/User';
+	let user: User = localStorage.user ? JSON.parse(localStorage.user) : {};
+	let payment_data = localStorage.payment_data
+		? JSON.parse(JSON.stringify(localStorage.payment_data))
+		: {};
+
 	$: branding_text = 'One second...';
 	$: text = '';
 	$: subtitle = '';
@@ -27,7 +33,7 @@
 				)
 			)) as Response;
 			// Immediately remove the payment information from the local storage (not card data--none is stored)
-			setTimeout(() => {	
+			setTimeout(() => {
 				localStorage.removeItem('payment_data');
 			}, 800);
 			if (!response.ok) {
@@ -46,6 +52,12 @@
 			document.title = 'Plattr | Checkout / Confirmed';
 			const json = await response.json();
 			toast.push(`${json.message ?? 'All good to go!'}`);
+
+			// Update the user's balance
+			user.credit.$numberDecimal = JSON.stringify(
+				parseFloat(user.credit.$numberDecimal) - payment_data.toDeduct
+			);
+			localStorage.user = JSON.stringify(user);
 		} catch (error) {
 			branding_text = 'Order not placed';
 			text = 'There was an error.';
