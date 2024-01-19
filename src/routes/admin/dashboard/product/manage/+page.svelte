@@ -359,6 +359,7 @@
 											value={data ? data.category._id : 'placeholder'}
 											custom_style="bg-transparent border border-COLORWHT"
 											options={categories}
+											options_color="text-COLORBLK"
 										/>
 									</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
