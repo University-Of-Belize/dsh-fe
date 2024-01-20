@@ -7,7 +7,7 @@
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	import type { Category } from '$lib/types/Category';
 	import { faAd, faLock, faUnlockKeyhole } from '@fortawesome/free-solid-svg-icons';
-// import type { Product as Product_ } from '$lib/types/Product.ts';
+	// import type { Product as Product_ } from '$lib/types/Product.ts';
 	import type { User } from '$lib/types/User';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
@@ -16,10 +16,14 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
-	let user: User = localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
+	let user: User =
+		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
 	let categories: Category[] = [];
 	let logging_in: boolean = false;
 	let debounceTimeout: number;
+	let landingPhoto: string;
+	// let clientWidth: number;
+	// let clientHeight: number;
 	// let product: Product_[] | null;
 
 	onMount(async () => {
@@ -38,6 +42,11 @@
 				}`
 			);
 		}
+		landingPhoto = getComputedStyle(document.documentElement)
+			.getPropertyValue('--LANDINGPHOTO')
+			.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+		// clientWidth = window.innerWidth;
+		// clientHeight = window.innerHeight;
 	});
 	async function getCategories() {
 		const response = (await fetchWebApi('v1/category', 'GET')) as Response;
@@ -398,5 +407,29 @@
 		.ltr::-webkit-scrollbar {
 			width: 8px;
 		}
+	}
+
+	@media (min-width: 1024px) {
+		/* Circle over title */
+		.hero-image::before {
+			border-radius: 50% 100%;
+			width: 50%;
+			height: 100%;
+			display: block;
+			content: '';
+			position: absolute;
+			bottom: 0;
+			background: radial-gradient(rgb(var(--COLORBLK)), transparent);
+		}
+	}
+	.hero {
+		transition-property: -webkit-transform;
+		transition-property: transform;
+		transition-duration: 200ms;
+	}
+	.image-and-wrapper {
+		overflow: clip;
+		border-radius: 5% 0;
+		z-index: 1;
 	}
 </style>
