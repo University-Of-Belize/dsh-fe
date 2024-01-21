@@ -64,7 +64,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Product Search / {params?.toString().toLowerCase() ?? 'Product Search'}</title>
+	<title>RapidEats | Product Search / {params?.toString().toLowerCase() ?? 'Product Search'}</title>
 </svelte:head>
 
 <main class="h-screen w-full">

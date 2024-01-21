@@ -12,7 +12,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	onMount(() => {
-		document.title = 'Plattr | Desktop App / Beta Testers Agreement';
+		document.title = 'RapidEats | Desktop App / Beta Testers Agreement';
 
 		if (eula) {
 			localStorage.setItem('eula', 'true');
@@ -41,7 +41,7 @@
 					subtitle="Select this option if you're on desktop (PC or laptop)"
 					body="Please take a moment to carefully read and review the installation agreement. Your understanding and acceptance of the terms outlined in the agreement are essential before proceeding with the installation. Thank you for choosing our mobile app—we appreciate your commitment to a smooth and secure experience."
 					image="/pwa/screenshots/desktop_1.jpg"
-					image_alt="Plattr Desktop App"
+					image_alt="RapidEats Desktop App"
 					button_icon={faCheck}
 					button_color="COLORGRN2"
 					button_text="Read the terms and conditions"

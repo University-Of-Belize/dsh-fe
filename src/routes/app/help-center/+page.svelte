@@ -35,7 +35,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Announcements</title>
+	<title>RapidEats | Announcements</title>
 </svelte:head>
 
 <main class="h-screen w-full overflow-hidden text-COLORWHT">
@@ -64,7 +64,7 @@
 								? marked.parse(article.content.substring(0, 500)) + '...'
 								: marked.parse(article.content)}
 							image="/android-chrome-512x512.png"
-							image_alt="Plattr Mobile App"
+							image_alt="RapidEats Mobile App"
 							button_icon={faBookOpenReader}
 							button_color="COLORGRN2"
 							button_text="Open article"

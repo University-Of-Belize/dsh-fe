@@ -35,7 +35,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Dashboard / Experiments</title>
+	<title>RapidEats | Dashboard / Experiments</title>
 </svelte:head>
 
 <main class="h-screen w-full overflow-hidden">

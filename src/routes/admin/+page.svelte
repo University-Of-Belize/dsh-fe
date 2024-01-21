@@ -6,5 +6,5 @@
 
 <!-- Path: src/routes/admin/dashboard/%2Bpage.svelte -->
 <svelte:head>
-	<title>Plattr | Dashboard / Home</title>
+	<title>RapidEats | Dashboard / Home</title>
 </svelte:head>

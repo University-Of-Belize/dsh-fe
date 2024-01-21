@@ -10,5 +10,5 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Login / Register</title>
+	<title>RapidEats | Login / Register</title>
 </svelte:head>

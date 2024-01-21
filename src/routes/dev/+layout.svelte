@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Plattr | Development Playground</title>
+	<title>RapidEats | Development Playground</title>
 </svelte:head>
 <slot />
 <!-- 

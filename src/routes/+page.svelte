@@ -7,7 +7,7 @@
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	import type { Category } from '$lib/types/Category';
 	import { faAd, faLock, faUnlockKeyhole } from '@fortawesome/free-solid-svg-icons';
-	// import type { Product as Product_ } from '$lib/types/Product.ts';
+// import type { Product as Product_ } from '$lib/types/Product.ts';
 	import type { User } from '$lib/types/User';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
@@ -143,7 +143,7 @@
 								class="running-heading flex w-full items-center justify-center py-10 text-5xl font-medium text-COLORWHT md:text-7xl"
 							>
 								<div class="block">
-									Plattr is an online<br />ordering system.<br />
+									RapidEats is an online<br />ordering system.<br />
 
 									<div class="mt-6 text-sm font-light">
 										<b class="font-normal">Online Test #1 is officially here!</b> Sign up using the button

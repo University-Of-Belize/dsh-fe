@@ -164,7 +164,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Dashboard / Product / Manage '{data ? data.productName : 'Product'}'</title>
+	<title>RapidEats | Dashboard / Product / Manage '{data ? data.productName : 'Product'}'</title>
 </svelte:head>
 
 <main class="h-screen w-full overflow-hidden">

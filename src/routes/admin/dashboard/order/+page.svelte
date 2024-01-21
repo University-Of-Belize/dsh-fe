@@ -278,7 +278,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Dashboard / Orders</title>
+	<title>RapidEats | Dashboard / Orders</title>
 </svelte:head>
 
 <div class="stub border- hidden border" />

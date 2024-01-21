@@ -147,7 +147,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Checkout</title>
+	<title>RapidEats | Checkout</title>
 </svelte:head>
 
 <main class="h-screen w-full">

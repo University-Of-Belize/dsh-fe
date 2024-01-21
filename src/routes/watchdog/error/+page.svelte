@@ -79,7 +79,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Action Needed</title>
+	<title>RapidEats | Action Needed</title>
 </svelte:head>
 
 <main class="h-screen w-full">

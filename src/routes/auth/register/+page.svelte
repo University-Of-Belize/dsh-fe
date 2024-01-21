@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import config from '$lib/config/settings';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -14,7 +15,6 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import config from '$lib/config/settings';
 	import Fa from 'svelte-fa';
 	let debounceTimeout: number;
 	let signing_up: boolean = false;
@@ -110,7 +110,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Login / Register</title>
+	<title>RapidEats | Login / Register</title>
 </svelte:head>
 
 <main class="h-screen w-full">

@@ -125,7 +125,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Dashboard / Home</title>
+	<title>RapidEats | Dashboard / Home</title>
 </svelte:head>
 
 <main class="h-screen w-full">

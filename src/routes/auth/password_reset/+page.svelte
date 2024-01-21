@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import config from '$lib/config/settings';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -17,7 +18,6 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
-	import config from '$lib/config/settings';
 	let debounceTimeout: number;
 	let logging_in: boolean = false;
 	const ResetToken = $page.url.searchParams.get('reset_token') || false;
@@ -86,7 +86,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Password Reset</title>
+	<title>RapidEats | Password Reset</title>
 </svelte:head>
 
 <main class="h-screen w-full">

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import EscrowBanner from '$lib/Elements/Banners/EscrowBanner.svelte';
-	import { onMount } from 'svelte';
+	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
+	import { onMount } from 'svelte';
 	let text: string, branding_text: string, subtitle: string;
 	let notFound: boolean = false;
 	onMount(() => {
@@ -18,7 +18,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | {$page.status}</title>
+	<title>RapidEats | {$page.status}</title>
 </svelte:head>
 
 <main class="h-screen w-full">

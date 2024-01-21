@@ -12,7 +12,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	onMount(() => {
-		document.title = 'Plattr | Mobile App / Beta Testers Agreement';
+		document.title = 'RapidEats | Mobile App / Beta Testers Agreement';
 
 		if (eula) {
 			localStorage.setItem('eula', 'true');
@@ -41,7 +41,7 @@
 					subtitle="Select this option if you're using a mobile device"
 					body="Please take a moment to carefully read and review the installation agreement. Your understanding and acceptance of the terms outlined in the agreement are essential before proceeding with the installation. Thank you for choosing our mobile app—we appreciate your commitment to a smooth and secure experience."
 					image="/pwa/screenshots/mobile_1.jpg"
-					image_alt="Plattr Mobile App"
+					image_alt="RapidEats Mobile App"
 					button_icon={faCheck}
 					button_color="COLORGRN2"
 					button_text="Read the terms and conditions"

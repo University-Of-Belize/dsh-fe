@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Onboarding</title>
+	<title>RapidEats | Onboarding</title>
 </svelte:head>
 
 <main class="h-screen w-full overflow-hidden text-COLORWHT">
@@ -26,9 +26,9 @@
 					subtitle="Select this option if you're using a mobile device"
 					body="Whether on the go or at home, our mobile-friendly platform ensures a seamless and
                     convenient ordering experience. Browse, customize, and enjoy your favorite dishes
-                    with just a few taps. Plattr—your quick and easy way to delicious meals."
+                    with just a few taps. RapidEats—your quick and easy way to delicious meals."
 					image="/pwa/screenshots/mobile_1.jpg"
-					image_alt="Plattr Mobile App"
+					image_alt="RapidEats Mobile App"
 					button_icon={faMobileAlt}
 					button_color="COLORGRN2"
 					button_text="Install for mobile"
@@ -37,9 +37,9 @@
 				<CardPicker
 					title="Desktop 🧑‍💻"
 					subtitle="Select this option if you're on desktop (PC or laptop)"
-					body="Plattr's user-friendly desktop interface provides a seamless ordering experience. Effortlessly explore our menu, customize your selections, and complete your order with ease. Enjoy the convenience of ordering your favorite dishes from the comfort of your computer. Elevate your dining experience with Plattr's intuitive desktop platform."
+					body="RapidEats's user-friendly desktop interface provides a seamless ordering experience. Effortlessly explore our menu, customize your selections, and complete your order with ease. Enjoy the convenience of ordering your favorite dishes from the comfort of your computer. Elevate your dining experience with RapidEats's intuitive desktop platform."
 					image="/pwa/screenshots/desktop_1.jpg"
-					image_alt="Plattr Mobile App"
+					image_alt="RapidEats Mobile App"
 					button_icon={faDesktopAlt}
 					button_color="COLORGRN2"
 					button_text="Install for desktop"

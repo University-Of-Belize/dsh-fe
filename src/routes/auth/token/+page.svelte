@@ -63,7 +63,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Login using a security token</title>
+	<title>RapidEats | Login using a security token</title>
 </svelte:head>
 
 <main class="h-screen w-full">

@@ -179,7 +179,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Verify your identity</title>
+	<title>RapidEats | Verify your identity</title>
 </svelte:head>
 
 <main class="h-screen w-full">

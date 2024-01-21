@@ -90,7 +90,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Dashboard / User</title>
+	<title>RapidEats | Dashboard / User</title>
 </svelte:head>
 
 <main class="h-screen w-full overflow-hidden">

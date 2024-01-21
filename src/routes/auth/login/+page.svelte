@@ -4,6 +4,7 @@
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import config from '$lib/config/settings';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -19,7 +20,6 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import html2canvas from 'html2canvas';
 	import { onMount } from 'svelte';
-	import config from '$lib/config/settings';
 	import Fa from 'svelte-fa';
 	$: continue_url = $page.url.searchParams.get('continue');
 	let debounceTimeout: number;
@@ -277,7 +277,7 @@
 </script>
 
 <svelte:head>
-	<title>Plattr | Login / Register</title>
+	<title>RapidEats | Login / Register</title>
 </svelte:head>
 
 <canvas bind:this={canvas} class="hidden" style="height: 100vh; width: 100vw;" />
