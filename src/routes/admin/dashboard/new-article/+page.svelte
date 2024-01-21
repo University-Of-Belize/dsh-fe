@@ -54,7 +54,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Dashboard / Help Article Composer</title>
+	<title>UniFood | Dashboard / Help Article Composer</title>
 </svelte:head>
 
 <main class="h-screen w-full overflow-hidden">

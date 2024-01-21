@@ -125,7 +125,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Dashboard / Home</title>
+	<title>UniFood | Dashboard / Home</title>
 </svelte:head>
 
 <main class="h-screen w-full">

@@ -110,7 +110,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Login / Register</title>
+	<title>UniFood | Login / Register</title>
 </svelte:head>
 
 <main class="h-screen w-full">

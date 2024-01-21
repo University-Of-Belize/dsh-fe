@@ -86,7 +86,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Password Reset</title>
+	<title>UniFood | Password Reset</title>
 </svelte:head>
 
 <main class="h-screen w-full">

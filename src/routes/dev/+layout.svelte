@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>RapidEats | Development Playground</title>
+	<title>UniFood | Development Playground</title>
 </svelte:head>
 <slot />
 <!-- 

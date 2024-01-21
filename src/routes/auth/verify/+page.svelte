@@ -179,7 +179,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Verify your identity</title>
+	<title>UniFood | Verify your identity</title>
 </svelte:head>
 
 <main class="h-screen w-full">

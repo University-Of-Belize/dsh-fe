@@ -90,7 +90,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Dashboard / User</title>
+	<title>UniFood | Dashboard / User</title>
 </svelte:head>
 
 <main class="h-screen w-full overflow-hidden">

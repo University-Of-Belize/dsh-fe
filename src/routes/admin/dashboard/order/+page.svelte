@@ -278,7 +278,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Dashboard / Orders</title>
+	<title>UniFood | Dashboard / Orders</title>
 </svelte:head>
 
 <div class="stub border- hidden border" />

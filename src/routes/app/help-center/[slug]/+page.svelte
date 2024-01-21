@@ -83,7 +83,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Announcements / Article View</title>
+	<title>UniFood | Announcements / Article View</title>
 </svelte:head>
 
 <div

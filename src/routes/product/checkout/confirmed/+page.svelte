@@ -39,7 +39,7 @@
 			if (!response.ok) {
 				const json = await response.json();
 				branding_text = 'Order not placed';
-				document.title = 'RapidEats | Checkout / Error';
+				document.title = 'UniFood | Checkout / Error';
 				text = json.message;
 				return toast.push(`${json.message}`, {
 					dismissable: false,
@@ -49,7 +49,7 @@
 				});
 			}
 			text = 'Order placed!';
-			document.title = 'RapidEats | Checkout / Confirmed';
+			document.title = 'UniFood | Checkout / Confirmed';
 			const json = await response.json();
 			toast.push(`${json.message ?? 'All good to go!'}`);
 
@@ -61,7 +61,7 @@
 		} catch (error) {
 			branding_text = 'Order not placed';
 			text = 'There was an error.';
-			document.title = 'RapidEats | Checkout / Error';
+			document.title = 'UniFood | Checkout / Error';
 			toast.push(`${error.message}. Try again later.`, {
 				dismissable: false,
 				theme: {
@@ -85,7 +85,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Checkout / Run Order</title>
+	<title>UniFood | Checkout / Run Order</title>
 </svelte:head>
 
 <main class="h-screen w-full">

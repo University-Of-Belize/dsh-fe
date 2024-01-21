@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import config from '$lib/config/settings';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
 		faKey,
@@ -12,7 +13,6 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
-	import config from '$lib/config/settings';
 	$: continue_url = $page.url.searchParams.get('continue');
 	let debounceTimeout: number;
 	let logging_in: boolean = false;
@@ -63,7 +63,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Login using a security token</title>
+	<title>UniFood | Login using a security token</title>
 </svelte:head>
 
 <main class="h-screen w-full">

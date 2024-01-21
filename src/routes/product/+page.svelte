@@ -64,7 +64,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Product Search / {params?.toString().toLowerCase() ?? 'Product Search'}</title>
+	<title>UniFood | Product Search / {params?.toString().toLowerCase() ?? 'Product Search'}</title>
 </svelte:head>
 
 <main class="h-screen w-full">

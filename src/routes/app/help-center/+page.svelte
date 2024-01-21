@@ -35,7 +35,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Announcements</title>
+	<title>UniFood | Announcements</title>
 </svelte:head>
 
 <main class="h-screen w-full overflow-hidden text-COLORWHT">
@@ -64,7 +64,7 @@
 								? marked.parse(article.content.substring(0, 500)) + '...'
 								: marked.parse(article.content)}
 							image="/android-chrome-512x512.png"
-							image_alt="RapidEats Mobile App"
+							image_alt="UniFood Mobile App"
 							button_icon={faBookOpenReader}
 							button_color="COLORGRN2"
 							button_text="Open article"

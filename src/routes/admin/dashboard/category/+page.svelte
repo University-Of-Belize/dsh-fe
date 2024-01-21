@@ -35,7 +35,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Dashboard / Categories</title>
+	<title>UniFood | Dashboard / Categories</title>
 </svelte:head>
 
 <main class="h-screen w-full overflow-hidden">

@@ -79,7 +79,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Action Needed</title>
+	<title>UniFood | Action Needed</title>
 </svelte:head>
 
 <main class="h-screen w-full">

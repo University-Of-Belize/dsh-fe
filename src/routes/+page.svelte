@@ -143,7 +143,7 @@
 								class="running-heading flex w-full items-center justify-center py-10 text-5xl font-medium text-COLORWHT md:text-7xl"
 							>
 								<div class="block">
-									RapidEats is an online<br />ordering system.<br />
+									UniFood is an online<br />ordering system.<br />
 
 									<div class="mt-6 text-sm font-light">
 										<b class="font-normal">Online Test #1 is officially here!</b> Sign up using the button

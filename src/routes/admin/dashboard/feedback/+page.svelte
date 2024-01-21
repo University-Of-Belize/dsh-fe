@@ -45,7 +45,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Dashboard / My Feedback</title>
+	<title>UniFood | Dashboard / My Feedback</title>
 </svelte:head>
 
 <main class="h-screen w-full overflow-hidden">

@@ -200,7 +200,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Dashboard / User / Manage {data ? `@${data.username}` : 'User'}</title>
+	<title>UniFood | Dashboard / User / Manage {data ? `@${data.username}` : 'User'}</title>
 </svelte:head>
 
 <main class="h-screen w-full overflow-hidden">

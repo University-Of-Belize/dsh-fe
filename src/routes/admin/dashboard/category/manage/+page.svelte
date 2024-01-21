@@ -96,7 +96,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Dashboard / Categories / Manage '{data ? data.name : 'Category'}'</title>
+	<title>UniFood | Dashboard / Categories / Manage '{data ? data.name : 'Category'}'</title>
 </svelte:head>
 
 <main class="h-screen w-full overflow-hidden">

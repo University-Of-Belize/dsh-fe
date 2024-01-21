@@ -18,7 +18,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | {$page.status}</title>
+	<title>UniFood | {$page.status}</title>
 </svelte:head>
 
 <main class="h-screen w-full">

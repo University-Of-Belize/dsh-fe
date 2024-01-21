@@ -65,7 +65,7 @@
 			// product_id = r[0].id;
 			product.set(r.is); // take the first result
 			product_id = r.is._id;
-			document.title = `RapidEats | Product / ${r.is.productName}`;
+			document.title = `UniFood | Product / ${r.is.productName}`;
 			// } else {
 			// 	product.set(null);
 			// }
@@ -123,7 +123,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Product</title>
+	<title>UniFood | Product</title>
 </svelte:head>
 
 <main class="h-screen w-full">

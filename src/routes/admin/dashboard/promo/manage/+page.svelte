@@ -107,7 +107,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Dashboard / Promotions / Manage Promotion Codes</title>
+	<title>UniFood | Dashboard / Promotions / Manage Promotion Codes</title>
 </svelte:head>
 
 <main class="h-screen w-full overflow-hidden">

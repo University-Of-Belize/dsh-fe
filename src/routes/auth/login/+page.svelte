@@ -277,7 +277,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Login / Register</title>
+	<title>UniFood | Login / Register</title>
 </svelte:head>
 
 <canvas bind:this={canvas} class="hidden" style="height: 100vh; width: 100vw;" />

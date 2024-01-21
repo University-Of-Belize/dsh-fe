@@ -147,7 +147,7 @@
 </script>
 
 <svelte:head>
-	<title>RapidEats | Checkout</title>
+	<title>UniFood | Checkout</title>
 </svelte:head>
 
 <main class="h-screen w-full">
