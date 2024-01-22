@@ -59,7 +59,7 @@
 					<div class="flex items-center text-base font-semibold lg:text-lg">
 						<div>{product.productName ?? 'Untitled Product'}</div>
 						{#if displayPrice}
-							<div>({product.price ?? ''})</div>
+							<div>({parseFloat(product.price.$numberDecimal).toFixed(2) ?? ''})</div>
 						{/if}
 						{#if tag}
 							<div
