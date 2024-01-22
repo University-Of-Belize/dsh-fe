@@ -12,6 +12,7 @@
 	export let description: string;
 	export let image: string | undefined;
 	export let widget: boolean = true;
+	export let displayPrice: boolean = false;
 	let pimg: HTMLImageElement;
 </script>
 
@@ -56,7 +57,10 @@
 			<div class="user-wrap flex w-full flex-wrap items-center">
 				<div class="product-content text-COLORWHT" style="word-break: break-word;">
 					<div class="flex items-center text-base font-semibold lg:text-lg">
-						{product.productName ?? 'Untitled Product'}
+						<div>{product.productName ?? 'Untitled Product'}</div>
+						{#if displayPrice}
+							<div>({product.price ?? ''})</div>
+						{/if}
 						{#if tag}
 							<div
 								class="tag px-4 py-1 bg-{tagColor} text-{tagColor_t} mx-4 flex items-center justify-center font-light lg:text-sm"
