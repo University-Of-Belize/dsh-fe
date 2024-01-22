@@ -21,7 +21,7 @@ async function R2S3Upload(event: Event, custom_path?: string, custom_filename?: 
 		S3,
 		new PutObjectCommand({
 			Bucket: 'primary-uswest',
-			Key: (custom_path ? `${custom_path}/` : '') + custom_filename ?? event.target.files[0].name
+			Key: (custom_path ? `${custom_path}/` : '') + (custom_filename ?? file.name)
 		}),
 		{
 			expiresIn: 60 * 60 * 4 // 4h
