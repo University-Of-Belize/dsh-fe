@@ -80,6 +80,7 @@
 						<div class="user_wrap w-full">
 							<ProductPill
 								product={product ?? {}}
+								displayPrice
 								description={`Category: ${
 									product.category ? product.category.name : 'Uncategorized'
 								}`}
