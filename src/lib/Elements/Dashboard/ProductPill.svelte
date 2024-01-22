@@ -56,10 +56,10 @@
 			</div>
 			<div class="user-wrap flex w-full flex-wrap items-center">
 				<div class="product-content text-COLORWHT" style="word-break: break-word;">
-					<div class="flex items-center text-base font-semibold lg:text-lg">
+					<div class="flex items-center text-base font-semibold lg:text-lg space-x-2">
 						<div>{product.productName ?? 'Untitled Product'}</div>
 						{#if displayPrice}
-							<div>({product.price ?? ''})</div>
+							<div>({product.price.$numberDecimal ?? ''})</div>
 						{/if}
 						{#if tag}
 							<div
