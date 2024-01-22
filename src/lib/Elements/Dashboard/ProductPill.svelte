@@ -56,7 +56,7 @@
 			</div>
 			<div class="user-wrap flex w-full flex-wrap items-center">
 				<div class="product-content text-COLORWHT" style="word-break: break-word;">
-					<div class="flex items-center text-base font-semibold lg:text-lg">
+					<div class="flex items-center space-x-2 text-base font-semibold lg:text-lg">
 						<div>{product.productName ?? 'Untitled Product'}</div>
 						{#if displayPrice}
 							<div>({parseFloat(product.price.$numberDecimal).toFixed(2) ?? ''})</div>
