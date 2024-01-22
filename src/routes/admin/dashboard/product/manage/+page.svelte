@@ -31,7 +31,8 @@
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	const product_id = $page.url.searchParams.get('product_id');
-	let user: User = localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {}; // User data
+	let user: User =
+		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {}; // User data
 	let data: Product = config['ui']['default-product']; // List of users
 	let productForm: HTMLFormElement;
 	let productImage: HTMLImageElement;
@@ -246,7 +247,7 @@
 													accept="image/*"
 													bind:this={photoInput}
 													on:change={async (e) => {
-														const pub_url = await R2S3Upload(e, 'product_photos', `${data._id}`);
+														const pub_url = await R2S3Upload(e, 'product_photos', data._id);
 														photoValue.value = pub_url;
 														productImage.src = pub_url;
 													}}
