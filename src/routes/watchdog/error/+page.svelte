@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import EscrowBanner from '$lib/Elements/Banners/EscrowBanner.svelte';
+	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -12,6 +13,7 @@
 	let notFound: boolean = false;
 	let offLine: boolean = false;
 	status_text = 10; // Start at 10
+	let buttonStatusText = `Retrying in: ${status_text}`;
 
 	onMount(async () => {
 		if (localStorage.watchdog) {
@@ -45,6 +47,7 @@
 				}, 10000); // 10s
 				statusTextDecrementer = setInterval(async () => {
 					status_text -= 1;
+					buttonStatusText = `Retrying in: ${status_text}`;
 				}, 1000); // 1s
 			}
 		} else {
@@ -72,7 +75,8 @@
 			// not connected to the server yet and you should disconnect
 			// from the server and try again later
 			branding_text = '🔗💔';
-			text = "Looks like you're not connected.";
+			// text = "Looks like you're not connected.";
+			text = "Not available while you're offline.";
 			subtitle = "You've been disconnected from the server. Try again later! 😭";
 		}
 	});
@@ -104,7 +108,17 @@
 						<div class="font-light">
 							Feel free to retry reloading at any time, or coming back later.
 						</div>
-						<div class="font-semibold">Retrying in: {status_text}</div>
+						<div class="flex w-full items-center justify-center text-center mt-2">
+							<Button
+								text={buttonStatusText}
+								on:hover={() => {
+									buttonStatusText = 'Retry Now';
+								}}
+								on:click={() => {
+									window.location.reload();
+								}}
+							/>
+						</div>
 					{/if}
 				</div>
 			</div></EscrowBanner

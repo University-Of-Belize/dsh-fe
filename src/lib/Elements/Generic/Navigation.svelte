@@ -47,6 +47,7 @@
 	let cachedCategories = localStorage.getItem('categories');
 	let categories: Category[] = [];
 	let installPrompt;
+	let offLine: boolean = false;
 
 	onMount(async () => {
 		// Undo our changes
@@ -55,6 +56,10 @@
 		// Set the scrim height
 		navScrimHeight = window.innerHeight; // Full height (inside screen-view)
 		installPrompt = window.installPrompt;
+		offLine = !window.navigator.onLine;
+		if (offLine) {
+			localStorage.setItem('serverOffline', 'true');
+		}
 		if (!localStorage.user) {
 			if (localStorage.token) {
 				try {
@@ -135,14 +140,15 @@
 	<div class="navigation bg-COLORBLK bg-opacity-{transparency} w-full px-2 py-2 text-lg">
 		<div class="content flex items-center justify-between bg-opacity-100 lg:justify-start">
 			<div class="meta-controls flex space-x-1">
-				<div
-					title="Pop open the navigation"
-					class="sidenav mr-2 cursor-pointer rounded-sm bg-COLORBLK1 px-4 py-3 hover:bg-opacity-70"
-					bind:this={navToggle}
-					on:click={toggleNav}
-				>
-					<Fa icon={faBars} size="1.25x" class="text-COLORWHT" />
-				</div>
+				{#if !offLine}
+					<div
+						title="Pop open the navigation"
+						class="sidenav mr-2 cursor-pointer rounded-sm bg-COLORBLK1 px-4 py-3 hover:bg-opacity-70"
+						bind:this={navToggle}
+						on:click={toggleNav}
+					>
+						<Fa icon={faBars} size="1.25x" class="text-COLORWHT" />
+					</div>{/if}
 				<div
 					class="flex items-center justify-center bg-COLORBLK1 {config.ui['branding-logo'].trim() !=
 					''
@@ -164,7 +170,7 @@
 					</div>
 				</div>
 			</div>
-			{#if search}
+			{#if search && !offLine}
 				<form
 					class="searchbar hidden flex-1 items-center rounded-sm border border-COLORBLK2 bg-opacity-{transparency +
 						35} bg-COLORBLK px-4 py-2 text-sm focus:bg-COLORBLK1 active:bg-COLORBLK1 lg:mx-20 lg:flex"
@@ -191,80 +197,88 @@
 			>
 				{@html staff ? '' : config['ui']['notice']}
 			</div>
-
-			{#if !user}
-				<div class="flex space-x-4">
-					<div
-						title="Sign in to access content"
-						class="btn-wrp hidden lg:block"
-						on:click={async () => {
-							await goto('/auth/login');
-						}}
-					>
-						<Button
-							icon={faRightToBracket}
-							color="COLORBLK2"
-							color_t="COLORYLW"
-							text="Log in"
-							custom_style="py-4 md:py-2"
-						/>
-					</div>
-					{#if installPrompt}
+			{#if !offLine}
+				{#if !user}
+					<div class="flex space-x-4">
 						<div
-							title="Install the app onto your device"
-							class="btn-wrp"
+							title="Sign in to access content"
+							class="btn-wrp hidden lg:block"
 							on:click={async () => {
-								await window.installPrompt.prompt();
-								window.location.reload();
+								await goto('/auth/login');
 							}}
 						>
 							<Button
-								icon={faDownload}
-								color="COLORBLE"
-								color_t="COLORWHT"
-								text="Install"
+								icon={faRightToBracket}
+								color="COLORBLK2"
+								color_t="COLORYLW"
+								text="Log in"
 								custom_style="py-4 md:py-2"
 							/>
 						</div>
-					{/if}
-				</div>
-			{:else}
-				<div
-					class="pnav flex items-center justify-center rounded-l-full rounded-r-full lg:space-x-4"
-					style="background: rgb(var(--COLORWHT) / 0.18);"
-				>
-					{#if staff}
-						<div class="btn-wrp" title="Admin dashboard" on:click={() => goto('/admin/dashboard')}>
-							<IconButton icon={faCogs} color="COLORBLE" color_t="COLORWHT" class="px-6 py-3" />
-						</div>{/if}
-					<div class="btn-wrp" title="My shopping cart" on:click={() => goto('/product/checkout')}>
-						<IconButton
-							icon={faCartShopping}
-							color="COLORBLK3"
-							color_t="COLORWHT"
-							class="px-6 py-3"
-						/>
-					</div>
-					<div
-						class="profile-picture hidden items-center justify-start space-x-2 text-sm font-medium text-white lg:flex"
-					>
-						<div>
-							<img
-								src={user.profile_picture ?? config['user']['default-image']}
-								title="My profile"
-								alt="{user.username}'s photo"
-								width="40px"
-								class="cursor-pointer rounded-full border border-COLORWHT bg-COLORBLK1 object-cover hover:opacity-80"
-								style="height: 42px; width: 42px;"
+						{#if installPrompt}
+							<div
+								title="Install the app onto your device"
+								class="btn-wrp"
 								on:click={async () => {
-									await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
+									await window.installPrompt.prompt();
+									window.location.reload();
 								}}
+							>
+								<Button
+									icon={faDownload}
+									color="COLORBLE"
+									color_t="COLORWHT"
+									text="Install"
+									custom_style="py-4 md:py-2"
+								/>
+							</div>
+						{/if}
+					</div>
+				{:else}
+					<div
+						class="pnav flex items-center justify-center rounded-l-full rounded-r-full lg:space-x-4"
+						style="background: rgb(var(--COLORWHT) / 0.18);"
+					>
+						{#if staff}
+							<div
+								class="btn-wrp"
+								title="Admin dashboard"
+								on:click={() => goto('/admin/dashboard')}
+							>
+								<IconButton icon={faCogs} color="COLORBLE" color_t="COLORWHT" class="px-6 py-3" />
+							</div>{/if}
+						<div
+							class="btn-wrp"
+							title="My shopping cart"
+							on:click={() => goto('/product/checkout')}
+						>
+							<IconButton
+								icon={faCartShopping}
+								color="COLORBLK3"
+								color_t="COLORWHT"
+								class="px-6 py-3"
 							/>
 						</div>
-						<div class="pr-4">${parseFloat(user.credit.$numberDecimal).toFixed(2)}</div>
+						<div
+							class="profile-picture hidden items-center justify-start space-x-2 text-sm font-medium text-white lg:flex"
+						>
+							<div>
+								<img
+									src={user.profile_picture ?? config['user']['default-image']}
+									title="My profile"
+									alt="{user.username}'s photo"
+									width="40px"
+									class="cursor-pointer rounded-full border border-COLORWHT bg-COLORBLK1 object-cover hover:opacity-80"
+									style="height: 42px; width: 42px;"
+									on:click={async () => {
+										await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
+									}}
+								/>
+							</div>
+							<div class="pr-4">${parseFloat(user.credit.$numberDecimal).toFixed(2)}</div>
+						</div>
 					</div>
-				</div>
-			{/if}
+				{/if}{/if}
 		</div>
 		{#if staff}
 			<div
