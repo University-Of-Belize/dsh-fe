@@ -9,7 +9,7 @@
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
 	title="Dark mode"
-	description="Latest dark mode skin. Website default."
+	description="Latest, stable dark mode skin. Website default."
 >
 	<div class="controls flex space-x-2">
 		{#if localStorage.theme === 'dark'}
@@ -35,6 +35,53 @@
 				class="activate h-fit w-fit"
 				on:click={() => {
 					localStorage.setItem('theme', 'dark');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORGRN1"
+					color_t="COLORGRN"
+					text="ACTIVATE"
+				/>
+			</div>
+		{/if}
+	</div>
+</GenericPill>
+
+<!-- Dark v2 -->
+<GenericPill
+	icon="/icons/font-awesome/scribble.svg"
+	title="Dark v2"
+	description="Latest, experimental dark mode skin. Report any cosmetic bugs using Feedback Hub."
+>
+	<div class="controls flex space-x-2">
+		{#if localStorage.theme === 'dark-v2'}
+			<div
+				class="deactivate h-fit w-fit"
+				on:click={() => {
+					localStorage.removeItem('theme');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORHPK"
+					color_t="COLORHPK"
+					text="DEACTIVATE"
+				/>
+			</div>
+		{:else}
+			<div
+				class="activate h-fit w-fit"
+				on:click={() => {
+					localStorage.setItem('theme', 'dark-v2');
 					toast.push('One moment...');
 					setTimeout(() => {
 						window.location.reload();
