@@ -155,14 +155,15 @@
 		if (!localStorage.theme) {
 			if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
 				toast.push(
-					"Your OS theme is set to light mode; but light mode isn't available yet, so we'll use dark mode instead.",
+					// "Your OS theme is set to light mode; but light mode isn't available yet, so we'll use dark mode instead.",
+					"Your OS theme is set to light mode; activating an experimental theme.",
 					{
 						// Set the timeout to 5 seconds
 						duration: 5000
 					}
 				);
 			}
-			localStorage.setItem('theme', 'dark');
+			localStorage.setItem('theme', 'light-v2');
 
 			setTimeout(() => {
 				detectColorScheme();
@@ -331,7 +332,7 @@
 		const cssVars = thememap ?? JSON.parse(localStorage.getItem('theme-map') ?? '{}');
 		// Loop through the CSS variables and set the values
 		for (const [key, value] of Object.entries(cssVars)) {
-			console.log(key, value);
+			// console.log(key, value); // Debug
 			// Convert the value to a string if it's not already a string
 			const stringValue = typeof value === 'string' ? value : String(value);
 			document.documentElement.style.setProperty(`--${key}`, stringValue);
