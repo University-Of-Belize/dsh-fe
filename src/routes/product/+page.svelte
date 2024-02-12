@@ -20,7 +20,7 @@
 		let searchResults, nameResults;
 		try {
 			const searchPromise = (await fetchWebApi(
-				`v1/search?filter=productName&q=${params?.toString().toLowerCase()}`,
+				`v1/search?filter=productName&q=${params?.toString().toLowerCase() ?? params_filter?.toString().toLowerCase()}`,
 				'GET'
 			)) as Response;
 
