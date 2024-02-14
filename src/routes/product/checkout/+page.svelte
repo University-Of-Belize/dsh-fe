@@ -481,12 +481,13 @@
 								>
 							</div>
 						</div>
+						<!-- Credit card graphic -->
 						<div
-							class="credit-card w-full select-none lg:w-1/2"
+							class="credit-card h-fit w-full select-none hidden lg:block lg:w-1/2"
 							on:mouseenter={() => flipCard('flip')}
 							on:mouseleave={() => flipCard('flip')}
 						>
-							<div class="h-60 w-full" style="perspective: 1000px">
+							<div class="w-full" style="width: 21.7375vw; perspective: 1000px; padding-bottom: 15vw;">
 								<div
 									bind:this={cardEl}
 									class="creditCard relative cursor-pointer font-mono transition-transform duration-500"
@@ -501,12 +502,12 @@
 											src="/assets/checkout/card-front.svg"
 											class="relative h-full w-full rounded-xl object-cover"
 										/>
-										<div class="absolute top-28 w-full overflow-clip px-8 text-white">
+										<div class="absolute w-full overflow-clip px-8 text-white" style="top: 7.03125vw;">
 											<div class="pt-1">
 												<!-- <p class="font-light">Card Number</p> -->
 												<p
 													bind:this={imageCardNumber}
-													class="tracking-more-wider h-6 text-xl font-medium"
+													class="tracking-more-wider h-6 lg:text-xl font-medium"
 												>
 													1234 1234 1234 1234
 												</p>
@@ -542,7 +543,7 @@
 											src="/assets/checkout/card-back.svg"
 											class="relative h-full w-full rounded-xl object-cover"
 										/>
-										<div class="absolute top-8 w-full">
+										<div class="absolute w-full" style="top: 6vh;">
 											<div class="mt-12 px-8">
 												<b>
 													<p
