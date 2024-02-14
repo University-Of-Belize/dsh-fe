@@ -482,7 +482,7 @@
 							</div>
 						</div>
 						<!-- Credit card graphic -- hide on small screens, show on large screens -->
-						<div class="flex w-full text-xl font-semibold pb-8 bg-opacity-100 text-COLORWHT">Pay below using Credit/Debit or your account's Virtual Currency</div>
+						<div class="flex lg:hidden w-full text-xl font-semibold pb-8 bg-opacity-100 text-COLORWHT">Pay below using Credit/Debit or your account's Virtual Currency</div>
 						<div
 							class="credit-card h-fit w-full select-none hidden lg:block lg:w-1/2"
 							on:mouseenter={() => flipCard('flip')}
