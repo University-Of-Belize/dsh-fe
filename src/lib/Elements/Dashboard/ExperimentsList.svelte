@@ -128,7 +128,7 @@
 			<div
 				class="activate h-fit w-fit"
 				on:click={() => {
-					localStorage.setItem('theme', 'dark-v2');
+					localStorage.setItem('theme', 'dark-v3');
 					toast.push('One moment...');
 					setTimeout(() => {
 						window.location.reload();
