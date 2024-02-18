@@ -150,7 +150,7 @@
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
 	title="Light mode"
-	description="Unstable, really bad for the eyes."
+	description="Latest, stable light mode theme. Report any cosmetic bugs using Feedback Hub."
 >
 	<div class="controls flex space-x-2">
 		{#if localStorage.theme === 'light'}

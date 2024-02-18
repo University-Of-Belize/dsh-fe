@@ -155,15 +155,15 @@
 		if (!localStorage.theme) {
 			if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
 				toast.push(
-					"Your OS theme is set to light mode; but light mode isn't available yet, so we'll use dark mode instead.",
-					// "Your OS theme is set to light mode; activating an experimental theme.",
+					// "Your OS theme is set to light mode; but light mode isn't available yet, so we'll use dark mode instead.",
+					"Your OS theme is set to light mode; activating an experimental theme.",
 					{
 						// Set the timeout to 5 seconds
 						duration: 5000
 					}
 				);
 			}
-			localStorage.setItem('theme', 'dark-v3'); // Set to dark instead of light
+			localStorage.setItem('theme', 'light'); // Set to light
 
 			setTimeout(() => {
 				detectColorScheme();

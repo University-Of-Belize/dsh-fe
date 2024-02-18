@@ -68,6 +68,32 @@
 /* Themes, and the such */
 /*light theme*/
 [data-theme='light'] {
+	--COLORWHT: 0 0 0;
+	--COLORWHT1: 0 0 0;
+	--COLORWHT2: 0 0 0;
+	--COLORWHT3: 0 0 0;
+	--COLORWHT4: 240 240 240;
+	--COLORWHT5: 0 0 0;
+	--COLORBLK: 204 204 204;
+	--COLORBLK1: 214 214 214;
+	--COLORBLK2: 182 190 210;
+	--COLORBLK3: 181 181 181;
+	--COLORBLK4: 179 182 208;
+	--COLORBLK5: 158 136 81;
+	--COLORGRY: 76 0 255;
+	--COLORGRN: 8 122 0;
+	--COLORGRN1: 3 179 0;
+	--COLORGRN2: 119 56 178;
+	--COLORYLW: 38 151 108;
+	--COLORBLE: 217 217 217;
+	--COLORBYW: 157 127 52;
+	--COLORHPK: 170 34 34;
+	--COLORPNK: 254 192 57;
+	--COLORRED: 255 148 148;
+	
+}
+/*grey theme*/
+[data-theme='grey'] {
 	/************************************************************************/
 	--COLORWHT: 255 255 255; /* White */
 	--COLORWHT1: 55 55 55; /* Slightly Lighter White */
@@ -383,7 +409,7 @@
 	--COLORWHT1: 255 255 255;
 	--COLORWHT2: 255 255 255;
 	--COLORWHT3: 255 255 255;
-	--COLORWHT4: 222 222 222;
+	--COLORWHT4: 59 59 59;
 	--COLORWHT5: 255 255 255;
 	--COLORBLK: 11 11 11;
 	--COLORBLK1: 64 64 64;
@@ -400,7 +426,7 @@
 	--COLORBYW: 157 127 52;
 	--COLORHPK: 170 34 34;
 	--COLORPNK: 254 192 57;
-	--COLORRED: 255 148 148;	
+	--COLORRED: 255 148 148;
 }
 /***************************** END THEMES **********/
 /* :global if in component */

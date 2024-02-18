@@ -133,7 +133,7 @@
 			</div>
 		{:else}
 			<div
-				class="item-center flex h-full w-full flex-wrap items-center justify-center text-COLORWHT4"
+				class="item-center flex h-full w-full flex-wrap items-center justify-center text-COLORWHT3"
 			>
 				<div class="item-center flex h-fit w-full flex-wrap items-center justify-center">
 					<div class="icon flex h-fit w-full basis-full items-center justify-center">
