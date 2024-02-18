@@ -34,7 +34,7 @@
 	</div>
 	<div class="relative ml-4 flex-grow pt-8 md:pt-2 lg:p-0">
 		<h2 class="text-lg font-semibold text-COLORWHT">{productName}</h2>
-		<p class="mt-2 font-light text-COLORWHT4">
+		<p class="mt-2 font-light text-COLORWHT3">
 			{productDescription.length > 100
 				? `${productDescription.slice(0, 100)}...`
 				: productDescription}
