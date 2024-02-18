@@ -193,6 +193,53 @@
 	</div>
 </GenericPill>
 
+<!-- Grey mode -->
+<GenericPill
+	icon="/icons/font-awesome/scribble.svg"
+	title="Grey theme"
+	description="Used to be light mode. Not anymore."
+>
+	<div class="controls flex space-x-2">
+		{#if localStorage.theme === 'grey'}
+			<div
+				class="deactivate h-fit w-fit"
+				on:click={() => {
+					localStorage.removeItem('theme');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORHPK"
+					color_t="COLORHPK"
+					text="DEACTIVATE"
+				/>
+			</div>
+		{:else}
+			<div
+				class="activate h-fit w-fit"
+				on:click={() => {
+					localStorage.setItem('theme', 'grey');
+					toast.push('One moment...');
+					setTimeout(() => {
+						window.location.reload();
+					}, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORGRN1"
+					color_t="COLORGRN"
+					text="ACTIVATE"
+				/>
+			</div>
+		{/if}
+	</div>
+</GenericPill>
+
 <!-- Light v2 (Theme) -->
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
