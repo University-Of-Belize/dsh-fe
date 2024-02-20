@@ -327,7 +327,7 @@
 
 	// UI Theme writer
 	function writeUITheme(thememap?: object) {
-		console.log("[WRITE_STARTED]: Writing theme to document's CSS variables.");
+		// console.log("[WRITE_STARTED]: Writing theme to document's CSS variables.");
 		// Get the CSS variables from localStorage
 		const cssVars = thememap ?? JSON.parse(localStorage.getItem('theme-map') ?? '{}');
 		// Loop through the CSS variables and set the values
