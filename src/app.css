@@ -3,7 +3,8 @@
 @tailwind components;
 @layer base {
 	:root {
-		--LANDINGPHOTO: url('/homepage/abstract_KDE.webp');
+		/* --LANDINGPHOTO: url('/homepage/abstract_KDE.webp'); */
+		--LANDINGPHOTO: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/University_of_Belize%2C_Central_Campus.jpg/1280px-University_of_Belize%2C_Central_Campus.jpg');
 		/* --COLORWHT: 227 223 209; */ /* old */
 		/* --COLORWHT: 227 226 222; */
 		/* --COLORWHT1: 244 238 226; */
@@ -68,6 +69,7 @@
 /* Themes, and the such */
 /*light theme*/
 [data-theme='light'] {
+	--LANDINGPHOTO: url('https://pub-25848f6979f1410bb0c611a1a9c24310.r2.dev/primary-uswest/January-2021-Slider-01.jpg');
 	--COLORWHT: 0 0 0;
 	--COLORWHT1: 0 0 0;
 	--COLORWHT2: 0 0 0;

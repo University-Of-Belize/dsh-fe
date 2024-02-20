@@ -412,7 +412,8 @@
 	@media (min-width: 1024px) {
 		/* Circle over title */
 		.hero-image::before {
-			border-radius: 50% 100%;
+			/* Small box shadow that blends into the background */
+			box-shadow: 1px 0 8px 4px rgb(var(--COLORBLK) / 0.25);
 			width: 50%;
 			height: 100%;
 			display: block;
