@@ -267,7 +267,7 @@
 											{/each}
 										</div>
 									</div>
-									<div class="text-md font-light text-COLORBLE">
+									<div class="text-md font-light text-COLORWHT1">
 										{@html escapeHtml(review.content).replace(/\n/g, '<br>')}
 									</div>
 									{#if JSON.parse(localStorage.staff ?? false)}
@@ -355,7 +355,7 @@
 								<textarea
 									bind:this={newReviewContent}
 									name="review"
-									class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORBLE focus:outline-none"
+									class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORWHT1 focus:outline-none"
 									rows="6"
 									placeholder="What's on your mind?"
 								/>
