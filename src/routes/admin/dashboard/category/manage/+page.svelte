@@ -315,7 +315,7 @@
 	:root {
 		--tw-bg-opacity: 1;
 	}
-	:global(body) {
+	/*:global(body) {
 		overflow: hidden;
-	}
+	}*/
 </style>
