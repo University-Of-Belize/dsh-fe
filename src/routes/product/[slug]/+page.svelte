@@ -195,7 +195,7 @@
 				/>{/if}
 		</div>
 	</div>
-	<div class="main-content mx-8 py-8 text-COLORWHT">
+	<div class="main-content px-2 md:px-8 py-8 text-COLORWHT relative z-10 bg-COLORBLK3">
 		{#if $product}
 			<div class="pt-2 text-4xl font-semibold text-COLORWHT">Reviews</div>
 			<div class="review-graph flex w-full py-2 pb-2">

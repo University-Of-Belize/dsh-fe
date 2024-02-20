@@ -312,7 +312,7 @@
 	</div>
 	{#if !localStorage.acknowledged_cookies || localStorage.acknowledged_cookies != 'true'}
 		<div
-			class="announcements-container z-20 flex bg-COLORHPK bg-opacity-50 py-1 text-center text-COLORWHT"
+			class="announcements-container text-xs  z-20 flex bg-COLORHPK bg-opacity-50 py-1 text-center text-COLORWHT"
 		>
 			<div class="container-wrap flex w-full flex-wrap items-center justify-center bg-opacity-100">
 				<div
@@ -343,7 +343,7 @@
 	{/if}
 	{#if !localStorage.acknowledged_announcements || localStorage.acknowledged_announcements != 'true'}
 		<div
-			class="announcements-container z-20 flex bg-COLORBLE bg-opacity-50 py-1 text-center text-COLORWHT"
+			class="announcements-container text-xs  z-20 flex bg-COLORBLE bg-opacity-50 py-1 text-center text-COLORWHT"
 		>
 			<div class="container-wrap flex w-full flex-wrap items-center justify-center bg-opacity-100">
 				<div
@@ -376,7 +376,7 @@
 		</div>
 	{/if}
 	<!-- <div
-	class="announcements-container text-center text-COLORWHT bg-COLORHPK bg-opacity-50 py-1 z-20"
+	class="announcements-container text-xs  text-center text-COLORWHT bg-COLORHPK bg-opacity-50 py-1 z-20"
 	bind:this={debug_selection}
 	on:click={() => {
 		if (hidden) {
