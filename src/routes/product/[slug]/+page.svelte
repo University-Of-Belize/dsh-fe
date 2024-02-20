@@ -28,7 +28,8 @@
 	import Fa from 'svelte-fa';
 	// let hero_image: HTMLDivElement;
 	const staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // The user
-	const user: User = localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {}; // The user
+	const user: User =
+		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {}; // The user
 	const product = writable<Product | null>(null);
 	let product_id: string;
 	const params = $page.params.slug;
@@ -130,7 +131,7 @@
 	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} />
 	</div>
-	<div class="hero">
+	<div class="hero bg-COLORWHT4">
 		<div class="image-and-wrapper relative" style="height: 800px">
 			<div
 				class="content-wrapper absolute z-10 flex h-full w-full flex-wrap items-center justify-center"
@@ -144,7 +145,7 @@
 								{$product.productName || "Oops, this product doesn't exist!"}
 							</div>
 							<StarCount reviews={$product.reviews} />
-							<div class="light:text-COLORWHT text-sm font-light dark:text-COLORWHT4 lg:text-lg">
+							<div class="text-COLORWHT2 lg:text-lg">
 								{@html escapeHtml($product.description).replace(/\n/g, '<br>')}
 							</div>
 							<div class="text-md py-4 font-semibold text-COLORWHT1 lg:text-xl">
@@ -190,12 +191,12 @@
 			</div>
 			{#if $product}
 				<div
-					class="hero-image h-full w-full"
-					style="background-image: url('{$product.image}')"
+					class="hero-image h-full w-full lg:w-1/2 ml-auto"
+					style="background-image: url('{$product.image}');"
 				/>{/if}
 		</div>
 	</div>
-	<div class="main-content px-2 md:px-8 py-8 text-COLORWHT relative z-10 bg-COLORBLK3">
+	<div class="main-content relative z-10 bg-COLORBLK3 px-2 py-8 text-COLORWHT md:px-8">
 		{#if $product}
 			<div class="pt-2 text-4xl font-semibold text-COLORWHT">Reviews</div>
 			<div class="review-graph flex w-full py-2 pb-2">
