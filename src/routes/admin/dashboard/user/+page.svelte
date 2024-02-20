@@ -154,9 +154,13 @@
 									tagColor={user?.staff ? 'COLORHPK' : 'COLORGRN2'}
 									tagColor_t={user?.staff ? 'COLORWHT' : 'COLORWHT'}
 									tagText={user?.staff ? 'Admin' : 'User'}
-									description="Token: {data[0].score
-										? 'Not available with search'
-										: user?.token || '<b>Not Activated / Never logged in</b>'}"
+									description="{data[0].score
+										? 'Not available with search.'
+										: !user?.token && !user?.firstAlert
+											? '<b>Not Activated; Never logged in</b>'
+											: !user?.token && user?.firstAlert
+												? '<b>Activated; Logged out.</b>'
+												: '<b>Activated; Logged in.</b>'}"
 									html
 								>
 									<div class="actions flex space-x-2">

@@ -19,6 +19,7 @@ interface User {
 	__v: number;
 	token: string | null;
 	activation_token?: string;
+	firstAlert?: boolean;
 }
 
 export type { User };

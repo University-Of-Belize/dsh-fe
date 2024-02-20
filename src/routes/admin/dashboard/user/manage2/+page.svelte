@@ -430,7 +430,7 @@
 										>
 											<Button
 												icon={faLock}
-												text="Invalidate token"
+												text="Invalidate session"
 												color="transparent"
 												color_t="COLORWHT"
 												custom_style="border border-COLORWHT my-2"
