@@ -185,13 +185,13 @@
 				<div class="fix flex-1">&nbsp;</div>
 			</div>
 			<div
-				class="wrapper absolute hidden lg:flex h-full w-full items-center justify-center bg-black opacity-50"
+				class="wrapper absolute flex h-full w-full items-center justify-center bg-black opacity-50 lg:hidden"
 			>
 				<!-- Nothing, this is an overlay-->
 			</div>
 			{#if $product}
 				<div
-					class="hero-image h-full w-full lg:w-1/2 ml-auto"
+					class="hero-image ml-auto h-full w-full lg:w-1/2"
 					style="background-image: url('{$product.image}');"
 				/>{/if}
 		</div>
