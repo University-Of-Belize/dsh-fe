@@ -185,7 +185,7 @@
 				<div class="fix flex-1">&nbsp;</div>
 			</div>
 			<div
-				class="wrapper absolute flex h-full w-full items-center justify-center bg-black opacity-50"
+				class="wrapper absolute hidden lg:flex h-full w-full items-center justify-center bg-black opacity-50"
 			>
 				<!-- Nothing, this is an overlay-->
 			</div>
