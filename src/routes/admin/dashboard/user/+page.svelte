@@ -168,6 +168,9 @@
 											<div
 												class="btn-wrp h-fit w-fit bg-opacity-100"
 												on:click={() => {
+													if (!user.token) {
+														return toast.push('This user has not activated or logged into their account yet.');
+													}
 													// Wipe ourselves
 													localStorage.clear(); // Load all the settings
 													localStorage.token = user.token;
