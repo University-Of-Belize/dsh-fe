@@ -2,134 +2,138 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
       <loc>https://cafe.ub.edu.bz/</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/admin</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/admin/dashboard</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/admin/dashboard/category</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/admin/dashboard/category/manage</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/admin/dashboard/feedback</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/admin/dashboard/new-article</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/admin/dashboard/order</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/admin/dashboard/product</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/admin/dashboard/product/manage</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/admin/dashboard/promo</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/admin/dashboard/promo/manage</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/admin/dashboard/review</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/admin/dashboard/user</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
+   </url>
+   <url>
+      <loc>https://cafe.ub.edu.bz/admin/dashboard/user/experiments</loc>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/admin/dashboard/user/manage</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/admin/dashboard/user/manage2</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/app/desktop</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/app/help-center</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/app/help-center/[slug]</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/app/mobile</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/app/onboarding</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/auth</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/auth/login</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/auth/password_reset</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/auth/register</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/auth/signup</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/auth/token</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/auth/verify</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/product</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/product/checkout</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/product/checkout/confirmed</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/product/[slug]</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
    <url>
       <loc>https://cafe.ub.edu.bz/watchdog/error</loc>
-      <lastmod>2024-01-01</lastmod>
+      <lastmod>2024-02-21</lastmod>
    </url>
 </urlset>
