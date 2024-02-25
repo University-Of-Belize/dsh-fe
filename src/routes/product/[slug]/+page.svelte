@@ -136,7 +136,7 @@
 			<div
 				class="content-wrapper absolute z-10 flex h-full w-full flex-wrap items-center justify-center"
 			>
-				<div class="content mx-12 flex h-full items-start justify-start py-24 lg:flex-1">
+				<div class="content px-12 flex h-full items-start justify-start py-24 lg:flex-1 bg-COLORWHT4">
 					{#if $product}
 						<div class="content-wrapper block">
 							<div
