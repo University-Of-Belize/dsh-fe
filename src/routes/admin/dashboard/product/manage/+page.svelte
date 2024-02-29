@@ -124,11 +124,11 @@
 			);
 		}
 
-		// Require a product image
-		if (valueArray[0] === '') {
+		// @note [Disabled-on-Request]: Require a product image
+		/*if (valueArray[0] === '') {
 			console.error('Product validation failed.');
 			return toast.push('You need to upload an image.');
-		}
+		}*/
 		// Make the last element the value of the keywords_input array
 		// Minus one to overwrite the last entry, which is supposed to be an empty/blank string
 		valueArray[valueArray.length - 1] = keywords_input.results;
