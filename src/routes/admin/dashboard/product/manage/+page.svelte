@@ -303,7 +303,7 @@
 														placeholder="Product description goes here. Add as many words as you'd like. Note each word will be counted as a keyword. So be specific, and descriptive at the same time. Products are indexed every {config[
 															'server'
 														]['indexing-interval']}"
-														value={data ? data.description : ''}
+														value={data ? data.description ?? '' : ''}
 													/>
 												</div>
 											</div>

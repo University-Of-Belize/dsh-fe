@@ -74,7 +74,7 @@
 				{#if data != undefined}
 					{#each data as category, i}
 						<div class="ctg_wrp w-full">
-							<CategoryPill {category} description={category.description}
+							<CategoryPill {category} description={category.description ?? ''}
 								><div slot="alias" class="my-2">
 									<!-- Categories get the same alias -->
 									{#if category.alias != undefined && category.alias != category.name}

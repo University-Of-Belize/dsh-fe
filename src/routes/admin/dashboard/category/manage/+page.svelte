@@ -134,7 +134,7 @@
 					{#if !isNaN(user.id) && staff}
 						<div class="user_wrap w-full">
 							<div class="ctg_wrp w-full">
-								<CategoryPill category={data} description={data.description}
+								<CategoryPill category={data} description={data.description ?? ''}
 									><div slot="alias" class="my-2">
 										<!-- Categories get the same alias -->
 										{#if data.alias != undefined && data.alias != data.name}
