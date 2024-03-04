@@ -279,9 +279,9 @@
 						<img src={config.ui['branding-logo']} class="mr-3 h-8" alt="Service Logo" />
 					{/if}
 
-					<span class="flex self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+					<span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
 						<!-- {@html staff ? `${titleText} | Staff` : titleText} -->
-						{@html titleText}
+						{titleText}
 					</span>
 				</a>
 				<form action="/product" method="GET" class="hidden lg:block lg:pl-2">
