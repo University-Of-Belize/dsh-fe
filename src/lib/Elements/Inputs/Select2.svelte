@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Category } from '$lib/types/Category';
-	import { faChevronDown, type IconDefinition } from '@fortawesome/free-solid-svg-icons';
 	import { createEventDispatcher } from 'svelte';
 	import Fa from 'svelte-fa';
 	const dispatch = createEventDispatcher();
@@ -39,7 +38,4 @@
 			<option value={option._id ?? option} class={options_color}>{option.name ?? option}</option>
 		{/each}
 	</select>
-	<div class="icon w-fit">
-		<Fa icon={faChevronDown} size="0.75x" />
-	</div>
 </div>

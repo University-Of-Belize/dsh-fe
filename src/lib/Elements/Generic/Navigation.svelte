@@ -116,7 +116,7 @@
 			on:click={() => (hidden1 = true)}
 			aria-expanded="true"
 			aria-controls="sidebar"
-			class="mr-3 hidden cursor-pointer rounded bg-gray-300 p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:inline"
+			class="mr-3 hidden cursor-pointer rounded bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:inline"
 		>
 			<Fa icon={faBars} />
 		</Button>
@@ -124,7 +124,7 @@
 			on:click={() => (hidden1 = true)}
 			aria-expanded="true"
 			aria-controls="sidebar"
-			class="mr-2 cursor-pointer rounded-lg bg-gray-300 p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:hidden"
+			class="mr-2 cursor-pointer rounded-lg bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:hidden"
 		>
 			<Fa icon={faBars} />
 			<span class="sr-only">Toggle sidebar</span>
@@ -132,7 +132,11 @@
 		<a href="/" class="mr-4 flex">
 			<img src="/icons/icon-svgrepo.svg" class="mr-3 h-8" alt="Plattr Logo" />
 			<span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white"
-				>Plattr</span
+				>
+				
+				{@html titleText.length > 15 ? titleText.substring(0, 15) : titleText}
+				
+				</span
 			>
 		</a>
 	</div>
@@ -261,7 +265,7 @@
 					on:click={() => (hidden1 = false)}
 					aria-expanded="true"
 					aria-controls="sidebar"
-					class="mr-3 hidden cursor-pointer rounded bg-gray-300 p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:inline"
+					class="mr-3 hidden cursor-pointer rounded bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:inline"
 				>
 					<Fa icon={faBars} />
 				</Button>
@@ -269,7 +273,7 @@
 					on:click={() => (hidden1 = false)}
 					aria-expanded="true"
 					aria-controls="sidebar"
-					class="mr-2 cursor-pointer rounded-lg bg-gray-300 p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:hidden"
+					class="mr-2 cursor-pointer rounded-lg bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:hidden"
 				>
 					<Fa icon={faBars} />
 					<span class="sr-only">Toggle sidebar</span>

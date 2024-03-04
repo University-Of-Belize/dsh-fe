@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { faChevronDown, type IconDefinition } from '@fortawesome/free-solid-svg-icons';
 	import { createEventDispatcher } from 'svelte';
 	import Fa from 'svelte-fa';
 	const dispatch = createEventDispatcher();
@@ -38,8 +37,5 @@
 				<option value={option}>{option}</option>
 			{/each}
 		</select>
-		<div class="icon w-fit">
-			<Fa icon={faChevronDown} size="0.75x" />
-		</div>
 	</div>
 </form>
