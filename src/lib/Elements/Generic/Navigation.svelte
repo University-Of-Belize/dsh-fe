@@ -740,7 +740,7 @@
 					>
 						<span class="sr-only">Open user menu</span>
 						<img
-							class="h-8 w-8 rounded-full"
+							class="h-8 w-8 rounded-full object-cover"
 							src={user.profile_picture ?? config['user']['default-image']}
 							alt="user photo"
 						/>
