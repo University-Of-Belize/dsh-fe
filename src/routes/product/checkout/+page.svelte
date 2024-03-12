@@ -109,47 +109,43 @@
 								calculateTotal(item.product.price.$numberDecimal, item.quantity);
 								return ''; // Weird hack
 							})()}
+
 							<div
-								class="cart_item flex w-full flex-wrap items-center rounded-sm bg-COLORBLK2 text-COLORWHT"
+								class="flex w-full flex-col items-center rounded-lg border border-COLORHPK bg-COLORBLK2 shadow hover:opacity-90 md:flex-row"
 							>
-								<div class="product-image h-full">
-									<img
-										class="object-cover"
-										src={item.product.image ?? config['product-showcase']['default-image']}
-										on:error={() =>
-											(item.product.image = config['product-showcase']['default-image'])}
-										alt={item.product.productName ?? ''}
-										width="128px"
-									/>
-								</div>
-								<div class="content mx-4 block flex-1">
-									<div
-										class="product-name font-base cursor-pointer text-xl hover:underline"
+								<img
+									class="h-96 w-full rounded-t-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+									src={!item.product.image ?? item.product.image?.trim() == ''
+										? config['product-showcase']['default-image']
+										: item.product.image}
+									on:error={() =>
+										(item.product.image = config['product-showcase']['default-image'])}
+									alt={item.product.productName ?? ''}
+								/>
+								<div class="flex w-full flex-col justify-between p-4 leading-normal">
+									<h5
+										class="mb-2 text-2xl font-bold tracking-tight text-COLORWHT hover:underline"
 										on:click={() => goto(`/product/${item.product.slug}`)}
 									>
 										{item.product.productName ?? ''}
-									</div>
-									<div class="product-quantity text-sm font-light text-COLORWHT">
-										(x{item.quantity ?? ''})
-									</div>
-								</div>
-								<div class="price mx-4 block font-semibold">
-									<!-- Product price = product_quantity * product_price -->
-									<div class="product-price">
-										{(parseFloat(item.product.price.$numberDecimal) * item.quantity).toLocaleString(
-											'en-US',
-											{
+									</h5>
+									<p class="mb-3 font-normal text-COLORWHT">
+										(x{item.quantity ?? ''}) @
+										<b
+											>{(
+												parseFloat(item.product.price.$numberDecimal) * item.quantity
+											).toLocaleString('en-US', {
 												style: 'currency',
 												currency: config['checkout']['currency'],
 												minimumFractionDigits: 2
-											}
-										) ??
-											'0.00'.toLocaleString('en-US', {
-												style: 'currency',
-												currency: config['checkout']['currency'],
-												minimumFractionDigits: 2
-											})}
-									</div>
+											}) ??
+												'0.00'.toLocaleString('en-US', {
+													style: 'currency',
+													currency: config['checkout']['currency'],
+													minimumFractionDigits: 2
+												})}</b
+										>
+									</p>
 								</div>
 							</div>
 						{/each}

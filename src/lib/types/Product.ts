@@ -22,7 +22,7 @@ interface CartProduct {
 		_id: string;
 		category: string;
 		description: string;
-		image: string;
+		image?: string;
 		in_stock: number;
 		price: {
 			$numberDecimal: string;
