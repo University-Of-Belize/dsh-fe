@@ -133,7 +133,7 @@
 				</div>
 
 				<!-- The products -->
-				<div class="flex flex-wrap justify-between mx-10 my-4">
+				<div class="flex flex-wrap justify-between lg:mx-10 lg:my-4">
 					{#each $products as product}<!-- This way, we filter out all the products from reviews -->
 						{#if product.price != undefined}
 							<Product

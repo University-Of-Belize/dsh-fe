@@ -36,11 +36,11 @@
 	</a>
 	<div class="px-5 py-1 pb-5 text-COLORWHT">
 		<a href="/product/{productSlug}">
-			<h5 class="text-xl font-semibold tracking-tight hover:underline w-fit">
+			<h5 class="w-fit text-xl font-semibold tracking-tight hover:underline">
 				{productName}
 			</h5>
 		</a>
-		<div class="mt-2 flex items-center justify-between">
+		<div class="mt-2 block lg:flex lg:flex-wrap items-center justify-start space-y-6 lg:space-y-0 lg:justify-between">
 			<span class="text-3xl font-bold"
 				>{parseFloat(productPrice).toLocaleString('en-US', {
 					style: 'currency',
@@ -54,7 +54,7 @@
 					addToCart(productId, 1);
 					added_to_cart = true;
 				}}
-				class="flex transition-all items-center justify-center space-x-2 rounded-lg {added_to_cart
+				class="flex items-center justify-center space-x-2 rounded-lg transition-all {added_to_cart
 					? 'bg-green-700'
 					: 'bg-blue-700'} px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-1 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 			>
