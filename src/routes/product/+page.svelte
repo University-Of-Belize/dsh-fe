@@ -135,7 +135,7 @@
 				<!-- The products -->
 				<div class="flex flex-wrap justify-between lg:mx-10 lg:my-4">
 					<!-- This way, we filter out all the products from reviews -->
-					{#each [...$products].reverse() as product}
+					{#each [...$products] as product}
 						{#if product.price != undefined}
 							<Product
 								id={product.id}
