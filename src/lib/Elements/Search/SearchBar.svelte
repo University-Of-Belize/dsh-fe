@@ -17,7 +17,7 @@
 		<input
 			type="text"
 			name="search"
-			class="font-regular w-full bg-transparent px-2 py-1 text-COLORWHT focus:outline-none"
+			class="font-regular w-full border-0 bg-transparent px-2 py-1 text-COLORWHT outline-0 focus:border-0 focus:shadow-none focus:outline-none active:border-0 active:shadow-none active:outline-0 active:ring-0"
 			placeholder={placeholder ?? 'Search for something else?'}
 		/>
 	</form>
@@ -32,7 +32,7 @@
 		<input
 			type="text"
 			name="search"
-			class="font-regular w-full bg-transparent px-2 py-1 text-COLORWHT focus:outline-none"
+			class="font-regular w-full border-0 bg-transparent px-2 py-1 text-COLORWHT outline-0 focus:border-0 focus:shadow-none focus:outline-none active:border-0 active:shadow-none active:outline-0 active:ring-0"
 			placeholder={placeholder ?? 'Search for something else?'}
 		/>
 	</form>

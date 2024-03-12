@@ -115,7 +115,7 @@
 				</div>
 				<div class="payment-form block text-COLORBLK">
 					<form
-						class="payment-form flex w-full flex-col-reverse items-center justify-center rounded-sm bg-opacity-10 py-8 text-COLORWHT md:bg-COLORWHT lg:px-6"
+						class="payment-form flex w-full flex-col-reverse items-center justify-center rounded-sm bg-opacity-10 py-8 text-COLORWHT md:bg-COLORWHT"
 						on:submit={(e) => handleSubmit(e)}
 					>
 						<div
@@ -234,23 +234,25 @@
 									placeholder="D'ALESSEO REQUENA"
 								/>
 							</div>
-							<div class="mt-6 flex w-full flex-col items-center lg:space-x-2 text-center">
+							<div class="mt-6 flex w-full flex-col items-center text-center lg:space-x-2">
 								<div>
-									Note that you will be paying {cartTotal
-										? parseFloat(cartTotal).toLocaleString('en-US', {
-												style: 'currency',
-												currency: config['checkout']['currency'],
-												minimumFractionDigits: 2
-											}) ??
-											parseFloat('0.00').toLocaleString('en-US', {
-												style: 'currency',
-												currency: config['checkout']['currency'],
-												minimumFractionDigits: 2
-											})
-										: () => {
-												goto('/product/checkout');
+									Note that you will be paying <b
+										>{cartTotal
+											? parseFloat(cartTotal).toLocaleString('en-US', {
+													style: 'currency',
+													currency: config['checkout']['currency'],
+													minimumFractionDigits: 2
+												}) ??
+												parseFloat('0.00').toLocaleString('en-US', {
+													style: 'currency',
+													currency: config['checkout']['currency'],
+													minimumFractionDigits: 2
+												})
+											: (() => {
 												toast.push('Add some items to your cart first.');
-											}}
+												goto('/product/checkout');
+												})()}</b
+									>
 								</div>
 								<div class="pay_now flex w-full basis-full items-center justify-start py-4">
 									<div class="stub hidden animate-pulse"></div>
@@ -444,7 +446,7 @@
 		 background: linear-gradient(rgba(239, 235, 222, 0.75), rgba(239, 235, 222, 0.75)),
 			url('/patterns/checkout.svg'); 
 	} */
-	.page-content::-webkit-scrollbar{
+	.page-content::-webkit-scrollbar {
 		display: none;
 	}
 </style>
