@@ -145,7 +145,7 @@
 		>
 			<DashList {staff} />
 		</div>
-		<div class="content hidden h-full w-full bg-transparent px-16 py-16 lg:block">
+		<div class="content hidden h-full w-full bg-transparent px-16 py-16 lg:block overflow-auto">
 			<div class="flex pb-2 text-2xl font-semibold">
 				{config.ui['branding-text']} | {@html staff
 					? "<div class='font-bold pl-1'>SuperUser Mode</div>"

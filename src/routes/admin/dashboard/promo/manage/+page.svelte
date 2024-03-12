@@ -195,7 +195,7 @@
 								<div class="label w-full text-lg font-semibold">Description</div>
 								<div class="review-wrap mb-4 w-full rounded-md border border-COLORWHT">
 									<div
-										class="text-i-combo flex items-center justify-start font-semibold text-COLORGRY"
+										class="text-i-combo flex items-center justify-start font-semibold text-COLORWHT"
 									>
 										<div class="icon px-2 py-2"><Fa icon={faPencil} size="1.01x" /></div>
 										Type in a description

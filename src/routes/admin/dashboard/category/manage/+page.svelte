@@ -222,7 +222,7 @@
 									</div>
 									<textarea
 										name="description"
-										class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORBLE focus:outline-none"
+										class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORWHT focus:outline-none"
 										rows="6"
 										placeholder="Category description goes here"
 										value={data ? data.description : ''}

@@ -9,18 +9,24 @@
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	import type { EngineProduct } from '$lib/types/Product';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
+	import type { Category } from '$lib/types/Category';
 	import Fa from 'svelte-fa';
+	import { goto } from '$app/navigation';
 
 	const products = writable<EngineProduct[]>([]);
 	$: params = $page.url.searchParams.get('search');
 	$: params_filter = $page.url.searchParams.get('filter');
+	let cachedCategories = localStorage.getItem('categories');
+	let categories: Category[] = [];
 
 	// Thread run everytime the params change
 	$: (async () => {
 		let searchResults, nameResults;
 		try {
 			const searchPromise = (await fetchWebApi(
-				`v1/search?filter=productName&q=${params?.toString().toLowerCase() ?? params_filter?.toString().toLowerCase()}`,
+				`v1/search?filter=productName&q=${
+					params?.toString().toLowerCase() ?? params_filter?.toString().toLowerCase()
+				}`,
 				'GET'
 			)) as Response;
 
@@ -29,6 +35,7 @@
 				throw new Error('Search not found');
 			}
 			searchResults = await searchResponse.json();
+			getCategories();
 		} catch (e) {
 			console.error('Error parsing JSON:', e);
 			products.set([]);
@@ -61,6 +68,19 @@
 			}
 		}
 	})();
+
+	async function getCategories() {
+		if (!cachedCategories) {
+			const response = (await fetchWebApi('v1/category', 'GET')) as Response;
+			if (!response) return;
+			const data = await response.json();
+			categories = data.is; // Category[]
+			categories = categories.filter((category: Category) => !category.hidden);
+			localStorage.setItem('categories', JSON.stringify(categories));
+		} else {
+			categories = JSON.parse(cachedCategories);
+		}
+	}
 </script>
 
 <svelte:head>
@@ -76,18 +96,55 @@
 		class="content-wrapper absolute z-10 h-full w-full items-start justify-start overflow-auto pb-40 lg:flex"
 	>
 		{#if $products && $products.length > 0}
-			<div class="flex flex-wrap">
-				{#each $products as product}<!-- This way, we filter out all the products from reviews -->
-					{#if product.price != undefined}
-						<Product
-							id={product.id}
-							image={product.image}
-							name={product.productName}
-							description={product.description ?? ""}
-							price={product.price?.$numberDecimal}
-							slug={product.slug}
-						/>
-						<!-- <div class="bg-white rounded-lg shadow-lg p-4 m-4 flex max-w-lg">
+			<!-- The categories -->
+
+			<div class="block w-full">
+				<div class="stub hidden bg-gray-200 bg-gray-300 text-gray-900 text-white" />
+				<div class="categoryp-wrap flex w-full overflow-x-auto rounded-md">
+					{#if categories.length > 0}
+						{#each categories as category}
+							<a
+								on:click={() => {
+									goto(
+										// We filter by alias, display by name
+										`/product?filter=${
+											category.alias
+												? category.alias.toString().toLowerCase()
+												: category.name.toString().toLowerCase()
+										}`
+									);
+								}}
+								href={`/product?filter=${
+									category.alias
+										? category.alias.toString().toLowerCase()
+										: category.name.toString().toLowerCase()
+								}`}
+								class="w-full border-b border-t border-gray-200 {params_filter
+									?.toString()
+									.toLowerCase() === category.alias?.toString().toLowerCase()
+									? 'bg-gray-200 text-gray-900'
+									: 'bg-gray-800 text-white'} flex items-center justify-center border-gray-700 px-4 py-2 text-center text-sm font-medium leading-tight hover:opacity-90 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700"
+								style="min-width: 150px; max-height: 50px;"
+							>
+								{category.name.trim() ?? category.alias.trim()}
+							</a>
+						{/each}
+					{/if}
+				</div>
+
+				<!-- The products -->
+				<div class="flex flex-wrap justify-between mx-10 my-4">
+					{#each $products as product}<!-- This way, we filter out all the products from reviews -->
+						{#if product.price != undefined}
+							<Product
+								id={product.id}
+								image={product.image}
+								name={product.productName}
+								description={product.description ?? ''}
+								price={product.price?.$numberDecimal}
+								slug={product.slug}
+							/>
+							<!-- <div class="bg-white rounded-lg shadow-lg p-4 m-4 flex max-w-lg">
 							<div class="flex-none">
 								<img
 									src={product.image || config['product-view']['default-image']}
@@ -128,14 +185,15 @@
 								</div>
 							</div>
 						</div> -->
-					{/if}
-				{/each}
+						{/if}
+					{/each}
+				</div>
 			</div>
 		{:else}
 			<div
-				class="item-center flex h-full w-full flex-wrap items-center justify-center text-COLORWHT3"
+				class="not-found flex h-full w-full flex-wrap items-center justify-center text-COLORWHT3"
 			>
-				<div class="item-center flex h-fit w-full flex-wrap items-center justify-center">
+				<div class="flex h-fit w-full flex-wrap items-center justify-center">
 					<div class="icon flex h-fit w-full basis-full items-center justify-center">
 						<Fa icon={faShoppingCart} size="2x" />
 					</div>
@@ -155,3 +213,9 @@
 		</div>
 	</Footer>
 </div>
+
+<style>
+	.categoryp-wrap::-webkit-scrollbar {
+		height: 1px !important;
+	}
+</style>

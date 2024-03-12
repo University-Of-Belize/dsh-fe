@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
+	import { faShoppingCart, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
+	import Fa from 'svelte-fa';
 	import { addToCart } from '../Utility/Cart';
-	import IconButton from '../Buttons/IconButton.svelte';
 	let productImage: string;
 	let productId: string;
 	let productName: string;
 	let productDescription: string;
 	let productPrice: string;
 	let productSlug: string;
+	let added_to_cart: boolean = false;
 	export { productImage as image };
 	export { productId as id };
 	export { productName as name };
@@ -19,7 +19,53 @@
 	export { productSlug as slug };
 </script>
 
-<div
+<div class="mt-4 w-full max-w-sm rounded-lg border border-COLORHPK bg-COLORBLK1">
+	<a href="/product/{productSlug}">
+		<img
+			class="mb-4 h-60 w-full rounded-t-lg object-cover"
+			on:click={() => {
+				// @ts-ignore
+				goto(`/product/${productSlug}`);
+			}}
+			src={productImage || config['product-view']['default-image']}
+			alt={productName}
+			on:error={() => {
+				productImage = config['product-view']['default-image'];
+			}}
+		/>
+	</a>
+	<div class="px-5 py-1 pb-5 text-COLORWHT">
+		<a href="/product/{productSlug}">
+			<h5 class="text-xl font-semibold tracking-tight hover:underline w-fit">
+				{productName}
+			</h5>
+		</a>
+		<div class="mt-2 flex items-center justify-between">
+			<span class="text-3xl font-bold"
+				>{parseFloat(productPrice).toLocaleString('en-US', {
+					style: 'currency',
+					currency: config['checkout']['currency'],
+					minimumFractionDigits: 2
+				})}</span
+			>
+			<a
+				href="#queue-product"
+				on:click={() => {
+					addToCart(productId, 1);
+					added_to_cart = true;
+				}}
+				class="flex transition-all items-center justify-center space-x-2 rounded-lg {added_to_cart
+					? 'bg-green-700'
+					: 'bg-blue-700'} px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-1 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+			>
+				<Fa icon={added_to_cart ? faCheckDouble : faShoppingCart} />
+				<div>{added_to_cart ? 'Added to cart' : 'Add to cart'}</div></a
+			>
+		</div>
+	</div>
+</div>
+
+<!-- <div
 	class="lg:500px m-4 flex w-full flex-wrap rounded-lg bg-COLORBLK1 p-4 shadow-lg lg:flex-nowrap"
 >
 	<div class="w-full flex-none md:w-auto">
@@ -48,7 +94,7 @@
 		</p>
 		<div class="comboBox absolute bottom-1 flex h-9 flex-wrap">
 			<div
-				class="details button mr-2 flex w-fit cursor-pointer select-none items-center rounded-sm bg-COLORRED px-4 py-2 text-sm font-semibold text-COLORWHT hover:bg-opacity-80"
+				class="details button mr-2 flex w-fit cursor-pointer select-none items-center rounded-sm bg-red-700 px-4 py-2 text-sm font-semibold text-white hover:bg-opacity-80"
 				on:click={() => {
 					// @ts-ignore
 					goto(`/product/${productSlug}`);
@@ -60,7 +106,7 @@
 			<div class="addToCart" on:click={() => addToCart(productId, 1)}>
 				<IconButton icon={faCartPlus} color="COLORBLE" color_t="COLORWHT" />
 			</div>
-			<!-- <IconButton icon={faHeart} color="COLORRED" class="hidden lg:flex"/> -->
+			<-- <IconButton icon={faHeart} color="COLORRED" class="hidden lg:flex"/> ->
 		</div>
 	</div>
 </div>
@@ -71,4 +117,4 @@
 			width: 500px;
 		}
 	}
-</style>
+</style> -->

@@ -168,7 +168,7 @@
 			action="/product"
 		>
 			<div class="searchicon w-fit">
-				<Fa icon={faSearch} size="1.01x" class="pr-4 text-COLORWHT" />
+				<Fa icon={faSearch} size="1.01x" class="pr-4 text-black" />
 			</div>
 			<input
 				{value}
@@ -292,7 +292,7 @@
 					<label for="topbar-search" class="sr-only">Search</label>
 					<div class="relative mt-1 lg:w-96">
 						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-							<Fa icon={faSearch} class="mr-4" />
+							<Fa icon={faSearch} class="mr-4 text-black"/>
 						</div>
 						<input
 							{value}
