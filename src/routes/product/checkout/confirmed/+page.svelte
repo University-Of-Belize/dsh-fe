@@ -19,6 +19,7 @@
 	$: subtitle = '';
 
 	onMount(async () => {
+		localStorage.removeItem('cart_total');
 		RunOrder();
 	});
 

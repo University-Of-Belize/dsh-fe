@@ -319,7 +319,7 @@
 						</div>
 						<form action="#" on:submit={(event) => handleSubmit(event)} class="space-y-3">
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-semibold">New username</div>
+								<div class="label w-full text-lg font-light">New username</div>
 								<TextInput
 									icon={faAd}
 									name="username"
@@ -333,7 +333,7 @@
 							</div>
 							{#if !user_id}
 								<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-									<div class="label w-full text-lg font-semibold">New email</div>
+									<div class="label w-full text-lg font-light">New email</div>
 									<TextInput
 										icon={faUserCog}
 										name="email"
@@ -343,7 +343,7 @@
 									/>
 								</div>{/if}
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-semibold">New password</div>
+								<div class="label w-full text-lg font-light">New password</div>
 								<TextInput
 									icon={faLock}
 									name="password"
@@ -354,7 +354,7 @@
 								/>
 							</div>
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-semibold">New password</div>
+								<div class="label w-full text-lg font-light">New password</div>
 								<TextInput
 									icon={faLock}
 									name="password2"
@@ -370,7 +370,7 @@
 							</div>
 							{#if !user_id}
 								<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-									<div class="label w-full text-lg font-semibold">Staff member</div>
+									<div class="label w-full text-lg font-light">Staff member</div>
 									<TextInput
 										icon={faLock}
 										name="staff"
@@ -380,7 +380,7 @@
 									/>
 								</div>
 								<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-									<div class="label w-full text-lg font-semibold">Credit</div>
+									<div class="label w-full text-lg font-light">Credit</div>
 									<TextInput
 										icon={faDollar}
 										name="credit"

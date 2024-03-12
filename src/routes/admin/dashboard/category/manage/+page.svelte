@@ -124,7 +124,7 @@
 					<div class="flex pb-2 text-2xl font-semibold">
 						{category_id ? 'Edit' : 'New'} Product Category
 					</div>
-					<div class="flex pb-12 text-xl font-semibold">
+					<div class="flex pb-12 text-xl font-light">
 						{category_id ? 'Edit a' : 'Create a'} product category
 					</div>
 				</div>
@@ -162,7 +162,7 @@
 						<form action="#" on:submit={(event) => handleSubmit(event)} class="space-y-3">
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
 								<div
-									class="label flex w-full items-center justify-start space-x-2 text-lg font-semibold"
+									class="label flex w-full items-center justify-start space-x-2 text-lg font-light"
 								>
 									<div class="title">Category name</div>
 									<div
@@ -183,7 +183,7 @@
 
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
 								<div
-									class="label flex w-full items-center justify-start space-x-2 text-lg font-semibold"
+									class="label flex w-full items-center justify-start space-x-2 text-lg font-light"
 								>
 									<div class="title">Category identity (recommended)</div>
 									<div
@@ -212,8 +212,8 @@
 								/>
 							</div>
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-semibold">Category description</div>
-								<div class="review-wrap mb-4 w-full rounded-md border border-black">
+								<div class="label w-full text-lg font-light">Category description</div>
+								<div class="review-wrap mb-4 w-full rounded-md border border-black mt-1">
 									<div
 										class="text-i-combo flex items-center justify-start font-semibold text-COLORGRY"
 									>

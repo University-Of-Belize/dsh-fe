@@ -191,7 +191,7 @@
 			<div class="flex-header flex w-full flex-wrap items-center">
 				<div class="block">
 					<div class="flex pb-2 text-2xl font-semibold">Product Wizard</div>
-					<div class="flex pb-12 text-xl font-semibold">
+					<div class="flex pb-12 text-xl font-light">
 						{product_id ? 'Edit' : 'Create a new'} product listing
 					</div>
 				</div>
@@ -311,7 +311,7 @@
 									</div>
 									<div class="text-2xl font-semibold">General Settings</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label w-full text-lg font-semibold">Slug</div>
+										<div class="label w-full text-lg font-light">Slug</div>
 										<TextInput
 											icon={faSign}
 											name="slug"
@@ -322,7 +322,7 @@
 									</div>
 
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label w-full text-lg font-semibold">Product name</div>
+										<div class="label w-full text-lg font-light">Product name</div>
 										<TextInput
 											icon={faSortAlphaAsc}
 											name="name"
@@ -332,7 +332,7 @@
 										/>
 									</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label w-full text-lg font-semibold">Listed price</div>
+										<div class="label w-full text-lg font-light">Listed price</div>
 										<TextInput
 											icon={faTag}
 											name="price"
@@ -342,7 +342,7 @@
 										/>
 									</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label w-full text-lg font-semibold">In stock</div>
+										<div class="label w-full text-lg font-light">In stock</div>
 										<TextInput
 											icon={faBox}
 											name="in_stock"
@@ -352,20 +352,20 @@
 										/>
 									</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label w-full text-lg font-semibold">Category</div>
+										<div class="label w-full text-lg font-light">Category</div>
 										<Select
 											icon={faList}
 											name="category"
 											placeholder="Select a category"
 											value={data ? data.category._id : 'placeholder'}
-											custom_style="bg-transparent border border-COLORWHT"
+											custom_style="bg-transparent border border-COLORWHT mt-1"
 											options={categories}
 											options_color="text-COLORBLK"
 										/>
 									</div>
 									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
 										<div
-											class="label flex w-fit items-center justify-start space-x-2 text-lg font-semibold"
+											class="label flex w-fit items-center justify-start space-x-2 text-lg font-light"
 										>
 											<div>Keywords</div>
 											<div

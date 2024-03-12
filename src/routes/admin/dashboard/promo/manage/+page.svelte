@@ -135,7 +135,7 @@
 					<div class="flex pb-2 text-2xl font-semibold">
 						{promo_id ? 'Edit' : 'New'} Promo Code
 					</div>
-					<div class="flex pb-12 text-xl font-semibold">
+					<div class="flex pb-12 text-xl font-light">
 						{promo_id ? 'Edit' : 'Create'} promo codes
 					</div>
 				</div>
@@ -171,7 +171,7 @@
 						</div>
 						<form action="#" on:submit={(event) => handleSubmit(event)} class="space-y-3">
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-semibold">Promo code</div>
+								<div class="label w-full text-lg font-light">Promo code</div>
 								<TextInput
 									icon={faTag}
 									name="code"
@@ -182,7 +182,7 @@
 							</div>
 
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-semibold">Nickname (optional)</div>
+								<div class="label w-full text-lg font-light">Nickname (optional)</div>
 								<TextInput
 									icon={faSortAlphaAsc}
 									name="nickname"
@@ -192,8 +192,8 @@
 								/>
 							</div>
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-semibold">Description</div>
-								<div class="review-wrap mb-4 w-full rounded-md border border-COLORWHT">
+								<div class="label w-full text-lg font-light">Description</div>
+								<div class="review-wrap mb-4 mt-1 w-full rounded-md border border-COLORWHT">
 									<div
 										class="text-i-combo flex items-center justify-start font-semibold text-COLORWHT"
 									>
@@ -210,7 +210,7 @@
 								</div>
 							</div>
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-semibold">Discount percentage</div>
+								<div class="label w-full text-lg font-light">Discount percentage</div>
 								<TextInput
 									icon={faTag}
 									name="discount"
@@ -220,7 +220,7 @@
 								/>
 							</div>
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-semibold">Start Date</div>
+								<div class="label w-full text-lg font-light">Start Date</div>
 								<DateInput
 									icon={faCalendarAlt}
 									name="p_start"
@@ -230,7 +230,7 @@
 								/>
 							</div>
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-semibold">End Date</div>
+								<div class="label w-full text-lg font-light">End Date</div>
 								<DateInput
 									icon={faCalendarAlt}
 									name="p_end"

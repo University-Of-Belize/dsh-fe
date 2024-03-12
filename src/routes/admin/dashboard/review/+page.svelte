@@ -63,7 +63,7 @@
 		</div>
 		<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
 			<div class="flex pb-2 text-2xl font-semibold">Review Management</div>
-			<div class="flex pb-12 text-xl font-semibold">Reviews & Comment Management</div>
+			<div class="flex pb-12 text-xl font-light">Reviews & Comment Management</div>
 			<div class="flex w-full flex-col-reverse flex-wrap">
 				{#if data != undefined}
 					{#if data.length === 0}

@@ -181,7 +181,7 @@
 									: "User's"
 							: 'Create'} User Account
 					</div>
-					<div class="flex pb-12 text-xl font-semibold">
+					<div class="flex pb-12 text-xl font-light">
 						{user_id ? 'Edit' : 'Create'}
 						{user_id ? (user_id == user._id ? 'Your' : data ? `${data.username}'s` : 'An') : 'An'} Account
 					</div>

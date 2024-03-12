@@ -305,7 +305,7 @@
 			<div class="flex-header flex w-full flex-wrap items-start">
 				<div class="block">
 					<div class="flex pb-2 text-2xl font-semibold">What's Queued?</div>
-					<div class="flex pb-12 text-xl font-semibold">
+					<div class="flex pb-12 text-xl font-light">
 						{staff ? 'Accept, decline and modify orders' : 'View and modify your open orders.'}
 					</div>
 				</div>

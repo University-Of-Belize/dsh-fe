@@ -151,7 +151,7 @@
 					? "<div class='font-bold pl-1'>SuperUser Mode</div>"
 					: `<div class='font-bold pl-1'>Dashboard</div>`}
 			</div>
-			<div class="flex pb-12 text-xl font-semibold">What would you like to do?</div>
+			<div class="flex pb-12 text-xl font-light">What would you like to do?</div>
 			<div class="flex w-full flex-wrap">
 				{#if data != undefined}
 					{#each data.is[0][1] as shortcut, i}

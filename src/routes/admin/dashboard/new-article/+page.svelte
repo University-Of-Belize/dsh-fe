@@ -92,7 +92,7 @@
 					/>
 				</div>
 			</div>
-			<div class="flex pb-12 text-xl font-semibold">Submit or delete announcements articles</div>
+			<div class="flex pb-12 text-xl font-light">Submit or delete announcements articles</div>
 			<div class="flex w-full flex-col flex-wrap">
 				{#if data != undefined}
 					<div class="block">

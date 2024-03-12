@@ -115,7 +115,7 @@
 			<div class="flex-header flex w-full flex-wrap items-center">
 				<div class="block">
 					<div class="flex pb-2 text-2xl font-semibold">User Management</div>
-					<div class="flex pb-12 text-xl font-semibold">Who would you like to edit?</div>
+					<div class="flex pb-12 text-xl font-light">Who would you like to edit?</div>
 				</div>
 				<div class="flex flex-1 items-center justify-end">
 					{#if staff}

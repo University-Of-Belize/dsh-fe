@@ -27,7 +27,7 @@
 		<div class="mb-6 text-xl font-semibold">
 			{title}
 
-			<div class="mb-6 text-sm text-COLORWHT2">
+			<div class="mb-6 text-sm text-COLORWHT2 font-light">
 				{subtitle}
 			</div>
 			<div
