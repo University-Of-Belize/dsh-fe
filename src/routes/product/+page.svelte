@@ -3,15 +3,15 @@
 	import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 	import { writable } from 'svelte/store';
 
+	import { goto } from '$app/navigation';
 	import Product from '$lib/Elements/Dashboard/ProductElement.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
+	import type { Category } from '$lib/types/Category';
 	import type { EngineProduct } from '$lib/types/Product';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import type { Category } from '$lib/types/Category';
 	import Fa from 'svelte-fa';
-	import { goto } from '$app/navigation';
 
 	const products = writable<EngineProduct[]>([]);
 	$: params = $page.url.searchParams.get('search');
@@ -134,7 +134,8 @@
 
 				<!-- The products -->
 				<div class="flex flex-wrap justify-between lg:mx-10 lg:my-4">
-					{#each $products as product}<!-- This way, we filter out all the products from reviews -->
+					<!-- This way, we filter out all the products from reviews -->
+					{#each [...$products].reverse() as product}
 						{#if product.price != undefined}
 							<Product
 								id={product.id}
