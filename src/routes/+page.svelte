@@ -7,7 +7,7 @@
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	import type { Category } from '$lib/types/Category';
 	import { faAd, faLock, faUnlockKeyhole } from '@fortawesome/free-solid-svg-icons';
-// import type { Product as Product_ } from '$lib/types/Product.ts';
+	// import type { Product as Product_ } from '$lib/types/Product.ts';
 	import type { User } from '$lib/types/User';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
@@ -413,14 +413,14 @@
 		/* Circle over title */
 		.hero-image::before {
 			/* Small box shadow that blends into the background */
-			box-shadow: 1px 0 8px 4px rgb(var(--COLORBLK) / 0.25);
+			/* box-shadow: 1px 0 8px 4px rgb(var(--COLORBLK) / 0.25); */
 			width: 50%;
 			height: 100%;
 			display: block;
 			content: '';
 			position: absolute;
 			bottom: 0;
-			background: radial-gradient(rgb(var(--COLORBLK)), transparent);
+			background: linear-gradient(90deg, rgb(var(--COLORBLK)), transparent);
 		}
 	}
 	.hero {
