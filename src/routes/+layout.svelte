@@ -347,7 +347,7 @@
 	</div>
 	{#if localStorage.theme === 'custom'}
 		<div
-			class="drawer h-screen w-1/4 flex-col justify-start overflow-auto bg-COLORBLK bg-opacity-100 px-8 py-2 text-COLORWHT"
+			class="drawer h-screen w-1/4 flex-col justify-start overflow-auto bg-COLORBLK bg-opacity-100 px-8 py-2 text-COLORWHT z-50"
 		>
 			<div class="two space-y-2 py-6">
 				<div class="title block pb-5 font-semibold">
