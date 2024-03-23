@@ -4,6 +4,7 @@
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import config from '$lib/config/settings';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
@@ -294,49 +295,31 @@
 					{config.ui['branding-text']}
 				</div>
 				<div
-					class="username mx-8 mt-2 flex flex-1 items-center rounded-sm border border-COLORWHT bg-transparent px-4 py-2 text-sm"
-				>
-					<div class="icon w-fit">
-						<Fa icon={faRectangleAd} size="1.25x" class="pr-4 text-COLORWHT" />
-					</div>
-					<input
-						type="text"
-						name="username"
-						autocomplete="username"
-						class="w-full bg-transparent px-2 py-1 font-medium text-COLORWHT focus:outline-none"
-						placeholder="Enter a username or email"
-					/>
-				</div>
-				<!-- <div
-					class="email flex-1 flex mt-2 rounded-sm bg-COLORWHT5 px-4 py-2 mx-8 items-center text-sm border border-COLORWHT"
-				>
-					<div class="icon w-fit">
-						<Fa icon={faUserCog} size="1.25x" class="text-COLORWHT pr-4" />
-					</div>
-					<input
-						type="email"
-						name="email"
-						class="w-full font-medium focus:outline-none text-COLORWHT py-1 px-2 bg-transparent"
-						placeholder="Enter your email address"
-					/>
-				</div> -->
+				class="username flex flex-wrap items-start justify-start lg:items-center"
+			>
+				<TextInput
+					icon={faRectangleAd}
+					name="username"
+					placeholder="Enter a username or email"
+					custom_style="bg-transparent"
+					required
+				/>
+			</div>	
 				<div
-					class="password mx-8 mt-2 flex flex-1 items-center rounded-sm border border-COLORWHT bg-transparent px-4 py-2 text-sm"
-				>
-					<div class="icon w-fit">
-						<Fa icon={faLock} size="1.25x" class="pr-4 text-COLORWHT" />
-					</div>
-					<input
-						type="password"
-						name="password"
-						autocomplete="current-password"
-						class="w-full bg-transparent px-2 py-1 font-medium text-COLORWHT focus:outline-none"
-						placeholder="Enter your password"
-					/>
-				</div>
-
+				class="password flex flex-wrap items-start justify-start lg:items-center"
+			>
+				<TextInput
+					icon={faLock}
+					name="username"
+					type="password"
+					placeholder="Enter your password"
+					autocomplete="current-password"
+					custom_style="bg-transparent"
+					required
+				/>
+			</div>
 				<div
-					class="submit mx-8 mt-6 flex flex-1 items-center justify-center"
+					class="submit mt-6 flex flex-1 items-center justify-center"
 					title={logging_in ? 'Please wait for the request to complete' : ''}
 				>
 					<button class="submit w-full" type="submit" disabled={logging_in}>
@@ -350,7 +333,7 @@
 						/>
 					</button>
 				</div>
-				<a href="/auth/password_reset" class="mx-8 block w-fit">
+				<a href="/auth/password_reset" class="block w-fit">
 					<div
 						on:keypress={() => goto('/auth/password_reset')}
 						on:click={() => goto('/auth/password_reset')}
@@ -362,7 +345,7 @@
 				>
 			</form>
 
-			<div class="mx-8 my-8 block text-COLORWHT">
+			<div class="my-8 block text-COLORWHT">
 				<div class="text-2xl font-light">New around here?</div>
 				<div
 					class="signup mt-6 flex flex-1 items-center justify-start"

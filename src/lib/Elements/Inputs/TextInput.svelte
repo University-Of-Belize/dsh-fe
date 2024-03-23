@@ -1,8 +1,8 @@
 <svelte:options accessors />
 
 <script lang="ts">
+	import { Input } from 'flowbite-svelte';
 	import { createEventDispatcher } from 'svelte';
-	import { Label, Input, ButtonGroup } from 'flowbite-svelte';
 	import Fa from 'svelte-fa';
 	export let icon: import('@fortawesome/free-solid-svg-icons').IconDefinition | undefined =
 		undefined; // Optional
@@ -11,6 +11,7 @@
 	export let custom_style: string | undefined = '';
 	export let container_style: string = '';
 	export let value: string = '';
+	export let autocomplete: string | undefined = 'current-password'
 	export let type: 'text' | 'password' | 'color' = 'text';
 	export let required: boolean = false; // Optional
 	export let disabled: boolean = false; // Optional
@@ -18,7 +19,7 @@
 	let class_: string | undefined = '';
 	export { class_ as class };
 
-	let inputBox: HTMLInputElement;
+	let inputBox: Input;
 	const dispatch = createEventDispatcher();
 
 	function handleInput(event: Event) {
@@ -62,6 +63,7 @@
 		{placeholder}
 		{required}
 		{disabled}
+		{autocomplete}
 		class="bg-transparent text-COLORWHT border-0 focus:outline-none disabled:cursor-not-allowed disabled:text-COLORWHT5 {class_}"
 	>
 		<Fa {icon} slot="left" size="0.75x" class="px-1 text-COLORWHT" />
