@@ -727,7 +727,8 @@
 							src={user.profile_picture ?? config['user']['default-image']}
 							alt="user photo"
 						/>
-						<div class="hidden w-fit text-center opacity-75 lg:block lg:px-4">
+						<!-- COLOR REMAINS STATIC THROUGHOUT -->
+						<div class="hidden w-fit text-white text-center opacity-75 lg:block lg:px-4">
 							${parseFloat(user?.credit?.$numberDecimal).toFixed(2)}
 						</div>
 					</button>
