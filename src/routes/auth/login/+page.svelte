@@ -287,7 +287,7 @@
 		<Navigation transparency={5} search={true} />
 	</div>
 	<div class="main-content lg:mx-8 flex h-full items-center justify-center py-8">
-		<div class="auth_window block bg-COLORBLK1 pt-8 lg:px-6 rounded-md">
+		<div class="auth_window block bg-COLORBLK1 pt-8 lg:px-8 rounded-md">
 			<form class="block" action="#" on:submit={(event) => handleSubmit(event)}>
 				<div
 					class="mx-8 mb-6 flex flex-1 items-center justify-center text-3xl font-semibold text-COLORWHT"
