@@ -290,7 +290,7 @@
 		<div class="auth_window block bg-COLORBLK1 pt-8 lg:px-8 rounded-md">
 			<form class="block" action="#" on:submit={(event) => handleSubmit(event)}>
 				<div
-					class="mx-8 mb-6 flex flex-1 items-center justify-center text-3xl font-semibold text-COLORWHT"
+					class="mb-6 flex flex-1 items-center justify-center text-3xl font-semibold text-COLORWHT"
 				>
 					{config.ui['branding-text']}
 				</div>

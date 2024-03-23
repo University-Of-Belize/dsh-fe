@@ -12,7 +12,7 @@
 	export let container_style: string = '';
 	export let value: string = '';
 	export let autocomplete: string | undefined = 'current-password'
-	export let type: 'text' | 'password' | 'color' = 'text';
+	export let type: 'text' | 'email' | 'password' | 'color' = 'text';
 	export let required: boolean = false; // Optional
 	export let disabled: boolean = false; // Optional
 	export let disabled_text: string = 'You cannot type here.'; // Optional
