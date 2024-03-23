@@ -512,6 +512,6 @@
 		/* background: #f0ede6; */
 		/* background: #202124 */
 		/* background: #d5d6dc */
-		background: rgb(var(--COLORBLK));
+		background: linear-gradient(240deg, rgb(var(--COLORBLK)), rgb(var(--COLORBLK-TONE2)));
 	}
 </style>
