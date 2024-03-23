@@ -140,7 +140,10 @@
 	{#if user}
 		<div class="my-2 mb-4">
 			<div
-				class="profile-picture flex w-full items-center justify-start space-x-4 rounded-md bg-COLORBLK3 px-2 py-4 text-sm font-medium text-white"
+				class="wallet-indicator flex w-full cursor-pointer items-center justify-start space-x-4 rounded-md bg-COLORBLK3 px-2 py-4 text-sm font-medium text-white hover:opacity-80"
+				on:click={async () => {
+					await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
+				}}
 			>
 				<div>
 					<img
@@ -148,11 +151,8 @@
 						title="My profile"
 						alt="{user?.username}'s photo"
 						width="40px"
-						class="cursor-pointer rounded-full border border-COLORWHT bg-COLORBLK1 object-cover hover:opacity-80"
+						class="rounded-full border border-COLORWHT bg-COLORBLK1 object-cover"
 						style="height: 42px; width: 42px;"
-						on:click={async () => {
-							await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
-						}}
 					/>
 				</div>
 				<div>Wallet (${parseFloat(user?.credit?.$numberDecimal).toFixed(2)})</div>
@@ -160,7 +160,7 @@
 		</div>
 	{/if}
 	{#if search}
-		<SearchBar nomargin placeholder="Search for snacks, drinks or lunch"/>
+		<SearchBar nomargin placeholder="Search for snacks, drinks or lunch" />
 	{:else}<div class="searchbar mx-8 flex flex-1 items-center px-4 py-2 text-sm" />
 	{/if}
 	{#if !user}
@@ -703,7 +703,7 @@
 					<button
 						use:clickOutside
 						type="button"
-						class="mx-3 hidden rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-0 lg:flex"
+						class="mx-3 hidden rounded-full bg-gray-800 text-sm hover:opacity-80 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-0 lg:flex lg:items-center"
 						id="user-menu-button"
 						aria-expanded="false"
 						data-dropdown-toggle="dropdown"
@@ -727,6 +727,9 @@
 							src={user.profile_picture ?? config['user']['default-image']}
 							alt="user photo"
 						/>
+						<div class="hidden w-fit text-center opacity-75 lg:block lg:px-4">
+							${parseFloat(user?.credit?.$numberDecimal).toFixed(2)}
+						</div>
 					</button>
 					<!-- User dropdown menu -->
 					<div
