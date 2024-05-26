@@ -64,7 +64,7 @@
 		{required}
 		{disabled}
 		{autocomplete}
-		class="bg-transparent text-COLORWHT border-0 focus:outline-none disabled:cursor-not-allowed disabled:text-COLORWHT5 {class_}"
+		class="bg-transparent outline-none text-COLORWHT border-0 focus:border-0 focus:outline-0 focus:ring-0 disabled:cursor-not-allowed disabled:text-COLORWHT5 {class_}"
 	>
 		<Fa {icon} slot="left" size="0.75x" class="px-1 text-COLORWHT" />
 	</Input>

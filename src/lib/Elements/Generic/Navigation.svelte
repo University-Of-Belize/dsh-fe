@@ -243,6 +243,7 @@
 <header class="border border-COLORBLK3 bg-COLORBLK antialiased bg-opacity-{transparency}">
 	<nav class="bg-opacity-100 px-4 py-2.5 text-COLORWHT opacity-100 lg:px-6">
 		<div class="flex flex-wrap items-center justify-between">
+			<!-- Logo and labels -->
 			<div class="flex items-center justify-start">
 				<Button
 					on:click={() => (hidden1 = false)}
@@ -271,9 +272,12 @@
 						{@html titleText}
 					</span>
 				</a>
-				<form action="/product" method="GET" class="hidden lg:block lg:pl-2">
+			</div>
+			<div class="hidden lg:flex items-center justify-center flex-1">
+				<!-- Searchbar -->
+				<form action="/product" method="GET" class="hidden lg:block w-full mx-4">
 					<label for="topbar-search" class="sr-only">Search</label>
-					<div class="relative mt-1 lg:w-96">
+					<div class="relative w-full">
 						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
 							<Fa icon={faSearch} class="mr-4 text-black" />
 						</div>
@@ -290,6 +294,7 @@
 					</div>
 				</form>
 			</div>
+			<!-- Login buttons, etc. -->
 			<div class="flex items-center lg:order-2">
 				{#if installPrompt}
 					<button
@@ -728,7 +733,7 @@
 							alt="user photo"
 						/>
 						<!-- COLOR REMAINS STATIC THROUGHOUT -->
-						<div class="hidden w-fit text-white text-center opacity-75 lg:block lg:px-4">
+						<div class="hidden w-fit text-center text-white opacity-75 lg:block lg:px-4">
 							${parseFloat(user?.credit?.$numberDecimal).toFixed(2)}
 						</div>
 					</button>
