@@ -1,4 +1,4 @@
-ARG BUN_VERSION=1.1.10
+ARG BUN_VERSION=1.1.3
 FROM oven/bun:${BUN_VERSION}-slim as builder
 
 # NPM will not install any package listed in "devDependencies" when NODE_ENV is set to "production",
