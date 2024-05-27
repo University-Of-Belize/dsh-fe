@@ -25,7 +25,7 @@ RUN apt-get update -qq && \
 # Begin
 WORKDIR /app
 
-COPY --from=builder /build .
+COPY --from=builder build .
 ENV NODE_ENV production
 
 CMD [ "PORT=8080", "bun", "index.js" ]
