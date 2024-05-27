@@ -26,8 +26,8 @@ RUN bun run build
 # Start anew
 FROM oven/bun:${BUN_VERSION}-slim
 
+# Copy our build directory
 COPY --from=builder /build/build /app
-# COPY --from=builder /build/node_modules /app
 
 # Begin
 WORKDIR /app
@@ -35,8 +35,8 @@ WORKDIR /app
 # Not sure if we need these, but for now we'll just copy the package and bun lock
 COPY --from=builder /build/package.json .
 COPY --from=builder /build/bun.lockb .
-# COPY --from=builder /build/package-lock.json .
-RUN bun install --ci # Run again for verification
+COPY --from=builder /build/package-lock.json .
+RUN bun install --ci # Install with Continuous Integration
 RUN bun pm trust --all # Trust that the postinstalls won't kill us
 
 ENV NODE_ENV production
