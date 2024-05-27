@@ -41,6 +41,7 @@
 			<div class="product-pfp flex flex-col items-center justify-start pr-4">
 				<img
 					bind:this={pimg}
+					loading="lazy"
 					class="rounded-md object-cover"
 					src={image ?? product.image
 						? product.image.trim() === ''

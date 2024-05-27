@@ -1,10 +1,11 @@
 <script lang="ts">
+	import IconButton from "$lib/Elements/Buttons/IconButton.svelte";
+	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	import { clickOutside } from '$lib/Elements/Utility/clickOutside';
 	import { Button, ButtonGroup, Drawer } from 'flowbite-svelte';
-	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	import Fa from 'svelte-fa';
 	import { sineIn } from 'svelte/easing';
-	/***********************/
+/***********************/
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
@@ -15,6 +16,7 @@
 		faBars,
 		faBurger,
 		faClone,
+		faCodePullRequest,
 		faCog,
 		faFeed,
 		// faDashboard,
@@ -29,7 +31,8 @@
 		faStar,
 		faTag,
 		faUserPlus,
-		faVial
+		faVial,
+		faX
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
@@ -174,7 +177,7 @@
 					<Fa icon={faRightToBracket} class="mr-2" />
 					Log in</Button
 				>
-				<Button on:click={() => goto('/auth/register')} class="flex-1 bg-COLORPNK text-COLORWHT">
+				<Button on:click={() => goto('/auth/create')} class="flex-1 bg-COLORPNK text-COLORWHT">
 					<Fa icon={faGift} class="mr-2" />
 					Sign up</Button
 				>
@@ -240,7 +243,7 @@
 	</div>
 </Drawer>
 
-<header class="border border-COLORBLK3 bg-COLORBLK antialiased bg-opacity-{transparency}">
+<header class="border-b border-COLORBLK3 bg-COLORBLK antialiased bg-opacity-{transparency}">
 	<nav class="bg-opacity-100 px-4 py-2.5 text-COLORWHT opacity-100 lg:px-6">
 		<div class="flex flex-wrap items-center justify-between">
 			<!-- Logo and labels -->
@@ -262,16 +265,28 @@
 					<Fa icon={faBars} />
 					<span class="sr-only">Toggle sidebar</span>
 				</Button>
-				<a href={titleWhere} class="mr-4 flex">
+				<a href={titleWhere} class="flex">
+					{#if config.ui['branding-logo'] && config.ui['branding-logo'].trim() != ''}
+					<img src={config.ui['branding-logo']} class="h-8" alt="Service Logo" />
+					{:else}
+					<span class="flex self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+						<!-- {@html staff ? `${titleText} | Staff` : titleText} -->
+						{@html titleText}
+					</span>
+					{/if}
+				</a>
+
+				<!-- TBD -->
+				<!-- <a href={titleWhere} class="mr-4 flex">
 					{#if config.ui['branding-logo'] && config.ui['branding-logo'].trim() != ''}
 						<img src={config.ui['branding-logo']} class="mr-3 h-8" alt="Service Logo" />
 					{/if}
 
 					<span class="flex self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-						<!-- {@html staff ? `${titleText} | Staff` : titleText} -->
+						<!- {@html staff ? `${titleText} | Staff` : titleText} ->
 						{@html titleText}
 					</span>
-				</a>
+				</a> -->
 			</div>
 			<div class="hidden lg:flex items-center justify-center flex-1">
 				<!-- Searchbar -->
@@ -279,7 +294,7 @@
 					<label for="topbar-search" class="sr-only">Search</label>
 					<div class="relative w-full">
 						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-							<Fa icon={faSearch} class="mr-4 text-black" />
+							<Fa icon={faSearch} class="mr-4 text-gray-500" />
 						</div>
 						<input
 							{value}
@@ -288,7 +303,7 @@
 							title="Click to search for snacks, drinks and lunch"
 							id="topbar-search"
 							class="bg-opacity-{transparency +
-								35} block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-9 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm"
+								35} block w-full text-xs font-light rounded-lg border-0 placeholder-COLORWHT bg-COLORBLK1 p-1.5 pl-9 text-COLORWHT focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm"
 							placeholder="Search for snacks, drinks or lunch"
 						/>
 					</div>
@@ -303,7 +318,7 @@
 							window.location.reload();
 						}}
 						type="button"
-						class="mr-2 hidden items-center justify-center rounded-lg bg-COLORBLK3 px-3 py-1.5 text-xs font-medium text-white hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex"
+						class="mr-2 hidden items-center justify-center rounded-lg bg-COLORBLK3 px-3 py-1.5 text-xs font-medium text-white hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex lg:px-4 lg:py-2"
 						><Fa icon={faPlus} class="mr-4" /> Install app</button
 					>
 				{/if}
@@ -834,4 +849,39 @@
 			</div>
 		</div>
 	</nav>
+	<!-- Announcements and stuff -->
+	{#if !localStorage.acknowledged_announcements || localStorage.acknowledged_announcements != 'true'}
+	<div
+		class="announcements-container fixed bottom-0 z-20 flex bg-COLORBLE bg-opacity-50 py-1 text-center text-COLORWHT w-full"
+	>
+		<div class="container-wrap flex w-full flex-wrap items-center justify-center bg-opacity-100">
+			<div
+				class="container flex flex-wrap items-center justify-center space-x-1 bg-opacity-100 text-COLORWHT"
+			>
+				<div class="flex space-x-1 bg-opacity-100 text-COLORWHT">
+					<div class="icon mx-2"><Fa icon={faCodePullRequest} size="1.25x" /></div>
+					<div>
+						Hey, thanks for visiting! We're still in beta, so please bear with us as we sort out
+						all the bugs. You can sign up
+						<a href="/app/onboarding" class="underline">here.</a>
+					</div>
+				</div>
+				<div>
+					<!--- @remind This isn't portable @todo make this portable. -->
+					And, if by chance you do experience any bugs, be sure to tell us using the
+					<a href="/app/help-center/6592452880c49849aa984f1c" class="underline">Feedback Hub</a>
+				</div>
+			</div>
+			<div
+				class="btn-wrp mt-2 flex items-center justify-end md:ml-2 md:mt-0 md:w-auto"
+				on:click={() => {
+					localStorage.setItem('acknowledged_announcements', 'true');
+					window.location.reload();
+				}}
+			>
+				<IconButton icon={faX} color="COLORRED" color_t="COLORWHT" />
+			</div>
+		</div>
+	</div>
+{/if}
 </header>

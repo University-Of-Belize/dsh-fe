@@ -8,8 +8,8 @@
 <!-- Dark mode -->
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
-	title="Dark mode"
-	description="Latest, stable dark mode skin. Website default."
+	title="Dark mode (Legacy)"
+	description="Legacy dark mode skin. Website default."
 >
 	<div class="controls flex space-x-2">
 		{#if localStorage.theme === 'dark'}
@@ -56,7 +56,7 @@
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
 	title="Dark v2"
-	description="Experimental dark mode skin. Report any cosmetic bugs using Feedback Hub."
+	description="Latest, stable dark mode skin. Report any cosmetic bugs using Feedback Hub."
 >
 	<div class="controls flex space-x-2">
 		{#if localStorage.theme === 'dark-v2'}

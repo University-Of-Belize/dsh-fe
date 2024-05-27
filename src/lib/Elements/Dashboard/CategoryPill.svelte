@@ -18,6 +18,7 @@
 		<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
 			<img
 				class="h-12 w-12 rounded-md object-cover"
+				loading="lazy"
 				bind:this={cImage}
 				src={category.image
 					? category.image.trim() === ''

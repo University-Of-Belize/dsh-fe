@@ -22,6 +22,7 @@
 <div class="mt-4 w-full max-w-sm rounded-lg border border-COLORHPK bg-COLORBLK1">
 	<a href="/product/{productSlug}">
 		<img
+		    loading="lazy"
 			class="mb-4 h-60 w-full rounded-t-lg object-cover"
 			on:click={() => {
 				// @ts-ignore

@@ -42,6 +42,7 @@
 		<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
 			<img
 				class="rounded-md object-cover"
+				loading="lazy"
 				src={user?.profile_picture ?? config['user']['default-image']}
 				alt="{user?.username}'s avatar"
 				on:error={() => {

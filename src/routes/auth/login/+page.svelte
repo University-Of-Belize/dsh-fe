@@ -2,26 +2,16 @@
 	// import config from '$lib/config/settings';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
-	import config from '$lib/config/settings';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { lockPointer } from '$lib/vendor/dishout/lock';
-	import {
-		faGift,
-		faLock,
-		faRectangleAd,
-		faRightToBracket,
-		faUnlockKeyhole
-		// faUserCog
-	} from '@fortawesome/free-solid-svg-icons';
+	import { faLock, faRectangleAd } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import html2canvas from 'html2canvas';
 	import { onMount } from 'svelte';
-	import Fa from 'svelte-fa';
 	$: continue_url = $page.url.searchParams.get('continue');
 	let debounceTimeout: number;
 	let logging_in: boolean = false;
@@ -281,86 +271,97 @@
 	<title>UniFood | Login / Register</title>
 </svelte:head>
 
-<canvas bind:this={canvas} class="hidden" style="height: 100vh; width: 100vw;" />
 <main class="h-screen w-full">
 	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} />
 	</div>
-	<div class="main-content lg:mx-8 flex h-full items-center justify-center py-8">
-		<div class="auth_window block bg-COLORBLK1 pt-8 lg:px-8 rounded-md">
-			<form class="block" action="#" on:submit={(event) => handleSubmit(event)}>
-				<div
-					class="mb-6 flex flex-1 items-center justify-center text-3xl font-semibold text-COLORWHT"
-				>
-					{config.ui['branding-text']}
-				</div>
-				<div
-				class="username flex flex-wrap items-start justify-start lg:items-center"
+	<div class="main-content flex h-full flex-wrap items-center justify-center text-COLORWHT">
+		<div class="flex w-full flex-col md:w-1/2">
+			<div
+				class="mx-auto my-auto flex flex-col justify-center pt-8 md:justify-start md:px-6 md:pt-0 lg:w-[28rem]"
 			>
-				<TextInput
-					icon={faRectangleAd}
-					name="username"
-					placeholder="Enter a username or email"
-					custom_style="bg-transparent"
-					required
-				/>
-			</div>	
-				<div
-				class="password flex flex-wrap items-start justify-start lg:items-center"
-			>
-				<TextInput
-					icon={faLock}
-					name="password"
-					type="password"
-					placeholder="Enter your password"
-					autocomplete="current-password"
-					custom_style="bg-transparent"
-					required
-				/>
-			</div>
-				<div
-					class="submit mt-6 flex flex-1 items-center justify-center"
-					title={logging_in ? 'Please wait for the request to complete' : ''}
+				<p class="text-left text-3xl font-bold">Welcome back</p>
+				<p class="mt-2 text-left text-COLORWHT1">Please enter your credentials.</p>
+				<!--
+				<button
+					class="-2 mt-8 flex items-center justify-center rounded-md border bg-COLORBLK px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-COLORWHT1 hover:bg-COLORBLK2 hover:text-white focus:ring-2"
+					><img class="mr-2 h-5" src="/icons/google-icon.svg" alt /> Log in with Google</button
 				>
-					<button class="submit w-full" type="submit" disabled={logging_in}>
-						<Button
-							icon={faRightToBracket}
-							color="COLORWHT"
-							color_t="COLORBLK"
-							custom_style="w-full justify-center"
-							text="Log in"
-							disabled={logging_in}
-						/>
-					</button>
-				</div>
-				<a href="/auth/password_reset" class="block w-fit">
+				<div class="relative mt-8 flex h-px place-items-center bg-COLORWHT">
 					<div
-						on:keypress={() => goto('/auth/password_reset')}
-						on:click={() => goto('/auth/password_reset')}
-						class="forgot-password flex w-fit cursor-pointer space-x-2 pt-4 text-sm font-semibold text-COLORWHT hover:underline"
+						class="absolute left-1/2 h-6 w-14 -translate-x-1/2 bg-COLORWHT text-center text-sm text-COLORBLK"
 					>
-						<div class="icon"><Fa icon={faUnlockKeyhole} /></div>
-						<div>Forgot Password?</div>
-					</div></a
+						or
+					</div>
+				</div>
+				--->
+				<form
+					class="flex flex-col pt-3 md:pt-8"
+					action="#"
+					on:submit={(event) => handleSubmit(event)}
 				>
-			</form>
-
-			<div class="my-8 block text-COLORWHT">
-				<div class="text-2xl font-light">New around here?</div>
-				<div
-					class="signup mt-6 flex flex-1 items-center justify-start"
-					on:click={() => goto('/auth/register')}
-					on:keypress={() => goto('/auth/register')}
-				>
-					<Button
-						icon={faGift}
-						color="COLORPNK"
-						text="Sign up"
-						color_t="COLORWHT"
-						custom_style="w-18 justify-center"
-					/>
+					<div class="flex flex-col pt-4">
+						<div class="relative flex overflow-hidden transition">
+							<TextInput
+								icon={faRectangleAd}
+								name="username"
+								placeholder="Enter a username or email"
+								custom_style="bg-transparent"
+								required
+							/>
+						</div>
+					</div>
+					<div class="mb-12 flex flex-col pt-4">
+						<div class="relative flex overflow-hidden transition">
+							<TextInput
+								icon={faLock}
+								name="password"
+								type="password"
+								placeholder="Enter your password"
+								autocomplete="current-password"
+								custom_style="bg-transparent"
+								required
+							/>
+						</div>
+					</div>
+					<button
+						type="submit"
+            title={logging_in ? 'Please wait for the request to complete' : ''}
+						class="w-full rounded-lg bg-COLORGRY disabled:opacity-50 px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2"
+            disabled={logging_in}
+						>Log in</button
+					>
+				</form>
+				<div class="py-12 text-center">
+					<p class="whitespace-nowrap text-gray-600">
+						Don't have an account?
+						<a href="/auth/create" class="font-semibold text-COLORWHT underline underline-offset-4"
+							>Sign up for free.</a
+						>
+					</p>
 				</div>
 			</div>
+		</div>
+		<div
+			class="pointer-events-none relative hidden h-screen select-none bg-black md:block md:w-1/2"
+		>
+			<div class="relative py-20 z-10 px-8 text-white opacity-100">
+				<p class="text-3xl font-semibold leading-10">
+					Thank you for helping us shape the future of our<br/>application.
+				</p>
+				<p class="mb-2 text-2xl font-semibold leading-10">
+					"The best way to predict the future is to create it."
+				</p>
+				<p class="mb-4 text-3xl font-semibold">Peter Drucker</p>
+				<p class="">Consultant/Educator</p>
+				<p class="mb-7 text-sm opacity-70">Goethe University Frankfurt</p>
+			</div>
+			<img
+			    alt
+				loading="lazy"
+				class="-z-1 absolute top-0 h-full w-full object-cover opacity-50"
+				src="/assets/auth/login-static.jpg"
+			/>
 		</div>
 	</div>
 </main>

@@ -4,7 +4,7 @@
 
 	// call this function when you want to redirect
 	function redirectToRegister() {
-		goto('/auth/register');
+		goto('/auth/create');
 	}
 	onMount(() => redirectToRegister());
 </script>

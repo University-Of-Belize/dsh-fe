@@ -3,7 +3,7 @@
 	import { Button, ButtonGroup, Drawer } from 'flowbite-svelte';
 	import Fa from 'svelte-fa';
 	import { sineIn } from 'svelte/easing';
-	/***********************/
+/***********************/
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
@@ -187,7 +187,7 @@
 					<Fa icon={faRightToBracket} class="mr-2" />
 					Log in</Button
 				>
-				<Button on:click={() => goto('/auth/register')} class="flex-1 bg-COLORPNK text-COLORWHT">
+				<Button on:click={() => goto('/auth/create')} class="flex-1 bg-COLORPNK text-COLORWHT">
 					<Fa icon={faGift} class="mr-2" />
 					Sign up</Button
 				>

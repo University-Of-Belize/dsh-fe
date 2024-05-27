@@ -7,7 +7,7 @@
 	import { SvelteToast, toast } from '@zerodevx/svelte-toast';
 	import 'node-localstorage/register';
 	import { onMount } from 'svelte';
-	// Import the functions you need from the SDKs you need
+// Import the functions you need from the SDKs you need
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import ColorInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import config from '$lib/config/settings';
@@ -245,13 +245,13 @@
 			// Pull the user back into setup
 			if (
 				window.matchMedia('(display-mode: standalone)').matches &&
-				clocation.pathname !== '/auth/register'
+				clocation.pathname !== '/auth/create'
 			) {
 				toast.push('Thanks for completing setup. You can now register your account.');
 				localStorage.clear();
 				localStorage.setItem('eula', 'true');
 				setTimeout(() => {
-					goto('/auth/register');
+					goto('/auth/create');
 				}, 2000);
 			}
 		}

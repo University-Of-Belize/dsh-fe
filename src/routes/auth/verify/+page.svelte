@@ -117,7 +117,7 @@
 						console.log('User accepted the install prompt');
 						toast.push('You can now register your account.');
 						setTimeout(() => {
-							goto('/auth/register');
+							goto('/auth/create');
 						}, 2000);
 					} else {
 						toast.push("You've dismissed the install prompt.", {
