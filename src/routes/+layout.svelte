@@ -156,7 +156,7 @@
 			if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
 				toast.push(
 					// "Your OS theme is set to light mode; but light mode isn't available yet, so we'll use dark mode instead.",
-					"Your OS theme is set to light mode; activating an experimental theme.",
+					'Your OS theme is set to light mode; activating an experimental theme.',
 					{
 						// Set the timeout to 5 seconds
 						duration: 5000
@@ -287,6 +287,11 @@
 				toast.push(`Oops. Something unexpected happened: ${error.message}. Try logging in again.`);
 			}
 		}
+
+		// Initialized!
+		setTimeout(()=>{
+			document.getElementById('splash-screen').classList.add('hidden'); // Hide splash
+		}, 3000); // Give the user a little while to adjust
 	});
 
 	// ********* Color-scheming ********* /
@@ -347,7 +352,7 @@
 	</div>
 	{#if localStorage.theme === 'custom'}
 		<div
-			class="drawer h-screen w-1/4 flex-col justify-start overflow-auto bg-COLORBLK bg-opacity-100 px-8 py-2 text-COLORWHT z-50"
+			class="drawer z-50 h-screen w-1/4 flex-col justify-start overflow-auto bg-COLORBLK bg-opacity-100 px-8 py-2 text-COLORWHT"
 		>
 			<div class="two space-y-2 py-6">
 				<div class="title block pb-5 font-semibold">
