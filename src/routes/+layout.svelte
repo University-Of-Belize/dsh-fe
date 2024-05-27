@@ -291,7 +291,9 @@
 		// Initialized!
 		setTimeout(()=>{
 			document.getElementById('splash-screen').classList.add('hidden'); // Hide splash
-		}, 3000); // Give the user a little while to adjust
+		}, 500); // Give the user a little while to adjust
+            // Complies with "Splash screen guidelines":
+            // https://developer.android.com/develop/ui/views/launch/splash-screen#splash-screen-animate-reqs
 	});
 
 	// ********* Color-scheming ********* /
