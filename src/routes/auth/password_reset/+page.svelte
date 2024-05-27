@@ -130,6 +130,8 @@
 										type="text"
 										id="text"
 										name="user_id"
+										autocomplete="off"
+										placeholder="{ResetToken ? 'Typed password is shown in Cleartext': 'User ID'}"
 										class="block w-full rounded-md bg-COLORBLK1 px-4 py-3 text-sm outline-none ring-offset-1 focus:ring-2"
 										required
 									/>
@@ -155,7 +157,7 @@
 									</p>
 								</div>
 							</div>
-							<!-- /Form Group -->
+							<!-- Form Group -->
 
 							<button
 								type="submit"
@@ -179,13 +181,14 @@
 					You may also
 					<a
 						class="pl-1 text-sm text-COLORGRY decoration-2 hover:underline"
+						href="#contact-support"
 						on:click={()=>{
 							window.open(
 							`https://mail.google.com/mail/u/?authuser=${localStorage.getItem(
 								'email'
 							)}&view=cm&fs=1&to=${config['server']['support-email']}&su=${localStorage.getItem(
 								'email'
-							)} — Support Request&body=User%20would%20like%20to%20file%20a%20support%20request.%0A%0AWrite%20your%20comment%20below%20this%20line.%0A------%0A%0A%0A`,
+							)?? "[YOUR_NAME]"} — Support Request&body=User%20would%20like%20to%20file%20a%20support%20request.%0A%0AWrite%20your%20comment%20below%20this%20line.%0A------%0A%0A%0ABEFORE%20TYPING%20ANYTHING%20PLEASE%20AFFIX%20YOUR%20FULL%20NAME%20IN%20THE%20SUBJECT%20LINE!`,
 							'_blank'
 						);
 						}}
