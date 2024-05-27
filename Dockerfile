@@ -37,7 +37,7 @@ WORKDIR /app
 
 # Not sure if we need these, but for now we'll just copy the package and bun lock
 COPY --from=builder /build/package.json .
-COPY --from=builder /build/bun.lockb .
+# COPY --from=builder /build/bun.lockb .  # Have bun run the conversion for us
 COPY --from=builder /build/package-lock.json .
 RUN bun install --ci # Install with Continuous Integration
 RUN bun pm trust --all # Trust that the postinstalls won't kill us
@@ -50,3 +50,4 @@ RUN echo "PORT=8080 bun index.js" >> start.sh
 RUN chmod +x start.sh
 
 CMD [ "./start.sh" ]
+EXPOSE 8080
