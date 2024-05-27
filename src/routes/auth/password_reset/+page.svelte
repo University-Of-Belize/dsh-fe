@@ -163,7 +163,7 @@
 							<button
 								type="submit"
 								disabled={resetting_password}
-								class="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-COLORGRY px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+								class="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-COLORGRY px-4 py-3 text-sm font-semibold text-white transition-all disabled:opacity-50 hover:opacity-80 focus:outline-none"
 								>Reset password</button
 							>
 						</div>
