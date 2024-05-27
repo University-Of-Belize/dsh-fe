@@ -17,8 +17,8 @@ WORKDIR /build
 COPY . .
 
 RUN bun install
-RUN bun run sitemap
-RUN bun run build
+RUN bun --bun run sitemap
+RUN bun --bun run build
 # RUN rm -rf node_modules
 # RUN bun install --ci  # Install with Continuous Integration
 
