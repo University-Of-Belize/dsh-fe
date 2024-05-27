@@ -26,6 +26,9 @@ RUN bun run build
 # Start anew
 FROM oven/bun:${BUN_VERSION}-slim
 
+# Create the work directory
+RUN mkdir /app
+
 # Copy our build directory
 COPY --from=builder /build/build /app
 
