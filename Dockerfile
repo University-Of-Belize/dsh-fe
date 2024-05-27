@@ -27,7 +27,9 @@ COPY --from=builder /app/build /app
 
 # Begin
 WORKDIR /app
-
 ENV NODE_ENV production
+RUN echo \#\!/bin/bash >> start.sh
+RUN echo "PORT=8080 bun index.js" >> start.sh
+RUN chmod +x start.sh
 
-CMD [ "PORT=8080", "bun", "index.js" ]
+CMD [ "./start.sh" ]
