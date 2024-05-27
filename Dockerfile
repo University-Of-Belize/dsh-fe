@@ -22,7 +22,7 @@ RUN mkdir /app
 
 # Begin
 WORKDIR /app
-COPY build .
+COPY . .
 
 # Start anew
 FROM oven/bun:${BUN_VERSION}-slim
