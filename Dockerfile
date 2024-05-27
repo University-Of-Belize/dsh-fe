@@ -10,20 +10,15 @@ FROM oven/bun:${BUN_VERSION}-slim as builder
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential curl node-gyp
 
+# Bun app build lives in here
+RUN mkdir /app
+WORKDIR /app
+
 COPY . .
 
 RUN bun install
 RUN bun run sitemap
 RUN bun run build
-RUN rm -rf .svelte-kit
-
-# Bun app build lives in here
-RUN mkdir /app
-RUN cp build /app
-
-# Begin
-# WORKDIR /app
-# COPY . .
 
 # Start anew
 FROM oven/bun:${BUN_VERSION}-slim
