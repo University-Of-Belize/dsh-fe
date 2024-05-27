@@ -7,8 +7,8 @@ FROM oven/bun:${BUN_VERSION}-slim as builder
 
 # ENV NODE_ENV production
 
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential curl node-gyp
+# RUN apt-get update -qq && \
+#    apt-get install --no-install-recommends -y build-essential curl node-gyp
 
 # Bun app build lives in here
 RUN mkdir /app
