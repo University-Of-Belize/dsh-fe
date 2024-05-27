@@ -1,17 +1,5 @@
-FROM debian:bullseye as builder
-
-ARG NODE_VERSION=20.5.0
-
-RUN apt-get update; apt install -y curl
-RUN curl https://get.volta.sh | bash
-ENV VOLTA_HOME /root/.volta
-ENV PATH /root/.volta/bin:$PATH
-RUN volta install node@${NODE_VERSION}
-
-#######################################################################
-
-RUN mkdir /app
-WORKDIR /app
+ARG BUN_VERSION=1.1.10
+FROM oven/bun:${BUN_VERSION}-slim as builder
 
 # NPM will not install any package listed in "devDependencies" when NODE_ENV is set to "production",
 # to install all modules: "npm install --production=false".
@@ -21,17 +9,23 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install
-RUN npm run sitemap
-RUN npm run build
-FROM debian:bullseye
+RUN bun install
+RUN bun run sitemap
+RUN bun run build
+RUN rm -rf .svelte-kit
 
-LABEL fly_launch_runtime="nodejs"
+# Start anew
+FROM oven/bun:${BUN_VERSION}-slim
 
-COPY --from=builder /root/.volta /root/.volta
-COPY --from=builder /app /app
+# Bun app lives in here
+RUN mkdir /app
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential curl node-gyp
 
+# Begin
 WORKDIR /app
+
+COPY --from=builder /build .
 ENV NODE_ENV production
-ENV PATH /root/.volta/bin:$PATH
-CMD [ "npm", "run", "start" ]
+
+CMD [ "PORT=8080", "bun", "index.js" ]
