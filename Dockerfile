@@ -16,9 +16,11 @@ RUN mkdir /app
 # Begin
 WORKDIR /app
 
+# ???
+RUN bun install
+
 COPY . .
 
-RUN bun install
 RUN bun run sitemap
 RUN bun run build
 RUN rm -rf .svelte-kit
