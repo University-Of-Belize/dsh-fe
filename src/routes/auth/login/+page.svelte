@@ -311,7 +311,7 @@
 							/>
 						</div>
 					</div>
-					<div class="mb-12 flex flex-col pt-4">
+					<div class="flex flex-col pt-4">
 						<div class="relative flex overflow-hidden transition">
 							<TextInput
 								icon={faLock}
@@ -323,6 +323,16 @@
 								required
 							/>
 						</div>
+						<div class="mb-12 mt-4">
+							<p class="whitespace-nowrap text-gray-600">
+								Forgot Password?
+									<a href="/auth/password_reset"
+										class="forgot-password font-semibold text-COLORWHT underline underline-offset-4"
+									>
+							Reset it now.
+									</a
+								></p>
+							</div>
 					</div>
 					<button
 						type="submit"
@@ -332,7 +342,7 @@
 						>Log in</button
 					>
 				</form>
-				<div class="py-12 text-center">
+				<div class="pt-12 text-center">
 					<p class="whitespace-nowrap text-gray-600">
 						Don't have an account?
 						<a href="/auth/create" class="font-semibold text-COLORWHT underline underline-offset-4"
@@ -340,6 +350,7 @@
 						>
 					</p>
 				</div>
+				
 			</div>
 		</div>
 		<div

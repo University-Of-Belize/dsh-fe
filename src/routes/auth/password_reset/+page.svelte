@@ -1,30 +1,25 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import config from '$lib/config/settings';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import {
-		faBuildingLock,
-		faEnvelopeCircleCheck,
-		faKey,
-		faRightToBracket,
-		faUserLock,
-		faWarning
-		// faUserCog
-	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
-	import Fa from 'svelte-fa';
 	let debounceTimeout: number;
-	let logging_in: boolean = false;
+	let resetting_password: boolean = false;
+	let error_string: string = "";
 	const ResetToken = $page.url.searchParams.get('reset_token') || false;
+	let error_message: HTMLDivElement;
+	let error_graphic: HTMLDivElement;
 
 	async function Reset(payload: any) {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
+			error_message.innerText = "";
+			error_graphic.classList.add("hidden");
+			error_graphic.classList.remove("absolute");
 			const r = (await fetchWebApi(
 				'v1/auth/passwordreset',
 				ResetToken ? 'PATCH' : 'POST',
@@ -34,18 +29,24 @@
 			)) as Response;
 			if (!r.ok) {
 				setTimeout(() => {
-					logging_in = false; // Slight "bounce"
+					resetting_password = false; // Slight "bounce"
 				}, 450);
 				try {
 					const res = await r.json();
-					return toast.push(res.message, {
+					error_message.innerText = res.message;
+					error_graphic.classList.remove("hidden");
+					error_graphic.classList.add("absolute");
+					return; /*toast.push(res.message, {
 						dismissable: false,
 						theme: {
 							'--toastBarBackground': 'rgb(var(--COLORRED))'
 						}
-					});
+					});*/
 				} catch {
-					return toast.push(
+					error_message.innerText = "Try that again one more time.";
+					error_graphic.classList.remove("hidden");
+					error_graphic.classList.add("absolute");
+					return; /*toast.push(
 						'Oops. Something hitched over on our side while requesting a password reset.<br/>Try that again one more time.',
 						{
 							dismissable: false,
@@ -53,7 +54,7 @@
 								'--toastBarBackground': 'rgb(var(--COLORRED))'
 							}
 						}
-					);
+					);*/
 				}
 			}
 			toast.push(
@@ -79,7 +80,7 @@
 			.map((el) => el.value);
 
 		if (valueArray[0].trim() != '') {
-			logging_in = true;
+			resetting_password = true;
 			Reset(valueArray);
 		}
 	};
@@ -93,75 +94,107 @@
 	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} />
 	</div>
-	<div class="main-content lg:mx-8 flex h-full items-center justify-center py-8">
-		<div class="auth_window block bg-COLORBLK1 pt-8 lg:px-6 rounded-md">
-			<form class="block" action="#" on:submit={(event) => handleSubmit(event)}>
-				<div
-					class="mx-8 mb-6 flex flex-1 items-center justify-center text-3xl font-semibold text-COLORWHT"
-				>
-					{config.ui['branding-text']}
+	<div class="main-content flex h-full items-center justify-center">
+		<div class="rounded-xl lg:border border-gray-200 lg:bg-COLORBLK1 lg:shadow-sm">
+			<div class="p-4 sm:p-7">
+				<div class="text-center">
+					<div class="mb-4 inline-block rounded-full bg-COLORGRY p-2 text-white">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-6 w-6"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							stroke-width="2"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+							/>
+						</svg>
+					</div>
+					<h1 class="block text-2xl font-bold text-COLORWHT">{ResetToken ? 'Change your password': 'Forgot password?'}</h1>
+					<p class="mt-2 text-sm text-COLORWHT1">{ResetToken ? 'Note that doing this will also sign out all of your devices': "Don't worry we'll send you reset instructions."}</p>
 				</div>
 
-				<div
-					class="password mx-8 mt-2 flex flex-1 items-center rounded-sm border border-COLORWHT bg-transparent px-4 py-2 text-sm"
-				>
-					<div class="icon w-fit">
-						<Fa
-							icon={ResetToken ? faUserLock : faBuildingLock}
-							size="1.25x"
-							class="pr-4 text-COLORWHT"
-						/>
-					</div>
-					<input
-						type="text"
-						name="token"
-						class="w-full bg-transparent px-2 py-1 font-medium text-COLORWHT focus:outline-none"
-						placeholder={ResetToken ? 'Enter a new password' : 'Enter a registered username'}
-					/>
+				<div class="mt-6">
+					<!-- Form -->
+					<form action="#" on:submit={(event) => handleSubmit(event)}>
+						<div class="grid gap-y-4 text-COLORWHT2">
+							<!-- Form Group -->
+							<div>
+								<label for="email" class="mb-2 block text-sm">{ResetToken ? 'New password': 'Email address or Username'}</label>
+								<div class="relative">
+									<input
+										type="text"
+										id="text"
+										name="user_id"
+										class="block w-full rounded-md bg-COLORBLK1 px-4 py-3 text-sm outline-none ring-offset-1 focus:ring-2"
+										required
+									/>
+									<div
+									    bind:this={error_graphic}
+										class="hidden pointer-events-none right-0 top-3 items-center px-3"
+									>
+										<svg
+											class="h-5 w-5 text-rose-500"
+											width="16"
+											height="16"
+											fill="currentColor"
+											viewBox="0 0 16 16"
+											aria-hidden="true"
+										>
+											<path
+												d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+											/>
+										</svg>
+									</div>
+									<p bind:this={error_message} class="mt-2 text-xs text-rose-600 peer-invalid:block" id="email-error">
+										{error_string}
+									</p>
+								</div>
+							</div>
+							<!-- /Form Group -->
+
+							<button
+								type="submit"
+								disabled={resetting_password}
+								class="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-COLORGRY px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+								>Reset password</button
+							>
+						</div>
+					</form>
+					<!-- /Form -->
 				</div>
-				{#if ResetToken}
-					<div
-						class="forgot-password-warning mx-8 flex w-fit space-x-2 pt-4 text-sm font-semibold text-COLORRED"
+				<p class="mt-3 block w-full divide-gray-300 text-center text-sm text-COLORWHT">
+					<!-- <a class="pl-3 text-sm text-gray-600 decoration-2 hover:text-blue-600 hover:underline" href="#"> FAQs </a> -->
+					<span class="inline pr-3">
+						Remember your password?
+						<a class="font-medium text-COLORGRY decoration-2 hover:underline" href="/auth/login">
+							Sign in here
+						</a>
+					</span>
+					<span class="hidden lg:inline"><br/></span>
+					You may also
+					<a
+						class="pl-1 text-sm text-COLORGRY decoration-2 hover:underline"
+						on:click={()=>{
+							window.open(
+							`https://mail.google.com/mail/u/?authuser=${localStorage.getItem(
+								'email'
+							)}&view=cm&fs=1&to=${config['server']['support-email']}&su=${localStorage.getItem(
+								'email'
+							)} — Support Request&body=User%20would%20like%20to%20file%20a%20support%20request.%0A%0AWrite%20your%20comment%20below%20this%20line.%0A------%0A%0A%0A`,
+							'_blank'
+						);
+						}}
+						target="_blank"
 					>
-						<div class="icon"><Fa icon={faWarning} /></div>
-						<div>Note that doing this will also sign out all of your devices</div>
-					</div>
-				{/if}
-				<div class="submit mx-8 mt-6 flex flex-1 items-center justify-center">
-					<button class="submit w-full" type="submit" disabled={logging_in}>
-						<Button
-							icon={ResetToken ? faKey : faEnvelopeCircleCheck}
-							color="COLORWHT"
-							color_t="COLORBLK"
-							custom_style="w-full justify-center"
-							text={ResetToken ? 'Change your password' : 'Request a password reset'}
-							disabled={logging_in}
-						/>
-					</button>
-				</div>
-			</form>
-
-			<div class="mx-8 my-8 block text-COLORWHT">
-				<div class="text-2xl font-light">Have an account?</div>
-				<div
-					class="login mt-6 flex flex-1 items-center justify-start"
-					on:click={() => goto('/auth/login')}
-				>
-					<Button
-						icon={faRightToBracket}
-						color="COLORYLW"
-						color_t="COLORBLK"
-						custom_style="w-18 justify-center"
-						text="Log in"
-					/>
-				</div>
+						Contact Support
+					</a>
+				</p>
 			</div>
 		</div>
 	</div>
 </main>
-
-<style>
-	:root {
-		--tw-bg-opacity: 1;
-	}
-</style>
