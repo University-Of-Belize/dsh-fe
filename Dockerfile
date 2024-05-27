@@ -29,15 +29,16 @@ FROM oven/bun:${BUN_VERSION}-slim
 COPY --from=builder /build/build /app
 # COPY --from=builder /build/node_modules /app
 
+# Begin
+WORKDIR /app
+
 # Not sure if we need these, but for now we'll just copy the package and bun lock
-COPY --from=builder /build/package.json /app
-COPY --from=builder /build/bun.lockb /app
-# COPY --from=builder /build/package-lock.json /app
+COPY --from=builder /build/package.json .
+COPY --from=builder /build/bun.lockb .
+# COPY --from=builder /build/package-lock.json .
 RUN bun install --ci # Run again for verification
 RUN bun pm trust --all # Trust that the postinstalls won't kill us
 
-# Begin
-WORKDIR /app
 ENV NODE_ENV production
 
 # Hack up an init script
