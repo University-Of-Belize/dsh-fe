@@ -13,11 +13,11 @@ RUN apt-get update -qq && \
 # Bun app build lives in here
 RUN mkdir /app
 
-# Begin
-WORKDIR /app
-
 # ???
 RUN bun install
+
+# Begin
+WORKDIR /app
 
 COPY . .
 
