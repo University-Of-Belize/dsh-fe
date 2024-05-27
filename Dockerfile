@@ -11,8 +11,8 @@ FROM oven/bun:${BUN_VERSION}-slim as builder
 #    apt-get install --no-install-recommends -y build-essential curl node-gyp
 
 # Bun app build lives in here
-RUN mkdir /app
-WORKDIR /app
+RUN mkdir /build
+WORKDIR /build
 
 COPY . .
 
@@ -26,13 +26,13 @@ RUN bun run build
 # Start anew
 FROM oven/bun:${BUN_VERSION}-slim
 
-COPY --from=builder /app/build /app
-# COPY --from=builder /app/node_modules /app
+COPY --from=builder /build/build /app
+# COPY --from=builder /build/node_modules /app
 
 # Not sure if we need these, but for now we'll just copy the package and bun lock
-COPY --from=builder /app/package.json .
-COPY --from=builder /app/bun.lockb .
-# COPY --from=builder /app/package-lock.json .
+COPY --from=builder /build/package.json /app
+COPY --from=builder /build/bun.lockb /app
+# COPY --from=builder /build/package-lock.json /app
 RUN bun install --ci # Run again for verification
 RUN bun pm trust --all # Trust that the postinstalls won't kill us
 
