@@ -33,6 +33,7 @@ COPY --from=builder /app/node_modules /app
 COPY --from=builder /app/package.json .
 COPY --from=builder /app/bun.lockb .
 # COPY --from=builder /app/package-lock.json .
+RUN bun install --ci # Run again for verification
 
 # Begin
 WORKDIR /app
