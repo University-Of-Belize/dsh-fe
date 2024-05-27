@@ -34,7 +34,7 @@ COPY --from=builder /app/package.json .
 COPY --from=builder /app/bun.lockb .
 # COPY --from=builder /app/package-lock.json .
 RUN bun install --ci # Run again for verification
-RUN bun pm trust # Trust that the postinstalls won't kill us
+RUN bun pm trust --all # Trust that the postinstalls won't kill us
 
 # Begin
 WORKDIR /app
