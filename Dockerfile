@@ -18,7 +18,7 @@ COPY . .
 
 RUN bun install
 RUN bun --bun run sitemap
-RUN bun --bun run build
+RUN bunx --bun vite build
 # RUN rm -rf node_modules
 # RUN bun install --ci  # Install with Continuous Integration
 
@@ -40,7 +40,7 @@ COPY --from=builder /build/package.json .
 # COPY --from=builder /build/bun.lockb .  # Have bun run the conversion for us
 COPY --from=builder /build/package-lock.json .
 RUN bun install --ci # Install with Continuous Integration
-RUN bun pm trust --all # Trust that the postinstalls won't kill us
+RUN bun pm trust --all # Trust that the postinstalls don't kill us
 
 ENV NODE_ENV production
 
