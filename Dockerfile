@@ -7,6 +7,15 @@ FROM oven/bun:${BUN_VERSION}-slim as builder
 
 # ENV NODE_ENV production
 
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential curl node-gyp
+
+# Bun app build lives in here
+RUN mkdir /app
+
+# Begin
+WORKDIR /app
+
 COPY . .
 
 RUN bun install
@@ -17,15 +26,11 @@ RUN rm -rf .svelte-kit
 # Start anew
 FROM oven/bun:${BUN_VERSION}-slim
 
-# Bun app lives in here
-RUN mkdir /app
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential curl node-gyp
+COPY --from=builder /app/build /app
 
 # Begin
 WORKDIR /app
 
-COPY --from=builder build .
 ENV NODE_ENV production
 
 CMD [ "PORT=8080", "bun", "index.js" ]
