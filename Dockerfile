@@ -33,15 +33,15 @@ COPY --from=builder /app/node_modules /app
 COPY --from=builder /app/package.json .
 COPY --from=builder /app/bun.lockb .
 # COPY --from=builder /app/package-lock.json .
-RUN bun pm untrusted # Trust that the postinstalls won't kill us
 RUN bun install --ci # Run again for verification
+RUN bun pm trust # Trust that the postinstalls won't kill us
 
 # Begin
 WORKDIR /app
 ENV NODE_ENV production
 
 # Hack up an init script
-RUN echo \#\!/usr/bin/bash >> start.sh
+RUN echo \#\!/usr/bin/env bash >> start.sh
 RUN echo "PORT=8080 bun index.js" >> start.sh
 RUN chmod +x start.sh
 
