@@ -41,7 +41,7 @@ WORKDIR /app
 ENV NODE_ENV production
 
 # Hack up an init script
-RUN echo \#\!/bin/bash >> start.sh
+RUN echo \#\!/usr/bin/bash >> start.sh
 RUN echo "PORT=8080 bun index.js" >> start.sh
 RUN chmod +x start.sh
 
