@@ -19,15 +19,26 @@ COPY . .
 RUN bun install
 RUN bun run sitemap
 RUN bun run build
+RUN rm -rf node_modules
+RUN bun install --ci  # Install with Continuous Integration
+
 
 # Start anew
 FROM oven/bun:${BUN_VERSION}-slim
 
 COPY --from=builder /app/build /app
+COPY --from=builder /app/node_modules /app
+
+# Not sure if we need these, but for now we'll just copy the package and bun lock
+COPY --from=builder /app/package.json .
+COPY --from=builder /app/bun.lockb .
+# COPY --from=builder /app/package-lock.json .
 
 # Begin
 WORKDIR /app
 ENV NODE_ENV production
+
+# Hack up an init script
 RUN echo \#\!/bin/bash >> start.sh
 RUN echo "PORT=8080 bun index.js" >> start.sh
 RUN chmod +x start.sh
