@@ -1,11 +1,11 @@
 <script lang="ts">
-	import IconButton from "$lib/Elements/Buttons/IconButton.svelte";
+	import IconButton from '$lib/Elements/Buttons/IconButton.svelte';
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	import { clickOutside } from '$lib/Elements/Utility/clickOutside';
 	import { Button, ButtonGroup, Drawer } from 'flowbite-svelte';
 	import Fa from 'svelte-fa';
 	import { sineIn } from 'svelte/easing';
-/***********************/
+	/***********************/
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
@@ -19,6 +19,8 @@
 		faCodePullRequest,
 		faCog,
 		faFeed,
+		faSun,
+		faMoon,
 		// faDashboard,
 		faGift,
 		faMessage,
@@ -61,6 +63,7 @@
 	// Dropdowns
 	let user_dropdown: HTMLDivElement;
 	let apps_dropdown: HTMLDivElement;
+	let theme_switched: bool = false;
 
 	onMount(async () => {
 		// Set the scrim height
@@ -267,12 +270,12 @@
 				</Button>
 				<a href={titleWhere} class="flex">
 					{#if config.ui['branding-logo'] && config.ui['branding-logo'].trim() != ''}
-					<img src={config.ui['branding-logo']} class="h-8" alt="Service Logo" />
+						<img src={config.ui['branding-logo']} class="h-8" alt="Service Logo" />
 					{:else}
-					<span class="flex self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-						<!-- {@html staff ? `${titleText} | Staff` : titleText} -->
-						{@html titleText}
-					</span>
+						<span class="flex self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+							<!-- {@html staff ? `${titleText} | Staff` : titleText} -->
+							{@html titleText}
+						</span>
 					{/if}
 				</a>
 
@@ -288,9 +291,9 @@
 					</span>
 				</a> -->
 			</div>
-			<div class="hidden lg:flex items-center justify-center flex-1">
+			<div class="hidden flex-1 items-center justify-center lg:flex">
 				<!-- Searchbar -->
-				<form action="/product" method="GET" class="hidden lg:block w-full mx-4">
+				<form action="/product" method="GET" class="mx-4 hidden w-full lg:block">
 					<label for="topbar-search" class="sr-only">Search</label>
 					<div class="relative w-full">
 						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -303,7 +306,7 @@
 							title="Click to search for snacks, drinks and lunch"
 							id="topbar-search"
 							class="bg-opacity-{transparency +
-								35} block w-full text-xs font-light rounded-lg border-0 placeholder-COLORWHT bg-COLORBLK1 p-1.5 pl-9 text-COLORWHT focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm"
+								35} block w-full rounded-lg border-0 bg-COLORBLK1 p-1.5 pl-9 text-xs font-light text-COLORWHT placeholder-COLORWHT focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm"
 							placeholder="Search for snacks, drinks or lunch"
 						/>
 					</div>
@@ -846,42 +849,63 @@
 						><Fa icon={faRightToBracket} class="mr-4 hidden lg:block" /> Login</button
 					>
 				{/if}
+
+				<!-------- START Other stuff (theme button, other fun things) ----->
+				<span class="ml-2">
+					<button
+						type="button"
+						on:click={() => {
+							theme_switched = theme_switched ? false : true;
+							let theme = document.body.parentElement.getAttribute('data-theme');
+							document.body.parentElement.setAttribute(
+								'data-theme',
+								theme == 'light' ? 'dark-v3' : 'light'
+							);
+							theme = document.body.parentElement.getAttribute('data-theme');
+							localStorage.setItem('theme', theme ?? 'light');
+						}}
+						class="items-center justify-center rounded-lg bg-COLORBLK2 px-3 py-1.5 text-xs font-medium text-COLORWHT hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex lg:px-4 lg:py-2.5"
+						><Fa icon={theme_switched ? faSun : faMoon} /></button
+					></span
+				>
+
+				<!-------- END Other stuff ---------------------------------------->
 			</div>
 		</div>
 	</nav>
 	<!-- Announcements and stuff -->
 	{#if !localStorage.acknowledged_announcements || localStorage.acknowledged_announcements != 'true'}
-	<div
-		class="announcements-container fixed bottom-0 z-20 flex bg-COLORBLE bg-opacity-50 py-1 text-center text-COLORWHT w-full"
-	>
-		<div class="container-wrap flex w-full flex-wrap items-center justify-center bg-opacity-100">
-			<div
-				class="container flex flex-wrap items-center justify-center space-x-1 bg-opacity-100 text-COLORWHT"
-			>
-				<div class="flex space-x-1 bg-opacity-100 text-COLORWHT">
-					<div class="icon mx-2"><Fa icon={faCodePullRequest} size="1.25x" /></div>
+		<div
+			class="announcements-container fixed bottom-0 z-20 flex w-full bg-COLORBLE bg-opacity-50 py-1 text-center text-COLORWHT"
+		>
+			<div class="container-wrap flex w-full flex-wrap items-center justify-center bg-opacity-100">
+				<div
+					class="container flex flex-wrap items-center justify-center space-x-1 bg-opacity-100 text-COLORWHT"
+				>
+					<div class="flex space-x-1 bg-opacity-100 text-COLORWHT">
+						<div class="icon mx-2"><Fa icon={faCodePullRequest} size="1.25x" /></div>
+						<div>
+							Hey, thanks for visiting! We're still in beta, so please bear with us as we sort out
+							all the bugs. You can sign up
+							<a href="/app/onboarding" class="underline">here.</a>
+						</div>
+					</div>
 					<div>
-						Hey, thanks for visiting! We're still in beta, so please bear with us as we sort out
-						all the bugs. You can sign up
-						<a href="/app/onboarding" class="underline">here.</a>
+						<!--- @remind This isn't portable @todo make this portable. -->
+						And, if by chance you do experience any bugs, be sure to tell us using the
+						<a href="/app/help-center/6592452880c49849aa984f1c" class="underline">Feedback Hub</a>
 					</div>
 				</div>
-				<div>
-					<!--- @remind This isn't portable @todo make this portable. -->
-					And, if by chance you do experience any bugs, be sure to tell us using the
-					<a href="/app/help-center/6592452880c49849aa984f1c" class="underline">Feedback Hub</a>
+				<div
+					class="btn-wrp mt-2 flex items-center justify-end md:ml-2 md:mt-0 md:w-auto"
+					on:click={() => {
+						localStorage.setItem('acknowledged_announcements', 'true');
+						window.location.reload();
+					}}
+				>
+					<IconButton icon={faX} color="COLORRED" color_t="COLORWHT" />
 				</div>
 			</div>
-			<div
-				class="btn-wrp mt-2 flex items-center justify-end md:ml-2 md:mt-0 md:w-auto"
-				on:click={() => {
-					localStorage.setItem('acknowledged_announcements', 'true');
-					window.location.reload();
-				}}
-			>
-				<IconButton icon={faX} color="COLORRED" color_t="COLORWHT" />
-			</div>
 		</div>
-	</div>
-{/if}
+	{/if}
 </header>

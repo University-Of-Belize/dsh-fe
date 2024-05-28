@@ -112,7 +112,7 @@
 			<p class="mb-2 text-2xl">UniFood is an online ordering system.</p>
 			<p class="mb-6 text-COLORWHT2">Online Test #2 is officially here! Sign up using the button below 👇</p>
 			<button class="flex items-center space-x-2 rounded-md border-2 border-COLORWHT px-4 py-2 font-medium text-COLORWHT transition hover:bg-COLORBLK1 hover:opacity-80">
-			  <span> Learn more </span>
+			  <a href="/auth/create"><span> Sign up </span></a>
 			  <span
 				><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
 				  <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 011.06 0l3.75 3.75a.75.75 0 010 1.06l-3.75 3.75a.75.75 0 11-1.06-1.06l2.47-2.47H3a.75.75 0 010-1.5h16.19l-2.47-2.47a.75.75 0 010-1.06z" clip-rule="evenodd" />
