@@ -21,3 +21,5 @@ static/workbox-48631b28.js.map
 
 # Sentry Config File
 .sentryclirc
+/.vs/slnx.sqlite
+/.vs
