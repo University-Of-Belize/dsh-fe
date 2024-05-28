@@ -13,7 +13,7 @@
 	import type { Promo } from '$lib/types/Promo';
 	import type { User } from '$lib/types/User';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
-// What is what?
+	// What is what?
 	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';
 	import { locateNodeUsingHash } from '$lib/Elements/Utility/page';
 	import type { CartProduct } from '$lib/types/Product';
@@ -43,7 +43,8 @@
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
-	let user: User = localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {}; // User data
+	let user: User =
+		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {}; // User data
 	let data: Order[]; // List of orders
 	let data_raw: Order[]; // Order data (raw, ungrouped)
 	let promos: Promo['code'][];

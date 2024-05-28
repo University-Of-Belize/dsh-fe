@@ -22,7 +22,7 @@
 <div class="mt-4 w-full max-w-sm rounded-lg border border-COLORHPK bg-COLORBLK1">
 	<a href="/product/{productSlug}">
 		<img
-		    loading="lazy"
+			loading="lazy"
 			class="mb-4 h-60 w-full rounded-t-lg object-cover"
 			on:click={() => {
 				// @ts-ignore
@@ -41,7 +41,9 @@
 				{productName}
 			</h5>
 		</a>
-		<div class="mt-2 block lg:flex lg:flex-wrap items-center justify-start space-y-6 lg:space-y-0 lg:justify-between">
+		<div
+			class="mt-2 block items-center justify-start space-y-6 lg:flex lg:flex-wrap lg:justify-between lg:space-y-0"
+		>
 			<span class="text-3xl font-bold"
 				>{parseFloat(productPrice).toLocaleString('en-US', {
 					style: 'currency',

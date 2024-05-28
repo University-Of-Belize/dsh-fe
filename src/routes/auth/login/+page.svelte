@@ -327,20 +327,20 @@
 						<div class="mb-12 mt-4">
 							<p class="whitespace-nowrap text-gray-600">
 								Forgot Password?
-									<a href="/auth/password_reset"
-										class="forgot-password font-semibold text-COLORWHT underline underline-offset-4"
-									>
-							Reset it now.
-									</a
-								></p>
-							</div>
+								<a
+									href="/auth/password_reset"
+									class="forgot-password font-semibold text-COLORWHT underline underline-offset-4"
+								>
+									Reset it now.
+								</a>
+							</p>
+						</div>
 					</div>
 					<button
 						type="submit"
-            title={logging_in ? 'Please wait for the request to complete' : ''}
-						class="w-full rounded-lg bg-COLORGRY disabled:opacity-50 px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2"
-            disabled={logging_in}
-						>Log in</button
+						title={logging_in ? 'Please wait for the request to complete' : ''}
+						class="w-full rounded-lg bg-COLORGRY px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2 disabled:opacity-50"
+						disabled={logging_in}>Log in</button
 					>
 				</form>
 				<div class="pt-12 text-center">
@@ -351,15 +351,14 @@
 						>
 					</p>
 				</div>
-				
 			</div>
 		</div>
 		<div
 			class="pointer-events-none relative hidden h-screen select-none bg-black md:block md:w-1/2"
 		>
-			<div class="relative py-20 z-10 px-8 text-white opacity-100">
+			<div class="relative z-10 px-8 py-20 text-white opacity-100">
 				<p class="text-3xl font-semibold leading-10">
-					Thank you for helping us shape the future of our<br/>application.
+					Thank you for helping us shape the future of our<br />application.
 				</p>
 				<p class="mb-2 text-2xl font-semibold leading-10">
 					"The best way to predict the future is to create it."
@@ -369,7 +368,7 @@
 				<p class="mb-7 text-sm opacity-70">Goethe University Frankfurt</p>
 			</div>
 			<img
-			    alt
+				alt
 				loading="lazy"
 				class="-z-1 absolute top-0 h-full w-full object-cover opacity-50"
 				src="/assets/auth/login-static.jpg"

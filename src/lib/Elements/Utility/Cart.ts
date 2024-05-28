@@ -62,4 +62,3 @@ async function emptyCart(index: number | null) {
 }
 
 export { addToCart, emptyCart };
-

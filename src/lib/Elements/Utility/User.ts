@@ -137,4 +137,3 @@ async function registerUser(payload: string[]) {
 }
 
 export { editUser, registerUser };
-

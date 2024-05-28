@@ -6,11 +6,7 @@
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import {
-		faLock,
-		faRectangleAd,
-		faUserCog
-	} from '@fortawesome/free-solid-svg-icons';
+	import { faLock, faRectangleAd, faUserCog } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	let debounceTimeout: number;
@@ -115,12 +111,15 @@
 		<Navigation transparency={5} search={true} />
 	</div>
 	<div class="main-content flex h-full flex-wrap items-center justify-center text-COLORWHT">
-		<div class="flex order-2 w-full flex-col md:w-1/2">
+		<div class="order-2 flex w-full flex-col md:w-1/2">
 			<div
 				class="mx-auto my-auto flex flex-col justify-center pt-8 md:justify-start md:px-6 md:pt-0 lg:w-[28rem]"
 			>
 				<p class="text-left text-3xl font-bold">Create an account</p>
-				<p class="mt-2 text-left text-COLORWHT1">Let's do this. Together, we will create <span class="inline md:hidden"><br/></span>something amazing.</p>
+				<p class="mt-2 text-left text-COLORWHT1">
+					Let's do this. Together, we will create <span class="inline md:hidden"><br /></span
+					>something amazing.
+				</p>
 				<!--
 				<button
 					class="-2 mt-8 flex items-center justify-center rounded-md border bg-COLORBLK px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-COLORWHT1 hover:bg-COLORBLK2 hover:text-white focus:ring-2"
@@ -153,46 +152,48 @@
 					<div class="flex flex-col pt-4">
 						<div class="relative flex overflow-hidden transition">
 							<TextInput
-                            icon={faUserCog}
-                            type="email"
-                            name="email"
-                            placeholder="Type in your {config.server['bound-organization']} email address"
-                            custom_style="bg-transparent"
-                            required
-                        />
+								icon={faUserCog}
+								type="email"
+								name="email"
+								placeholder="Type in your {config.server['bound-organization']} email address"
+								custom_style="bg-transparent"
+								required
+							/>
 						</div>
 					</div>
 					<div class="flex flex-col pt-4">
 						<div class="relative flex overflow-hidden transition">
-                            <TextInput
-                            icon={faLock}
-                            type="password"
-                            name="password"
-                            placeholder="Choose a password"
-                            custom_style="bg-transparent"
-                            required
-                        />
+							<TextInput
+								icon={faLock}
+								type="password"
+								name="password"
+								placeholder="Choose a password"
+								custom_style="bg-transparent"
+								required
+							/>
 						</div>
 					</div>
 					<div class="mb-12 flex flex-col pt-4">
 						<div class="relative flex overflow-hidden transition">
 							<TextInput
-							icon={faLock}
-							type="password"
-							name="password2"
-							placeholder="Retype this password"
-							custom_style="bg-transparent"
-							required
-						/>
+								icon={faLock}
+								type="password"
+								name="password2"
+								placeholder="Retype this password"
+								custom_style="bg-transparent"
+								required
+							/>
 						</div>
-                        <span class="hidden md:flex mt-4 flex-col py-2 px-4 border border-l border-COLORGRY bg-COLORBLK1">Get early access to new features and the opportunity to share your valuable feedback.</span>
+						<span
+							class="mt-4 hidden flex-col border border-l border-COLORGRY bg-COLORBLK1 px-4 py-2 md:flex"
+							>Get early access to new features and the opportunity to share your valuable feedback.</span
+						>
 					</div>
 					<button
 						type="submit"
-            title={signing_up ? 'Please wait for the request to complete' : ''}
-						class="w-full rounded-lg bg-COLORGRY disabled:opacity-50 px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2"
-            disabled={signing_up}
-						>Get started</button
+						title={signing_up ? 'Please wait for the request to complete' : ''}
+						class="w-full rounded-lg bg-COLORGRY px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2 disabled:opacity-50"
+						disabled={signing_up}>Get started</button
 					>
 				</form>
 				<div class="py-12 text-center">
@@ -208,9 +209,9 @@
 		<div
 			class="pointer-events-none relative hidden h-screen select-none bg-black md:block md:w-1/2"
 		>
-			<div class="relative py-20 z-10 px-8 text-white opacity-100">
+			<div class="relative z-10 px-8 py-20 text-white opacity-100">
 				<p class="text-3xl font-semibold leading-10">
-					Thank you for being part of something exciting<br/>and signing up as a beta tester.
+					Thank you for being part of something exciting<br />and signing up as a beta tester.
 				</p>
 				<p class="mb-2 text-2xl font-semibold leading-10">
 					"The only way to do great work is to love what you do."
@@ -220,7 +221,7 @@
 				<p class="mb-7 text-sm opacity-70">Apple, Inc.</p>
 			</div>
 			<img
-			    alt
+				alt
 				loading="lazy"
 				class="-z-1 absolute top-0 h-full w-full object-cover opacity-50"
 				src="/assets/auth/signup-static.jpg"

@@ -20,7 +20,7 @@
 <div class="review my-4 rounded-md bg-COLORBLK4 bg-opacity-50 px-4 py-2">
 	<div class="flex bg-opacity-100">
 		<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
-			<img			
+			<img
 				class="rounded-md object-cover"
 				loading="lazy"
 				src={user?.profile_picture || config['user']['default-image']}

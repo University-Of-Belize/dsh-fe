@@ -249,8 +249,8 @@
 													minimumFractionDigits: 2
 												})
 											: (() => {
-												toast.push('Add some items to your cart first.');
-												goto('/product/checkout');
+													toast.push('Add some items to your cart first.');
+													goto('/product/checkout');
 												})()}</b
 									>
 								</div>

@@ -108,7 +108,7 @@
 						<div class="font-light">
 							Feel free to retry reloading at any time, or coming back later.
 						</div>
-						<div class="flex w-full items-center justify-center text-center mt-2">
+						<div class="mt-2 flex w-full items-center justify-center text-center">
 							<Button
 								text={buttonStatusText}
 								on:hover={() => {

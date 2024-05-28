@@ -141,11 +141,11 @@
 	</div>
 	<div class="main-content flex h-screen items-center justify-start text-COLORWHT">
 		<div
-			class="drawer h-screen w-full flex-col justify-start bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:w-1/4 overflow-auto"
+			class="drawer h-screen w-full flex-col justify-start overflow-auto bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:w-1/4"
 		>
 			<DashList {staff} />
 		</div>
-		<div class="content hidden h-full w-full bg-transparent px-16 py-16 lg:block overflow-auto">
+		<div class="content hidden h-full w-full overflow-auto bg-transparent px-16 py-16 lg:block">
 			<div class="flex pb-2 text-2xl font-semibold">
 				{config.ui['branding-text']} | {@html staff
 					? "<div class='font-bold pl-1'>SuperUser Mode</div>"

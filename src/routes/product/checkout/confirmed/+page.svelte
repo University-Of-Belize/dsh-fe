@@ -9,7 +9,8 @@
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	let user: User = localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
+	let user: User =
+		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
 	let payment_data = localStorage.payment_data
 		? JSON.parse(JSON.stringify(localStorage.payment_data))
 		: {};

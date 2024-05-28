@@ -12,7 +12,10 @@
 	}
 
 	onMount(async () => {
-		outTerminal('ERROR', 'This microservice has been shut-down for maintenance. Please try again later.');
+		outTerminal(
+			'ERROR',
+			'This microservice has been shut-down for maintenance. Please try again later.'
+		);
 	});
 </script>
 
@@ -24,7 +27,9 @@
 	>
 		<div class="consoleEvent">[TERMINAL] Ready to accept input</div>
 	</div>
-	<div class="mt-6 text-xl font-semibold">Testing has been put on-hold.<br/>Please check your email for further updates.</div>
+	<div class="mt-6 text-xl font-semibold">
+		Testing has been put on-hold.<br />Please check your email for further updates.
+	</div>
 </main>
 
 <style>

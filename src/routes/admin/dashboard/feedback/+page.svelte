@@ -17,7 +17,8 @@
 	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let data: Feedback[]; // Declare the data variable
-	let user: User = localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
+	let user: User =
+		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
 	let feedbackInput: CommentBox;
 	let richTextInput: string;
 	let prefersRichText = true;
@@ -104,12 +105,8 @@
 						<div
 							class="edit-wrap h-fit w-fit"
 							on:click={() => {
-								createFeedback(
-									(feedbackInput
-										? feedbackInput.value
-										: richTextInput ?? '') ?? ''
-								);
-								feedbackInput? feedbackInput.clear(): false;
+								createFeedback((feedbackInput ? feedbackInput.value : richTextInput ?? '') ?? '');
+								feedbackInput ? feedbackInput.clear() : false;
 								setTimeout(() => {
 									catchAll();
 								}, 800);
@@ -143,11 +140,7 @@
 					{/if}
 					{#each data as feedback, i}
 						<div class="user_wrap w-full">
-							<UserPill
-								user={feedback.author ?? {}}
-								description={feedback.content}
-								html
-							>
+							<UserPill user={feedback.author ?? {}} description={feedback.content} html>
 								<div class="controls flex space-x-2">
 									<div
 										class="edit-wrap h-fit w-fit"

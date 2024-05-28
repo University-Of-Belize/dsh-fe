@@ -154,13 +154,13 @@
 									tagColor={user?.staff ? 'COLORHPK' : 'COLORGRN2'}
 									tagColor_t={user?.staff ? 'COLORWHT' : 'COLORWHT'}
 									tagText={user?.staff ? 'Admin' : 'User'}
-									description="{data[0].score
+									description={data[0].score
 										? 'Not available with search.'
 										: !user?.token && !user?.firstAlert
 											? '<b>Not Activated; Never logged in</b>'
 											: !user?.token && user?.firstAlert
 												? '<b>Activated; Logged out.</b>'
-												: '<b>Activated; Logged in.</b>'}"
+												: '<b>Activated; Logged in.</b>'}
 									html
 								>
 									<div class="actions flex space-x-2">
@@ -169,7 +169,9 @@
 												class="btn-wrp h-fit w-fit bg-opacity-100"
 												on:click={() => {
 													if (!user.token) {
-														return toast.push('This user has not activated or logged into their account yet.');
+														return toast.push(
+															'This user has not activated or logged into their account yet.'
+														);
 													}
 													// Wipe ourselves
 													localStorage.clear(); // Load all the settings

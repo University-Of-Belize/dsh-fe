@@ -93,7 +93,6 @@
 	--COLORHPK: 170 34 34;
 	--COLORPNK: 254 192 57;
 	--COLORRED: 255 148 148;
-	
 }
 /*grey theme*/
 [data-theme='grey'] {
@@ -380,8 +379,6 @@
 	--COLORHPK: 251 123 84;
 	--COLORPNK: 43 72 163;
 	--COLORRED: 75 195 79;
-	
-	
 }
 [data-theme='dark-v2'] {
 	--COLORWHT: 255 255 255;
@@ -406,7 +403,6 @@
 	--COLORHPK: 251 123 84;
 	--COLORPNK: 43 72 163;
 	--COLORRED: 75 195 79;
-	
 }
 [data-theme='dark-v3'] {
 	/* --LANDINGPHOTO: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/University_of_Belize%2C_Central_Campus.jpg/1280px-University_of_Belize%2C_Central_Campus.jpg'); */
@@ -474,14 +470,47 @@ body {
 }
 
 /* Smooth transitions for themes */
-.transition, button, input, body, div {
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-property: color, background-color, width, height, background, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
+.transition,
+button,
+input,
+body,
+div {
+	transition-property:
+		color,
+		background-color,
+		border-color,
+		text-decoration-color,
+		fill,
+		stroke,
+		opacity,
+		box-shadow,
+		transform,
+		filter,
+		-webkit-backdrop-filter;
+	transition-property: color, background-color, border-color, text-decoration-color, fill, stroke,
+		opacity, box-shadow, transform, filter, backdrop-filter;
+	transition-property:
+		color,
+		background-color,
+		width,
+		height,
+		background,
+		border-color,
+		text-decoration-color,
+		fill,
+		stroke,
+		opacity,
+		box-shadow,
+		transform,
+		filter,
+		backdrop-filter,
+		-webkit-backdrop-filter;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
 }
 
-input, button, textarea {
-   outline: none;
+input,
+button,
+textarea {
+	outline: none;
 }

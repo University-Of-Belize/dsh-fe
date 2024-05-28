@@ -62,4 +62,3 @@ async function createFeedback(comment: string) {
 }
 
 export { createFeedback, deleteFeedback };
-

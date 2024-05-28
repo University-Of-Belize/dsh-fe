@@ -21,4 +21,3 @@ function locateNodeUsingHash(node: string) {
 }
 
 export { locateNodeUsingHash };
-

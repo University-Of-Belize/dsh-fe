@@ -11,7 +11,7 @@
 	export let custom_style: string | undefined = '';
 	export let container_style: string = '';
 	export let value: string = '';
-	export let autocomplete: string | undefined = 'current-password'
+	export let autocomplete: string | undefined = 'current-password';
 	export let type: 'text' | 'email' | 'password' | 'color' = 'text';
 	export let required: boolean = false; // Optional
 	export let disabled: boolean = false; // Optional
@@ -64,7 +64,7 @@
 		{required}
 		{disabled}
 		{autocomplete}
-		class="bg-transparent outline-none text-COLORWHT border-0 focus:border-0 focus:outline-0 focus:ring-0 disabled:cursor-not-allowed disabled:text-COLORWHT5 {class_}"
+		class="border-0 bg-transparent text-COLORWHT outline-none focus:border-0 focus:outline-0 focus:ring-0 disabled:cursor-not-allowed disabled:text-COLORWHT5 {class_}"
 	>
 		<Fa {icon} slot="left" size="0.75x" class="px-1 text-COLORWHT" />
 	</Input>

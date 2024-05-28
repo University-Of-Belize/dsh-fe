@@ -13,7 +13,8 @@
 	// import insane from 'insane';
 	// let hero_image: HTMLDivElement;
 	const staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // The user
-	const user: User = localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {}; // The user
+	const user: User =
+		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {}; // The user
 	const params = $page.params.slug;
 	let data: Article;
 

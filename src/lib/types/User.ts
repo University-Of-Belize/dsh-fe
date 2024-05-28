@@ -1,4 +1,4 @@
-import type { CartProduct } from "./Product";
+import type { CartProduct } from './Product';
 
 interface User {
 	_id: string;

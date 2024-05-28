@@ -28,7 +28,8 @@
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	const category_id = $page.url.searchParams.get('category_id');
 	let category_identity_input: TextInput;
-	let user: User = localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {}; // User data
+	let user: User =
+		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {}; // User data
 	let data: Category; // List of users
 
 	async function catchAll() {
@@ -213,7 +214,7 @@
 							</div>
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
 								<div class="label w-full text-lg font-light">Category description</div>
-								<div class="review-wrap mb-4 w-full rounded-md border border-black mt-1">
+								<div class="review-wrap mb-4 mt-1 w-full rounded-md border border-black">
 									<div
 										class="text-i-combo flex items-center justify-start font-semibold text-COLORGRY"
 									>

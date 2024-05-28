@@ -14,7 +14,7 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	compilerOptions: {
-		accessors: true,
+		accessors: true
 		// customElement: true,
 	},
 

@@ -63,4 +63,3 @@ async function createArticle(comment: string) {
 }
 
 export { createArticle, deleteArticle };
-

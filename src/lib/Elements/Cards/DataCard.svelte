@@ -13,10 +13,12 @@
 		class="cursor group mx-4 overflow-hidden rounded-2xl border border-COLORBLK1 duration-200 hover:-translate-y-4"
 	>
 		<div class="flex h-60 flex-col justify-between overflow-hidden">
-			<a href={url}><img
-				src={image ?? config['product-showcase']['default-image']}
-				class="h-full w-full object-cover duration-200 group-hover:scale-110"
-			/></a>
+			<a href={url}
+				><img
+					src={image ?? config['product-showcase']['default-image']}
+					class="h-full w-full object-cover duration-200 group-hover:scale-110"
+				/></a
+			>
 		</div>
 		<div class="flex-1 overflow-hidden bg-COLORBLK1 px-6 py-8">
 			<a href={url}><h5 class="mb-4 text-xl font-bold">{@html name}</h5></a>

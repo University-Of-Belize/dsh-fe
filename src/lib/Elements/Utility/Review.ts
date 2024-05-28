@@ -69,4 +69,3 @@ function escapeHtml(unsafe: string) {
 }
 
 export { createReview, deleteReview, escapeHtml };
-

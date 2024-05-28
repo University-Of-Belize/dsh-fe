@@ -136,7 +136,9 @@
 			<div
 				class="content-wrapper absolute z-10 flex h-full w-full flex-wrap items-center justify-center"
 			>
-				<div class="content px-12 flex h-full items-start justify-start py-24 lg:flex-1 bg-COLORWHT4">
+				<div
+					class="content flex h-full items-start justify-start bg-COLORWHT4 px-12 py-24 lg:flex-1"
+				>
 					{#if $product}
 						<div class="content-wrapper block">
 							<div
@@ -146,7 +148,7 @@
 							</div>
 							<StarCount reviews={$product.reviews} />
 							<div class="text-COLORWHT2 lg:text-lg">
-								{@html escapeHtml($product.description ?? "").replace(/\n/g, '<br>')}
+								{@html escapeHtml($product.description ?? '').replace(/\n/g, '<br>')}
 							</div>
 							<div class="text-md py-4 font-semibold text-COLORWHT1 lg:text-xl">
 								{parseFloat($product.price.$numberDecimal).toLocaleString('en-US', {

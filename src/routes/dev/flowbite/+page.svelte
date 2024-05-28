@@ -3,7 +3,7 @@
 	import { Button, ButtonGroup, Drawer } from 'flowbite-svelte';
 	import Fa from 'svelte-fa';
 	import { sineIn } from 'svelte/easing';
-/***********************/
+	/***********************/
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
@@ -297,7 +297,7 @@
 							title="Click to search for snacks, drinks and lunch"
 							id="topbar-search"
 							class="bg-opacity-{transparency +
-								35} focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-9 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 sm:text-sm"
+								35} block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-9 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm"
 							placeholder="Search for snacks, drinks or lunch"
 						/>
 					</div>
