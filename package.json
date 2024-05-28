@@ -16,7 +16,6 @@
     "format": "prettier --plugin-search-dir . --write ."
   },
   "devDependencies": {
-
     "@sveltejs/kit": "^2.5.10",
     "@types/lodash": "^4.17.4",
     "@types/turndown": "^5.0.4",
