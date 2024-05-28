@@ -154,9 +154,7 @@
 				{#each categories as category}
 					<DataCard
 						url={`/product?filter=${
-							category.name
-								? category.name.toString().toLowerCase()
-								: category.alias.toString().toLowerCase()
+							category.alias.toString().toLowerCase()
 						}`}
 						image={category.image}
 						name={category.name}
