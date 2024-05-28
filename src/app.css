@@ -409,7 +409,8 @@
 	
 }
 [data-theme='dark-v3'] {
-	--LANDINGPHOTO: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/University_of_Belize%2C_Central_Campus.jpg/1280px-University_of_Belize%2C_Central_Campus.jpg');
+	/* --LANDINGPHOTO: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/University_of_Belize%2C_Central_Campus.jpg/1280px-University_of_Belize%2C_Central_Campus.jpg'); */
+	--LANDINGPHOTO: ''; /* Nothing */
 	--COLORWHT: 255 255 255;
 	--COLORWHT1: 255 255 255;
 	--COLORWHT2: 255 255 255;
@@ -482,6 +483,5 @@ body {
 }
 
 input, button, textarea {
-   border: 0;
    outline: none;
 }

@@ -4,7 +4,7 @@
 	export let branding_text: string = config.ui['branding-text'];
 </script>
 
-<div class="footer block bg-COLORBLK3 text-center text-COLORWHT">
+<div class="footer block bg-COLORBLK1 text-center text-COLORWHT">
 	<div class="chunk-one flex items-center justify-center py-14">
 		<div class="block">
 			<div class="branding-text w-full items-center justify-center text-4xl font-semibold">
