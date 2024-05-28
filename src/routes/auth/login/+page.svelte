@@ -271,6 +271,7 @@
 	<title>UniFood | Login / Register</title>
 </svelte:head>
 
+<canvas bind:this={canvas} class="hidden" style="height: 100vh; width: 100vw;" />
 <main class="h-screen w-full">
 	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} />

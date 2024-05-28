@@ -94,34 +94,20 @@
 
 	<body data-sveltekit-preload-data="hover">
 		<!--- Lol, thanks Instagram -->
-		<div
-			id="splash-screen"
-			class=""
-			alt="UNIFOOD"
-			style="
-				position: fixed;
-				z-index: 100;
-				background: linear-gradient(240deg, rgb(var(--COLORBLK)), rgb(var(--COLORBLK-TONE2)));  /* Same as body */
-				color: rgb(var(--COLORWHT));
-				top: 0px;
-				left: 0px;
-				width: 100%;
-				height: 100%;
-				transition: background 150ms;
-     user-select: none; /* Do not allow the user to select */
-			"
-		>
-			<img
-				width="80px"
-				height="80px"
-				alt="The University of Belize"
-				style="position: absolute; top: 50%; left: 50%; margin: -40px 0 0 -40px"
-				src="/icons/icon-svgrepo.svg"
-			/><span
-				style="display: block; position: absolute; bottom: 32px; left: 50%; margin: -36px 0 0 -36px"
-				><span>from</span><img width="72px" height="37px" src="/icons/ub-logo.svg"
-			/></span>
-		</div>
+		<div id="splash-screen" class="" style="
+		position: fixed;
+		z-index: 100;
+		background: linear-gradient(240deg, rgb(var(--COLORBLK)), rgb(var(--COLORBLK-TONE2)));  /* Same as body */
+		color: rgb(var(--COLORWHT));
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
+		transition: background 150ms;
+user-select: none; /* Do not allow the user to select */
+	">
+	<img width="80px" height="80px" alt="UNIFOOD" style="position: absolute; top: 50%; left: 50%; margin: -40px 0 0 -40px" src="/icons/icon-svgrepo.svg"><span class="flex items-center justify-center w-full py-10 text-center" style="position: absolute; bottom: 0"><span class="flex flex-col justify-center items-center w-fit space-y-4"><span>By students<br>in partnership with</span><img width="72px" height="37px" src="/icons/ub-logo.svg" alt="The University of Belize"></span></span>
+</div>
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 	<!--- PWA installscript -->
