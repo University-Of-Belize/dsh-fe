@@ -107,85 +107,107 @@
 			<div class="hero-image h-full w-full" />
 		</div> -->
 
-<div class="w-full hero-image p-8">
-			<div class="mb-4 w-20 rounded-md bg-COLORBLK2 px-2 py-1 text-sm font-medium text-COLORWHT">BETA</div>
+		<div class="hero-image w-full p-8">
+			<div class="mb-4 w-20 rounded-md bg-COLORBLK2 px-2 py-1 text-sm font-medium text-COLORWHT">
+				BETA
+			</div>
 			<p class="mb-2 text-2xl">UniFood is an online ordering system.</p>
-			<p class="mb-6 text-COLORWHT2">Online Test #2 is officially here! Sign up using the button below 👇</p>
-			<button class="flex items-center space-x-2 rounded-md border-2 border-COLORWHT px-4 py-2 font-medium text-COLORWHT transition hover:bg-COLORBLK1 hover:opacity-80">
-			  <a href="/auth/create"><span> Sign up </span></a>
-			  <span
-				><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
-				  <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 011.06 0l3.75 3.75a.75.75 0 010 1.06l-3.75 3.75a.75.75 0 11-1.06-1.06l2.47-2.47H3a.75.75 0 010-1.5h16.19l-2.47-2.47a.75.75 0 010-1.06z" clip-rule="evenodd" />
-				</svg>
-			  </span>
+			<p class="mb-6 text-COLORWHT2">
+				Online Test #2 is officially here! Sign up using the button below 👇
+			</p>
+			<button
+				class="flex items-center space-x-2 rounded-md border-2 border-COLORWHT px-4 py-2 font-medium text-COLORWHT transition hover:bg-COLORBLK1 hover:opacity-80"
+			>
+				<a href="/auth/create"><span> Sign up </span></a>
+				<span
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						fill="currentColor"
+						class="h-6 w-6"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M16.72 7.72a.75.75 0 011.06 0l3.75 3.75a.75.75 0 010 1.06l-3.75 3.75a.75.75 0 11-1.06-1.06l2.47-2.47H3a.75.75 0 010-1.5h16.19l-2.47-2.47a.75.75 0 010-1.06z"
+							clip-rule="evenodd"
+						/>
+					</svg>
+				</span>
 			</button>
-		</div>	  
-		
+		</div>
 	</div>
 
 	<div class="content block">
-		<div class="category-grid flex justify-center items-center w-full flex-wrap">
-			<div class="gridelement h-16 w-full flex justify-center items-center relative bg-COLORBLK">
+		<div class="category-grid flex w-full flex-wrap items-center justify-center">
+			<div class="gridelement relative flex h-16 w-full items-center justify-center bg-COLORBLK">
 				<div
-					class="content-wrapper w-full h-full absolute flex items-center justify-start text-2xl font-semibold text-COLORWHT bg-COLORBLK px-8 z-10"
+					class="content-wrapper absolute z-10 flex h-full w-full items-center justify-start bg-COLORBLK px-8 text-2xl font-semibold text-COLORWHT"
 				>
 					Categories
 				</div>
 			</div>
 		</div>
 		<div
-			class="category-grid flex flex-wrap justify-center lg:justify-start items-center w-full h-full overflow-auto"
+			class="category-grid flex h-full w-full flex-wrap items-center justify-center overflow-auto lg:justify-start"
 		>
 			{#if categories.length > 0}
 				{#each categories as category}
-
-			<DataCard url={`/product?filter=${
-					category.name
-						? category.name.toString().toLowerCase()
-						: category.alias.toString().toLowerCase()
-				}`} image={category.image} name={category.name} description={category.description}/>
+					<DataCard
+						url={`/product?filter=${
+							category.name
+								? category.name.toString().toLowerCase()
+								: category.alias.toString().toLowerCase()
+						}`}
+						image={category.image}
+						name={category.name}
+						description={category.description}
+					/>
 				{/each}
 			{:else}
-				<div class="flex justify-center items-center w-full h-16">
+				<div class="flex h-16 w-full items-center justify-center">
 					<div class="text-2xl font-semibold text-COLORWHT">No categories available</div>
 				</div>
 			{/if}
 		</div>
-	
-	<div class="featured block w-full">
-		<div
-			class="banner-featured flex justify-start items-center text-2xl bg-COLORBLK1 font-semibold text-COLORWHT px-8 py-12"
-		>
-			For You
-		</div>
-		<div
-		class="category-grid flex flex-wrap justify-start items-center w-full h-full"
-	>
-		{#if product}
-			{#each product as product}
-					<DataCard url={`/product/${product.slug}`}
-					image={product.image}
-					name={product.productName + `<br/>$${product.price?.$numberDecimal}`}
-					description={(product.description.length > 500 ? product.description.substring(0, 500) + "..." : product.description) ?? ''}
-					reviews={product.reviews}/>
-			{/each}
-		{/if}
-	</div>
-	</div>
-	{#if !localStorage.token}
-		<Footer text="There's more to explore">
-			<div class="block">
-				<div class="text-xl font-light">Shop our entire menu by creating an account</div>
-				<div
-					class="btn-wrp flex w-full items-center justify-center p-2"
-					on:click={async () => {
-						await goto('/auth/signup');
-					}}
-				>
-					<Button icon={faGift} color="COLORPNK" text="Sign up" color_t="COLORWHT" />
-				</div>
+
+		<div class="featured block">
+			<div
+				class="banner-featured flex items-center justify-start bg-COLORBLK1 px-8 py-12 text-2xl font-semibold text-COLORWHT"
+			>
+				For You
 			</div>
-		</Footer>{/if}
+			<div
+				class="category-grid flex h-full w-full flex-wrap items-center justify-center lg:justify-start"
+			>
+				{#if product}
+					{#each product as product}
+						<DataCard
+							url={`/product/${product.slug}`}
+							image={product.image}
+							name={product.productName + `<br/>$${product.price?.$numberDecimal}`}
+							description={(product.description.length > 500
+								? product.description.substring(0, 500) + '...'
+								: product.description) ?? ''}
+							reviews={product.reviews}
+						/>
+					{/each}
+				{/if}
+			</div>
+		</div>
+		{#if !localStorage.token}
+			<Footer text="There's more to explore">
+				<div class="block">
+					<div class="text-xl font-light">Shop our entire menu by creating an account</div>
+					<div
+						class="btn-wrp flex w-full items-center justify-center p-2"
+						on:click={async () => {
+							await goto('/auth/signup');
+						}}
+					>
+						<Button icon={faGift} color="COLORPNK" text="Sign up" color_t="COLORWHT" />
+					</div>
+				</div>
+			</Footer>{/if}
 	</div>
 </main>
 
