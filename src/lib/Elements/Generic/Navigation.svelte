@@ -5,7 +5,7 @@
 	import { Button, ButtonGroup, Drawer } from 'flowbite-svelte';
 	import Fa from 'svelte-fa';
 	import { sineIn } from 'svelte/easing';
-	/***********************/
+/***********************/
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
@@ -19,11 +19,10 @@
 		faCodePullRequest,
 		faCog,
 		faFeed,
-		faSun,
-		faMoon,
 		// faDashboard,
 		faGift,
 		faMessage,
+		faMoon,
 		faNoteSticky,
 		faPlus,
 		faQuestionCircle,
@@ -31,6 +30,7 @@
 		faSearch,
 		faShoppingCart,
 		faStar,
+		faSun,
 		faTag,
 		faUserPlus,
 		faVial,
@@ -48,6 +48,7 @@
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let navDrawer: HTMLDivElement;
 	let navClose: HTMLDivElement;
+	let mobile_search: HTMLDivElement;
 	let navScrimHeight: number = 0;
 	let navTransparency: number = 0;
 	let cachedCategories = localStorage.getItem('categories');
@@ -329,8 +330,18 @@
 					<!-- Search -->
 					<button
 						id="toggleSidebarMobileSearch"
+						on:click={()=>{
+									mobile_search.classList.toggle("hidden");
+								
+								setTimeout(()=>{
+										mobile_search.style.height = mobile_search.style.height == "30px"? "0px": "30px";
+									}, 10);
+								
+								
+								
+						}}
 						type="button"
-						class="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:hidden"
+						class="flex items-center justify-start bg-COLORBLK1 p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:hidden  focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm"
 					>
 						<span class="sr-only">Search</span>
 						<!-- Search icon -->
@@ -868,10 +879,28 @@
 						><Fa icon={theme_switched ? faSun : faMoon} /></button
 					></span
 				>
-
 				<!-------- END Other stuff ---------------------------------------->
 			</div>
 		</div>
+									<!-- Mobile Searchbar (gets its own row)-->
+									<form action="/product" method="GET">	<div
+									bind:this={mobile_search}
+									style="height: 0px;"
+									class="hidden mt-4 flex items-center w-full justify-start bg-COLORBLK1 p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:hidden  focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm"
+								>
+									<span class="sr-only">Search</span>
+									<!-- Search icon -->
+									<Fa icon={faSearch} />
+									<input
+									{value}
+									type="text"
+									name="search"
+									title="Click to search for snacks, drinks and lunch"
+									id="topbar-search"
+									class="w-full bg-transparent block rounded-lg border-0 text-xs font-light text-COLORWHT placeholder-COLORWHT"
+									placeholder="Search for snacks, drinks or lunch"
+								/>
+							</div></form>
 	</nav>
 	<!-- Announcements and stuff -->
 	{#if !localStorage.acknowledged_announcements || localStorage.acknowledged_announcements != 'true'}
