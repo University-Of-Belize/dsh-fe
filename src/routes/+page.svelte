@@ -134,7 +134,7 @@
 			</div>
 		</div>
 		<div
-			class="category-grid flex flex-wrap justify-start items-center w-full h-full overflow-auto"
+			class="category-grid flex flex-wrap justify-center lg:justify-start items-center w-full h-full overflow-auto"
 		>
 			{#if categories.length > 0}
 				{#each categories as category}
