@@ -19,13 +19,20 @@
 	let cachedCategories = localStorage.getItem('categories');
 	let categories: Category[] = [];
 
+	const SEARCHLENGTH_LIMIT = 3;
+	let error_string: string;
+
 	// Thread run everytime the params change
 	$: (async () => {
 		let searchResults, nameResults;
+		if(!params_filter && (params ? params.toString().length < SEARCHLENGTH_LIMIT : true)) {
+			error_string = `Make that search at least ${SEARCHLENGTH_LIMIT} characters long`;
+			return;
+		};
 		try {
 			const searchPromise = (await fetchWebApi(
-				`v1/search?filter=productName&q=${
-					params?.toString().toLowerCase() ?? params_filter?.toString().toLowerCase()
+				`v1/search?filter=${params_filter ?? "productName"}&q=${
+					(params?.toString().toLowerCase() ?? "")
 				}`,
 				'GET'
 			)) as Response;
@@ -36,6 +43,7 @@
 			}
 			searchResults = await searchResponse.json();
 			getCategories();
+			error_string = undefined; // Reset
 		} catch (e) {
 			console.error('Error parsing JSON:', e);
 			products.set([]);
@@ -133,7 +141,7 @@
 				</div>
 
 				<!-- The products -->
-				<div class="flex flex-wrap justify-between lg:mx-10 lg:my-4">
+				<div class="flex flex-wrap justify-center lg:justify-start md:space-x-4 lg:mx-6 lg:my-4">
 					<!-- This way, we filter out all the products from reviews -->
 					{#each [...$products] as product}
 						{#if product.price != undefined}
@@ -198,7 +206,7 @@
 					<div class="icon flex h-fit w-full basis-full items-center justify-center">
 						<Fa icon={faShoppingCart} size="2x" />
 					</div>
-					<p class="font-semibold">No products found</p>
+					<p class="font-semibold">{error_string? error_string: "No products found"}</p>
 				</div>
 			</div>
 		{/if}
