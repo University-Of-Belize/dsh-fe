@@ -102,7 +102,11 @@ async function fetchWebApi(
 			return new Promise((resolve, reject) => {
 				setTimeout(() => {
 					toast.push(
-						`Checking to see if the server is asleep (${retryCount + 1}/${
+						`Testing
+						
+						
+						
+						your internet connection (${retryCount + 1}/${
 							config.ui['APIretryLimit']
 						})...`
 					);
