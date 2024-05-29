@@ -9,11 +9,11 @@
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	import type { Category } from '$lib/types/Category';
-	import type { Product } from '$lib/types/Product';
+	import type { Product as Product_ } from '$lib/types/Product';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import Fa from 'svelte-fa';
 
-	const products = writable<Product[]>([]);
+	const products = writable<Product_[]>([]);
 	let cachedCategories = localStorage.getItem('categories');
 	let categories: Category[] = [];
 
@@ -67,77 +67,79 @@
 	<div
 		class="content-wrapper absolute z-10 h-full w-full items-start justify-start overflow-auto pb-40 lg:mx-6 lg:flex"
 	>
-		{#if $products && $products.length > 0}
-			<!-- The categories -->
+		<div class="content mx-4">
+			{#if $products && $products.length > 0}
+				<!-- The categories -->
 
-			<div class="block w-full">
-				<span class="stub hidden bg-gray-200 bg-gray-300 text-gray-900 text-white" />
-				<div class="categoryp-wrap flex w-full overflow-x-auto rounded-md">
-					{#if categories.length > 0}
-						{#each categories as category}
-							<a
-								on:click={() => {
-									goto(
-										// We filter by alias, display by name
-										`/product?filter=${
-											category.alias
-												? category.alias.toString().toLowerCase()
-												: category.name.toString().toLowerCase()
-										}`
-									);
-								}}
-								href={`/product?filter=${
-									category.alias
-										? category.alias.toString().toLowerCase()
-										: category.name.toString().toLowerCase()
-								}`}
-								class="flex w-full items-center justify-center border-b border-t border-gray-200 border-gray-700 px-4 py-2 text-center text-sm font-medium leading-tight hover:opacity-90 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700"
-								style="min-width: 150px; max-height: 50px;"
-							>
-								{category.name.trim() ?? category.alias.trim()}
-							</a>
-						{/each}
-					{/if}
-				</div>
-
-				<!--- The title -->
-				<div class="my-8 block w-full text-2xl font-semibold text-COLORWHT">
-					<div>Product Availability</div>
-					<div class="text-sm font-light">
-						This is the entire menu. Browse through it as you'd like.
-					</div>
-				</div>
-
-				<!-- The products -->
-				<div class="flex flex-wrap justify-center md:space-x-4 lg:my-4 lg:justify-start">
-					<!-- This way, we filter out all the products from reviews -->
-					{#each [...$products] as product}
-						{#if product.price != undefined}
-							<Product
-								id={product._id}
-								image={product.image}
-								name={product.productName}
-								description={product.description ?? ''}
-								price={product.price?.$numberDecimal}
-								slug={product.slug}
-								out_of_stock={product.in_stock <= 0}
-							/>
+				<div class="block w-full">
+					<span class="stub hidden bg-gray-200 bg-gray-300 text-gray-900 text-white" />
+					<div class="categoryp-wrap flex w-full overflow-x-auto rounded-md">
+						{#if categories.length > 0}
+							{#each categories as category}
+								<a
+									on:click={() => {
+										goto(
+											// We filter by alias, display by name
+											`/product?filter=${
+												category.alias
+													? category.alias.toString().toLowerCase()
+													: category.name.toString().toLowerCase()
+											}`
+										);
+									}}
+									href={`/product?filter=${
+										category.alias
+											? category.alias.toString().toLowerCase()
+											: category.name.toString().toLowerCase()
+									}`}
+									class="flex w-full items-center justify-center border-b border-t border-gray-200 border-gray-700 px-4 py-2 text-center text-sm font-medium leading-tight hover:opacity-90 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700"
+									style="min-width: 150px; max-height: 50px;"
+								>
+									{category.name.trim() ?? category.alias.trim()}
+								</a>
+							{/each}
 						{/if}
-					{/each}
-				</div>
-			</div>
-		{:else}
-			<div
-				class="not-found flex h-full w-full flex-wrap items-center justify-center text-COLORWHT3"
-			>
-				<div class="flex h-fit w-full flex-wrap items-center justify-center">
-					<div class="icon flex h-fit w-full basis-full items-center justify-center">
-						<Fa icon={faShoppingCart} size="2x" />
 					</div>
-					<p class="font-semibold">No products found</p>
+
+					<!--- The title -->
+					<div class="my-8 block w-full text-2xl font-semibold text-COLORWHT">
+						<div>Product Availability</div>
+						<div class="text-sm font-light">
+							This is the entire menu. Browse through it as you'd like.
+						</div>
+					</div>
+
+					<!-- The products -->
+					<div class="flex flex-wrap justify-center md:space-x-4 lg:my-4 lg:justify-start">
+						<!-- This way, we filter out all the products from reviews -->
+						{#each [...$products] as product}
+							{#if product.price != undefined}
+								<Product
+									id={product._id}
+									image={product.image}
+									name={product.productName}
+									description={product.description ?? ''}
+									price={product.price?.$numberDecimal}
+									slug={product.slug}
+									out_of_stock={product.in_stock <= 0}
+								/>
+							{/if}
+						{/each}
+					</div>
 				</div>
-			</div>
-		{/if}
+			{:else}
+				<div
+					class="not-found flex h-full w-full flex-wrap items-center justify-center text-COLORWHT3"
+				>
+					<div class="flex h-fit w-full flex-wrap items-center justify-center">
+						<div class="icon flex h-fit w-full basis-full items-center justify-center">
+							<Fa icon={faShoppingCart} size="2x" />
+						</div>
+						<p class="font-semibold">No products found</p>
+					</div>
+				</div>
+			{/if}
+		</div>
 	</div>
 </main>
 <div class="footer relative z-10">

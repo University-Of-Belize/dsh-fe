@@ -19,8 +19,8 @@
 
 	onMount(async () => {
 		payment_data = localStorage.payment_data
-		? JSON.parse(JSON.stringify(localStorage.payment_data))
-		: {};
+			? JSON.parse(JSON.stringify(localStorage.payment_data))
+			: {};
 		localStorage.removeItem('cart_total');
 		RunOrder();
 	});

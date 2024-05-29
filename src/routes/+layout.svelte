@@ -177,33 +177,36 @@
 
 		// ********* Firebase (run in browser--not server) ********* /
 
-		const messaging = getMessaging(app);
-		// getToken(messaging, {
-		// 	vapidKey: config.ui.firebase['vapid-key'],
-		// 	serviceWorkerRegistration: await navigator.serviceWorker.getRegistration()
-		// });
+		try {
+			const messaging = getMessaging(app);
+			// getToken(messaging, {
+			// 	vapidKey: config.ui.firebase['vapid-key'],
+			// 	serviceWorkerRegistration: await navigator.serviceWorker.getRegistration()
+			// });
 
-		// Handle incoming messages. Called when:
-		// - a message is received while the app has focus
-		// - the user clicks on an app notification created by a service worker
-		//   `messaging.onBackgroundMessage` handler.
-		onMessage(messaging, (payload: FirebaseMessage) => {
-			console.log('Message received. ', payload);
-			// toast.push(
-			// 	payload.notification?.body ?? 'You received a message, but the client does not support it.',
-			// 	options_firebase
-			// );
-			// ...
-		});
+			// Handle incoming messages. Called when:
+			// - a message is received while the app has focus
+			// - the user clicks on an app notification created by a service worker
+			//   `messaging.onBackgroundMessage` handler.
+			onMessage(messaging, (payload: FirebaseMessage) => {
+				console.log('Message received. ', payload);
+				// toast.push(
+				// 	payload.notification?.body ?? 'You received a message, but the client does not support it.',
+				// 	options_firebase
+				// );
+				// ...
+			});
 
-		/*******************************/
+			/*******************************/
 
-		// Check for service worker and register if needed
-		if (!(await navigator.serviceWorker.getRegistration())) {
-			await navigator.serviceWorker.register('/sw.js');
-			// console.log(x); // Log out registration output
+			// Check for service worker and register if needed
+			if (!(await navigator.serviceWorker.getRegistration())) {
+				await navigator.serviceWorker.register('/sw.js');
+				// console.log(x); // Log out registration output
+			}
+		} catch (error) {
+			console.warn('Client does not support push messaging. There may be some usability issues.');
 		}
-
 		// Run in manual mode
 		if (!localStorage.watchdog && !localStorage.enableDevMode) {
 			// Run only once

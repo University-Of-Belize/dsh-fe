@@ -119,147 +119,151 @@
 	id="sidebar"
 	class="bg-COLORBLK p-5 text-COLORWHT"
 >
-<div class="flex flex-col h-full">
-	<div class="nav-main block">
-	<div class="metaControls flex pb-4">
-		<Button
-			on:click={() => (hidden1 = true)}
-			aria-expanded="true"
-			aria-controls="sidebar"
-			class="mr-3 hidden cursor-pointer rounded bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:inline"
-		>
-			<Fa icon={faBars} />
-		</Button>
-		<Button
-			on:click={() => (hidden1 = true)}
-			aria-expanded="true"
-			aria-controls="sidebar"
-			class="mr-2 cursor-pointer rounded-lg bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:hidden"
-		>
-			<Fa icon={faBars} />
-			<span class="sr-only">Toggle sidebar</span>
-		</Button>
-		<a href="/" class="mr-4 flex">
-			<img src="/icons/icon-svgrepo.svg" class="mr-3 h-8" alt="Plattr Logo" />
-			<span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-				{@html titleText.length > 15 ? titleText.substring(0, 15) : titleText}
-			</span>
-		</a>
-	</div>
-	{#if user}
-		<div class="my-2 mb-4">
-			<div
-				class="wallet-indicator flex w-full cursor-pointer items-center justify-start space-x-4 rounded-md bg-COLORBLK3 px-2 py-4 text-sm font-medium text-white hover:opacity-80"
-				on:click={async () => {
-					await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
-				}}
-			>
-				<div>
-					<img
-						src={user?.profile_picture ?? config['user']['default-image']}
-						title="My profile"
-						alt="{user?.username}'s photo"
-						width="40px"
-						class="rounded-full border border-COLORWHT bg-COLORBLK1 object-cover"
-						style="height: 42px; width: 42px;"
-					/>
-				</div>
-				<div>Wallet (${parseFloat(user?.credit?.$numberDecimal).toFixed(2)})</div>
+	<div class="flex h-full flex-col">
+		<div class="nav-main block">
+			<div class="metaControls flex pb-4">
+				<Button
+					on:click={() => (hidden1 = true)}
+					aria-expanded="true"
+					aria-controls="sidebar"
+					class="mr-3 hidden cursor-pointer rounded bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:inline"
+				>
+					<Fa icon={faBars} />
+				</Button>
+				<Button
+					on:click={() => (hidden1 = true)}
+					aria-expanded="true"
+					aria-controls="sidebar"
+					class="mr-2 cursor-pointer rounded-lg bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:hidden"
+				>
+					<Fa icon={faBars} />
+					<span class="sr-only">Toggle sidebar</span>
+				</Button>
+				<a href="/" class="mr-4 flex">
+					<img src="/icons/icon-svgrepo.svg" class="mr-3 h-8" alt="Plattr Logo" />
+					<span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+						{@html titleText.length > 15 ? titleText.substring(0, 15) : titleText}
+					</span>
+				</a>
 			</div>
-		</div>
-	{/if}
-	{#if search}
-		<SearchBar nomargin placeholder="Search for snacks, drinks or lunch" />
-	{:else}<div class="searchbar mx-8 flex flex-1 items-center px-4 py-2 text-sm" />
-	{/if}
-	{#if !user}
-		<div class="top-row flex w-full items-center justify-between pt-2">
-			<!-- <div class="btn-wrp pr-1" >
+			{#if user}
+				<div class="my-2 mb-4">
+					<div
+						class="wallet-indicator flex w-full cursor-pointer items-center justify-start space-x-4 rounded-md bg-COLORBLK3 px-2 py-4 text-sm font-medium text-white hover:opacity-80"
+						on:click={async () => {
+							await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
+						}}
+					>
+						<div>
+							<img
+								src={user?.profile_picture ?? config['user']['default-image']}
+								title="My profile"
+								alt="{user?.username}'s photo"
+								width="40px"
+								class="rounded-full border border-COLORWHT bg-COLORBLK1 object-cover"
+								style="height: 42px; width: 42px;"
+							/>
+						</div>
+						<div>Wallet (${parseFloat(user?.credit?.$numberDecimal).toFixed(2)})</div>
+					</div>
+				</div>
+			{/if}
+			{#if search}
+				<SearchBar nomargin placeholder="Search for snacks, drinks or lunch" />
+			{:else}<div class="searchbar mx-8 flex flex-1 items-center px-4 py-2 text-sm" />
+			{/if}
+			{#if !user}
+				<div class="top-row flex w-full items-center justify-between pt-2">
+					<!-- <div class="btn-wrp pr-1" >
 			</div>
 			<div class="btn-wrp pl-2" >
 			</div> -->
-			<ButtonGroup class="flex w-full">
-				<Button on:click={() => goto('/auth/login')} class="flex-1 bg-COLORBLK2 text-COLORWHT">
-					<Fa icon={faRightToBracket} class="mr-2" />
-					Log in</Button
-				>
-				<Button on:click={() => goto('/auth/create')} class="flex-1 bg-COLORPNK text-COLORWHT">
-					<Fa icon={faGift} class="mr-2" />
-					Sign up</Button
-				>
-			</ButtonGroup>
-		</div>{:else}
-		<div class="two space-y-2 py-6">
-			<div class="title pb-5 font-semibold">My Account</div>
+					<ButtonGroup class="flex w-full">
+						<Button on:click={() => goto('/auth/login')} class="flex-1 bg-COLORBLK2 text-COLORWHT">
+							<Fa icon={faRightToBracket} class="mr-2" />
+							Log in</Button
+						>
+						<Button on:click={() => goto('/auth/create')} class="flex-1 bg-COLORPNK text-COLORWHT">
+							<Fa icon={faGift} class="mr-2" />
+							Sign up</Button
+						>
+					</ButtonGroup>
+				</div>{:else}
+				<div class="two space-y-2 py-6">
+					<div class="title pb-5 font-semibold">My Account</div>
 
-			<Button
-				class="w-full bg-COLORBLK3 text-COLORWHT"
-				on:click={async () => {
-					localStorage.clear();
-					window.location.reload();
-				}}
-			>
-				<Fa icon={faArrowRightFromBracket} class="mr-2" />
-				Logout</Button
-			>
-
-			<Button
-				class="w-full bg-COLORBLK1 text-COLORWHT"
-				on:click={async () => {
-					await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
-				}}
-			>
-				<Fa icon={faCog} class="mr-2" />
-				My account settings</Button
-			>
-		</div>{/if}
-	<div class="three border-t border-dashed border-black border-opacity-5 py-6">
-		<div class="title pb-5 font-semibold">Categories</div>
-		{#if categories.length > 0}
-			{#each categories as category}
-				<div
-					class="two pt-1"
-					on:click={() => {
-						goto(
-							// We filter by alias, display by name
-							`/product?filter=${
-								category.alias
-									? category.alias.toString().toLowerCase()
-									: category.name.toString().toLowerCase()
-							}`
-						);
-					}}
-				>
 					<Button
-						class="w-full bg-COLORBLK1 font-medium text-COLORWHT lg:justify-start lg:text-left"
+						class="w-full bg-COLORBLK3 text-COLORWHT"
+						on:click={async () => {
+							localStorage.clear();
+							window.location.reload();
+						}}
 					>
-						<Fa icon={faStar} class="mr-2 hidden lg:block" />
-						{category.name ?? category.alias}</Button
+						<Fa icon={faArrowRightFromBracket} class="mr-2" />
+						Logout</Button
 					>
-				</div>
-			{/each}
-		{:else}
-			<div class="two pt-1">
-				<Button class="w-full bg-COLORBLK4 font-semibold text-COLORWHT">
-					<Fa icon={faQuestionCircle} class="mr-2" />
-					Looks like you caught us! Just a moment.</Button
-				>
+
+					<Button
+						class="w-full bg-COLORBLK1 text-COLORWHT"
+						on:click={async () => {
+							await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
+						}}
+					>
+						<Fa icon={faCog} class="mr-2" />
+						My account settings</Button
+					>
+				</div>{/if}
+			<div class="three border-t border-dashed border-black border-opacity-5 py-6">
+				<div class="title pb-5 font-semibold">Categories</div>
+				{#if categories.length > 0}
+					{#each categories as category}
+						<div
+							class="two pt-1"
+							on:click={() => {
+								goto(
+									// We filter by alias, display by name
+									`/product?filter=${
+										category.alias
+											? category.alias.toString().toLowerCase()
+											: category.name.toString().toLowerCase()
+									}`
+								);
+							}}
+						>
+							<Button
+								class="w-full bg-COLORBLK1 font-medium text-COLORWHT lg:justify-start lg:text-left"
+							>
+								<Fa icon={faStar} class="mr-2 hidden lg:block" />
+								{category.name ?? category.alias}</Button
+							>
+						</div>
+					{/each}
+				{:else}
+					<div class="two pt-1">
+						<Button class="w-full bg-COLORBLK4 font-semibold text-COLORWHT">
+							<Fa icon={faQuestionCircle} class="mr-2" />
+							Looks like you caught us! Just a moment.</Button
+						>
+					</div>
+				{/if}
 			</div>
-		{/if}
-	</div>
-</div>
-	<div class="nav-footer mt-auto block text-COLORWHT w-full font-light text-xs space-y-2">
-		<div class="flex items-center justify-between divide-x-2 w-full text-center">
-			<div class="w-full text-center flex justify-center items-center hover:underline"><a aria-label="View the app credits" href="/app/credits">Credits</a></div>
-			<!-- @remind Enable as we continue to create these new, informational pages -->
-			<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">About</a></div> -->
-			<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">Jobs</a></div> -->
-			<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">Terms</a></div> -->
-			<div class="w-full text-center flex justify-center items-center hover:underline"><a aria-label="View the help center" href="/app/help-center">Blog</a></div>
 		</div>
-		<div>&copy; {new Date().getFullYear()} The University of Belize</div>
+		<div class="nav-footer mt-auto block w-full space-y-2 text-xs font-light text-COLORWHT">
+			<div class="flex w-full items-center justify-between divide-x-2 text-center">
+				<div class="flex w-full items-center justify-center text-center hover:underline">
+					<a aria-label="View the app credits" href="/app/credits">Credits</a>
+				</div>
+				<!-- @remind Enable as we continue to create these new, informational pages -->
+				<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">About</a></div> -->
+				<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">Jobs</a></div> -->
+				<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">Terms</a></div> -->
+				<div class="flex w-full items-center justify-center text-center hover:underline">
+					<a aria-label="View the help center" href="/app/help-center">Blog</a>
+				</div>
+			</div>
+			<div>&copy; {new Date().getFullYear()} The University of Belize</div>
+		</div>
 	</div>
-</div>
 </Drawer>
 
 <header class="border-b border-COLORBLK3 bg-COLORBLK antialiased bg-opacity-{transparency}">

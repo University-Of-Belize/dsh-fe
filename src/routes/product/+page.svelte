@@ -140,21 +140,22 @@
 					{/if}
 				</div>
 
-				<!-- The products -->
-				<div class="flex flex-wrap justify-center md:space-x-4 lg:mx-6 lg:my-4 lg:justify-start">
-					<!-- This way, we filter out all the products from reviews -->
-					{#each [...$products] as product}
-						{#if product.price != undefined}
-							<Product
-								id={product.id}
-								image={product.image}
-								name={product.productName}
-								description={product.description ?? ''}
-								price={product.price?.$numberDecimal}
-								slug={product.slug}
-								out_of_stock={product.in_stock <= 0}
-							/>
-							<!-- <div class="bg-white rounded-lg shadow-lg p-4 m-4 flex max-w-lg">
+				<div class="content mx-4">
+					<!-- The products -->
+					<div class="flex flex-wrap justify-center md:space-x-4 lg:mx-6 lg:my-4 lg:justify-start">
+						<!-- This way, we filter out all the products from reviews -->
+						{#each [...$products] as product}
+							{#if product.price != undefined}
+								<Product
+									id={product.id}
+									image={product.image}
+									name={product.productName}
+									description={product.description ?? ''}
+									price={product.price?.$numberDecimal}
+									slug={product.slug}
+									out_of_stock={product.in_stock <= 0}
+								/>
+								<!-- <div class="bg-white rounded-lg shadow-lg p-4 m-4 flex max-w-lg">
 							<div class="flex-none">
 								<img
 									src={product.image || config['product-view']['default-image']}
@@ -195,8 +196,9 @@
 								</div>
 							</div>
 						</div> -->
-						{/if}
-					{/each}
+							{/if}
+						{/each}
+					</div>
 				</div>
 			</div>
 		{:else}

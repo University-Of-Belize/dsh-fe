@@ -236,7 +236,7 @@
 							</div>
 							<div class="mt-6 flex w-full flex-col items-center text-center lg:space-x-2">
 								<div>
-									Note that you{!cartTotal? "r " :"will be paying " }<b
+									Note that you{!cartTotal ? 'r ' : 'will be paying '}<b
 										>{cartTotal
 											? parseFloat(cartTotal).toLocaleString('en-US', {
 													style: 'currency',
@@ -248,14 +248,16 @@
 													currency: config['checkout']['currency'],
 													minimumFractionDigits: 2
 												})
-											: "cart is empty"}</b
+											: 'cart is empty'}</b
 									>
 								</div>
 								<div class="pay_now flex w-full basis-full items-center justify-start py-4">
 									<div class="stub hidden animate-pulse"></div>
 									<button
-									    disabled={cartTotal? conductingTransaction: true}
-										title={cartTotal? "Pay with a credit/debit card": "Disabled reason: Cart is empty"}
+										disabled={cartTotal ? conductingTransaction : true}
+										title={cartTotal
+											? 'Pay with a credit/debit card'
+											: 'Disabled reason: Cart is empty'}
 										class="btn_wrp w-full {conductingTransaction ? 'animate-pulse' : ''}}"
 										type="submit"
 									>
@@ -264,7 +266,7 @@
 											color_t="COLORWHT"
 											text={transactionConfirm ? 'Confirm Payment?' : 'Pay now'}
 											icon={faLock}
-											disabled={cartTotal? conductingTransaction: true}
+											disabled={cartTotal ? conductingTransaction : true}
 											disabled_text="Please wait for the current transaction to complete."
 											custom_style="w-full justify-center items-center {transactionConfirm
 												? 'bg-COLORRED'
@@ -297,8 +299,10 @@
 									</div>
 									<div class="pay_with_credit flex w-full items-center justify-start py-4">
 										<button
-										    disabled={cartTotal? conductingTransaction: true}
-											title={cartTotal? "Pay with your prepaid credit": "Disabled reason: Cart is empty"}
+											disabled={cartTotal ? conductingTransaction : true}
+											title={cartTotal
+												? 'Pay with your prepaid credit'
+												: 'Disabled reason: Cart is empty'}
 											class="btn_wrp w-full"
 											on:click={() => {
 												conductingTransaction = true;
@@ -316,8 +320,10 @@
 												color_t="COLORWHT"
 												text="Pay with VC"
 												icon={faClone}
-												disabled={cartTotal? conductingTransaction: true}
-												disabled_text={!cartTotal ? "Add some items to your cart first" : "Please wait for the current transaction to complete."}
+												disabled={cartTotal ? conductingTransaction : true}
+												disabled_text={!cartTotal
+													? 'Add some items to your cart first'
+													: 'Please wait for the current transaction to complete.'}
 												custom_style="w-full justify-center items-center"
 											/>
 										</button>
