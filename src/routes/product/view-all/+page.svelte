@@ -92,7 +92,7 @@
 											? category.alias.toString().toLowerCase()
 											: category.name.toString().toLowerCase()
 									}`}
-									class="flex w-full items-center justify-center border-b border-t border-gray-200 border-gray-700 px-4 py-2 text-center text-sm font-medium leading-tight hover:opacity-90 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700"
+									class="flex w-full bg-gray-800 text-white items-center justify-center border-b border-t border-gray-200 border-gray-700 px-4 py-2 text-center text-sm font-medium leading-tight hover:opacity-90 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700"
 									style="min-width: 150px; max-height: 50px;"
 								>
 									{category.name.trim() ?? category.alias.trim()}
