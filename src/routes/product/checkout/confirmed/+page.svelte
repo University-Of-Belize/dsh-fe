@@ -11,15 +11,16 @@
 	import { onMount } from 'svelte';
 	let user: User =
 		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
-	let payment_data = localStorage.payment_data
-		? JSON.parse(JSON.stringify(localStorage.payment_data))
-		: {};
+	let payment_data: object;
 
 	$: branding_text = 'One second...';
 	$: text = '';
 	$: subtitle = '';
 
 	onMount(async () => {
+		payment_data = localStorage.payment_data
+		? JSON.parse(JSON.stringify(localStorage.payment_data))
+		: {};
 		localStorage.removeItem('cart_total');
 		RunOrder();
 	});
@@ -57,7 +58,7 @@
 
 			// Update the user's balance
 			user.credit.$numberDecimal = JSON.stringify(
-				parseFloat(user.credit.$numberDecimal) - payment_data.toDeduct
+				parseFloat(user.credit.$numberDecimal) - parseFloat(json.is.total_amount.$numberDecimal) // Response should have the correct amount
 			);
 			localStorage.user = JSON.stringify(user);
 		} catch (error) {
