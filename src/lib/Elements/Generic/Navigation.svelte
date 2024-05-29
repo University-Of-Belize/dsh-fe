@@ -119,6 +119,8 @@
 	id="sidebar"
 	class="bg-COLORBLK p-5 text-COLORWHT"
 >
+<div class="flex flex-col h-full">
+	<div class="nav-main block">
 	<div class="metaControls flex pb-4">
 		<Button
 			on:click={() => (hidden1 = true)}
@@ -245,6 +247,19 @@
 			</div>
 		{/if}
 	</div>
+</div>
+	<div class="nav-footer mt-auto block text-COLORWHT w-full font-light text-xs space-y-2">
+		<div class="flex items-center justify-between divide-x-2 w-full text-center">
+			<div class="w-full text-center flex justify-center items-center hover:underline"><a aria-label="View the app credits" href="/app/credits">Credits</a></div>
+			<!-- @remind Enable as we continue to create these new, informational pages -->
+			<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">About</a></div> -->
+			<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">Jobs</a></div> -->
+			<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">Terms</a></div> -->
+			<div class="w-full text-center flex justify-center items-center hover:underline"><a aria-label="View the help center" href="/app/help-center">Blog</a></div>
+		</div>
+		<div>&copy; {new Date().getFullYear()} The University of Belize</div>
+	</div>
+</div>
 </Drawer>
 
 <header class="border-b border-COLORBLK3 bg-COLORBLK antialiased bg-opacity-{transparency}">
