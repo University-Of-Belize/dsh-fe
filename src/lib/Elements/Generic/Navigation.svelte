@@ -905,7 +905,7 @@
 	<!-- Announcements and stuff -->
 	{#if !localStorage.acknowledged_announcements || localStorage.acknowledged_announcements != 'true'}
 		<div
-			class="announcements-container fixed bottom-0 z-20 flex w-full bg-COLORBLE py-1 text-center text-COLORWHT"
+			class="announcements-container fixed bottom-0 z-20 flex w-full bg-COLORBLK py-1 text-center text-COLORWHT"
 		>
 			<div class="container-wrap flex w-full flex-wrap items-center justify-center bg-opacity-100">
 				<div
