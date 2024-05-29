@@ -9,11 +9,11 @@
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	import type { Category } from '$lib/types/Category';
-	import type { EngineProduct } from '$lib/types/Product';
+	import type { Product } from '$lib/types/Product';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import Fa from 'svelte-fa';
 
-	const products = writable<EngineProduct[]>([]);
+	const products = writable<Product[]>([]);
 	let cachedCategories = localStorage.getItem('categories');
 	let categories: Category[] = [];
 
@@ -115,7 +115,7 @@
 					{#each [...$products] as product}
 						{#if product.price != undefined}
 							<Product
-								id={product.id}
+								id={product._id}
 								image={product.image}
 								name={product.productName}
 								description={product.description ?? ''}
@@ -123,47 +123,6 @@
 								slug={product.slug}
 								out_of_stock={product.in_stock <= 0}
 							/>
-							<!-- <div class="bg-white rounded-lg shadow-lg p-4 m-4 flex max-w-lg">
-							<div class="flex-none">
-								<img
-									src={product.image || config['product-view']['default-image']}
-									alt={product.productName}
-									class="w-48 h-48 object-cover rounded-lg"
-									on:error={() => {
-										product.image = config['product-view']['default-image'];
-									}}
-									on:load={() => {
-										console.log('Image loaded successfully');
-									}}
-								/>
-							</div>
-							<div class="relative flex-grow ml-4">
-								<h2 class="text-lg font-semibold text-gray-700">{product.productName}</h2>
-								<p class="mt-2 text-gray-600 font-light">
-									{product.description.length > 100
-										? `${product.description.slice(0, 100)}...`
-										: product.description}
-								</p>
-								<p class="mb-16 text-gray-600 font-bold">
-									${parseFloat(product.price?.$numberDecimal).toFixed(2)}
-								</p>
-								<div class="comboBox flex flex-wrap absolute bottom-1">
-									<div
-										class="details font-semibold bg-COLORRED text-COLORWHT button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-4 py-2 items-center text-sm select-none mr-2"
-										on:click={() => {
-											window.location = `/product/${product.slug}`;
-										}}
-										role="link"
-									>
-										Details
-									</div>
-
-									<IconButton icon={faShoppingCart} color="COLORYLW" />
-
-									<IconButton icon={faHeart} color="COLORRED" class="hidden lg:flex" />
-								</div>
-							</div>
-						</div> -->
 						{/if}
 					{/each}
 				</div>

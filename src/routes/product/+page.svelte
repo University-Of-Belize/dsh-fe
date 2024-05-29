@@ -152,7 +152,7 @@
 								description={product.description ?? ''}
 								price={product.price?.$numberDecimal}
 								slug={product.slug}
-								out_of_stock={product.in_stock}
+								out_of_stock={product.in_stock <= 0}
 							/>
 							<!-- <div class="bg-white rounded-lg shadow-lg p-4 m-4 flex max-w-lg">
 							<div class="flex-none">
