@@ -15,7 +15,7 @@
 		<div class="flex h-60 flex-col justify-between overflow-hidden">
 			<a aria-label="Visit the product '{name}'" href={url}
 				><img
-				    alt="Picture showing the product '{name}'"
+					alt="Picture showing the product '{name}'"
 					src={image ?? config['product-showcase']['default-image']}
 					class="h-full w-full object-cover duration-200 group-hover:scale-110"
 				/></a

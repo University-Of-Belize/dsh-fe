@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-	import { onMount } from "svelte";
+	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
 	import { goto } from '$app/navigation';
@@ -22,10 +22,7 @@
 		let searchResults, nameResults;
 
 		try {
-			const searchPromise = (await fetchWebApi(
-				"v1/menu/",
-				'GET'
-			)) as Response;
+			const searchPromise = (await fetchWebApi('v1/menu/', 'GET')) as Response;
 
 			const searchResponse = await searchPromise;
 			if (searchResponse.status === 404) {
@@ -34,8 +31,8 @@
 			const res = await searchResponse.json();
 			searchResults = res.is; // What _is_ the response?
 			if (searchResults && searchResults.length > 0) {
-			products.set(searchResults); // @ts-ignore
-		    }
+				products.set(searchResults); // @ts-ignore
+			}
 			getCategories();
 		} catch (e) {
 			console.error('Error parsing JSON:', e);
@@ -65,10 +62,10 @@
 <main class="h-screen w-full">
 	<div class="navigation z-20 w-full">
 		<!-- Params to empty string--not undefined otherwise it will make the value actually be the string 'undefined' -->
-		<Navigation transparency={5} search={true}/>
+		<Navigation transparency={5} search={true} />
 	</div>
 	<div
-		class="content-wrapper absolute z-10 h-full w-full lg:mx-6 items-start justify-start overflow-auto pb-40 lg:flex"
+		class="content-wrapper absolute z-10 h-full w-full items-start justify-start overflow-auto pb-40 lg:mx-6 lg:flex"
 	>
 		{#if $products && $products.length > 0}
 			<!-- The categories -->
@@ -94,7 +91,7 @@
 										? category.alias.toString().toLowerCase()
 										: category.name.toString().toLowerCase()
 								}`}
-								class="w-full border-b border-t border-gray-200 flex items-center justify-center border-gray-700 px-4 py-2 text-center text-sm font-medium leading-tight hover:opacity-90 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700"
+								class="flex w-full items-center justify-center border-b border-t border-gray-200 border-gray-700 px-4 py-2 text-center text-sm font-medium leading-tight hover:opacity-90 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700"
 								style="min-width: 150px; max-height: 50px;"
 							>
 								{category.name.trim() ?? category.alias.trim()}
@@ -104,13 +101,15 @@
 				</div>
 
 				<!--- The title -->
-				<div class="block my-8 w-full text-2xl font-semibold text-COLORWHT">
+				<div class="my-8 block w-full text-2xl font-semibold text-COLORWHT">
 					<div>Product Availability</div>
-					<div class="text-sm font-light">This is the entire menu. Browse through it as you'd like.</div>
+					<div class="text-sm font-light">
+						This is the entire menu. Browse through it as you'd like.
+					</div>
 				</div>
 
 				<!-- The products -->
-				<div class="flex flex-wrap justify-center lg:justify-start md:space-x-4 lg:my-4">
+				<div class="flex flex-wrap justify-center md:space-x-4 lg:my-4 lg:justify-start">
 					<!-- This way, we filter out all the products from reviews -->
 					{#each [...$products] as product}
 						{#if product.price != undefined}

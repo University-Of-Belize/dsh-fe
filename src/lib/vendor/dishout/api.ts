@@ -106,9 +106,7 @@ async function fetchWebApi(
 						
 						
 						
-						your internet connection (${retryCount + 1}/${
-							config.ui['APIretryLimit']
-						})...`
+						your internet connection (${retryCount + 1}/${config.ui['APIretryLimit']})...`
 					);
 					// Recall the API request function
 					fetchWebApi(endpoint, method, body, json, token, silent).then(resolve).catch(reject);

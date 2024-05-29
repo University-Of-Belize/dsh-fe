@@ -39,11 +39,15 @@
 	</a>
 	<div class="px-5 py-1 pb-5 text-COLORWHT">
 		<a href="/product/{productSlug}">
-			<span class="stub hidden strikethrough"/>
-			<h5 class="w-fit text-xl font-semibold tracking-tight hover:underline {productUnavailable? "line-through" : ""}">
+			<span class="stub strikethrough hidden" />
+			<h5
+				class="w-fit text-xl font-semibold tracking-tight hover:underline {productUnavailable
+					? 'line-through'
+					: ''}"
+			>
 				{productName}
 			</h5>
-			{@html productUnavailable ? `<span class="text-COLORHPK">OUT OF STOCK</span>`: ""}
+			{@html productUnavailable ? `<span class="text-COLORHPK">OUT OF STOCK</span>` : ''}
 		</a>
 		<div
 			class="mt-2 block items-center justify-start space-y-6 lg:flex lg:flex-wrap lg:justify-between lg:space-y-0"

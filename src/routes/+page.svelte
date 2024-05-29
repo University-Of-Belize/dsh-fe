@@ -164,6 +164,12 @@
 		<div
 			class="category-grid flex h-full w-full flex-wrap items-center justify-center overflow-auto lg:justify-start"
 		>
+			<DataCard
+				url="/product/view-all"
+				image="/assets/home/all_products.png"
+				name="View the menu"
+				description="View the entire menu and product availability."
+			/>
 			{#if categories.length > 0}
 				{#each categories as category}
 					<DataCard
@@ -173,10 +179,10 @@
 						description={category.description}
 					/>
 				{/each}
-			{:else}
+				<!-- {:else}
 				<div class="flex h-16 w-full items-center justify-center">
 					<div class="text-2xl font-semibold text-COLORWHT">No categories available</div>
-				</div>
+				</div> -->
 			{/if}
 		</div>
 

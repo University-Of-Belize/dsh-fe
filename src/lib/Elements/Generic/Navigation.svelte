@@ -905,14 +905,18 @@
 	<!-- Announcements and stuff -->
 	{#if !localStorage.acknowledged_announcements || localStorage.acknowledged_announcements != 'true'}
 		<div
-			class="announcements-container fixed bottom-0 z-20 flex w-full bg-COLORBLK py-1 lg:text-center text-COLORWHT text-sm lg:text-base"
+			class="announcements-container fixed bottom-0 z-20 flex w-full bg-COLORBLK py-1 text-sm text-COLORWHT lg:text-center lg:text-base"
 		>
-			<div class="container-wrap flex flex-col space-y-4 lg:space-y-0 lg:flex-row mx-2 lg:mx-0 w-full flex-wrap items-center justify-center bg-opacity-100">
+			<div
+				class="container-wrap mx-2 flex w-full flex-col flex-wrap items-center justify-center space-y-4 bg-opacity-100 lg:mx-0 lg:flex-row lg:space-y-0"
+			>
 				<div
-					class="container flex flex-col lg:flex-row space-y-2 flex-wrap items-center justify-center space-x-1 bg-opacity-100 text-COLORWHT"
+					class="container flex flex-col flex-wrap items-center justify-center space-x-1 space-y-2 bg-opacity-100 text-COLORWHT lg:flex-row"
 				>
-					<div class="block lg:flex space-x-1 bg-opacity-100 text-COLORWHT">
-						<div class="icon ml-1 lg:mx-2 my-2 lg:my-0"><Fa icon={faCodePullRequest} size="1.25x" /></div>
+					<div class="block space-x-1 bg-opacity-100 text-COLORWHT lg:flex">
+						<div class="icon my-2 ml-1 lg:mx-2 lg:my-0">
+							<Fa icon={faCodePullRequest} size="1.25x" />
+						</div>
 						<div>
 							Hey, thanks for visiting! We're still in beta, so please bear with us as we sort out
 							all the bugs. You can sign up
@@ -926,13 +930,18 @@
 					</div>
 				</div>
 				<div
-					class="btn-wrp flex mt-auto items-center justify-center w-full lg:ml-2 lg:mt-0 lg:w-auto bg-COLORRED font-semibold text-COLORWHT focus:opacity-80"
+					class="btn-wrp mt-auto flex w-full items-center justify-center bg-COLORRED font-semibold text-COLORWHT focus:opacity-80 lg:ml-2 lg:mt-0 lg:w-auto"
 					on:click={() => {
 						localStorage.setItem('acknowledged_announcements', 'true');
 						window.location.reload();
 					}}
 				>
-					<IconButton icon={faX} color="" color_t="COLORWHT" class="w-fit flex items-center justify-center" />
+					<IconButton
+						icon={faX}
+						color=""
+						color_t="COLORWHT"
+						class="flex w-fit items-center justify-center"
+					/>
 					<span class="lg:hidden">CLOSE</span>
 				</div>
 			</div>
