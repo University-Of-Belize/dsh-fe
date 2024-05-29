@@ -271,7 +271,7 @@
 				</Button>
 				<a href={titleWhere} class="flex">
 					{#if config.ui['branding-logo'] && config.ui['branding-logo'].trim() != ''}
-						<img src={config.ui['branding-logo']} class="h-8" alt="Service Logo" />
+						<img src={config.ui['branding-logo']} class="h-8 w-8 object-cover" alt="Service Logo" />
 					{:else}
 						<span class="flex self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
 							<!-- {@html staff ? `${titleText} | Staff` : titleText} -->
@@ -861,7 +861,7 @@
 				<!-------- START Other stuff (theme button, other fun things) ----->
 				<span class="ml-2">
 					<button
-					    aria-label="Toggle dark mode"
+						aria-label="Toggle dark mode"
 						type="button"
 						on:click={() => {
 							theme_switched = theme_switched ? false : true;

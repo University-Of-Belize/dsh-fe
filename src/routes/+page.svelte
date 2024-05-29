@@ -1,22 +1,16 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
+	import DataCard from '$lib/Elements/Cards/DataCard.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import ProductBanner from '$lib/Elements/Banners/ProductBanner.svelte';
-	import DataCard from '$lib/Elements/Cards/DataCard.svelte';
-	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
-	import { faAd, faLock, faUnlockKeyhole } from '@fortawesome/free-solid-svg-icons';
 	import type { Product as Product_ } from '$lib/types/Product';
 	import type { User } from '$lib/types/User';
-	import { what_is } from '$lib/vendor/dishout/What_Is';
-	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { faGift, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+	import { faGift } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import Fa from 'svelte-fa';
 	let user: User =
 		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
 	let categories: Category[] = [];
@@ -27,7 +21,22 @@
 	// let clientHeight: number;
 	let product: Product_[] | null;
 
+	let LCP: string;
+	let LCP_EXT: string;
+
 	onMount(async () => {
+		// Get the root element
+		const root = document.documentElement;
+
+		// Get the computed styles of the root element
+		const style = getComputedStyle(root);
+
+		// Get the value of the variable
+		LCP = style.getPropertyValue('--LANDINGPHOTO');
+		LCP = LCP.substring(4, LCP.length - 1).replace(/['"]+/g, ''); // Remove the dumb quotes
+
+		LCP_EXT = LCP.split('.').pop(); // Get the extension
+
 		try {
 			const res = (await fetchWebApi('v1/menu/random', 'GET')) as Response;
 			if (!res) return;
@@ -61,6 +70,11 @@
 		}
 	}
 </script>
+
+<svelte:head>
+	<!-- Preload the LCP image with a high fetchpriority so it starts loading with the stylesheet. -->
+	<link rel="preload" fetchpriority="high" as="image" href={LCP} type="image/{LCP_EXT}" />
+</svelte:head>
 
 <main class="h-screen w-full text-COLORWHT">
 	<div class="navigation z-20 w-full">
