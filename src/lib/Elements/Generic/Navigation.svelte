@@ -116,7 +116,7 @@
 	transitionType="fly"
 	{transitionParams}
 	bind:hidden={hidden1}
-	id="sidebar1"
+	id="sidebar"
 	class="bg-COLORBLK p-5 text-COLORWHT"
 >
 	<div class="metaControls flex pb-4">
@@ -861,6 +861,7 @@
 				<!-------- START Other stuff (theme button, other fun things) ----->
 				<span class="ml-2">
 					<button
+					    aria-label="Toggle dark mode"
 						type="button"
 						on:click={() => {
 							theme_switched = theme_switched ? false : true;
@@ -904,7 +905,7 @@
 	<!-- Announcements and stuff -->
 	{#if !localStorage.acknowledged_announcements || localStorage.acknowledged_announcements != 'true'}
 		<div
-			class="announcements-container fixed bottom-0 z-20 flex w-full bg-COLORBLE bg-opacity-50 py-1 text-center text-COLORWHT"
+			class="announcements-container fixed bottom-0 z-20 flex w-full bg-COLORBLE py-1 text-center text-COLORWHT"
 		>
 			<div class="container-wrap flex w-full flex-wrap items-center justify-center bg-opacity-100">
 				<div
