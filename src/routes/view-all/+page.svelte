@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+	import { onMount } from "svelte";
 	import { writable } from 'svelte/store';
 
 	import { goto } from '$app/navigation';
@@ -14,26 +14,16 @@
 	import Fa from 'svelte-fa';
 
 	const products = writable<EngineProduct[]>([]);
-	$: params = $page.url.searchParams.get('search');
-	$: params_filter = $page.url.searchParams.get('filter');
 	let cachedCategories = localStorage.getItem('categories');
 	let categories: Category[] = [];
 
-	const SEARCHLENGTH_LIMIT = 3;
-	let error_string: string;
-
 	// Thread run everytime the params change
-	$: (async () => {
+	onMount(async () => {
 		let searchResults, nameResults;
-		if(!params_filter && (params ? params.toString().length < SEARCHLENGTH_LIMIT : true)) {
-			error_string = `Make that search at least ${SEARCHLENGTH_LIMIT} characters long`;
-			return;
-		};
+
 		try {
 			const searchPromise = (await fetchWebApi(
-				`v1/search?filter=${params_filter ?? "productName"}&q=${
-					(params?.toString().toLowerCase() ?? "")
-				}`,
+				"v1/menu/",
 				'GET'
 			)) as Response;
 
@@ -41,41 +31,18 @@
 			if (searchResponse.status === 404) {
 				throw new Error('Search not found');
 			}
-			searchResults = await searchResponse.json();
+			const res = await searchResponse.json();
+			searchResults = res.is; // What _is_ the response?
+			if (searchResults && searchResults.length > 0) {
+			products.set(searchResults); // @ts-ignore
+		    }
 			getCategories();
-			error_string = undefined; // Reset
 		} catch (e) {
 			console.error('Error parsing JSON:', e);
 			products.set([]);
 			return;
 		}
-		if (searchResults && searchResults.length > 0) {
-			products.set(searchResults); // @ts-ignore
-		} else {
-			try {
-				const namePromise = (await fetchWebApi(
-					`v1/search?filter=alias&q=${
-						params_filter?.toString().toLowerCase() ?? params?.toString().toLowerCase()
-					}`,
-					'GET'
-				)) as Response;
-				const nameResponse = await namePromise;
-				if (nameResponse.status === 404) {
-					throw new Error('Name not found');
-				}
-				nameResults = await nameResponse.json();
-			} catch (e) {
-				console.error('Error parsing JSON:', e);
-				products.set([]);
-				return;
-			}
-			if (nameResults && nameResults.length > 0) {
-				products.set(nameResults); // @ts-ignore
-			} else {
-				products.set([]);
-			}
-		}
-	})();
+	});
 
 	async function getCategories() {
 		if (!cachedCategories) {
@@ -92,22 +59,22 @@
 </script>
 
 <svelte:head>
-	<title>UniFood | Product Search / {params?.toString().toLowerCase() ?? 'Product Search'}</title>
+	<title>UniFood | View the Menu</title>
 </svelte:head>
 
 <main class="h-screen w-full">
 	<div class="navigation z-20 w-full">
 		<!-- Params to empty string--not undefined otherwise it will make the value actually be the string 'undefined' -->
-		<Navigation transparency={5} search={true} value={params ?? ''} />
+		<Navigation transparency={5} search={true}/>
 	</div>
 	<div
-		class="content-wrapper absolute z-10 h-full w-full items-start justify-start overflow-auto pb-40 lg:flex"
+		class="content-wrapper absolute z-10 h-full w-full lg:mx-6 items-start justify-start overflow-auto pb-40 lg:flex"
 	>
 		{#if $products && $products.length > 0}
 			<!-- The categories -->
 
 			<div class="block w-full">
-				<div class="stub hidden bg-gray-200 bg-gray-300 text-gray-900 text-white" />
+				<span class="stub hidden bg-gray-200 bg-gray-300 text-gray-900 text-white" />
 				<div class="categoryp-wrap flex w-full overflow-x-auto rounded-md">
 					{#if categories.length > 0}
 						{#each categories as category}
@@ -127,11 +94,7 @@
 										? category.alias.toString().toLowerCase()
 										: category.name.toString().toLowerCase()
 								}`}
-								class="w-full border-b border-t border-gray-200 {params_filter
-									?.toString()
-									.toLowerCase() === category.alias?.toString().toLowerCase()
-									? 'bg-gray-200 text-gray-900'
-									: 'bg-gray-800 text-white'} flex items-center justify-center border-gray-700 px-4 py-2 text-center text-sm font-medium leading-tight hover:opacity-90 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700"
+								class="w-full border-b border-t border-gray-200 flex items-center justify-center border-gray-700 px-4 py-2 text-center text-sm font-medium leading-tight hover:opacity-90 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700"
 								style="min-width: 150px; max-height: 50px;"
 							>
 								{category.name.trim() ?? category.alias.trim()}
@@ -140,8 +103,14 @@
 					{/if}
 				</div>
 
+				<!--- The title -->
+				<div class="block my-8 w-full text-2xl font-semibold text-COLORWHT">
+					<div>Product Availability</div>
+					<div class="text-sm font-light">This is the entire menu. Browse through it as you'd like.</div>
+				</div>
+
 				<!-- The products -->
-				<div class="flex flex-wrap justify-center lg:justify-start md:space-x-4 lg:mx-6 lg:my-4">
+				<div class="flex flex-wrap justify-center lg:justify-start md:space-x-4 lg:my-4">
 					<!-- This way, we filter out all the products from reviews -->
 					{#each [...$products] as product}
 						{#if product.price != undefined}
@@ -152,7 +121,7 @@
 								description={product.description ?? ''}
 								price={product.price?.$numberDecimal}
 								slug={product.slug}
-								out_of_stock={product.in_stock}
+								out_of_stock={product.in_stock <= 0}
 							/>
 							<!-- <div class="bg-white rounded-lg shadow-lg p-4 m-4 flex max-w-lg">
 							<div class="flex-none">
@@ -207,7 +176,7 @@
 					<div class="icon flex h-fit w-full basis-full items-center justify-center">
 						<Fa icon={faShoppingCart} size="2x" />
 					</div>
-					<p class="font-semibold">{error_string? error_string: "No products found"}</p>
+					<p class="font-semibold">No products found</p>
 				</div>
 			</div>
 		{/if}

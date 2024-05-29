@@ -10,6 +10,7 @@
 	let productDescription: string;
 	let productPrice: string;
 	let productSlug: string;
+	let productUnavailable: boolean;
 	let added_to_cart: boolean = false;
 	export { productImage as image };
 	export { productId as id };
@@ -17,6 +18,7 @@
 	export { productDescription as description };
 	export { productPrice as price };
 	export { productSlug as slug };
+	export { productUnavailable as out_of_stock };
 </script>
 
 <div class="mt-4 w-full max-w-sm rounded-lg border border-COLORHPK bg-COLORBLK1">
@@ -37,9 +39,11 @@
 	</a>
 	<div class="px-5 py-1 pb-5 text-COLORWHT">
 		<a href="/product/{productSlug}">
-			<h5 class="w-fit text-xl font-semibold tracking-tight hover:underline">
+			<span class="stub hidden strikethrough"/>
+			<h5 class="w-fit text-xl font-semibold tracking-tight hover:underline {productUnavailable? "line-through" : ""}">
 				{productName}
 			</h5>
+			{@html productUnavailable ? `<span class="text-COLORHPK">OUT OF STOCK</span>`: ""}
 		</a>
 		<div
 			class="mt-2 block items-center justify-start space-y-6 lg:flex lg:flex-wrap lg:justify-between lg:space-y-0"
