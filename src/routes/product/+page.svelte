@@ -18,6 +18,7 @@
 	$: params_filter = $page.url.searchParams.get('filter');
 	let cachedCategories = localStorage.getItem('categories');
 	let categories: Category[] = [];
+	let current_category: Category;
 
 	const SEARCHLENGTH_LIMIT = 3;
 	let error_string: string;
@@ -89,6 +90,11 @@
 			categories = JSON.parse(cachedCategories);
 		}
 	}
+
+	function set_current_category(category: Category): string {
+		current_category = category;
+		return 'bg-gray-200 text-gray-900';
+	}
 </script>
 
 <svelte:head>
@@ -108,7 +114,7 @@
 
 			<div class="block w-full">
 				<div class="stub hidden bg-gray-200 bg-gray-300 text-gray-900 text-white" />
-				<div class="categoryp-wrap flex w-full overflow-x-auto rounded-md mx-4 lg:mx-0">
+				<div class="categoryp-wrap mx-4 flex w-full overflow-x-auto rounded-md lg:mx-0">
 					{#if categories.length > 0}
 						{#each categories as category}
 							<a
@@ -130,7 +136,7 @@
 								class="w-full border-b border-t border-gray-200 {params_filter
 									?.toString()
 									.toLowerCase() === category.alias?.toString().toLowerCase()
-									? 'bg-gray-200 text-gray-900'
+									? set_current_category(category)
 									: 'bg-gray-800 text-white'} flex items-center justify-center border-gray-700 px-4 py-2 text-center text-sm font-medium leading-tight hover:opacity-90 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700"
 								style="min-width: 150px; max-height: 50px;"
 							>
@@ -141,6 +147,17 @@
 				</div>
 
 				<div class="content mx-4">
+					<!-- Check to see if we're viewing a category -->
+					{#if current_category}
+						{current_category}
+						<!--- The title -->
+						<div class="my-8 block w-full text-2xl font-semibold text-COLORWHT">
+							<div>{current_category.name.trim() ?? current_category.alias.trim()}</div>
+							<div class="text-sm font-light">
+								{current_category.description.trim()}
+							</div>
+						</div>
+					{/if}
 					<!-- The products -->
 					<div class="flex flex-wrap justify-center md:space-x-4 lg:mx-6 lg:my-4 lg:justify-start">
 						<!-- This way, we filter out all the products from reviews -->

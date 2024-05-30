@@ -345,7 +345,8 @@
 						><Fa icon={faPlus} class="mr-4" /> Install app</button
 					>
 				{/if}
-				{#if user}
+				
+				<!------ Included for unauthed users-->
 					<!-- Search -->
 					<button
 						id="toggleSidebarMobileSearch"
@@ -357,12 +358,15 @@
 							}, 10);
 						}}
 						type="button"
-						class="flex items-center justify-start rounded-lg bg-COLORBLK1 p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm lg:hidden"
+						class="flex items-center lg:mr-0 mr-3 md:mr-2 justify-start rounded-lg bg-COLORBLK1 p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm lg:hidden"
 					>
 						<span class="sr-only">Search</span>
 						<!-- Search icon -->
 						<Fa icon={faSearch} />
+						<span class="ml-4 mr-3 hidden md:inline">Search</span>
 					</button>
+
+					{#if user}
 					<!---
 					<!- Notifications ->
 					<button
