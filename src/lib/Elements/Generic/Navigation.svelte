@@ -124,20 +124,13 @@
 			<div class="metaControls flex pb-4">
 				<Button
 					on:click={() => (hidden1 = true)}
+					title="Toggle the sidebar"
 					aria-expanded="true"
 					aria-controls="sidebar"
-					class="mr-3 hidden cursor-pointer rounded bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:inline"
+					class="mr-2 lg:mr-3 inline cursor-pointer rounded-lg lg:rounded bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:focus:bg-gray-700 dark:focus:ring-gray-700"
 				>
+				    <span class="sr-only">Toggle sidebar</span>
 					<Fa icon={faBars} />
-				</Button>
-				<Button
-					on:click={() => (hidden1 = true)}
-					aria-expanded="true"
-					aria-controls="sidebar"
-					class="mr-2 cursor-pointer rounded-lg bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:hidden"
-				>
-					<Fa icon={faBars} />
-					<span class="sr-only">Toggle sidebar</span>
 				</Button>
 				<a href="/" class="mr-4 flex">
 					<img src="/icons/icon-svgrepo.svg" class="mr-3 h-8" alt="Plattr Logo" />
@@ -273,20 +266,13 @@
 			<div class="flex items-center justify-start">
 				<Button
 					on:click={() => (hidden1 = false)}
+					title="Toggle the sidebar"
 					aria-expanded="true"
 					aria-controls="sidebar"
-					class="mr-3 hidden cursor-pointer rounded bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:inline"
+					class="mr-2 lg:mr-3 inline cursor-pointer rounded-lg lg:rounded bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:focus:bg-gray-700 dark:focus:ring-gray-700"
 				>
+				    <span class="sr-only">Toggle sidebar</span>
 					<Fa icon={faBars} />
-				</Button>
-				<Button
-					on:click={() => (hidden1 = false)}
-					aria-expanded="true"
-					aria-controls="sidebar"
-					class="mr-2 cursor-pointer rounded-lg bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:hidden"
-				>
-					<Fa icon={faBars} />
-					<span class="sr-only">Toggle sidebar</span>
 				</Button>
 				<a href={titleWhere} class="flex">
 					{#if config.ui['branding-logo'] && config.ui['branding-logo'].trim() != ''}
