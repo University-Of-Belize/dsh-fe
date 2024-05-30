@@ -108,7 +108,7 @@
 
 			<div class="block w-full">
 				<div class="stub hidden bg-gray-200 bg-gray-300 text-gray-900 text-white" />
-				<div class="categoryp-wrap flex w-full overflow-x-auto rounded-md">
+				<div class="categoryp-wrap flex w-full overflow-x-auto rounded-md mx-4 lg:mx-0">
 					{#if categories.length > 0}
 						{#each categories as category}
 							<a

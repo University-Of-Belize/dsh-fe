@@ -65,15 +65,14 @@
 		<Navigation transparency={5} search={true} />
 	</div>
 	<div
-		class="content-wrapper absolute z-10 h-full w-full items-start justify-start overflow-auto pb-40 lg:mx-6 lg:flex"
+		class="content-wrapper absolute z-10 h-full w-full items-start justify-start overflow-auto pb-40 lg:flex"
 	>
-		<div class="content mx-4">
 			{#if $products && $products.length > 0}
 				<!-- The categories -->
 
 				<div class="block w-full">
 					<span class="stub hidden bg-gray-200 bg-gray-300 text-gray-900 text-white" />
-					<div class="categoryp-wrap flex w-full overflow-x-auto rounded-md">
+					<div class="categoryp-wrap flex w-full overflow-x-auto rounded-md mx-4 lg:mx-0">
 						{#if categories.length > 0}
 							{#each categories as category}
 								<a
@@ -101,6 +100,7 @@
 						{/if}
 					</div>
 
+					<div class="content mx-4">
 					<!--- The title -->
 					<div class="my-8 block w-full text-2xl font-semibold text-COLORWHT">
 						<div>Product Availability</div>
@@ -127,6 +127,7 @@
 						{/each}
 					</div>
 				</div>
+			</div>
 			{:else}
 				<div
 					class="not-found flex h-full w-full flex-wrap items-center justify-center text-COLORWHT3"
@@ -139,7 +140,6 @@
 					</div>
 				</div>
 			{/if}
-		</div>
 	</div>
 </main>
 <div class="footer relative z-10">
