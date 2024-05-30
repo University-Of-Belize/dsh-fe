@@ -29,7 +29,7 @@
 				{#if !no_forward}
 					<a aria-label="Visit the link for '{name}'" href={url} class="group text-lg font-bold">
 						<!-- <span>▷</span> -->
-						<span class="underline">Visit page</span>
+						<span class="underline">View page</span>
 					</a>
 				{/if}
 			</div>
