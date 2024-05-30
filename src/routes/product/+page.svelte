@@ -151,7 +151,7 @@
 					{#if current_category}
 						{current_category}
 						<!--- The title -->
-						<div class="my-8 block w-full text-2xl font-semibold text-COLORWHT">
+						<div class="mt-2 mb-8 block w-full text-2xl font-semibold text-COLORWHT">
 							<div>{current_category.name.trim() ?? current_category.alias.trim()}</div>
 							<div class="text-sm font-light">
 								{current_category.description.trim()}
@@ -159,7 +159,7 @@
 						</div>
 					{/if}
 					<!-- The products -->
-					<div class="flex flex-wrap justify-center md:space-x-4 lg:mx-6 lg:my-4 lg:justify-start">
+					<div class="flex flex-wrap justify-center md:space-x-4 lg:my-4 lg:justify-start">
 						<!-- This way, we filter out all the products from reviews -->
 						{#each [...$products] as product}
 							{#if product.price != undefined}
