@@ -64,7 +64,7 @@
 	// Dropdowns
 	let user_dropdown: HTMLDivElement;
 	let apps_dropdown: HTMLDivElement;
-	let theme_switched: bool = false;
+	let theme_switched: boolean = false;
 
 	onMount(async () => {
 		// Set the scrim height
