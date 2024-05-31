@@ -5,8 +5,9 @@
 	import { onMount } from 'svelte';
 	import type { ServerMessage, UserDetailsMessage, Message } from '$lib/types/Message';
 	import MessageStrip from '$lib/Elements/Dashboard/MessageStrip.svelte';
+	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 
-	import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+	import { faPaperPlane, faUser } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
 	// What is what, anyway?
@@ -14,6 +15,9 @@
 	import what from '$lib/vendor/dishout/Whats';
 
 	let messageBox: HTMLInputElement;
+	let messageBlock: HTMLDivElement;
+
+	let selected_user: HTMLInputElement;
 
 	let current_interaction: UserDetailsMessage;
 	let interactions: ServerMessage[]; // Declare the data variable
@@ -21,7 +25,7 @@
 	const slug = $page.params.slug;
 
 	let debounceTimeout: number;
-        let error_string: string = '';
+    let error_string: string = '';
 	let error_message: HTMLDivElement;
 
 	async function catchAll() {
@@ -52,7 +56,7 @@
 				.map((el) => el.value);
 
 			const message: Message = {
-				user: current_interaction?.username,
+				user: selected_user?.innerText ?? current_interaction?.username,
 				message: {
 					subject: '',
 					content: valueArray[0]
@@ -65,7 +69,7 @@
 
 	async function sendMessage(message: Message) {
 		// Reset error message
-		error_message.innerHTML = "&nbsp;";
+		error_message.innerText = "";
 
 		// Send the message
 		const res = (await fetchWebApi(
@@ -85,7 +89,10 @@
 		// Push the new interaction
 		interactions.push(r.is.message);
 		interactions = interactions; // Trigger the reactivity
-		console.log(interactions);
+		// console.log(interactions);
+
+		// Scroll to bottom of the messageBlock
+		messageBlock.scrollTo(0, messageBlock.scrollHeight);
 	}
 
 	onMount(async () => {
@@ -101,34 +108,89 @@
 <div
 	class="content block h-full w-full overflow-auto bg-transparent px-3 py-6 lg:px-16 lg:py-16"
 >
-	{#if current_interaction}
 		<div class="flex space-x-2 pb-2 text-2xl font-semibold">
 			<div class="inline">
+				{#if current_interaction}
 				<span>Your interaction with</span> <code>@{current_interaction?.username}</code>
+				{:else}
+				<span>New conversation</span>
+				{/if}
 			</div>
 		</div>
-	{/if}
+
 	<div class="flex w-full flex-wrap justify-between pb-12 text-sm font-light">
-		<div>Interact with {slug}. Sent messages will be displayed below.</div>
+		<div>{@html interactions? "Interact ": "Start your new interaction. You will need to know the user's @TAG to converse with them.<br/>Use the username 'staff' for contacting the staff about an item."}
+			{interactions? `with ${slug}. Sent messages will be displayed below.`: ""}</div>
 	</div>
 	<div class="flex h-3/4 w-full flex-col flex-wrap lg:h-full">
 		<!-- The first message sets the chat's subject -->
-		{#if interactions}
-			<div class="mb-4 flex w-full space-x-2 pb-2 text-xl font-light">
+			<div class="mb-4 flex justify-center w-full space-x-2 pb-2 text-xl font-light">
+				{#if interactions}
 				<span>Subject:</span><b>{interactions[0]?.subject}</b>
+				{:else}
+				<div class="messagebox block lg:mb-6 mt-auto w-full lg:w-auto">
+					<form
+					    class="block w-full space-y-4"
+						action="#"
+						on:submit={(event) => handleSubmit(event)}
+					>
+					<TextInput
+					icon={faUser}
+					name="user_id"
+					type="text"
+					placeholder="Enter a username"
+					custom_style="bg-transparent"
+					required
+				/>
+				<TextInput
+				icon={faUser}
+				name="subject"
+				type="text"
+				placeholder="Enter a subject"
+				custom_style="bg-transparent"
+				required
+			/>
+					<div class="relative flex h-fit w-full overflow-clip rounded-lg bg-COLORBLK1 p-1.5">
+						<input
+							bind:this={messageBox}
+							type="text"
+							name="message"
+							autocomplete="off"
+							title="Send a new message"
+							class="block w-full border-0 bg-transparent text-xs font-light text-COLORWHT placeholder-COLORWHT focus:border-0 focus:ring-0 sm:text-sm"
+							placeholder="Leave a message"
+						/>
+						<button
+							type="submit"
+							class="flex h-full cursor-pointer items-center justify-center px-6 py-2 text-center hover:bg-COLORBLK2"
+						>
+							<Fa icon={faPaperPlane} class="text-gray-500" />
+						</button>
+					</div>
+					</form>
+					<p bind:this={error_message} class="mt-2 text-xs text-rose-600">
+						{@html error_string ?? "&nbsp;"}
+					</p>
+				</div>
+				{/if}
 			</div>
+			{#if interactions}
 			<div
+			    bind:this={messageBlock}
 				class="messages block"
 				style="max-height: 80%; overflow: auto;">
 				{#each interactions as interaction}
 					<MessageStrip
-					    id={interaction._id ?? ""}
+					    id={interaction._id}
 						icon={current_interaction.profile_picture}
 						username={current_interaction.username}
-						message={interaction.content}
+						message={interaction.content ?? "<i>No content</i>"}
 						status="unused"
 					/>
 				{/each}
+				<MessageStrip
+				hidden={true}
+			/>
 			</div>
 		{/if}
 		{#if current_interaction}
@@ -155,7 +217,7 @@
 					</button>
 				</form>
                 <p bind:this={error_message} class="mt-2 text-xs text-rose-600">
-                    {@html error_string ?? "&nbsp;"}
+                    {error_string ?? ""}
                 </p>
 			</div>
 		{/if}

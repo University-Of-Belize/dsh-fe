@@ -6,6 +6,7 @@
 	export let notification: Boolean = false;
 	export let size: number = 40;
 	export let id: string;
+	export let hidden: boolean = false;
 </script>
 
 <!---
@@ -16,9 +17,10 @@
 					    @slotParams 'notification' Last message timestamp/amount of unread message count
 					-->
 
+<span class="stub hidden invisible"></span>
 <div
 	{id}
-	class="conversation my-2 flex w-full cursor-pointer select-none items-center rounded-md py-4 px-2 bg-COLORBLK1 hover:bg-COLORBLK2"
+	class="{hidden? "invisible": ""} conversation my-2 flex w-full cursor-pointer select-none items-center rounded-md py-4 px-2 bg-COLORBLK1 hover:bg-COLORBLK2"
 >
 	<div class="icon-wrap hidden lg:flex items-center text-left">
 		<div class="icon_wrap relative mr-4 rounded-full">
