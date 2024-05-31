@@ -25,7 +25,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Auth Sentry
-        run: npx sentry-cli login --auth-token $SENTRY_AUTH_TOKEN
+        run: |
+           curl -sL https://sentry.io/get-cli/ | sh
+           sentry-cli login --auth-token $SENTRY_AUTH_TOKEN
       - name: Set up flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
       #- run: flyctl deploy --remote-only -a ubcafe-dev
