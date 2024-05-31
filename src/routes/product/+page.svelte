@@ -149,9 +149,8 @@
 				<div class="content mx-4">
 					<!-- Check to see if we're viewing a category -->
 					{#if current_category}
-						{current_category}
 						<!--- The title -->
-						<div class="mt-2 mb-8 block w-full text-2xl font-semibold text-COLORWHT">
+						<div class="my-8 mb-8 block w-full text-2xl font-semibold text-COLORWHT">
 							<div>{current_category.name.trim() ?? current_category.alias.trim()}</div>
 							<div class="text-sm font-light">
 								{current_category.description.trim()}

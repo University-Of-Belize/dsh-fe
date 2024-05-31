@@ -7,6 +7,7 @@ export class ThemeDefinition {
 	COLORWHT5: string;
 
 	COLORBLK: string;
+	'COLORBLK-TONE2': string;
 	COLORBLK1: string;
 	COLORBLK2: string;
 	COLORBLK3: string;
@@ -44,6 +45,7 @@ export class ThemeDefinition {
 		this.COLORWHT5 = randomRGB();
 
 		this.COLORBLK = randomRGB();
+		this['COLORBLK-TONE2'] = randomRGB();
 		this.COLORBLK1 = randomRGB();
 		this.COLORBLK2 = randomRGB();
 		this.COLORBLK3 = randomRGB();
@@ -68,3 +70,11 @@ export class ThemeDefinition {
 		this.COLORRED = randomRGB();
 	}
 }
+
+interface ThemeData {
+	name: string;
+	id: string;
+	description: string | undefined;
+}
+
+export type { ThemeData };

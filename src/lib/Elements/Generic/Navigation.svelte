@@ -24,6 +24,7 @@
 		faMessage,
 		faMoon,
 		faNoteSticky,
+		faPaintbrush,
 		faPlus,
 		faQuestionCircle,
 		faRightToBracket,
@@ -65,8 +66,10 @@
 	let user_dropdown: HTMLDivElement;
 	let apps_dropdown: HTMLDivElement;
 	let theme_switched: boolean = false;
+	let themedrawer_isHidden: boolean;
 
 	onMount(async () => {
+		themedrawer_isHidden = localStorage.getItem('themedrawer_isHidden') == 'true';
 		// Set the scrim height
 		navScrimHeight = window.innerHeight; // Full height (inside screen-view)
 		// @ts-ignore
@@ -127,9 +130,9 @@
 					title="Toggle the sidebar"
 					aria-expanded="true"
 					aria-controls="sidebar"
-					class="mr-2 lg:mr-3 inline cursor-pointer rounded-lg lg:rounded bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:focus:bg-gray-700 dark:focus:ring-gray-700"
+					class="mr-2 inline cursor-pointer rounded-lg bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:mr-3 lg:rounded"
 				>
-				    <span class="sr-only">Toggle sidebar</span>
+					<span class="sr-only">Toggle sidebar</span>
 					<Fa icon={faBars} />
 				</Button>
 				<a href="/" class="mr-4 flex">
@@ -269,9 +272,9 @@
 					title="Toggle the sidebar"
 					aria-expanded="true"
 					aria-controls="sidebar"
-					class="mr-2 lg:mr-3 inline cursor-pointer rounded-lg lg:rounded bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:focus:bg-gray-700 dark:focus:ring-gray-700"
+					class="mr-2 inline cursor-pointer rounded-lg bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:mr-3 lg:rounded"
 				>
-				    <span class="sr-only">Toggle sidebar</span>
+					<span class="sr-only">Toggle sidebar</span>
 					<Fa icon={faBars} />
 				</Button>
 				<a href={titleWhere} class="flex">
@@ -331,28 +334,28 @@
 						><Fa icon={faPlus} class="mr-4" /> Install app</button
 					>
 				{/if}
-				
+
 				<!------ Included for unauthed users-->
-					<!-- Search -->
-					<button
-						id="toggleSidebarMobileSearch"
-						on:click={() => {
-							mobile_search.classList.toggle('hidden');
+				<!-- Search -->
+				<button
+					id="toggleSidebarMobileSearch"
+					on:click={() => {
+						mobile_search.classList.toggle('hidden');
 
-							setTimeout(() => {
-								mobile_search.style.height = mobile_search.style.height == '30px' ? '0px' : '30px';
-							}, 10);
-						}}
-						type="button"
-						class="flex items-center lg:mr-0 mr-3 md:mr-2 justify-start rounded-lg bg-COLORBLK1 p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm lg:hidden"
-					>
-						<span class="sr-only">Search</span>
-						<!-- Search icon -->
-						<Fa icon={faSearch} />
-						<span class="ml-4 mr-3 hidden md:inline">Search</span>
-					</button>
+						setTimeout(() => {
+							mobile_search.style.height = mobile_search.style.height == '30px' ? '0px' : '30px';
+						}, 10);
+					}}
+					type="button"
+					class="mr-3 flex items-center justify-start rounded-lg bg-COLORBLK1 p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm md:mr-2 lg:mr-0 lg:hidden"
+				>
+					<span class="sr-only">Search</span>
+					<!-- Search icon -->
+					<Fa icon={faSearch} />
+					<span class="ml-4 mr-3 hidden md:inline">Search</span>
+				</button>
 
-					{#if user}
+				{#if user}
 					<!---
 					<!- Notifications ->
 					<button
@@ -886,6 +889,31 @@
 						><Fa icon={theme_switched ? faSun : faMoon} /></button
 					></span
 				>
+				<!-- Theme panel switch -->
+				{#if localStorage.theme === 'custom'}
+					<span class="ml-2">
+						<button
+							aria-label="Toggle theme panel"
+							type="button"
+							on:click={() => {
+								const theme_drawer = document.getElementById('theme_drawer');
+								if (theme_drawer != null) {
+									if (themedrawer_isHidden) {
+										theme_drawer.classList.remove('hidden');
+										localStorage.setItem('themedrawer_isHidden', 'false');
+										themedrawer_isHidden = false;
+									} else {
+										theme_drawer.classList.add('hidden');
+										localStorage.setItem('themedrawer_isHidden', 'true');
+										themedrawer_isHidden = true;
+									}
+								}
+							}}
+							class="items-center justify-center rounded-lg bg-COLORBLK2 px-3 py-1.5 text-xs font-medium text-COLORWHT hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex lg:px-4 lg:py-2.5"
+							><Fa icon={faPaintbrush} /></button
+						></span
+					>
+				{/if}
 				<!-------- END Other stuff ---------------------------------------->
 			</div>
 		</div>
