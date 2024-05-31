@@ -309,8 +309,8 @@
 						class="orderPane my-8 flex w-full flex-col justify-start rounded-sm border border-COLORWHT3 bg-COLORBLK1 px-4 py-4 lg:flex-row"
 					>
 						<div class="order-details flex w-full flex-col px-4 pb-8" id={order.order_code}>
-							<div class="flex space-x-4">
-								<div class="pfp">
+							<div class="flex lg:space-x-4">
+								<div class="hidden lg:block customer-photo">
 									<img
 										class="rounded-md object-cover"
 										src={order.order_from
@@ -337,7 +337,7 @@
 											<div class="font-semibold">issued an order for</div>
 										</div>
 									</div>
-									<div class="flex text-base font-semibold text-COLORWHT">
+									<div class="flex text-sm font-light text-COLORWHT">
 										Ordered at {getLocaleDateTime(order.order_date)}
 										<!-- <br/>Review or manage this order -->
 									</div>
@@ -348,7 +348,7 @@
 								<div class="product-order-container mt-4 w-full">
 									<div class="flex flex-wrap">
 										<div class="my-4 text-2xl font-semibold">
-											{product.product?.productName ?? 'Product Unavailable'}
+											{product.quantity + "x "} {product.product?.productName ?? 'Product Unavailable'}
 										</div>
 										<div
 											class="flex flex-1 basis-full items-center justify-start space-x-2 md:basis-0 md:justify-end"
@@ -372,7 +372,7 @@
 														icon_on_sm
 													/>
 												</button>
-											{/if}
+											
 											<button
 												class="btn_wrp h-fit w-fit"
 												on:click={() => goto(`/product/${product.product?.slug ?? 'back'}`)}
@@ -386,10 +386,11 @@
 													icon_on_sm
 												/>
 											</button>
+											{/if}
 										</div>
 									</div>
 									<div class="banner-top items-top flex w-full flex-wrap space-x-4">
-										<div class="pimg_wrp block h-fit w-fit rounded-md bg-COLORBLE">
+										<div class="pimg_wrp hidden lg:block h-fit w-fit rounded-md bg-COLORBLE">
 											<div class="pimg_wrp2 relative">
 												<div
 													class="product-image relative block cursor-pointer overflow-clip rounded-md hover:opacity-80"
@@ -408,9 +409,9 @@
 										<div
 											class="inputgroup my-2 block flex-1 items-start justify-start lg:items-center"
 										>
-											<div class="label w-full text-lg font-semibold">Product description</div>
+											<div class="hidden label w-full text-lg font-semibold">Product description</div>
 											<div
-												class="product-description text-md mb-4 h-full w-full rounded-md bg-transparent py-1 font-light text-COLORWHT"
+												class="hidden product-description text-md mb-4 h-full w-full rounded-md bg-transparent py-1 font-light text-COLORWHT"
 											>
 												<div class="text">
 													{@html product.product?.description.length > 250
@@ -443,8 +444,8 @@
 										</div>
 									</div>
 								</div>{/each}
-							<div class="my-4 text-2xl font-semibold">
-								{parseFloat(order.total_amount.$numberDecimal ?? '0.00').toLocaleString('en-US', {
+							<div class="hidden my-4 text-2xl font-semibold">
+							{parseFloat(order.total_amount.$numberDecimal ?? '0.00').toLocaleString('en-US', {
 									style: 'currency',
 									currency: config['checkout']['currency'],
 									minimumFractionDigits: 2
