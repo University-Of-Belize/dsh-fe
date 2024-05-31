@@ -17,7 +17,8 @@
 	let messageBox: HTMLInputElement;
 	let messageBlock: HTMLDivElement;
 
-	let selected_user: HTMLInputElement;
+	let selected_user: TextInput;
+	let selected_subject: TextInput;
 
 	let current_interaction: UserDetailsMessage;
 	let interactions: ServerMessage[]; // Declare the data variable
@@ -26,6 +27,7 @@
 
 	let debounceTimeout: number;
     let error_string: string = '';
+	let bad_error: boolean = false;
 	let error_message: HTMLDivElement;
 
 	async function catchAll() {
@@ -37,6 +39,7 @@
 		if (!res.ok) {
 			const r = await res.json();
 			return toast.push(r.message);
+			bad_error = true;
 		}
 		const r = await res.json();
 		interactions = r.is; // Rizz
@@ -56,9 +59,9 @@
 				.map((el) => el.value);
 
 			const message: Message = {
-				user: selected_user?.innerText ?? current_interaction?.username,
+				user: selected_user?.value ?? current_interaction?.username,
 				message: {
-					subject: '',
+					subject: selected_subject?.value ?? '',
 					content: valueArray[0]
 				}
 			};
@@ -70,6 +73,7 @@
 	async function sendMessage(message: Message) {
 		// Reset error message
 		error_message.innerText = "";
+		bad_error = false;
 
 		// Send the message
 		const res = (await fetchWebApi(
@@ -80,11 +84,15 @@
 		if (!res.ok) {
 			const r = await res.json();
             error_message.innerText = r.message;
+			bad_error = true;
 			return toast.push(r.message);
 		}
 		// Current message
 		const r = await res.json();
 		messageBox.value = '';
+
+		bad_error = false;
+		error_string = "Your message has been sent.";
 
 		// Push the new interaction
 		interactions.push(r.is.message);
@@ -129,12 +137,11 @@
 				<span>Subject:</span><b>{interactions[0]?.subject}</b>
 				{:else}
 				<div class="messagebox block lg:mb-6 mt-auto w-full lg:w-auto">
-					<form
+					<div
 					    class="block w-full space-y-4"
-						action="#"
-						on:submit={(event) => handleSubmit(event)}
 					>
 					<TextInput
+					bind:this={selected_user}
 					icon={faUser}
 					name="user_id"
 					type="text"
@@ -143,6 +150,7 @@
 					required
 				/>
 				<TextInput
+				bind:this={selected_subject}
 				icon={faUser}
 				name="subject"
 				type="text"
@@ -150,6 +158,9 @@
 				custom_style="bg-transparent"
 				required
 			/>
+			<form
+			action="#"
+			on:submit={(event) => handleSubmit(event)}>
 					<div class="relative flex h-fit w-full overflow-clip rounded-lg bg-COLORBLK1 p-1.5">
 						<input
 							bind:this={messageBox}
@@ -168,7 +179,9 @@
 						</button>
 					</div>
 					</form>
-					<p bind:this={error_message} class="mt-2 text-xs text-rose-600">
+				</div>
+					<span class="stub hidden text-rose-600 text-emerald-600"></span>
+					<p bind:this={error_message} class="mt-2 text-xs {bad_error? "text-rose-600": "text-emerald-600"}">
 						{@html error_string ?? "&nbsp;"}
 					</p>
 				</div>
