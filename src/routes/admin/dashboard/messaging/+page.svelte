@@ -6,32 +6,32 @@
 	import CommentBox from '$lib/Elements/Inputs/CommentBox.svelte';
 	import { createFeedback, deleteFeedback } from '$lib/Elements/Utility/Feedback';
 	import config from '$lib/config/settings';
-	import type { Feedback } from '$lib/types/Feedback';
+	import type { ServerMessage } from '$lib/types/Message';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { faPaperPlane, faTrash } from '@fortawesome/free-solid-svg-icons';
+	import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 	import Editor from '@tinymce/tinymce-svelte';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import SearchBar from '../../../../lib/Elements/Search/SearchBar.svelte';
 	let navDrawer: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
-	let data: Feedback[]; // Declare the data variable
+	let interactions: ServerMessage[]; // Declare the data variable
 	let user: User =
 		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
 	let feedbackInput: CommentBox;
 	let richTextInput: string;
 	let prefersRichText = true;
-	$: data; // List of feedback (Feedback[])
+	$: interactions; // List of interactions (ServerMessage[])
 
 	async function catchAll() {
-		const res = (await fetchWebApi('v1/admin/feedback/manage', 'GET')) as Response;
+		const res = (await fetchWebApi('v1/user/messaging/interactions', 'GET')) as Response;
 		if (!res.ok) {
 			const r = await res.json();
 			return toast.push(r.message);
 		}
 		const r = await res.json();
-		data = r.is; // Rizz
+		interactions = r.is; // Rizz
 		// console.log(data);
 	}
 
@@ -46,102 +46,42 @@
 </script>
 
 <svelte:head>
-	<title>UniFood | Dashboard / My Feedback</title>
+	<title>UniFood | Dashboard / My messages</title>
 </svelte:head>
 
 <div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
-	<div class="flex pb-2 text-2xl font-semibold">Feedback Hub</div>
-	<div class="flex w-full flex-wrap justify-between pb-12 text-xl font-light">
-		<div>Submit or manage your feedback</div>
-		<div
-			on:click={async () => {
-				prefersRichText = prefersRichText ? false : true;
-			}}
-		>
-			<!--- Lol, well 'custom_icon' took long enough -->
-			<Button
-				custom_icon="/icons/font-awesome/scribble.svg"
-				color="COLORBLK3"
-				text="Swap editor views"
-				color_t="COLORWHT"
-				custom_style="w-full"
-			/>
+	<div class="flex pb-2 text-2xl font-semibold">Message center</div>
+	<div class="flex w-full flex-wrap justify-between pb-12 text-sm font-light">
+		<div>
+			Message users. You will need to know their <code>@TAG</code> for this.<br />Below are the your
+			recent interactions so far.
 		</div>
 	</div>
 	<div class="flex w-full flex-col-reverse flex-wrap">
-		{#if data != undefined}
-			<div class="block">
-				{#if prefersRichText}
-					<div class="richTextInput mb-4">
-						<div class="mb-4 text-2xl font-semibold text-COLORWHT">Write some feedback</div>
-						<Editor bind:value={richTextInput} apiKey={config.ui['tiny-mce']['api-key']} />
-					</div>
-				{:else}
-					<div class="markDownInput mb-4">
-						<div class="mb-4 text-2xl font-semibold text-COLORWHT">Write some feedback</div>
-					</div>
-					<CommentBox
-						bind:this={feedbackInput}
-						placeholder="Press 'Enter' and write some feedback"
-						{user}
-					/>{/if}
-				<div
-					class="edit-wrap h-fit w-fit"
-					on:click={() => {
-						createFeedback((feedbackInput ? feedbackInput.value : richTextInput ?? '') ?? '');
-						feedbackInput ? feedbackInput.clear() : false;
-						setTimeout(() => {
-							catchAll();
-						}, 800);
-					}}
-				>
-					<Button
-						icon={faPaperPlane}
-						color="transparent"
-						custom_style="border border-COLORGRN1"
-						color_t="COLORGRN"
-						text="Submit feedback"
-					/>
-				</div>
-			</div>
-			<!-- on:input={(e) => outTerminal('INFO', JSON.stringify(e.detail))} -->
-			{#if data.length === 0}
-				<!-- Note that the reversal of UI elements is intentional because of "flex-reverse-column" -->
-				{#if !staff}
-					<div class="py-4">
-						<SearchBar
-							placeholder="Browse around, make an order, and tell us here if you experience any issues."
-							nomargin
-						/>
-					</div>
-				{/if}
-				<div class="font-light">
-					{staff
-						? 'Nobody has submitted any feedback as yet.'
-						: 'You have not submitted any feedback as yet.'}
-				</div>
-			{/if}
-			{#each data as feedback, i}
+		{#if interactions}
+			{#each interactions as interaction, i}
 				<div class="user_wrap w-full">
-					<UserPill user={feedback.author ?? {}} description={feedback.content} html>
+					<UserPill user={interaction.to_user ?? {}} description={interaction.content} html>
 						<div class="controls flex space-x-2">
-							<div
-								class="edit-wrap h-fit w-fit"
-								on:click={() => {
-									deleteFeedback(feedback._id);
-									setTimeout(() => {
-										catchAll();
-									}, 800);
-								}}
+							<a href="/admin/dashboard/messaging/{interaction.to_user.channel_id}"
+								><div
+									class="edit-wrap h-fit w-fit"
+									on:click={() => {
+										localStorage.setItem(
+											'current_interaction',
+											JSON.stringify(interaction.to_user)
+										);
+									}}
+								>
+									<Button
+										icon={faPaperPlane}
+										color="transparent"
+										custom_style="border border-COLORWHT"
+										color_t="COLORWHT"
+										text="Go to channel"
+									/>
+								</div></a
 							>
-								<Button
-									icon={faTrash}
-									color="transparent"
-									custom_style="border border-COLORHPK"
-									color_t="COLORHPK"
-									text="Delete feedback"
-								/>
-							</div>
 						</div>
 					</UserPill>
 				</div>

@@ -102,11 +102,7 @@ async function fetchWebApi(
 			return new Promise((resolve, reject) => {
 				setTimeout(() => {
 					toast.push(
-						`Testing
-						
-						
-						
-						your internet connection (${retryCount + 1}/${config.ui['APIretryLimit']})...`
+						`Testing your internet connection (${retryCount + 1}/${config.ui['APIretryLimit']})...`
 					);
 					// Recall the API request function
 					fetchWebApi(endpoint, method, body, json, token, silent).then(resolve).catch(reject);

@@ -91,6 +91,18 @@
 				/>
 			</div>{/if}
 	</div>
+	<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
+		<div class="title pb-5 font-semibold">Messaging</div>
+		<div class="three pt-1" on:click={() => goto('/admin/dashboard/messaging')}>
+			<Button
+				icon={faMessage}
+				color="COLORBLK3"
+				text="Message a user"
+				color_t="COLORWHT"
+				custom_style="w-full font-medium"
+			/>
+		</div>
+	</div>
 	{#if staff}
 		<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
 			<div class="title pb-5 font-semibold">Announcements</div>
