@@ -7,7 +7,7 @@ export default defineConfig({
 		sentrySvelteKit({
 			sourceMapsUploadOptions: {
 				org: 'immanuel-daviel-a-garcia',
-				project: 'ubcafe'.
+				project: 'ubcafe',
 				authToken: process.env.SENTRY_AUTH_TOKEN
 			}
 		}),
