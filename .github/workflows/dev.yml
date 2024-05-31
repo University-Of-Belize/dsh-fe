@@ -25,4 +25,5 @@ jobs:
         uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only -a ubcafe-dev
         env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           FLY_API_TOKEN: ${{ secrets.FLYIO_ACCESS }}
