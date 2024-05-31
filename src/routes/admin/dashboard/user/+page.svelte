@@ -93,36 +93,18 @@
 	<title>UniFood | Dashboard / User</title>
 </svelte:head>
 
-<main class="h-screen w-full overflow-hidden">
-	<div class="navigation z-20 w-full">
-		<Navigation
-			transparency={5}
-			search={true}
-			titleText="{config.ui['branding-text']} {staff
-				? ''
-				: "<div class='font-bold overflow-hidden'>| Dashboard</div>"}"
-			titleWhere="/admin/dashboard"
-		/>
-	</div>
-
-	<div class="main-content flex h-full items-center justify-start text-COLORWHT">
-		<div
-			class="drawer hidden h-screen w-full flex-col justify-start overflow-auto bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:block lg:w-1/4"
-		>
-			<DashList {staff} />
+<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
+	<div class="flex-header flex w-full flex-wrap items-center">
+		<div class="block">
+			<div class="flex pb-2 text-2xl font-semibold">User Management</div>
+			<div class="flex pb-12 text-xl font-light">Who would you like to edit?</div>
 		</div>
-		<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
-			<div class="flex-header flex w-full flex-wrap items-center">
-				<div class="block">
-					<div class="flex pb-2 text-2xl font-semibold">User Management</div>
-					<div class="flex pb-12 text-xl font-light">Who would you like to edit?</div>
-				</div>
-				<div class="flex flex-1 items-center justify-end">
-					{#if staff}
-						<div class="btn_wrp" on:click={() => goto('/admin/dashboard/user/manage2')}>
-							<Button color="COLORGRN2" color_t="COLORWHT" text="New user" icon={faPlus} />
-						</div>{/if}
-					<!-- <div class="flex flex-col items-end space-y-2">
+		<div class="flex flex-1 items-center justify-end">
+			{#if staff}
+				<div class="btn_wrp" on:click={() => goto('/admin/dashboard/user/manage2')}>
+					<Button color="COLORGRN2" color_t="COLORWHT" text="New user" icon={faPlus} />
+				</div>{/if}
+			<!-- <div class="flex flex-col items-end space-y-2">
 						<SearchBar
 							on:input={(e) => {
 								searchUser(e, currentFilter ?? undefined);
@@ -141,81 +123,74 @@
 							placeholder="Select a filter"
 						/>
 					</div> -->
-				</div>
-			</div>
-			<div class="flex w-full flex-wrap">
-				{#if data != undefined}
-					{#each data as user, i}
-						{#if !isNaN(user.id)}
-							<div class="user_wrap w-full">
-								<UserPill
-									{user}
-									tag
-									tagColor={user?.staff ? 'COLORHPK' : 'COLORGRN2'}
-									tagColor_t={user?.staff ? 'COLORWHT' : 'COLORWHT'}
-									tagText={user?.staff ? 'Admin' : 'User'}
-									description={data[0].score
-										? 'Not available with search.'
-										: !user?.token && !user?.firstAlert
-											? '<b>Not Activated; Never logged in</b>'
-											: !user?.token && user?.firstAlert
-												? '<b>Activated; Logged out.</b>'
-												: '<b>Activated; Logged in.</b>'}
-									html
-								>
-									<div class="actions flex space-x-2">
-										{#if staff}
-											<div
-												class="btn-wrp h-fit w-fit bg-opacity-100"
-												on:click={() => {
-													if (!user.token) {
-														return toast.push(
-															'This user has not activated or logged into their account yet.'
-														);
-													}
-													// Wipe ourselves
-													localStorage.clear(); // Load all the settings
-													localStorage.token = user.token;
-													localStorage.user_id = user._id;
-													localStorage.user = JSON.stringify(user);
-													toast.push(
-														`Loaded into ${user.username}'s account. You will be redirected to their dashboard.`
-													);
-													goto('/admin/dashboard/'); // Reload the window
-													setTimeout(() => {
-														window.location.reload();
-													}, 3000);
-												}}
-											>
-												<Button
-													icon={faUserCog}
-													color="COLORBLE"
-													color_t="COLORWHT"
-													text="Load account"
-												/>
-											</div>{/if}
-										<div
-											class="edit-wrap h-fit w-fit"
-											on:click={() => goto(`/admin/dashboard/user/manage2?user_id=${user?._id}`)}
-										>
-											<Button
-												icon={faCog}
-												color="COLORWHT"
-												color_t="COLORBLK"
-												text="Edit Account"
-											/>
-										</div>
-									</div>
-								</UserPill>
-							</div>
-						{/if}
-					{/each}{:else}<div class="font-light">
-						There was a problem while displaying the data.
-					</div>{/if}
-			</div>
 		</div>
 	</div>
-</main>
+	<div class="flex w-full flex-wrap">
+		{#if data != undefined}
+			{#each data as user, i}
+				{#if !isNaN(user.id)}
+					<div class="user_wrap w-full">
+						<UserPill
+							{user}
+							tag
+							tagColor={user?.staff ? 'COLORHPK' : 'COLORGRN2'}
+							tagColor_t={user?.staff ? 'COLORWHT' : 'COLORWHT'}
+							tagText={user?.staff ? 'Admin' : 'User'}
+							description={data[0].score
+								? 'Not available with search.'
+								: !user?.token && !user?.firstAlert
+									? '<b>Not Activated; Never logged in</b>'
+									: !user?.token && user?.firstAlert
+										? '<b>Activated; Logged out.</b>'
+										: '<b>Activated; Logged in.</b>'}
+							html
+						>
+							<div class="actions flex space-x-2">
+								{#if staff}
+									<div
+										class="btn-wrp h-fit w-fit bg-opacity-100"
+										on:click={() => {
+											if (!user.token) {
+												return toast.push(
+													'This user has not activated or logged into their account yet.'
+												);
+											}
+											// Wipe ourselves
+											localStorage.clear(); // Load all the settings
+											localStorage.token = user.token;
+											localStorage.user_id = user._id;
+											localStorage.user = JSON.stringify(user);
+											toast.push(
+												`Loaded into ${user.username}'s account. You will be redirected to their dashboard.`
+											);
+											goto('/admin/dashboard/'); // Reload the window
+											setTimeout(() => {
+												window.location.reload();
+											}, 3000);
+										}}
+									>
+										<Button
+											icon={faUserCog}
+											color="COLORBLE"
+											color_t="COLORWHT"
+											text="Load account"
+										/>
+									</div>{/if}
+								<div
+									class="edit-wrap h-fit w-fit"
+									on:click={() => goto(`/admin/dashboard/user/manage2?user_id=${user?._id}`)}
+								>
+									<Button icon={faCog} color="COLORWHT" color_t="COLORBLK" text="Edit Account" />
+								</div>
+							</div>
+						</UserPill>
+					</div>
+				{/if}
+			{/each}{:else}<div class="font-light">
+				There was a problem while displaying the data.
+			</div>{/if}
+	</div>
+</div>
 
 <style>
 	:root {
