@@ -12,8 +12,9 @@ self.importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging
 let CACHE_NAME = 'dsh-offline';
 let CACHE_ROUTE = '/cache/storage.json';
 let OFFLINE_ROUTE = '/watchdog/error';
-
 let supportPreloading = false;
+let debounceTimeout;
+
 // let filesList = [];
 
 // ############################### MAIN THREAD ##############################
@@ -229,6 +230,8 @@ firebase.initializeApp(firebaseConfig);
 self.addEventListener('push', function (event) {
 	console.log('[firebase-messaging-sw.js] Received background message ', event.data.json());
 
+	clearTimeout(debounceTimeout);
+	debounceTimeout = setTimeout(async () => {
 	// Extract notification details from the received data
 	const push = event.data.json().notification;
 	const title = push.title;
@@ -242,4 +245,5 @@ self.addEventListener('push', function (event) {
 
 	// Show the notification
 	event.waitUntil(self.registration.showNotification(title, notificationOptions));
+    }, 3750); // bounce every 3750ms - notifications should be slow, not spammed
 });
