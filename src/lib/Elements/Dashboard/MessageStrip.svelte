@@ -26,7 +26,7 @@
 		<div class="icon_wrap relative mr-4 rounded-full">
 			<!-- CSS hack lol-->
 			<img
-				class="rounded-full"
+				class="rounded-full object-cover"
 				style={'height:' + size + 'px; width:' + size + 'px;'}
 				src={icon}
 				alt={username}

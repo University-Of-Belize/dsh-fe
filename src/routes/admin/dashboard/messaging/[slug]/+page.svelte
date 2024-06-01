@@ -38,8 +38,8 @@
 		)) as Response;
 		if (!res.ok) {
 			const r = await res.json();
-			return toast.push(r.message);
 			bad_error = true;
+			return toast.push(r.message);
 		}
 		const r = await res.json();
 		interactions = r.is; // Rizz

@@ -70,7 +70,7 @@
 									on:click={() => {
 										localStorage.setItem(
 											'current_interaction',
-											JSON.stringify(interaction.to_user)
+											JSON.stringify(interaction.from_user)
 										);
 									}}
 								>
