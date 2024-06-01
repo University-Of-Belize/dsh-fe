@@ -16,6 +16,11 @@ WORKDIR /build
 
 COPY . .
 
+# Auth Sentry
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y curl ca-certificates
+RUN curl -sL https://sentry.io/get-cli/ | sh
+RUN sentry-cli login --auth-token "$(cat sentry_token.txt)"
+
 RUN bun install
 RUN bun --bun run sitemap
 RUN bunx --bun vite build
