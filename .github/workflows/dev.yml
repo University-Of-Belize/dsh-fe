@@ -24,14 +24,9 @@ jobs:
         FLY_API_TOKEN: ${{ secrets.FLYIO_ACCESS }}
     steps:
       - uses: actions/checkout@v3
-      - name: Auth Sentry
-        run: |
-           curl -sL https://sentry.io/get-cli/ | sh
-           sentry-cli login --auth-token $SENTRY_AUTH_TOKEN
       - name: Write Sentry resource file
         run: |
-          cp /home/runner/.sentryclirc /home/runner/work/dsh-fe/dsh-fe/.sentryclirc
-        # echo SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN >> .env
+           echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
       - name: Set up flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only -a ubcafe-dev
