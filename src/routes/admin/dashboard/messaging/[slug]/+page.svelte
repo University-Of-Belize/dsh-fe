@@ -195,8 +195,8 @@
 				{#each interactions as interaction}
 					<MessageStrip
 					    id={interaction._id}
-						icon={current_interaction.profile_picture}
-						username={current_interaction.username}
+						icon={interaction.from_user.profile_picture}
+						username={interaction.from_user.username}
 						message={interaction.content ?? "<i>No content</i>"}
 						status="unused"
 					/>
