@@ -17,7 +17,7 @@ WORKDIR /build
 COPY . .
 
 # Auth Sentry
-RUN apt-get install curl ca-certificates
+RUN apt-get install curl
 RUN curl -sL https://sentry.io/get-cli/ | sh
 RUN sentry-cli login --auth-token "$(cat sentry_token.txt)"
 
