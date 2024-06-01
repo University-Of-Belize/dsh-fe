@@ -17,7 +17,7 @@ WORKDIR /build
 COPY . .
 
 # Auth Sentry
-RUN yes | apt-get update && apt-get install curl ca-certificates
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y curl ca-certificates
 RUN curl -sL https://sentry.io/get-cli/ | sh
 RUN sentry-cli login --auth-token "$(cat sentry_token.txt)"
 
