@@ -60,8 +60,9 @@
 	<div class="flex w-full flex-col-reverse flex-wrap">
 		{#if interactions}
 			{#each interactions as interaction, i}
+			{#if interaction.from_user.username != user.username}
 				<div class="user_wrap w-full">
-					<UserPill user={interaction.to_user ?? {}} description={interaction.content} html>
+					<UserPill user={interaction.from_user ?? {}} description={interaction.content} html>
 						<div class="controls flex space-x-2">
 							<a href="/admin/dashboard/messaging/{interaction.to_user.channel_id}"
 								><div
@@ -85,6 +86,7 @@
 						</div>
 					</UserPill>
 				</div>
+				{/if}
 			{/each}{:else}<div class="font-light">
 				There was a problem while displaying the data.
 			</div>{/if}

@@ -20,6 +20,7 @@ interface ServerMessage {
     _id: string;
     subject: string;
     content: string;
+    from_user: UserDetailsMessage | undefined;
     to_user: UserDetailsMessage | undefined;
 }
 
