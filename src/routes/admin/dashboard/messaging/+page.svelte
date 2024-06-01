@@ -64,7 +64,7 @@
 				<div class="user_wrap w-full">
 					<UserPill user={interaction.from_user ?? {}} description={interaction.content} html>
 						<div class="controls flex space-x-2">
-							<a href="/admin/dashboard/messaging/{interaction.to_user.channel_id}"
+							<a href="/admin/dashboard/messaging/{interaction.from_user.channel_id}"
 								><div
 									class="edit-wrap h-fit w-fit"
 									on:click={() => {
