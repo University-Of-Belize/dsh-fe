@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
-	import CommentBox from '$lib/Elements/Inputs/CommentBox.svelte';
 	// import config from '$lib/config/settings';
 	import type { ServerMessage } from '$lib/types/Message';
 	import type { User } from '$lib/types/User';
