@@ -262,7 +262,9 @@ self.addEventListener("push", function (event) {
       };
       // Show the notification
 		event.waitUntil(
-         self.registration.showNotification(title, notificationOptions),
-      );
+         self.registration.showNotification(title, notificationOptions)
+      ).catch(()=>{
+         return self.registration.showNotification(title, notificationOptions);
+      });
 	}, 3750); // bounce every 3750ms - notifications should be slow, not spammed
 });
