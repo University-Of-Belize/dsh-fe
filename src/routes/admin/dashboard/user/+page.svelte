@@ -2,10 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import config from '$lib/config/settings';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faCog, faPlus, faUserCog } from '@fortawesome/free-solid-svg-icons';
@@ -102,7 +99,7 @@
 		<div class="flex flex-1 items-center justify-end">
 			{#if staff}
 				<div class="btn_wrp" on:click={() => goto('/admin/dashboard/user/manage2')}>
-					<Button color="COLORGRN2" color_t="COLORWHT" text="New user" icon={faPlus} />
+					<Button color="COLORBLK1" color_t="COLORWHT" text="New user" icon={faPlus} />
 				</div>{/if}
 			<!-- <div class="flex flex-col items-end space-y-2">
 						<SearchBar

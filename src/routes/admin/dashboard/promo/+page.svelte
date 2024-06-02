@@ -1,11 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import PromoPill from '$lib/Elements/Dashboard/PromoPill.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import { deletePromo } from '$lib/Elements/Utility/Promo';
-	import config from '$lib/config/settings';
 	import type { Promo } from '$lib/types/Promo';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faCog, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -49,7 +46,7 @@
 		<div class="flex flex-1 items-center justify-end">
 			<div class="flex flex-col items-end space-y-2">
 				<div class="btn_wrp" on:click={() => goto('/admin/dashboard/promo/manage')}>
-					<Button color="COLORGRN2" color_t="COLORWHT" text="New promo" icon={faPlus} />
+					<Button color="COLORBLK1" color_t="COLORWHT" text="New promo" icon={faPlus} />
 				</div>
 			</div>
 		</div>

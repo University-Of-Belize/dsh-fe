@@ -2,10 +2,7 @@
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import CategoryPill from '$lib/Elements/Dashboard/CategoryPill.svelte';
-	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import { deleteCategory } from '$lib/Elements/Utility/Category';
-	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faCog, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -47,7 +44,7 @@
 		<div class="flex flex-1 items-center justify-end">
 			<div class="flex flex-col items-end space-y-2">
 				<div class="btn_wrp" on:click={() => goto('/admin/dashboard/category/manage')}>
-					<Button color="COLORGRN2" color_t="COLORWHT" text="New category" icon={faPlus} />
+					<Button color="COLORBLK1" color_t="COLORWHT" text="New category" icon={faPlus} />
 				</div>
 			</div>
 		</div>
