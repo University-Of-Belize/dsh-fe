@@ -95,7 +95,7 @@
 		error_string = "Your message has been sent.";
 
 		// Push the new interaction
-		interactions.push(r.is.message);
+		interactions.push(r.is); // Rizz up the message
 		interactions = interactions; // Trigger the reactivity
 		// console.log(interactions);
 
