@@ -60,7 +60,7 @@
 	</div>
 	<div class="details-block block flex-1 text-left text-base font-medium leading-4 text-COLORWHT">
 		{username}
-		<div class="w-56 truncate text-xs font-normal text-COLORWHT1">
+		<div class="mt-2 lg:mt-0 w-full text-xs font-normal text-COLORWHT1">
 			{message}
 		</div>
 	</div>
