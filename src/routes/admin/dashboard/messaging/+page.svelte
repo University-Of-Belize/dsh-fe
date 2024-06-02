@@ -1,27 +1,18 @@
 <script lang="ts">
 	import Button from '$lib/Elements/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import CommentBox from '$lib/Elements/Inputs/CommentBox.svelte';
-	import { createFeedback, deleteFeedback } from '$lib/Elements/Utility/Feedback';
-	import config from '$lib/config/settings';
+	// import config from '$lib/config/settings';
 	import type { ServerMessage } from '$lib/types/Message';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-	import Editor from '@tinymce/tinymce-svelte';
+	import { faPaperPlane, faPlus } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import SearchBar from '../../../../lib/Elements/Search/SearchBar.svelte';
-	let navDrawer: HTMLDivElement;
-	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
+	// let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let interactions: ServerMessage[]; // Declare the data variable
 	let user: User =
 		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
-	let feedbackInput: CommentBox;
-	let richTextInput: string;
-	let prefersRichText = true;
 	$: interactions; // List of interactions (ServerMessage[])
 
 	async function catchAll() {
@@ -55,6 +46,13 @@
 		<div>
 			Message users. You will need to know their <code>@TAG</code> for this.<br />Below are the your
 			recent interactions so far.
+		</div>
+		<div class="flex items-center justify-end">
+			<div class="flex flex-col items-end space-y-2">
+				<div class="btn_wrp mt-4 lg:mt-0" on:click={() => goto('/admin/dashboard/messaging/new')}>
+					<Button color="COLORBLK1" color_t="COLORWHT" text="New message" icon={faPlus} />
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="flex w-full flex-col-reverse flex-wrap">
