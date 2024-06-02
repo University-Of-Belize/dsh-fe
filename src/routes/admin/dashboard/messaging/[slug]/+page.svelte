@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import config from '$lib/config/settings';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
@@ -195,7 +196,7 @@
 				{#each interactions as interaction}
 					<MessageStrip
 					    id={interaction._id}
-						icon={interaction.from_user.profile_picture}
+						icon={interaction.from_user.profile_picture ?? config['user']['default-image']}
 						username={interaction.from_user.username}
 						message={interaction.content ?? "<i>No content</i>"}
 						status="unused"
