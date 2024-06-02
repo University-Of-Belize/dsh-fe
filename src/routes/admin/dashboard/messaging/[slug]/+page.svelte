@@ -132,7 +132,7 @@
 	</div>
 	<div class="flex h-3/4 w-full flex-col flex-wrap lg:h-full">
 		<!-- The first message sets the chat's subject -->
-			<div class="mb-4 flex justify-center w-full space-x-2 pb-2 text-xl font-light">
+			<div class="mb-4 flex justify-start w-full space-x-2 pb-2 text-xl font-light">
 				{#if interactions}
 				<span>Subject:</span><b>{interactions[0]?.subject}</b>
 				{:else}
