@@ -168,6 +168,7 @@
 								type="password"
 								name="password"
 								placeholder="Choose a password"
+								autocomplete="new-password"
 								custom_style="bg-transparent"
 								required
 							/>
@@ -180,6 +181,7 @@
 								type="password"
 								name="password2"
 								placeholder="Retype this password"
+								autocomplete="new-password"
 								custom_style="bg-transparent"
 								required
 							/>
