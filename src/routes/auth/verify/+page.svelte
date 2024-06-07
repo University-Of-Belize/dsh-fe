@@ -110,7 +110,7 @@
 				// Block the user from doing anything much
 				localStorage.watchdog = 'true';
 				localStorage.customReason = 'true';
-				localStorage.watchDogReason = 'To continue setup, open the app on your device.';
+				localStorage.watchDogReason = 'To continue setup, open the app on your device.<br/>Alternatively, <a href="javascript:(function(){ localStorage.removeItem("watchDogReason"); localStorage.removeItem("setup_inProgress"); localStorage.removeItem("customReason"); localStorage.removeItem("watchdog")})();">cancel setup.</a>';
 				localStorage.setup_inProgress = 'true';
 				await installPrompt.prompt().then((choiceResult: any) => {
 					if (choiceResult.outcome === 'accepted') {
