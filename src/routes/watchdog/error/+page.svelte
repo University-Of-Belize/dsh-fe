@@ -94,8 +94,9 @@
 		<EscrowBanner
 			branding_text={branding_text ?? "You've hit an error"}
 			text={text ?? 'One moment while we fetch what went wrong'}
-			subtitle={@html subtitle ??
+			subtitle={subtitle ??
 				"Getting error details. If this doesn't change and you can still see this text, please get in touch with one of our team members."}
+			html
 			><div class="flex w-full items-center justify-center pb-4 pt-8">
 				{#if notFound}
 					<SearchBar />
