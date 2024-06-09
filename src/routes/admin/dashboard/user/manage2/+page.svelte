@@ -113,7 +113,7 @@
 				valueArray[valueArray.length - 2] === valueArray[valueArray.length - 1])
 		) {
 			if (user_id) {
-				console.table(['DATA TO BE SENT TO SERVER', valueArray]);
+				// console.table(['DATA TO BE SENT TO SERVER', valueArray]);
 				// Debounce 500ms
 				try {
 					// @ts-ignore

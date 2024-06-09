@@ -24,7 +24,7 @@
 	let current_interaction: UserDetailsMessage;
 	let interactions: ServerMessage[]; // Declare the data variable
 	$: interactions; // List of interactions (ServerMessage[])
-	const slug = $page.params.slug;
+	const slug = $page.params.user_id;
 
 	let debounceTimeout: number;
 	let error_string: string = '';
