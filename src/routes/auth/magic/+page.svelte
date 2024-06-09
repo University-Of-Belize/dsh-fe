@@ -13,19 +13,27 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
-	$: continue_url = $page.url.searchParams.get('continue');
 	let debounceTimeout: number;
 	let logging_in: boolean = false;
+	$: SecToken = $page.url.searchParams.get('token') || null;
 
 	onMount(() => {
-		// token exists, do something
-		toast.push('Entering an invalid token will result in an error.');
+		if(location.hash != ''){
+			SecToken = location.hash.substring(1, location.hash.length);
+			Login([SecToken]);
+		} else if(SecToken != null) {
+			Login([SecToken]);
+		}
+						// token exists, do something
+						if(SecToken == null && localStorage.dev != undefined) {
+			toast.push('Entering an invalid token will result in an error.');
+		} 
 	});
 
 	async function Login(payload: any) {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const r = (await fetchWebApi('v1/dash', 'GET', undefined, undefined, payload[0])) as Response;
+			const r = (await fetchWebApi('v1/dash', 'GET', undefined, undefined, payload[0], true)) as Response;
 			if (!r.ok) {
 				setTimeout(() => {
 					logging_in = false; // Slight "bounce"
@@ -63,7 +71,7 @@
 </script>
 
 <svelte:head>
-	<title>UniFood | Login using a security token</title>
+	<title>UniFood | Login using a magic link</title>
 </svelte:head>
 
 <main class="h-screen w-full">
@@ -71,12 +79,14 @@
 		<Navigation transparency={5} search={true} />
 	</div>
 	<div class="main-content flex h-full items-center justify-center py-8 lg:mx-8">
+		{#if SecToken == null && localStorage.dev != undefined}
 		<div class="auth_window block rounded-md bg-COLORBLK1 pt-8 lg:px-6">
 			<form class="block" action="#" on:submit={(event) => handleSubmit(event)}>
 				<div
 					class="mx-8 mb-6 flex flex-1 items-center justify-center text-3xl font-semibold text-COLORWHT"
 				>
 					{config.ui['branding-text']}
+					<span class="bg-yellow-300 text-gray-50 px-2 py-1 mb-4 ml-2 text-sm">DEV</span>
 				</div>
 
 				<div
@@ -87,8 +97,9 @@
 					</div>
 					<input
 						type="text"
+						autocomplete="off"
 						name="token"
-						class="w-full bg-transparent px-2 py-1 font-medium text-COLORWHT focus:outline-none"
+						class="w-full bg-transparent px-2 py-1 font-medium border-0 text-COLORWHT focus:outline-none"
 						placeholder="Enter a valid user token"
 					/>
 				</div>
@@ -128,6 +139,65 @@
 				</div>
 			</div>
 		</div>
+		{:else if SecToken != null}
+		<div class="rounded-xl border-gray-200 lg:border lg:bg-COLORBLK1 lg:shadow-sm">
+			<div class="p-4 sm:p-7">
+			   <div class="text-center">
+				  <div class="mb-4 inline-block rounded-full bg-COLORGRY p-2 text-white">
+					 <svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-6 w-6"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						stroke-width="2"
+					 >
+						<path
+						   stroke-linecap="round"
+						   stroke-linejoin="round"
+						   d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+						/>
+					 </svg>
+				  </div>
+				  <h1 class="block text-2xl font-bold text-COLORWHT">
+					 Signing you in...
+				  </h1>
+				  <p class="mt-2 text-sm text-COLORWHT1">
+					 You'll be logged-in in just a moment.
+				  </p>
+			   </div>
+			</div>
+		 </div>
+		 {:else}
+		 <div class="rounded-xl border-gray-200 lg:border lg:bg-COLORBLK1 lg:shadow-sm">
+			<div class="p-4 sm:p-7">
+			   <div class="text-center">
+				  <div class="mb-4 inline-block rounded-full bg-COLORGRY p-2 text-white">
+					 <svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-6 w-6"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						stroke-width="2"
+					 >
+						<path
+						   stroke-linecap="round"
+						   stroke-linejoin="round"
+						   d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+						/>
+					 </svg>
+				  </div>
+				  <h1 class="block text-2xl font-bold text-COLORWHT">
+					 Signing you in...
+				  </h1>
+				  <p class="mt-2 text-sm text-rose-600">
+					The link you followed does not work anymore.<br/>You may need to request a magic link again.
+				  </p>
+			   </div>
+			</div>
+		 </div>
+		{/if}
 	</div>
 </main>
 

@@ -11,7 +11,7 @@ async function fetchWebApi(
 	body?: object,
 	json?: boolean,
 	token?: string,
-	silent?: boolean // Silences any toast messages. Do not emit any toast messages
+	silent?: boolean // Silences any toast messages. Do not emit any toast messages or redirect the user
 ): Promise<Response> | Promise<number | object | void> {
 	try {
 		// If the server is offline, don't even try to fetch

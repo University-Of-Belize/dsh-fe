@@ -190,7 +190,7 @@
 
 <!-- Staff tools V1 -->
 <GenericPill
-	icon="/icons/font-awesome/scribble.svg"
+    icon="/icons/font-awesome/gear-code.svg"
 	title="Staff tools V1"
 	description="Website staff management tools."
 >
@@ -237,7 +237,7 @@
 
 <!--- Theme Creator (Experimental) -->
 <GenericPill
-	icon="/icons/font-awesome/scribble.svg"
+    icon="/icons/font-awesome/gear-code.svg"
 	title="Theme Creator (Experimental)"
 	description="'Theme Creator' allows the creation of new skins for the website."
 >
@@ -283,3 +283,53 @@
 		{/if}
 	</div>
 </GenericPill>
+
+<!--- Developer Mode -->
+<GenericPill
+	icon="/icons/font-awesome/gear-code.svg"
+	title="Dev"
+	description="dev"
+>
+	<div class="controls flex space-x-2">
+		{#if localStorage.dev != undefined}
+			<div
+				class="deactivate h-fit w-fit"
+				on:click={() => {
+					localStorage.removeItem('dev');
+					toast.push('One moment...');
+					// No reload
+					// setTimeout(() => {
+					// 	window.location.reload();
+					// }, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORHPK"
+					color_t="COLORHPK"
+					text="DEACTIVATE"
+				/>
+			</div>
+		{:else}
+			<div
+				class="activate h-fit w-fit"
+				on:click={() => {
+					localStorage.setItem('dev', '');
+					toast.push('One moment...');
+					// No reload
+					// setTimeout(() => {
+					// 	window.location.reload();
+					// }, 3000);
+				}}
+			>
+				<Button
+					color="transparent"
+					custom_style="border border-COLORGRN1"
+					color_t="COLORGRN"
+					text="ACTIVATE"
+				/>
+			</div>
+		{/if}
+	</div>
+</GenericPill>
+
