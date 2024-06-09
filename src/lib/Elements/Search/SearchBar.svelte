@@ -4,11 +4,14 @@
 	export let toUrl: string | undefined = undefined;
 	export let placeholder: string | undefined = undefined;
 	export let nomargin: boolean | undefined = undefined;
+	let class_: string = '';
+	export { class_ as class };
 </script>
 
+<span class="stub block inline flex hidden lg:hidden"></span>
 {#if !nomargin}
 	<form
-		class="searchbar mx-8 flex flex-1 items-center rounded-sm border border-COLORWHT5 bg-COLORBLK bg-opacity-90 px-4 py-2 text-sm focus:bg-COLORBLK1 active:bg-COLORBLK1"
+		class="searchbar mx-8 flex flex-1 items-center rounded-sm border border-COLORWHT5 bg-COLORBLK bg-opacity-90 px-4 py-2 text-sm focus:bg-COLORBLK1 active:bg-COLORBLK1 {class_}"
 		action={toUrl ?? '/product'}
 	>
 		<div class="searchicon w-fit">

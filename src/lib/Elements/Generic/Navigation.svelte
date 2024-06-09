@@ -164,11 +164,12 @@
 					</div>
 				</div>
 			{/if}
-			{#if search}
-				<SearchBar nomargin placeholder="Search for snacks, drinks or lunch" />
-			{:else}<div class="searchbar mx-8 flex flex-1 items-center px-4 py-2 text-sm" />
-			{/if}
 			{#if !user}
+				{#if search}
+					<SearchBar nomargin placeholder="Search for snacks, drinks or lunch" />
+				{:else}
+					<div class="searchbar mx-8 flex flex-1 items-center px-4 py-2 text-sm" />
+				{/if}
 				<div class="top-row flex w-full items-center justify-between pt-2">
 					<!-- <div class="btn-wrp pr-1" >
 			</div>
@@ -189,7 +190,7 @@
 					<div class="title pb-5 font-semibold">My Account</div>
 
 					<Button
-						class="w-full bg-COLORBLK3 text-COLORWHT"
+						class="w-full bg-COLORBLK3 text-COLORWHT hover:bg-COLORBLK3 hover:opacity-80"
 						on:click={async () => {
 							localStorage.clear();
 							window.location.reload();
@@ -200,7 +201,7 @@
 					>
 
 					<Button
-						class="w-full bg-COLORBLK1 text-COLORWHT"
+						class="w-full bg-COLORBLK1 text-COLORWHT hover:bg-COLORBLK1 hover:opacity-80"
 						on:click={async () => {
 							await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
 						}}
@@ -227,7 +228,7 @@
 							}}
 						>
 							<Button
-								class="w-full bg-COLORBLK1 font-medium text-COLORWHT lg:justify-start lg:text-left"
+								class="w-full bg-COLORBLK1 font-medium text-COLORWHT lg:justify-start lg:text-left hover:bg-COLORBLK1 hover:opacity-80"
 							>
 								<Fa icon={faStar} class="mr-2 hidden lg:block" />
 								{category.name ?? category.alias}</Button
