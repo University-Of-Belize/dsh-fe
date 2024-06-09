@@ -3,15 +3,16 @@
 	export let image: string;
 	export let name: string;
 	export let description: string;
+	export let error_text: string;
 	export let no_forward: boolean = false;
 
 	import config from '$lib/config/settings';
 </script>
 
 <div class="my-10 grid max-w-md">
-	<div class="mx-2 rounded-xl bg-gray-100"></div>
+	<div class="invisible mx-2 rounded-xl bg-gray-100"></div>
 	<div
-		class="cursor group mx-2 overflow-hidden rounded-2xl border border-COLORBLK1 duration-200 hover:-translate-y-4 lg:mx-4"
+		class="cursor group mx-2 overflow-hidden rounded-2xl border border-COLORBLK1 bg-COLORBLK1 duration-200 hover:-translate-y-4 lg:mx-4"
 	>
 		<div class="flex h-60 flex-col justify-between overflow-hidden">
 			<a aria-label="Visit the link for '{name}'" href={url}
@@ -24,7 +25,10 @@
 		</div>
 		<div class="flex-1 overflow-hidden bg-COLORBLK1 px-6 py-8">
 			<a href={url}><h5 class="mb-4 text-xl font-bold">{@html name}</h5></a>
-			<p class="mb-8 text-COLORWHT1">{description}</p>
+			<p class="mb-1 text-COLORWHT1">{description}</p>
+			{#if error_text}
+				<p class="mb-8 text-rose-600">{error_text}</p>
+			{/if}
 			<div class="flex justify-between">
 				{#if !no_forward}
 					<a aria-label="Visit the link for '{name}'" href={url} class="group text-lg font-bold">
@@ -35,5 +39,5 @@
 			</div>
 		</div>
 	</div>
-	<div class="mx-2 rounded-xl bg-gray-100"></div>
+	<div class="invisible mx-2 rounded-xl bg-gray-100"></div>
 </div>

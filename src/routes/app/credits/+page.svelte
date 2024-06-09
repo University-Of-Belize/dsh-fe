@@ -6,6 +6,62 @@
 
 	// import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 	// import Fa from 'svelte-fa';
+
+	import type { ContributorData } from '$lib/types/Contibutor';
+
+	// The "contributors" object
+	const contributors: ContributorData[] = [
+		{
+			url: 'https://github.com/AlexDev404',
+			image: 'https://avatars.githubusercontent.com/u/34188635',
+			name: 'Immanuel Garcia',
+			description: 'Systems Designer, Programmer, Documentor, Project Coordinator',
+			retired: false
+		},
+		{
+			url: 'https://github.com/Pedro-Kukul',
+			image: 'https://avatars.githubusercontent.com/u/122998176',
+			name: 'Pedro J Kukul',
+			description: 'Database Designer, Programmer, Documentor',
+			retired: false
+		},
+		{
+			url: '#',
+			image: '/assets/credits/DALESSEO_REQUENA.jpg',
+			name: "D'Alesseo Requena",
+			description: 'Public Relations Officer, Creative Lead, Project Organizer',
+			retired: false
+		},
+		{
+			url: 'https://hueilost.github.io/HueiLost/',
+			image: 'https://avatars.githubusercontent.com/u/98348428',
+			name: 'Maylin Chee',
+			description:
+				'Quality Assurance Officer, Creative Lead, Graphic Designer, UI Component Designer',
+			retired: false
+		},
+		{
+			url: 'https://github.com/Lee26Ed',
+			image: 'https://avatars.githubusercontent.com/u/86505610',
+			name: 'Lee Panti',
+			description: 'Systems Designer, Database Designer, Programmer, Documentor',
+			retired: true
+		},
+		{
+			url: '#',
+			image: '/assets/credits/KYLER_BROWN.jpg',
+			name: 'Kyler Brown',
+			description: 'Documentation, Systems Designer',
+			retired: false
+		},
+		{
+			url: '#',
+			image: '/assets/credits/KYLE_GLADDEN.jpg',
+			name: 'Kyle Gladden',
+			description: 'Documentation, Systems Designer',
+			retired: false
+		}
+	];
 </script>
 
 <svelte:head>
@@ -23,22 +79,26 @@
 			<div class="my-8 block w-full text-2xl font-semibold text-COLORWHT">
 				<div>Credits</div>
 				<div class="text-sm font-light">
-					These are all the people who made it possible to bring the app to life.
+					These are all the people who made it possible to bring this app into existence throughout
+					the course of its lifetime.
 				</div>
 			</div>
-			<div class="block w-full">
-				<!-- Start cards -->
-				<div
-					class="card-wrapper my-4 flex flex-wrap justify-center text-COLORWHT md:space-x-4 lg:justify-start"
-				>
-					<DataCard
-						url="#"
-						image="/assets/credits/IMMANUEL_GARCIA.jpg"
-						name="Immanuel Garcia"
-						description="Systems Designer, Programmer, Documentor, Project Coordinator"
-						no_forward
-					/>
-				</div>
+			<div class="block w-full flex-wrap lg:flex">
+				{#each contributors as contributor}
+					<!-- Start cards -->
+					<div
+						class="card-wrapper my-4 flex flex-wrap justify-center text-COLORWHT md:space-x-4 lg:justify-start"
+					>
+						<DataCard
+							url={contributor.url}
+							image={contributor.image}
+							name={contributor.name}
+							description={contributor.description}
+							error_text={contributor.retired ? 'RETIRED' : false}
+							no_forward={contributor.url == '#'}
+						/>
+					</div>
+				{/each}
 			</div>
 			<!-- End cards -->
 		</div>

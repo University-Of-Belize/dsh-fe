@@ -228,7 +228,7 @@
 							}}
 						>
 							<Button
-								class="w-full bg-COLORBLK1 font-medium text-COLORWHT lg:justify-start lg:text-left hover:bg-COLORBLK1 hover:opacity-80"
+								class="w-full bg-COLORBLK1 font-medium text-COLORWHT hover:bg-COLORBLK1 hover:opacity-80 lg:justify-start lg:text-left"
 							>
 								<Fa icon={faStar} class="mr-2 hidden lg:block" />
 								{category.name ?? category.alias}</Button
