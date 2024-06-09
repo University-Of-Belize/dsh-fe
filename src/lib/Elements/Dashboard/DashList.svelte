@@ -52,17 +52,17 @@
 		</div>
 	</div>
 	<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
-		<div class="title pb-5 font-semibold">{staff? "Customer Insights": "Your Feedback"}</div>
+		<div class="title pb-5 font-semibold">{staff ? 'Customer Insights' : 'Your Feedback'}</div>
 		{#if staff}
-		<div class="three pt-1" on:click={() => goto('/admin/dashboard/user')}>
-			<Button
-				icon={faUserCog}
-				color="COLORBLK3"
-				text="User management"
-				color_t="COLORWHT"
-				custom_style="w-full font-medium"
-			/>
-		</div>
+			<div class="three pt-1" on:click={() => goto('/admin/dashboard/user')}>
+				<Button
+					icon={faUserCog}
+					color="COLORBLK3"
+					text="User management"
+					color_t="COLORWHT"
+					custom_style="w-full font-medium"
+				/>
+			</div>
 		{/if}
 		<div class="three pt-1" on:click={() => goto('/admin/dashboard/review')}>
 			<Button

@@ -20,13 +20,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-        FLY_API_TOKEN: ${{ secrets.FLYIO_ACCESS }}
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      FLY_API_TOKEN: ${{ secrets.FLYIO_ACCESS }}
     steps:
       - uses: actions/checkout@v3
       - name: Write Sentry resource file
         run: |
-           echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
+          echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
       - name: Set up flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only -a ubcafe-dev

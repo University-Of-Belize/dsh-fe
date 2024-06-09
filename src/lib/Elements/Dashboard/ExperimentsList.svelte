@@ -190,7 +190,7 @@
 
 <!-- Staff tools V1 -->
 <GenericPill
-    icon="/icons/font-awesome/gear-code.svg"
+	icon="/icons/font-awesome/gear-code.svg"
 	title="Staff tools V1"
 	description="Website staff management tools."
 >
@@ -237,7 +237,7 @@
 
 <!--- Theme Creator (Experimental) -->
 <GenericPill
-    icon="/icons/font-awesome/gear-code.svg"
+	icon="/icons/font-awesome/gear-code.svg"
 	title="Theme Creator (Experimental)"
 	description="'Theme Creator' allows the creation of new skins for the website."
 >
@@ -285,11 +285,7 @@
 </GenericPill>
 
 <!--- Developer Mode -->
-<GenericPill
-	icon="/icons/font-awesome/gear-code.svg"
-	title="Dev"
-	description="dev"
->
+<GenericPill icon="/icons/font-awesome/gear-code.svg" title="Dev" description="dev">
 	<div class="controls flex space-x-2">
 		{#if localStorage.dev != undefined}
 			<div
@@ -332,4 +328,3 @@
 		{/if}
 	</div>
 </GenericPill>
-

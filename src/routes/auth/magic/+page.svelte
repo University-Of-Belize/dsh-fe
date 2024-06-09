@@ -18,22 +18,29 @@
 	$: SecToken = $page.url.searchParams.get('token') || null;
 
 	onMount(() => {
-		if(location.hash != ''){
+		if (location.hash != '') {
 			SecToken = location.hash.substring(1, location.hash.length);
 			Login([SecToken]);
-		} else if(SecToken != null) {
+		} else if (SecToken != null) {
 			Login([SecToken]);
 		}
-						// token exists, do something
-						if(SecToken == null && localStorage.dev != undefined) {
+		// token exists, do something
+		if (SecToken == null && localStorage.dev != undefined) {
 			toast.push('Entering an invalid token will result in an error.');
-		} 
+		}
 	});
 
 	async function Login(payload: any) {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
-			const r = (await fetchWebApi('v1/dash', 'GET', undefined, undefined, payload[0], true)) as Response;
+			const r = (await fetchWebApi(
+				'v1/dash',
+				'GET',
+				undefined,
+				undefined,
+				payload[0],
+				true
+			)) as Response;
 			if (!r.ok) {
 				setTimeout(() => {
 					logging_in = false; // Slight "bounce"
@@ -80,123 +87,118 @@
 	</div>
 	<div class="main-content flex h-full items-center justify-center py-8 lg:mx-8">
 		{#if SecToken == null && localStorage.dev != undefined}
-		<div class="auth_window block rounded-md bg-COLORBLK1 pt-8 lg:px-6">
-			<form class="block" action="#" on:submit={(event) => handleSubmit(event)}>
-				<div
-					class="mx-8 mb-6 flex flex-1 items-center justify-center text-3xl font-semibold text-COLORWHT"
-				>
-					{config.ui['branding-text']}
-					<span class="bg-yellow-300 text-gray-50 px-2 py-1 mb-4 ml-2 text-sm">DEV</span>
-				</div>
-
-				<div
-					class="password mx-8 mt-2 flex flex-1 items-center rounded-sm border border-COLORWHT bg-transparent px-4 py-2 text-sm"
-				>
-					<div class="icon w-fit">
-						<Fa icon={faKey} size="1.25x" class="pr-4 text-COLORWHT" />
+			<div class="auth_window block rounded-md bg-COLORBLK1 pt-8 lg:px-6">
+				<form class="block" action="#" on:submit={(event) => handleSubmit(event)}>
+					<div
+						class="mx-8 mb-6 flex flex-1 items-center justify-center text-3xl font-semibold text-COLORWHT"
+					>
+						{config.ui['branding-text']}
+						<span class="mb-4 ml-2 bg-yellow-300 px-2 py-1 text-sm text-gray-50">DEV</span>
 					</div>
-					<input
-						type="text"
-						autocomplete="off"
-						name="token"
-						class="w-full bg-transparent px-2 py-1 font-medium border-0 text-COLORWHT focus:outline-none"
-						placeholder="Enter a valid user token"
-					/>
-				</div>
 
-				<div class="submit mx-8 mt-6 flex flex-1 items-center justify-center">
-					<button
-						class="submit w-full"
-						type="submit"
-						disabled={logging_in}
-						title={logging_in ? 'Please wait for the request to complete' : ''}
+					<div
+						class="password mx-8 mt-2 flex flex-1 items-center rounded-sm border border-COLORWHT bg-transparent px-4 py-2 text-sm"
+					>
+						<div class="icon w-fit">
+							<Fa icon={faKey} size="1.25x" class="pr-4 text-COLORWHT" />
+						</div>
+						<input
+							type="text"
+							autocomplete="off"
+							name="token"
+							class="w-full border-0 bg-transparent px-2 py-1 font-medium text-COLORWHT focus:outline-none"
+							placeholder="Enter a valid user token"
+						/>
+					</div>
+
+					<div class="submit mx-8 mt-6 flex flex-1 items-center justify-center">
+						<button
+							class="submit w-full"
+							type="submit"
+							disabled={logging_in}
+							title={logging_in ? 'Please wait for the request to complete' : ''}
+						>
+							<Button
+								icon={faRightToBracket}
+								color="COLORWHT"
+								color_t="COLORBLK"
+								custom_style="w-full justify-center"
+								text="Log in"
+								disabled={logging_in}
+							/>
+						</button>
+					</div>
+				</form>
+
+				<div class="mx-8 my-8 block text-COLORWHT">
+					<div class="text-2xl font-light">Have an account?</div>
+					<div
+						class="login mt-6 flex flex-1 items-center justify-start"
+						on:click={() => goto('/auth/login')}
 					>
 						<Button
 							icon={faRightToBracket}
-							color="COLORWHT"
+							color="COLORYLW"
 							color_t="COLORBLK"
-							custom_style="w-full justify-center"
+							custom_style="w-18 justify-center"
 							text="Log in"
-							disabled={logging_in}
 						/>
-					</button>
-				</div>
-			</form>
-
-			<div class="mx-8 my-8 block text-COLORWHT">
-				<div class="text-2xl font-light">Have an account?</div>
-				<div
-					class="login mt-6 flex flex-1 items-center justify-start"
-					on:click={() => goto('/auth/login')}
-				>
-					<Button
-						icon={faRightToBracket}
-						color="COLORYLW"
-						color_t="COLORBLK"
-						custom_style="w-18 justify-center"
-						text="Log in"
-					/>
+					</div>
 				</div>
 			</div>
-		</div>
 		{:else if SecToken != null}
-		<div class="rounded-xl border-gray-200 lg:border lg:bg-COLORBLK1 lg:shadow-sm">
-			<div class="p-4 sm:p-7">
-			   <div class="text-center">
-				  <div class="mb-4 inline-block rounded-full bg-COLORGRY p-2 text-white">
-					 <svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						stroke-width="2"
-					 >
-						<path
-						   stroke-linecap="round"
-						   stroke-linejoin="round"
-						   d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
-						/>
-					 </svg>
-				  </div>
-				  <h1 class="block text-2xl font-bold text-COLORWHT">
-					 Signing you in...
-				  </h1>
-				  <p class="mt-2 text-sm text-COLORWHT1">
-					 You'll be logged-in in just a moment.
-				  </p>
-			   </div>
+			<div class="rounded-xl border-gray-200 lg:border lg:bg-COLORBLK1 lg:shadow-sm">
+				<div class="p-4 sm:p-7">
+					<div class="text-center">
+						<div class="mb-4 inline-block rounded-full bg-COLORGRY p-2 text-white">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+								/>
+							</svg>
+						</div>
+						<h1 class="block text-2xl font-bold text-COLORWHT">Signing you in...</h1>
+						<p class="mt-2 text-sm text-COLORWHT1">You'll be logged-in in just a moment.</p>
+					</div>
+				</div>
 			</div>
-		 </div>
-		 {:else}
-		 <div class="rounded-xl border-gray-200 lg:border lg:bg-COLORBLK1 lg:shadow-sm">
-			<div class="p-4 sm:p-7">
-			   <div class="text-center">
-				  <div class="mb-4 inline-block rounded-full bg-COLORGRY p-2 text-white">
-					 <svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						stroke-width="2"
-					 >
-						<path
-						   stroke-linecap="round"
-						   stroke-linejoin="round"
-						   d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
-						/>
-					 </svg>
-				  </div>
-				  <h1 class="block text-2xl font-bold text-COLORWHT">
-					 Signing you in...
-				  </h1>
-				  <p class="mt-2 text-sm text-rose-600">
-					The link you followed does not work anymore.<br/>You may need to request a magic link again.
-				  </p>
-			   </div>
+		{:else}
+			<div class="rounded-xl border-gray-200 lg:border lg:bg-COLORBLK1 lg:shadow-sm">
+				<div class="p-4 sm:p-7">
+					<div class="text-center">
+						<div class="mb-4 inline-block rounded-full bg-COLORGRY p-2 text-white">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+								/>
+							</svg>
+						</div>
+						<h1 class="block text-2xl font-bold text-COLORWHT">Signing you in...</h1>
+						<p class="mt-2 text-sm text-rose-600">
+							The link you followed does not work anymore.<br />You may need to request a magic link
+							again.
+						</p>
+					</div>
+				</div>
 			</div>
-		 </div>
 		{/if}
 	</div>
 </main>

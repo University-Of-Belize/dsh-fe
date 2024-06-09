@@ -40,7 +40,9 @@
 	<title>UniFood | Dashboard / My messages</title>
 </svelte:head>
 
-<div class="content block h-full w-full overflow-auto bg-transparent px-2 py-6 lg:px-16 lg:py-16 pb-40">
+<div
+	class="content block h-full w-full overflow-auto bg-transparent px-2 py-6 pb-40 lg:px-16 lg:py-16"
+>
 	<div class="flex pb-2 text-2xl font-semibold">Message center</div>
 	<div class="flex w-full flex-wrap justify-between pb-12 text-sm font-light">
 		<div>
@@ -58,32 +60,32 @@
 	<div class="flex w-full flex-col-reverse flex-wrap">
 		{#if interactions}
 			{#each interactions as interaction, i}
-			{#if interaction.from_user.username != user.username}
-				<div class="user_wrap w-full">
-					<UserPill user={interaction.from_user ?? {}} description={interaction.content} html>
-						<div class="controls flex space-x-2">
-							<a href="/admin/dashboard/messaging/{interaction.from_user.channel_id}"
-								><div
-									class="edit-wrap h-fit w-fit"
-									on:click={() => {
-										localStorage.setItem(
-											'current_interaction',
-											JSON.stringify(interaction.from_user)
-										);
-									}}
+				{#if interaction.from_user.username != user.username}
+					<div class="user_wrap w-full">
+						<UserPill user={interaction.from_user ?? {}} description={interaction.content} html>
+							<div class="controls flex space-x-2">
+								<a href="/admin/dashboard/messaging/{interaction.from_user.channel_id}"
+									><div
+										class="edit-wrap h-fit w-fit"
+										on:click={() => {
+											localStorage.setItem(
+												'current_interaction',
+												JSON.stringify(interaction.from_user)
+											);
+										}}
+									>
+										<Button
+											icon={faPaperPlane}
+											color="transparent"
+											custom_style="border border-COLORWHT"
+											color_t="COLORWHT"
+											text="Go to channel"
+										/>
+									</div></a
 								>
-									<Button
-										icon={faPaperPlane}
-										color="transparent"
-										custom_style="border border-COLORWHT"
-										color_t="COLORWHT"
-										text="Go to channel"
-									/>
-								</div></a
-							>
-						</div>
-					</UserPill>
-				</div>
+							</div>
+						</UserPill>
+					</div>
 				{/if}
 			{/each}{:else}<div class="font-light">
 				There was a problem while displaying the data.

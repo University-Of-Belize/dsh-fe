@@ -358,13 +358,20 @@
 	</div>
 	{#if localStorage.theme === 'custom'}
 		<div
-		    bind:this={theme_drawer}
+			bind:this={theme_drawer}
 			id="theme_drawer"
-			class="drawer block z-50 h-screen w-1/4 flex-col justify-start overflow-auto bg-COLORBLK bg-opacity-100 px-8 py-2 text-COLORWHT"
+			class="drawer z-50 block h-screen w-1/4 flex-col justify-start overflow-auto bg-COLORBLK bg-opacity-100 px-8 py-2 text-COLORWHT"
 		>
-		<div class="flex w-full items-center justify-start">
-			<span on:click={()=>{theme_drawer.classList.add("hidden"); localStorage.setItem("themedrawer_isHidden", "true")}} class="bg-COLORBLK1 rounded-md px-4 py-2 ml-auto cursor-pointer hover:opacity-80"><Fa icon={faX} size="0.75x"/></span>
-		</div>
+			<div class="flex w-full items-center justify-start">
+				<span
+					on:click={() => {
+						theme_drawer.classList.add('hidden');
+						localStorage.setItem('themedrawer_isHidden', 'true');
+					}}
+					class="ml-auto cursor-pointer rounded-md bg-COLORBLK1 px-4 py-2 hover:opacity-80"
+					><Fa icon={faX} size="0.75x" /></span
+				>
+			</div>
 			<div class="two space-y-2 py-6">
 				<div class="title block pb-5 font-semibold">
 					<div class="title flex items-center justify-start space-x-4">

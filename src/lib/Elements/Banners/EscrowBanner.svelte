@@ -14,10 +14,10 @@
 			</div>
 			<div class="text text-xl font-light">{text}</div>
 			<div class="text text-sm font-light">
-				{#if html}	
-				   {@html subtitle}
+				{#if html}
+					{@html subtitle}
 				{:else}
-				   {subtitle}
+					{subtitle}
 				{/if}
 			</div>
 			<div class="content flex w-full items-center justify-center">

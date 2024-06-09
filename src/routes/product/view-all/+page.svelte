@@ -67,40 +67,40 @@
 	<div
 		class="content-wrapper absolute z-10 h-full w-full items-start justify-start overflow-auto pb-40 lg:flex"
 	>
-			{#if $products && $products.length > 0}
-				<!-- The categories -->
+		{#if $products && $products.length > 0}
+			<!-- The categories -->
 
-				<div class="block w-full">
-					<span class="stub hidden bg-gray-200 bg-gray-300 text-gray-900 text-white" />
-					<div class="categoryp-wrap flex w-full overflow-x-auto rounded-md mx-4 lg:mx-0">
-						{#if categories.length > 0}
-							{#each categories as category}
-								<a
-									on:click={() => {
-										goto(
-											// We filter by alias, display by name
-											`/product?filter=${
-												category.alias
-													? category.alias.toString().toLowerCase()
-													: category.name.toString().toLowerCase()
-											}`
-										);
-									}}
-									href={`/product?filter=${
-										category.alias
-											? category.alias.toString().toLowerCase()
-											: category.name.toString().toLowerCase()
-									}`}
-									class="flex w-full bg-gray-800 text-white items-center justify-center border-b border-t border-gray-200 border-gray-700 px-4 py-2 text-center text-sm font-medium leading-tight hover:opacity-90 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700"
-									style="min-width: 150px; max-height: 50px;"
-								>
-									{category.name.trim() ?? category.alias.trim()}
-								</a>
-							{/each}
-						{/if}
-					</div>
+			<div class="block w-full">
+				<span class="stub hidden bg-gray-200 bg-gray-300 text-gray-900 text-white" />
+				<div class="categoryp-wrap mx-4 flex w-full overflow-x-auto rounded-md lg:mx-0">
+					{#if categories.length > 0}
+						{#each categories as category}
+							<a
+								on:click={() => {
+									goto(
+										// We filter by alias, display by name
+										`/product?filter=${
+											category.alias
+												? category.alias.toString().toLowerCase()
+												: category.name.toString().toLowerCase()
+										}`
+									);
+								}}
+								href={`/product?filter=${
+									category.alias
+										? category.alias.toString().toLowerCase()
+										: category.name.toString().toLowerCase()
+								}`}
+								class="flex w-full items-center justify-center border-b border-t border-gray-200 border-gray-700 bg-gray-800 px-4 py-2 text-center text-sm font-medium leading-tight text-white hover:opacity-90 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700"
+								style="min-width: 150px; max-height: 50px;"
+							>
+								{category.name.trim() ?? category.alias.trim()}
+							</a>
+						{/each}
+					{/if}
+				</div>
 
-					<div class="content mx-4">
+				<div class="content mx-4">
 					<!--- The title -->
 					<div class="my-8 block w-full text-2xl font-semibold text-COLORWHT">
 						<div>Product Availability</div>
@@ -128,18 +128,18 @@
 					</div>
 				</div>
 			</div>
-			{:else}
-				<div
-					class="not-found flex h-full w-full flex-wrap items-center justify-center text-COLORWHT3"
-				>
-					<div class="flex h-fit w-full flex-wrap items-center justify-center">
-						<div class="icon flex h-fit w-full basis-full items-center justify-center">
-							<Fa icon={faShoppingCart} size="2x" />
-						</div>
-						<p class="font-semibold">No products found</p>
+		{:else}
+			<div
+				class="not-found flex h-full w-full flex-wrap items-center justify-center text-COLORWHT3"
+			>
+				<div class="flex h-fit w-full flex-wrap items-center justify-center">
+					<div class="icon flex h-fit w-full basis-full items-center justify-center">
+						<Fa icon={faShoppingCart} size="2x" />
 					</div>
+					<p class="font-semibold">No products found</p>
 				</div>
-			{/if}
+			</div>
+		{/if}
 	</div>
 </main>
 <div class="footer relative z-10">

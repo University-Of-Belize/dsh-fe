@@ -17,12 +17,14 @@
 					    @slotParams 'notification' Last message timestamp/amount of unread message count
 					-->
 
-<span class="stub hidden invisible"></span>
+<span class="stub invisible hidden"></span>
 <div
 	{id}
-	class="{hidden? "invisible": ""} conversation my-2 flex w-full cursor-pointer select-none items-center rounded-md py-4 px-2 bg-COLORBLK1 hover:bg-COLORBLK2"
+	class="{hidden
+		? 'invisible'
+		: ''} conversation my-2 flex w-full cursor-pointer select-none items-center rounded-md bg-COLORBLK1 px-2 py-4 hover:bg-COLORBLK2"
 >
-	<div class="icon-wrap hidden lg:flex items-center text-left">
+	<div class="icon-wrap hidden items-center text-left lg:flex">
 		<div class="icon_wrap relative mr-4 rounded-full">
 			<!-- CSS hack lol-->
 			<img
@@ -60,7 +62,7 @@
 	</div>
 	<div class="details-block block flex-1 text-left text-base font-medium leading-4 text-COLORWHT">
 		{username}
-		<div class="mt-2 lg:mt-0 w-full text-xs font-normal text-COLORWHT1">
+		<div class="mt-2 w-full text-xs font-normal text-COLORWHT1 lg:mt-0">
 			{message}
 		</div>
 	</div>
