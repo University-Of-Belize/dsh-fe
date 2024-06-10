@@ -8,7 +8,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	// import Fa from 'svelte-fa';
-	import { faCog } from '@fortawesome/free-solid-svg-icons';
+	import { faCog, faMessage } from '@fortawesome/free-solid-svg-icons';
 
 	import UserBanner from '$lib/Elements/Banners/UserBanner2.svelte';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
@@ -72,7 +72,7 @@
 				{#if data}
 					{#if staff || user._id == data?._id}
 						<div
-							class="edit-wrap h-fit w-full py-2 lg:w-fit lg:p-0"
+							class="button-wrapper h-fit w-full py-2 lg:w-fit lg:p-0"
 							on:click={() => goto(`/admin/dashboard/user/manage2?user_id=${data?._id}`)}
 						>
 							<Button
@@ -83,6 +83,28 @@
 								custom_style="w-full lg:w-fit justify-center lg:justify-start"
 							/>
 						</div>
+					{/if}
+					{#if user._id != data?._id}
+					<div
+					class="button-wrapper h-fit w-full py-2 lg:w-fit lg:p-0"
+					on:click={() => {
+						localStorage.setItem("current_interaction", 
+						                     JSON.stringify({
+												channel_id: data?.channel_id, 
+												username: data?.username
+											}));
+						goto(`/admin/dashboard/messaging/${data?.channel_id}`);
+						}
+					}
+				>
+					<Button
+						icon={faMessage}
+						color="COLORBLK1"
+						color_t="COLORWHT"
+						text="Message"
+						custom_style="w-full lg:w-fit justify-center lg:justify-start"
+					/>
+				</div>
 					{/if}
 				{/if}
 			</UserBanner>

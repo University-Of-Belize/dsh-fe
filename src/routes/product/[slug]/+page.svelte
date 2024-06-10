@@ -255,7 +255,9 @@
 								</div>
 								<div class="review-content text-COLORWHT">
 									<div class="flex text-lg font-semibold">
-										{review.reviewer?.username || 'Anonymous'}
+										<a href="/app/space/{review.reviewer?._id}" class="hover:underline"
+											><span>{review.reviewer?.username || 'Anonymous'}</span></a
+										>
 										<div class="starcount flex items-center justify-center px-2 text-COLORYLW">
 											<!-- Copilot Logic-->
 											{#each Array.from({ length: 5 }, (_, i) => i) as _}
@@ -331,7 +333,7 @@
 			{#if user && localStorage.token}
 				<div class="review my-4 rounded-md bg-transparent px-4 py-2">
 					<div class="flex bg-opacity-100">
-						<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
+						<div class="reviewer-pfp flex hidden flex-col items-center justify-start pr-4 lg:block">
 							<img
 								class="rounded-md object-cover"
 								src={user.profile_picture || config['user']['default-image']}

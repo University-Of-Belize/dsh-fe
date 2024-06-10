@@ -137,7 +137,11 @@
 		<!-- The first message sets the chat's subject -->
 		<div class="mb-4 flex w-full justify-start space-x-2 pb-2 text-xl font-light">
 			{#if interactions}
-				<span>Subject:</span><b>{interactions[0]?.subject}</b>
+				<span>Subject:</span><b
+					>{!interactions[0]?.subject || interactions[0]?.subject.trim() === ''
+						? 'No subject'
+						: interactions[0]?.subject}</b
+				>
 			{:else}
 				<div class="messagebox mt-auto block w-full lg:mb-6 lg:w-auto">
 					<div class="block w-full space-y-4">
