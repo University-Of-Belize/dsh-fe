@@ -72,7 +72,7 @@
 				{#if data}
 					{#if staff || user._id == data?._id}
 						<div
-							class="button-wrapper h-fit w-full py-2 lg:w-fit lg:p-0 mr-1"
+							class="button-wrapper mr-1 h-fit w-full py-2 lg:w-fit lg:p-0"
 							on:click={() => goto(`/admin/dashboard/user/manage2?user_id=${data?._id}`)}
 						>
 							<Button
@@ -85,26 +85,27 @@
 						</div>
 					{/if}
 					{#if user._id != data?._id}
-					<div
-					class="button-wrapper h-fit w-full py-2 lg:w-fit lg:p-0"
-					on:click={() => {
-						localStorage.setItem("current_interaction", 
-						                     JSON.stringify({
-												channel_id: data?.channel_id, 
-												username: data?.username
-											}));
-						goto(`/admin/dashboard/messaging/${data?.channel_id}`);
-						}
-					}
-				>
-					<Button
-						icon={faMessage}
-						color="COLORBLK1"
-						color_t="COLORWHT"
-						text="Message"
-						custom_style="w-full lg:w-fit justify-center lg:justify-start"
-					/>
-				</div>
+						<div
+							class="button-wrapper h-fit w-full py-2 lg:w-fit lg:p-0"
+							on:click={() => {
+								localStorage.setItem(
+									'current_interaction',
+									JSON.stringify({
+										channel_id: data?.channel_id,
+										username: data?.username
+									})
+								);
+								goto(`/admin/dashboard/messaging/${data?.channel_id}`);
+							}}
+						>
+							<Button
+								icon={faMessage}
+								color="COLORBLK1"
+								color_t="COLORWHT"
+								text="Message"
+								custom_style="w-full lg:w-fit justify-center lg:justify-start"
+							/>
+						</div>
 					{/if}
 				{/if}
 			</UserBanner>
