@@ -34,11 +34,15 @@
 		<div class="user-wrap flex flex-wrap items-center lg:w-full">
 			<div class="review-content text-COLORWHT" style="word-break: break-word;">
 				<div class="flex items-center text-base font-semibold lg:text-lg">
-					{user.username
-						? user._id == localStorage.user_id
-							? `${user?.username} (You)`
-							: user?.username
-						: 'Anonymous'}
+					<a href="/app/space/{user._id}" class="hover:underline"
+						><span
+							>{user.username
+								? user._id == localStorage.user_id
+									? `${user?.username} (You)`
+									: user?.username
+								: 'Anonymous'}</span
+						></a
+					>
 					{#if tag}
 						<div
 							class="tag px-4 py-1 bg-{tagColor} text-{tagColor_t} mx-4 flex items-center justify-center font-light lg:text-sm"

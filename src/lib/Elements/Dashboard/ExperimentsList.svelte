@@ -29,7 +29,8 @@
 		{
 			name: 'UB Theme',
 			id: 'ub-theme',
-			description: 'UB Theme is meant to comply with the branding guidelines given to us by The University of Belize.'
+			description:
+				'UB Theme is meant to comply with the branding guidelines given to us by The University of Belize.'
 		},
 		{
 			name: 'Fandom Wiki',
