@@ -7,7 +7,7 @@
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import Fa from 'svelte-fa';
+	// import Fa from 'svelte-fa';
 	import { faCog } from '@fortawesome/free-solid-svg-icons';
 
 	import UserBanner from '$lib/Elements/Banners/UserBanner2.svelte';
@@ -20,7 +20,7 @@
 	let data: User;
 	let reviews: Review[];
 
-	onMount(async () => {
+	async function get_userdata() {
 		// User lookup
 		const res = (await fetchWebApi(`v1/admin/user/lookup?user_id=${user_id}`, 'GET')) as Response;
 		if (!res.ok) {
@@ -40,14 +40,16 @@
 		const r_ = await rev.json();
 		reviews = r_.is;
 		reviews = reviews;
-	});
+	}
+
+	onMount(get_userdata);
 </script>
 
 <svelte:head>
 	<title>UniFood | User Space</title>
 </svelte:head>
 
-<div class="content mx-4 flex w-full flex-col items-center justify-center">
+<div class="content m-1 flex w-full flex-col items-center justify-center lg:m-4">
 	{#if data}
 		<div
 			class="user_wrap relative flex h-56 w-full items-end justify-center rounded-md bg-COLORBLK2"
@@ -88,7 +90,16 @@
 
 		<!-- Other stuff -->
 		<div class="my-8 block w-full">
-			<div class="text-2xl font-semibold">Recent Activity</div>
+			<div class="flex justify-start text-2xl font-semibold">
+				{#if data}
+					{#if user._id == data?._id}
+						<span>Your r</span>
+					{:else}
+						<span>R</span>
+					{/if}
+				{/if}
+				<span>ecent activity</span>
+			</div>
 			<div
 				class="relative mb-10 mt-6 flex h-full flex-col overflow-hidden rounded-2xl bg-COLORBLK text-COLORWHT shadow-lg ring-1 ring-COLORBLK1"
 			>
@@ -110,8 +121,8 @@
 										class="absolute inline-flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 object-cover text-center text-base font-semibold text-white shadow"
 									></span>
 									<div class="ml-12 w-auto pt-1">
-										<h6 class="text-sm font-semibold text-COLORBLK2">No reviews</h6>
-										<p class="mt-1 text-xs text-gray-500">
+										<h6 class="text-sm font-semibold text-COLORWHT">No reviews</h6>
+										<p class="mt-1 text-xs text-COLORWHT1">
 											@{data?.username} has yet to post their first review
 										</p>
 									</div>
