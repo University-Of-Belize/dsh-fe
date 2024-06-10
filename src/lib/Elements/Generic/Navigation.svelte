@@ -147,7 +147,7 @@
 					<div
 						class="wallet-indicator flex w-full cursor-pointer items-center justify-start space-x-4 rounded-md bg-COLORBLK3 px-2 py-4 text-sm font-medium text-white hover:opacity-80"
 						on:click={async () => {
-							await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
+							await goto(`/app/space/${localStorage.user_id}`);
 						}}
 					>
 						<div>
