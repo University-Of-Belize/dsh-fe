@@ -27,6 +27,11 @@
 			description: 'Latest, stable dark mode skin. Report any cosmetic bugs using Feedback Hub.'
 		},
 		{
+			name: 'UB Theme',
+			id: 'ub-theme',
+			description: 'UB Theme is meant to comply with the branding guidelines given to us by The University of Belize.'
+		},
+		{
 			name: 'Fandom Wiki',
 			id: 'fandom-wiki'
 		},
