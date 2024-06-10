@@ -65,7 +65,7 @@
 </script>
 
 <svelte:head>
-	<title>UniFood | Credits</title>
+	<title>UniFood | App Credits</title>
 </svelte:head>
 
 <main class="h-screen w-full">
