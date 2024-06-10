@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import config from '$lib/config/settings';
 	import type { Review } from '$lib/types/Review';
@@ -6,14 +7,16 @@
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	// import Fa from 'svelte-fa';
-	// import { faCog } from '@fortawesome/free-solid-svg-icons';
+	import Fa from 'svelte-fa';
+	import { faCog } from '@fortawesome/free-solid-svg-icons';
 
 	import UserBanner from '$lib/Elements/Banners/UserBanner2.svelte';
+	import Button from '$lib/Elements/Buttons/Button.svelte';
 
 	const user_id = $page.params.user_id;
 	let user: User =
 		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {}; // User data
+	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 	let data: User;
 	let reviews: Review[];
 
@@ -63,16 +66,33 @@
 				description={data?.staff ? 'Administrator' : 'Standard Account'}
 				editProfilePicture={// Admins only have so much control over users
 				data._id == user._id}
-			/>
+			>
+				{#if data}
+					{#if staff || user._id == data?._id}
+						<div
+							class="edit-wrap h-fit w-full py-2 lg:w-fit lg:p-0"
+							on:click={() => goto(`/admin/dashboard/user/manage2?user_id=${data?._id}`)}
+						>
+							<Button
+								icon={faCog}
+								color="COLORBLE"
+								color_t="COLORWHT"
+								text="Edit Account"
+								custom_style="w-full lg:w-fit justify-center lg:justify-start"
+							/>
+						</div>
+					{/if}
+				{/if}
+			</UserBanner>
 		</div>
 
 		<!-- Other stuff -->
-		<div class="my-4 block w-full">
+		<div class="my-8 block w-full">
 			<div class="text-2xl font-semibold">Recent Activity</div>
 			<div
-				class="relative my-10 flex h-full flex-col overflow-hidden rounded-2xl bg-white text-gray-600 shadow-lg ring-1 ring-gray-200"
+				class="relative mb-10 mt-6 flex h-full flex-col overflow-hidden rounded-2xl bg-COLORBLK text-COLORWHT shadow-lg ring-1 ring-COLORBLK1"
 			>
-				<div class="border-b p-6">
+				<div class="border-b border-COLORBLK1 p-6">
 					<h6 class="mb-2 text-base font-semibold">All recent reviews</h6>
 					<p class="mb-2 text-sm font-light">
 						{#if reviews}
@@ -82,7 +102,7 @@
 				</div>
 				<div class="flex-auto p-6">
 					<div class="relative flex flex-col justify-center">
-						<div class="absolute left-4 h-full border-r-2"></div>
+						<div class="absolute left-4 h-full border-r-2 border-COLORBLK1"></div>
 						{#if reviews}
 							{#if reviews.length === 0}
 								<div class="relative mb-4">
@@ -90,7 +110,7 @@
 										class="absolute inline-flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 object-cover text-center text-base font-semibold text-white shadow"
 									></span>
 									<div class="ml-12 w-auto pt-1">
-										<h6 class="text-sm font-semibold text-blue-900">No reviews</h6>
+										<h6 class="text-sm font-semibold text-COLORBLK2">No reviews</h6>
 										<p class="mt-1 text-xs text-gray-500">
 											@{data?.username} has yet to post their first review
 										</p>
@@ -106,11 +126,11 @@
 										/>
 										<div class="ml-12 w-auto pt-1">
 											<a href="/product/{review.product.slug}#{review._id}" class="w-fit"
-												><h6 class="text-sm font-semibold text-blue-900 hover:underline">
+												><h6 class="text-sm font-semibold text-COLORWHT hover:underline">
 													{review.product.productName}
 												</h6></a
 											>
-											<p class="mt-1 text-xs text-gray-500">"{review.content}"</p>
+											<p class="mt-1 text-xs text-COLORWHT1">"{review.content}"</p>
 										</div>
 									</div>
 								{/if}

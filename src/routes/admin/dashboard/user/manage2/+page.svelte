@@ -229,20 +229,7 @@
 						description={data?.staff ? 'Administrator' : 'Standard Account'}
 						editProfilePicture={// Admins only have so much control over users
 						data._id == user._id}
-					>
-						<div
-							class="edit-wrap h-fit w-full py-2 lg:w-fit lg:p-0"
-							on:click={() => editPane.classList.toggle('hidden')}
-						>
-							<Button
-								icon={faCog}
-								color="COLORBLE"
-								color_t="COLORWHT"
-								text="Edit Account"
-								custom_style="w-full lg:w-fit justify-center lg:justify-start"
-							/>
-						</div>
-					</UserBanner>
+					/>
 					<div
 						class="widget_andInput"
 						on:click={() => {
@@ -289,7 +276,7 @@
 		{:else if user_id}<div class="font-light">The server returned no data.</div>{/if}
 
 		<div
-			class="editPane flex hidden flex-col lg:flex-row {staff
+			class="editPane flex flex-col lg:flex-row {staff
 				? 'justify-around'
 				: 'justify-start'} w-full bg-COLORBLK1 px-4 py-4 pt-9"
 			bind:this={editPane}
