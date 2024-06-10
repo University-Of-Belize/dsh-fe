@@ -72,7 +72,7 @@
 				{#if data}
 					{#if staff || user._id == data?._id}
 						<div
-							class="button-wrapper h-fit w-full py-2 lg:w-fit lg:p-0"
+							class="button-wrapper h-fit w-full py-2 lg:w-fit lg:p-0 mr-1"
 							on:click={() => goto(`/admin/dashboard/user/manage2?user_id=${data?._id}`)}
 						>
 							<Button
