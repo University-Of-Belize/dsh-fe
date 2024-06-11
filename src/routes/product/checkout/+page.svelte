@@ -22,6 +22,9 @@
 	let cartTotal: number = 0.0;
 
 	onMount(async () => {
+		// **************** TELEMETRY ******************
+		gtag('event', 'begin_checkout');
+		// ************** END TELEMETRY ****************
 		try {
 			if (single_cart && JSON.parse(wants_single_cart)) {
 				localStorage.removeItem('wants_single_cart');
@@ -50,7 +53,7 @@
 						return acc;
 					}, []);
 					dataLength = data?.length;
-					localStorage.setItem("currentCart", JSON.stringify(data));
+					localStorage.setItem('currentCart', JSON.stringify(data));
 					// console.log(data, dataLength === 0);
 				} else {
 					toast.push('Failed to fetch cart data.');

@@ -15,7 +15,13 @@ const addToCart = async (item: string | undefined, quantity: number) => {
 			)) as Response;
 			const data = await response.json();
 			if (response.ok) {
-				toast.push('Added item to cart.');
+				// **************** TELEMETRY ******************
+				gtag('event', 'add_to_cart', {
+					item_id: item,
+					quantity
+				});
+				// ************** END TELEMETRY ****************
+				// toast.push('Added item to cart.');
 				return data;
 			} else {
 				// console.error('Failed to add item to cart.');
@@ -25,6 +31,13 @@ const addToCart = async (item: string | undefined, quantity: number) => {
 						'--toastBarBackground': 'rgb(var(--COLORRED))'
 					}
 				});
+				// **************** TELEMETRY ******************
+				gtag('event', 'cart_error', {
+					error: data.message,
+					item_id: item,
+					quantity
+				});
+				// ************** END TELEMETRY ****************
 			}
 		}, 500); // 500ms break
 	} catch (error) {
@@ -45,6 +58,11 @@ async function emptyCart(index: number | null) {
 			const data = await response.json();
 			if (response.ok) {
 				toast.push('Emptied the cart.');
+				// **************** TELEMETRY ******************
+				gtag('event', 'emptied_cart', {
+					error: data.message
+				});
+				// ************** END TELEMETRY ****************
 				return data;
 			} else {
 				// console.error('Failed to add item to cart.');

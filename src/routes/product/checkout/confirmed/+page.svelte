@@ -9,9 +9,13 @@
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
+	import { v4 } from 'uuid';
+
 	let user: User =
 		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
 	let payment_data: object;
+	let cartTotal = localStorage.cart_total;
+	let currentCart = localStorage.currentCart;
 
 	$: branding_text = 'One second...';
 	$: text = '';
@@ -61,6 +65,48 @@
 				parseFloat(user.credit.$numberDecimal) - parseFloat(json.is.total_amount.$numberDecimal) // Response should have the correct amount
 			);
 			localStorage.user = JSON.stringify(user);
+
+			// *********** TELEMETRY ******************
+			let g_cart: object[] = []; // The modified cart
+			JSON.parse(currentCart).forEach((item, index) => {
+				g_cart.push({
+					item_id: item.product._id,
+					item_name: item.product.name,
+					//affiliation: "Google Merchandise Store",
+					//coupon: "SUMMER_FUN",
+					discount: 0.0,
+					index,
+					item_brand: 'UniFood',
+					//item_category: "Apparel",
+					//item_category2: "Adult",
+					//item_category3: "Shirts",
+					//item_category4: "Crew",
+					//item_category5: "Short sleeve",
+					//item_list_id: "related_products",
+					item_list_name: item.product.productName.trim(),
+					item_variant: item.product.slug.trim(),
+					//location_id: "ChIJIQBpAG2ahYAR_6128GcTUEo",
+					price: item.product.price['$numberDecimal'],
+					quantity: item.quantity
+				});
+			});
+			console.log(g_cart);
+
+			gtag('event', 'purchase', {
+				// This purchase event uses a different transaction ID
+				// from the previous purchase event so Analytics
+				// doesn't deduplicate the events.
+				// Learn more: https://support.google.com/analytics/answer/12313109
+				transaction_id: `T_${v4()}`,
+				value: cartTotal,
+				tax: 0.0,
+				shipping: 0.0,
+				currency: 'BZD',
+				//coupon: "SUMMER_SALE",
+				items: g_cart
+			});
+
+			// *********** END TELEMETRY **************
 		} catch (error) {
 			branding_text = 'Order not placed';
 			text = 'There was an error.';

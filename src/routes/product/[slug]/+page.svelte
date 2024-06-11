@@ -37,6 +37,11 @@
 	let rating = 0;
 
 	onMount(async () => {
+		// **************** TELEMETRY ******************
+		gtag('event', 'view_product', {
+			item_name: params
+		});
+		// ************** END TELEMETRY ****************
 		// Mounted scrolling to anchors
 		locateNodeUsingHash('review');
 

@@ -8,6 +8,7 @@
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faClone, faLock } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
+	import { v4 } from 'uuid';
 
 	import config from '$lib/config/settings';
 	import creditCardType from 'credit-card-type';
@@ -27,6 +28,7 @@
 	let conductingTransaction: boolean = false;
 	let transactionConfirm: boolean = false;
 	let cartTotal = localStorage.cart_total;
+	let currentCart = localStorage.currentCart;
 
 	/*** Card animations and stuff */
 	function flipCard(flip: string) {
@@ -90,6 +92,48 @@
 		}
 		const res = await r.json();
 		toast.push(`${res.message ?? 'Thank you for your order.'}`);
+
+		// *********** TELEMETRY ******************
+		let g_cart: object[] = []; // The modified cart
+		JSON.parse(currentCart).forEach((item, index) => {
+			g_cart.push({
+				item_id: item.product._id,
+				item_name: item.product.slug.trim(),
+				//affiliation: "Google Merchandise Store",
+				//coupon: "SUMMER_FUN",
+				discount: 0.0,
+				index,
+				item_brand: 'UniFood',
+				//item_category: "Apparel",
+				//item_category2: "Adult",
+				//item_category3: "Shirts",
+				//item_category4: "Crew",
+				//item_category5: "Short sleeve",
+				//item_list_id: "related_products",
+				item_list_name: item.product.productName.trim(),
+				item_variant: item.product.slug.trim(),
+				//location_id: "ChIJIQBpAG2ahYAR_6128GcTUEo",
+				price: item.product.price['$numberDecimal'],
+				quantity: item.quantity
+			});
+		});
+		// console.log(g_cart);
+		gtag('event', 'purchase', {
+			// This purchase event uses a different transaction ID
+			// from the previous purchase event so Analytics
+			// doesn't deduplicate the events.
+			// Learn more: https://support.google.com/analytics/answer/12313109
+			transaction_id: `T_${v4()}`,
+			value: cartTotal,
+			tax: 0.0,
+			shipping: 0.0,
+			currency: 'BZD',
+			//coupon: "SUMMER_SALE",
+			items: g_cart
+		});
+
+		// *********** END TELEMETRY **************
+
 		setTimeout(() => {
 			goto('/admin/dashboard');
 		}, 3000);
@@ -127,6 +171,11 @@
 							</div>
 							<label class="mb-2 block text-sm font-light">Card number</label>
 							<input
+							    on:click={()=>{
+									// **************** TELEMETRY ******************
+									gtag('event', 'add_payment_info');
+									// ************** END TELEMETRY ****************
+								}}
 								required
 								type="text"
 								name="cc-number"
