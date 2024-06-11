@@ -93,11 +93,9 @@
 			console.log(g_cart);
 
 			gtag('event', 'purchase', {
-				// This purchase event uses a different transaction ID
-				// from the previous purchase event so Analytics
-				// doesn't deduplicate the events.
 				// Learn more: https://support.google.com/analytics/answer/12313109
-				transaction_id: `T_${v4()}`,
+				transaction_id: `prepaid_t_${v4()}`,
+				prepaid: true,
 				value: cartTotal,
 				tax: 0.0,
 				shipping: 0.0,
