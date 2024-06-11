@@ -169,7 +169,7 @@
 							</div>
 							<label class="mb-2 block text-sm font-light">Card number</label>
 							<input
-							    on:click={()=>{
+								on:click={() => {
 									// **************** TELEMETRY ******************
 									gtag('event', 'add_payment_info');
 									// ************** END TELEMETRY ****************
