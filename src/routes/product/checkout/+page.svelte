@@ -50,6 +50,7 @@
 						return acc;
 					}, []);
 					dataLength = data?.length;
+					localStorage.setItem("currentCart", JSON.stringify(data));
 					// console.log(data, dataLength === 0);
 				} else {
 					toast.push('Failed to fetch cart data.');
