@@ -2,9 +2,12 @@ import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
 import { fetchWebApi } from '$lib/vendor/dishout/api';
 import { toast } from '@zerodevx/svelte-toast';
+
+import type { Product } from '$lib/types/Product.ts';
+
 let debounceTimeout: number;
 
-const addToCart = async (item: string | undefined, quantity: number) => {
+const addToCart = async (product: Product, item: string | undefined, quantity: number) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
@@ -17,8 +20,30 @@ const addToCart = async (item: string | undefined, quantity: number) => {
 			if (response.ok) {
 				// **************** TELEMETRY ******************
 				gtag('event', 'add_to_cart', {
-					item_id: item,
-					quantity
+					currency: 'BZD',
+					value: product.price ? product.price['$numberDecimal'] : 0,
+					items: [
+						{
+							item_id: product._id,
+							item_name: product.productName ? product.productName.trim() : 'Unavailable',
+							//affiliation: "Google Merchandise Store",
+							//coupon: "SUMMER_FUN",
+							discount: 0.0,
+							index: 0,
+							item_brand: 'UniFood',
+							item_category: product.category ? product.category.name.trim() : 'Unavailable',
+							//item_category2: "Adult",
+							//item_category3: "Shirts",
+							//item_category4: "Crew",
+							//item_category5: "Short sleeve",
+							//item_list_id: "related_products",
+							item_list_name: product.productName ? product.productName.trim() : 'Unavailable',
+							item_variant: product.slug ? product.slug.trim() : 'Unavailable',
+							//location_id: "ChIJIQBpAG2ahYAR_6128GcTUEo",
+							price: product.price ? product.price['$numberDecimal'] : 'Unavailable',
+							quantity: 1
+						}
+					]
 				});
 				// ************** END TELEMETRY ****************
 				// toast.push('Added item to cart.');

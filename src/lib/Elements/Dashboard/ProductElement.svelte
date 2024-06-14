@@ -21,6 +21,19 @@
 	export { productPrice as price };
 	export { productSlug as slug };
 	export { productUnavailable as out_of_stock };
+
+	let product = {
+		_id: productId,
+		category: {
+			name: 'Unavailable'
+		},
+		description: productDescription,
+		price: {
+			$numberDecimal: productPrice
+		},
+		productName,
+		slug: productSlug
+	};
 </script>
 
 <div class="mt-4 w-full max-w-sm rounded-lg border border-COLORHPK bg-COLORBLK1">
@@ -64,7 +77,7 @@
 			<a
 				href="#queue-product"
 				on:click={() => {
-					addToCart(productId, 1);
+					addToCart(product, productId, 1);
 					clearTimeout(debounceTimeout);
 					debounceTimeout = setTimeout(async () => {
 						added_to_cart = true;

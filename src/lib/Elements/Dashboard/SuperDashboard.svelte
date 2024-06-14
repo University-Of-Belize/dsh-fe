@@ -78,12 +78,12 @@
 </svelte:head>
 
 <main class="block h-full w-full bg-COLORBLK1 px-6 text-COLORWHT">
-	<div class="navbar flex space-x-2 bg-COLORBLK py-1 text-sm">
+	<div class="navbar mb-6 flex space-x-2 bg-COLORBLK py-1 text-sm">
 		<button class="rounded-md px-2 py-2 hover:bg-COLORBLK1"> Overview </button>
 		<button class="rounded-md px-2 py-2 hover:bg-COLORBLK1"> Analytics </button>
 	</div>
 
-	<div class="dashboard flex w-full">
+	<div class="dashboard flex w-full flex-wrap">
 		<div class="block w-full rounded-md">
 			<div
 				class="col-span-2 -mx-4 bg-gradient-to-t from-indigo-500 to-blue-500 px-4 py-8 sm:col-span-1 sm:mx-0 sm:rounded-xl sm:py-4"

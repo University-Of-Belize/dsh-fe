@@ -67,30 +67,13 @@
 			localStorage.user = JSON.stringify(user);
 
 			// *********** TELEMETRY ******************
-			let g_cart: object[] = []; // The modified cart
-			JSON.parse(currentCart).forEach((item, index) => {
-				g_cart.push({
-					item_id: item.product._id,
-					item_name: item.product.name,
-					//affiliation: "Google Merchandise Store",
-					//coupon: "SUMMER_FUN",
-					discount: 0.0,
-					index,
-					item_brand: 'UniFood',
-					//item_category: "Apparel",
-					//item_category2: "Adult",
-					//item_category3: "Shirts",
-					//item_category4: "Crew",
-					//item_category5: "Short sleeve",
-					//item_list_id: "related_products",
-					item_list_name: item.product.productName.trim(),
-					item_variant: item.product.slug.trim(),
-					//location_id: "ChIJIQBpAG2ahYAR_6128GcTUEo",
-					price: item.product.price['$numberDecimal'],
-					quantity: item.quantity
-				});
+			gtag('event', 'add_payment_info', {
+				currency: 'BZD',
+				value: cartTotal,
+				//coupon: "SUMMER_SALE",
+				payment_type: 'Prepaid Credit',
+				items: JSON.parse(currentCart)
 			});
-			console.log(g_cart);
 
 			gtag('event', 'purchase', {
 				// Learn more: https://support.google.com/analytics/answer/12313109
@@ -101,7 +84,7 @@
 				shipping: 0.0,
 				currency: 'BZD',
 				//coupon: "SUMMER_SALE",
-				items: g_cart
+				items: JSON.parse(currentCart)
 			});
 
 			// *********** END TELEMETRY **************

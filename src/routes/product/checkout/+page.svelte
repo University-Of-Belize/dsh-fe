@@ -21,14 +21,13 @@
 	let dataLength: number = data?.length;
 	let cartTotal: number = 0.0;
 
+	let g_cart: object[] = []; // The modified cart
+
 	onMount(async () => {
-		// **************** TELEMETRY ******************
-		gtag('event', 'begin_checkout');
-		// ************** END TELEMETRY ****************
 		try {
 			if (single_cart && JSON.parse(wants_single_cart)) {
 				localStorage.removeItem('wants_single_cart');
-				addToCart(single_cart, 1)
+				addToCart({ _id: single_cart }, single_cart, 1)
 					.then(() => {
 						setTimeout(() => {
 							window.location.reload();
@@ -53,7 +52,41 @@
 						return acc;
 					}, []);
 					dataLength = data?.length;
-					localStorage.setItem('currentCart', JSON.stringify(data));
+
+					// *********** TELEMETRY ******************
+					data.forEach((item, index) => {
+						g_cart.push({
+							item_id: item.product._id,
+							item_name: item.product.productName.trim(),
+							//affiliation: "Google Merchandise Store",
+							//coupon: "SUMMER_FUN",
+							discount: 0.0,
+							index,
+							item_brand: 'UniFood',
+							//item_category: "Apparel",
+							//item_category2: "Adult",
+							//item_category3: "Shirts",
+							//item_category4: "Crew",
+							//item_category5: "Short sleeve",
+							//item_list_id: "related_products",
+							item_list_name: item.product.productName.trim(),
+							item_variant: item.product.slug.trim(),
+							//location_id: "ChIJIQBpAG2ahYAR_6128GcTUEo",
+							price: item.product.price['$numberDecimal'],
+							quantity: item.quantity
+						});
+						calculateTotal(item.product.price.$numberDecimal, item.quantity);
+					});
+					// console.log(g_cart);
+					gtag('event', 'view_cart', {
+						currency: 'BZD',
+						value: cartTotal,
+						//coupon: "SUMMER_SALE",
+						items: g_cart
+					});
+					localStorage.setItem('currentCart', JSON.stringify(g_cart));
+					// *********** END TELEMETRY **************
+
 					// console.log(data, dataLength === 0);
 				} else {
 					toast.push('Failed to fetch cart data.');
@@ -109,11 +142,6 @@
 				<div class="cart_items flex w-full flex-col flex-wrap space-y-2">
 					{#if data != undefined && dataLength > 0}
 						{#each data as item}
-							{(() => {
-								calculateTotal(item.product.price.$numberDecimal, item.quantity);
-								return ''; // Weird hack
-							})()}
-
 							<div
 								class="flex w-full flex-col items-center rounded-lg border border-COLORHPK bg-COLORBLK2 shadow hover:opacity-90 md:flex-row"
 							>
@@ -192,6 +220,13 @@
 								href="/product/checkout/payments"
 								on:click={() => {
 									localStorage.setItem('cart_total', JSON.stringify(cartTotal));
+									gtag('event', 'begin_checkout', {
+										currency: 'BZD',
+										value: cartTotal,
+										//coupon: "SUMMER_SALE",
+										items: g_cart
+									});
+
 									goto('/product/checkout/payments');
 								}}
 								class="flex items-center justify-center space-x-2 rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white transition-all hover:bg-blue-800 focus:outline-none focus:ring-1 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
