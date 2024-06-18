@@ -58,7 +58,7 @@ const addToCart = async (product: Product, item: string | undefined, quantity: n
 				});
 				// **************** TELEMETRY ******************
 				gtag('event', 'cart_error', {
-					error: data.message,
+					cart_error: data.message,
 					item_id: item,
 					quantity
 				});
