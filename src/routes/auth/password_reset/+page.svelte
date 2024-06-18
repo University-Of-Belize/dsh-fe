@@ -138,7 +138,7 @@
 										type="text"
 										id="text"
 										name="user_id"
-										autocomplete="off"
+										autocomplete={ResetToken ? 'new-password' : 'off'}
 										minlength="2"
 										placeholder={ResetToken ? 'Typed password is shown in Cleartext' : 'User ID'}
 										class="block w-full rounded-md bg-COLORBLK1 px-4 py-3 text-sm outline-none ring-offset-1 focus:ring-2"

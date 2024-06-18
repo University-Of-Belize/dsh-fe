@@ -111,182 +111,157 @@
 	<title>UniFood | Dashboard / Promotions / Manage Promotion Codes</title>
 </svelte:head>
 
-<main class="h-screen w-full overflow-hidden">
-	<div class="navigation z-20 w-full">
-		<Navigation
-			transparency={5}
-			search={true}
-			titleText="{config.ui['branding-text']} {staff
-				? ''
-				: "<div class='font-bold overflow-hidden'>| Dashboard</div>"}"
-			titleWhere="/admin/dashboard"
-		/>
-	</div>
-
-	<div class="main-content flex h-full items-center justify-start overflow-hidden text-COLORWHT">
-		<div
-			class="drawer hidden h-screen w-full flex-col justify-start overflow-auto bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:block lg:w-1/4"
-			bind:this={navDrawer}
-		>
-			<DashList {staff} />
+<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
+	<div class="flex-header flex w-full flex-wrap items-center">
+		<div class="block">
+			<div class="flex pb-2 text-2xl font-semibold">
+				{promo_id ? 'Edit' : 'New'} Promo Code
+			</div>
+			<div class="flex pb-12 text-xl font-light">
+				{promo_id ? 'Edit' : 'Create'} promo codes
+			</div>
 		</div>
-		<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
-			<div class="flex-header flex w-full flex-wrap items-center">
-				<div class="block">
-					<div class="flex pb-2 text-2xl font-semibold">
-						{promo_id ? 'Edit' : 'New'} Promo Code
-					</div>
-					<div class="flex pb-12 text-xl font-light">
-						{promo_id ? 'Edit' : 'Create'} promo codes
+	</div>
+	<div class="flex w-full flex-wrap">
+		{#if data != undefined}
+			{#if !isNaN(user.id) && staff}
+				<div class="user_wrap w-full">
+					<div class="ctg_wrp w-full">
+						<PromoPill promo={data} description={data.code}
+							><div slot="alias" class="my-2">
+								<div class="text-md font-semibold">Created by</div>
+								<ul>
+									<li class="flex items-center before:content-['-⠀']">
+										<div class="text-sm font-light">
+											{data.created_by ? data.created_by.username : 'Cannot retrieve author.'}
+										</div>
+									</li>
+								</ul>
+							</div>
+						</PromoPill>
 					</div>
 				</div>
-			</div>
-			<div class="flex w-full flex-wrap">
-				{#if data != undefined}
-					{#if !isNaN(user.id) && staff}
-						<div class="user_wrap w-full">
-							<div class="ctg_wrp w-full">
-								<PromoPill promo={data} description={data.code}
-									><div slot="alias" class="my-2">
-										<div class="text-md font-semibold">Created by</div>
-										<ul>
-											<li class="flex items-center before:content-['-⠀']">
-												<div class="text-sm font-light">
-													{data.created_by ? data.created_by.username : 'Cannot retrieve author.'}
-												</div>
-											</li>
-										</ul>
-									</div>
-								</PromoPill>
-							</div>
-						</div>
-					{/if}{/if}
-				<div
-					class="editPane flex w-full flex-col justify-around bg-COLORBLK1 px-4 py-4 lg:flex-row"
-					bind:this={editPane}
-				>
-					<div class="editGroup flex flex-col px-4 pb-8">
-						<div class="flex pb-12 text-xl font-semibold">
-							{promo_id ? 'Edit' : 'Create a'}
-							promo code
-						</div>
-						<form action="#" on:submit={(event) => handleSubmit(event)} class="space-y-3">
-							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-light">Promo code</div>
-								<TextInput
-									icon={faTag}
-									name="code"
-									placeholder="Enter a promo code"
-									custom_style="bg-transparent"
-									value={data ? data.code : ''}
-								/>
-							</div>
+			{/if}{/if}
+		<div
+			class="editPane flex w-full flex-col justify-around bg-COLORBLK1 px-4 py-4 lg:flex-row"
+			bind:this={editPane}
+		>
+			<div class="editGroup flex flex-col px-4 pb-8">
+				<div class="flex pb-12 text-xl font-semibold">
+					{promo_id ? 'Edit' : 'Create a'}
+					promo code
+				</div>
+				<form action="#" on:submit={(event) => handleSubmit(event)} class="space-y-3">
+					<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
+						<div class="label w-full text-lg font-light">Promo code</div>
+						<TextInput
+							icon={faTag}
+							name="code"
+							placeholder="Enter a promo code"
+							custom_style="bg-transparent"
+							value={data ? data.code : ''}
+						/>
+					</div>
 
-							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-light">Nickname (optional)</div>
-								<TextInput
-									icon={faSortAlphaAsc}
-									name="nickname"
-									placeholder="Enter a nickname"
-									custom_style="bg-transparent"
-									value={data ? data.nickname : ''}
-								/>
+					<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
+						<div class="label w-full text-lg font-light">Nickname (optional)</div>
+						<TextInput
+							icon={faSortAlphaAsc}
+							name="nickname"
+							placeholder="Enter a nickname"
+							custom_style="bg-transparent"
+							value={data ? data.nickname : ''}
+						/>
+					</div>
+					<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
+						<div class="label w-full text-lg font-light">Description</div>
+						<div class="review-wrap mb-4 mt-1 w-full rounded-md border border-COLORWHT">
+							<div class="text-i-combo flex items-center justify-start font-semibold text-COLORWHT">
+								<div class="icon px-2 py-2"><Fa icon={faPencil} size="1.01x" /></div>
+								Type in a description
 							</div>
+							<textarea
+								name="description"
+								class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORWHT focus:outline-none"
+								rows="6"
+								placeholder="Promotion description goes here"
+								value={data ? data.description : ''}
+							/>
+						</div>
+					</div>
+					<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
+						<div class="label w-full text-lg font-light">Discount percentage</div>
+						<TextInput
+							icon={faTag}
+							name="discount"
+							placeholder="Enter a discount percentage (e.g. 10)"
+							custom_style="bg-transparent"
+							value={data ? data.discount_percentage : ''}
+						/>
+					</div>
+					<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
+						<div class="label w-full text-lg font-light">Start Date</div>
+						<DateInput
+							icon={faCalendarAlt}
+							name="p_start"
+							placeholder="Enter a discount percentage (e.g. 10)"
+							custom_style="bg-transparent"
+							value={data ? getDate(data.start_date) : new Date().toISOString().split('T')[0]}
+						/>
+					</div>
+					<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
+						<div class="label w-full text-lg font-light">End Date</div>
+						<DateInput
+							icon={faCalendarAlt}
+							name="p_end"
+							placeholder="Enter a discount percentage (e.g. 10)"
+							custom_style="bg-transparent"
+							value={data ? getDate(data.expiry_date) : new Date().toISOString().split('T')[0]}
+						/>
+					</div>
+					<button class="btn_wrp h-fit w-fit" type="submit">
+						<Button
+							icon={faCog}
+							color="COLORWHT"
+							color_t="COLORBLK"
+							text={promo_id ? 'Apply changes' : 'Create promotion'}
+							custom_style="my-2"
+						/>
+					</button>
+				</form>
+			</div>
+			<div class="editGroup flex flex-col px-4 pb-8">
+				{#if staff && data != undefined}
+					<div class="flex pb-12 text-xl font-semibold">Take Action</div>
+					<div class="flex flex-col lg:flex-row">
+						<div class="flex flex-col">
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-light">Description</div>
-								<div class="review-wrap mb-4 mt-1 w-full rounded-md border border-COLORWHT">
-									<div
-										class="text-i-combo flex items-center justify-start font-semibold text-COLORWHT"
-									>
-										<div class="icon px-2 py-2"><Fa icon={faPencil} size="1.01x" /></div>
-										Type in a description
-									</div>
-									<textarea
-										name="description"
-										class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORWHT focus:outline-none"
-										rows="6"
-										placeholder="Promotion description goes here"
-										value={data ? data.description : ''}
+								<div class="label w-full text-lg font-semibold">Delete promotion</div>
+								<div
+									class="btn_wrp"
+									on:click={() => {
+										deletePromo(data.code);
+										toast.push(`You have deleted the promo ${data.code}. It will be invalidated.`);
+									}}
+								>
+									<Button
+										icon={faLock}
+										text="Delete promo"
+										color="transparent"
+										color_t="COLORHPK"
+										custom_style="border border-COLORHPK my-2"
 									/>
 								</div>
 							</div>
-							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-light">Discount percentage</div>
-								<TextInput
-									icon={faTag}
-									name="discount"
-									placeholder="Enter a discount percentage (e.g. 10)"
-									custom_style="bg-transparent"
-									value={data ? data.discount_percentage : ''}
-								/>
-							</div>
-							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-light">Start Date</div>
-								<DateInput
-									icon={faCalendarAlt}
-									name="p_start"
-									placeholder="Enter a discount percentage (e.g. 10)"
-									custom_style="bg-transparent"
-									value={data ? getDate(data.start_date) : new Date().toISOString().split('T')[0]}
-								/>
-							</div>
-							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-								<div class="label w-full text-lg font-light">End Date</div>
-								<DateInput
-									icon={faCalendarAlt}
-									name="p_end"
-									placeholder="Enter a discount percentage (e.g. 10)"
-									custom_style="bg-transparent"
-									value={data ? getDate(data.expiry_date) : new Date().toISOString().split('T')[0]}
-								/>
-							</div>
-							<button class="btn_wrp h-fit w-fit" type="submit">
-								<Button
-									icon={faCog}
-									color="COLORWHT"
-									color_t="COLORBLK"
-									text={promo_id ? 'Apply changes' : 'Create promotion'}
-									custom_style="my-2"
-								/>
-							</button>
-						</form>
-					</div>
-					<div class="editGroup flex flex-col px-4 pb-8">
-						{#if staff && data != undefined}
-							<div class="flex pb-12 text-xl font-semibold">Take Action</div>
-							<div class="flex flex-col lg:flex-row">
-								<div class="flex flex-col">
-									<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
-										<div class="label w-full text-lg font-semibold">Delete promotion</div>
-										<div
-											class="btn_wrp"
-											on:click={() => {
-												deletePromo(data.code);
-												toast.push(
-													`You have deleted the promo ${data.code}. It will be invalidated.`
-												);
-											}}
-										>
-											<Button
-												icon={faLock}
-												text="Delete promo"
-												color="transparent"
-												color_t="COLORHPK"
-												custom_style="border border-COLORHPK my-2"
-											/>
-										</div>
-									</div>
-								</div>
-							</div>{/if}
-					</div>
-				</div>
-				<!-- {/if}
-				{:else}<div class="font-light">There was a problem while displaying the data.</div>{/if}
-		-->
+						</div>
+					</div>{/if}
 			</div>
 		</div>
+		<!-- {/if}
+				{:else}<div class="font-light">There was a problem while displaying the data.</div>{/if}
+		-->
 	</div>
-</main>
+</div>
 
 <style>
 	:root {

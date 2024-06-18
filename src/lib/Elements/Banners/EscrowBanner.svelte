@@ -3,6 +3,7 @@
 	export let text: string;
 	export let subtitle: string;
 	export let branding_text: string = config.ui['branding-text'];
+	export let html: boolean = false;
 </script>
 
 <div class="footer block w-full bg-COLORBLK5 text-center text-COLORWHT">
@@ -12,7 +13,13 @@
 				{branding_text}
 			</div>
 			<div class="text text-xl font-light">{text}</div>
-			<div class="text text-sm font-light">{subtitle}</div>
+			<div class="text text-sm font-light">
+				{#if html}
+					{@html subtitle}
+				{:else}
+					{subtitle}
+				{/if}
+			</div>
 			<div class="content flex w-full items-center justify-center">
 				<slot />
 			</div>

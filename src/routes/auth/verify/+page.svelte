@@ -110,7 +110,7 @@
 				// Block the user from doing anything much
 				localStorage.watchdog = 'true';
 				localStorage.customReason = 'true';
-				localStorage.watchDogReason = 'To continue setup, open the app on your device.';
+				localStorage.watchDogReason = `<span>Setup incomplete. To continue setup, open the app on your device.<br/>Alternatively, <a style="text-decoration: underline; font-weight: bold;" href="javascript:(function(){ localStorage.removeItem('watchDogReason'); localStorage.removeItem('setup_inProgress'); localStorage.removeItem('customReason'); localStorage.removeItem('watchdog'); setTimeout(()=>{window.location.href = '/auth/create';}, 2000);})();">cancel setup.</a></span>`;
 				localStorage.setup_inProgress = 'true';
 				await installPrompt.prompt().then((choiceResult: any) => {
 					if (choiceResult.outcome === 'accepted') {

@@ -18,6 +18,10 @@
 	let canvas: HTMLCanvasElement;
 	let data: string = '';
 
+	let blocked_message: string = "Sorry, you've been blocked from our services.";
+	let error_string: string = '';
+	let error_message: HTMLDivElement;
+
 	onMount(() => {
 		// Take a screenshot
 		html2canvas(document.body).then((c) => {
@@ -32,13 +36,16 @@
 			goto(continue_url ?? '/admin/dashboard');
 		}
 		if (blocked) {
-			toast.push("Sorry, you've been blocked from our services.");
+			toast.push(blocked_message);
 			goto('/auth/verify');
 		}
 	});
 
 	async function Login(payload: any) {
 		clearTimeout(debounceTimeout);
+		error_message.innerText = '';
+		// error_graphic.classList.add('hidden');
+		// error_graphic.classList.remove('absolute');
 		debounceTimeout = setTimeout(async () => {
 			logging_in = true;
 			await postData(payload, 'login');
@@ -67,7 +74,7 @@
 			const json = await response.json();
 			if (response.status === 403) {
 				// Hackish asf lmfao
-				if (json.message === "Sorry, you've been blocked from our services.") {
+				if (json.message === blocked_message) {
 					// Flag the user
 					localStorage.setItem('blocked', 'true');
 					toast.push(`${json.message}`, {
@@ -76,6 +83,9 @@
 							'--toastBarBackground': 'rgb(var(--COLORRED))'
 						}
 					});
+					error_message.innerText = blocked_message;
+					// error_graphic.classList.remove('hidden');
+					// error_graphic.classList.add('absolute');
 					// Redirect to verify to notify the status
 					return goto('/auth/verify');
 				}
@@ -83,6 +93,10 @@
 			if (!response.ok) {
 				// Special cases
 				if (response.status === 418) {
+					error_message.innerText = '是/不是/回去/46524F4D5F57484154594F5544494';
+					// error_graphic.classList.remove('hidden');
+					// error_graphic.classList.add('absolute');
+
 					localStorage.setItem('token', json.is[1]);
 					toast.push(json.is[0]);
 					document.body.style.background = 'red';
@@ -108,6 +122,11 @@
 				setTimeout(() => {
 					logging_in = false; // Slight "bounce"
 				}, 450);
+
+				error_message.innerText = `${json.message}`;
+				// error_graphic.classList.remove('hidden');
+				// error_graphic.classList.add('absolute');
+
 				return toast.push(`${json.message}`, {
 					dismissable: false,
 					theme: {
@@ -128,6 +147,11 @@
 			setTimeout(() => {
 				logging_in = false; // Reenable after such time
 			}, 3000);
+
+			error_message.innerText = `${error.message}. Try again later.`;
+			// error_graphic.classList.remove('hidden');
+			// error_graphic.classList.add('absolute');
+
 			toast.push(`${error.message}. Try again later.`, {
 				dismissable: false,
 				theme: {
@@ -324,6 +348,9 @@
 								required
 							/>
 						</div>
+						<p bind:this={error_message} class="mt-2 text-xs text-rose-600" id="email-error">
+							{error_string}
+						</p>
 						<div class="mb-12 mt-4">
 							<p class="whitespace-nowrap text-gray-600">
 								Forgot Password?

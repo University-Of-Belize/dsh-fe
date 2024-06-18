@@ -31,6 +31,7 @@
 	}
 </script>
 
+<span class="hidden h-full"></span>
 <div
 	aria-disabled={disabled}
 	title={disabled ? disabled_text : ''}

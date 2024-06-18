@@ -3,6 +3,52 @@
 	// import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import { toast } from '@zerodevx/svelte-toast';
+
+	import type { ThemeData } from '$lib/types/ThemeDefinition';
+
+	// The "themes" object
+	const themes: ThemeData[] = [
+		{ name: 'Soft Pink', id: 'soft-pink' },
+		{
+			name: 'Light v2',
+			id: 'light-v2',
+			description: "Experimental, but not as bad. Generated using 'Theme Creator'."
+		},
+		{ name: 'Grey', id: 'grey', description: 'Used to be light mode. Not anymore.' },
+		{
+			name: 'Dark v3',
+			id: 'dark-v3',
+			description:
+				'Third iteration of experimental dark mode skin. Report any cosmetic bugs using Feedback Hub.'
+		},
+		{
+			name: 'Dark v2',
+			id: 'dark-v2',
+			description: 'Latest, stable dark mode skin. Report any cosmetic bugs using Feedback Hub.'
+		},
+		{
+			name: 'UB Theme',
+			id: 'ub-theme',
+			description:
+				'UB Theme is meant to comply with the branding guidelines given to us by The University of Belize.'
+		},
+		{
+			name: 'Fandom Wiki',
+			id: 'fandom-wiki'
+		},
+		{
+			name: 'Green',
+			id: 'green-ish'
+		},
+		{
+			name: 'Bubblegum',
+			id: 'bubble-gum'
+		},
+		{
+			name: 'Lol',
+			id: 'lol'
+		}
+	];
 </script>
 
 <!-- Dark mode -->
@@ -35,100 +81,6 @@
 				class="activate h-fit w-fit"
 				on:click={() => {
 					localStorage.setItem('theme', 'dark');
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORGRN1"
-					color_t="COLORGRN"
-					text="ACTIVATE"
-				/>
-			</div>
-		{/if}
-	</div>
-</GenericPill>
-
-<!-- Dark v2 -->
-<GenericPill
-	icon="/icons/font-awesome/scribble.svg"
-	title="Dark v2"
-	description="Latest, stable dark mode skin. Report any cosmetic bugs using Feedback Hub."
->
-	<div class="controls flex space-x-2">
-		{#if localStorage.theme === 'dark-v2'}
-			<div
-				class="deactivate h-fit w-fit"
-				on:click={() => {
-					localStorage.removeItem('theme');
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORHPK"
-					color_t="COLORHPK"
-					text="DEACTIVATE"
-				/>
-			</div>
-		{:else}
-			<div
-				class="activate h-fit w-fit"
-				on:click={() => {
-					localStorage.setItem('theme', 'dark-v2');
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORGRN1"
-					color_t="COLORGRN"
-					text="ACTIVATE"
-				/>
-			</div>
-		{/if}
-	</div>
-</GenericPill>
-
-<!-- Dark v3 -->
-<GenericPill
-	icon="/icons/font-awesome/scribble.svg"
-	title="Dark v3"
-	description="Third iteration of experimental dark mode skin. Report any cosmetic bugs using Feedback Hub."
->
-	<div class="controls flex space-x-2">
-		{#if localStorage.theme === 'dark-v3'}
-			<div
-				class="deactivate h-fit w-fit"
-				on:click={() => {
-					localStorage.removeItem('theme');
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORHPK"
-					color_t="COLORHPK"
-					text="DEACTIVATE"
-				/>
-			</div>
-		{:else}
-			<div
-				class="activate h-fit w-fit"
-				on:click={() => {
-					localStorage.setItem('theme', 'dark-v3');
 					toast.push('One moment...');
 					setTimeout(() => {
 						window.location.reload();
@@ -193,106 +145,60 @@
 	</div>
 </GenericPill>
 
-<!-- Grey mode -->
-<GenericPill
-	icon="/icons/font-awesome/scribble.svg"
-	title="Grey theme"
-	description="Used to be light mode. Not anymore."
->
-	<div class="controls flex space-x-2">
-		{#if localStorage.theme === 'grey'}
-			<div
-				class="deactivate h-fit w-fit"
-				on:click={() => {
-					localStorage.removeItem('theme');
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORHPK"
-					color_t="COLORHPK"
-					text="DEACTIVATE"
-				/>
-			</div>
-		{:else}
-			<div
-				class="activate h-fit w-fit"
-				on:click={() => {
-					localStorage.setItem('theme', 'grey');
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORGRN1"
-					color_t="COLORGRN"
-					text="ACTIVATE"
-				/>
-			</div>
-		{/if}
-	</div>
-</GenericPill>
-
-<!-- Light v2 (Theme) -->
-<GenericPill
-	icon="/icons/font-awesome/scribble.svg"
-	title="Light v2 (Theme)"
-	description="Experimental, but not as bad. Generated using 'Theme Creator'."
->
-	<div class="controls flex space-x-2">
-		{#if localStorage.theme === 'light-v2'}
-			<!-- Theme name -->
-			<div
-				class="deactivate h-fit w-fit"
-				on:click={() => {
-					localStorage.removeItem('theme');
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORHPK"
-					color_t="COLORHPK"
-					text="DEACTIVATE"
-				/>
-			</div>
-		{:else}
-			<div
-				class="activate h-fit w-fit"
-				on:click={() => {
-					localStorage.setItem('theme', 'light-v2'); // Theme name
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORGRN1"
-					color_t="COLORGRN"
-					text="ACTIVATE"
-				/>
-			</div>
-		{/if}
-	</div>
-</GenericPill>
+{#each themes as theme}
+	<!--- {theme.name} (Theme) -->
+	<GenericPill
+		icon="/icons/font-awesome/scribble.svg"
+		title="{theme.name} (Theme)"
+		description={theme.description ?? `${theme.name} (Theme). Created using 'Theme Creator'.`}
+	>
+		<div class="controls flex space-x-2">
+			{#if localStorage.theme === theme.id}
+				<div
+					class="deactivate h-fit w-fit"
+					on:click={() => {
+						localStorage.removeItem('theme');
+						toast.push('One moment...');
+						setTimeout(() => {
+							window.location.reload();
+						}, 3000);
+					}}
+				>
+					<Button
+						color="transparent"
+						custom_style="border border-COLORHPK"
+						color_t="COLORHPK"
+						text="DEACTIVATE"
+					/>
+				</div>
+			{:else}
+				<div
+					class="activate h-fit w-fit"
+					on:click={() => {
+						localStorage.setItem('theme', theme.id);
+						toast.push('One moment...');
+						setTimeout(() => {
+							window.location.reload();
+						}, 3000);
+					}}
+				>
+					<Button
+						color="transparent"
+						custom_style="border border-COLORGRN1"
+						color_t="COLORGRN"
+						text="ACTIVATE"
+					/>
+				</div>
+			{/if}
+		</div>
+	</GenericPill>
+{/each}
 
 <!-- Staff tools V1 -->
 <GenericPill
-	icon="/icons/font-awesome/scribble.svg"
+	icon="/icons/font-awesome/gear-code.svg"
 	title="Staff tools V1"
-	description="Staff management tools."
+	description="Website staff management tools."
 >
 	<div class="controls flex space-x-2">
 		{#if localStorage.staff === 'true'}
@@ -335,56 +241,9 @@
 	</div>
 </GenericPill>
 
-<!--- UB (Theme) -->
-<GenericPill
-	icon="/icons/font-awesome/scribble.svg"
-	title="UB (Theme)"
-	description="Just- don't. This is a joke. This is only here to comply with UB branding standards for the time being."
->
-	<div class="controls flex space-x-2">
-		{#if localStorage.theme === 'ub-theme'}
-			<div
-				class="deactivate h-fit w-fit"
-				on:click={() => {
-					localStorage.removeItem('theme');
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORHPK"
-					color_t="COLORHPK"
-					text="DEACTIVATE"
-				/>
-			</div>
-		{:else}
-			<div
-				class="activate h-fit w-fit"
-				on:click={() => {
-					localStorage.setItem('theme', 'ub-theme');
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORGRN1"
-					color_t="COLORGRN"
-					text="ACTIVATE"
-				/>
-			</div>
-		{/if}
-	</div>
-</GenericPill>
-
 <!--- Theme Creator (Experimental) -->
 <GenericPill
-	icon="/icons/font-awesome/scribble.svg"
+	icon="/icons/font-awesome/gear-code.svg"
 	title="Theme Creator (Experimental)"
 	description="'Theme Creator' allows the creation of new skins for the website."
 >
@@ -431,22 +290,19 @@
 	</div>
 </GenericPill>
 
-<!-- Fandom Wiki (Theme) -->
-<GenericPill
-	icon="/icons/font-awesome/scribble.svg"
-	title="Fandom Wiki (Theme)"
-	description="Generated using 'Theme Creator'."
->
+<!--- Developer Mode -->
+<GenericPill icon="/icons/font-awesome/gear-code.svg" title="Dev" description="dev">
 	<div class="controls flex space-x-2">
-		{#if localStorage.theme === 'fandom-wiki'}
+		{#if localStorage.dev != undefined}
 			<div
 				class="deactivate h-fit w-fit"
 				on:click={() => {
-					localStorage.removeItem('theme');
+					localStorage.removeItem('dev');
 					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
+					// No reload
+					// setTimeout(() => {
+					// 	window.location.reload();
+					// }, 3000);
 				}}
 			>
 				<Button
@@ -460,153 +316,12 @@
 			<div
 				class="activate h-fit w-fit"
 				on:click={() => {
-					localStorage.setItem('theme', 'fandom-wiki');
+					localStorage.setItem('dev', '');
 					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORGRN1"
-					color_t="COLORGRN"
-					text="ACTIVATE"
-				/>
-			</div>
-		{/if}
-	</div>
-</GenericPill>
-
-<!--- Green (Theme) -->
-<GenericPill
-	icon="/icons/font-awesome/scribble.svg"
-	title="Green (Theme)"
-	description="Generated using 'Theme Creator'."
->
-	<div class="controls flex space-x-2">
-		{#if localStorage.theme === 'green-ish'}
-			<div
-				class="deactivate h-fit w-fit"
-				on:click={() => {
-					localStorage.removeItem('theme');
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORHPK"
-					color_t="COLORHPK"
-					text="DEACTIVATE"
-				/>
-			</div>
-		{:else}
-			<div
-				class="activate h-fit w-fit"
-				on:click={() => {
-					localStorage.setItem('theme', 'green-ish');
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORGRN1"
-					color_t="COLORGRN"
-					text="ACTIVATE"
-				/>
-			</div>
-		{/if}
-	</div>
-</GenericPill>
-
-<!--- Bubblegum (Theme) -->
-<GenericPill
-	icon="/icons/font-awesome/scribble.svg"
-	title="Bubblegum (Theme)"
-	description="Generated using 'Theme Creator'."
->
-	<div class="controls flex space-x-2">
-		{#if localStorage.theme === 'bubble-gum'}
-			<div
-				class="deactivate h-fit w-fit"
-				on:click={() => {
-					localStorage.removeItem('theme');
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORHPK"
-					color_t="COLORHPK"
-					text="DEACTIVATE"
-				/>
-			</div>
-		{:else}
-			<div
-				class="activate h-fit w-fit"
-				on:click={() => {
-					localStorage.setItem('theme', 'bubble-gum');
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORGRN1"
-					color_t="COLORGRN"
-					text="ACTIVATE"
-				/>
-			</div>
-		{/if}
-	</div>
-</GenericPill>
-
-<!-- Lol (Theme) -->
-<GenericPill
-	icon="/icons/font-awesome/scribble.svg"
-	title="Lol (Theme)"
-	description="Generated using 'Theme Creator'."
->
-	<div class="controls flex space-x-2">
-		{#if localStorage.theme === 'lol'}
-			<!-- Theme name -->
-			<div
-				class="deactivate h-fit w-fit"
-				on:click={() => {
-					localStorage.removeItem('theme');
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
-				}}
-			>
-				<Button
-					color="transparent"
-					custom_style="border border-COLORHPK"
-					color_t="COLORHPK"
-					text="DEACTIVATE"
-				/>
-			</div>
-		{:else}
-			<div
-				class="activate h-fit w-fit"
-				on:click={() => {
-					localStorage.setItem('theme', 'lol'); // Theme name
-					toast.push('One moment...');
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
+					// No reload
+					// setTimeout(() => {
+					// 	window.location.reload();
+					// }, 3000);
 				}}
 			>
 				<Button

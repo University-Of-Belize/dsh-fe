@@ -10,13 +10,30 @@
 	let productDescription: string;
 	let productPrice: string;
 	let productSlug: string;
+	let productUnavailable: boolean;
 	let added_to_cart: boolean = false;
+	let clicked_times: number = 0;
+	let debounceTimeout: number;
 	export { productImage as image };
 	export { productId as id };
 	export { productName as name };
 	export { productDescription as description };
 	export { productPrice as price };
 	export { productSlug as slug };
+	export { productUnavailable as out_of_stock };
+
+	let product = {
+		_id: productId,
+		category: {
+			name: 'Unavailable'
+		},
+		description: productDescription,
+		price: {
+			$numberDecimal: productPrice
+		},
+		productName,
+		slug: productSlug
+	};
 </script>
 
 <div class="mt-4 w-full max-w-sm rounded-lg border border-COLORHPK bg-COLORBLK1">
@@ -37,9 +54,15 @@
 	</a>
 	<div class="px-5 py-1 pb-5 text-COLORWHT">
 		<a href="/product/{productSlug}">
-			<h5 class="w-fit text-xl font-semibold tracking-tight hover:underline">
+			<span class="stub strikethrough hidden" />
+			<h5
+				class="w-fit text-xl font-semibold tracking-tight hover:underline {productUnavailable
+					? 'line-through'
+					: ''}"
+			>
 				{productName}
 			</h5>
+			{@html productUnavailable ? `<span class="text-COLORHPK">OUT OF STOCK</span>` : ''}
 		</a>
 		<div
 			class="mt-2 block items-center justify-start space-y-6 lg:flex lg:flex-wrap lg:justify-between lg:space-y-0"
@@ -54,15 +77,23 @@
 			<a
 				href="#queue-product"
 				on:click={() => {
-					addToCart(productId, 1);
-					added_to_cart = true;
+					addToCart(product, productId, 1);
+					clearTimeout(debounceTimeout);
+					debounceTimeout = setTimeout(async () => {
+						added_to_cart = true;
+						clicked_times += 1;
+					}, 500);
 				}}
 				class="flex items-center justify-center space-x-2 rounded-lg transition-all {added_to_cart
 					? 'bg-green-700'
 					: 'bg-blue-700'} px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-1 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 			>
 				<Fa icon={added_to_cart ? faCheckDouble : faShoppingCart} />
-				<div>{added_to_cart ? 'Added to cart' : 'Add to cart'}</div></a
+				<div>
+					{added_to_cart
+						? `Added to cart ${clicked_times > 1 ? `(${clicked_times})` : ''}`
+						: 'Add to cart'}
+				</div></a
 			>
 		</div>
 	</div>

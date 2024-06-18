@@ -1,22 +1,17 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
+	import DataCard from '$lib/Elements/Cards/DataCard.svelte';
+	import SuperDashboard from '$lib/Elements/Dashboard/SuperDashboard.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import ProductBanner from '$lib/Elements/Banners/ProductBanner.svelte';
-	import DataCard from '$lib/Elements/Cards/DataCard.svelte';
-	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
-	import { faAd, faLock, faUnlockKeyhole } from '@fortawesome/free-solid-svg-icons';
 	import type { Product as Product_ } from '$lib/types/Product';
 	import type { User } from '$lib/types/User';
-	import { what_is } from '$lib/vendor/dishout/What_Is';
-	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { faGift, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+	import { faGift } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import Fa from 'svelte-fa';
 	let user: User =
 		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
 	let categories: Category[] = [];
@@ -27,7 +22,22 @@
 	// let clientHeight: number;
 	let product: Product_[] | null;
 
+	let LCP: string;
+	let LCP_EXT: string;
+
 	onMount(async () => {
+		// Get the root element
+		const root = document.documentElement;
+
+		// Get the computed styles of the root element
+		const style = getComputedStyle(root);
+
+		// Get the value of the variable
+		LCP = style.getPropertyValue('--LANDINGPHOTO');
+		LCP = LCP.substring(4, LCP.length - 1).replace(/['"]+/g, ''); // Remove the dumb quotes
+
+		LCP_EXT = LCP.split('.').pop(); // Get the extension
+
 		try {
 			const res = (await fetchWebApi('v1/menu/random', 'GET')) as Response;
 			if (!res) return;
@@ -62,12 +72,17 @@
 	}
 </script>
 
+<svelte:head>
+	<!-- Preload the LCP image with a high fetchpriority so it starts loading with the stylesheet. -->
+	<link rel="preload" fetchpriority="high" as="image" href={LCP} type="image/{LCP_EXT}" />
+</svelte:head>
+
 <main class="h-screen w-full text-COLORWHT">
 	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} />
 	</div>
-	<div class="hero mb-8">
-		<!-- <div
+		<div class="hero mb-8">
+			<!-- <div
 			class="image-and-wrapper relative"
 			style="height: 250px;{localStorage.token ? '100vh' : '800px'}"
 		>
@@ -107,104 +122,110 @@
 			<div class="hero-image h-full w-full" />
 		</div> -->
 
-		<div class="hero-image w-full p-8">
-			<div class="mb-4 w-20 rounded-md bg-COLORBLK2 px-2 py-1 text-sm font-medium text-COLORWHT">
-				BETA
-			</div>
-			<p class="mb-2 text-2xl">UniFood is an online ordering system.</p>
-			<p class="mb-6 text-COLORWHT2">
-				Online Test #2 is officially here! Sign up using the button below 👇
-			</p>
-			<button
-				class="flex items-center space-x-2 rounded-md border-2 border-COLORWHT px-4 py-2 font-medium text-COLORWHT transition hover:bg-COLORBLK1 hover:opacity-80"
-			>
-				<a href="/auth/create"><span> Sign up </span></a>
-				<span
-					><svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24"
-						fill="currentColor"
-						class="h-6 w-6"
-					>
-						<path
-							fill-rule="evenodd"
-							d="M16.72 7.72a.75.75 0 011.06 0l3.75 3.75a.75.75 0 010 1.06l-3.75 3.75a.75.75 0 11-1.06-1.06l2.47-2.47H3a.75.75 0 010-1.5h16.19l-2.47-2.47a.75.75 0 010-1.06z"
-							clip-rule="evenodd"
-						/>
-					</svg>
-				</span>
-			</button>
-		</div>
-	</div>
-
-	<div class="content block">
-		<div class="category-grid flex w-full flex-wrap items-center justify-center">
-			<div class="gridelement relative flex h-16 w-full items-center justify-center bg-COLORBLK">
-				<div
-					class="content-wrapper absolute z-10 flex h-full w-full items-center justify-start bg-COLORBLK px-8 text-2xl font-semibold text-COLORWHT"
+			<div class="hero-image w-full p-8">
+				<div class="mb-4 w-20 rounded-md bg-COLORBLK2 px-2 py-1 text-sm font-medium text-COLORWHT">
+					BETA
+				</div>
+				<p class="mb-2 text-2xl">UniFood is an online ordering system.</p>
+				<p class="mb-6 text-COLORWHT2">
+					Online Test #2 is officially here! Sign up using the button below 👇
+				</p>
+				<button
+					class="flex items-center space-x-2 rounded-md border-2 border-COLORWHT px-4 py-2 font-medium text-COLORWHT transition hover:bg-COLORBLK1 hover:opacity-80"
 				>
-					Categories
-				</div>
+					<a href="/auth/create"><span> Sign up </span></a>
+					<span
+						><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="h-6 w-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.72 7.72a.75.75 0 011.06 0l3.75 3.75a.75.75 0 010 1.06l-3.75 3.75a.75.75 0 11-1.06-1.06l2.47-2.47H3a.75.75 0 010-1.5h16.19l-2.47-2.47a.75.75 0 010-1.06z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+					</span>
+				</button>
 			</div>
-		</div>
-		<div
-			class="category-grid flex h-full w-full flex-wrap items-center justify-center overflow-auto lg:justify-start"
-		>
-			{#if categories.length > 0}
-				{#each categories as category}
-					<DataCard
-						url={`/product?filter=${category.alias.toString().toLowerCase()}`}
-						image={category.image}
-						name={category.name}
-						description={category.description}
-					/>
-				{/each}
-			{:else}
-				<div class="flex h-16 w-full items-center justify-center">
-					<div class="text-2xl font-semibold text-COLORWHT">No categories available</div>
-				</div>
-			{/if}
 		</div>
 
-		<div class="featured block">
-			<div
-				class="banner-featured flex items-center justify-start bg-COLORBLK1 px-8 py-12 text-2xl font-semibold text-COLORWHT"
-			>
-				For You
-			</div>
-			<div
-				class="category-grid flex h-full w-full flex-wrap items-center justify-center lg:justify-start"
-			>
-				{#if product}
-					{#each product as product}
-						<DataCard
-							url={`/product/${product.slug}`}
-							image={product.image}
-							name={product.productName + `<br/>$${product.price?.$numberDecimal}`}
-							description={(product.description.length > 500
-								? product.description.substring(0, 500) + '...'
-								: product.description) ?? ''}
-							reviews={product.reviews}
-						/>
-					{/each}
-				{/if}
-			</div>
-		</div>
-		{#if !localStorage.token}
-			<Footer text="There's more to explore">
-				<div class="block">
-					<div class="text-xl font-light">Shop our entire menu by creating an account</div>
+		<div class="content block">
+			<div class="category-grid flex w-full flex-wrap items-center justify-center">
+				<div class="gridelement relative flex h-16 w-full items-center justify-center bg-COLORBLK">
 					<div
-						class="btn-wrp flex w-full items-center justify-center p-2"
-						on:click={async () => {
-							await goto('/auth/signup');
-						}}
+						class="content-wrapper absolute z-10 flex h-full w-full items-center justify-start bg-COLORBLK px-8 text-2xl font-semibold text-COLORWHT"
 					>
-						<Button icon={faGift} color="COLORPNK" text="Sign up" color_t="COLORWHT" />
+						Categories
 					</div>
 				</div>
-			</Footer>{/if}
-	</div>
+			</div>
+			<div
+				class="category-grid flex h-full w-full flex-wrap items-center justify-center overflow-auto lg:justify-start"
+			>
+				<DataCard
+					url="/product/view-all"
+					image="/assets/home/all_products.png"
+					name="View the menu"
+					description="View the entire menu and product availability."
+				/>
+				{#if categories.length > 0}
+					{#each categories as category}
+						<DataCard
+							url={`/product?filter=${category.alias.toString().toLowerCase()}`}
+							image={category.image}
+							name={category.name}
+							description={category.description}
+						/>
+					{/each}
+					<!-- {:else}
+				<div class="flex h-16 w-full items-center justify-center">
+					<div class="text-2xl font-semibold text-COLORWHT">No categories available</div>
+				</div> -->
+				{/if}
+			</div>
+
+			<div class="featured block">
+				<div
+					class="banner-featured flex items-center justify-start bg-COLORBLK1 px-8 py-12 text-2xl font-semibold text-COLORWHT"
+				>
+					For You
+				</div>
+				<div
+					class="category-grid flex h-full w-full flex-wrap items-center justify-center lg:justify-start"
+				>
+					{#if product}
+						{#each product as product}
+							<DataCard
+								url={`/product/${product.slug}`}
+								image={product.image}
+								name={product.productName + `<br/>$${product.price?.$numberDecimal}`}
+								description={(product.description.length > 500
+									? product.description.substring(0, 500) + '...'
+									: product.description) ?? ''}
+								reviews={product.reviews}
+							/>
+						{/each}
+					{/if}
+				</div>
+			</div>
+			{#if !localStorage.token}
+				<Footer text="There's more to explore">
+					<div class="block">
+						<div class="text-xl font-light">Shop our entire menu by creating an account</div>
+						<div
+							class="btn-wrp flex w-full items-center justify-center p-2"
+							on:click={async () => {
+								await goto('/auth/signup');
+							}}
+						>
+							<Button icon={faGift} color="COLORPNK" text="Sign up" color_t="COLORWHT" />
+						</div>
+					</div>
+				</Footer>{/if}
+		</div>
 </main>
 
 <style>

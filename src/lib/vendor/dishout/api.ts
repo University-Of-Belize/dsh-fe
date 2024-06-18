@@ -11,7 +11,7 @@ async function fetchWebApi(
 	body?: object,
 	json?: boolean,
 	token?: string,
-	silent?: boolean // Silences any toast messages. Do not emit any toast messages
+	silent?: boolean // Silences any toast messages. Do not emit any toast messages or redirect the user
 ): Promise<Response> | Promise<number | object | void> {
 	try {
 		// If the server is offline, don't even try to fetch
@@ -102,9 +102,7 @@ async function fetchWebApi(
 			return new Promise((resolve, reject) => {
 				setTimeout(() => {
 					toast.push(
-						`Checking to see if the server is asleep (${retryCount + 1}/${
-							config.ui['APIretryLimit']
-						})...`
+						`Testing your internet connection (${retryCount + 1}/${config.ui['APIretryLimit']})...`
 					);
 					// Recall the API request function
 					fetchWebApi(endpoint, method, body, json, token, silent).then(resolve).catch(reject);

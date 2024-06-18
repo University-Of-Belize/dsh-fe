@@ -2,9 +2,12 @@ import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
 import { fetchWebApi } from '$lib/vendor/dishout/api';
 import { toast } from '@zerodevx/svelte-toast';
+
+import type { Product } from '$lib/types/Product.ts';
+
 let debounceTimeout: number;
 
-const addToCart = async (item: string | undefined, quantity: number) => {
+const addToCart = async (product: Product, item: string | undefined, quantity: number) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
@@ -15,7 +18,35 @@ const addToCart = async (item: string | undefined, quantity: number) => {
 			)) as Response;
 			const data = await response.json();
 			if (response.ok) {
-				toast.push('Added item to cart.');
+				// **************** TELEMETRY ******************
+				gtag('event', 'add_to_cart', {
+					currency: 'BZD',
+					value: product.price ? product.price['$numberDecimal'] : 0,
+					items: [
+						{
+							item_id: product._id,
+							item_name: product.productName ? product.productName.trim() : 'Unavailable',
+							//affiliation: "Google Merchandise Store",
+							//coupon: "SUMMER_FUN",
+							discount: 0.0,
+							index: 0,
+							item_brand: 'UniFood',
+							item_category: product.category ? product.category.name.trim() : 'Unavailable',
+							//item_category2: "Adult",
+							//item_category3: "Shirts",
+							//item_category4: "Crew",
+							//item_category5: "Short sleeve",
+							//item_list_id: "related_products",
+							item_list_name: product.productName ? product.productName.trim() : 'Unavailable',
+							item_variant: product.slug ? product.slug.trim() : 'Unavailable',
+							//location_id: "ChIJIQBpAG2ahYAR_6128GcTUEo",
+							price: product.price ? product.price['$numberDecimal'] : 'Unavailable',
+							quantity: 1
+						}
+					]
+				});
+				// ************** END TELEMETRY ****************
+				// toast.push('Added item to cart.');
 				return data;
 			} else {
 				// console.error('Failed to add item to cart.');
@@ -25,6 +56,13 @@ const addToCart = async (item: string | undefined, quantity: number) => {
 						'--toastBarBackground': 'rgb(var(--COLORRED))'
 					}
 				});
+				// **************** TELEMETRY ******************
+				gtag('event', 'cart_error', {
+					cart_error: data.message,
+					item_id: item,
+					quantity
+				});
+				// ************** END TELEMETRY ****************
 			}
 		}, 500); // 500ms break
 	} catch (error) {
@@ -45,6 +83,11 @@ async function emptyCart(index: number | null) {
 			const data = await response.json();
 			if (response.ok) {
 				toast.push('Emptied the cart.');
+				// **************** TELEMETRY ******************
+				gtag('event', 'emptied_cart', {
+					error: data.message
+				});
+				// ************** END TELEMETRY ****************
 				return data;
 			} else {
 				// console.error('Failed to add item to cart.');

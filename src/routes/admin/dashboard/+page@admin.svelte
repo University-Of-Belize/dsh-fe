@@ -128,74 +128,55 @@
 	<title>UniFood | Dashboard / Home</title>
 </svelte:head>
 
-<main class="h-screen w-full">
-	<div class="navigation z-20 w-full">
-		<Navigation
-			transparency={5}
-			search={true}
-			titleText="{config.ui['branding-text']} {staff
-				? ''
-				: "<div class='font-bold overflow-hidden'>| Dashboard</div>"}"
-			titleWhere="/"
-		/>
+<div class="content hidden h-full w-full overflow-auto bg-transparent px-16 py-16 lg:block">
+	<div class="flex pb-2 text-2xl font-semibold">
+		{config.ui['branding-text']} | {@html staff
+			? "<div class='font-bold pl-1'>SuperUser Mode</div>"
+			: `<div class='font-bold pl-1'>Dashboard</div>`}
 	</div>
-	<div class="main-content flex h-screen items-center justify-start text-COLORWHT">
-		<div
-			class="drawer h-screen w-full flex-col justify-start overflow-auto bg-COLORWHT4 bg-opacity-20 px-4 py-2 lg:w-1/4"
-		>
-			<DashList {staff} />
-		</div>
-		<div class="content hidden h-full w-full overflow-auto bg-transparent px-16 py-16 lg:block">
-			<div class="flex pb-2 text-2xl font-semibold">
-				{config.ui['branding-text']} | {@html staff
-					? "<div class='font-bold pl-1'>SuperUser Mode</div>"
-					: `<div class='font-bold pl-1'>Dashboard</div>`}
-			</div>
-			<div class="flex pb-12 text-xl font-light">What would you like to do?</div>
-			<div class="flex w-full flex-wrap">
-				{#if data != undefined}
-					{#each data.is[0][1] as shortcut, i}
-						<div
-							class="mx-4 my-4 h-56 w-56 cursor-pointer select-none rounded-sm bg-COLORBLK1 text-COLORWHT hover:opacity-80"
-							on:click={() => goto(data.is[1][1][i] ?? '/admin/dashboard')}
-						>
-							<div class="flex h-full w-full items-center justify-center text-center">
-								<div class="block">
-									<div class="flex w-full items-center justify-center py-6">
-										{#if icons[i]}{#if icons[i] === 'user'}
-												<Fa
-													icon={faUserCog}
-													size={data.is[1][0] ?? '4x'}
-												/>{:else if icons[i] === 'hamburger'}<Fa
-													icon={faHamburger}
-													size={data.is[1][0] ?? '4x'}
-												/>{:else if icons[i] === 'list'}<Fa
-													icon={faList}
-													size={data.is[1][0] ?? '4x'}
-												/>{:else if icons[i] === 'clone'}<Fa
-													icon={faClone}
-													size={data.is[1][0] ?? '4x'}
-												/>{:else if icons[i] === 'plus'}<Fa
-													icon={faPlus}
-													size={data.is[1][0] ?? '4x'}
-												/>{:else if icons[i] === 'message'}<Fa
-													icon={faMessage}
-													size={data.is[1][0] ?? '4x'}
-												/>{:else}<Fa icon={faQuestion} size={data.is[1][0] ?? '4x'} />
-											{/if}
-										{/if}
-									</div>
-									<div class="description font-semibold">{shortcut}</div>
-								</div>
+	<div class="flex pb-12 text-xl font-light">What would you like to do?</div>
+	<div class="flex w-full flex-wrap">
+		{#if data != undefined}
+			{#each data.is[0][1] as shortcut, i}
+				<div
+					class="mx-4 my-4 h-56 w-56 cursor-pointer select-none rounded-sm bg-COLORBLK1 text-COLORWHT hover:opacity-80"
+					on:click={() => goto(data.is[1][1][i] ?? '/admin/dashboard')}
+				>
+					<div class="flex h-full w-full items-center justify-center text-center">
+						<div class="block">
+							<div class="flex w-full items-center justify-center py-6">
+								{#if icons[i]}{#if icons[i] === 'user'}
+										<Fa
+											icon={faUserCog}
+											size={data.is[1][0] ?? '4x'}
+										/>{:else if icons[i] === 'hamburger'}<Fa
+											icon={faHamburger}
+											size={data.is[1][0] ?? '4x'}
+										/>{:else if icons[i] === 'list'}<Fa
+											icon={faList}
+											size={data.is[1][0] ?? '4x'}
+										/>{:else if icons[i] === 'clone'}<Fa
+											icon={faClone}
+											size={data.is[1][0] ?? '4x'}
+										/>{:else if icons[i] === 'plus'}<Fa
+											icon={faPlus}
+											size={data.is[1][0] ?? '4x'}
+										/>{:else if icons[i] === 'message'}<Fa
+											icon={faMessage}
+											size={data.is[1][0] ?? '4x'}
+										/>{:else}<Fa icon={faQuestion} size={data.is[1][0] ?? '4x'} />
+									{/if}
+								{/if}
 							</div>
+							<div class="description font-semibold">{shortcut}</div>
 						</div>
-					{/each}{:else}<div class="font-light">
-						There was a problem while loading the shortcuts.
-					</div>{/if}
-			</div>
-		</div>
+					</div>
+				</div>
+			{/each}{:else}<div class="font-light">
+				There was a problem while loading the shortcuts.
+			</div>{/if}
 	</div>
-</main>
+</div>
 
 <style>
 	:root {

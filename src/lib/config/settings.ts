@@ -5,6 +5,7 @@ const settings = {
 		// HTTPOrigin: 'https://winter-darkness-1705.fly.dev',
 		HTTPOrigin: 'https://icy-rain-2400.fly.dev',
 		// HTTPOrigin: 'http://127.0.0.1:8080',
+		// HTTPOrigin: 'http://192.168.38.16:8080',
 		// HTTPOrigin: 'http://192.168.1.102:8080',
 		'support-email': 'cafeteria@ub.edu.bz',
 		'bound-organization': 'University of Belize',

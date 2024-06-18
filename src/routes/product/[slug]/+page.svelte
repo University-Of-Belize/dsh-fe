@@ -46,6 +46,38 @@
 			if (!response.ok) {
 				history.back();
 			}
+
+			const retVal = await getProduct();
+			if ($product == null || retVal !== 1) return;
+			console.log($product);
+			// **************** TELEMETRY ******************
+			gtag('event', 'view_item', {
+				currency: 'BZD',
+				value: $product.price['$numberDecimal'],
+				items: [
+					{
+						item_id: $product._id,
+						item_name: $product.productName.trim(),
+						//affiliation: "Google Merchandise Store",
+						//coupon: "SUMMER_FUN",
+						discount: 0.0,
+						index: 0,
+						item_brand: 'UniFood',
+						item_category: $product.category.name.trim(),
+						//item_category2: "Adult",
+						//item_category3: "Shirts",
+						//item_category4: "Crew",
+						//item_category5: "Short sleeve",
+						//item_list_id: "related_products",
+						item_list_name: $product.productName.trim(),
+						item_variant: $product.slug.trim(),
+						//location_id: "ChIJIQBpAG2ahYAR_6128GcTUEo",
+						price: $product.price['$numberDecimal'],
+						quantity: 1
+					}
+				]
+			});
+			// ************** END TELEMETRY ****************
 		} catch (error) {
 			console.log(error);
 			toast.push(
@@ -54,8 +86,7 @@
 		}
 	});
 
-	// Thread run everytime the params change
-	$: (async () => {
+	async function getProduct() {
 		const response = (await fetchWebApi(`v1/menu/lookup?slug=${params}`, 'GET')) as Response;
 		if (!response || response.body == null) return;
 		let r;
@@ -70,11 +101,17 @@
 			// } else {
 			// 	product.set(null);
 			// }
+			return 1;
 		} catch (e) {
 			console.error('Error parsing JSON:', e);
 			product.set(null);
 			return;
 		}
+	}
+
+	// Thread run everytime the params change
+	$: (async () => {
+		getProduct();
 	})();
 	function calculateRating(reviews: Product['reviews'], count: boolean = false) {
 		let sum = 0;
@@ -169,7 +206,7 @@
 									Purchase Now
 								</div>
 
-								<div class="addToCart" on:click={() => addToCart($product?._id, 1)}>
+								<div class="addToCart" on:click={() => addToCart($product, $product?._id, 1)}>
 									<IconButton icon={faCartPlus} color="COLORBLE" />
 								</div>
 								{#if staff}
@@ -255,7 +292,9 @@
 								</div>
 								<div class="review-content text-COLORWHT">
 									<div class="flex text-lg font-semibold">
-										{review.reviewer?.username || 'Anonymous'}
+										<a href="/app/space/{review.reviewer?._id}" class="hover:underline"
+											><span>{review.reviewer?.username || 'Anonymous'}</span></a
+										>
 										<div class="starcount flex items-center justify-center px-2 text-COLORYLW">
 											<!-- Copilot Logic-->
 											{#each Array.from({ length: 5 }, (_, i) => i) as _}
@@ -331,7 +370,7 @@
 			{#if user && localStorage.token}
 				<div class="review my-4 rounded-md bg-transparent px-4 py-2">
 					<div class="flex bg-opacity-100">
-						<div class="reviewer-pfp flex flex-col items-center justify-start pr-4">
+						<div class="reviewer-pfp flex hidden flex-col items-center justify-start pr-4 lg:block">
 							<img
 								class="rounded-md object-cover"
 								src={user.profile_picture || config['user']['default-image']}

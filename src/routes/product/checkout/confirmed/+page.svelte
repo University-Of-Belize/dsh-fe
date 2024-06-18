@@ -9,17 +9,22 @@
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
+	import { v4 } from 'uuid';
+
 	let user: User =
 		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {};
-	let payment_data = localStorage.payment_data
-		? JSON.parse(JSON.stringify(localStorage.payment_data))
-		: {};
+	let payment_data: object;
+	let cartTotal = localStorage.cart_total;
+	let currentCart = localStorage.currentCart;
 
 	$: branding_text = 'One second...';
 	$: text = '';
 	$: subtitle = '';
 
 	onMount(async () => {
+		payment_data = localStorage.payment_data
+			? JSON.parse(JSON.stringify(localStorage.payment_data))
+			: {};
 		localStorage.removeItem('cart_total');
 		RunOrder();
 	});
@@ -57,9 +62,32 @@
 
 			// Update the user's balance
 			user.credit.$numberDecimal = JSON.stringify(
-				parseFloat(user.credit.$numberDecimal) - payment_data.toDeduct
+				parseFloat(user.credit.$numberDecimal) - parseFloat(json.is.total_amount.$numberDecimal) // Response should have the correct amount
 			);
 			localStorage.user = JSON.stringify(user);
+
+			// *********** TELEMETRY ******************
+			gtag('event', 'add_payment_info', {
+				currency: 'BZD',
+				value: cartTotal,
+				//coupon: "SUMMER_SALE",
+				payment_type: 'Prepaid Credit',
+				items: JSON.parse(currentCart)
+			});
+
+			gtag('event', 'purchase', {
+				// Learn more: https://support.google.com/analytics/answer/12313109
+				transaction_id: `prepaid_t_${v4()}`,
+				prepaid: true,
+				value: cartTotal,
+				tax: 0.0,
+				shipping: 0.0,
+				currency: 'BZD',
+				//coupon: "SUMMER_SALE",
+				items: JSON.parse(currentCart)
+			});
+
+			// *********** END TELEMETRY **************
 		} catch (error) {
 			branding_text = 'Order not placed';
 			text = 'There was an error.';

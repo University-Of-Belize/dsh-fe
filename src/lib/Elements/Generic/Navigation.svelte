@@ -24,6 +24,7 @@
 		faMessage,
 		faMoon,
 		faNoteSticky,
+		faPaintbrush,
 		faPlus,
 		faQuestionCircle,
 		faRightToBracket,
@@ -64,9 +65,11 @@
 	// Dropdowns
 	let user_dropdown: HTMLDivElement;
 	let apps_dropdown: HTMLDivElement;
-	let theme_switched: bool = false;
+	let theme_switched: boolean = false;
+	let themedrawer_isHidden: boolean;
 
 	onMount(async () => {
+		themedrawer_isHidden = localStorage.getItem('themedrawer_isHidden') == 'true';
 		// Set the scrim height
 		navScrimHeight = window.innerHeight; // Full height (inside screen-view)
 		// @ts-ignore
@@ -116,134 +119,147 @@
 	transitionType="fly"
 	{transitionParams}
 	bind:hidden={hidden1}
-	id="sidebar1"
+	id="sidebar"
 	class="bg-COLORBLK p-5 text-COLORWHT"
 >
-	<div class="metaControls flex pb-4">
-		<Button
-			on:click={() => (hidden1 = true)}
-			aria-expanded="true"
-			aria-controls="sidebar"
-			class="mr-3 hidden cursor-pointer rounded bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:inline"
-		>
-			<Fa icon={faBars} />
-		</Button>
-		<Button
-			on:click={() => (hidden1 = true)}
-			aria-expanded="true"
-			aria-controls="sidebar"
-			class="mr-2 cursor-pointer rounded-lg bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:hidden"
-		>
-			<Fa icon={faBars} />
-			<span class="sr-only">Toggle sidebar</span>
-		</Button>
-		<a href="/" class="mr-4 flex">
-			<img src="/icons/icon-svgrepo.svg" class="mr-3 h-8" alt="Plattr Logo" />
-			<span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-				{@html titleText.length > 15 ? titleText.substring(0, 15) : titleText}
-			</span>
-		</a>
-	</div>
-	{#if user}
-		<div class="my-2 mb-4">
-			<div
-				class="wallet-indicator flex w-full cursor-pointer items-center justify-start space-x-4 rounded-md bg-COLORBLK3 px-2 py-4 text-sm font-medium text-white hover:opacity-80"
-				on:click={async () => {
-					await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
-				}}
-			>
-				<div>
-					<img
-						src={user?.profile_picture ?? config['user']['default-image']}
-						title="My profile"
-						alt="{user?.username}'s photo"
-						width="40px"
-						class="rounded-full border border-COLORWHT bg-COLORBLK1 object-cover"
-						style="height: 42px; width: 42px;"
-					/>
-				</div>
-				<div>Wallet (${parseFloat(user?.credit?.$numberDecimal).toFixed(2)})</div>
+	<div class="flex h-full flex-col">
+		<div class="nav-main block">
+			<div class="metaControls flex pb-4">
+				<Button
+					on:click={() => (hidden1 = true)}
+					title="Toggle the sidebar"
+					aria-expanded="true"
+					aria-controls="sidebar"
+					class="mr-2 inline cursor-pointer rounded-lg bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:mr-3 lg:rounded"
+				>
+					<span class="sr-only">Toggle sidebar</span>
+					<Fa icon={faBars} />
+				</Button>
+				<a href="/" class="mr-4 flex">
+					<img src="/icons/icon-svgrepo.svg" class="mr-3 h-8" alt="Plattr Logo" />
+					<span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+						{@html titleText.length > 15 ? titleText.substring(0, 15) : titleText}
+					</span>
+				</a>
 			</div>
-		</div>
-	{/if}
-	{#if search}
-		<SearchBar nomargin placeholder="Search for snacks, drinks or lunch" />
-	{:else}<div class="searchbar mx-8 flex flex-1 items-center px-4 py-2 text-sm" />
-	{/if}
-	{#if !user}
-		<div class="top-row flex w-full items-center justify-between pt-2">
-			<!-- <div class="btn-wrp pr-1" >
+			{#if user}
+				<div class="my-2 mb-4">
+					<div
+						class="wallet-indicator flex w-full cursor-pointer items-center justify-start space-x-4 rounded-md bg-COLORBLK3 px-2 py-4 text-sm font-medium text-white hover:opacity-80"
+						on:click={async () => {
+							await goto(`/app/space/${localStorage.user_id}`);
+						}}
+					>
+						<div>
+							<img
+								src={user?.profile_picture ?? config['user']['default-image']}
+								title="My profile"
+								alt="{user?.username}'s photo"
+								width="40px"
+								class="rounded-full border border-COLORWHT bg-COLORBLK1 object-cover"
+								style="height: 42px; width: 42px;"
+							/>
+						</div>
+						<div>Wallet (${parseFloat(user?.credit?.$numberDecimal).toFixed(2)})</div>
+					</div>
+				</div>
+			{/if}
+			{#if !user}
+				{#if search}
+					<SearchBar nomargin placeholder="Search for snacks, drinks or lunch" />
+				{:else}
+					<div class="searchbar mx-8 flex flex-1 items-center px-4 py-2 text-sm" />
+				{/if}
+				<div class="top-row flex w-full items-center justify-between pt-2">
+					<!-- <div class="btn-wrp pr-1" >
 			</div>
 			<div class="btn-wrp pl-2" >
 			</div> -->
-			<ButtonGroup class="flex w-full">
-				<Button on:click={() => goto('/auth/login')} class="flex-1 bg-COLORBLK2 text-COLORWHT">
-					<Fa icon={faRightToBracket} class="mr-2" />
-					Log in</Button
-				>
-				<Button on:click={() => goto('/auth/create')} class="flex-1 bg-COLORPNK text-COLORWHT">
-					<Fa icon={faGift} class="mr-2" />
-					Sign up</Button
-				>
-			</ButtonGroup>
-		</div>{:else}
-		<div class="two space-y-2 py-6">
-			<div class="title pb-5 font-semibold">My Account</div>
+					<ButtonGroup class="flex w-full">
+						<Button on:click={() => goto('/auth/login')} class="flex-1 bg-COLORBLK2 text-COLORWHT">
+							<Fa icon={faRightToBracket} class="mr-2" />
+							Log in</Button
+						>
+						<Button on:click={() => goto('/auth/create')} class="flex-1 bg-COLORPNK text-COLORWHT">
+							<Fa icon={faGift} class="mr-2" />
+							Sign up</Button
+						>
+					</ButtonGroup>
+				</div>{:else}
+				<div class="two space-y-2 py-6">
+					<div class="title pb-5 font-semibold">My Account</div>
 
-			<Button
-				class="w-full bg-COLORBLK3 text-COLORWHT"
-				on:click={async () => {
-					localStorage.clear();
-					window.location.reload();
-				}}
-			>
-				<Fa icon={faArrowRightFromBracket} class="mr-2" />
-				Logout</Button
-			>
-
-			<Button
-				class="w-full bg-COLORBLK1 text-COLORWHT"
-				on:click={async () => {
-					await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
-				}}
-			>
-				<Fa icon={faCog} class="mr-2" />
-				My account settings</Button
-			>
-		</div>{/if}
-	<div class="three border-t border-dashed border-black border-opacity-5 py-6">
-		<div class="title pb-5 font-semibold">Categories</div>
-		{#if categories.length > 0}
-			{#each categories as category}
-				<div
-					class="two pt-1"
-					on:click={() => {
-						goto(
-							// We filter by alias, display by name
-							`/product?filter=${
-								category.alias
-									? category.alias.toString().toLowerCase()
-									: category.name.toString().toLowerCase()
-							}`
-						);
-					}}
-				>
 					<Button
-						class="w-full bg-COLORBLK1 font-medium text-COLORWHT lg:justify-start lg:text-left"
+						class="w-full bg-COLORBLK3 text-COLORWHT hover:bg-COLORBLK3 hover:opacity-80"
+						on:click={async () => {
+							localStorage.clear();
+							window.location.reload();
+						}}
 					>
-						<Fa icon={faStar} class="mr-2 hidden lg:block" />
-						{category.name ?? category.alias}</Button
+						<Fa icon={faArrowRightFromBracket} class="mr-2" />
+						Logout</Button
 					>
-				</div>
-			{/each}
-		{:else}
-			<div class="two pt-1">
-				<Button class="w-full bg-COLORBLK4 font-semibold text-COLORWHT">
-					<Fa icon={faQuestionCircle} class="mr-2" />
-					Looks like you caught us! Just a moment.</Button
-				>
+
+					<Button
+						class="w-full bg-COLORBLK1 text-COLORWHT hover:bg-COLORBLK1 hover:opacity-80"
+						on:click={async () => {
+							await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
+						}}
+					>
+						<Fa icon={faCog} class="mr-2" />
+						My account settings</Button
+					>
+				</div>{/if}
+			<div class="three border-t border-dashed border-black border-opacity-5 py-6">
+				<div class="title pb-5 font-semibold">Categories</div>
+				{#if categories.length > 0}
+					{#each categories as category}
+						<div
+							class="two pt-1"
+							on:click={() => {
+								goto(
+									// We filter by alias, display by name
+									`/product?filter=${
+										category.alias
+											? category.alias.toString().toLowerCase()
+											: category.name.toString().toLowerCase()
+									}`
+								);
+							}}
+						>
+							<Button
+								class="w-full bg-COLORBLK1 font-medium text-COLORWHT hover:bg-COLORBLK1 hover:opacity-80 lg:justify-start lg:text-left"
+							>
+								<Fa icon={faStar} class="mr-2 hidden lg:block" />
+								{category.name ?? category.alias}</Button
+							>
+						</div>
+					{/each}
+				{:else}
+					<div class="two pt-1">
+						<Button class="w-full bg-COLORBLK4 font-semibold text-COLORWHT">
+							<Fa icon={faQuestionCircle} class="mr-2" />
+							Looks like you caught us! Just a moment.</Button
+						>
+					</div>
+				{/if}
 			</div>
-		{/if}
+		</div>
+		<div class="nav-footer mt-auto block w-full space-y-2 text-xs font-light text-COLORWHT">
+			<div class="flex w-full items-center justify-between divide-x-2 text-center">
+				<div class="flex w-full items-center justify-center text-center hover:underline">
+					<a aria-label="View the app credits" href="/app/credits">Credits</a>
+				</div>
+				<!-- @remind Enable as we continue to create these new, informational pages -->
+				<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">About</a></div> -->
+				<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">Jobs</a></div> -->
+				<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">Terms</a></div> -->
+				<div class="flex w-full items-center justify-center text-center hover:underline">
+					<a aria-label="View the help center" href="/app/help-center">Blog</a>
+				</div>
+			</div>
+			<div>&copy; {new Date().getFullYear()} The University of Belize</div>
+		</div>
 	</div>
 </Drawer>
 
@@ -254,24 +270,17 @@
 			<div class="flex items-center justify-start">
 				<Button
 					on:click={() => (hidden1 = false)}
+					title="Toggle the sidebar"
 					aria-expanded="true"
 					aria-controls="sidebar"
-					class="mr-3 hidden cursor-pointer rounded bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:inline"
+					class="mr-2 inline cursor-pointer rounded-lg bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:mr-3 lg:rounded"
 				>
-					<Fa icon={faBars} />
-				</Button>
-				<Button
-					on:click={() => (hidden1 = false)}
-					aria-expanded="true"
-					aria-controls="sidebar"
-					class="mr-2 cursor-pointer rounded-lg bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:hidden"
-				>
-					<Fa icon={faBars} />
 					<span class="sr-only">Toggle sidebar</span>
+					<Fa icon={faBars} />
 				</Button>
 				<a href={titleWhere} class="flex">
 					{#if config.ui['branding-logo'] && config.ui['branding-logo'].trim() != ''}
-						<img src={config.ui['branding-logo']} class="h-8" alt="Service Logo" />
+						<img src={config.ui['branding-logo']} class="h-8 w-8 object-cover" alt="Service Logo" />
 					{:else}
 						<span class="flex self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
 							<!-- {@html staff ? `${titleText} | Staff` : titleText} -->
@@ -326,24 +335,28 @@
 						><Fa icon={faPlus} class="mr-4" /> Install app</button
 					>
 				{/if}
-				{#if user}
-					<!-- Search -->
-					<button
-						id="toggleSidebarMobileSearch"
-						on:click={() => {
-							mobile_search.classList.toggle('hidden');
 
-							setTimeout(() => {
-								mobile_search.style.height = mobile_search.style.height == '30px' ? '0px' : '30px';
-							}, 10);
-						}}
-						type="button"
-						class="flex items-center justify-start rounded-lg bg-COLORBLK1 p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm lg:hidden"
-					>
-						<span class="sr-only">Search</span>
-						<!-- Search icon -->
-						<Fa icon={faSearch} />
-					</button>
+				<!------ Included for unauthed users-->
+				<!-- Search -->
+				<button
+					id="toggleSidebarMobileSearch"
+					on:click={() => {
+						mobile_search.classList.toggle('hidden');
+
+						setTimeout(() => {
+							mobile_search.style.height = mobile_search.style.height == '30px' ? '0px' : '30px';
+						}, 10);
+					}}
+					type="button"
+					class="mr-3 flex items-center justify-start rounded-lg bg-COLORBLK1 p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm md:mr-2 lg:mr-0 lg:hidden"
+				>
+					<span class="sr-only">Search</span>
+					<!-- Search icon -->
+					<Fa icon={faSearch} />
+					<span class="ml-4 mr-3 hidden md:inline">Search</span>
+				</button>
+
+				{#if user}
 					<!---
 					<!- Notifications ->
 					<button
@@ -784,7 +797,7 @@
 						<ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
 							<li>
 								<a
-									href={`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`}
+									href={`/app/space/${localStorage.user_id}`}
 									class="block px-4 py-2 text-sm hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
 									>My profile</a
 								>
@@ -861,6 +874,7 @@
 				<!-------- START Other stuff (theme button, other fun things) ----->
 				<span class="ml-2">
 					<button
+						aria-label="Toggle dark mode"
 						type="button"
 						on:click={() => {
 							theme_switched = theme_switched ? false : true;
@@ -876,6 +890,31 @@
 						><Fa icon={theme_switched ? faSun : faMoon} /></button
 					></span
 				>
+				<!-- Theme panel switch -->
+				{#if localStorage.theme === 'custom'}
+					<span class="ml-2">
+						<button
+							aria-label="Toggle theme panel"
+							type="button"
+							on:click={() => {
+								const theme_drawer = document.getElementById('theme_drawer');
+								if (theme_drawer != null) {
+									if (themedrawer_isHidden) {
+										theme_drawer.classList.remove('hidden');
+										localStorage.setItem('themedrawer_isHidden', 'false');
+										themedrawer_isHidden = false;
+									} else {
+										theme_drawer.classList.add('hidden');
+										localStorage.setItem('themedrawer_isHidden', 'true');
+										themedrawer_isHidden = true;
+									}
+								}
+							}}
+							class="items-center justify-center rounded-lg bg-COLORBLK2 px-3 py-1.5 text-xs font-medium text-COLORWHT hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex lg:px-4 lg:py-2.5"
+							><Fa icon={faPaintbrush} /></button
+						></span
+					>
+				{/if}
 				<!-------- END Other stuff ---------------------------------------->
 			</div>
 		</div>
@@ -904,14 +943,18 @@
 	<!-- Announcements and stuff -->
 	{#if !localStorage.acknowledged_announcements || localStorage.acknowledged_announcements != 'true'}
 		<div
-			class="announcements-container fixed bottom-0 z-20 flex w-full bg-COLORBLE bg-opacity-50 py-1 text-center text-COLORWHT"
+			class="announcements-container fixed bottom-0 z-20 flex w-full bg-COLORBLK py-1 text-sm text-COLORWHT lg:text-center lg:text-base"
 		>
-			<div class="container-wrap flex w-full flex-wrap items-center justify-center bg-opacity-100">
+			<div
+				class="container-wrap mx-2 flex w-full flex-col flex-wrap items-center justify-center space-y-4 bg-opacity-100 lg:mx-0 lg:flex-row lg:space-y-0"
+			>
 				<div
-					class="container flex flex-wrap items-center justify-center space-x-1 bg-opacity-100 text-COLORWHT"
+					class="container flex flex-col flex-wrap items-center justify-center space-x-1 space-y-2 bg-opacity-100 text-COLORWHT lg:flex-row"
 				>
-					<div class="flex space-x-1 bg-opacity-100 text-COLORWHT">
-						<div class="icon mx-2"><Fa icon={faCodePullRequest} size="1.25x" /></div>
+					<div class="block space-x-1 bg-opacity-100 text-COLORWHT lg:flex">
+						<div class="icon my-2 ml-1 lg:mx-2 lg:my-0">
+							<Fa icon={faCodePullRequest} size="1.25x" />
+						</div>
 						<div>
 							Hey, thanks for visiting! We're still in beta, so please bear with us as we sort out
 							all the bugs. You can sign up
@@ -925,13 +968,19 @@
 					</div>
 				</div>
 				<div
-					class="btn-wrp mt-2 flex items-center justify-end md:ml-2 md:mt-0 md:w-auto"
+					class="btn-wrp mt-auto flex w-full items-center justify-center bg-COLORRED font-semibold text-COLORWHT focus:opacity-80 lg:ml-2 lg:mt-0 lg:w-auto"
 					on:click={() => {
 						localStorage.setItem('acknowledged_announcements', 'true');
 						window.location.reload();
 					}}
 				>
-					<IconButton icon={faX} color="COLORRED" color_t="COLORWHT" />
+					<IconButton
+						icon={faX}
+						color=""
+						color_t="COLORWHT"
+						class="flex w-fit items-center justify-center"
+					/>
+					<span class="lg:hidden">CLOSE</span>
 				</div>
 			</div>
 		</div>

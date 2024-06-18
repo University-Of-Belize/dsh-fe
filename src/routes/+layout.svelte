@@ -15,7 +15,7 @@
 	import { ThemeDefinition } from '$lib/types/ThemeDefinition';
 	import { initializeApp } from '@firebase/app';
 	import { getMessaging, onMessage } from '@firebase/messaging';
-	import { faPaintbrush, faShare } from '@fortawesome/free-solid-svg-icons';
+	import { faPaintbrush, faShare, faX } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	let theme =
 		localStorage['theme-map'] && localStorage['theme-map'] !== '{}'
@@ -41,6 +41,7 @@
 			.join('');
 	let keys = Object.keys(theme);
 	let themeCodePanel: HTMLDivElement;
+	let theme_drawer: HTMLDivElement;
 	// import { getAnalytics } from '@firebase/analytics';
 	// const analytics = getAnalytics(app);
 	let clocation: URL;
@@ -177,33 +178,36 @@
 
 		// ********* Firebase (run in browser--not server) ********* /
 
-		const messaging = getMessaging(app);
-		// getToken(messaging, {
-		// 	vapidKey: config.ui.firebase['vapid-key'],
-		// 	serviceWorkerRegistration: await navigator.serviceWorker.getRegistration()
-		// });
+		try {
+			const messaging = getMessaging(app);
+			// getToken(messaging, {
+			// 	vapidKey: config.ui.firebase['vapid-key'],
+			// 	serviceWorkerRegistration: await navigator.serviceWorker.getRegistration()
+			// });
 
-		// Handle incoming messages. Called when:
-		// - a message is received while the app has focus
-		// - the user clicks on an app notification created by a service worker
-		//   `messaging.onBackgroundMessage` handler.
-		onMessage(messaging, (payload: FirebaseMessage) => {
-			console.log('Message received. ', payload);
-			// toast.push(
-			// 	payload.notification?.body ?? 'You received a message, but the client does not support it.',
-			// 	options_firebase
-			// );
-			// ...
-		});
+			// Handle incoming messages. Called when:
+			// - a message is received while the app has focus
+			// - the user clicks on an app notification created by a service worker
+			//   `messaging.onBackgroundMessage` handler.
+			onMessage(messaging, (payload: FirebaseMessage) => {
+				console.log('Message received. ', payload);
+				// toast.push(
+				// 	payload.notification?.body ?? 'You received a message, but the client does not support it.',
+				// 	options_firebase
+				// );
+				// ...
+			});
 
-		/*******************************/
+			/*******************************/
 
-		// Check for service worker and register if needed
-		if (!(await navigator.serviceWorker.getRegistration())) {
-			await navigator.serviceWorker.register('/sw.js');
-			// console.log(x); // Log out registration output
+			// Check for service worker and register if needed
+			if (!(await navigator.serviceWorker.getRegistration())) {
+				await navigator.serviceWorker.register('/sw.js');
+				// console.log(x); // Log out registration output
+			}
+		} catch (error) {
+			console.warn('Client does not support push messaging. There may be some usability issues.');
 		}
-
 		// Run in manual mode
 		if (!localStorage.watchdog && !localStorage.enableDevMode) {
 			// Run only once
@@ -354,8 +358,20 @@
 	</div>
 	{#if localStorage.theme === 'custom'}
 		<div
-			class="drawer z-50 h-screen w-1/4 flex-col justify-start overflow-auto bg-COLORBLK bg-opacity-100 px-8 py-2 text-COLORWHT"
+			bind:this={theme_drawer}
+			id="theme_drawer"
+			class="drawer z-50 block h-screen w-1/4 flex-col justify-start overflow-auto bg-COLORBLK bg-opacity-100 px-8 py-2 text-COLORWHT"
 		>
+			<div class="flex w-full items-center justify-start">
+				<span
+					on:click={() => {
+						theme_drawer.classList.add('hidden');
+						localStorage.setItem('themedrawer_isHidden', 'true');
+					}}
+					class="ml-auto cursor-pointer rounded-md bg-COLORBLK1 px-4 py-2 hover:opacity-80"
+					><Fa icon={faX} size="0.75x" /></span
+				>
+			</div>
 			<div class="two space-y-2 py-6">
 				<div class="title block pb-5 font-semibold">
 					<div class="title flex items-center justify-start space-x-4">
@@ -388,6 +404,8 @@
 								}}
 								name={key}
 								type="color"
+								custom_style="h-full"
+								class="h-[3.125rem]"
 								placeholder={key}
 								value={rgbToHEX(theme_[key])}
 								on:input={async (e) => {
@@ -494,16 +512,21 @@
 								placeholder="Paste code here to edit."
 								on:input={async (e) => {
 									const cssString = e.detail;
-									const matches = cssString.match(/--(\w+):\s(\d+\s\d+\s\d+);/g);
+									const matches = cssString.match(/--([\w\-]+):\s(\d+\s\d+\s\d+);/g);
 									const themeDefinition = {};
-									// @ts-ignore
-									matches.forEach((match) => {
-										const [property, value] = match.split(': '); // @ts-ignore
-										themeDefinition[property.slice(2)] = value.slice(0, -1); // Remove the leading '--' from the property and the trailing ';' from the value
-									});
+									if (matches != null) {
+										// @ts-ignore
+										matches.forEach((match) => {
+											const [property, value] = match.split(': '); // @ts-ignore
+											themeDefinition[property.slice(2)] = value.slice(0, -1); // Remove the leading '--' from the property and the trailing ';' from the value
+										});
 
-									[theme, theme_] = [themeDefinition, themeDefinition];
-									document.documentElement.style = cssString;
+										[theme, theme_] = [themeDefinition, themeDefinition];
+										if (localStorage.getItem('theme-map') != JSON.stringify(theme)) {
+											localStorage.setItem('theme-map', JSON.stringify(theme));
+										}
+										document.documentElement.style = cssString;
+									}
 								}}
 							/>
 						</div>
