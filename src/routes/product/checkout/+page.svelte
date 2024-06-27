@@ -283,7 +283,7 @@
 													class=""
 												></path>
 											</svg>
-											<span class="hidden lg:inline"> Remove item</span>
+											<span class="hidden lg:inline">Remove item</span>
 										</button>
 									</div>
 								</div>
@@ -304,7 +304,7 @@
 					<div
 						class="mb-4 flex w-full items-center justify-start border-b border-COLORWHT pb-4 text-2xl font-semibold text-COLORWHT"
 					>
-						Total Amount
+						Total amount
 					</div>
 					<div class="total_block flex w-full items-center">
 						<div

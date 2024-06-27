@@ -131,20 +131,158 @@
 	</div>
 	<div class="main-content flex h-full items-center justify-start text-COLORWHT">
 		<div
-			class="page-content mx-2 flex h-full w-full justify-center overflow-auto bg-transparent py-16 lg:m-0 lg:px-16"
+			class="page-content flex h-full w-full flex-wrap items-start justify-center overflow-auto bg-transparent p-2 py-16 lg:space-x-14"
 		>
-			<div class="mb-8 block w-full lg:w-1/2">
-				<div class="block w-full">
+			<div class="block text-center">
+				<div class="block">
 					<div class="flex pb-2 text-2xl font-semibold">Checkout</div>
 					<div class="flex text-xl font-light lg:pb-12">Confirm your payment</div>
 				</div>
-				<div class="payment-form block text-COLORBLK">
-					<form
-						class="payment-form flex w-full flex-col-reverse items-center justify-center rounded-sm bg-opacity-10 py-8 text-COLORWHT md:bg-COLORWHT"
+				<form class="grid w-60 grid-cols-1 gap-2 text-left sm:w-96">
+					<div class="relative w-full">
+						<div class="absolute w-full" style="height: 40%;">
+						<input
+							class="peer hidden"
+							id="credit_debit"
+							type="radio"
+							name="payment_method"
+							checked
+						/>
+						
+						<span
+							class="absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-4 border-gray-300 bg-white peer-checked:border-indigo-500"
+						></span>
+
+					</div>
+						<label
+							class="flex cursor-pointer select-none flex-col rounded-lg border border-gray-300 p-4 peer-checked:border peer-checked:border-indigo-700"
+							for="credit_debit"
+						>
+							<span class="text-xs font-semibold uppercase">DIRECT</span>
+							<span class="mt-2 text-xl font-bold">Credit/Debit Card</span>
+							<ul class="mt-2 text-sm">
+								<li>Pay with your credit or debit card</li>
+								<li>Local and international cards are accepted</li>
+							</ul>
+
+							<!-- on:mouseenter={() => flipCard('flip')}
+							on:mouseleave={() => flipCard('flip')} -->
+							<div
+							class="credit-card pointer-events-none hidden mt-4 mb-6 h-fit w-full select-none lg:block"
+							
+						>
+							<div
+								class="w-full"
+								style="perspective: 1000px;"
+							>
+								<div
+									bind:this={cardEl}
+									class="creditCard relative cursor-pointer font-mono transition-transform duration-500"
+									style="transform-style: preserve-3d"
+									on:click={() => flipCard('flip')}
+								>
+									<div
+										class="border opacity-100 border-COLORWHT pt-14 pb-8 w-full rounded-xl shadow-md"
+										style="backface-visibility: hidden"
+									>
+										<div
+											class="w-full overflow-clip px-8 text-COLORWHT"
+										>
+											<div class="pt-1">
+												<!-- <p class="font-light">Card Number</p> -->
+												<p
+													bind:this={imageCardNumber}
+													class="tracking-more-wider h-6 font-medium lg:text-xl"
+												>
+													1234 1234 1234 1234
+												</p>
+											</div>
+											<div class="block pt-2 text-sm font-normal">
+												<div class="flex items-center justify-start space-x-2 pt-1">
+													<p class="text-xs font-light">VALID<br />TO</p>
+													<p bind:this={imageExpDate} class="w-14 font-medium tracking-wider">
+														12/24
+													</p>
+												</div>
+												<div class="flex items-center justify-between">
+													<p bind:this={imageCardName} class="pt-2 font-medium tracking-widest">
+														D'ALESSEO REQUENA
+													</p>
+													<p class="absolute right-8 mb-4 font-light">
+														<img
+															src="/assets/checkout/brands/{creditCardType(
+																inputCardNumber?.value ?? ''
+															)[0]?.type ?? 'question'}.svg"
+															width="50px"
+														/>
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div
+										class="absolute border opacity-100 border-COLORWHT pt-12 pb-8 w-full rounded-xl shadow-2xl"
+										style="backface-visibility: hidden; transform: rotateY(180deg); top: 0;"
+									>
+										<div class="block w-full">
+											<div class="mt-8 px-8">
+												<b>
+													<p
+														bind:this={imageCVCNumber}
+														class="ml-auto flex w-14 items-center py-2 pl-2 text-COLORWHT"
+													>
+														456
+													</p></b
+												>
+												<p class="mr-2 flex justify-end pt-4 text-sm font-bold text-COLORWHT">
+													security code
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</label>
+					</div>
+					<div class="relative w-full">
+						<input class="peer hidden" id="pre_paid" type="radio" name="payment_method" />
+						<span
+							class="absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-4 border-gray-300 bg-white peer-checked:border-indigo-500"
+						></span>
+						<label
+							class="flex cursor-pointer select-none flex-col rounded-lg border border-gray-300 p-4 peer-checked:border peer-checked:border-indigo-700"
+							for="pre_paid"
+						>
+							<span class="text-xs font-semibold uppercase">PREPAID</span>
+							<span class="mt-2 text-xl font-bold">Virtual Currency</span>
+							<ul class="mt-2 text-sm">
+								<li>Pay with your account's pre-paid balance</li>
+							</ul>
+						</label>
+					</div>
+				</form>
+			</div>
+
+			<div class="checkout_card block h-fit rounded-lg border p-8">
+				<div class="total_amount flex w-full flex-col items-center">
+					<div
+						class="mb-4 flex w-full items-center justify-start border-b border-COLORWHT pb-4 text-2xl font-semibold text-COLORWHT"
+					>
+						Order summary
+					</div>
+					<div class="total_block flex w-full items-center">
+						<div
+							class="total_item flex w-full flex-wrap items-center rounded-sm bg-COLORBLK3 py-4 text-COLORWHT"
+						>
+
+						<!-- Credit card form -->
+						<form
+						class="payment-form block w-full bg-opacity-10 py-8 text-COLORWHT md:bg-COLORWHT"
 						on:submit={(e) => handleSubmit(e)}
 					>
 						<div
-							class="card-info mt-4 w-full border-t-2 border-COLORBLK2 bg-opacity-100 text-COLORWHT lg:w-1/2"
+							class="card-info w-full border-t-2 border-COLORBLK2 bg-opacity-100 text-COLORWHT"
 						>
 							<div class="mb-4 w-full border-l border-l-COLORGRN bg-COLORBLK1 p-4 text-COLORWHT">
 								Local cards are also accepted! This means you can use your local debit card here,
@@ -374,94 +512,68 @@
 						>
 							Pay below using Credit/Debit or your account's Virtual Currency
 						</div>
-						<div
-							role="content"
-							class="credit-card hidden h-fit w-full select-none lg:block lg:w-1/2"
-							on:mouseenter={() => flipCard('flip')}
-							on:mouseleave={() => flipCard('flip')}
-						>
-							<div
-								class="w-full"
-								style="width: 21.7375vw; perspective: 1000px; padding-bottom: 15vw;"
-							>
-								<div
-									bind:this={cardEl}
-									class="creditCard relative cursor-pointer font-mono transition-transform duration-500"
-									style="transform-style: preserve-3d"
-									on:click={() => flipCard('flip')}
-								>
-									<div
-										class="absolute m-auto w-full rounded-xl shadow-2xl"
-										style="backface-visibility: hidden"
-									>
-										<img
-											src="/assets/checkout/card-front.svg"
-											class="relative h-full w-full rounded-xl object-cover"
-										/>
-										<div
-											class="absolute w-full overflow-clip px-8 text-white"
-											style="top: 7.03125vw;"
-										>
-											<div class="pt-1">
-												<!-- <p class="font-light">Card Number</p> -->
-												<p
-													bind:this={imageCardNumber}
-													class="tracking-more-wider h-6 font-medium lg:text-xl"
-												>
-													1234 1234 1234 1234
-												</p>
-											</div>
-											<div class="block pt-2 text-sm font-normal">
-												<div class="flex items-center justify-start space-x-2 pt-1">
-													<p class="text-xs font-light">VALID<br />TO</p>
-													<p bind:this={imageExpDate} class="w-14 font-medium tracking-wider">
-														12/24
-													</p>
-												</div>
-												<div class="flex items-center justify-between">
-													<p bind:this={imageCardName} class="pt-2 font-medium tracking-widest">
-														D'ALESSEO REQUENA
-													</p>
-													<p class="absolute right-8 mb-4 font-light">
-														<img
-															src="/assets/checkout/brands/{creditCardType(
-																inputCardNumber?.value ?? ''
-															)[0]?.type ?? 'question'}.svg"
-															width="50px"
-														/>
-													</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div
-										class="absolute m-auto w-full rounded-xl bg-opacity-100 shadow-2xl"
-										style="backface-visibility: hidden; transform: rotateY(180deg)"
-									>
-										<img
-											src="/assets/checkout/card-back.svg"
-											class="relative h-full w-full rounded-xl object-cover"
-										/>
-										<div class="absolute w-full" style="top: 6vh;">
-											<div class="mt-12 px-8">
-												<b>
-													<p
-														bind:this={imageCVCNumber}
-														class="ml-auto flex w-14 items-center py-2 pl-2 text-white"
-													>
-														456
-													</p></b
-												>
-												<p class="mr-2 flex justify-end pt-4 text-sm font-bold text-white">
-													security code
-												</p>
-											</div>
-										</div>
-									</div>
+					
+					</form>
+
+
+						<!--- Credit card form ENDS -->
+
+							<div class="content mx-4 block">
+								<div class="product-name font-base text-xl">Total amount due today</div>
+								<div class="product-quantity text-sm font-light text-COLORWHT2">
+									Your total amount to pay
+								</div>
+							</div>
+							<div class="price mx-4 block font-semibold">
+								<div class="product-price">
+									{parseFloat(cartTotal).toLocaleString('en-US', {
+										style: 'currency',
+										currency: config['checkout']['currency'],
+										minimumFractionDigits: 2
+									}) ??
+										parseFloat('0.00').toLocaleString('en-US', {
+											style: 'currency',
+											currency: config['checkout']['currency'],
+											minimumFractionDigits: 2
+										})}
 								</div>
 							</div>
 						</div>
-					</form>
+					</div>
+				</div>
+
+				<div style="margin-top: 2rem !important;">
+					<button
+						disabled={cartTotal ? conductingTransaction : true}
+						title={cartTotal ? 'Pay with a credit/debit card' : 'Disabled reason: Cart is empty'}
+						class="btn_wrp w-full {conductingTransaction ? 'animate-pulse' : ''}}"
+						type="submit"
+					>
+						<Button
+							color="COLORBLE"
+							color_t="COLORWHT"
+							text={transactionConfirm ? 'Confirm Payment?' : 'Pay now'}
+							icon={faLock}
+							disabled={cartTotal ? conductingTransaction : true}
+							disabled_text="Please wait for the current transaction to complete."
+							custom_style="w-full justify-center items-center {transactionConfirm
+								? 'bg-COLORRED'
+								: ''}"
+						/>
+					</button>
+				</div>
+
+				<div
+					class="mt-8 flex items-center justify-between space-x-2 rounded-sm border border-COLORWHT5 bg-COLORBLK pl-4 text-sm text-COLORWHT1"
+				>
+					<div>Secure payment processing<br />powered by</div>
+					<a href="https://onelink.bz" target="_blank" class="bg-COLORBLK1 px-4 py-4">
+						<img
+							src="/assets/checkout/brands/one-link.svg"
+							width="50px"
+							class="cursor-pointer hover:opacity-75"
+						/></a
+					>
 				</div>
 			</div>
 		</div>
