@@ -133,7 +133,7 @@
 	</div>
 	<div class="main-content flex h-full items-center justify-start text-COLORWHT">
 		<div
-			class="page-content flex h-full w-full flex-wrap items-start justify-center space-x-14 overflow-auto bg-transparent p-2 py-16"
+			class="page-content flex h-full w-full flex-wrap items-start justify-center lg:space-x-14 overflow-auto bg-transparent p-2 py-16"
 		>
 			<!-- <div class="order-summary mx-2 flex flex-wrap h-fit w-full pb-12 lg:m-0"> -->
 			<div class="cart_summary block">
@@ -241,7 +241,7 @@
 																index
 															);
 														}}
-														class="m-0 flex h-full w-12 items-center justify-center border-y border-gray-700 bg-COLORBLK1 p-0 px-4 text-center text-xs uppercase text-COLORWHT transition"
+														class="m-0 flex h-full w-16 items-center justify-center border-y border-gray-700 bg-COLORBLK1 p-0 px-4 text-center text-xs uppercase text-COLORWHT transition"
 														value={item.quantity ?? '1'}
 													/>
 													<button
@@ -308,9 +308,9 @@
 					</div>
 					<div class="total_block flex w-full items-center">
 						<div
-							class="total_item flex w-full items-center rounded-sm bg-COLORBLK3 py-4 text-COLORWHT"
+							class="total_item flex flex-wrap w-full items-center rounded-sm bg-COLORBLK3 py-4 text-COLORWHT"
 						>
-							<div class="content mx-4 block flex-1">
+							<div class="content mx-4 block">
 								<div class="product-name font-base text-xl">Total amount due today</div>
 								<div class="product-quantity text-sm font-light text-COLORWHT2">
 									Your total amount to pay
