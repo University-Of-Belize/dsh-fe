@@ -4,6 +4,7 @@ import { fetchWebApi } from '$lib/vendor/dishout/api';
 import { toast } from '@zerodevx/svelte-toast';
 
 import type { Product } from '$lib/types/Product.ts';
+import type { CartProduct } from '$lib/types/Product';
 
 let debounceTimeout: number;
 
@@ -104,4 +105,108 @@ async function emptyCart(index: number | null) {
 	}
 }
 
-export { addToCart, emptyCart };
+async function updateCartQuantity(product_slug: string, quantity: number | null) {
+	try {
+		clearTimeout(debounceTimeout);
+
+		debounceTimeout = setTimeout(async () => {
+			const response = (await fetchWebApi(
+				'v1/user/cart',
+				'POST',
+				what_is(what.public.user, [product_slug, quantity])
+			)) as Response;
+			const data = await response.json();
+			// if (response.ok) {
+			// 	toast.push('Emptied the cart.');
+			// 	// **************** TELEMETRY ******************
+			// 	gtag('event', 'emptied_cart', {
+			// 		error: data.message
+			// 	});
+			// 	// ************** END TELEMETRY ****************
+			// 	return data;
+			// } else {
+			if(!response.ok) {
+				// console.error('Failed to add item to cart.');
+				toast.push(`Failed to update cart. ${data.message}`, {
+					dismissable: false,
+					theme: {
+						'--toastBarBackground': 'rgb(var(--COLORRED))'
+					}
+				});
+			}
+		}, 500); // One action at a time
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+async function removeFromCart(index: string) {
+	try {
+		clearTimeout(debounceTimeout);
+
+		debounceTimeout = setTimeout(async () => {
+			const response = (await fetchWebApi(
+				'v1/user/cart',
+				'DELETE',
+				what_is(what.public.user, index)
+			)) as Response;
+			const data = await response.json();
+			// if (response.ok) {
+			// 	toast.push('Emptied the cart.');
+			// 	// **************** TELEMETRY ******************
+			// 	gtag('event', 'emptied_cart', {
+			// 		error: data.message
+			// 	});
+			// 	// ************** END TELEMETRY ****************
+			// 	return data;
+			// } else {
+			if(!response.ok) {
+				// console.error('Failed to add item to cart.');
+				toast.push(`Failed to update cart. ${data.message}`, {
+					dismissable: false,
+					theme: {
+						'--toastBarBackground': 'rgb(var(--COLORRED))'
+					}
+				});
+			}
+		}, 500); // One action at a time
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+async function syncCart(cart: CartProduct[]) {
+	try {
+		clearTimeout(debounceTimeout);
+
+		debounceTimeout = setTimeout(async () => {
+			const response = (await fetchWebApi(
+				'v1/user/cart',
+				'PUT',
+				what_is(what.public.user, cart)
+			)) as Response;
+			const data = await response.json();
+			// if (response.ok) {
+			// 	toast.push('Emptied the cart.');
+			// 	// **************** TELEMETRY ******************
+			// 	gtag('event', 'emptied_cart', {
+			// 		error: data.message
+			// 	});
+			// 	// ************** END TELEMETRY ****************
+			// 	return data;
+			// } else {
+			if(!response.ok) {
+				// console.error('Failed to add item to cart.');
+				toast.push(`Failed to update cart. ${data.message}`, {
+					dismissable: false,
+					theme: {
+						'--toastBarBackground': 'rgb(var(--COLORRED))'
+					}
+				});
+			}
+		}, 500); // One action at a time
+	} catch (error) {
+		console.log(error);
+	}
+}
+export { addToCart, emptyCart, updateCartQuantity, removeFromCart, syncCart};
