@@ -31,7 +31,7 @@
 					color="COLORBLK3"
 					text="My account settings"
 					color_t="COLORWHT"
-					custom_style="w-full"
+					custom_style="w-full rounded-md"
 				/>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 					color="COLORBLK3"
 					text="Experiments"
 					color_t="COLORWHT"
-					custom_style="w-full"
+					custom_style="w-full rounded-md"
 				/>
 			</div>
 		</div>
@@ -60,7 +60,7 @@
 					color="COLORBLK3"
 					text="User management"
 					color_t="COLORWHT"
-					custom_style="w-full font-medium"
+					custom_style="w-full rounded-md font-medium"
 				/>
 			</div>
 		{/if}
@@ -70,7 +70,7 @@
 				color="COLORBLK3"
 				text="Review management"
 				color_t="COLORWHT"
-				custom_style="w-full font-medium"
+				custom_style="w-full rounded-md font-medium"
 			/>
 		</div>
 		<div class="three pt-1" on:click={() => goto('/admin/dashboard/feedback')}>
@@ -79,7 +79,7 @@
 				color="COLORBLK3"
 				text="Feedback hub"
 				color_t="COLORWHT"
-				custom_style="w-full font-medium"
+				custom_style="w-full rounded-md font-medium"
 			/>
 		</div>
 		{#if staff}
@@ -89,7 +89,7 @@
 					color="transparent"
 					text="Create a new user"
 					color_t="COLORWHT"
-					custom_style="w-full font-medium"
+					custom_style="w-full rounded-md font-medium"
 				/>
 			</div>{/if}
 	</div>
@@ -101,7 +101,7 @@
 				color="COLORBLK3"
 				text="Message a user"
 				color_t="COLORWHT"
-				custom_style="w-full font-medium"
+				custom_style="w-full rounded-md font-medium"
 			/>
 		</div>
 	</div>
@@ -114,7 +114,7 @@
 					color="COLORBLK3"
 					text="Write a new article"
 					color_t="COLORWHT"
-					custom_style="w-full font-medium"
+					custom_style="w-full rounded-md font-medium"
 				/>
 			</div>
 		</div>
@@ -127,7 +127,7 @@
 				color="COLORBLK3"
 				text="What's queued?"
 				color_t="COLORWHT"
-				custom_style="w-full font-medium"
+				custom_style="w-full rounded-md font-medium"
 			/>
 		</div>
 	</div>
@@ -140,7 +140,7 @@
 					color="COLORBLK3"
 					text="Category management"
 					color_t="COLORWHT"
-					custom_style="w-full font-medium"
+					custom_style="w-full rounded-md font-medium"
 				/>
 			</div>
 			<div class="three pt-1" on:click={() => goto('/admin/dashboard/product')}>
@@ -149,7 +149,7 @@
 					color="COLORBLK3"
 					text="Product management"
 					color_t="COLORWHT"
-					custom_style="w-full font-medium"
+					custom_style="w-full rounded-md font-medium"
 				/>
 			</div>
 			<div class="three pt-1" on:click={() => goto('/admin/dashboard/promo')}>
@@ -158,7 +158,7 @@
 					color="COLORBLK3"
 					text="Promo code management"
 					color_t="COLORWHT"
-					custom_style="w-full font-medium"
+					custom_style="w-full rounded-md font-medium"
 				/>
 			</div>
 			<div class="three pt-1" on:click={() => goto('/admin/dashboard/category/manage')}>
@@ -167,7 +167,7 @@
 					color="transparent"
 					text="Start a new category"
 					color_t="COLORWHT"
-					custom_style="w-full font-medium"
+					custom_style="w-full rounded-md font-medium"
 				/>
 			</div>
 			<div class="three pt-1" on:click={() => goto('/admin/dashboard/promo/manage')}>
@@ -176,7 +176,7 @@
 					color="transparent"
 					text="Start a new promo code"
 					color_t="COLORWHT"
-					custom_style="w-full font-medium"
+					custom_style="w-full rounded-md font-medium"
 				/>
 			</div>
 		</div>{/if}
