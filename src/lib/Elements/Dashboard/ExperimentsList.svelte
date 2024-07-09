@@ -9,29 +9,29 @@
 	// The "themes" object
 	const themes: ThemeData[] = [
 		{ name: 'Soft Pink', id: 'soft-pink' },
-		{
+	/*	{
 			name: 'Light v2',
 			id: 'light-v2',
 			description: "Experimental, but not as bad. Generated using 'Theme Creator'."
 		},
-		{ name: 'Grey', id: 'grey', description: 'Used to be light mode. Not anymore.' },
+		{ name: 'Grey', id: 'grey', description: 'Used to be light mode. Not anymore.' },*/
 		{
 			name: 'Dark v3',
 			id: 'dark-v3',
 			description:
 				'Third iteration of experimental dark mode skin. Report any cosmetic bugs using Feedback Hub.'
 		},
-		{
+/*		{
 			name: 'Dark v2',
 			id: 'dark-v2',
 			description: 'Latest, stable dark mode skin. Report any cosmetic bugs using Feedback Hub.'
-		},
+		},*/
 		{
 			name: 'UB Theme',
 			id: 'ub-theme',
 			description:
 				'UB Theme is meant to comply with the branding guidelines given to us by The University of Belize.'
-		},
+		}/*,
 		{
 			name: 'Fandom Wiki',
 			id: 'fandom-wiki'
@@ -47,7 +47,7 @@
 		{
 			name: 'Lol',
 			id: 'lol'
-		}
+		}*/
 	];
 </script>
 
