@@ -7,9 +7,9 @@ on:
   schedule:
     - cron: '0 * * * 0' # Every Sunday of the month
   push:
-    branches: ['flowbite']
+    branches: ['dev']
   pull_request:
-    branches: ['flowbite']
+    branches: ['dev']
   workflow_dispatch:
 
 concurrency: # Multiple jobs should NOT run at the same time
