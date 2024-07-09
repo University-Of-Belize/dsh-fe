@@ -11,6 +11,7 @@
 	export let disabled_text: string = 'You cannot interact with this element.'; // Optional
 	export let icon_on_sm: boolean = false; // Optional
 	export let custom_icon: string | undefined = undefined;
+	export let rounding: "sm" | "md" | "lg" | "xl" = "sm";
 	let objectData: HTMLObjectElement;
 	let iconData: HTMLDivElement;
 	const dispatch = createEventDispatcher();
@@ -42,7 +43,7 @@
 	role="button"
 	aria-disabled={disabled}
 	title={disabled ? disabled_text : ''}
-	class="button flex w-fit rounded-sm bg-{color} cursor-pointer hover:bg-opacity-80 text-{color_t} select-none items-center px-2 py-2 text-sm aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:opacity-40 lg:px-4 {custom_style}"
+	class="button flex w-fit rounded-{rounding} bg-{color} cursor-pointer hover:bg-opacity-80 text-{color_t} select-none items-center px-2 py-2 text-sm aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:opacity-40 lg:px-4 {custom_style}"
 >
 	<div class="icon w-fit">
 		{#if custom_icon}
