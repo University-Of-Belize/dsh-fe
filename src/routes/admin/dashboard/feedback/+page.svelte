@@ -49,7 +49,7 @@
 	<title>UniFood | Dashboard / My Feedback</title>
 </svelte:head>
 
-<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
+<div class="content block h-full w-full overflow-auto bg-transparent p-2 py-8 lg:px-16 lg:py-16 pb-40">
 	<div class="flex pb-2 text-2xl font-semibold">Feedback Hub</div>
 	<div class="flex w-full flex-wrap justify-between pb-12 text-xl font-light">
 		<div>Submit or manage your feedback</div>

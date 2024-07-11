@@ -282,7 +282,7 @@
 
 <div class="stub border- hidden border" />
 
-<div class="content block h-full w-full overflow-auto bg-transparent px-2 py-16 pb-40 md:px-16">
+<div class="content block h-full w-full overflow-auto bg-transparent p-2 py-8 lg:px-16 lg:py-16 pb-40">
 	<div class="flex-header flex w-full flex-wrap items-start">
 		<div class="block">
 			<div class="flex pb-2 text-2xl font-semibold">What's Queued?</div>

@@ -168,7 +168,7 @@
 	<title>UniFood | Dashboard / Product / Manage '{data ? data.productName : 'Product'}'</title>
 </svelte:head>
 
-<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
+<div class="content block h-full w-full overflow-auto bg-transparent p-2 py-8 lg:px-16 lg:py-16 pb-40">
 	<div class="flex-header flex w-full flex-wrap items-center">
 		<div class="block">
 			<div class="flex pb-2 text-2xl font-semibold">Product Wizard</div>

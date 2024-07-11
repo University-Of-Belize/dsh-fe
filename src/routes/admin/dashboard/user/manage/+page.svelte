@@ -2,8 +2,6 @@
 	import { page } from '$app/stores';
 	import UserBanner from '$lib/Elements/Banners/UserBanner.svelte';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import { editUser, registerUser } from '$lib/Elements/Utility/User';
 	import config from '$lib/config/settings';
@@ -152,7 +150,7 @@
 	};
 </script>
 
-<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
+<div class="content block h-full w-full overflow-auto bg-transparent p-2 py-8 lg:px-16 lg:py-16 pb-40">
 	<div class="flex-header flex w-full flex-wrap items-center">
 		<div class="block">
 			<div class="flex pb-2 text-2xl font-semibold">

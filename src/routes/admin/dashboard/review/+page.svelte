@@ -1,11 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import { deleteReview, escapeHtml } from '$lib/Elements/Utility/Review';
-	import config from '$lib/config/settings';
 	import type { Review } from '$lib/types/Review';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -42,7 +39,7 @@
 	<title>UniFood | Dashboard / Review</title>
 </svelte:head>
 
-<div class="content block h-full w-full overflow-auto bg-transparent px-16 py-16 pb-40">
+<div class="content block h-full w-full overflow-auto bg-transparent p-2 py-8 lg:px-16 lg:py-16 pb-40">
 	<div class="flex pb-2 text-2xl font-semibold">Review Management</div>
 	<div class="flex pb-12 text-xl font-light">Reviews & Comment Management</div>
 	<div class="flex w-full flex-col-reverse flex-wrap">
