@@ -35,6 +35,9 @@
 	let error_message: HTMLDivElement;
 	let error_available: boolean = false;
 
+	let checkout_card: HTMLDivElement;
+	let cart_summary: HTMLDivElement;
+
 	function updateCartQuantity(product: CartProduct, quantity: number, index_: number) {
 		APIUpdateCartQuantity(product.product.slug, quantity);
 		const index = data.findIndex((p) => p.product._id === product.product._id);
@@ -177,7 +180,7 @@
 			class="page-content flex h-full w-full flex-wrap items-start justify-center overflow-auto bg-transparent p-2 py-16 lg:space-x-14"
 		>
 			<!-- <div class="order-summary mx-2 flex flex-wrap h-fit w-full pb-12 lg:m-0"> -->
-			<div class="cart_summary block">
+			<div bind:this={cart_summary} class="cart_summary block">
 				{#if data != undefined && dataLength > 0}
 					<div class="mb-8 flex w-full flex-wrap items-center justify-start">
 						<div class="block">
@@ -337,10 +340,54 @@
 						</div>{:else}
 						<div class="font-light">There was a problem while loading your shopping cart.</div>{/if}
 				</ul>
+				<div class="my-4 w-full lg:hidden">
+					<Button
+						text="Next"
+						color="COLORBLK4"
+						color_t="COLORWHT"
+						icon={undefined}
+						custom_style="w-full justify-center py-4 text-md"
+						on:click={() => {
+							checkout_card.classList.remove('hidden');
+							checkout_card.classList.add('block');
+							cart_summary.classList.add('hidden');
+							cart_summary.classList.remove('block');
+						}}
+					/>
+				</div>
 			</div>
 
 			<!-------- CHECKOUT CARD ------->
-			<div class="checkout_card block h-fit rounded-lg border p-8">
+			<div
+				bind:this={checkout_card}
+				class="checkout_card hidden h-fit rounded-lg p-1 lg:block lg:border lg:p-8"
+			>
+				<div class="cart_controls lg:hidden mb-8">
+					<div class="block">
+						<div class="flex text-2xl font-semibold lg:pb-2">Your Cart</div>
+						<div class="flex pb-2 text-xl font-semibold lg:pb-12">Review your order</div>
+					</div>
+					<div class="flex space-x-2 lg:flex-1 lg:justify-end">
+						<div class="btn-wrp" on:click={() => history.back()}>
+							<Button text="Go Back" color="COLORBLK4" color_t="COLORWHT" icon={undefined} />
+						</div>
+						<div
+							class="btn-wrp"
+							on:click={() => {
+								emptyCart(null);
+								setTimeout(() => {
+									window.location.reload();
+								}, 3000);
+							}}
+						>
+							<IconButton icon={faTrash} color="COLORBLK4" color_t="COLORHPK" />
+						</div>
+						<div class="btn-wrp" on:click={() => window.print()}>
+							<IconButton icon={faPrint} color="COLORBLK4" color_t="COLORWHT" />
+						</div>
+					</div>
+				</div>
+
 				<div class="total_amount flex w-full flex-col items-center">
 					<div
 						class="mb-4 flex w-full items-center justify-start border-b border-COLORWHT pb-4 text-2xl font-semibold text-COLORWHT"
@@ -349,7 +396,7 @@
 					</div>
 					<div class="total_block block w-full items-center">
 						<div
-							class="total_item flex w-full flex-wrap items-center bg-COLORBLK3 py-4 text-COLORWHT rounded-xl overflow-clip"
+							class="total_item flex w-full flex-wrap items-center overflow-clip rounded-xl bg-COLORBLK3 py-4 text-COLORWHT"
 						>
 							<div class="content mx-4 block">
 								<div class="product-name font-base text-xl">Total amount due today</div>
@@ -379,7 +426,7 @@
 								Apply a coupon code
 							</div>
 							<form
-								class="coupon_checker flex h-fit flex-wrap items-center border border-COLORWHT bg-COLORBLK1 text-COLORWHT rounded-lg overflow-clip"
+								class="coupon_checker flex h-fit flex-wrap items-center overflow-clip rounded-lg border border-COLORWHT bg-COLORBLK1 text-COLORWHT"
 								action="#check-voucher"
 								on:submit={(e) => checkCoupon(e)}
 							>
