@@ -32,6 +32,9 @@
 	let cardPayment: boolean = true;
 	let paymentMethod = 'card';
 
+	let checkout_card: HTMLDivElement;
+	let cart_summary: HTMLDivElement;
+
 	/*** Card animations and stuff */
 	function flipCard(flip: string) {
 		if (flip === 'flipToRear' && !cardEl.classList.contains('rearIsVisible')) {
@@ -70,7 +73,11 @@
 			case 'credit': {
 				localStorage.setItem(
 					'payment_data',
-					JSON.stringify({ method: 'credit', toDeduct: cartTotal, discount_code: localStorage.discount_code ?? ''})
+					JSON.stringify({
+						method: 'credit',
+						toDeduct: cartTotal,
+						discount_code: localStorage.discount_code ?? ''
+					})
 				);
 				setTimeout(() => {
 					goto('/product/checkout/confirmed');
@@ -149,12 +156,12 @@
 		<div
 			class="page-content flex h-full w-full flex-wrap items-start justify-center overflow-auto bg-transparent p-2 py-16 lg:space-x-14"
 		>
-			<div class="block text-center">
-				<div class="block">
+			<div bind:this={cart_summary} class="block text-center">
+				<div class="mb-8 block">
 					<div class="flex pb-2 text-2xl font-semibold">Checkout</div>
 					<div class="flex text-xl font-light lg:pb-12">Confirm your payment</div>
 				</div>
-				<form class="grid w-60 grid-cols-1 gap-2 text-left sm:w-96">
+				<form class="grid grid-cols-1 gap-2 text-left sm:w-96 lg:w-60">
 					<div
 						class="relative w-full"
 						on:click={() => {
@@ -283,9 +290,28 @@
 						</label>
 					</div>
 				</form>
+
+				<div class="my-4 w-full lg:hidden">
+					<Button
+						text="Next"
+						color="COLORBLK4"
+						color_t="COLORWHT"
+						icon={undefined}
+						custom_style="w-full justify-center py-4 text-md"
+						on:click={() => {
+							checkout_card.classList.remove('hidden');
+							checkout_card.classList.add('block');
+							cart_summary.classList.add('hidden');
+							cart_summary.classList.remove('block');
+						}}
+					/>
+				</div>
 			</div>
 
-			<div class="checkout_card block h-fit rounded-lg border p-8">
+			<div
+				bind:this={checkout_card}
+				class="checkout_card hidden h-fit rounded-lg p-1 lg:block lg:border lg:p-8"
+			>
 				<form on:submit={(e) => handleSubmit(e)}>
 					<div class="total_amount flex w-full flex-col items-center">
 						<div
@@ -452,7 +478,7 @@
 							{/if}
 							<!--- Credit card form ENDS -->
 							<div
-								class="total_item flex w-full flex-wrap items-center bg-COLORBLK3 py-4 text-COLORWHT rounded-lg overflow-clip"
+								class="total_item flex w-full flex-wrap items-center overflow-clip rounded-lg bg-COLORBLK3 py-4 text-COLORWHT"
 							>
 								<div class="content mx-4 block w-full">
 									<div class="product-name font-base text-xl">Total amount due today</div>
@@ -500,7 +526,7 @@
 					</div>
 				</form>
 				<div
-					class="mt-8 flex items-center justify-between space-x-2 border border-COLORWHT5 bg-COLORBLK pl-4 text-sm text-COLORWHT1 rounded-xl overflow-clip"
+					class="mt-8 flex items-center justify-between space-x-2 overflow-clip rounded-xl border border-COLORWHT5 bg-COLORBLK pl-4 text-sm text-COLORWHT1"
 				>
 					<div>Secure payment processing<br />powered by</div>
 					<a href="https://onelink.bz" target="_blank" class="bg-COLORBLK1 px-4 py-4">
