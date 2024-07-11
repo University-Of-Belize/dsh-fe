@@ -1,0 +1,33 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: SvelteKit Deploy (Dev)
+
+on:
+  schedule:
+    - cron: '0 * * * 0' # Every Sunday of the month
+  push:
+    branches: ['dev']
+  pull_request:
+    branches: ['dev']
+  workflow_dispatch:
+
+concurrency: # Multiple jobs should NOT run at the same time
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      FLY_API_TOKEN: ${{ secrets.FLYIO_ACCESS }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Write Sentry resource file
+        run: |
+          echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
+      - name: Set up flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only -a ubcafe-dev
+      #- run: flyctl deploy --local-only -a ubcafe-dev
