@@ -680,7 +680,7 @@
 											<div
 												class="label flex w-full items-center justify-start space-x-2 text-lg font-semibold"
 											>
-												<div class="title">Discount percentage applied</div>
+												<div class="title">Discount amount</div>
 												<div
 													title={'The total discount percentage that was applied to this order'}
 													class="icon cursor-help select-none"

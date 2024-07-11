@@ -26,8 +26,7 @@
 			? JSON.parse(JSON.stringify(localStorage.payment_data))
 			: {};
 		localStorage.removeItem('cart_total');
-		localStorage.removeItem('currentCart');
-		localStorage.remoevItem('discount_code')
+		localStorage.removeItem('discount_code')
 		RunOrder();
 	});
 
