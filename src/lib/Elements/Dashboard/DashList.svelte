@@ -88,7 +88,8 @@
 			/>
 		</div>
 		{#if staff}
-			<div class="three pt-1" on:click={() => goto('/admin/dashboard/user/manage2')}>
+			<!-- Workaround since Manage2 bugs out -->
+			<div class="three pt-1" on:click={() => goto('/admin/dashboard/user/manage')}>
 				<Button
 					icon={faPlus}
 					color="transparent"

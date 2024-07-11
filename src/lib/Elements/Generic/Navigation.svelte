@@ -671,7 +671,7 @@
 
 							{#if staff}
 								<a
-									href="/admin/dashboard/user/manage2"
+									href="/admin/dashboard/user/manage"
 									class="group block rounded-lg p-4 text-center hover:bg-gray-100 dark:hover:bg-gray-600"
 								>
 									<Fa

@@ -98,7 +98,7 @@
 		</div>
 		<div class="flex flex-1 items-center justify-end">
 			{#if staff}
-				<div class="btn_wrp" on:click={() => goto('/admin/dashboard/user/manage2')}>
+				<div class="btn_wrp" on:click={() => goto('/admin/dashboard/user/manage')}>
 					<Button color="COLORBLK1" color_t="COLORWHT" text="New user" icon={faPlus} />
 				</div>{/if}
 			<!-- <div class="flex flex-col items-end space-y-2">

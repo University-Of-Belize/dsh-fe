@@ -797,18 +797,18 @@
 														color="transparent"
 														custom_style="border border-COLORHPK py-2 m-0"
 														color_t="COLORHPK"
-														text="Delete product"
+														text="Remove"
 													/>
 												</div>
 
-												<div class="edit-wrap h-fit w-fit">
+												<!-- <div class="edit-wrap h-fit w-fit">
 													<TextInput
 														icon={faCog}
 														name="quantity"
 														placeholder="Input a new quantity"
 														custom_style="py-2 m-0"
 													/>
-												</div>
+												</div> -->
 											</div>
 										</ProductPill>
 									{/each}

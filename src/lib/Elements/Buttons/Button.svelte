@@ -12,7 +12,7 @@
 	export let disabled_text: string = 'You cannot interact with this element.'; // Optional
 	export let icon_on_sm: boolean = false; // Optional
 	export let custom_icon: string | undefined = undefined;
-	export let rounding: "sm" | "md" | "lg" | "xl" = "sm";
+	export let rounding: "sm" | "md" | "lg" | "xl" | "2xl" = "lg";
 	let objectData: HTMLObjectElement;
 	let iconData: HTMLDivElement;
 	const dispatch = createEventDispatcher();
