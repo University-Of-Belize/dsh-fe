@@ -452,7 +452,7 @@
 							{/if}
 							<!--- Credit card form ENDS -->
 							<div
-								class="total_item flex w-full flex-wrap items-center rounded-sm bg-COLORBLK3 py-4 text-COLORWHT"
+								class="total_item flex w-full flex-wrap items-center bg-COLORBLK3 py-4 text-COLORWHT rounded-lg overflow-clip"
 							>
 								<div class="content mx-4 block w-full">
 									<div class="product-name font-base text-xl">Total amount due today</div>
@@ -500,7 +500,7 @@
 					</div>
 				</form>
 				<div
-					class="mt-8 flex items-center justify-between space-x-2 rounded-sm border border-COLORWHT5 bg-COLORBLK pl-4 text-sm text-COLORWHT1"
+					class="mt-8 flex items-center justify-between space-x-2 border border-COLORWHT5 bg-COLORBLK pl-4 text-sm text-COLORWHT1 rounded-xl overflow-clip"
 				>
 					<div>Secure payment processing<br />powered by</div>
 					<a href="https://onelink.bz" target="_blank" class="bg-COLORBLK1 px-4 py-4">

@@ -349,7 +349,7 @@
 					</div>
 					<div class="total_block block w-full items-center">
 						<div
-							class="total_item flex w-full flex-wrap items-center rounded-sm bg-COLORBLK3 py-4 text-COLORWHT"
+							class="total_item flex w-full flex-wrap items-center bg-COLORBLK3 py-4 text-COLORWHT rounded-xl overflow-clip"
 						>
 							<div class="content mx-4 block">
 								<div class="product-name font-base text-xl">Total amount due today</div>
@@ -379,7 +379,7 @@
 								Apply a coupon code
 							</div>
 							<form
-								class="coupon_checker flex h-fit flex-wrap items-center border border-COLORWHT bg-COLORBLK1 text-COLORWHT"
+								class="coupon_checker flex h-fit flex-wrap items-center border border-COLORWHT bg-COLORBLK1 text-COLORWHT rounded-lg overflow-clip"
 								action="#check-voucher"
 								on:submit={(e) => checkCoupon(e)}
 							>
@@ -395,6 +395,7 @@
 									color_t="COLORWHT"
 									type="submit"
 									icon={undefined}
+									rounding="sm"
 									custom_style="py-4"
 								/>
 							</form>
