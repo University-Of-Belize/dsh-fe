@@ -5,6 +5,7 @@ const WhatDB = {
 		category: 'category',
 		menu: 'menu',
 		order: 'order',
+		promos: 'promo',
 		post: 'post',
 		user: 'user'
 	},

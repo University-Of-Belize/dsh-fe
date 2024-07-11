@@ -6,6 +6,7 @@
 	export let color: string = 'COLORBLK4';
 	export let color_t: string = 'COLORWHT';
 	export let text: string;
+	export let type: 'button' | 'submit' | 'reset' = 'button';
 	export let custom_style: string | undefined = '';
 	export let disabled: boolean = false; // Optional
 	export let disabled_text: string = 'You cannot interact with this element.'; // Optional
@@ -33,14 +34,14 @@
 >
 	&nbsp;
 </div>
-<div
+<button
 	on:mouseover={(e) => handleHover(e)}
 	on:focus={(e) => handleHover(e)}
 	on:mouseleave={(e) => handleMouseLeave(e)}
 	on:click={(e) => handleClick(e)}
 	on:keypress={(e) => handleClick(e)}
 	tabindex="-1"
-	role="button"
+	{type}
 	aria-disabled={disabled}
 	title={disabled ? disabled_text : ''}
 	class="button flex w-fit rounded-{rounding} bg-{color} cursor-pointer hover:bg-opacity-80 text-{color_t} select-none items-center px-2 py-2 text-sm aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:opacity-40 lg:px-4 {custom_style}"
@@ -83,4 +84,4 @@
 	<div class="{icon_on_sm ? 'hidden' : ''} md:block">
 		{text}
 	</div>
-</div>
+</button>

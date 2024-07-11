@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import DateTimeInput from '$lib/Elements/Inputs/DateTimeInput.svelte';
 	import Select from '$lib/Elements/Inputs/Select2.svelte';
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
@@ -13,7 +11,7 @@
 	import type { Promo } from '$lib/types/Promo';
 	import type { User } from '$lib/types/User';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
-	// What is what?
+// What is what?
 	import { userDeleteOrderProduct } from '$lib/Elements/Utility/Order';
 	import { locateNodeUsingHash } from '$lib/Elements/Utility/page';
 	import type { CartProduct } from '$lib/types/Product';
@@ -448,7 +446,7 @@
 									</div>
 								</div>{/each}
 							<div class="my-4 hidden text-2xl font-semibold">
-								{parseFloat(order.total_amount.$numberDecimal ?? '0.00').toLocaleString('en-US', {
+								{parseFloat(order.final_amount.$numberDecimal ?? '0.00').toLocaleString('en-US', {
 									style: 'currency',
 									currency: config['checkout']['currency'],
 									minimumFractionDigits: 2
@@ -514,7 +512,7 @@
 											icon={faClone}
 											color="COLORYLW"
 											color_t="COLORBLK"
-											text={staff ? 'Override' : 'Modify'}
+											text={staff ? 'Details' : 'Modify'}
 											custom_style="my-2"
 										/>
 									</button>{/if}
@@ -624,11 +622,11 @@
 											<div
 												class="label flex w-full items-center justify-start space-x-2 text-lg font-semibold"
 											>
-												<div class="title">Total amount due</div>
+												<div class="title">Final amount due</div>
 												<div
 													title={staff
 														? 'How much does the customer have to pay?'
-														: 'The total amount you have to pay--not including any discounts that may have been applied'}
+														: 'The total amount you have to pay'}
 													class="icon cursor-help select-none"
 												>
 													<Fa icon={faQuestionCircle} size="1x" />
@@ -640,16 +638,68 @@
 												placeholder="Enter a total (e.g. 10.75)"
 												custom_style="bg-transparent"
 												value={order
-													? parseFloat(order.total_amount.$numberDecimal).toFixed(2)
+													? parseFloat(order.final_amount.$numberDecimal).toFixed(2)
 													: ''}
 												disabled={staff ? false : true}
 												disabled_text={staff
 													? ''
 													: `Your total ${
 															order
-																? 'is $' + parseFloat(order.total_amount.$numberDecimal).toFixed(2)
+																? 'is $' + parseFloat(order.final_amount.$numberDecimal).toFixed(2)
 																: 'failed to load'
 														}`}
+											/>
+										</div>
+										<div class="rogroup flex flex-wrap items-start justify-start lg:items-center">
+											<div
+												class="label flex w-full items-center justify-start space-x-2 text-lg font-semibold"
+											>
+												<div class="title">Total amount</div>
+												<div
+													title={staff
+														? 'The total amount excl. any discounts that may have been applied'
+														: 'The total amount you have to pay--not including any discounts that may have been applied'}
+													class="icon cursor-help select-none"
+												>
+													<Fa icon={faQuestionCircle} size="1x" />
+												</div>
+											</div>
+											<TextInput
+												icon={faDollarSign}
+												name={undefined}
+												placeholder="0"
+												custom_style="bg-transparent"
+												value={order
+													? parseFloat(order.total_amount.$numberDecimal).toFixed(2)
+													: ''}
+												disabled
+												disabled_text={'Total amount excl. any discounts'}
+											/>
+										</div>
+										<div class="rogroup flex flex-wrap items-start justify-start lg:items-center">
+											<div
+												class="label flex w-full items-center justify-start space-x-2 text-lg font-semibold"
+											>
+												<div class="title">Discount percentage applied</div>
+												<div
+													title={'The total discount percentage that was applied to this order'}
+													class="icon cursor-help select-none"
+												>
+													<Fa icon={faQuestionCircle} size="1x" />
+												</div>
+											</div>
+											<TextInput
+												icon={faDollarSign}
+												name={undefined}
+												placeholder="0"
+												custom_style="bg-transparent"
+												value={order
+													? parseFloat(order.discount_amount.$numberDecimal).toFixed(2)
+													: ''}
+												disabled
+												disabled_text={staff
+													? 'To edit the percentage, go and edit the promo code applied to this order.'
+													: 'Your total discount percentage'}
 											/>
 										</div>
 										<div

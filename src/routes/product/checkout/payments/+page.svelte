@@ -6,7 +6,7 @@
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { faClone, faLock } from '@fortawesome/free-solid-svg-icons';
+	import { faLock } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { v4 } from 'uuid';
 
@@ -70,7 +70,7 @@
 			case 'credit': {
 				localStorage.setItem(
 					'payment_data',
-					JSON.stringify({ method: 'credit', toDeduct: cartTotal })
+					JSON.stringify({ method: 'credit', toDeduct: cartTotal, discount_code: localStorage.discount_code ?? ''})
 				);
 				setTimeout(() => {
 					goto('/product/checkout/confirmed');
@@ -457,7 +457,7 @@
 								<div class="content mx-4 block w-full">
 									<div class="product-name font-base text-xl">Total amount due today</div>
 									<div class="product-quantity text-sm font-light text-COLORWHT2">
-										Your total amount to pay
+										Your total amount to pay (excl. discounts)
 									</div>
 								</div>
 								<div class="price mx-4 block font-semibold">

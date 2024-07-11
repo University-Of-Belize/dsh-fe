@@ -2,23 +2,25 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
+	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import IconButton from '$lib/Elements/Buttons/IconButton.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	import {
 		addToCart,
-		emptyCart,
 		updateCartQuantity as APIUpdateCartQuantity,
+		emptyCart,
 		removeFromCart,
 		syncCart
 	} from '$lib/Elements/Utility/Cart';
 	import config from '$lib/config/settings';
 	import type { CartProduct } from '$lib/types/Product';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { faPrint, faTrash } from '@fortawesome/free-solid-svg-icons';
+	import { what_is } from '$lib/vendor/dishout/What_Is';
+	import whats from '$lib/vendor/dishout/Whats';
+	import { faPrint, faTrash, faTicket } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-
 	const wants_single_cart = localStorage.wants_single_cart ?? false;
 	$: single_cart = $page.url.searchParams.get('single_cart');
 
@@ -28,6 +30,10 @@
 	let cartTotal: number = 0.0;
 
 	let g_cart: object[] = []; // The modified cart
+
+	let debounceTimeout: NodeJS.Timeout;
+	let error_message: HTMLDivElement;
+	let error_available: boolean = false;
 
 	function updateCartQuantity(product: CartProduct, quantity: number, index_: number) {
 		APIUpdateCartQuantity(product.product.slug, quantity);
@@ -121,6 +127,41 @@
 	function calculateTotal(price: string, quantity: number) {
 		cartTotal += parseFloat(price) * quantity;
 	}
+
+	async function checkCoupon(event: Event) {
+		event.preventDefault();
+
+		clearTimeout(debounceTimeout);
+		error_message.innerText = '';
+		// error_graphic.classList.add('hidden');
+		// error_graphic.classList.remove('absolute');
+		debounceTimeout = setTimeout(async () => {
+			const valueArray = Array.from(event.target)
+				.filter((el) => el.name)
+				.map((el) => el.value);
+
+			const coupon_code = valueArray[0];
+			if (coupon_code.trim() === '') {
+				error_available = true;
+				error_message.innerText = 'Please enter a valid coupon code.';
+				return;
+			}
+
+			const r = (await fetchWebApi(
+				'v1/promo/validate',
+				'POST',
+				what_is(whats.public.promos, coupon_code)
+			)) as Response;
+			const res = await r.json();
+			if (r.ok) {
+				error_available = false;
+				localStorage.setItem('discount_code', coupon_code);
+			} else {
+				error_available = true;
+			}
+			error_message.innerText = res.message;
+		}, 500); // bounce every 500ms
+	}
 </script>
 
 <svelte:head>
@@ -133,7 +174,7 @@
 	</div>
 	<div class="main-content flex h-full items-center justify-start text-COLORWHT">
 		<div
-			class="page-content flex h-full w-full flex-wrap items-start justify-center lg:space-x-14 overflow-auto bg-transparent p-2 py-16"
+			class="page-content flex h-full w-full flex-wrap items-start justify-center overflow-auto bg-transparent p-2 py-16 lg:space-x-14"
 		>
 			<!-- <div class="order-summary mx-2 flex flex-wrap h-fit w-full pb-12 lg:m-0"> -->
 			<div class="cart_summary block">
@@ -306,14 +347,14 @@
 					>
 						Total amount
 					</div>
-					<div class="total_block flex w-full items-center">
+					<div class="total_block block w-full items-center">
 						<div
-							class="total_item flex flex-wrap w-full items-center rounded-sm bg-COLORBLK3 py-4 text-COLORWHT"
+							class="total_item flex w-full flex-wrap items-center rounded-sm bg-COLORBLK3 py-4 text-COLORWHT"
 						>
 							<div class="content mx-4 block">
 								<div class="product-name font-base text-xl">Total amount due today</div>
 								<div class="product-quantity text-sm font-light text-COLORWHT2">
-									Your total amount to pay
+									Your total amount to pay (excl. discounts)
 								</div>
 							</div>
 							<div class="price mx-4 block font-semibold">
@@ -330,6 +371,39 @@
 										})}
 								</div>
 							</div>
+						</div>
+						<div class="coupon_checker_section my-6 block w-full items-center">
+							<div
+								class="text-md mb-4 flex w-full items-center justify-start border-b border-COLORWHT pb-4 font-semibold text-COLORWHT"
+							>
+								Apply a coupon code
+							</div>
+							<form
+								class="coupon_checker flex h-fit flex-wrap items-center border border-COLORWHT bg-COLORBLK1 text-COLORWHT"
+								action="#check-voucher"
+								on:submit={(e) => checkCoupon(e)}
+							>
+								<TextInput
+									icon={faTicket}
+									name="coupon_code"
+									placeholder="Type in a coupon code and press 'Check'"
+									custom_style="text-COLORBLK bg-transparent border-0 h-full mt-0"
+								/>
+								<Button
+									text="Check"
+									color="COLORBLK4"
+									color_t="COLORWHT"
+									type="submit"
+									icon={undefined}
+									custom_style="py-4"
+								/>
+							</form>
+							<span class="hidden text-emerald-600 text-rose-600" />
+							<p
+								bind:this={error_message}
+								class="mt-2 text-xs {error_available ? 'text-rose-600' : 'text-emerald-600'}"
+								id="email-error"
+							></p>
 						</div>
 					</div>
 				</div>

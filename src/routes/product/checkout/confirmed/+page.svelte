@@ -26,6 +26,8 @@
 			? JSON.parse(JSON.stringify(localStorage.payment_data))
 			: {};
 		localStorage.removeItem('cart_total');
+		localStorage.removeItem('currentCart');
+		localStorage.remoevItem('discount_code')
 		RunOrder();
 	});
 
@@ -62,7 +64,7 @@
 
 			// Update the user's balance
 			user.credit.$numberDecimal = JSON.stringify(
-				parseFloat(user.credit.$numberDecimal) - parseFloat(json.is.total_amount.$numberDecimal) // Response should have the correct amount
+				parseFloat(user.credit.$numberDecimal) - parseFloat(json.is.final_amount.$numberDecimal) // Response should have the correct amount
 			);
 			localStorage.user = JSON.stringify(user);
 

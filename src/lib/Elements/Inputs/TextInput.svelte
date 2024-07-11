@@ -36,7 +36,7 @@
 	aria-disabled={disabled}
 	title={disabled ? disabled_text : ''}
 	style={container_style}
-	class="textinput_generic mt-2 flex flex-1 items-center rounded-sm border border-COLORWHT bg-COLORBLK2 text-sm aria-disabled:cursor-not-allowed aria-disabled:opacity-40 {custom_style}"
+	class="textinput_generic mt-2 flex flex-1 items-center rounded-md border border-COLORWHT bg-COLORBLK2 text-sm aria-disabled:cursor-not-allowed aria-disabled:opacity-40 {custom_style}"
 >
 	<!-- <div class="icon w-fit">
 		<Fa {icon} size="1.25x" class="pr-4 text-COLORWHT" />
@@ -65,7 +65,7 @@
 		{required}
 		{disabled}
 		{autocomplete}
-		class="border-0 bg-transparent text-COLORWHT outline-none focus:border-0 focus:outline-0 focus:ring-0 disabled:cursor-not-allowed disabled:text-COLORWHT5 {class_}"
+		class="border-0 bg-transparent text-COLORWHT placeholder:text-COLORWHT3 outline-none focus:border-0 focus:outline-0 focus:ring-0 disabled:cursor-not-allowed disabled:text-COLORWHT5 {class_}"
 	>
 		<Fa {icon} slot="left" size="0.75x" class="px-1 text-COLORWHT" />
 	</Input>

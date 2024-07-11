@@ -10,6 +10,12 @@ interface Order {
 	total_amount: {
 		$numberDecimal: string;
 	};
+	final_amount: {
+		$numberDecimal: string;
+	};
+	discount_amount: {
+		$numberDecimal: string;
+	};
 	delay_time: number;
 	promo_code?: Promo;
 	is_accepted?: boolean;
