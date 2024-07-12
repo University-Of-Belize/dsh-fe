@@ -81,7 +81,7 @@
 	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} />
 	</div>
-	{#if !localStorage.user}
+	<!-- {#if !localStorage.user} -->
 		<div class="hero mb-8">
 			<!-- <div
 			class="image-and-wrapper relative"
@@ -227,9 +227,9 @@
 					</div>
 				</Footer>{/if}
 		</div>
-	{:else}
+	<!-- {:else}
 		<SuperDashboard />
-	{/if}
+	{/if} -->
 </main>
 
 <style>

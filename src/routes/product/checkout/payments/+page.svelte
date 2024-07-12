@@ -161,7 +161,7 @@
 					<div class="flex pb-2 text-2xl font-semibold">Checkout</div>
 					<div class="flex text-xl font-light lg:pb-12">Confirm your payment</div>
 				</div>
-				<form class="grid grid-cols-1 gap-2 text-left sm:w-96 lg:w-60">
+				<form class="grid grid-cols-1 gap-2 text-left sm:w-96 w-60">
 					<div
 						class="relative w-full"
 						on:click={() => {
