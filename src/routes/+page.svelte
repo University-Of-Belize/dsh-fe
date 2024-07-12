@@ -2,7 +2,6 @@
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import DataCard from '$lib/Elements/Cards/DataCard.svelte';
-	import SuperDashboard from '$lib/Elements/Dashboard/SuperDashboard.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import type { Category } from '$lib/types/Category';
