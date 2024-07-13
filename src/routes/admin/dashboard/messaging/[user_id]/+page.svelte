@@ -133,7 +133,7 @@
 			{interactions ? `with ${slug}. Sent messages will be displayed below.` : ''}
 		</div>
 	</div>
-	<div class="flex h-3/4 w-full flex-col flex-wrap lg:h-full">
+	<div class="block h-3/4 w-full lg:h-full">
 		<!-- The first message sets the chat's subject -->
 		<div class="mb-4 flex w-full justify-start space-x-2 pb-2 text-xl font-light">
 			{#if interactions}
