@@ -29,5 +29,5 @@ jobs:
           echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
       - name: Set up flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only -a ubcafe-dev
-      #- run: flyctl deploy --local-only -a ubcafe-dev
+      - run: flyctl deploy --remote-only -a ubcafe
+      #- run: flyctl deploy --local-only -a ubcafe
