@@ -185,7 +185,7 @@
 				</div>
 
 				<div
-					class="editPane flex w-full flex-col justify-around rounded-sm border border-COLORWHT3 bg-COLORBLK1 px-4 py-4 lg:flex-row"
+					class="editPane w-full block rounded-md border border-COLORWHT3 bg-COLORBLK1 px-4 py-4 lg:flex-row"
 					bind:this={editPane}
 				>
 					<div class="editGroup flex flex-col px-4 pb-8">

@@ -773,9 +773,10 @@
 								<div id="user-modify-content-{order._id}" class="hidden">
 									<div class="title text-2xl font-semibold">Products Ordered</div>
 									{#each data_raw[index].products as product, index}
+									<!-- description={product.product?.description} -->
 										<ProductPill
 											product={product.product ?? config.ui['default-product']}
-											description={product.product?.description}
+											description={""}
 											image={product.product?.image}
 											widget={false}
 											tag={true}
