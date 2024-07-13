@@ -12,7 +12,9 @@
 	export let container_style: string = '';
 	export let value: string = '';
 	export let autocomplete: string | undefined = 'current-password';
-	export let type: 'text' | 'email' | 'password' | 'color' = 'text';
+	export let type: 'text' | 'email' | 'password' | 'color' | 'number' = 'text';
+        export let max: string;
+        export let min: string;
 	export let required: boolean = false; // Optional
 	export let disabled: boolean = false; // Optional
 	export let disabled_text: string = 'You cannot type here.'; // Optional
@@ -48,6 +50,8 @@
 		{value}
 		{type}
 		{name}
+                {max}
+                {min}
 		class="w-full border-0 bg-transparent px-2 py-1 font-medium text-COLORWHT focus:outline-none active:outline-none disabled:cursor-not-allowed disabled:text-COLORWHT5 {class_}"
 		{placeholder}
 		{required}

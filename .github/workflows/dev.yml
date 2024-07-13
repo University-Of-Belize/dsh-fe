@@ -1,15 +1,15 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: SvelteKit Deploy (Staging)
+name: SvelteKit Deploy (Dev)
 
 on:
   schedule:
     - cron: '0 * * * 0' # Every Sunday of the month
   push:
-    branches: ['staging']
+    branches: ['dev']
   pull_request:
-    branches: ['staging']
+    branches: ['dev']
   workflow_dispatch:
 
 concurrency: # Multiple jobs should NOT run at the same time
@@ -29,5 +29,5 @@ jobs:
           echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
       - name: Set up flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only -a ubcafe
-      #- run: flyctl deploy --local-only -a ubcafe
+      - run: flyctl deploy --remote-only -a ubcafe-dev
+      #- run: flyctl deploy --local-only -a ubcafe-dev

@@ -194,6 +194,9 @@
 						<TextInput
 							icon={faTag}
 							name="discount"
+							type="number"
+							max="100"
+							min="1"
 							placeholder="Enter a discount percentage (e.g. 10)"
 							custom_style="bg-transparent"
 							value={data ? data.discount_percentage : ''}
