@@ -964,7 +964,7 @@
 					<div>
 						<!--- @remind This isn't portable @todo make this portable. -->
 						And, if by chance you do experience any bugs, be sure to tell us using the
-						<a href="/app/help-center/6592452880c49849aa984f1c" class="underline">Feedback Hub</a>
+						<a href="https://plattr.wuaze.com/public/d/2-using-the-feedback-hub" class="underline">Feedback Hub</a>
 					</div>
 				</div>
 				<div
