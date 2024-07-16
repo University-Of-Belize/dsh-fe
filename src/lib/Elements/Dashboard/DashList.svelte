@@ -6,6 +6,7 @@
 		faFeed,
 		faHamburger,
 		faMessage,
+		faTicket,
 		faNoteSticky,
 		faPlus,
 		faTag,
@@ -114,6 +115,19 @@
 		</div>
 	</div>
 	{#if staff}
+		<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
+			<div class="title pb-5 font-semibold">Receipts</div>
+			<div class="three pt-1" on:click={() => goto('/admin/dashboard/receipts')}>
+				<Button
+					icon={faTicket}
+					color="COLORBLK3"
+					text="View receipts"
+					color_t="COLORWHT"
+					custom_style="w-full font-medium"
+					rounding="md"
+				/>
+			</div>
+		</div>
 		<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
 			<div class="title pb-5 font-semibold">Announcements</div>
 			<div class="three pt-1" on:click={() => goto('/admin/dashboard/new-article')}>
