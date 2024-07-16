@@ -166,7 +166,9 @@
 	<title>UniFood | Dashboard / Product / Manage '{data ? data.productName : 'Product'}'</title>
 </svelte:head>
 
-<div class="content block h-full w-full overflow-auto bg-transparent p-2 py-8 lg:px-16 lg:py-16 pb-40">
+<div
+	class="content block h-full w-full overflow-auto bg-transparent p-2 py-8 pb-40 lg:px-16 lg:py-16"
+>
 	<div class="flex-header flex w-full flex-wrap items-center">
 		<div class="block">
 			<div class="flex pb-2 text-2xl font-semibold">Product Wizard</div>
@@ -183,7 +185,7 @@
 				</div>
 
 				<div
-					class="editPane w-full block rounded-md border border-COLORWHT3 bg-COLORBLK1 px-4 py-4 lg:flex-row"
+					class="editPane block w-full rounded-md border border-COLORWHT3 bg-COLORBLK1 px-4 py-4 lg:flex-row"
 					bind:this={editPane}
 				>
 					<div class="editGroup flex flex-col px-4 pb-8">
@@ -309,6 +311,9 @@
 								<TextInput
 									icon={faTag}
 									name="price"
+									type="number"
+									min="0.00"
+									step="0.25"
 									placeholder="Enter a price (e.g. 10.75)"
 									custom_style="bg-transparent"
 									value={data ? (data.price ? data.price.$numberDecimal : '') : ''}
@@ -319,6 +324,9 @@
 								<TextInput
 									icon={faBox}
 									name="in_stock"
+									type="number"
+									min="1"
+									step="1"
 									placeholder="How many of this item are available (e.g. 35)"
 									custom_style="bg-transparent"
 									value={data ? data.in_stock : ''}
@@ -336,6 +344,7 @@
 									options_color="text-COLORBLK"
 								/>
 							</div>
+
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
 								<div
 									class="label flex w-fit items-center justify-start space-x-2 text-lg font-light"

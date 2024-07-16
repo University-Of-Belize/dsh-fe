@@ -13,8 +13,9 @@
 	export let value: string = '';
 	export let autocomplete: string | undefined = 'current-password';
 	export let type: 'text' | 'email' | 'password' | 'color' | 'number' = 'text';
-        export let max: string;
-        export let min: string;
+	export let max: string | undefined;
+	export let min: string | undefined;
+	export let step: string | undefined;
 	export let required: boolean = false; // Optional
 	export let disabled: boolean = false; // Optional
 	export let disabled_text: string = 'You cannot type here.'; // Optional
@@ -64,12 +65,15 @@
 		on:input={handleInput}
 		{value}
 		{type}
+		{max}
+		{min}
+		{step}
 		{name}
 		{placeholder}
 		{required}
 		{disabled}
 		{autocomplete}
-		class="border-0 bg-transparent text-COLORWHT placeholder:text-COLORWHT3 outline-none focus:border-0 focus:outline-0 focus:ring-0 disabled:cursor-not-allowed disabled:text-COLORWHT5 {class_}"
+		class="border-0 bg-transparent text-COLORWHT outline-none placeholder:text-COLORWHT3 focus:border-0 focus:outline-0 focus:ring-0 disabled:cursor-not-allowed disabled:text-COLORWHT5 {class_}"
 	>
 		<Fa {icon} slot="left" size="0.75x" class="px-1 text-COLORWHT" />
 	</Input>

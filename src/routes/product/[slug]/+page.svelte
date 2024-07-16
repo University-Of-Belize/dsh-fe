@@ -283,6 +283,7 @@
 							<!-- <p class="ml-2 text-sm font-medium text-gray-500">1,209 Reviews</p> -->
 						</div>
 
+						<!-- @todo Make this into a form -->
 						<!-- Loop through the variations array and map them to their respective vcategories -->
 						<!-- We use the VCategory_id property (second subarray) to identify which category these elements belong to by matching it against the first subarray elements' property _id -->
 						{#if productVariations}

@@ -11,7 +11,8 @@
 		faPlus,
 		faTag,
 		faUserCog,
-		faVial
+		faVial,
+		faBagShopping
 	} from '@fortawesome/free-solid-svg-icons';
 	import Button from '../Buttons/Button.svelte';
 
@@ -122,6 +123,19 @@
 					icon={faTicket}
 					color="COLORBLK3"
 					text="View receipts"
+					color_t="COLORWHT"
+					custom_style="w-full font-medium"
+					rounding="md"
+				/>
+			</div>
+		</div>
+		<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
+			<div class="title pb-5 font-semibold">Credit Refill</div>
+			<div class="three pt-1" on:click={() => goto('/admin/dashboard/refill')}>
+				<Button
+					icon={faBagShopping}
+					color="COLORBLK3"
+					text="Refill an account"
 					color_t="COLORWHT"
 					custom_style="w-full font-medium"
 					rounding="md"
