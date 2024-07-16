@@ -3,7 +3,7 @@ import { version } from '$app/environment';
 const settings = {
 	server: {
 		HTTPOrigin: 'https://winter-darkness-1705.fly.dev',
-		'api-version': '1',
+		'api-version': '2',
 		// HTTPOrigin: 'https://icy-rain-2400.fly.dev',
 		// HTTPOrigin: 'http://127.0.0.1:8080',
 		// HTTPOrigin: 'http://192.168.38.16:8080',
