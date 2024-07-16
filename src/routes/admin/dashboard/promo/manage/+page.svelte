@@ -1,14 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import PromoPill from '$lib/Elements/Dashboard/PromoPill.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import DateInput from '$lib/Elements/Inputs/DateInput.svelte';
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import { createPromo, deletePromo, editPromo } from '$lib/Elements/Utility/Promo';
 	import { getDate } from '$lib/Elements/Utility/time';
-	import config from '$lib/config/settings';
 	import type { Promo } from '$lib/types/Promo';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -34,7 +31,7 @@
 	async function catchAll() {
 		// Do not run if there is no promo_id provided
 		if (promo_id) {
-			const res = (await fetchWebApi('v1/admin/promo/manage', 'GET')) as Response;
+			const res = (await fetchWebApi('admin/promo/manage', 'GET')) as Response;
 			const r = await res.json();
 			if (!res.ok) {
 				return toast.push(r.message);

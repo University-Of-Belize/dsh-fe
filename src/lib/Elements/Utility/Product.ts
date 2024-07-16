@@ -1,4 +1,3 @@
-import { goto } from '$app/navigation';
 import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
 import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -30,7 +29,7 @@ const createProduct = async (
 				discount
 			];
 			const res = (await fetchWebApi(
-				'v1/admin/menu/manage',
+				'admin/menu/manage',
 				'POST',
 				what_is(what.private.menu, payload)
 			)) as Response;
@@ -74,7 +73,7 @@ const editProduct = async (
 				discount
 			];
 			const res = (await fetchWebApi(
-				'v1/admin/menu/manage',
+				'admin/menu/manage',
 				'PUT',
 				what_is(what.private.menu, payload)
 			)) as Response;
@@ -96,7 +95,7 @@ const deleteProduct = async (productId: string) => {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
 			const res = (await fetchWebApi(
-				'v1/admin/menu/manage',
+				'admin/menu/manage',
 				'DELETE',
 				what_is(what.private.menu, productId)
 			)) as Response;
@@ -113,4 +112,5 @@ const deleteProduct = async (productId: string) => {
 	}
 };
 
-export { createProduct, editProduct, deleteProduct };
+export { createProduct, deleteProduct, editProduct };
+

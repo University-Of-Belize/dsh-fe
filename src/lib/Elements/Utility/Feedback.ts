@@ -1,4 +1,3 @@
-import { goto } from '$app/navigation';
 import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
 import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -10,7 +9,7 @@ const deleteFeedback = async (feedbackId: string) => {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
 			const res = (await fetchWebApi(
-				'v1/admin/feedback/manage',
+				'admin/feedback/manage',
 				'DELETE',
 				what_is(what.private.feedback, feedbackId)
 			)) as Response;
@@ -34,7 +33,7 @@ async function createFeedback(comment: string) {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
 			const response = (await fetchWebApi(
-				'v1/admin/feedback/manage',
+				'admin/feedback/manage',
 				'POST',
 				what_is(what.private.feedback, comment)
 			)) as Response;

@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import Select from '$lib/Elements/Inputs/Select2.svelte';
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import { createProduct, deleteProduct, editProduct } from '$lib/Elements/Utility/Product';
@@ -42,7 +40,7 @@
 	let keywords_input: TagInput;
 
 	async function populateCategories() {
-		const res = (await fetchWebApi('v1/category', 'GET')) as Response;
+		const res = (await fetchWebApi('category', 'GET')) as Response;
 		if (!res.ok) {
 			const r = await res.json();
 			return toast.push(r.message);
@@ -56,7 +54,7 @@
 		populateCategories();
 		// Do not run if there is no product_id provided
 		if (product_id) {
-			const res = (await fetchWebApi(`v1/menu/lookup?product_id=${product_id}`, 'GET')) as Response;
+			const res = (await fetchWebApi(`menu/lookup?product_id=${product_id}`, 'GET')) as Response;
 			const r = await res.json();
 			if (!res.ok) {
 				return toast.push(r.message);

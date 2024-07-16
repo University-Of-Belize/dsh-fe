@@ -11,7 +11,7 @@ const deleteArticle = async (articleId: string) => {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
 			const res = (await fetchWebApi(
-				'v1/admin/post/manage',
+				'admin/post/manage',
 				'DELETE',
 				what_is(what.private.post, articleId)
 			)) as Response;
@@ -35,7 +35,7 @@ async function createArticle(comment: string) {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
 			const response = (await fetchWebApi(
-				'v1/admin/post/manage',
+				'admin/post/manage',
 				'POST',
 				what_is(what.private.post, comment)
 			)) as Response;

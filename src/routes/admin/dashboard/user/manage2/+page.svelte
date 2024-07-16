@@ -2,8 +2,6 @@
 	import { page } from '$app/stores';
 	import UserBanner from '$lib/Elements/Banners/UserBanner2.svelte';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import { editUser, registerUser } from '$lib/Elements/Utility/User';
 	import { R2S3Upload } from '$lib/Elements/Utility/vendor/dishout/r2_s3';
@@ -53,7 +51,7 @@
 		// Do not run if there is no user_id provided
 		if (user_id) {
 			const res = (await fetchWebApi(
-				`v1/admin/user/lookup?user_id=${user_id == 'me' ? localStorage.user_id : user_id}`,
+				`admin/user/lookup?user_id=${user_id == 'me' ? localStorage.user_id : user_id}`,
 				'GET'
 			)) as Response;
 			if (!res.ok) {
@@ -73,7 +71,7 @@
 
 	onMount(async () => {
 		try {
-			fetchWebApi('v1/dash/', 'GET'); // Are we logged in?
+			fetchWebApi('dash/', 'GET'); // Are we logged in?
 			await catchAll(); // Fetch the user for updates
 		} catch (error) {
 			console.log(error);

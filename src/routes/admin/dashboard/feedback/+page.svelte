@@ -1,8 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/Elements/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import CommentBox from '$lib/Elements/Inputs/CommentBox.svelte';
 	import { createFeedback, deleteFeedback } from '$lib/Elements/Utility/Feedback';
 	import config from '$lib/config/settings';
@@ -25,7 +23,7 @@
 	$: data; // List of feedback (Feedback[])
 
 	async function catchAll() {
-		const res = (await fetchWebApi('v1/admin/feedback/manage', 'GET')) as Response;
+		const res = (await fetchWebApi('admin/feedback/manage', 'GET')) as Response;
 		if (!res.ok) {
 			const r = await res.json();
 			return toast.push(r.message);

@@ -92,7 +92,7 @@
 		// console.log(valueArray);
 
 		const r = (await fetchWebApi(
-			'v1/order/place',
+			'order/place',
 			'POST', // "silent" errors
 			what_is(what.public.order, { method: 'card', data: valueArray }),
 			undefined,

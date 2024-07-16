@@ -22,7 +22,7 @@
 		let searchResults, nameResults;
 
 		try {
-			const searchPromise = (await fetchWebApi('v1/menu/', 'GET')) as Response;
+			const searchPromise = (await fetchWebApi('menu/', 'GET')) as Response;
 
 			const searchResponse = await searchPromise;
 			if (searchResponse.status === 404) {
@@ -43,7 +43,7 @@
 
 	async function getCategories() {
 		if (!cachedCategories) {
-			const response = (await fetchWebApi('v1/category', 'GET')) as Response;
+			const response = (await fetchWebApi('category', 'GET')) as Response;
 			if (!response) return;
 			const data = await response.json();
 			categories = data.is; // Category[]

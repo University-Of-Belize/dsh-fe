@@ -1,4 +1,3 @@
-import { goto } from '$app/navigation';
 import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
 import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -77,7 +76,7 @@ async function editUser(
 	]);
 
 	try {
-		const res = (await fetchWebApi('v1/admin/user/manage', 'PUT', payload)) as Response;
+		const res = (await fetchWebApi('admin/user/manage', 'PUT', payload)) as Response;
 		if (!res.ok) {
 			const r = await res.json();
 			return toast.push(r.message, {
@@ -105,7 +104,7 @@ async function registerUser(payload: string[]) {
 		console.log(payload);
 		debounceTimeout = setTimeout(async () => {
 			const response = (await fetchWebApi(
-				'v1/admin/user/manage',
+				'admin/user/manage',
 				'POST',
 				what_is(what.private.user, payload)
 			)) as Response;

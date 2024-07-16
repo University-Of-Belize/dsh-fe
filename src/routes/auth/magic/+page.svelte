@@ -34,7 +34,7 @@
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
 			const r = (await fetchWebApi(
-				'v1/dash',
+				'dash',
 				'GET',
 				undefined,
 				undefined,

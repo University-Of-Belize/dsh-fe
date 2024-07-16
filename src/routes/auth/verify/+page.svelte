@@ -134,7 +134,7 @@
 	async function postData(data: any, path: string, token?: string) {
 		try {
 			const response = (await fetchWebApi(
-				`v1/auth/${path}`,
+				`auth/${path}`,
 				'POST',
 				what_is(what.public.auth, data),
 				undefined,

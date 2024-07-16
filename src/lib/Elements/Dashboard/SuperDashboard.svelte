@@ -1,15 +1,8 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import Button from '$lib/Elements/Buttons/Button.svelte';
-	import DataCard from '$lib/Elements/Cards/DataCard.svelte';
-	import SuperDashboard from '$lib/Elements/Dashboard/SuperDashboard.svelte';
-	import Footer from '$lib/Elements/Generic/Footer.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import type { Category } from '$lib/types/Category';
 	import type { Product as Product_ } from '$lib/types/Product';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { faGift } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	let user: User =
@@ -39,7 +32,7 @@
 		LCP_EXT = LCP.split('.').pop(); // Get the extension
 
 		try {
-			const res = (await fetchWebApi('v1/menu/random', 'GET')) as Response;
+			const res = (await fetchWebApi('menu/random', 'GET')) as Response;
 			if (!res) return;
 			const r = await res.json();
 			product = r.is;
@@ -60,7 +53,7 @@
 		// clientHeight = window.innerHeight;
 	});
 	async function getCategories() {
-		const response = (await fetchWebApi('v1/category', 'GET')) as Response;
+		const response = (await fetchWebApi('category', 'GET')) as Response;
 		const data = await response.json();
 		categories = data.is; // Category[]
 		categories = categories.filter((category: Category) => !category.hidden);

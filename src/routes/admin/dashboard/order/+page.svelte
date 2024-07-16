@@ -52,7 +52,7 @@
 		// Try to see if we provided an order ID to search for
 		locateNodeUsingHash('order');
 		// Fetch all orders
-		const res = (await fetchWebApi('v1/admin/order/manage', 'GET')) as Response;
+		const res = (await fetchWebApi('admin/order/manage', 'GET')) as Response;
 		const r = await res.json();
 		if (!res.ok) {
 			return toast.push(r.message);
@@ -229,7 +229,7 @@
 			case 3: // Modify
 			case 4: // Ready
 				const r = (await fetchWebApi(
-					'v1/admin/order/manage',
+					'admin/order/manage',
 					'POST',
 					what_is(what.private.order, [
 						currentAction[0] === 1

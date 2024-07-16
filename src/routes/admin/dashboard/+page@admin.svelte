@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	// import Button from '$lib/Elements/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import config from '$lib/config/settings';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
@@ -32,7 +30,7 @@
 
 	onMount(async () => {
 		try {
-			const res = (await fetchWebApi('v1/dash', 'GET')) as Response;
+			const res = (await fetchWebApi('dash', 'GET')) as Response;
 			if (!res.ok) {
 				const r = await res.json();
 				return toast.push(r.message);
@@ -61,7 +59,7 @@
 							localStorage.setItem('fb_token', JSON.stringify(currentToken));
 							// Send the token to the server and update the UI if necessary
 							const res = (await fetchWebApi(
-								'v1/user/notifications',
+								'user/notifications',
 								'POST',
 								what_is(what.public.user, currentToken)
 							)) as Response;

@@ -5,7 +5,7 @@ import { toast } from '@zerodevx/svelte-toast';
 
 async function userDeleteOrderProduct(order_id: string, index: number) {
 	const r = (await fetchWebApi(
-		'v1/order/place',
+		'order/place',
 		'PUT',
 		what_is(what.public.order, [
 			order_id,

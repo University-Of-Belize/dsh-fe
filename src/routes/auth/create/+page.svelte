@@ -18,7 +18,7 @@
 			clearTimeout(debounceTimeout);
 			debounceTimeout = setTimeout(async () => {
 				const response = (await fetchWebApi(
-					`v1/auth/signup`,
+					`auth/signup`,
 					'POST',
 					what_is(what.public.auth, payload)
 				)) as Response;

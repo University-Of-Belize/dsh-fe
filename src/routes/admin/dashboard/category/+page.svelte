@@ -12,7 +12,7 @@
 	let data: Category[]; // List of users
 
 	async function catchAll() {
-		const res = (await fetchWebApi('v1/category', 'GET')) as Response;
+		const res = (await fetchWebApi('category', 'GET')) as Response;
 		if (!res.ok) {
 			const r = await res.json();
 			return toast.push(r.message);

@@ -2,11 +2,8 @@
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import CategoryPill from '$lib/Elements/Dashboard/CategoryPill.svelte';
-	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import { createCategory, deleteCategory, editCategory } from '$lib/Elements/Utility/Category';
-	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -35,7 +32,7 @@
 	async function catchAll() {
 		// Do not run if there is no category_id provided
 		if (category_id) {
-			const res = (await fetchWebApi('v1/category', 'GET')) as Response;
+			const res = (await fetchWebApi('category', 'GET')) as Response;
 			const r = await res.json();
 			if (!res.ok) {
 				return toast.push(r.message);

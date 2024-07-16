@@ -32,7 +32,7 @@
 		}
 		try {
 			const searchPromise = (await fetchWebApi(
-				`v1/search?filter=${params_filter ?? 'productName'}&q=${
+				`search?filter=${params_filter ?? 'productName'}&q=${
 					params?.toString().toLowerCase() ?? ''
 				}`,
 				'GET'
@@ -55,7 +55,7 @@
 		} else {
 			try {
 				const namePromise = (await fetchWebApi(
-					`v1/search?filter=alias&q=${
+					`search?filter=alias&q=${
 						params_filter?.toString().toLowerCase() ?? params?.toString().toLowerCase()
 					}`,
 					'GET'
@@ -80,7 +80,7 @@
 
 	async function getCategories() {
 		if (!cachedCategories) {
-			const response = (await fetchWebApi('v1/category', 'GET')) as Response;
+			const response = (await fetchWebApi('category', 'GET')) as Response;
 			if (!response) return;
 			const data = await response.json();
 			categories = data.is; // Category[]

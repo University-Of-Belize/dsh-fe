@@ -4,10 +4,10 @@
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
+	import { faImage } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
 	import { R2S3Upload } from '../Utility/vendor/dishout/r2_s3';
-	import { faImage } from '@fortawesome/free-solid-svg-icons';
 	export let user: User;
 	export let tag: boolean = false;
 	export let tagColor: string = 'COLORWHT';
@@ -21,7 +21,7 @@
 
 	async function updateProfilePhoto(pub_url: string) {
 		const r = (await fetchWebApi(
-			'v1/admin/user/manage/profile_picture',
+			'admin/user/manage/profile_picture',
 			'PUT',
 			what_is(what.private.user, pub_url)
 		)) as Response; // JS doesn't allow type declarations

@@ -21,7 +21,7 @@
 	async function catchAll() {
 		// Do not run if there is no user_id provided
 		if (user_id) {
-			const res = (await fetchWebApi(`v1/admin/user/lookup?user_id=${user_id}`, 'GET')) as Response;
+			const res = (await fetchWebApi(`admin/user/lookup?user_id=${user_id}`, 'GET')) as Response;
 			if (!res.ok) {
 				const r = await res.json();
 				return toast.push(r.message);

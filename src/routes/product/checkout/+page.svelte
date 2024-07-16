@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import config from '$lib/config/settings';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
-	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import IconButton from '$lib/Elements/Buttons/IconButton.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
+	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 	import {
 		addToCart,
@@ -13,12 +14,11 @@
 		removeFromCart,
 		syncCart
 	} from '$lib/Elements/Utility/Cart';
-	import config from '$lib/config/settings';
 	import type { CartProduct } from '$lib/types/Product';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import whats from '$lib/vendor/dishout/Whats';
-	import { faPrint, faTrash, faTicket } from '@fortawesome/free-solid-svg-icons';
+	import { faPrint, faTicket, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	const wants_single_cart = localStorage.wants_single_cart ?? false;
@@ -67,7 +67,7 @@
 					});
 			}
 			setTimeout(async () => {
-				const response = (await fetchWebApi('v1/user/cart', 'GET')) as Response;
+				const response = (await fetchWebApi('user/cart', 'GET')) as Response;
 				if (response.ok) {
 					const r = await response.json(); // Copilot logic (efficiently group the same items together)
 					data = r.is.reduce((acc: CartProduct[], curr: CartProduct) => {
@@ -151,7 +151,7 @@
 			}
 
 			const r = (await fetchWebApi(
-				'v1/promo/validate',
+				'promo/validate',
 				'POST',
 				what_is(whats.public.promos, coupon_code)
 			)) as Response;

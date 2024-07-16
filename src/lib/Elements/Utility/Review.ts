@@ -1,4 +1,3 @@
-import { goto } from '$app/navigation';
 import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
 import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -10,7 +9,7 @@ const deleteReview = async (reviewId: string) => {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
 			const res = (await fetchWebApi(
-				'v1/admin/review/manage',
+				'admin/review/manage',
 				'DELETE',
 				what_is(what.private.review, reviewId)
 			)) as Response;
@@ -32,7 +31,7 @@ async function createReview(product_id: string, rating: number, comment: string)
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
 			const response = (await fetchWebApi(
-				'v1/review/create',
+				'review/create',
 				'POST',
 				what_is(what.public.review, [product_id, rating, comment])
 			)) as Response;

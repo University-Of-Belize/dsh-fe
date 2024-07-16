@@ -5,7 +5,7 @@
 	import { Button, ButtonGroup, Drawer } from 'flowbite-svelte';
 	import Fa from 'svelte-fa';
 	import { sineIn } from 'svelte/easing';
-	/***********************/
+/***********************/
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
@@ -81,7 +81,7 @@
 		if (!localStorage.user) {
 			if (localStorage.token) {
 				try {
-					const response = (await fetchWebApi('v1/admin/user/lookup', 'GET')) as Response;
+					const response = (await fetchWebApi('admin/user/lookup', 'GET')) as Response;
 					if (!response) return;
 					const data = await response.json();
 					// console.log(data);
@@ -103,7 +103,7 @@
 
 	async function getCategories() {
 		if (!cachedCategories) {
-			const response = (await fetchWebApi('v1/category', 'GET')) as Response;
+			const response = (await fetchWebApi('category', 'GET')) as Response;
 			if (!response) return;
 			const data = await response.json();
 			categories = data.is; // Category[]

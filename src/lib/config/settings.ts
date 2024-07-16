@@ -3,6 +3,7 @@ import { version } from '$app/environment';
 const settings = {
 	server: {
 		HTTPOrigin: 'https://winter-darkness-1705.fly.dev',
+		'api-version': '1',
 		// HTTPOrigin: 'https://icy-rain-2400.fly.dev',
 		// HTTPOrigin: 'http://127.0.0.1:8080',
 		// HTTPOrigin: 'http://192.168.38.16:8080',
@@ -38,7 +39,7 @@ const settings = {
 		notice: 'You are viewing <br/><b>A PREVIEW</b>',
 		version: version,
 		APIretryLimit: 12, // Should be enough for server "wake-up"
-		'branding-text': 'UniFood',
+		'branding-text': 'Plattr',
 		'branding-logo': '/icons/icon-svgrepo.svg',
 		'default-product': {
 			category: { _id: 'placeholder', name: 'Uncategorized' },

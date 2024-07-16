@@ -38,7 +38,7 @@
 		LCP_EXT = LCP.split('.').pop(); // Get the extension
 
 		try {
-			const res = (await fetchWebApi('v1/menu/random', 'GET')) as Response;
+			const res = (await fetchWebApi('menu/random', 'GET')) as Response;
 			if (!res) return;
 			const r = await res.json();
 			product = r.is;
@@ -59,7 +59,7 @@
 		// clientHeight = window.innerHeight;
 	});
 	async function getCategories() {
-		const response = (await fetchWebApi('v1/category', 'GET')) as Response;
+		const response = (await fetchWebApi('category', 'GET')) as Response;
 		const data = await response.json();
 		categories = data.is; // Category[]
 		categories = categories.filter((category: Category) => !category.hidden);

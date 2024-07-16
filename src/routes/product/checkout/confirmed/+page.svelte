@@ -33,7 +33,7 @@
 	async function postData(data: any, token?: string) {
 		try {
 			const response = (await fetchWebApi(
-				'v1/order/place',
+				'order/place',
 				'POST',
 				what_is(
 					what.public.order,

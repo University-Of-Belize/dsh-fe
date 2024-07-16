@@ -42,7 +42,7 @@
 
 		try {
 			// Check if the slug even exists
-			const response = (await fetchWebApi(`v1/menu/slug?id=${params}`, 'GET')) as Response;
+			const response = (await fetchWebApi(`menu/slug?id=${params}`, 'GET')) as Response;
 			if (!response.ok) {
 				history.back();
 			}
@@ -87,7 +87,7 @@
 	});
 
 	async function getProduct() {
-		const response = (await fetchWebApi(`v1/menu/lookup?slug=${params}`, 'GET')) as Response;
+		const response = (await fetchWebApi(`menu/lookup?slug=${params}`, 'GET')) as Response;
 		if (!response || response.body == null) return;
 		let r;
 		try {

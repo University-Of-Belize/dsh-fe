@@ -55,7 +55,7 @@
 
 	async function catchAll() {
 		const post = (await fetchWebApi(
-			`v1/admin/post/lookup?article_id=${params}`,
+			`admin/post/lookup?article_id=${params}`,
 			'GET'
 		)) as Response;
 		if (!post) return;

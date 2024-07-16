@@ -51,7 +51,7 @@
 				search = query;
 			}
 			const response = (await fetchWebApi(
-				`v1/search?filter=${currentFilter ?? filter?.detail}&q=${query}`,
+				`search?filter=${currentFilter ?? filter?.detail}&q=${query}`,
 				'GET'
 			)) as Response;
 			data = await response.json();
@@ -62,7 +62,7 @@
 	}
 
 	async function catchAll() {
-		const res = (await fetchWebApi('v1/admin/user/manage', 'GET')) as Response;
+		const res = (await fetchWebApi('admin/user/manage', 'GET')) as Response;
 		if (!res.ok) {
 			const r = await res.json();
 			return toast.push(r.message);

@@ -21,7 +21,7 @@
 			error_graphic.classList.add('hidden');
 			error_graphic.classList.remove('absolute');
 			const r = (await fetchWebApi(
-				'v1/auth/passwordreset',
+				'auth/passwordreset',
 				ResetToken ? 'PATCH' : 'POST',
 				what_is(what.public.auth, payload[0]),
 				undefined,

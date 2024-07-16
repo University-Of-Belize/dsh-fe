@@ -1,17 +1,16 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import config from '$lib/config/settings';
+	import MessageStrip from '$lib/Elements/Dashboard/MessageStrip.svelte';
+	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
+	import type { Message, ServerMessage, UserDetailsMessage } from '$lib/types/Message';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import type { ServerMessage, UserDetailsMessage, Message } from '$lib/types/Message';
-	import MessageStrip from '$lib/Elements/Dashboard/MessageStrip.svelte';
-	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 
 	import { faPaperPlane, faUser } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-
-	// What is what, anyway?
+// What is what, anyway?
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 
@@ -33,7 +32,7 @@
 
 	async function catchAll() {
 		const res = (await fetchWebApi(
-			'v1/user/messaging/get',
+			'user/messaging/get',
 			'POST',
 			what_is(what.public.user, slug)
 		)) as Response;
@@ -78,7 +77,7 @@
 
 		// Send the message
 		const res = (await fetchWebApi(
-			'v1/user/messaging/send',
+			'user/messaging/send',
 			'POST',
 			what_is(what.public.user, message)
 		)) as Response;

@@ -9,7 +9,7 @@
 	let data: Article[];
 
 	async function catchAll() {
-		const res = (await fetchWebApi('v1/admin/post/manage', 'GET')) as Response;
+		const res = (await fetchWebApi('admin/post/manage', 'GET')) as Response;
 		if (!res.ok) {
 			const r = await res.json();
 			return toast.push(r.message);

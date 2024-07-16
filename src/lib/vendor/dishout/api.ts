@@ -20,7 +20,7 @@ async function fetchWebApi(
 			console.error('Server offline. Please refresh the page.');
 			return 0;
 		}
-		const res = await fetch(`${settings.server.HTTPOrigin}/api/${endpoint}`, {
+		const res = await fetch(`${settings.server.HTTPOrigin}/api/v${config.server['api-version']}/${endpoint}`, {
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: `Bearer ${token ? token : localStorage.token}`

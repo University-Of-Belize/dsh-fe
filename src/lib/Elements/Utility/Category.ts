@@ -1,4 +1,3 @@
-import { goto } from '$app/navigation';
 import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
 import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -16,7 +15,7 @@ const createCategory = async (
 		debounceTimeout = setTimeout(async () => {
 			const payload = [newName, description, alias.trim() === '' ? newName : alias, hidden];
 			const res = (await fetchWebApi(
-				'v1/admin/category/manage',
+				'admin/category/manage',
 				'POST',
 				what_is(what.private.category, payload)
 			)) as Response;
@@ -50,7 +49,7 @@ const editCategory = async (
 				hidden
 			];
 			const res = (await fetchWebApi(
-				'v1/admin/category/manage',
+				'admin/category/manage',
 				'PUT',
 				what_is(what.private.category, payload)
 			)) as Response;
@@ -74,7 +73,7 @@ const deleteCategory = async (categoryName: string) => {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
 			const res = (await fetchWebApi(
-				'v1/admin/category/manage',
+				'admin/category/manage',
 				'DELETE',
 				what_is(what.private.category, categoryName)
 			)) as Response;
@@ -91,4 +90,5 @@ const deleteCategory = async (categoryName: string) => {
 	}
 };
 
-export { createCategory, editCategory, deleteCategory };
+export { createCategory, deleteCategory, editCategory };
+

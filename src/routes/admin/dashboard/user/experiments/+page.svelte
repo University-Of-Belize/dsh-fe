@@ -1,7 +1,5 @@
 <script lang="ts">
-	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import ExperimentsList from '$lib/Elements/Dashboard/ExperimentsList.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import type { Article } from '$lib/types/Article';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -15,7 +13,7 @@
 	$: data; // List of article (Article[])
 
 	async function catchAll() {
-		const res = (await fetchWebApi('v1/dash', 'GET')) as Response; // Check if we're signed in
+		const res = (await fetchWebApi('dash', 'GET')) as Response; // Check if we're signed in
 		if (!res.ok) {
 			const r = await res.json();
 			return toast.push(r.message);

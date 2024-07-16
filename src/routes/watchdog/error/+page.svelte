@@ -27,7 +27,7 @@
 					status_text = 11; // Start again
 					localStorage.removeItem('serverOffline');
 					const isOnline = (await fetchWebApi(
-						'v1/dash',
+						'dash',
 						'GET',
 						undefined,
 						undefined,

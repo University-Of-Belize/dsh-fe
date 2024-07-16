@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
-	// import config from '$lib/config/settings';
+// import config from '$lib/config/settings';
 	import type { ServerMessage } from '$lib/types/Message';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -16,7 +16,7 @@
 	$: interactions; // List of interactions (ServerMessage[])
 
 	async function catchAll() {
-		const res = (await fetchWebApi('v1/user/messaging/interactions', 'GET')) as Response;
+		const res = (await fetchWebApi('user/messaging/interactions', 'GET')) as Response;
 		if (!res.ok) {
 			const r = await res.json();
 			return toast.push(r.message);

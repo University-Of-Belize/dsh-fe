@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
-	import DashList from '$lib/Elements/Dashboard/DashList.svelte';
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import CommentBox from '$lib/Elements/Inputs/CommentBox.svelte';
 	import { createArticle, deleteArticle } from '$lib/Elements/Utility/Article';
 	import config from '$lib/config/settings';
@@ -34,7 +32,7 @@
 	$: data; // List of article (Article[])
 
 	async function catchAll() {
-		const res = (await fetchWebApi('v1/admin/post/manage', 'GET')) as Response;
+		const res = (await fetchWebApi('admin/post/manage', 'GET')) as Response;
 		if (!res.ok) {
 			const r = await res.json();
 			return toast.push(r.message);

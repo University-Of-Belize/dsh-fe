@@ -1,4 +1,3 @@
-import { goto } from '$app/navigation';
 import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
 import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -25,7 +24,7 @@ const createPromo = async (
 				end_date
 			];
 			const res = (await fetchWebApi(
-				'v1/admin/promo/manage',
+				'admin/promo/manage',
 				'POST',
 				what_is(what.private.promos, payload)
 			)) as Response;
@@ -66,7 +65,7 @@ const editPromo = async (
 				end_date
 			];
 			const res = (await fetchWebApi(
-				'v1/admin/promo/manage',
+				'admin/promo/manage',
 				'PUT',
 				what_is(what.private.promos, payload)
 			)) as Response;
@@ -90,7 +89,7 @@ const deletePromo = async (code: string) => {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
 			const res = (await fetchWebApi(
-				'v1/admin/promo/manage',
+				'admin/promo/manage',
 				'DELETE',
 				what_is(what.private.promos, code)
 			)) as Response;
@@ -111,7 +110,7 @@ const deletePromo = async (code: string) => {
 
 const getPromo = async () => {
 	try {
-		const res = (await fetchWebApi('v1/admin/promo/manage', 'GET')) as Response;
+		const res = (await fetchWebApi('admin/promo/manage', 'GET')) as Response;
 		const r = await res.json();
 		if (!res.ok) {
 			return toast.push(r.message);
@@ -125,4 +124,5 @@ const getPromo = async () => {
 	}
 };
 
-export { createPromo, editPromo, deletePromo, getPromo };
+export { createPromo, deletePromo, editPromo, getPromo };
+

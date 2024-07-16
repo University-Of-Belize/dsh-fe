@@ -3,8 +3,8 @@ import what from '$lib/vendor/dishout/Whats';
 import { fetchWebApi } from '$lib/vendor/dishout/api';
 import { toast } from '@zerodevx/svelte-toast';
 
-import type { Product } from '$lib/types/Product.ts';
 import type { CartProduct } from '$lib/types/Product';
+import type { Product } from '$lib/types/Product.ts';
 
 let debounceTimeout: number;
 
@@ -13,7 +13,7 @@ const addToCart = async (product: Product, item: string | undefined, quantity: n
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
 			const response = (await fetchWebApi(
-				'v1/user/cart',
+				'user/cart',
 				'POST',
 				what_is(what.public.user, [item, quantity])
 			)) as Response;
@@ -77,7 +77,7 @@ async function emptyCart(index: number | null) {
 
 		debounceTimeout = setTimeout(async () => {
 			const response = (await fetchWebApi(
-				'v1/user/cart',
+				'user/cart',
 				'DELETE',
 				what_is(what.public.user, index?.toString())
 			)) as Response;
@@ -111,7 +111,7 @@ async function updateCartQuantity(product_slug: string, quantity: number | null)
 
 		debounceTimeout = setTimeout(async () => {
 			const response = (await fetchWebApi(
-				'v1/user/cart',
+				'user/cart',
 				'POST',
 				what_is(what.public.user, [product_slug, quantity])
 			)) as Response;
@@ -146,7 +146,7 @@ async function removeFromCart(index: string) {
 
 		debounceTimeout = setTimeout(async () => {
 			const response = (await fetchWebApi(
-				'v1/user/cart',
+				'user/cart',
 				'DELETE',
 				what_is(what.public.user, index)
 			)) as Response;
@@ -181,7 +181,7 @@ async function syncCart(cart: CartProduct[]) {
 
 		debounceTimeout = setTimeout(async () => {
 			const response = (await fetchWebApi(
-				'v1/user/cart',
+				'user/cart',
 				'PUT',
 				what_is(what.public.user, cart)
 			)) as Response;
@@ -209,4 +209,5 @@ async function syncCart(cart: CartProduct[]) {
 		console.log(error);
 	}
 }
-export { addToCart, emptyCart, updateCartQuantity, removeFromCart, syncCart};
+export { addToCart, emptyCart, removeFromCart, syncCart, updateCartQuantity };
+
