@@ -55,7 +55,7 @@
 		try {
 			if (single_cart && JSON.parse(wants_single_cart)) {
 				localStorage.removeItem('wants_single_cart');
-				addToCart({ _id: single_cart }, single_cart, 1)
+				addToCart({ _id: single_cart }, single_cart, 1, [])
 					.then(() => {
 						setTimeout(() => {
 							window.location.reload();
@@ -234,7 +234,7 @@
 									<div class="sm:col-gap-5 sm:grid sm:grid-cols-2">
 										<div class="pr-8 sm:pr-5">
 											<p
-												class="text-base font-semibold hover:underline"
+												class="cursor-pointer text-base font-semibold hover:underline"
 												on:click={() => goto(`/product/${item.product.slug}`)}
 											>
 												{item.product.productName ?? ''}
@@ -362,7 +362,7 @@
 				bind:this={checkout_card}
 				class="checkout_card hidden h-fit rounded-lg p-1 lg:block lg:border lg:p-8"
 			>
-				<div class="cart_controls lg:hidden mb-8">
+				<div class="cart_controls mb-8 lg:hidden">
 					<div class="block">
 						<div class="flex text-2xl font-semibold lg:pb-2">Your Cart</div>
 						<div class="flex pb-2 text-xl font-semibold lg:pb-12">Review your order</div>

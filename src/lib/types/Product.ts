@@ -34,6 +34,7 @@ interface CartProduct {
 		keywords: string[];
 	};
 	quantity: number;
+	variations: string[];
 	_id: string;
 }
 

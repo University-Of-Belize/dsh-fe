@@ -8,14 +8,19 @@ import type { Product } from '$lib/types/Product.ts';
 
 let debounceTimeout: number;
 
-const addToCart = async (product: Product, item: string | undefined, quantity: number) => {
+const addToCart = async (
+	product: Product,
+	item: string | undefined,
+	quantity: number,
+	variations: string[]
+) => {
 	try {
 		clearTimeout(debounceTimeout);
 		debounceTimeout = setTimeout(async () => {
 			const response = (await fetchWebApi(
 				'user/cart',
 				'POST',
-				what_is(what.public.user, [item, quantity])
+				what_is(what.public.user, [item, quantity, variations.filter((n) => n)])
 			)) as Response;
 			const data = await response.json();
 			if (response.ok) {
@@ -113,7 +118,7 @@ async function updateCartQuantity(product_slug: string, quantity: number | null)
 			const response = (await fetchWebApi(
 				'user/cart',
 				'POST',
-				what_is(what.public.user, [product_slug, quantity])
+				what_is(what.public.user, [product_slug, quantity, []])
 			)) as Response;
 			const data = await response.json();
 			// if (response.ok) {
@@ -125,7 +130,7 @@ async function updateCartQuantity(product_slug: string, quantity: number | null)
 			// 	// ************** END TELEMETRY ****************
 			// 	return data;
 			// } else {
-			if(!response.ok) {
+			if (!response.ok) {
 				// console.error('Failed to add item to cart.');
 				toast.push(`Failed to update cart. ${data.message}`, {
 					dismissable: false,
@@ -160,7 +165,7 @@ async function removeFromCart(index: string) {
 			// 	// ************** END TELEMETRY ****************
 			// 	return data;
 			// } else {
-			if(!response.ok) {
+			if (!response.ok) {
 				// console.error('Failed to add item to cart.');
 				toast.push(`Failed to update cart. ${data.message}`, {
 					dismissable: false,
@@ -195,7 +200,7 @@ async function syncCart(cart: CartProduct[]) {
 			// 	// ************** END TELEMETRY ****************
 			// 	return data;
 			// } else {
-			if(!response.ok) {
+			if (!response.ok) {
 				// console.error('Failed to add item to cart.');
 				toast.push(`Failed to update cart. ${data.message}`, {
 					dismissable: false,
@@ -210,4 +215,3 @@ async function syncCart(cart: CartProduct[]) {
 	}
 }
 export { addToCart, emptyCart, removeFromCart, syncCart, updateCartQuantity };
-

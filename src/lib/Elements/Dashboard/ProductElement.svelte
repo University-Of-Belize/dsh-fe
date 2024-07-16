@@ -77,7 +77,7 @@
 			<a
 				href="#queue-product"
 				on:click={() => {
-					addToCart(product, productId, 1);
+					addToCart(product, productId, 1, []);
 					clearTimeout(debounceTimeout);
 					debounceTimeout = setTimeout(async () => {
 						added_to_cart = true;

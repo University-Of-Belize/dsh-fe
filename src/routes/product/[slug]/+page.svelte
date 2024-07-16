@@ -25,6 +25,7 @@
 	import { locateNodeUsingHash } from '$lib/Elements/Utility/page';
 	import type { Product } from '$lib/types/Product.ts';
 	import type { User } from '$lib/types/User';
+	import type { VariationData } from '$lib/types/Variation';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
@@ -45,6 +46,9 @@
 	let productDescription: HTMLDivElement;
 	let productReviews: HTMLDivElement;
 
+	let productVariations: VariationData;
+	let selectedVariations: string[] = [];
+
 	onMount(async () => {
 		// Mounted scrolling to anchors
 		locateNodeUsingHash('review');
@@ -58,6 +62,17 @@
 
 			const retVal = await getProduct();
 			if ($product == null || retVal !== 1) return;
+
+			// Check if this product has variations
+			const variations_response = (await fetchWebApi(
+				`menu/variation/${$product._id}`,
+				'GET'
+			)) as Response;
+			if (variations_response.ok) {
+				const variations = await variations_response.json();
+				productVariations = variations.is; // What is?
+			}
+
 			console.log($product);
 			// **************** TELEMETRY ******************
 			gtag('event', 'view_item', {
@@ -268,73 +283,43 @@
 							<!-- <p class="ml-2 text-sm font-medium text-gray-500">1,209 Reviews</p> -->
 						</div>
 
-						<h2 class="mt-8 text-base">Coffee Type</h2>
-						<div class="mt-3 flex select-none flex-wrap items-center gap-1">
-							<label class="">
-								<input type="radio" name="type" value="Powder" class="peer sr-only" checked />
-								<p
-									class="rounded-lg border border-black px-6 py-2 font-bold peer-checked:bg-black peer-checked:text-white"
-								>
-									Powder
-								</p>
-							</label>
-							<label class="">
-								<input type="radio" name="type" value="Whole Bean" class="peer sr-only" />
-								<p
-									class="rounded-lg border border-black px-6 py-2 font-bold peer-checked:bg-black peer-checked:text-white"
-								>
-									Whole Bean
-								</p>
-							</label>
-							<label class="">
-								<input type="radio" name="type" value="Groud" class="peer sr-only" />
-								<p
-									class="rounded-lg border border-black px-6 py-2 font-bold peer-checked:bg-black peer-checked:text-white"
-								>
-									Groud
-								</p>
-							</label>
-						</div>
-
-						<h2 class="mt-8 text-base">Choose subscription</h2>
-						<div class="mt-3 flex select-none flex-wrap items-center gap-1">
-							<label class="">
-								<input type="radio" name="subscription" value="4 Months" class="peer sr-only" />
-								<p
-									class="rounded-lg border border-black px-6 py-2 font-bold peer-checked:bg-black peer-checked:text-white"
-								>
-									4 Months
-								</p>
-								<span class="mt-1 block text-center text-xs">$80/mo</span>
-							</label>
-							<label class="">
-								<input
-									type="radio"
-									name="subscription"
-									value="8 Months"
-									class="peer sr-only"
-									checked
-								/>
-								<p
-									class="rounded-lg border border-black px-6 py-2 font-bold peer-checked:bg-black peer-checked:text-white"
-								>
-									8 Months
-								</p>
-								<span class="mt-1 block text-center text-xs">$60/mo</span>
-							</label>
-							<label class="">
-								<input type="radio" name="subscription" value="12 Months" class="peer sr-only" />
-								<p
-									class="rounded-lg border border-black px-6 py-2 font-bold peer-checked:bg-black peer-checked:text-white"
-								>
-									12 Months
-								</p>
-								<span class="mt-1 block text-center text-xs">$40/mo</span>
-							</label>
-						</div>
+						<!-- Loop through the variations array and map them to their respective vcategories -->
+						<!-- We use the VCategory_id property (second subarray) to identify which category these elements belong to by matching it against the first subarray elements' property _id -->
+						{#if productVariations}
+							{#each productVariations[0] as variation, vcat_index}
+								<div class="mt-8">
+									<h2 class="mt-8 text-base">{variation.Name}</h2>
+									<div class="mt-3 flex select-none flex-wrap items-center gap-1">
+										{#each productVariations[1] as v, variation_index}
+											{#if v.VCategory_id.trim() === variation._id.trim()}
+												<label class="">
+													<input
+														id={v._id}
+														on:click={() => {
+															selectedVariations[vcat_index] = v._id;
+															console.log(selectedVariations);
+														}}
+														type="radio"
+														name="{variation.Name}"
+														value={v.Name}
+														class="peer sr-only cursor-pointer"
+														checked={variation_index === 0}
+													/>
+													<p
+														class="rounded-lg border border-black px-6 py-2 font-bold peer-checked:bg-black peer-checked:text-white"
+													>
+														{v.Name}
+													</p>
+												</label>
+											{/if}
+										{/each}
+									</div>
+								</div>
+							{/each}
+						{/if}
 
 						<div
-							class="mt-10 flex flex-col items-center justify-between space-y-4 border-b border-t py-4 sm:flex-row sm:space-y-0"
+							class="mt-10 flex flex-col items-center justify-between space-y-4 border-y border-COLORWHT py-4 sm:flex-row sm:space-y-0"
 						>
 							<div class="flex items-end">
 								<h1 class="text-3xl font-bold">
@@ -351,7 +336,7 @@
 								<a
 									href="#"
 									on:click={() => {
-										addToCart($product, $product?._id, 1);
+										addToCart($product, $product?._id, 1, selectedVariations);
 										clearTimeout(debounceTimeout);
 										debounceTimeout = setTimeout(async () => {
 											added_to_cart = true;
@@ -411,7 +396,7 @@
 					</div>
 
 					<div class="lg:col-span-3">
-						<div class="border-b border-COLORBLK1">
+						<div class="border-b border-COLORWHT">
 							<nav class="flex gap-4">
 								<a
 									href="#"
