@@ -43,7 +43,10 @@
 	let clicked_times = 0;
 	let debounceTimeout: NodeJS.Timeout;
 
+	let descriptionPaneSelection: HTMLAnchorElement;
 	let productDescription: HTMLDivElement;
+
+	let reviewPaneSelection: HTMLAnchorElement;
 	let productReviews: HTMLDivElement;
 
 	let productVariations: VariationData;
@@ -399,29 +402,43 @@
 
 					<div class="lg:col-span-3">
 						<div class="border-b border-COLORWHT">
-							<nav class="flex gap-4">
+							<nav class="flex gap-0.5">
 								<a
 									href="#"
+									bind:this={descriptionPaneSelection}
 									on:click={(e) => {
 										e.preventDefault();
 										productDescription.classList.remove('hidden');
 										productReviews.classList.add('hidden');
+
+										reviewPaneSelection.classList.remove('bg-COLORBLK1');
+										reviewPaneSelection.classList.add('border-transparent');
+
+										descriptionPaneSelection.classList.remove('border-transparent');
+										descriptionPaneSelection.classList.add('bg-COLORBLK1');
 									}}
 									title=""
-									class="border-b-2 border-COLORWHT1 py-4 text-sm font-medium hover:border-COLORWHT hover:opacity-80"
+									class="border-b-2 border-COLORWHT1 border-transparent px-4 py-4 text-sm font-medium hover:border-COLORWHT hover:bg-COLORBLK1 hover:opacity-80"
 								>
 									Description
 								</a>
 
 								<a
 									href="#"
+									bind:this={reviewPaneSelection}
 									on:click={(e) => {
 										e.preventDefault();
 										productDescription.classList.add('hidden');
 										productReviews.classList.remove('hidden');
+
+										descriptionPaneSelection.classList.remove('bg-COLORBLK1');
+										descriptionPaneSelection.classList.add('border-transparent');
+
+										reviewPaneSelection.classList.remove('border-transparent');
+										reviewPaneSelection.classList.add('bg-COLORBLK1');
 									}}
 									title=""
-									class="inline-flex items-center border-b-2 border-transparent py-4 text-sm font-medium"
+									class="inline-flex items-center border-b-2 border-COLORWHT1 bg-COLORBLK1 px-4 py-4 text-sm font-medium hover:bg-COLORBLK1"
 								>
 									Reviews
 								</a>
@@ -430,11 +447,11 @@
 
 						<div
 							bind:this={productDescription}
-							class="root-content mt-8 flow-root overflow-clip sm:mt-12"
+							class="root-content mt-8 flow-root hidden overflow-clip sm:mt-12"
 						>
 							{@html escapeHtml($product.description ?? '').replace(/\n/g, '<br>')}
 						</div>
-						<div bind:this={productReviews} class="mt-8 flow-root hidden overflow-clip sm:mt-12">
+						<div bind:this={productReviews} class="mt-8 flow-root overflow-clip sm:mt-12">
 							{#if $product}
 								<div class="pt-2 text-4xl font-semibold text-COLORWHT">Reviews</div>
 								<div class="review-graph flex w-full py-2 pb-2">

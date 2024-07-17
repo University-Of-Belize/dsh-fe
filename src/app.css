@@ -131,6 +131,7 @@
 /*dark theme*/
 [data-theme='dark'] {
 	/************************************************************************/
+	--LANDINGPHOTO: url('/homepage/hero-shapes.webp'); /* Nothing */ 
 	--COLORWHT: 255 255 255; /* White */
 	--COLORWHT1: 200 200 200; /* Slightly Lighter White */
 	--COLORWHT2: 190 190 190; /* Dark Gray */
@@ -406,7 +407,7 @@
 }
 [data-theme='dark-v3'] {
 	/* --LANDINGPHOTO: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/University_of_Belize%2C_Central_Campus.jpg/1280px-University_of_Belize%2C_Central_Campus.jpg'); */
-	--LANDINGPHOTO: ''; /* Nothing */
+	--LANDINGPHOTO: url('/homepage/ray_2.webp'); /* Nothing */
 	--COLORWHT: 255 255 255;
 	--COLORWHT1: 255 255 255;
 	--COLORWHT2: 255 255 255;
