@@ -258,7 +258,7 @@
 					<a aria-label="View the help center" href="/app/help-center">Blog</a>
 				</div>
 			</div>
-			<div>&copy; {new Date().getFullYear()} The University of Belize</div>
+			<div>&copy; {new Date().getFullYear()} <a href="https://github.com/AlexDev404">AlexDev404</a></div>
 		</div>
 	</div>
 </Drawer>

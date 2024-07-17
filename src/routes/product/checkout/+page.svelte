@@ -80,7 +80,11 @@
 					data = r.is.reduce((acc: CartProduct[], curr: CartProduct) => {
 						const existingProduct = acc.find((p) => p.product._id === curr.product._id);
 						if (existingProduct) {
-							existingProduct.quantity += curr.quantity;
+							if (JSON.stringify(existingProduct.variations) === JSON.stringify(curr.variations)) {
+								existingProduct.quantity += curr.quantity;
+							} else {
+								acc.push(curr);
+							}
 						} else {
 							acc.push(curr);
 						}

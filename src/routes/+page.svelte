@@ -92,10 +92,10 @@
 				<div class="content-wrapper block px-4 md:px-8 lg:px-0">
 					<div class="running-heading block w-fit space-y-6 text-4xl font-medium text-COLORWHT">
 						<div class="block">
-							UniFood is an online<br />ordering system.<br />
+							This is it!<br />
 
 							<div class="mt-6 text-sm font-light">
-								<b class="font-normal">Online Test #1 is officially here!</b> Sign up using the button
+								<b class="font-normal">Introducing Plattr! Your one-stop shop for the latest food-dealings @ the University of Belize cafeteria! Online Test #1 is officially here!</b> Sign up using the button
 								below 👇
 							</div>
 							<!-- Order Anytime,<br /> Anywhere --
@@ -126,9 +126,9 @@
 				<div class="mb-4 w-20 rounded-md bg-COLORBLK2 px-2 py-1 text-sm font-medium text-COLORWHT">
 					BETA
 				</div>
-				<p class="mb-2 text-2xl">UniFood is an online ordering system.</p>
+				<p class="mb-2 text-2xl">This is it! 😊🎉</p>
 				<p class="mb-6 text-COLORWHT2">
-					Online Test #2 is officially here! Sign up using the button below 👇
+					Introducing Plattr! Your one-stop shop for the latest food-dealings @ the University of Belize cafeteria!<br/>Online Test #2 is officially here! Sign up using the button below 👇
 				</p>
 				<button
 					class="flex items-center space-x-2 rounded-md border-2 border-COLORWHT px-4 py-2 font-medium text-COLORWHT transition hover:bg-COLORBLK1 hover:opacity-80"
