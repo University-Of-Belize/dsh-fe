@@ -816,10 +816,13 @@
 						<ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
 							<li>
 								<a
-									on:click={async () => {
-										localStorage.clear();
+								on:click={async () => {
+									localStorage.clear();
+									localStorage.setItem('theme', 'dark');
+									setTimeout(() => {
 										window.location.reload();
-									}}
+									}, 1000);
+								}}
 									href="#logout"
 									class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
 									>Sign out</a

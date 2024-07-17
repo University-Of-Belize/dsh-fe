@@ -307,7 +307,7 @@
 														checked={variation_index === 0}
 													/>
 													<p
-														class="rounded-lg border border-black px-6 py-2 font-bold peer-checked:bg-black peer-checked:text-white"
+														class="rounded-lg border border-COLORWHT px-6 py-2 font-bold peer-checked:bg-COLORWHT peer-checked:text-COLORBLK"
 													>
 														{v.Name}
 													</p>

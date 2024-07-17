@@ -3,19 +3,18 @@
 	// For reading storage
 	import { beforeNavigate, goto } from '$app/navigation';
 	import { updated } from '$app/stores';
-	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { SvelteToast, toast } from '@zerodevx/svelte-toast';
-	import 'node-localstorage/register';
-	import { onMount } from 'svelte';
-// Import the functions you need from the SDKs you need
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import ColorInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import config from '$lib/config/settings';
 	import type { FirebaseMessage } from '$lib/types/Firebase';
 	import { ThemeDefinition } from '$lib/types/ThemeDefinition';
+	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { initializeApp } from '@firebase/app';
 	import { getMessaging, onMessage } from '@firebase/messaging';
 	import { faPaintbrush, faShare, faX } from '@fortawesome/free-solid-svg-icons';
+	import { SvelteToast, toast } from '@zerodevx/svelte-toast';
+	import 'node-localstorage/register';
+	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	let theme =
 		localStorage['theme-map'] && localStorage['theme-map'] !== '{}'
@@ -153,6 +152,13 @@
 	});
 	// Function runs every time upon manual, traditional-based navigation
 	onMount(async () => {
+		// @remind Remove this after a bit
+		// Inject early into the app initialization
+		if (!localStorage.token && !localStorage.tour && !localStorage.theme) {
+			// Restrict to only visitors who aren't signed in, have never visited the site, and have not seen the tour
+			window.location.href = '/dev/tour';
+		}
+
 		if (!localStorage.theme) {
 			if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
 				toast.push(
@@ -292,7 +298,7 @@
 			}
 		}
 
-		// Initialized!
+		// @note Initialized!
 		setTimeout(() => {
 			document.getElementById('splash-screen').classList.add('hidden'); // Hide splash
 		}, 500); // Give the user a little while to adjust

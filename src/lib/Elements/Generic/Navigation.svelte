@@ -5,7 +5,7 @@
 	import { Button, ButtonGroup, Drawer } from 'flowbite-svelte';
 	import Fa from 'svelte-fa';
 	import { sineIn } from 'svelte/easing';
-/***********************/
+	/***********************/
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
@@ -193,7 +193,10 @@
 						class="w-full bg-COLORBLK3 text-COLORWHT hover:bg-COLORBLK3 hover:opacity-80"
 						on:click={async () => {
 							localStorage.clear();
-							window.location.reload();
+							localStorage.setItem('theme', 'dark');
+							setTimeout(() => {
+								window.location.reload();
+							}, 1000);
 						}}
 					>
 						<Fa icon={faArrowRightFromBracket} class="mr-2" />
@@ -258,7 +261,9 @@
 					<a aria-label="View the help center" href="/app/help-center">Blog</a>
 				</div>
 			</div>
-			<div>&copy; {new Date().getFullYear()} <a href="https://github.com/AlexDev404">AlexDev404</a></div>
+			<div>
+				&copy; {new Date().getFullYear()} <a href="https://github.com/AlexDev404">AlexDev404</a>
+			</div>
 		</div>
 	</div>
 </Drawer>
@@ -853,7 +858,10 @@
 								<a
 									on:click={async () => {
 										localStorage.clear();
-										window.location.reload();
+										localStorage.setItem('theme', 'dark');
+										setTimeout(() => {
+											window.location.reload();
+										}, 1000);
 									}}
 									href="#logout"
 									class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -964,7 +972,9 @@
 					<div>
 						<!--- @remind This isn't portable @todo make this portable. -->
 						And, if by chance you do experience any bugs, be sure to tell us using the
-						<a href="https://plattr.wuaze.com/public/d/2-using-the-feedback-hub" class="underline">Feedback Hub</a>
+						<a href="https://plattr.wuaze.com/public/d/2-using-the-feedback-hub" class="underline"
+							>Feedback Hub</a
+						>
 					</div>
 				</div>
 				<div

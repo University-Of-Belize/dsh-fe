@@ -37,7 +37,7 @@
 					{#if v.VCategory_id.trim() === $variation._id.trim()}
 						<div
 							id={v._id}
-							class="flex cursor-pointer items-center justify-center rounded-lg border border-black px-6 py-2 font-bold text-COLORWHT"
+							class="flex cursor-pointer items-center justify-center rounded-lg border border-COLORWHT px-6 py-2 font-bold text-COLORWHT"
 						>
 							<span>{v.Name}</span>
 							<span
