@@ -301,7 +301,7 @@
 															console.log(selectedVariations);
 														}}
 														type="radio"
-														name="{variation.Name}"
+														name={variation.Name}
 														value={v.Name}
 														class="peer sr-only cursor-pointer"
 														checked={variation_index === 0}
@@ -354,6 +354,7 @@
 									href="#"
 									on:click={() => {
 										localStorage.setItem('wants_single_cart', 'true');
+										localStorage.setItem('selected_variations', JSON.stringify(selectedVariations));
 										goto(`/product/checkout?single_cart=${$product?._id}`);
 									}}
 									class="flex items-center justify-center space-x-2 rounded-r-lg {staff

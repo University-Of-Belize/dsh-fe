@@ -56,8 +56,14 @@
 			if (single_cart && JSON.parse(wants_single_cart)) {
 				localStorage.removeItem('wants_single_cart');
 				// We need to return and cancel the cart upload/sync
-				return addToCart({ _id: single_cart }, single_cart, 1, [])
+				return addToCart(
+					{ _id: single_cart },
+					single_cart,
+					1,
+					JSON.parse(localStorage.selected_variations)
+				)
 					.then(() => {
+						localStorage.removeItem('selected_variations');
 						setTimeout(() => {
 							window.location.reload();
 						}, 2000);
@@ -66,7 +72,6 @@
 						console.error(err);
 						toast.push('Failed to add item to cart.');
 					});
-					
 			}
 			setTimeout(async () => {
 				const response = (await fetchWebApi('user/cart', 'GET')) as Response;
