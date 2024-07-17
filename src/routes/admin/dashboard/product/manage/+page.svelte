@@ -3,6 +3,7 @@
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Select from '$lib/Elements/Inputs/Select2.svelte';
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
+	import RecursiveTextInput from '$lib/Elements/Inputs/RecursiveTextInput.svelte';
 	import { createProduct, deleteProduct, editProduct } from '$lib/Elements/Utility/Product';
 	import { R2S3Upload } from '$lib/Elements/Utility/vendor/dishout/r2_s3';
 	import config from '$lib/config/settings';
@@ -25,6 +26,10 @@
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import TagInput from '../../../../../lib/Elements/Inputs/TagInput.svelte';
+	import { what_is } from '$lib/vendor/dishout/What_Is';
+	import what from '$lib/vendor/dishout/Whats';
+	import type { VCategory, VariationData } from '$lib/types/Variation';
+	import VariationCategoryEditor from '$lib/Elements/Dashboard/VariationCategoryEditor.svelte';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
@@ -38,6 +43,7 @@
 	let photoValue: HTMLInputElement;
 	let categories: Category[] = [];
 	let keywords_input: TagInput;
+	let productVariations: VariationData; // Variation data
 
 	async function populateCategories() {
 		const res = (await fetchWebApi('category', 'GET')) as Response;
@@ -66,6 +72,16 @@
 			// Flatten
 			// @ts-ignore
 			// data = data[0];
+
+			// Check if this product has variations and restore them if necessary
+			const variations_response = (await fetchWebApi(
+				`menu/variation/${product_id}`,
+				'GET'
+			)) as Response;
+			if (variations_response.ok) {
+				const variations = await variations_response.json();
+				productVariations = variations.is; // What is?
+			}
 
 			// Restore the keywords
 			keywords_input.results = data.keywords ?? [];
@@ -160,6 +176,40 @@
 			);
 		}
 	};
+
+	function createVariations(event: Event) {
+		event.preventDefault();
+		// @ts-ignore
+		const valueArray: string[] = Array.from(event.target)
+			.filter((el) => el.name)
+			.map((el) => el.value)
+			.filter((el) => el !== ''); // Extra step -- Take out empty strings
+
+		console.log(valueArray);
+		// 	variations: Variation[]
+		valueArray.forEach(async (variation) => {
+			const response = (await fetchWebApi(
+				'admin/menu/variation/tag',
+				'POST',
+				what_is(what.private.variation, [variation, product_id])
+			)) as Response;
+			if (response.ok) {
+				toast.push(`Variation ${variation} has been created.`);
+				const res = await response.json();
+				const cvar = res[1] as VCategory;
+				productVariations[0].push(cvar);
+			} else {
+				let json;
+				try {
+					json = await response.json();
+				} catch (error) {}
+
+				toast.push(`Variation ${variation} could not be created. ${json ? json.message : ''}`);
+			}
+		});
+	}
+
+	
 </script>
 
 <svelte:head>
@@ -313,6 +363,7 @@
 									name="price"
 									type="number"
 									min="0.00"
+									max="9999.99"
 									step="0.25"
 									placeholder="Enter a price (e.g. 10.75)"
 									custom_style="bg-transparent"
@@ -326,6 +377,7 @@
 									name="in_stock"
 									type="number"
 									min="1"
+									max="100"
 									step="1"
 									placeholder="How many of this item are available (e.g. 35)"
 									custom_style="bg-transparent"
@@ -344,6 +396,41 @@
 									options_color="text-COLORBLK"
 								/>
 							</div>
+
+							<!--------------VARIATIONS EDITOR--ONLY SUPPORTED WHILE EDITING PRODUCTS------------------->
+							{#if product_id}
+								<div class="inputgroup block justify-start lg:items-center">
+									<div
+										class="label flex w-fit items-center justify-start text-lg font-light"
+									>
+										<div>Variations (Optional)</div>
+									</div>
+									{#if productVariations}
+									<VariationCategoryEditor variations={productVariations}/>
+								
+									{/if}
+								</div>
+								<form class="mt-4" on:submit={(e) => createVariations(e)}>
+									<div class="text-lg font-medium my-4">New variation category</div>
+									<TextInput
+										required
+										icon={faSortAlphaAsc}
+										name="name"
+										placeholder="Enter variation name and press enter"
+										custom_style="bg-transparent"
+									/>
+									<button class="btn_wrp h-fit w-fit" type="submit">
+										<Button
+											icon={faCog}
+											color="COLORWHT"
+											color_t="COLORBLK"
+											text="Create variations"
+											custom_style="my-2"
+										/>
+									</button>
+								</form>
+							{/if}
+							<!---------------------------->
 
 							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
 								<div

@@ -73,7 +73,7 @@
 				productVariations = variations.is; // What is?
 			}
 
-			console.log($product);
+			// console.log($product);
 			// **************** TELEMETRY ******************
 			gtag('event', 'view_item', {
 				currency: 'BZD',

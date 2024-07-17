@@ -4,6 +4,7 @@ const WhatDB = {
 		review: 'review',
 		category: 'category',
 		menu: 'menu',
+		variation: "menu/variation",
 		order: 'order',
 		promos: 'promo',
 		post: 'post',
@@ -17,6 +18,7 @@ const WhatDB = {
 		order: '__order',
 		post: '__post',
 		menu: '__menu',
+		variation: "__menu/variation",
 		user: '__user'
 	}
 };
