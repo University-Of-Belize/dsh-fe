@@ -26,11 +26,14 @@
 	const dispatch = createEventDispatcher();
 
 	function handleInput(event: Event) {
+		value = event?.target?.value;
 		dispatch('input', event?.target?.value);
 	}
 	function handleKeyDown(event: Event) {
-		value = inputBox.value;
 		dispatch('keydown', event);
+	}
+	function handleKeyDownWithTarget(event: Event) {
+		dispatch('keydown_target', [event, event.target]);
 	}
 </script>
 
@@ -62,6 +65,7 @@
 	<Input
 		bind:this={inputBox}
 		on:keydown={handleKeyDown}
+		on:keydown={handleKeyDownWithTarget}
 		on:input={handleInput}
 		{value}
 		{type}

@@ -7,15 +7,16 @@
 	import type { VariationData } from '$lib/types/Variation';
 	import { faSortAlphaAsc } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
-	import RecursiveTextInput from '../Inputs/RecursiveTextInput.svelte';
-	let productVariations: VariationData;
+	import TextInput from '../Inputs/TextInput.svelte';
+	import { writable, type Writable } from 'svelte/store';
+	let productVariations: Writable<VariationData> = writable() as Writable<VariationData>; // Variation data
 	export { productVariations as variations };
 	let debounceTimeout1: NodeJS.Timeout;
-	let recursiveTextBoxVariations: RecursiveTextInput;
+	let TextBoxVariations: TextInput;
 </script>
 
 <section class="space-y-2">
-	{#each productVariations[0] as $variation, vcat_index}
+	{#each $productVariations[0] as $variation, vcat_index}
 		<div class="mt-8" id={$variation._id}>
 			<div class="mt-8 flex text-base">
 				<span>{$variation.Name}</span>
@@ -25,14 +26,14 @@
 						const errored = await deleteCategoryVariation($variation._id);
 						if (!errored) {
 							// Remove the element
-							productVariations[0].splice(vcat_index, 1);
+							$productVariations[0].splice(vcat_index, 1);
 							document.getElementById($variation._id).remove();
 						}
 					}}>x</span
 				>
 			</div>
 			<div class="mt-3 flex select-none flex-wrap items-center gap-1">
-				{#each productVariations[1] as v, variation_index}
+				{#each $productVariations[1] as v, variation_index}
 					{#if v.VCategory_id.trim() === $variation._id.trim()}
 						<div
 							id={v._id}
@@ -46,7 +47,7 @@
 									if (!errored) {
 										toast.push(`You have deleted the variation '${v.Name}'.`);
 										// Remove the element
-										productVariations[1].splice(variation_index, 1);
+										$productVariations[1].splice(variation_index, 1);
 										document.getElementById(v._id).remove();
 									}
 								}}>x</span
@@ -56,24 +57,20 @@
 				{/each}
 			</div>
 
-			<RecursiveTextInput
-				on:input={(e) => {
-					// console.log(e.detail)
-					clearTimeout(debounceTimeout1);
-					debounceTimeout1 = setTimeout(() => {
-						addVariation(e.detail, variation._id);
-						// productVariations[1].push({
-						//     _id: Math.random().toString(36).substring(7),
-						//     Name: e.detail,
-						//     VCategory_id: variation
-						// });
-						// variation_input.value = '';
-                        recursiveTextBoxVariations.disabled = true;
-					}, recursiveTextBoxVariations.TimeOut);
+			<TextInput
+				on:keydown_target={async (e) => {
+					const target = e.detail[1];
+					if (e.detail[0].key === 'Enter' && target.value.trim() !== '') {
+						const json = await addVariation(target.value.trim() ?? '', $variation._id);
+						if (json) {
+							$productVariations[1].push(json);
+							$productVariations = $productVariations;
+							target.value = '';
+						}
+					}
 				}}
-				bind:this={recursiveTextBoxVariations}
+				bind:this={TextBoxVariations}
 				required
-				auto_disable
 				icon={faSortAlphaAsc}
 				name="name"
 				placeholder="Enter variation category name and press enter"

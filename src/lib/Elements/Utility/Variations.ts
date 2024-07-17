@@ -13,6 +13,8 @@ async function addVariation(variation_name: string, vcategory_id: string) {
 	)) as Response;
 	if (response.ok) {
 		toast.push(`Variation has been added.`);
+		const res = await response.json();
+		return res[1];
 	} else {
 		let json;
 		try {

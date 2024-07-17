@@ -24,6 +24,7 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
+	import { writable, type Writable } from 'svelte/store';
 	import Fa from 'svelte-fa';
 	import TagInput from '../../../../../lib/Elements/Inputs/TagInput.svelte';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
@@ -43,7 +44,8 @@
 	let photoValue: HTMLInputElement;
 	let categories: Category[] = [];
 	let keywords_input: TagInput;
-	let productVariations: VariationData; // Variation data
+	let productVariations: Writable<VariationData> = writable() as Writable<VariationData>; // Variation data	
+	let variation_category_TextInput: TextInput;
 
 	async function populateCategories() {
 		const res = (await fetchWebApi('category', 'GET')) as Response;
@@ -80,7 +82,8 @@
 			)) as Response;
 			if (variations_response.ok) {
 				const variations = await variations_response.json();
-				productVariations = variations.is; // What is?
+				$productVariations = variations.is; // What is?
+				$productVariations = $productVariations;
 			}
 
 			// Restore the keywords
@@ -197,7 +200,9 @@
 				toast.push(`Variation ${variation} has been created.`);
 				const res = await response.json();
 				const cvar = res[1] as VCategory;
-				productVariations[0].push(cvar);
+				$productVariations[0].push(cvar);
+				$productVariations = $productVariations;
+				variation_category_TextInput.value = '';
 			} else {
 				let json;
 				try {
@@ -405,7 +410,7 @@
 									>
 										<div>Variations (Optional)</div>
 									</div>
-									{#if productVariations}
+									{#if $productVariations}
 									<VariationCategoryEditor variations={productVariations}/>
 								
 									{/if}
@@ -413,6 +418,7 @@
 								<form class="mt-4" on:submit={(e) => createVariations(e)}>
 									<div class="text-lg font-medium my-4">New variation category</div>
 									<TextInput
+									bind:this={variation_category_TextInput}
 										required
 										icon={faSortAlphaAsc}
 										name="name"
@@ -424,7 +430,7 @@
 											icon={faCog}
 											color="COLORWHT"
 											color_t="COLORBLK"
-											text="Create variations"
+											text="Create variation"
 											custom_style="my-2"
 										/>
 									</button>
