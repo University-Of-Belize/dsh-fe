@@ -282,7 +282,9 @@
 
 <div class="stub border- hidden border" />
 
-<div class="content block h-full w-full overflow-auto bg-transparent p-2 py-8 lg:px-16 lg:py-16 pb-40">
+<div
+	class="content block h-full w-full overflow-auto bg-transparent p-2 py-8 pb-40 lg:px-16 lg:py-16"
+>
 	<div class="flex-header flex w-full flex-wrap items-start">
 		<div class="block">
 			<div class="flex pb-2 text-2xl font-semibold">What's Queued?</div>
@@ -489,19 +491,21 @@
 										/>
 									</button>
 								{/if}
-								<button
-									class="btn_wrp h-fit w-fit"
-									title={staff ? 'Reject/Decline this order' : 'Dequeue this order'}
-									on:click={() => go_order(2, order._id)}
-								>
-									<Button
-										icon={faX}
-										color="transparent"
-										color_t="COLORHPK"
-										text={staff ? 'Decline' : 'Delete'}
-										custom_style="my-2 border border-COLORHPK"
-									/>
-								</button>
+								{#if staff || (!staff && !order.is_accepted)}
+									<button
+										class="btn_wrp h-fit w-fit"
+										title={staff ? 'Reject/Decline this order' : 'Dequeue this order'}
+										on:click={() => go_order(2, order._id)}
+									>
+										<Button
+											icon={faX}
+											color="transparent"
+											color_t="COLORHPK"
+											text={staff ? 'Decline' : 'Delete'}
+											custom_style="my-2 border border-COLORHPK"
+										/>
+									</button>
+								{/if}
 								{#if staff && order.is_accepted}
 									<button
 										class="btn_wrp h-fit w-fit"
@@ -547,9 +551,18 @@
 									</div>
 								</div>
 							</div>
+							{#if !staff && !order.is_accepted}
+								<div class="my-8 space-y-4">
+									<span class="border border-COLORWHT px-4 py-2">PENDING REVIEW</span>
+								</div>
+							{/if}
 							<div
 								id="pulldown-{order._id}"
-								class="settings-pulldown {staff ? 'hidden' : ''} my-8 space-y-4"
+								class="settings-pulldown {staff
+									? 'hidden'
+									: order.is_accepted
+										? ''
+										: 'hidden'} my-8 space-y-4"
 							>
 								<div id="title-{order._id}" class="text-2xl font-semibold">
 									{staff ? 'Take Action' : 'Order Details'}
@@ -773,10 +786,10 @@
 								<div id="user-modify-content-{order._id}" class="hidden">
 									<div class="title text-2xl font-semibold">Products Ordered</div>
 									{#each data_raw[index].products as product, index}
-									<!-- description={product.product?.description} -->
+										<!-- description={product.product?.description} -->
 										<ProductPill
 											product={product.product ?? config.ui['default-product']}
-											description={""}
+											description={''}
 											image={product.product?.image}
 											widget={false}
 											tag={true}
