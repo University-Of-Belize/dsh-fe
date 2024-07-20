@@ -4,8 +4,8 @@ const settings = {
 	server: {
 		// HTTPOrigin: 'https://winter-darkness-1705.fly.dev',
 		'api-version': '2',
-		// HTTPOrigin: 'https://icy-rain-2400.fly.dev',
-		HTTPOrigin: 'http://127.0.0.1:8080',
+		HTTPOrigin: 'https://icy-rain-2400.fly.dev',
+		// HTTPOrigin: 'http://127.0.0.1:8080',
 		// HTTPOrigin: 'http://192.168.38.16:8080',
 		// HTTPOrigin: 'http://192.168.1.102:8080',
 		'support-email': 'cafeteria@ub.edu.bz',
