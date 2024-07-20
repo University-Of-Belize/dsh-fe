@@ -27,8 +27,7 @@
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 
 	const tourConfig: TourConfig = {
-		theme: localStorage.theme === 'light' ? 'light' : 'dark',
-		customTourBoxWrapperCSS: 'position: absolute; z-index: 20;'
+		theme: localStorage.theme === 'light' ? 'light' : 'dark'
 	};
 	interface DashData {
 		what: string;
