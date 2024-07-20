@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@sveltejs/kit": "^2.5.10",
+    "@types/event-emitter-es6": "^1.1.4",
     "@types/lodash": "^4.17.4",
     "@types/turndown": "^5.0.4",
     "@types/uuid": "^9.0.8",

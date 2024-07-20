@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	// import Button from '$lib/Elements/Buttons/Button.svelte';
+	import Button from '$lib/Elements/Buttons/Button.svelte';
+// import Button from '$lib/Elements/Buttons/Button.svelte';
 	import config from '$lib/config/settings';
 	import { admin_tour } from '$lib/data/tour_data';
 	import type { TourConfig } from '$lib/tour/index';
@@ -35,6 +36,7 @@
 	}
 	let data: DashData;
 	let icons: DashData['is'][0][2];
+	let tour: Tour;
 
 	onMount(async () => {
 		try {
@@ -123,10 +125,10 @@
 			}
 
 			// END IMPLEMENTATION
-
+			// Set tour
+			tour = new Tour(admin_tour, tourConfig);
 			// Start tour
-			let tour = new Tour(admin_tour, tourConfig);
-			tour.start();
+			tour.start().catch(() => console.log('Tour ended'));
 		} catch (error) {
 			console.log(error);
 			toast.push(`Oops. Something unexpected happened while loading the dash: ${error.message}`);
@@ -139,12 +141,21 @@
 </svelte:head>
 
 <div class="content hidden h-full w-full overflow-auto bg-transparent px-16 py-16 lg:block">
-	<div id="dash_title" class="flex pb-2 text-2xl font-semibold">
-		{config.ui['branding-text']} | {@html staff
-			? "<div class='font-bold pl-1'>SuperUser Mode</div>"
-			: `<div class='font-bold pl-1'>Dashboard</div>`}
+	<div id="dash-header-container" class="pb-12">
+		<div id="dash_title" class="flex pb-2 text-2xl font-semibold">
+			{config.ui['branding-text']} | {@html staff
+				? "<div class='font-bold pl-1'>SuperUser Mode</div>"
+				: `<div class='font-bold pl-1'>Dashboard</div>`}
+		</div>
+		<div class="flex pb-4 text-xl font-light">What would you like to do?</div>
+		<Button
+			text="Start tour"
+			on:click={() => {
+				tour = new Tour(admin_tour, tourConfig);
+				tour.start().catch(() => console.log('Tour ended'));
+			}}
+		/>
 	</div>
-	<div class="flex pb-12 text-xl font-light">What would you like to do?</div>
 	<div id="shortcut_container" class="flex w-full flex-wrap">
 		{#if data != undefined}
 			{#each data.is[0][1] as shortcut, i}

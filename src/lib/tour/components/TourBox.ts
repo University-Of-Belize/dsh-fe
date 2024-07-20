@@ -68,7 +68,8 @@ export default class TourBox {
 	goToPosition(x: number, y: number) {
 		const tour_modal = document.getElementById('tour_modal');
 		if (tour_modal === null) {
-			throw new Error('Tour modal not initialized or tour has ended.');
+			return; // Tour has ended
+			// throw new Error('Tour modal not initialized or tour has ended.');
 		}
 		this.wrapper.style.left = `${x < 0 ? 0 : x > window.innerWidth - tour_modal.offsetWidth ? window.innerWidth - tour_modal.offsetWidth : x}px`;
 		this.wrapper.style.top = `${y < 0 ? 0 : y > window.innerHeight - tour_modal.offsetWidth ? window.innerHeight - tour_modal.offsetWidth : y}px`; // Set to width because it fits better on-screen
