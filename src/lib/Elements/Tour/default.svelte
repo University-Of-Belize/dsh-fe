@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { TourData } from '@alexdev404/svelte-guide';
+	import type { TourData } from '$lib/tour/index';
 	export let data: TourData;
 	export let eventHandlers: { close: () => void; next: () => void; previous: () => void };
 	export let progress;
