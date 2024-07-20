@@ -127,7 +127,7 @@
 			// Set tour if required
 			const needs_tour = JSON.parse(localStorage.needs_dashTour ?? 'false');
 			if (needs_tour) {
-				localStorage.removeItem('needs_tour');
+				localStorage.removeItem('needs_dashTour');
 				tour = new Tour(admin_tour, tourConfig);
 				// Start tour
 				tour.start().catch(() => console.log('Tour ended'));
