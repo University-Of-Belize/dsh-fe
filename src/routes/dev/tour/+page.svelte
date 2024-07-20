@@ -8,6 +8,7 @@
 
 	onMount(async () => {
 		localStorage.setItem('tour', 'Yes');
+		localStorage.setItem('needs_dashTour', 'true')
 		navigator.serviceWorker.getRegistrations().then((registrations) => {
 			for (const registration of registrations) {
 				registration.unregister();

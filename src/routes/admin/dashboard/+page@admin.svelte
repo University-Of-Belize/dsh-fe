@@ -125,10 +125,14 @@
 			}
 
 			// END IMPLEMENTATION
-			// Set tour
-			tour = new Tour(admin_tour, tourConfig);
-			// Start tour
-			tour.start().catch(() => console.log('Tour ended'));
+			// Set tour if required
+			const needs_tour = JSON.parse(localStorage.needs_dashTour ?? 'false');
+			if (needs_tour) {
+				localStorage.removeItem('needs_tour');
+				tour = new Tour(admin_tour, tourConfig);
+				// Start tour
+				tour.start().catch(() => console.log('Tour ended'));
+			}
 		} catch (error) {
 			console.log(error);
 			toast.push(`Oops. Something unexpected happened while loading the dash: ${error.message}`);
