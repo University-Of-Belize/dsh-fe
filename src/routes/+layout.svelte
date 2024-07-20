@@ -156,7 +156,7 @@
 		// Inject early into the app initialization
 		if (!localStorage.token && !localStorage.tour && !localStorage.theme) {
 			// Restrict to only visitors who aren't signed in, have never visited the site, and have not seen the tour
-			window.location.href = '/dev/tour';
+			window.location.href = '/app/tour';
 		}
 
 		if (!localStorage.theme) {
