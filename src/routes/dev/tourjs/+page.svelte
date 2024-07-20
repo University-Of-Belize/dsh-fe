@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Tour from '$lib/tour/lib/index';
-	import type { TourConfig, TourSteps } from '$lib/tour/lib/index';
 	import Tour2 from '$lib/Elements/Tour/default.svelte';
+	import type { TourConfig, TourSteps } from '@alexdev404/svelte-guide';
+	import Tour from '@alexdev404/svelte-guide';
 	import {
 		faClone,
 		faHamburger,
