@@ -142,7 +142,7 @@
 	};
 	onMount(async () => {
 		try {
-			let tour = new Tour(myTour);
+			let tour = new Tour(myTour, tourConfig);
 			tour
 				.start()
 				.then(() => {
