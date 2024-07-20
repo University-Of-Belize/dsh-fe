@@ -1,12 +1,12 @@
 import type { ComponentConstructorOptions, ComponentType } from 'svelte';
 import { DEFAULT_WRAPPER_CSS } from '../defaults.js';
-import DEFAULT_TEMPLATE from './TourBox.svelte';
 import type Tour from '../index.js';
+import type { Orientation } from '../types/Orientation.js';
+import type { Rect } from '../types/Rect.js';
 import type { TourData } from '../types/TourData';
 import { createElement } from '../utils/dom';
 import { horizontalCenter, verticalCenter } from '../utils/orientation';
-import type { Orientation } from '../types/Orientation.js';
-import type { Rect } from '../types/Rect.js';
+import DEFAULT_TEMPLATE from './TourBox.svelte';
 
 export default class TourBox {
 	offsetX: number;
@@ -43,7 +43,6 @@ export default class TourBox {
 	}
 
 	renderData(data: TourData, progress: { current: number; total: number }) {
-		console.log(data, progress);
 		return new this.template({
 			target: this.wrapper,
 			props: {
@@ -67,8 +66,12 @@ export default class TourBox {
 	}
 
 	goToPosition(x: number, y: number) {
-		this.wrapper.style.left = `${x < 0 ? 0 : x}px`;
-		this.wrapper.style.top = `${y < 0 ? 0 : y}px`;
+		const tour_modal = document.getElementById('tour_modal');
+		if (tour_modal === null) {
+			throw new Error('Tour modal not initialized or tour has ended.');
+		}
+		this.wrapper.style.left = `${x < 0 ? 0 : x > window.innerWidth - tour_modal.offsetWidth ? window.innerWidth - tour_modal.offsetWidth : x}px`;
+		this.wrapper.style.top = `${y < 0 ? 0 : y > window.innerHeight - tour_modal.offsetWidth ? window.innerHeight - tour_modal.offsetWidth : y}px`; // Set to width because it fits better on-screen
 	}
 
 	calculateRelativeShift(orientation: Orientation, targetRect: Rect, wrapperRect: Rect) {

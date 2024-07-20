@@ -1,18 +1,18 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import {
+		faBagShopping,
 		faClone,
 		faCog,
 		faFeed,
 		faHamburger,
 		faMessage,
-		faTicket,
 		faNoteSticky,
 		faPlus,
 		faTag,
+		faTicket,
 		faUserCog,
-		faVial,
-		faBagShopping
+		faVial
 	} from '@fortawesome/free-solid-svg-icons';
 	import Button from '../Buttons/Button.svelte';
 
@@ -23,7 +23,7 @@
 	<div class="section bg-opacity-100 py-6">
 		<div class="title pb-5 font-semibold">My Account</div>
 		<div class="three pt-1">
-			<div
+			<div id="my_account"
 				on:click={async () => {
 					await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
 				}}
@@ -39,7 +39,7 @@
 			</div>
 		</div>
 		<div class="three pt-1">
-			<div
+			<div id="app_experiments"
 				on:click={async () => {
 					await goto('/admin/dashboard/user/experiments');
 				}}
@@ -58,7 +58,7 @@
 	<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
 		<div class="title pb-5 font-semibold">{staff ? 'Customer Insights' : 'Your Feedback'}</div>
 		{#if staff}
-			<div class="three pt-1" on:click={() => goto('/admin/dashboard/user')}>
+			<div id="user_management" class="three pt-1" on:click={() => goto('/admin/dashboard/user')}>
 				<Button
 					icon={faUserCog}
 					color="COLORBLK3"
@@ -69,7 +69,7 @@
 				/>
 			</div>
 		{/if}
-		<div class="three pt-1" on:click={() => goto('/admin/dashboard/review')}>
+		<div id="review_management" class="three pt-1" on:click={() => goto('/admin/dashboard/review')}>
 			<Button
 				icon={faMessage}
 				color="COLORBLK3"
@@ -79,7 +79,7 @@
 				rounding="md"
 			/>
 		</div>
-		<div class="three pt-1" on:click={() => goto('/admin/dashboard/feedback')}>
+		<div id="feedback_hub" class="three pt-1" on:click={() => goto('/admin/dashboard/feedback')}>
 			<Button
 				icon={faFeed}
 				color="COLORBLK3"
@@ -91,7 +91,7 @@
 		</div>
 		{#if staff}
 			<!-- Workaround since Manage2 bugs out -->
-			<div class="three pt-1" on:click={() => goto('/admin/dashboard/user/manage')}>
+			<div id="new_user" class="three pt-1" on:click={() => goto('/admin/dashboard/user/manage')}>
 				<Button
 					icon={faPlus}
 					color="transparent"
@@ -104,7 +104,7 @@
 	</div>
 	<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
 		<div class="title pb-5 font-semibold">Messaging</div>
-		<div class="three pt-1" on:click={() => goto('/admin/dashboard/messaging')}>
+		<div id="message_user" class="three pt-1" on:click={() => goto('/admin/dashboard/messaging')}>
 			<Button
 				icon={faMessage}
 				color="COLORBLK3"
@@ -118,7 +118,7 @@
 	{#if staff}
 		<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
 			<div class="title pb-5 font-semibold">Receipts</div>
-			<div class="three pt-1" on:click={() => goto('/admin/dashboard/receipts')}>
+			<div id="view_receipts" class="three pt-1" on:click={() => goto('/admin/dashboard/receipts')}>
 				<Button
 					icon={faTicket}
 					color="COLORBLK3"
@@ -131,7 +131,7 @@
 		</div>
 		<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
 			<div class="title pb-5 font-semibold">Credit Refill</div>
-			<div class="three pt-1" on:click={() => goto('/admin/dashboard/refill')}>
+			<div id="refill_account" class="three pt-1" on:click={() => goto('/admin/dashboard/refill')}>
 				<Button
 					icon={faBagShopping}
 					color="COLORBLK3"
@@ -144,7 +144,7 @@
 		</div>
 		<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
 			<div class="title pb-5 font-semibold">Announcements</div>
-			<div class="three pt-1" on:click={() => goto('/admin/dashboard/new-article')}>
+			<div id="help_articles" class="three pt-1" on:click={() => goto('/admin/dashboard/new-article')}>
 				<Button
 					icon={faNoteSticky}
 					color="COLORBLK3"
@@ -158,7 +158,7 @@
 	{/if}
 	<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
 		<div class="title pb-5 font-semibold">Order Management</div>
-		<div class="three pt-1" on:click={() => goto('/admin/dashboard/order')}>
+		<div id="open_orders" class="three pt-1" on:click={() => goto('/admin/dashboard/order')}>
 			<Button
 				icon={faClone}
 				color="COLORBLK3"
@@ -172,7 +172,7 @@
 	{#if staff}
 		<div class="section border-t border-dashed border-COLORBLK1 border-opacity-5 py-6">
 			<div class="title pb-5 font-semibold">Product Management</div>
-			<div class="three pt-1" on:click={() => goto('/admin/dashboard/category')}>
+			<div id="category_management" class="three pt-1" on:click={() => goto('/admin/dashboard/category')}>
 				<Button
 					icon={faPlus}
 					color="COLORBLK3"
@@ -182,7 +182,7 @@
 					rounding="md"
 				/>
 			</div>
-			<div class="three pt-1" on:click={() => goto('/admin/dashboard/product')}>
+			<div id="product_management" class="three pt-1" on:click={() => goto('/admin/dashboard/product')}>
 				<Button
 					icon={faHamburger}
 					color="COLORBLK3"
@@ -192,17 +192,17 @@
 					rounding="md"
 				/>
 			</div>
-			<div class="three pt-1" on:click={() => goto('/admin/dashboard/promo')}>
+			<div id="promo_management" class="three pt-1" on:click={() => goto('/admin/dashboard/promo')}>
 				<Button
 					icon={faTag}
 					color="COLORBLK3"
-					text="Promo code management"
+					text="Voucher code management"
 					color_t="COLORWHT"
 					custom_style="w-full font-medium"
 					rounding="md"
 				/>
 			</div>
-			<div class="three pt-1" on:click={() => goto('/admin/dashboard/category/manage')}>
+			<div id="new_category" class="three pt-1" on:click={() => goto('/admin/dashboard/category/manage')}>
 				<Button
 					icon={faPlus}
 					color="transparent"
@@ -212,11 +212,11 @@
 					rounding="md"
 				/>
 			</div>
-			<div class="three pt-1" on:click={() => goto('/admin/dashboard/promo/manage')}>
+			<div id="new_promo" class="three pt-1" on:click={() => goto('/admin/dashboard/promo/manage')}>
 				<Button
 					icon={faPlus}
 					color="transparent"
-					text="Start a new promo code"
+					text="Start a new voucher code"
 					color_t="COLORWHT"
 					custom_style="w-full font-medium"
 					rounding="md"

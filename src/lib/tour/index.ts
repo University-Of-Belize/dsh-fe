@@ -32,7 +32,15 @@ export default class Tour {
 
 			// If for any reason the target is not found, set it to the body (fallback)
 			if (step.target === null) {
-				step.target = document.body;
+				// Try one more time
+				setTimeout(() => {
+					step.target =
+						typeof step.target === 'string' ? document.querySelector(step.target) : step.target;
+				}, 2000);
+				// Is it the same?
+				if (step.target === null) {
+					step.target = document.body;
+				}
 			}
 		});
 

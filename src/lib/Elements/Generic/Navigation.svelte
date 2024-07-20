@@ -5,7 +5,7 @@
 	import { Button, ButtonGroup, Drawer } from 'flowbite-svelte';
 	import Fa from 'svelte-fa';
 	import { sineIn } from 'svelte/easing';
-	/***********************/
+/***********************/
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
@@ -611,7 +611,7 @@
 						<Fa icon={faShoppingCart} />
 					</a>
 					<!-- Apps menu -->
-					<button
+					<button id="quick_access"
 						use:clickOutside
 						type="button"
 						data-dropdown-toggle="apps-dropdown"
@@ -882,6 +882,7 @@
 				<!-------- START Other stuff (theme button, other fun things) ----->
 				<span class="ml-2">
 					<button
+						id="theme_switcher"
 						aria-label="Toggle dark mode"
 						type="button"
 						on:click={() => {

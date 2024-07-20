@@ -2,6 +2,9 @@
 	import { goto } from '$app/navigation';
 	// import Button from '$lib/Elements/Buttons/Button.svelte';
 	import config from '$lib/config/settings';
+	import { admin_tour } from '$lib/data/tour_data';
+	import type { TourConfig } from '$lib/tour/index';
+	import Tour from '$lib/tour/index';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -19,8 +22,13 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
+
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 
+	const tourConfig: TourConfig = {
+		theme: localStorage.theme === 'light' ? 'light' : 'dark',
+		customTourBoxWrapperCSS: 'position: absolute; z-index: 20;'
+	};
 	interface DashData {
 		what: string;
 		is: Array<Array<string | string[]>>;
@@ -115,6 +123,10 @@
 			}
 
 			// END IMPLEMENTATION
+
+			// Start tour
+			let tour = new Tour(admin_tour, tourConfig);
+			tour.start();
 		} catch (error) {
 			console.log(error);
 			toast.push(`Oops. Something unexpected happened while loading the dash: ${error.message}`);
@@ -127,13 +139,13 @@
 </svelte:head>
 
 <div class="content hidden h-full w-full overflow-auto bg-transparent px-16 py-16 lg:block">
-	<div class="flex pb-2 text-2xl font-semibold">
+	<div id="dash_title" class="flex pb-2 text-2xl font-semibold">
 		{config.ui['branding-text']} | {@html staff
 			? "<div class='font-bold pl-1'>SuperUser Mode</div>"
 			: `<div class='font-bold pl-1'>Dashboard</div>`}
 	</div>
 	<div class="flex pb-12 text-xl font-light">What would you like to do?</div>
-	<div class="flex w-full flex-wrap">
+	<div id="shortcut_container" class="flex w-full flex-wrap">
 		{#if data != undefined}
 			{#each data.is[0][1] as shortcut, i}
 				<div
