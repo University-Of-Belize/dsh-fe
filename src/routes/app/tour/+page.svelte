@@ -63,7 +63,7 @@
 </div>
 
 <YouTube
-	videoId="Oq46-UCWuZ4"
+	videoId="7id9rU19CDM"
 	class="h-screen w-full"
 	{options}
 	on:ready={onReady}
