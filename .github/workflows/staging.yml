@@ -27,10 +27,11 @@ jobs:
       - name: Write Sentry resource file
         run: |
           echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
-      - name: Set up flyctl
+      - if: github.actor == 'dependabot[bot]'
+        name: Set up flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
-        if: github.actor != 'dependabot[bot]'
       - run: flyctl deploy --remote-only -a ubcafe
-        if: github.actor == 'dependabot[bot]'
-      - run: docker build -t dishout:latest .
+      - if: github.actor != 'dependabot[bot]'  # Weird comparison that somehow works reversed
+        name: Run basic test
+        run: docker build -t dishout:latest .
       #- run: flyctl deploy --local-only -a ubcafe
