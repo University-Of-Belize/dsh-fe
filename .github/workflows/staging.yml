@@ -28,10 +28,10 @@ jobs:
         run: |
           echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - name: Set up flyctl
-        if: github.actor == 'dependabot[bot]'        
+      - name: Deploy to fly.io
+        if: github.actor != 'dependabot[bot]'        
         run: flyctl deploy --remote-only -a ubcafe
       - name: Run basic test
-        if: github.actor != 'dependabot[bot]'  # Weird comparison that somehow works reversed
+        if: github.actor == 'dependabot[bot]'
         run: docker build -t dishout:latest .
       #- run: flyctl deploy --local-only -a ubcafe
