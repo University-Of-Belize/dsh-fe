@@ -28,11 +28,11 @@ jobs:
           echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to fly.io
-        if: github.actor != 'dependabot[bot]'        
+        if: github.event_name != 'pull_request'
         run: | 
          echo "Run RELEASE" >> release
          flyctl deploy --remote-only -a ubcafe
       - name: Run basic test
-        if: github.actor == 'dependabot[bot]'
+        if: github.event_name == 'pull_request'
         run: docker build -t dishout:latest .
       #- run: flyctl deploy --local-only -a ubcafe
