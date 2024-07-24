@@ -40,7 +40,8 @@ RUN if [ -f ./release ]; then \
     sentry-cli releases new $(sentry-cli releases propose-version) --project ubcafe; \
     sentry-cli sourcemaps inject ./build; \
     sentry-cli sourcemaps upload ./build --project ubcafe; \
-    find ./build -type f -name "*.map" -exec rm -rf {} \; \
+    find ./build -type f -name "*.map" -exec rm -rf {} \;; \
+    sentry-cli releases finalize $(sentry-cli releases propose-version); \
   else \
     echo "Release file does not exist-skipping additional steps."; \
   fi
