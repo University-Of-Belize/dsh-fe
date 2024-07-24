@@ -5,6 +5,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
 	plugins: [
 		sentrySvelteKit({
+			autoUploadSourceMaps: false,
 			sourceMapsUploadOptions: {
 				org: 'immanuel-daviel-a-garcia',
 				project: 'ubcafe',
