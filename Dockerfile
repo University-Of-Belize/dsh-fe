@@ -22,6 +22,7 @@ RUN curl -sL https://sentry.io/get-cli/ | sh
 
 # Login to Sentry
 RUN if [ -f ./release ]; then \
+    echo "Logged-in to Sentry"; \
     sentry-cli login --auth-token "$(cat sentry_token.txt)"; \
   else \
     echo "Release file does not exist-skipping additional steps."; \
@@ -35,9 +36,10 @@ RUN bunx --bun vite build
 
 # Sentry sourcemap uploading and delete sourcemaps from 'prod'
 RUN if [ -f ./release ]; then \
+    echo "Built for production. Uploading sourcemaps"; \
     sentry-cli releases new $(sentry-cli releases propose-version) --project ubcafe; \
-    sentry-cli sourcemaps inject ./build \
-    sentry-cli sourcemaps upload ./build --project ubcafe \
+    sentry-cli sourcemaps inject ./build; \
+    sentry-cli sourcemaps upload ./build --project ubcafe; \
     find ./build -type f -name "*.map" -exec rm -rf {} \; \
   else \
     echo "Release file does not exist-skipping additional steps."; \
