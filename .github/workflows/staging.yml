@@ -8,10 +8,8 @@ on:
     - cron: '0 * * * 0' # Every Sunday of the month
   push:
     branches: ['staging']
-  pull_request_target:
+  pull_request:
     branches: ['staging']
-  # pull_request:
-  #   branches: ['staging']
   workflow_dispatch:
 concurrency: # Multiple jobs should NOT run at the same time
   group: ${{ github.workflow }}
@@ -31,7 +29,9 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to fly.io
         if: github.actor != 'dependabot[bot]'        
-        run: flyctl deploy --remote-only -a ubcafe
+        run: | 
+         echo "Run RELEASE" >> release
+         flyctl deploy --remote-only -a ubcafe
       - name: Run basic test
         if: github.actor == 'dependabot[bot]'
         run: docker build -t dishout:latest .
