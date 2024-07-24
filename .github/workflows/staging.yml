@@ -8,9 +8,9 @@ on:
     - cron: '0 * * * 0' # Every Sunday of the month
   push:
     branches: ['staging']
-  pull_request:
-    branches: ['staging']
   pull_request_target:
+    branches: ['staging']
+  pull_request:
     branches: ['staging']
   workflow_dispatch:
 concurrency: # Multiple jobs should NOT run at the same time
