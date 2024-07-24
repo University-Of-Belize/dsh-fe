@@ -12,7 +12,12 @@ export default defineConfig({
 			sourceMapsUploadOptions: {
 				org: 'immanuel-daviel-a-garcia',
 				project: 'ubcafe',
-				authToken: process.env.SENTRY_AUTH_TOKEN
+				authToken: process.env.SENTRY_AUTH_TOKEN,
+				sourcemaps: {
+					assets: ["./build/*/**/*"],
+					ignore: ["**/build/client/**/*"],
+					filesToDeleteAfterUpload: ["./build/**/*.map"],
+				},
 			}
 		}),
 		sveltekit()
