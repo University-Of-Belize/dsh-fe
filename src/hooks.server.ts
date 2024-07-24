@@ -10,7 +10,7 @@ const json = readFileSync(file, 'utf8');
 const pkg = JSON.parse(json); // Hate this way of importing files. But it won't build unless I do
 
 Sentry.init({
-	release: `${pkg.name}@${pkg.version}`
+	release: `${pkg.name}@${pkg.version}`,
 	dsn: 'https://537f9ebddaa9b420f4927ab5304c417a@o4506573592723456.ingest.sentry.io/4506573594755072',
 	tracesSampleRate: 1.0
 });
