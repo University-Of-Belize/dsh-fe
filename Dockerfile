@@ -19,7 +19,14 @@ COPY . .
 # Auth Sentry
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y curl ca-certificates
 RUN curl -sL https://sentry.io/get-cli/ | sh
-RUN sentry-cli login --auth-token "$(cat sentry_token.txt)"
+
+# Login to Sentry
+RUN if [ -f ./release ]; then \
+    echo "Logged-in to Sentry"; \
+    sentry-cli login --auth-token "$(cat sentry_token.txt)"; \
+  else \
+    echo "Release file does not exist-skipping additional steps."; \
+  fi
 
 RUN bun install
 RUN bun --bun run sitemap
@@ -27,6 +34,17 @@ RUN bunx --bun vite build
 # RUN rm -rf node_modules
 # RUN bun install --ci  # Install with Continuous Integration
 
+# Sentry sourcemap uploading and delete sourcemaps from 'prod'
+RUN if [ -f ./release ]; then \
+    echo "Built for production. Uploading sourcemaps"; \
+    sentry-cli releases new $(sentry-cli releases propose-version) --project ubcafe; \
+    sentry-cli sourcemaps inject ./build; \
+    sentry-cli sourcemaps upload ./build --project ubcafe; \
+    find ./build -type f -name "*.map" -exec rm -rf {} \;; \
+    sentry-cli releases finalize $(sentry-cli releases propose-version); \
+  else \
+    echo "Release file does not exist-skipping additional steps."; \
+  fi
 
 # Start anew
 FROM oven/bun:${BUN_VERSION}-slim
