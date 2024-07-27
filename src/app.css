@@ -12,13 +12,39 @@
 
 		--COLORACCENTL: 255 106 56;
 		--COLORACCENTD: 6 193 105;
+
+
+		/* HSL COLOR VARIANTS */
+		--COLORLIGHT_HS: 230, 46%;
+		--COLORLIGHT_L: 88%;
+		
+		--COLORDARK_HS: 192, 33%;
+		--COLORDARK_L: 12%;
 	}
 }
 @tailwind utilities;
 
 /* Themes, and the such */
 /*light theme*/
-/* Nothing here yet! */
+/* Inverted colors */
+[data-theme='light'] {
+	--COLORLIGHT: 20 36 40;
+	--COLORDARK: 209 214 238;
+
+	--COLORMAIN: 244 175 0;
+	--COLORMAIN2: 255 192 0; /* Tone 2 */
+
+	--COLORACCENTL: 255 106 56;
+	--COLORACCENTD: 6 193 105;
+
+
+	/* HSL COLOR VARIANTS */
+	--COLORLIGHT_HS: 192, 33%;
+	--COLORLIGHT_L: 12%;
+
+	--COLORDARK_HS: 230, 46%;
+	--COLORDARK_L: 88%;
+}
 /***************************** END THEMES **********/
 /* :global if in component */
 html {

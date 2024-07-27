@@ -22,17 +22,17 @@ export default {
 					950: '#172554'
 				},
 				COLORLIGHT: {
-					15: '#e2dfff',
-					25: '#e0dfff',
-					50: '#dfe0ff',
-					75: '#dfe3ff',
+					15: 'hsl(var(--COLORLIGHT_HS), calc(var(--COLORLIGHT_L) + 14.5%))',
+					25: 'hsl(var(--COLORLIGHT_HS), calc(var(--COLORLIGHT_L) + 11.6%))',
+					50: 'hsl(var(--COLORLIGHT_HS), calc(var(--COLORLIGHT_L) + 8.7%))',
+					75: 'hsl(var(--COLORLIGHT_HS), calc(var(--COLORLIGHT_L) + 2.9%))',
 					100: 'rgb(var(--COLORLIGHT) / var(--tw-bg-opacity))'
 				},
 				COLORDARK: {
-					15: '#60acc0',
-					25: '#4d8a9a',
-					50: '#3a6874',
-					75: '#1c3238',
+					15: 'hsl(var(--COLORDARK_HS), calc(var(--COLORDARK_L) + 14.5%))',
+					25: 'hsl(var(--COLORDARK_HS), calc(var(--COLORDARK_L) + 51.6%))',
+					50: 'hsl(var(--COLORDARK_HS), calc(var(--COLORDARK_L) + 28.7%))',
+					75: 'hsl(var(--COLORDARK_HS), calc(var(--COLORDARK_L) + 2.9%))',
 					100: 'rgb(var(--COLORDARK) / var(--tw-bg-opacity))'
 				},
 
