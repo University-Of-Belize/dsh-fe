@@ -9,53 +9,32 @@
 	// The "themes" object
 	const themes: ThemeData[] = [
 		{ name: 'Soft Pink', id: 'soft-pink' },
-	/*	{
-			name: 'Light v2',
-			id: 'light-v2',
-			description: "Experimental, but not as bad. Generated using 'Theme Creator'."
+		{
+			name: 'Dark Legacy',
+			id: 'dark-legacy',
+			description:
+				'Port of app\'s legacy dark mode skin. Probably does not work properly.'
 		},
-		{ name: 'Grey', id: 'grey', description: 'Used to be light mode. Not anymore.' },*/
 		{
 			name: 'Dark v3',
 			id: 'dark-v3',
 			description:
-				'Third iteration of experimental dark mode skin. Report any cosmetic bugs using Feedback Hub.'
+				'One of the more "fun" dark-mode skins. Report any cosmetic bugs using Feedback Hub.'
 		},
-/*		{
-			name: 'Dark v2',
-			id: 'dark-v2',
-			description: 'Latest, stable dark mode skin. Report any cosmetic bugs using Feedback Hub.'
-		},*/
 		{
 			name: 'UB Theme',
 			id: 'ub-theme',
 			description:
 				'UB Theme is meant to comply with the branding guidelines given to us by The University of Belize.'
-		}/*,
-		{
-			name: 'Fandom Wiki',
-			id: 'fandom-wiki'
-		},
-		{
-			name: 'Green',
-			id: 'green-ish'
-		},
-		{
-			name: 'Bubblegum',
-			id: 'bubble-gum'
-		},
-		{
-			name: 'Lol',
-			id: 'lol'
-		}*/
+		}
 	];
 </script>
 
 <!-- Dark mode -->
 <GenericPill
 	icon="/icons/font-awesome/scribble.svg"
-	title="Dark mode (Legacy)"
-	description="Legacy dark mode skin. Website default."
+	title="Dark mode"
+	description="Latest, stable dark mode theme. Website default."
 >
 	<div class="controls flex space-x-2">
 		{#if localStorage.theme === 'dark'}
@@ -244,7 +223,7 @@
 <!--- Theme Creator (Experimental) -->
 <GenericPill
 	icon="/icons/font-awesome/gear-code.svg"
-	title="Theme Creator (Experimental)"
+	title="Theme Creator (Defunct/Experimental)"
 	description="'Theme Creator' allows the creation of new skins for the website."
 >
 	<div class="controls flex space-x-2">

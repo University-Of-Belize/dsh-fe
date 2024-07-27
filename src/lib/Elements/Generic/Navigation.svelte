@@ -5,7 +5,7 @@
 	import { Button, ButtonGroup, Drawer } from 'flowbite-svelte';
 	import Fa from 'svelte-fa';
 	import { sineIn } from 'svelte/easing';
-	/***********************/
+/***********************/
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
@@ -898,7 +898,7 @@
 							let theme = document.body.parentElement.getAttribute('data-theme');
 							document.body.parentElement.setAttribute(
 								'data-theme',
-								theme == 'light' ? 'dark-v3' : 'light'
+								theme == 'light' ? 'dark' : 'light'
 							);
 							theme = document.body.parentElement.getAttribute('data-theme');
 							localStorage.setItem('theme', theme ?? 'light');

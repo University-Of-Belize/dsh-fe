@@ -25,6 +25,27 @@
 @tailwind utilities;
 
 /* Themes, and the such */
+/*dark theme*/
+/* Original colors */
+[data-theme='dark'] {
+	/* --LANDINGPHOTO: url('/homepage/hero-shapes.webp'); */
+	--COLORLIGHT: 209 214 238;
+	--COLORDARK: 20 36 40;
+
+	--COLORMAIN: 244 175 0;
+	--COLORMAIN2: 255 192 0; /* Tone 2 */
+
+	--COLORACCENTL: 255 106 56;
+	--COLORACCENTD: 6 193 105;
+
+
+	/* HSL COLOR VARIANTS */
+	--COLORLIGHT_HS: 230, 46%;
+	--COLORLIGHT_L: 88%;
+	
+	--COLORDARK_HS: 192, 33%;
+	--COLORDARK_L: 12%;
+}
 /*light theme*/
 /* Inverted colors */
 [data-theme='light'] {
@@ -44,6 +65,89 @@
 
 	--COLORDARK_HS: 230, 46%;
 	--COLORDARK_L: 88%;
+}
+/*dark-legacy theme*/
+/* OG Colors */
+[data-theme='dark-legacy'] {
+	--COLORLIGHT: 255 255 255;
+	--COLORDARK: 0 0 0;
+
+	--COLORMAIN: 55 55 55;
+	--COLORMAIN2: 55 55 55; /* Tone 2 */
+
+	--COLORACCENTL: 255 0 168;
+	--COLORACCENTD: 0 255 23;
+
+
+	/* HSL COLOR VARIANTS */
+	--COLORLIGHT_HS: 0, 0%;
+	--COLORLIGHT_L: 100%;
+
+	--COLORDARK_HS: 0, 0%;
+	--COLORDARK_L: 0%;
+}
+/*dark-v3 theme*/
+/* The "fun" theme */
+[data-theme='dark-v3'] {
+	--LANDINGPHOTO: ''; /* Nothing */
+	--COLORLIGHT: 255 255 255;
+	--COLORDARK: 15 23 42;
+
+	--COLORMAIN: 49 83 175;
+	--COLORMAIN2: 11 11 11; /* Tone 2 */
+
+	--COLORACCENTL: 69 255 56;
+	--COLORACCENTD: 254 192 57;
+	
+	
+	/* HSL COLOR VARIANTS */
+	--COLORLIGHT_HS: 0, 0%;
+	--COLORLIGHT_L: 100%;
+	
+	--COLORDARK_HS: 222, 47%;
+	--COLORDARK_L: 11%;
+}
+/*ub theme*/
+/* The _boring_ theme */
+[data-theme='ub-theme'] {
+	--LANDINGPHOTO: url('https://pub-25848f6979f1410bb0c611a1a9c24310.r2.dev/primary-uswest/January-2021-Slider-01.jpg');
+	/************************************************************************/
+	--COLORLIGHT: 255 255 255;
+	--COLORDARK: 16 4 41;
+
+	--COLORMAIN: 49 83 175;
+	--COLORMAIN2: 44 5 136; /* Tone 2 */
+
+	--COLORACCENTL: 0 255 23;
+	--COLORACCENTD: 154 30 139;
+
+
+	/* HSL COLOR VARIANTS */
+	--COLORLIGHT_HS: 0, 0%;
+	--COLORLIGHT_L: 100%;
+
+	--COLORDARK_HS: 259, 82%;
+	--COLORDARK_L: 9%;
+}
+/*soft pink*/
+/* The soft theme */
+[data-theme='soft-pink'] {
+	--COLORLIGHT: 28 28 28;
+	--COLORDARK: 236 193 193;
+
+	--COLORMAIN: 196 147 147;
+	--COLORMAIN2: 196 147 147; /* Tone 2 */
+
+	--COLORACCENTL: 222 118 118;
+	--COLORACCENTD: 0 0 0;
+
+
+	/* HSL COLOR VARIANTS */
+	--COLORLIGHT_HS: 0, 0%;
+	--COLORLIGHT_L: 11%;
+
+	--COLORDARK_HS: 0, 53%;
+	--COLORDARK_L: 84%;
 }
 /***************************** END THEMES **********/
 /* :global if in component */
