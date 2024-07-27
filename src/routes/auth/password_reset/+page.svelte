@@ -127,7 +127,7 @@
 				<div class="mt-6">
 					<!-- Form -->
 					<form action="#" on:submit={(event) => handleSubmit(event)}>
-						<div class="grid gap-y-4 text-COLORWHT2">
+						<div class="grid gap-y-4 text-COLORLIGHT-100">
 							<!-- Form Group -->
 							<div>
 								<label for="email" class="mb-2 block text-sm"
