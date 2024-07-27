@@ -78,18 +78,21 @@
 				if (device === 'windows' || device === 'linux' || device === 'android') {
 					branding_text = 'The app is already installed';
 					text = 'You already have the app installed. No need to reinstall again.';
+					subtitle = 'Redirecting you back to the home page.';
+					buttonText = '';
+					smartButton.style.display = 'none';
+					toast.push('Redirecting you to the home page');
+					setTimeout(() => {
+						goto('/');
+					}, 6000);
 				} else {
-					branding_text = 'Unsupported device';
+					branding_text = 'Add to the home screen';
 					text =
-						'Try signing up through the website. You can only use the website, but not install the app on this device. Please use a supported device to install the app.';
+					'Add to the home screen and then relaunch the app an try to sign up.';
+					subtitle = 'If you have any issues, please contact us.';
+					buttonText = '';
+					smartButton.style.display = 'none';
 				}
-				subtitle = 'Redirecting you back to the home page.';
-				buttonText = '';
-				smartButton.style.display = 'none';
-				toast.push('Redirecting you to the home page');
-				setTimeout(() => {
-					goto('/');
-				}, 6000);
 				return;
 			}
 			branding_text = 'Installing...';
