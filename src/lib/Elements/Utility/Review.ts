@@ -40,7 +40,7 @@ async function createReview(product_id: string, rating: number, comment: string)
 				return toast.push(data.message, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': 'rgb(var(--COLORRED))'
+						'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 					}
 				});
 			}

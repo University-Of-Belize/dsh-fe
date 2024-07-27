@@ -1,7 +1,6 @@
 import { goto } from '$app/navigation';
-import settings from '$lib/config/settings';
-import { toast } from '@zerodevx/svelte-toast';
 import config from '$lib/config/settings';
+import { toast } from '@zerodevx/svelte-toast';
 
 // Stolen code from: https://developer.spotify.com/
 // It's a great idea though! 😅😅
@@ -20,14 +19,17 @@ async function fetchWebApi(
 			console.error('Server offline. Please refresh the page.');
 			return 0;
 		}
-		const res = await fetch(`${settings.server.HTTPOrigin}/api/v${config.server['api-version']}/${endpoint}`, {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${token ? token : localStorage.token}`
-			},
-			method,
-			body: JSON.stringify(body)
-		});
+		const res = await fetch(
+			`${config.server.HTTPOrigin}/api/v${config.server['api-version']}/${endpoint}`,
+			{
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token ? token : localStorage.token}`
+				},
+				method,
+				body: JSON.stringify(body)
+			}
+		);
 		if (!silent) {
 			// Moved from countless different files
 			if (res.status === 403) {
@@ -38,7 +40,7 @@ async function fetchWebApi(
 				toast.push('Hey, you need to log in.', {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': 'rgb(var(--COLORRED))'
+						'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 					}
 				});
 				goto(
@@ -116,7 +118,7 @@ async function fetchWebApi(
 			toast.push(`FetchWebAPI '${method} ${endpoint}': Failed—Fatal error: ${error}`, {
 				dismissable: false,
 				theme: {
-					'--toastBarBackground': 'rgb(var(--COLORRED))'
+					'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 				}
 			});
 		}

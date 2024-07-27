@@ -82,7 +82,7 @@ async function editUser(
 			return toast.push(r.message, {
 				dismissable: false,
 				theme: {
-					'--toastBarBackground': 'rgb(var(--COLORRED))'
+					'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 				}
 			});
 		}
@@ -113,7 +113,7 @@ async function registerUser(payload: string[]) {
 				return toast.push(`${json.message}`, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': 'rgb(var(--COLORRED))'
+						'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 					}
 				});
 			}
@@ -127,7 +127,7 @@ async function registerUser(payload: string[]) {
 			{
 				dismissable: false,
 				theme: {
-					'--toastBarBackground': 'rgb(var(--COLORRED))'
+					'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 				}
 			}
 		);

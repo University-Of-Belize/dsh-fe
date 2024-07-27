@@ -59,7 +59,7 @@ const addToCart = async (
 				toast.push(`Failed to add item to cart. ${data.message}`, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': 'rgb(var(--COLORRED))'
+						'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 					}
 				});
 				// **************** TELEMETRY ******************
@@ -100,7 +100,7 @@ async function emptyCart(index: number | null) {
 				toast.push(`Failed to empty cart. ${data.message}`, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': 'rgb(var(--COLORRED))'
+						'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 					}
 				});
 			}
@@ -135,7 +135,7 @@ async function updateCartQuantity(product_slug: string, quantity: number | null)
 				toast.push(`Failed to update cart. ${data.message}`, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': 'rgb(var(--COLORRED))'
+						'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 					}
 				});
 			}
@@ -170,7 +170,7 @@ async function removeFromCart(index: string) {
 				toast.push(`Failed to update cart. ${data.message}`, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': 'rgb(var(--COLORRED))'
+						'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 					}
 				});
 			}
@@ -205,7 +205,7 @@ async function syncCart(cart: CartProduct[]) {
 				toast.push(`Failed to update cart. ${data.message}`, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': 'rgb(var(--COLORRED))'
+						'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 					}
 				});
 			}

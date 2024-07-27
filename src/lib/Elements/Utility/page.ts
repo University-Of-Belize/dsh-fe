@@ -13,7 +13,7 @@ function locateNodeUsingHash(node: string) {
 			toast.push(`Couldn't find that one.<br/>No ${node} found with that ID.`, {
 				dismissable: false,
 				theme: {
-					'--toastBarBackground': 'rgb(var(--COLORRED))'
+					'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 				}
 			});
 		}
@@ -21,3 +21,4 @@ function locateNodeUsingHash(node: string) {
 }
 
 export { locateNodeUsingHash };
+
