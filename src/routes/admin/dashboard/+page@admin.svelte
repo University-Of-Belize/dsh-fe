@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 // import Button from '$lib/Elements/Buttons/Button.svelte';
+	import TourModal from '$lib/Elements/Tour/default.svelte';
 	import config from '$lib/config/settings';
 	import { admin_tour } from '$lib/data/tour_data';
 	import type { TourConfig } from '$lib/tour/index';
@@ -27,7 +28,8 @@
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
 
 	const tourConfig: TourConfig = {
-		theme: localStorage.theme === 'light' ? 'light' : 'dark'
+		theme: localStorage.theme === 'light' ? 'light' : 'dark',
+		customTemplate: TourModal
 	};
 	interface DashData {
 		what: string;

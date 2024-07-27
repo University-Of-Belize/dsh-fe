@@ -49,10 +49,7 @@ let arrowCSS = orientation => {
 };*/
 </script>
 
-<div
-	id="tour_modal"
-	class="boxCSS rounded-[0.65rem] {theme === 'dark' ? 'bg-slate-900 text-white' : ''}"
->
+<div id="tour_modal" class="boxCSS rounded-[0.65rem] bg-COLORDARK-100 text-COLORLIGHT-100">
 	<button class="closeButtonCSS" on:click={eventHandlers.close}>x</button>
 	<h3 style="font-weight:bold">{data.title ?? ''}</h3>
 	<div>{data.content}</div>
@@ -78,17 +75,7 @@ let arrowCSS = orientation => {
 	.rounded-\[0\.65rem\] {
 		border-radius: 0.65rem /* 10.4px */;
 	}
-	.bg-slate-900 {
-		--tw-bg-opacity: 1;
-		background-color: rgb(15 23 42 / var(--tw-bg-opacity)) !important /* #0f172a */;
-	}
-	.text-white {
-		--tw-text-opacity: 1;
-		color: rgb(255 255 255 / var(--tw-text-opacity)) !important /* #ffffff */;
-	}
 	.boxCSS {
-		background-color: white;
-		color: black;
 		padding: 15px;
 		box-shadow: 0px 0px 9px #636363;
 		max-width: 300px;
