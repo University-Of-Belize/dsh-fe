@@ -309,7 +309,7 @@
 														class="peer sr-only cursor-pointer"
 													/>
 													<p
-														class="rounded-lg border border-COLORLIGHT-100 px-6 py-2 font-bold peer-checked:bg-COLORLIGHT-100 peer-checked:text-COLORLIGHT-100"
+														class="rounded-lg border border-COLORLIGHT-100 px-6 py-2 font-bold peer-checked:bg-COLORLIGHT-100 peer-checked:text-COLORDARK-100"
 													>
 														{v.Name}
 													</p>
