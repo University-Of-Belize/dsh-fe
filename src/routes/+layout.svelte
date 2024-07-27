@@ -13,6 +13,7 @@
 	import { getMessaging, onMessage } from '@firebase/messaging';
 	import { faPaintbrush, faShare, faX } from '@fortawesome/free-solid-svg-icons';
 	import { SvelteToast, toast } from '@zerodevx/svelte-toast';
+	import { partytownSnippet } from '@builder.io/partytown/integration';
 	import 'node-localstorage/register';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
@@ -357,6 +358,10 @@
 	}
 </script>
 
+<svelte:head>
+	{@html '<script>' + partytownSnippet() + '</script>'}
+</svelte:head>
+
 <SvelteToast {options} />
 <main id="main" class="flex">
 	<div class="block w-full">
@@ -477,7 +482,9 @@
 							/>
 						</div>
 
-						<div class="text-md mt-8 block rounded-sm bg-COLORDARK-50 px-4 py-6 text-COLORLIGHT-100">
+						<div
+							class="text-md mt-8 block rounded-sm bg-COLORDARK-50 px-4 py-6 text-COLORLIGHT-100"
+						>
 							<div class="text-COLORLIGHT-25">Code Panel</div>
 							<div
 								class="code mt-2"

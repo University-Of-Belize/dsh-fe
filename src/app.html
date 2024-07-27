@@ -24,14 +24,20 @@
 
 		<!-- Measurement -->
 		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-9GT0JR1RDJ"></script>
+		<script
+			type="text/partytown"
+			src="https://www.googletagmanager.com/gtag/js?id=G-9GT0JR1RDJ"
+		></script>
 		<script>
+			// Forward the necessary functions to the web worker layer
+			partytown = {
+				forward: ['dataLayer.push', 'gtag']
+			};
+		</script>
+		<script type="text/partytown">
 			window.dataLayer = window.dataLayer || [];
-			function gtag() {
-				dataLayer.push(arguments);
-			}
+			window.gtag = function(){dataLayer.push(arguments);}
 			gtag('js', new Date());
-
 			gtag('config', 'G-9GT0JR1RDJ', { debug_mode: true });
 		</script>
 
