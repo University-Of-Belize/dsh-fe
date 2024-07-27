@@ -3,7 +3,7 @@
 @tailwind components;
 @layer base {
 	:root {
-		--LANDINGPHOTO: url('/homepage/abstract_KDE.webp');
+		--LANDINGPHOTO: url('/homepage/hero-shapes.webp');
 		--COLORLIGHT: 209 214 238;
 		--COLORDARK: 20 36 40;
 
