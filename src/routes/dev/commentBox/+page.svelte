@@ -17,11 +17,11 @@
 	});
 </script>
 
-<main class="p-8 text-COLORWHT">
+<main class="p-8 text-COLORLIGHT-100">
 	<div class="mb-2 mt-6 text-2xl font-semibold">Development Area</div>
 	<div
 		bind:this={terminal}
-		class="consoleEventLog boarder-COLORWHT block w-full rounded-sm border p-8 font-mono text-COLORBLE"
+		class="consoleEventLog boarder-COLORLIGHT-100 block w-full rounded-sm border p-8 font-mono text-COLORACCENTL"
 	>
 		<div class="consoleEvent">[TERMINAL] Ready to accept input</div>
 	</div>

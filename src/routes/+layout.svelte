@@ -49,16 +49,16 @@
 		dismissable: true,
 		pausable: true,
 		theme: {
-			'--toastBackground': 'rgb(var(--COLORBLK1))',
-			'--toastColor': 'rgb(var(--COLORWHT))',
-			'--toastBarBackground': 'rgb(var(--COLORGRN))'
+			'--toastBackground': 'rgb(var(--COLORDARK-75))',
+			'--toastColor': 'rgb(var(--COLORLIGHT-100))',
+			'--toastBarBackground': 'rgb(var(--COLORACCENTD))'
 		}
 	};
 	const options_firebase = {
 		dismissable: true,
 		theme: {
-			'--toastBackground': 'rgb(var(--COLORBLK1))',
-			'--toastColor': 'rgb(var(--COLORWHT)) ',
+			'--toastBackground': 'rgb(var(--COLORDARK-75))',
+			'--toastColor': 'rgb(var(--COLORLIGHT-100)) ',
 			'--toastBarBackground': '#ff7f4c' // Firebase color
 		}
 	};
@@ -287,7 +287,7 @@
 					toast.push('Your session is invalidated. Please sign in.', {
 						dismissable: false,
 						theme: {
-							'--toastBarBackground': 'rgb(var(--COLORRED))'
+							'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 						}
 					});
 					goto('/auth/login');
@@ -366,7 +366,7 @@
 		<div
 			bind:this={theme_drawer}
 			id="theme_drawer"
-			class="drawer z-50 block h-screen w-1/4 flex-col justify-start overflow-auto bg-COLORBLK bg-opacity-100 px-8 py-2 text-COLORWHT"
+			class="drawer z-50 block h-screen w-1/4 flex-col justify-start overflow-auto bg-COLORDARK-100 bg-opacity-100 px-8 py-2 text-COLORLIGHT-100"
 		>
 			<div class="flex w-full items-center justify-start">
 				<span
@@ -374,7 +374,7 @@
 						theme_drawer.classList.add('hidden');
 						localStorage.setItem('themedrawer_isHidden', 'true');
 					}}
-					class="ml-auto cursor-pointer rounded-md bg-COLORBLK1 px-4 py-2 hover:opacity-80"
+					class="ml-auto cursor-pointer rounded-md bg-COLORDARK-75 px-4 py-2 hover:opacity-80"
 					><Fa icon={faX} size="0.75x" /></span
 				>
 			</div>
@@ -395,7 +395,7 @@
 				<div class="theme-input">
 					{#each keys as key (key)}
 						<div class="inputfield text-field mt-2 block">
-							<div class="label text-md text-COLORWHT">{key}</div>
+							<div class="label text-md text-COLORLIGHT-100">{key}</div>
 							<ColorInput
 								icon={{
 									prefix: 'fas',
@@ -431,9 +431,9 @@
 						>
 							<Button
 								custom_icon="/icons/font-awesome/eye-dropper-half.svg"
-								color="COLORBLK3"
+								color="COLORDARK-25"
 								text="Apply style"
-								color_t="COLORWHT"
+								color_t="COLORLIGHT-100"
 								custom_style="w-full"
 							/>
 						</div>
@@ -446,9 +446,9 @@
 						>
 							<Button
 								custom_icon="/icons/font-awesome/paintbrush.svg"
-								color="COLORBLK3"
+								color="COLORDARK-25"
 								text="Reset style"
-								color_t="COLORWHT"
+								color_t="COLORLIGHT-100"
 								custom_style="w-full"
 							/>
 						</div>
@@ -470,15 +470,15 @@
 						>
 							<Button
 								icon={faShare}
-								color="COLORBLK3"
+								color="COLORDARK-25"
 								text="Export style"
-								color_t="COLORWHT"
+								color_t="COLORLIGHT-100"
 								custom_style="w-full"
 							/>
 						</div>
 
-						<div class="text-md mt-8 block rounded-sm bg-COLORBLK2 px-4 py-6 text-COLORWHT">
-							<div class="text-COLORWHT2">Code Panel</div>
+						<div class="text-md mt-8 block rounded-sm bg-COLORDARK-50 px-4 py-6 text-COLORLIGHT-100">
+							<div class="text-COLORLIGHT-25">Code Panel</div>
 							<div
 								class="code mt-2"
 								bind:this={themeCodePanel}
@@ -500,7 +500,7 @@
 							</div>
 						</div>
 						<div class="inputfield text-field mt-2 block">
-							<div class="label text-md text-COLORWHT">Import theme</div>
+							<div class="label text-md text-COLORLIGHT-100">Import theme</div>
 							<ColorInput
 								icon={{
 									prefix: 'fas',
@@ -548,6 +548,6 @@
 		/* background: #f0ede6; */
 		/* background: #202124 */
 		/* background: #d5d6dc */
-		background: linear-gradient(240deg, rgb(var(--COLORBLK)), rgb(var(--COLORBLK-TONE2)));
+		background: linear-gradient(240deg, rgb(var(--COLORDARK)), rgb(var(--COLORDARK)));
 	}
 </style>

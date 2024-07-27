@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
+	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 </script>
 
-<main class="h-screen w-full overflow-hidden text-COLORWHT">
+<main class="h-screen w-full overflow-hidden text-COLORLIGHT-100">
 	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} />
 	</div>

@@ -22,17 +22,17 @@ export default {
 					950: '#172554'
 				},
 				COLORLIGHT: {
-					15: 'rgb(var(--COLORLIGHT) / 0.15',
-					25: 'rgb(var(--COLORLIGHT) / 0.25',
-					50: 'rgb(var(--COLORLIGHT) / 0.5',
-					75: 'rgb(var(--COLORLIGHT) / 0.75',
+					15: '#e2dfff',
+					25: '#e0dfff',
+					50: '#dfe0ff',
+					75: '#dfe3ff',
 					100: 'rgb(var(--COLORLIGHT) / var(--tw-bg-opacity))'
 				},
 				COLORDARK: {
-					15: 'rgb(var(--COLORDARK) / 0.15',
-					25: 'rgb(var(--COLORDARK) / 0.25',
-					50: 'rgb(var(--COLORDARK) / 0.5',
-					75: 'rgb(var(--COLORDARK) / 0.75',
+					15: '#60acc0',
+					25: '#4d8a9a',
+					50: '#3a6874',
+					75: '#1c3238',
 					100: 'rgb(var(--COLORDARK) / var(--tw-bg-opacity))'
 				},
 

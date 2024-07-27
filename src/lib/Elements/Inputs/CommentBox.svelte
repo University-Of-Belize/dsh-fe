@@ -51,9 +51,9 @@
 				style="width: 50px; height: 50px;"
 			/>
 		</div>
-		<div class="review-content h-full w-full rounded-md px-1 py-1 text-COLORWHT">
-			<div class="review-wrap mb-4 rounded-md border border-COLORBLE">
-				<div class="text-i-combo flex items-center justify-start font-semibold text-COLORGRY">
+		<div class="review-content h-full w-full rounded-md px-1 py-1 text-COLORLIGHT-100">
+			<div class="review-wrap mb-4 rounded-md border border-COLORACCENTD">
+				<div class="text-i-combo flex items-center justify-start font-semibold text-COLORACCENTL">
 					<div class="icon px-2 py-2"><Fa icon={faPencil} size="1.01x" /></div>
 					{placeholder ?? 'Write a review...'}
 				</div>
@@ -66,10 +66,10 @@
 						}
 						handleInput(e);
 					}}
-					class="text-md mx-6 h-full w-full cursor-text bg-transparent px-2 py-1 font-light text-COLORGRN focus:outline-none"
+					class="text-md mx-6 h-full w-full cursor-text bg-transparent px-2 py-1 font-light text-COLORACCENTD focus:outline-none"
 					contenteditable="true"
 				>
-					<div class="select-none text-COLORWHT1" contenteditable="false">What's on your mind?</div>
+					<div class="select-none text-COLORLIGHT-15" contenteditable="false">What's on your mind?</div>
 					<div contenteditable="true">&nbsp;</div>
 				</div>
 			</div>

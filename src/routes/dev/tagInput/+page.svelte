@@ -83,12 +83,12 @@
 	}
 </script>
 
-<main class="p-8 text-COLORWHT">
+<main class="p-8 text-COLORLIGHT-100">
 	<div class="mb-2 mt-6 text-2xl font-semibold">Development Area</div>
 	<div
 		bind:this={terminal}
 		style="font-family: 'Courier New', Courier, monospace;"
-		class="consoleEventLog block w-full rounded-sm border border-COLORWHT p-8 font-mono text-COLORBLE"
+		class="consoleEventLog block w-full rounded-sm border border-COLORLIGHT-100 p-8 font-mono text-COLORACCENTL"
 	>
 		<div>[TERMINAL] Ready to accept input</div>
 	</div>
@@ -98,10 +98,10 @@
 		<div class="tag-close ml-1">×</div>
 	</div>
 	<div class="mt-6 text-xl font-semibold">Tag Input</div>
-	<div class="tagInput flex w-fit border border-COLORWHT bg-COLORWHT px-4 py-4">
+	<div class="tagInput flex w-fit border border-COLORLIGHT-100 bg-COLORLIGHT-100 px-4 py-4">
 		<div bind:this={tagArea} class="tagArea flex px-2" />
 		<input
-			class="tagInputArea w-full bg-transparent text-COLORWHT focus:outline-none"
+			class="tagInputArea w-full bg-transparent text-COLORLIGHT-100 focus:outline-none"
 			bind:this={tagInputArea}
 			on:keydown={(e) => {
 				checkTags(e);

@@ -76,7 +76,7 @@
 	<link rel="preload" fetchpriority="high" as="image" href={LCP} type="image/{LCP_EXT}" />
 </svelte:head>
 
-<main class="h-screen w-full text-COLORWHT">
+<main class="h-screen w-full text-COLORLIGHT-100">
 	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} />
 	</div>
@@ -90,7 +90,7 @@
 				class="content-wrapper absolute z-10 flex h-full w-full items-center justify-start px-4 lg:px-10"
 			>
 				<div class="content-wrapper block px-4 md:px-8 lg:px-0">
-					<div class="running-heading block w-fit space-y-6 text-4xl font-medium text-COLORWHT">
+					<div class="running-heading block w-fit space-y-6 text-4xl font-medium text-COLORLIGHT-100">
 						<div class="block">
 							This is it!<br />
 
@@ -107,7 +107,7 @@
 									goto('/auth/login');
 								}}
 							>
-								<Button icon={faRightToBracket} color="COLORBLK2" color_t="COLORWHT" text="Log in" />
+								<Button icon={faRightToBracket} color="COLORDARK-50" color_t="COLORLIGHT-100" text="Log in" />
 							</div>
 						</div>
 					</div>
@@ -115,7 +115,7 @@
 			</div>
 
 			<div
-				class="wrapper absolute flex h-full w-full items-center justify-center bg-COLORBLK opacity-20"
+				class="wrapper absolute flex h-full w-full items-center justify-center bg-COLORDARK-100 opacity-20"
 			>
 				<!-- Nothing, this is an overlay--
 			</div>
@@ -123,16 +123,16 @@
 		</div> -->
 
 		<div class="hero-image w-full p-8">
-			<div class="mb-4 w-20 rounded-md bg-COLORBLK2 px-2 py-1 text-sm font-medium text-COLORWHT">
+			<div class="mb-4 w-20 rounded-md bg-COLORDARK-50 px-2 py-1 text-sm font-medium text-COLORLIGHT-100">
 				BETA
 			</div>
 			<p class="mb-2 text-2xl">This is it! 😊🎉</p>
-			<p class="mb-6 text-COLORWHT2">
+			<p class="mb-6 text-COLORLIGHT-25">
 				Introducing Plattr! Your one-stop shop for the latest food-dealings @ the University of
 				Belize cafeteria!<br />Online Test #2 is officially here! Sign up using the button below 👇
 			</p>
 			<button
-				class="flex items-center space-x-2 rounded-md border-2 border-COLORWHT px-4 py-2 font-medium text-COLORWHT transition hover:bg-COLORBLK1 hover:opacity-80"
+				class="flex items-center space-x-2 rounded-md border-2 border-COLORLIGHT-100 px-4 py-2 font-medium text-COLORLIGHT-100 transition hover:bg-COLORDARK-75 hover:opacity-80"
 			>
 				<a href="/auth/create"><span> Sign up </span></a>
 				<span
@@ -155,9 +155,9 @@
 
 	<div class="content block">
 		<div class="category-grid flex w-full flex-wrap items-center justify-center">
-			<div class="gridelement relative flex h-16 w-full items-center justify-center bg-COLORBLK">
+			<div class="gridelement relative flex h-16 w-full items-center justify-center bg-COLORDARK-100">
 				<div
-					class="content-wrapper absolute z-10 flex h-full w-full items-center justify-start bg-COLORBLK px-8 text-2xl font-semibold text-COLORWHT"
+					class="content-wrapper absolute z-10 flex h-full w-full items-center justify-start bg-COLORDARK-100 px-8 text-2xl font-semibold text-COLORLIGHT-100"
 				>
 					Categories
 				</div>
@@ -183,14 +183,14 @@
 				{/each}
 				<!-- {:else}
 				<div class="flex h-16 w-full items-center justify-center">
-					<div class="text-2xl font-semibold text-COLORWHT">No categories available</div>
+					<div class="text-2xl font-semibold text-COLORLIGHT-100">No categories available</div>
 				</div> -->
 			{/if}
 		</div>
 
 		<div class="featured block">
 			<div
-				class="banner-featured flex items-center justify-start bg-COLORBLK1 px-8 py-12 text-2xl font-semibold text-COLORWHT"
+				class="banner-featured flex items-center justify-start bg-COLORDARK-75 px-8 py-12 text-2xl font-semibold text-COLORLIGHT-100"
 			>
 				For You
 			</div>
@@ -224,7 +224,7 @@
 							await goto('/auth/signup');
 						}}
 					>
-						<Button icon={faGift} color="COLORPNK" text="Sign up" color_t="COLORWHT" />
+						<Button icon={faGift} color="COLORACCENTL" text="Sign up" color_t="COLORLIGHT-100" />
 					</div>
 				</div>
 			</Footer>{/if}
@@ -270,14 +270,14 @@
 		/* Circle over title /
 		.hero-image::before {
 			/* Small box shadow that blends into the background /
-			/* box-shadow: 1px 0 8px 4px rgb(var(--COLORBLK) / 0.25); /
+			/* box-shadow: 1px 0 8px 4px rgb(var(--COLORDARK-100) / 0.25); /
 			width: 50%;
 			height: 100%;
 			display: block;
 			content: '';
 			position: absolute;
 			bottom: 0;
-			background: linear-gradient(90deg, rgb(var(--COLORBLK)), transparent);
+			background: linear-gradient(90deg, rgb(var(--COLORDARK-100)), transparent);
 		}
 	} */
 	.hero {

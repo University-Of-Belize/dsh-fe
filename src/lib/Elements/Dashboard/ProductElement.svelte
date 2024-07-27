@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
-	import { faShoppingCart, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
+	import { faCheckDouble, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { addToCart } from '../Utility/Cart';
 	let productImage: string;
@@ -36,7 +36,7 @@
 	};
 </script>
 
-<div class="mt-4 w-full max-w-sm rounded-lg border border-COLORHPK bg-COLORBLK1">
+<div class="mt-4 w-full max-w-sm rounded-lg border border-COLORACCENTL bg-COLORDARK-75">
 	<a href="/product/{productSlug}">
 		<img
 			loading="lazy"
@@ -52,7 +52,7 @@
 			}}
 		/>
 	</a>
-	<div class="px-5 py-1 pb-5 text-COLORWHT">
+	<div class="px-5 py-1 pb-5 text-COLORLIGHT-100">
 		<a href="/product/{productSlug}">
 			<span class="stub strikethrough hidden" />
 			<h5
@@ -62,7 +62,7 @@
 			>
 				{productName}
 			</h5>
-			{@html productUnavailable ? `<span class="text-COLORHPK">OUT OF STOCK</span>` : ''}
+			{@html productUnavailable ? `<span class="text-COLORACCENTL">OUT OF STOCK</span>` : ''}
 		</a>
 		<div
 			class="mt-2 block items-center justify-start space-y-6 lg:flex lg:flex-wrap lg:justify-between lg:space-y-0"
@@ -100,7 +100,7 @@
 </div>
 
 <!-- <div
-	class="lg:500px m-4 flex w-full flex-wrap rounded-lg bg-COLORBLK1 p-4 shadow-lg lg:flex-nowrap"
+	class="lg:500px m-4 flex w-full flex-wrap rounded-lg bg-COLORDARK-75 p-4 shadow-lg lg:flex-nowrap"
 >
 	<div class="w-full flex-none md:w-auto">
 		<img
@@ -113,13 +113,13 @@
 		/>
 	</div>
 	<div class="relative ml-4 flex-grow pt-8 md:pt-2 lg:p-0">
-		<h2 class="text-lg font-semibold text-COLORWHT">{productName}</h2>
-		<p class="mt-2 font-light text-COLORWHT3">
+		<h2 class="text-lg font-semibold text-COLORLIGHT-100">{productName}</h2>
+		<p class="mt-2 font-light text-COLORLIGHT-50">
 			{productDescription.length > 100
 				? `${productDescription.slice(0, 100)}...`
 				: productDescription}
 		</p>
-		<p class="mb-16 font-bold text-COLORWHT1">
+		<p class="mb-16 font-bold text-COLORLIGHT-15">
 			{parseFloat(productPrice).toLocaleString('en-US', {
 				style: 'currency',
 				currency: config['checkout']['currency'],
@@ -138,9 +138,9 @@
 				Details
 			</div>
 			<div class="addToCart" on:click={() => addToCart(productId, 1)}>
-				<IconButton icon={faCartPlus} color="COLORBLE" color_t="COLORWHT" />
+				<IconButton icon={faCartPlus} color="COLORACCENTD" color_t="COLORLIGHT-100" />
 			</div>
-			<-- <IconButton icon={faHeart} color="COLORRED" class="hidden lg:flex"/> ->
+			<-- <IconButton icon={faHeart} color="COLORACCENTL" class="hidden lg:flex"/> ->
 		</div>
 	</div>
 </div>

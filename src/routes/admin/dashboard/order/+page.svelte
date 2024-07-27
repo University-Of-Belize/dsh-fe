@@ -122,7 +122,7 @@
 			case 1: // Accept
 				toast.push('You accepted this order.');
 				getId(`order-${orderId}`)?.classList.remove('border-red-300'); // @ts-ignore
-				getId(`order-${orderId}`)?.classList.remove('border-COLORYLW'); // @ts-ignore
+				getId(`order-${orderId}`)?.classList.remove('border-COLORACCENTL'); // @ts-ignore
 				if (drawerOpenBy != 1) {
 					// Keepthe drawer open as long as we're switching tabs
 					getId(`pulldown-${orderId}`)?.classList.add('hidden'); // @ts-ignore
@@ -133,12 +133,12 @@
 				getId(`modify-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
 				getId(`user-modify-content-${orderId}`)?.classList.add('hidden');
 				getId(`title-${orderId}`).innerHTML =
-					'You <b class="font-normal text-COLORWHT">accepted</b> this order.';
+					'You <b class="font-normal text-COLORLIGHT-100">accepted</b> this order.';
 				currentAction = [action, orderId];
 				break;
 			case 2: // Decline
 				toast.push(staff ? 'You rejected this order.' : "You're about to delete this order.");
-				getId(`order-${orderId}`)?.classList.remove('border-COLORYLW'); // @ts-ignore
+				getId(`order-${orderId}`)?.classList.remove('border-COLORACCENTL'); // @ts-ignore
 				getId(`order-${orderId}`)?.classList.add('border-red-300'); // @ts-ignore
 				if (drawerOpenBy != 2) {
 					// Keep the drawer open as long as we're switching tabs
@@ -150,17 +150,17 @@
 				getId(`modify-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
 				getId(`user-modify-content-${orderId}`)?.classList.add('hidden');
 				getId(`title-${orderId}`).innerHTML = staff
-					? 'You <b class="font-normal text-COLORHPK">rejected</b> this order.'
-					: 'Are you <b class="font-normal text-COLORHPK underline">absolutely sure</b> you want to remove this order?';
+					? 'You <b class="font-normal text-COLORACCENTL">rejected</b> this order.'
+					: 'Are you <b class="font-normal text-COLORACCENTL underline">absolutely sure</b> you want to remove this order?';
 				currentAction = [action, orderId];
 				break;
 			case 3: // Modify
 				toast.push("You're altering this order.");
 				// @ts-ignore
 				getId(`title-${orderId}`).innerHTML =
-					'You\'re <b class="font-normal text-COLORYLW">altering</b> this order.';
+					'You\'re <b class="font-normal text-COLORACCENTL">altering</b> this order.';
 				getId(`order-${orderId}`)?.classList.remove('border-red-300'); // @ts-ignore
-				getId(`order-${orderId}`)?.classList.add('border-COLORYLW'); // @ts-ignore
+				getId(`order-${orderId}`)?.classList.add('border-COLORACCENTL'); // @ts-ignore
 				if (drawerOpenBy != 3) {
 					// Keep the drawer open as long as we're switching tabs
 					getId(`pulldown-${orderId}`)?.classList.add('hidden'); // @ts-ignore
@@ -180,7 +180,7 @@
 				break;
 			case 4: // Ready
 				toast.push("You're readying this order.");
-				getId(`order-${orderId}`)?.classList.remove('border-COLORYLW'); // @ts-ignore
+				getId(`order-${orderId}`)?.classList.remove('border-COLORACCENTL'); // @ts-ignore
 				getId(`order-${orderId}`)?.classList.add('border-red-300'); // @ts-ignore
 				if (drawerOpenBy != 4) {
 					// Keep the drawer open as long as we're switching tabs
@@ -192,7 +192,7 @@
 				getId(`modify-content-${orderId}`)?.classList.add('hidden'); // @ts-ignore
 				getId(`user-modify-content-${orderId}`)?.classList.add('hidden');
 				getId(`title-${orderId}`).innerHTML =
-					'This will send out the "ready" status to the user.<br/>Are you <b class="font-normal text-COLORHPK underline">absolutely sure</b> this order is ready for pick-up?';
+					'This will send out the "ready" status to the user.<br/>Are you <b class="font-normal text-COLORACCENTL underline">absolutely sure</b> this order is ready for pick-up?';
 				currentAction = [action, orderId];
 				break;
 			default: // WTF
@@ -306,7 +306,7 @@
 				{#each data as order, index}
 					<div
 						id="order-{order._id}"
-						class="orderPane my-8 flex w-full flex-col justify-start rounded-sm border border-COLORWHT3 bg-COLORBLK1 px-4 py-4 lg:flex-row"
+						class="orderPane my-8 flex w-full flex-col justify-start rounded-sm border border-COLORLIGHT-50 bg-COLORDARK-75 px-4 py-4 lg:flex-row"
 					>
 						<div class="order-details flex w-full flex-col px-4 pb-8" id={order.order_code}>
 							<div class="flex lg:space-x-4">
@@ -325,7 +325,7 @@
 								<div class="block">
 									<div class="flex">
 										<div
-											class="flex flex-wrap space-x-2 text-lg font-medium text-COLORWHT lg:text-2xl"
+											class="flex flex-wrap space-x-2 text-lg font-medium text-COLORLIGHT-100 lg:text-2xl"
 										>
 											<div class="g-wrap">
 												{order.order_from
@@ -337,7 +337,7 @@
 											<div class="font-semibold">issued an order for</div>
 										</div>
 									</div>
-									<div class="flex text-sm font-light text-COLORWHT">
+									<div class="flex text-sm font-light text-COLORLIGHT-100">
 										Ordered at {getLocaleDateTime(order.order_date)}
 										<!-- <br/>Review or manage this order -->
 									</div>
@@ -366,8 +366,8 @@
 												>
 													<Button
 														icon={faCog}
-														color="COLORBLE"
-														color_t="COLORWHT"
+														color="COLORACCENTD"
+														color_t="COLORLIGHT-100"
 														text="Edit Listing"
 														custom_style="my-2"
 														icon_on_sm
@@ -380,8 +380,8 @@
 												>
 													<Button
 														icon={faShare}
-														color="COLORWHT"
-														color_t="COLORBLK"
+														color="COLORLIGHT-100"
+														color_t="COLORDARK-100"
 														text="Go to Listing"
 														custom_style="my-2"
 														icon_on_sm
@@ -391,7 +391,7 @@
 										</div>
 									</div>
 									<div class="banner-top items-top flex w-full flex-wrap space-x-4">
-										<div class="pimg_wrp hidden h-fit w-fit rounded-md bg-COLORBLE lg:block">
+										<div class="pimg_wrp hidden h-fit w-fit rounded-md bg-COLORACCENTD lg:block">
 											<div class="pimg_wrp2 relative">
 												<div
 													class="product-image relative block cursor-pointer overflow-clip rounded-md hover:opacity-80"
@@ -414,7 +414,7 @@
 												Product description
 											</div>
 											<div
-												class="product-description text-md mb-4 hidden h-full w-full rounded-md bg-transparent py-1 font-light text-COLORWHT"
+												class="product-description text-md mb-4 hidden h-full w-full rounded-md bg-transparent py-1 font-light text-COLORLIGHT-100"
 											>
 												<div class="text">
 													{@html product.product?.description.length > 250
@@ -466,8 +466,8 @@
 									>
 										<Button
 											icon={faCheck}
-											color="COLORWHT"
-											color_t="COLORBLK"
+											color="COLORLIGHT-100"
+											color_t="COLORDARK-100"
 											text="Accept"
 											custom_style="my-2"
 											disabled={order.is_accepted}
@@ -484,8 +484,8 @@
 									>
 										<Button
 											icon={faCheckDouble}
-											color="COLORBLE"
-											color_t="COLORWHT"
+											color="COLORACCENTD"
+											color_t="COLORLIGHT-100"
 											text="Ready"
 											custom_style="my-2"
 										/>
@@ -500,9 +500,9 @@
 										<Button
 											icon={faX}
 											color="transparent"
-											color_t="COLORHPK"
+											color_t="COLORACCENTL"
 											text={staff ? 'Decline' : 'Delete'}
-											custom_style="my-2 border border-COLORHPK"
+											custom_style="my-2 border border-COLORACCENTL"
 										/>
 									</button>
 								{/if}
@@ -514,8 +514,8 @@
 									>
 										<Button
 											icon={faClone}
-											color="COLORYLW"
-											color_t="COLORBLK"
+											color="COLORACCENTL"
+											color_t="COLORDARK-100"
 											text={staff ? 'Details' : 'Modify'}
 											custom_style="my-2"
 										/>
@@ -546,14 +546,14 @@
 											{order.order_code}
 										</div>
 										<div class="copy rounded-md p-4 opacity-80 hover:bg-gray-200">
-											<Fa icon={faCopy} size="1.25x" class="text-COLORWHT" />
+											<Fa icon={faCopy} size="1.25x" class="text-COLORLIGHT-100" />
 										</div>
 									</div>
 								</div>
 							</div>
 							{#if !staff && !order.is_accepted}
 								<div class="my-8 space-y-4">
-									<span class="border border-COLORWHT px-4 py-2">PENDING REVIEW</span>
+									<span class="border border-COLORLIGHT-100 px-4 py-2">PENDING REVIEW</span>
 								</div>
 							{/if}
 							<div
@@ -576,9 +576,9 @@
 										<Button
 											icon={faTrash}
 											color="transparent"
-											color_t="COLORHPK"
+											color_t="COLORACCENTL"
 											text="DELETE"
-											custom_style="my-2 border border-COLORHPK"
+											custom_style="my-2 border border-COLORACCENTL"
 										/>
 									</button>
 								{:else if currentAction[0] === 4}
@@ -589,10 +589,10 @@
 									>
 										<Button
 											icon={faCheckCircle}
-											color="COLORBLE"
-											color_t="COLORWHT"
+											color="COLORACCENTD"
+											color_t="COLORLIGHT-100"
 											text="THIS ORDER IS READY"
-											custom_style="my-2 border border-COLORWHT"
+											custom_style="my-2 border border-COLORLIGHT-100"
 										/>
 									</button>
 								{/if}
@@ -745,7 +745,7 @@
 															? order.promo_code.code
 															: 'placeholder'
 														: 'placeholder'}
-													custom_style="bg-transparent border border-COLORWHT"
+													custom_style="bg-transparent border border-COLORLIGHT-100"
 													options={promos}
 												/>
 											{:else}
@@ -758,7 +758,7 @@
 															? order.promo_code.code
 															: 'NO DISCOUNT APPLIED'
 														: 'NO DISCOUNT APPLIED'}
-													custom_style="bg-transparent border border-COLORWHT"
+													custom_style="bg-transparent border border-COLORLIGHT-100"
 													disabled
 													disabled_text={order
 														? order.promo_code
@@ -774,8 +774,8 @@
 										<button class="btn_wrp h-fit w-fit" type="submit" title="Process this request">
 											<Button
 												icon={faSave}
-												color="COLORWHT"
-												color_t="COLORBLK"
+												color="COLORLIGHT-100"
+												color_t="COLORDARK-100"
 												text="Save"
 												custom_style="my-2"
 											/>
@@ -809,8 +809,8 @@
 													<Button
 														icon={faTrash}
 														color="transparent"
-														custom_style="border border-COLORHPK py-2 m-0"
-														color_t="COLORHPK"
+														custom_style="border border-COLORACCENTL py-2 m-0"
+														color_t="COLORACCENTL"
 														text="Remove"
 													/>
 												</div>

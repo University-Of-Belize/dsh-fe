@@ -26,11 +26,11 @@
 	// Override rendering for tables
 	customRenderer.table = function (header, body) {
 		return `
-    <div class="flex flex-col border border-COLORBLK2 mt-8">
-      <div class="flex flex-row bg-COLORBLK2 font-semibold border border-COLORBLK3">
+    <div class="flex flex-col border border-COLORDARK-50 mt-8">
+      <div class="flex flex-row bg-COLORDARK-50 font-semibold border border-COLORDARK-25">
         ${header}
       </div>
-      <div class="flex flex-row border border-COLORBLK2">
+      <div class="flex flex-row border border-COLORDARK-50">
         ${body}
       </div>
     </div>`;
@@ -38,13 +38,13 @@
 
 	// Override rendering for table rows
 	customRenderer.tablerow = function (content) {
-		return `<div class="flex flex-wrap md:flex-nowrap w-full h-full items-start justify-around p-2 border border-COLORBLK2">${content}</div>`;
+		return `<div class="flex flex-wrap md:flex-nowrap w-full h-full items-start justify-around p-2 border border-COLORDARK-50">${content}</div>`;
 	};
 
 	// Override rendering for table cells
 	customRenderer.tablecell = function (content, flags) {
 		const alignClass = flags.align ? `text-${flags.align}` : '';
-		return `<div class="${alignClass} flex items-center justify-start space-x-2 p-2 border border-COLORBLK2"><div class="block">${content}</div></div>`;
+		return `<div class="${alignClass} flex items-center justify-start space-x-2 p-2 border border-COLORDARK-50"><div class="block">${content}</div></div>`;
 	};
 
 	// Set the custom renderer when calling marked
@@ -88,10 +88,10 @@
 </svelte:head>
 
 <div
-	class="stub flex hidden flex-row flex-col flex-wrap items-start justify-start justify-center justify-between justify-around space-x-2 bg-COLORBLK1 md:flex-nowrap"
+	class="stub flex hidden flex-row flex-col flex-wrap items-start justify-start justify-center justify-between justify-around space-x-2 bg-COLORDARK-75 md:flex-nowrap"
 ></div>
 
-<main class="h-screen w-full text-COLORWHT">
+<main class="h-screen w-full text-COLORLIGHT-100">
 	<div class="navigation z-20 w-full">
 		<Navigation
 			transparency={5}
@@ -107,12 +107,12 @@
 		<div class="content pb-27 mx-12 flex h-full w-full items-start justify-start pt-12 lg:flex-1">
 			{#if data != undefined}
 				<section
-					class="content-wrapper prose prose-neutral block w-full max-w-full rounded-sm bg-COLORBLK1 p-8 text-COLORWHT1 prose-h1:text-COLORWHT prose-h2:text-COLORWHT2 prose-h3:text-COLORWHT3 prose-h4:text-COLORWHT4 prose-h5:text-COLORWHT5 prose-h6:text-COLORWHT5 prose-a:text-COLORWHT2 prose-blockquote:text-COLORWHT1 prose-strong:text-COLORWHT1 prose-code:text-COLORYLW prose-ol:text-COLORWHT1 prose-ul:text-COLORWHT2 prose-li:text-COLORWHT"
+					class="content-wrapper prose prose-neutral block w-full max-w-full rounded-sm bg-COLORDARK-75 p-8 text-COLORLIGHT-15 prose-h1:text-COLORLIGHT-100 prose-h2:text-COLORWHT2 prose-h3:text-COLORLIGHT-50 prose-h4:text-COLORLIGHT-75 prose-h5:text-COLORLIGHT-100 prose-h6:text-COLORLIGHT-100 prose-a:text-COLORWHT2 prose-blockquote:text-COLORLIGHT-15 prose-strong:text-COLORLIGHT-15 prose-code:text-COLORACCENTL prose-ol:text-COLORLIGHT-15 prose-ul:text-COLORWHT2 prose-li:text-COLORLIGHT-100"
 				>
 					{@html marked.parse(data.content) || "Oops, this post doesn't exist!"}
 				</section>
 			{:else}
-				<div class="text-2xl text-COLORWHT">Loading article...</div>
+				<div class="text-2xl text-COLORLIGHT-100">Loading article...</div>
 			{/if}
 		</div>
 	</div>
@@ -135,7 +135,7 @@
 		margin-top: 1.25rem;
 		padding: 1rem 1rem 1rem 1rem;
 		border-radius: 0.25rem;
-		background: rgb(var(--COLORBLK2));
+		background: rgb(var(--COLORDARK-50));
 	}
 	:global(a) {
 		text-decoration: underline;
@@ -156,7 +156,7 @@
 	:global(hr) {
 		margin-top: 2rem;
 		margin-bottom: 2rem;
-		color: rgb(var(--COLORBLK5));
+		color: rgb(var(--COLORDARK-15));
 	}
 	:global(li) {
 		counter-increment: my-counter;
@@ -175,9 +175,9 @@
 		display: inline-block;
 		font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode',
 			Geneva, Verdana, sans-serif;
-		color: rgb(var(--COLORGRN));
-		background: rgb(var(--COLORBLK1));
-		border: 1px solid rgb(var(--COLORBLK5));
+		color: rgb(var(--COLORACCENTD));
+		background: rgb(var(--COLORDARK-75));
+		border: 1px solid rgb(var(--COLORDARK-15));
 		border-radius: 0.125rem;
 		padding: 0.25rem 0.5rem 0.25rem 0.5rem;
 		margin-top: 1rem;

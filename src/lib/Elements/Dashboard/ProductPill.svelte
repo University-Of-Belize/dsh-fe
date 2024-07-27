@@ -6,8 +6,8 @@
 	import Fa from 'svelte-fa';
 	export let product: Product;
 	export let tag: boolean = false;
-	export let tagColor: string = 'COLORWHT';
-	export let tagColor_t: string = 'COLORBLK';
+	export let tagColor: string = 'COLORLIGHT-100';
+	export let tagColor_t: string = 'COLORDARK-100';
 	export let tagText: string = '';
 	export let description: string;
 	export let image: string | undefined;
@@ -18,7 +18,7 @@
 
 <!-- Color stub -->
 <div
-	class="placeholder hidden w-full bg-COLORBYW bg-COLORPNK bg-COLORRED bg-COLORWHT bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORYLW"
+	class="placeholder hidden w-full bg-COLORACCENTL bg-COLORACCENTL bg-COLORACCENTL bg-COLORLIGHT-100 bg-COLORLIGHT-100 bg-COLORWHT2 bg-COLORLIGHT-50 bg-COLORACCENTL"
 >
 	&nbsp;
 </div>
@@ -31,12 +31,12 @@
 		>
 			<div
 				on:click={() => goto(`/admin/dashboard/product/manage?product_id=${product._id}`)}
-				class="widget w-fit cursor-pointer rounded-md bg-COLORBLE px-2 py-2 text-COLORWHT shadow-md hover:opacity-80"
+				class="widget w-fit cursor-pointer rounded-md bg-COLORACCENTD px-2 py-2 text-COLORLIGHT-100 shadow-md hover:opacity-80"
 			>
 				<Fa icon={faPencil} size="0.85x" />
 			</div>
 		</div>{/if}
-	<div class="product my-4 rounded-md bg-COLORBLK4 bg-opacity-50 px-4 py-2">
+	<div class="product my-4 rounded-md bg-COLORDARK-75 bg-opacity-50 px-4 py-2">
 		<div class="flex bg-opacity-100">
 			<div class="product-pfp flex flex-col items-center justify-start pr-4">
 				<img
@@ -56,7 +56,7 @@
 				/>
 			</div>
 			<div class="user-wrap flex w-full flex-wrap items-center">
-				<div class="product-content text-COLORWHT" style="word-break: break-word;">
+				<div class="product-content text-COLORLIGHT-100" style="word-break: break-word;">
 					<div class="flex items-center space-x-2 text-base font-semibold lg:text-lg">
 						<div>{product.productName ?? 'Untitled Product'}</div>
 						{#if displayPrice}
@@ -70,11 +70,11 @@
 							</div>
 						{/if}
 					</div>
-					<div class="text-md font-light text-COLORWHT1">
+					<div class="text-md font-light text-COLORLIGHT-15">
 						{@html description}
 					</div>
 				</div>
-				<div class="actions flex flex-1 items-center justify-start text-COLORWHT lg:justify-end">
+				<div class="actions flex flex-1 items-center justify-start text-COLORLIGHT-100 lg:justify-end">
 					<slot />
 				</div>
 			</div>

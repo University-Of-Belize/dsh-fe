@@ -1,15 +1,18 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
+	import VariationCategoryEditor from '$lib/Elements/Dashboard/VariationCategoryEditor.svelte';
 	import Select from '$lib/Elements/Inputs/Select2.svelte';
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
-	import RecursiveTextInput from '$lib/Elements/Inputs/RecursiveTextInput.svelte';
 	import { createProduct, deleteProduct, editProduct } from '$lib/Elements/Utility/Product';
 	import { R2S3Upload } from '$lib/Elements/Utility/vendor/dishout/r2_s3';
 	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
 	import type { Product } from '$lib/types/Product';
 	import type { User } from '$lib/types/User';
+	import type { VCategory, VariationData } from '$lib/types/Variation';
+	import { what_is } from '$lib/vendor/dishout/What_Is';
+	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
 		faBox,
@@ -24,13 +27,9 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	import { writable, type Writable } from 'svelte/store';
 	import Fa from 'svelte-fa';
+	import { writable, type Writable } from 'svelte/store';
 	import TagInput from '../../../../../lib/Elements/Inputs/TagInput.svelte';
-	import { what_is } from '$lib/vendor/dishout/What_Is';
-	import what from '$lib/vendor/dishout/Whats';
-	import type { VCategory, VariationData } from '$lib/types/Variation';
-	import VariationCategoryEditor from '$lib/Elements/Dashboard/VariationCategoryEditor.svelte';
 	let navDrawer: HTMLDivElement;
 	let editPane: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
@@ -240,7 +239,7 @@
 				</div>
 
 				<div
-					class="editPane block w-full rounded-md border border-COLORWHT3 bg-COLORBLK1 px-4 py-4 lg:flex-row"
+					class="editPane block w-full rounded-md border border-COLORLIGHT-50 bg-COLORDARK-75 px-4 py-4 lg:flex-row"
 					bind:this={editPane}
 				>
 					<div class="editGroup flex flex-col px-4 pb-8">
@@ -252,21 +251,21 @@
 							class="space-y-3"
 						>
 							<div class="block">
-								<div class="text-2xl font-semibold text-COLORWHT">
+								<div class="text-2xl font-semibold text-COLORLIGHT-100">
 									{data
 										? data.productName
 											? data.productName
 											: 'Untitled Product'
 										: 'Untitled Product'}
 								</div>
-								<div class="flex text-base font-semibold text-COLORWHT">
+								<div class="flex text-base font-semibold text-COLORLIGHT-100">
 									<div class="pr-1 font-light">Category:</div>
 									{data ? (data.category ? data.category.name : 'Uncategorized') : 'Uncategorized'}
 								</div>
 							</div>
 							<div class="banner-top items-top flex w-full flex-wrap space-x-4">
 								<div
-									class="pimg_wrp block h-fit w-fit rounded-md bg-COLORBLE"
+									class="pimg_wrp block h-fit w-fit rounded-md bg-COLORACCENTD"
 									on:click={() => {
 										photoInput.click();
 									}}
@@ -296,7 +295,7 @@
 											class="widget-wrp absolute z-10 flex w-full items-center justify-end"
 										>
 											<div
-												class="widget w-fit cursor-pointer rounded-md bg-COLORBLE px-2 py-2 text-COLORWHT shadow-md hover:opacity-80"
+												class="widget w-fit cursor-pointer rounded-md bg-COLORACCENTD px-2 py-2 text-COLORLIGHT-100 shadow-md hover:opacity-80"
 											>
 												<Fa icon={faPencil} size="0.85x" />
 											</div>
@@ -317,7 +316,7 @@
 									<div class="label w-full text-lg font-semibold">Product description</div>
 									<div class="review-wrap mb-4 w-full rounded-md border border-black">
 										<div
-											class="text-i-combo flex items-center justify-start font-semibold text-COLORWHT"
+											class="text-i-combo flex items-center justify-start font-semibold text-COLORLIGHT-100"
 										>
 											<div class="icon px-2 py-2"><Fa icon={faPencil} size="1.01x" /></div>
 											Type in a description
@@ -328,7 +327,7 @@
 													e.stopPropagation();
 												}}
 												name="description"
-												class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORWHT focus:outline-none"
+												class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORLIGHT-100 focus:outline-none"
 												rows="6"
 												placeholder="Product description goes here. Add as many words as you'd like. Note each word will be counted as a keyword. So be specific, and descriptive at the same time. Products are indexed every {config[
 													'server'
@@ -396,9 +395,9 @@
 									name="category"
 									placeholder="Select a category"
 									value={data ? data.category._id : 'placeholder'}
-									custom_style="bg-transparent border border-COLORWHT mt-1"
+									custom_style="bg-transparent border border-COLORLIGHT-100 mt-1"
 									options={categories}
-									options_color="text-COLORBLK"
+									options_color="text-COLORLIGHT-100"
 								/>
 							</div>
 
@@ -428,8 +427,8 @@
 									<button class="btn_wrp h-fit w-fit" type="submit">
 										<Button
 											icon={faCog}
-											color="COLORWHT"
-											color_t="COLORBLK"
+											color="COLORLIGHT-100"
+											color_t="COLORDARK-100"
 											text="Create variation"
 											custom_style="my-2"
 										/>
@@ -461,8 +460,8 @@
 							<button class="btn_wrp h-fit w-fit" type="submit">
 								<Button
 									icon={faCog}
-									color="COLORWHT"
-									color_t="COLORBLK"
+									color="COLORLIGHT-100"
+									color_t="COLORDARK-100"
 									text={product_id ? 'Apply changes' : 'Create product'}
 									custom_style="my-2"
 								/>
@@ -489,8 +488,8 @@
 												icon={faLock}
 												text="Delete product"
 												color="transparent"
-												color_t="COLORHPK"
-												custom_style="border border-COLORHPK my-2"
+												color_t="COLORACCENTL"
+												custom_style="border border-COLORACCENTL my-2"
 											/>
 										</div>
 									</div>

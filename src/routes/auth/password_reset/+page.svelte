@@ -39,7 +39,7 @@
 					return; /*toast.push(res.message, {
 						dismissable: false,
 						theme: {
-							'--toastBarBackground': 'rgb(var(--COLORRED))'
+							'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 						}
 					});*/
 				} catch {
@@ -51,7 +51,7 @@
 						{
 							dismissable: false,
 							theme: {
-								'--toastBarBackground': 'rgb(var(--COLORRED))'
+								'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 							}
 						}
 					);*/
@@ -95,10 +95,10 @@
 		<Navigation transparency={5} search={true} />
 	</div>
 	<div class="main-content flex h-full items-center justify-center">
-		<div class="rounded-xl border-gray-200 lg:border lg:bg-COLORBLK1 lg:shadow-sm">
+		<div class="rounded-xl border-gray-200 lg:border lg:bg-COLORDARK-75 lg:shadow-sm">
 			<div class="p-4 sm:p-7">
 				<div class="text-center">
-					<div class="mb-4 inline-block rounded-full bg-COLORGRY p-2 text-white">
+					<div class="mb-4 inline-block rounded-full bg-COLORACCENTL p-2 text-white">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							class="h-6 w-6"
@@ -114,10 +114,10 @@
 							/>
 						</svg>
 					</div>
-					<h1 class="block text-2xl font-bold text-COLORWHT">
+					<h1 class="block text-2xl font-bold text-COLORLIGHT-100">
 						{ResetToken ? 'Change your password' : 'Forgot password?'}
 					</h1>
-					<p class="mt-2 text-sm text-COLORWHT1">
+					<p class="mt-2 text-sm text-COLORLIGHT-15">
 						{ResetToken
 							? 'Note that doing this will also sign out all of your devices'
 							: "Don't worry we'll send you reset instructions."}
@@ -141,7 +141,7 @@
 										autocomplete={ResetToken ? 'new-password' : 'off'}
 										minlength="2"
 										placeholder={ResetToken ? 'Typed password is shown in Cleartext' : 'User ID'}
-										class="block w-full rounded-md bg-COLORBLK1 px-4 py-3 text-sm outline-none ring-offset-1 focus:ring-2"
+										class="block w-full rounded-md bg-COLORDARK-75 px-4 py-3 text-sm outline-none ring-offset-1 focus:ring-2"
 										required
 									/>
 									<div
@@ -175,25 +175,25 @@
 							<button
 								type="submit"
 								disabled={resetting_password}
-								class="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-COLORGRY px-4 py-3 text-sm font-semibold text-white transition-all hover:opacity-80 focus:outline-none disabled:opacity-50"
+								class="inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-COLORACCENTL px-4 py-3 text-sm font-semibold text-white transition-all hover:opacity-80 focus:outline-none disabled:opacity-50"
 								>Reset password</button
 							>
 						</div>
 					</form>
 					<!-- /Form -->
 				</div>
-				<p class="mt-3 block w-full divide-gray-300 text-center text-sm text-COLORWHT">
+				<p class="mt-3 block w-full divide-gray-300 text-center text-sm text-COLORLIGHT-100">
 					<!-- <a class="pl-3 text-sm text-gray-600 decoration-2 hover:text-blue-600 hover:underline" href="#"> FAQs </a> -->
 					<span class="inline pr-3">
 						Remember your password?
-						<a class="font-medium text-COLORGRY decoration-2 hover:underline" href="/auth/login">
+						<a class="font-medium text-COLORACCENTL decoration-2 hover:underline" href="/auth/login">
 							Sign in here
 						</a>
 					</span>
 					<span class="hidden lg:inline"><br /></span>
 					You may also
 					<a
-						class="pl-1 text-sm text-COLORGRY decoration-2 hover:underline"
+						class="pl-1 text-sm text-COLORACCENTL decoration-2 hover:underline"
 						href="#contact-support"
 						on:click={() => {
 							window.open(

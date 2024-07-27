@@ -102,7 +102,7 @@
 
 				<div class="content mx-4">
 					<!--- The title -->
-					<div class="my-8 block w-full text-2xl font-semibold text-COLORWHT">
+					<div class="my-8 block w-full text-2xl font-semibold text-COLORLIGHT-100">
 						<div>Product Availability</div>
 						<div class="text-sm font-light">
 							This is the entire menu. Browse through it as you'd like.
@@ -130,7 +130,7 @@
 			</div>
 		{:else}
 			<div
-				class="not-found flex h-full w-full flex-wrap items-center justify-center text-COLORWHT3"
+				class="not-found flex h-full w-full flex-wrap items-center justify-center text-COLORLIGHT-50"
 			>
 				<div class="flex h-fit w-full flex-wrap items-center justify-center">
 					<div class="icon flex h-fit w-full basis-full items-center justify-center">

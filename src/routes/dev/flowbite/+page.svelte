@@ -109,7 +109,7 @@
 	{transitionParams}
 	bind:hidden={hidden1}
 	id="sidebar1"
-	class="bg-COLORBLK p-5 text-COLORWHT"
+	class="bg-COLORDARK-100 p-5 text-COLORLIGHT-100"
 >
 	<div class="metaControls flex pb-4">
 		<Button
@@ -139,7 +139,7 @@
 	{#if user}
 		<div class="my-2 mb-4">
 			<div
-				class="profile-picture flex w-full items-center justify-start space-x-4 rounded-md bg-COLORBLK3 px-2 py-4 text-sm font-medium text-white"
+				class="profile-picture flex w-full items-center justify-start space-x-4 rounded-md bg-COLORDARK-25 px-2 py-4 text-sm font-medium text-white"
 			>
 				<div>
 					<img
@@ -147,7 +147,7 @@
 						title="My profile"
 						alt="{user?.username}'s photo"
 						width="40px"
-						class="cursor-pointer rounded-full border border-COLORWHT bg-COLORBLK1 object-cover hover:opacity-80"
+						class="cursor-pointer rounded-full border border-COLORLIGHT-100 bg-COLORDARK-75 object-cover hover:opacity-80"
 						style="height: 42px; width: 42px;"
 						on:click={async () => {
 							await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
@@ -160,17 +160,17 @@
 	{/if}
 	{#if search}
 		<form
-			class="searchbar flex items-center rounded-sm border border-COLORWHT5 bg-COLORBLK bg-opacity-90 px-4 py-2 text-sm focus:bg-COLORBLK1 active:bg-COLORBLK1 lg:hidden"
+			class="searchbar flex items-center rounded-sm border border-COLORLIGHT-100 bg-COLORDARK-100 bg-opacity-90 px-4 py-2 text-sm focus:bg-COLORDARK-75 active:bg-COLORDARK-75 lg:hidden"
 			action="/product"
 		>
 			<div class="searchicon w-fit">
-				<Fa icon={faSearch} size="1.01x" class="pr-4 text-COLORWHT" />
+				<Fa icon={faSearch} size="1.01x" class="pr-4 text-COLORLIGHT-100" />
 			</div>
 			<input
 				{value}
 				type="text"
 				name="search"
-				class="font-regular w-full bg-transparent px-2 py-1 text-COLORWHT focus:outline-none"
+				class="font-regular w-full bg-transparent px-2 py-1 text-COLORLIGHT-100 focus:outline-none"
 				placeholder="Search for snacks, drinks and lunch"
 			/>
 		</form>
@@ -183,11 +183,11 @@
 			<div class="btn-wrp pl-2" >
 			</div> -->
 			<ButtonGroup class="flex w-full">
-				<Button on:click={() => goto('/auth/login')} class="flex-1 bg-COLORBLK2 text-COLORWHT">
+				<Button on:click={() => goto('/auth/login')} class="flex-1 bg-COLORDARK-50 text-COLORLIGHT-100">
 					<Fa icon={faRightToBracket} class="mr-2" />
 					Log in</Button
 				>
-				<Button on:click={() => goto('/auth/create')} class="flex-1 bg-COLORPNK text-COLORWHT">
+				<Button on:click={() => goto('/auth/create')} class="flex-1 bg-COLORACCENTL text-COLORLIGHT-100">
 					<Fa icon={faGift} class="mr-2" />
 					Sign up</Button
 				>
@@ -197,7 +197,7 @@
 			<div class="title pb-5 font-semibold">My Account</div>
 
 			<Button
-				class="w-full bg-COLORBLK3 text-COLORWHT"
+				class="w-full bg-COLORDARK-25 text-COLORLIGHT-100"
 				on:click={async () => {
 					localStorage.clear();
 					window.location.reload();
@@ -208,7 +208,7 @@
 			>
 
 			<Button
-				class="w-full bg-COLORBLK1 text-COLORWHT"
+				class="w-full bg-COLORDARK-75 text-COLORLIGHT-100"
 				on:click={async () => {
 					await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
 				}}
@@ -235,7 +235,7 @@
 					}}
 				>
 					<Button
-						class="w-full bg-COLORBLK1 font-medium text-COLORWHT lg:justify-start lg:text-left"
+						class="w-full bg-COLORDARK-75 font-medium text-COLORLIGHT-100 lg:justify-start lg:text-left"
 					>
 						<Fa icon={faStar} class="mr-2 hidden lg:block" />
 						{category.name ?? category.alias}</Button
@@ -244,7 +244,7 @@
 			{/each}
 		{:else}
 			<div class="two pt-1">
-				<Button class="w-full bg-COLORBLK4 font-semibold text-COLORWHT">
+				<Button class="w-full bg-COLORDARK-75 font-semibold text-COLORLIGHT-100">
 					<Fa icon={faQuestionCircle} class="mr-2" />
 					Looks like you caught us! Just a moment.</Button
 				>
@@ -253,8 +253,8 @@
 	</div>
 </Drawer>
 
-<header class="border border-COLORBLK3 bg-COLORBLK antialiased bg-opacity-{transparency}">
-	<nav class="bg-opacity-100 px-4 py-2.5 text-COLORWHT opacity-100 lg:px-6">
+<header class="border border-COLORDARK-25 bg-COLORDARK-100 antialiased bg-opacity-{transparency}">
+	<nav class="bg-opacity-100 px-4 py-2.5 text-COLORLIGHT-100 opacity-100 lg:px-6">
 		<div class="flex flex-wrap items-center justify-between">
 			<div class="flex items-center justify-start">
 				<Button
@@ -311,7 +311,7 @@
 							window.location.reload();
 						}}
 						type="button"
-						class="mr-2 hidden items-center justify-center rounded-lg bg-COLORBLK3 px-3 py-1.5 text-xs font-medium text-white hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex"
+						class="mr-2 hidden items-center justify-center rounded-lg bg-COLORDARK-25 px-3 py-1.5 text-xs font-medium text-white hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex"
 						><Fa icon={faPlus} class="mr-4" /> Install app</button
 					>
 				{/if}
@@ -612,7 +612,7 @@
 					</button>
 					<!-- Apps dropdown menu -->
 					<div
-						class="z-50 my-4 hidden max-w-sm list-none divide-y divide-gray-100 overflow-hidden rounded border border-COLORBLK bg-white"
+						class="z-50 my-4 hidden max-w-sm list-none divide-y divide-COLORDARK-50 overflow-hidden rounded border border-COLORDARK-25 bg-COLORDARK-100"
 						on:click={() => {
 							// Let's start a war
 							apps_dropdown.classList.remove('hidden');
@@ -621,14 +621,14 @@
 						bind:this={apps_dropdown}
 					>
 						<div
-							class="block bg-COLORWHT4 px-4 py-2 text-center text-base font-medium text-COLORWHT"
+							class="block bg-COLORDARK-75 px-4 py-2 text-center text-base font-medium text-COLORLIGHT-100"
 						>
 							Quick Access
 						</div>
 						<div class="grid grid-cols-3 gap-4 p-4">
 							<a
 								href="/admin/dashboard"
-								class="group block rounded-lg p-4 text-center hover:bg-gray-100 dark:hover:bg-gray-600"
+								class="group block rounded-lg p-4 text-center hover:bg-COLORDARK-75"
 							>
 								<Fa
 									icon={faCog}
@@ -834,7 +834,7 @@
 					<button
 						type="button"
 						on:click={() => goto('/auth/login')}
-						class="items-center justify-center rounded-lg bg-COLORBLK2 px-3 py-1.5 text-xs font-medium text-COLORWHT hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex lg:px-4 lg:py-2"
+						class="items-center justify-center rounded-lg bg-COLORDARK-50 px-3 py-1.5 text-xs font-medium text-COLORLIGHT-100 hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex lg:px-4 lg:py-2"
 						><Fa icon={faRightToBracket} class="mr-4 hidden lg:block" /> Login</button
 					>
 				{/if}

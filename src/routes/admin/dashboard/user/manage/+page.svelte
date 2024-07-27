@@ -134,7 +134,7 @@
 					toast.push('Staff member must be <b>YES</b> or <b>NO</b>', {
 						dismissable: false,
 						theme: {
-							'--toastBarBackground': 'rgb(var(--COLORRED))'
+							'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 						}
 					});
 				}
@@ -143,7 +143,7 @@
 			toast.push("<b>Retype password</b> and <b>password</b> aren't the same", {
 				dismissable: false,
 				theme: {
-					'--toastBarBackground': 'rgb(var(--COLORRED))'
+					'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 				}
 			});
 		}
@@ -170,8 +170,8 @@
 					<UserBanner
 						user={data}
 						tag
-						tagColor={data?.staff ? 'COLORHPK' : 'COLORGRN2'}
-						tagColor_t={data?.staff ? 'COLORWHT' : 'COLORWHT'}
+						tagColor={data?.staff ? 'COLORACCENTL' : 'COLORACCENTD'}
+						tagColor_t={data?.staff ? 'COLORLIGHT-100' : 'COLORLIGHT-100'}
 						tagText={data?.staff ? 'Admin' : 'User'}
 						description="Token: {data?.token ?? '<b>Redacted</b>'}"
 						editProfilePicture={// Admins only have so much control over users
@@ -183,8 +183,8 @@
 						>
 							<Button
 								icon={faCog}
-								color="COLORBLE"
-								color_t="COLORWHT"
+								color="COLORACCENTD"
+								color_t="COLORDARK-75"
 								text="Edit Account"
 								custom_style="w-full lg:w-fit justify-center lg:justify-start"
 							/>
@@ -195,7 +195,7 @@
 		<div
 			class="editPane flex hidden flex-col lg:flex-row {staff
 				? 'justify-around'
-				: 'justify-start'} w-full bg-COLORBLK1 px-4 py-4"
+				: 'justify-start'} w-full bg-COLORDARK-75 px-4 py-4"
 			bind:this={editPane}
 		>
 			<div class="editGroup flex flex-col px-4 pb-8">
@@ -279,8 +279,8 @@
 					<button class="btn_wrp h-fit w-fit" type="submit">
 						<Button
 							icon={faCog}
-							color="COLORWHT"
-							color_t="COLORBLK"
+							color="COLORLIGHT-100"
+							color_t="COLORDARK-100"
 							text={user_id ? 'Apply changes' : 'Create account'}
 							custom_style="my-2"
 						/>
@@ -316,8 +316,8 @@
 										icon={faLock}
 										text="Invalidate token"
 										color="transparent"
-										color_t="COLORWHT"
-										custom_style="border border-COLORWHT my-2"
+										color_t="COLORLIGHT-100"
+										custom_style="border border-COLORLIGHT-100 my-2"
 									/>
 								</div>
 							</div>
@@ -345,8 +345,8 @@
 										icon={faUserCog}
 										text="{data.staff ? 'Demote' : 'Promote'} user"
 										color="transparent"
-										color_t={data.staff ? 'COLORHPK' : 'COLORWHT'}
-										custom_style="border border-{data.staff ? 'COLORHPK' : 'COLORWHT'} my-2"
+										color_t={data.staff ? 'COLORACCENTL' : 'COLORLIGHT-100'}
+										custom_style="border border-{data.staff ? 'COLORACCENTL' : 'COLORLIGHT-100'} my-2"
 									/>
 								</div>
 							</div>
@@ -374,8 +374,8 @@
 										icon={faLock}
 										text="Trigger verification flow"
 										color="transparent"
-										color_t="COLORHPK"
-										custom_style="border border-COLORHPK my-2"
+										color_t="COLORACCENTL"
+										custom_style="border border-COLORACCENTL my-2"
 									/>
 								</div>
 							</div>
@@ -405,8 +405,8 @@
 										icon={faLock}
 										text="Ban user"
 										color="transparent"
-										color_t="COLORHPK"
-										custom_style="border border-COLORHPK my-2"
+										color_t="COLORACCENTL"
+										custom_style="border border-COLORACCENTL my-2"
 									/>
 								</div>
 							</div>
@@ -434,8 +434,8 @@
 										icon={faLock}
 										text="Lockout"
 										color="transparent"
-										color_t="COLORHPK"
-										custom_style="border border-COLORHPK my-2"
+										color_t="COLORACCENTL"
+										custom_style="border border-COLORACCENTL my-2"
 									/>
 								</div>
 							</div>
@@ -463,8 +463,8 @@
 										icon={faLock}
 										text="Delete account"
 										color="transparent"
-										color_t="COLORHPK"
-										custom_style="border border-COLORHPK my-2"
+										color_t="COLORACCENTL"
+										custom_style="border border-COLORACCENTL my-2"
 									/>
 								</div>
 							</div>

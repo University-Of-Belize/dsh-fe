@@ -150,7 +150,7 @@
 					<!-- Check to see if we're viewing a category -->
 					{#if current_category}
 						<!--- The title -->
-						<div class="my-8 mb-8 block w-full text-2xl font-semibold text-COLORWHT">
+						<div class="my-8 mb-8 block w-full text-2xl font-semibold text-COLORLIGHT-100">
 							<div>{current_category.name.trim() ?? current_category.alias.trim()}</div>
 							<div class="text-sm font-light">
 								{current_category.description.trim()}
@@ -197,7 +197,7 @@
 								</p>
 								<div class="comboBox flex flex-wrap absolute bottom-1">
 									<div
-										class="details font-semibold bg-COLORRED text-COLORWHT button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-4 py-2 items-center text-sm select-none mr-2"
+										class="details font-semibold bg-COLORACCENTL text-COLORLIGHT-100 button w-fit flex rounded-sm hover:bg-opacity-80 cursor-pointer px-4 py-2 items-center text-sm select-none mr-2"
 										on:click={() => {
 											window.location = `/product/${product.slug}`;
 										}}
@@ -206,9 +206,9 @@
 										Details
 									</div>
 
-									<IconButton icon={faShoppingCart} color="COLORYLW" />
+									<IconButton icon={faShoppingCart} color="COLORACCENTL" />
 
-									<IconButton icon={faHeart} color="COLORRED" class="hidden lg:flex" />
+									<IconButton icon={faHeart} color="COLORACCENTL" class="hidden lg:flex" />
 								</div>
 							</div>
 						</div> -->
@@ -219,7 +219,7 @@
 			</div>
 		{:else}
 			<div
-				class="not-found flex h-full w-full flex-wrap items-center justify-center text-COLORWHT3"
+				class="not-found flex h-full w-full flex-wrap items-center justify-center text-COLORLIGHT-50"
 			>
 				<div class="flex h-fit w-full flex-wrap items-center justify-center">
 					<div class="icon flex h-fit w-full basis-full items-center justify-center">

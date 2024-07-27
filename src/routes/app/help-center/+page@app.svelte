@@ -38,11 +38,11 @@
 <div class="content flex w-full flex-1 items-center justify-center">
 	<div class="block p-8 text-left">
 		<div
-			class="title flex h-48 w-full items-center justify-center rounded-md bg-COLORBLK4 pb-5 text-4xl font-semibold"
+			class="title flex h-48 w-full items-center justify-center rounded-md bg-COLORDARK-75 pb-5 text-4xl font-semibold"
 		>
 			<div class="block text-center">
 				<div>Announcements (Beta)</div>
-				<div class="mt-2 text-sm font-light text-COLORWHT1">Find help articles here</div>
+				<div class="mt-2 text-sm font-light text-COLORLIGHT-15">Find help articles here</div>
 			</div>
 		</div>
 		{#if data != undefined}
@@ -56,7 +56,7 @@
 					image="/android-chrome-512x512.png"
 					image_alt="UniFood Mobile App"
 					button_icon={faBookOpenReader}
-					button_color="COLORGRN2"
+					button_color="COLORACCENTD"
 					button_text="Open article"
 					where_to="/app/help-center/{article._id}"
 				/>

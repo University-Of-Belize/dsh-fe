@@ -52,7 +52,7 @@
 <div class="content m-1 flex w-full flex-col items-center justify-center lg:m-4">
 	{#if data}
 		<div
-			class="user_wrap relative flex h-56 w-full items-end justify-center rounded-md bg-COLORBLK2"
+			class="user_wrap relative flex h-56 w-full items-end justify-center rounded-md bg-COLORDARK-50"
 		>
 			<img
 				class="absolute h-full w-full rounded-md object-cover"
@@ -77,8 +77,8 @@
 						>
 							<Button
 								icon={faCog}
-								color="COLORBLE"
-								color_t="COLORWHT"
+								color="COLORACCENTD"
+								color_t="COLORDARK-75"
 								text="Edit Account"
 								custom_style="w-full lg:w-fit justify-center lg:justify-start"
 							/>
@@ -100,8 +100,8 @@
 						>
 							<Button
 								icon={faMessage}
-								color="COLORBLK1"
-								color_t="COLORWHT"
+								color="COLORDARK-75"
+								color_t="COLORLIGHT-100"
 								text="Message"
 								custom_style="w-full lg:w-fit justify-center lg:justify-start"
 							/>
@@ -124,9 +124,9 @@
 				<span>ecent activity</span>
 			</div>
 			<div
-				class="relative mb-10 mt-6 flex h-full flex-col overflow-hidden rounded-2xl bg-COLORBLK text-COLORWHT shadow-lg ring-1 ring-COLORBLK1"
+				class="relative mb-10 mt-6 flex h-full flex-col overflow-hidden rounded-2xl bg-COLORDARK-100 text-COLORLIGHT-100 shadow-lg ring-1 ring-COLORDARK-75"
 			>
-				<div class="border-b border-COLORBLK1 p-6">
+				<div class="border-b border-COLORDARK-75 p-6">
 					<h6 class="mb-2 text-base font-semibold">All recent reviews</h6>
 					<p class="mb-2 text-sm font-light">
 						{#if reviews}
@@ -136,7 +136,7 @@
 				</div>
 				<div class="flex-auto p-6">
 					<div class="relative flex flex-col justify-center">
-						<div class="absolute left-4 h-full border-r-2 border-COLORBLK1"></div>
+						<div class="absolute left-4 h-full border-r-2 border-COLORDARK-75"></div>
 						{#if reviews}
 							{#if reviews.length === 0}
 								<div class="relative mb-4">
@@ -144,8 +144,8 @@
 										class="absolute inline-flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 object-cover text-center text-base font-semibold text-white shadow"
 									></span>
 									<div class="ml-12 w-auto pt-1">
-										<h6 class="text-sm font-semibold text-COLORWHT">No reviews</h6>
-										<p class="mt-1 text-xs text-COLORWHT1">
+										<h6 class="text-sm font-semibold text-COLORLIGHT-100">No reviews</h6>
+										<p class="mt-1 text-xs text-COLORLIGHT-15">
 											@{data?.username} has yet to post their first review
 										</p>
 									</div>
@@ -160,11 +160,11 @@
 										/>
 										<div class="ml-12 w-auto pt-1">
 											<a href="/product/{review.product.slug}#{review._id}" class="w-fit"
-												><h6 class="text-sm font-semibold text-COLORWHT hover:underline">
+												><h6 class="text-sm font-semibold text-COLORLIGHT-100 hover:underline">
 													{review.product.productName}
 												</h6></a
 											>
-											<p class="mt-1 text-xs text-COLORWHT1">"{review.content}"</p>
+											<p class="mt-1 text-xs text-COLORLIGHT-15">"{review.content}"</p>
 										</div>
 									</div>
 								{/if}

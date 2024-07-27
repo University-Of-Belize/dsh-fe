@@ -70,10 +70,10 @@
 	<title>UniFood | Super Dashboard</title>
 </svelte:head>
 
-<main class="block h-full w-full bg-COLORBLK1 px-6 text-COLORWHT">
-	<div class="navbar mb-6 flex space-x-2 bg-COLORBLK py-1 text-sm">
-		<button class="rounded-md px-2 py-2 hover:bg-COLORBLK1"> Overview </button>
-		<button class="rounded-md px-2 py-2 hover:bg-COLORBLK1"> Analytics </button>
+<main class="block h-full w-full bg-COLORDARK-75 px-6 text-COLORLIGHT-100">
+	<div class="navbar mb-6 flex space-x-2 bg-COLORDARK-100 py-1 text-sm">
+		<button class="rounded-md px-2 py-2 hover:bg-COLORDARK-75"> Overview </button>
+		<button class="rounded-md px-2 py-2 hover:bg-COLORDARK-75"> Analytics </button>
 	</div>
 
 	<div class="dashboard flex w-full flex-wrap">

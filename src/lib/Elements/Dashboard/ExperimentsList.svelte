@@ -71,8 +71,8 @@
 			>
 				<Button
 					color="transparent"
-					custom_style="border border-COLORHPK"
-					color_t="COLORHPK"
+					custom_style="border border-COLORACCENTL"
+					color_t="COLORACCENTL"
 					text="DEACTIVATE"
 				/>
 			</div>
@@ -89,8 +89,8 @@
 			>
 				<Button
 					color="transparent"
-					custom_style="border border-COLORGRN1"
-					color_t="COLORGRN"
+					custom_style="border border-COLORACCENTD"
+					color_t="COLORACCENTD"
 					text="ACTIVATE"
 				/>
 			</div>
@@ -118,8 +118,8 @@
 			>
 				<Button
 					color="transparent"
-					custom_style="border border-COLORHPK"
-					color_t="COLORHPK"
+					custom_style="border border-COLORACCENTL"
+					color_t="COLORACCENTL"
 					text="DEACTIVATE"
 				/>
 			</div>
@@ -136,8 +136,8 @@
 			>
 				<Button
 					color="transparent"
-					custom_style="border border-COLORGRN1"
-					color_t="COLORGRN"
+					custom_style="border border-COLORACCENTD"
+					color_t="COLORACCENTD"
 					text="ACTIVATE"
 				/>
 			</div>
@@ -166,8 +166,8 @@
 				>
 					<Button
 						color="transparent"
-						custom_style="border border-COLORHPK"
-						color_t="COLORHPK"
+						custom_style="border border-COLORACCENTL"
+						color_t="COLORACCENTL"
 						text="DEACTIVATE"
 					/>
 				</div>
@@ -184,8 +184,8 @@
 				>
 					<Button
 						color="transparent"
-						custom_style="border border-COLORGRN1"
-						color_t="COLORGRN"
+						custom_style="border border-COLORACCENTD"
+						color_t="COLORACCENTD"
 						text="ACTIVATE"
 					/>
 				</div>
@@ -214,8 +214,8 @@
 			>
 				<Button
 					color="transparent"
-					custom_style="border border-COLORHPK"
-					color_t="COLORHPK"
+					custom_style="border border-COLORACCENTL"
+					color_t="COLORACCENTL"
 					text="DEACTIVATE"
 				/>
 			</div>
@@ -232,8 +232,8 @@
 			>
 				<Button
 					color="transparent"
-					custom_style="border border-COLORGRN1"
-					color_t="COLORGRN"
+					custom_style="border border-COLORACCENTD"
+					color_t="COLORACCENTD"
 					text="ACTIVATE"
 				/>
 			</div>
@@ -262,8 +262,8 @@
 			>
 				<Button
 					color="transparent"
-					custom_style="border border-COLORHPK"
-					color_t="COLORHPK"
+					custom_style="border border-COLORACCENTL"
+					color_t="COLORACCENTL"
 					text="DEACTIVATE"
 				/>
 			</div>
@@ -281,8 +281,8 @@
 			>
 				<Button
 					color="transparent"
-					custom_style="border border-COLORGRN1"
-					color_t="COLORGRN"
+					custom_style="border border-COLORACCENTD"
+					color_t="COLORACCENTD"
 					text="ACTIVATE"
 				/>
 			</div>
@@ -307,8 +307,8 @@
 			>
 				<Button
 					color="transparent"
-					custom_style="border border-COLORHPK"
-					color_t="COLORHPK"
+					custom_style="border border-COLORACCENTL"
+					color_t="COLORACCENTL"
 					text="DEACTIVATE"
 				/>
 			</div>
@@ -326,8 +326,8 @@
 			>
 				<Button
 					color="transparent"
-					custom_style="border border-COLORGRN1"
-					color_t="COLORGRN"
+					custom_style="border border-COLORACCENTD"
+					color_t="COLORACCENTD"
 					text="ACTIVATE"
 				/>
 			</div>

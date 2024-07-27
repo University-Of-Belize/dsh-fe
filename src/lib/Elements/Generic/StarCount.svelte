@@ -1,7 +1,7 @@
 <script lang="ts">
+	import type { Product } from '$lib/types/Product.ts';
 	import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import type { Product } from '$lib/types/Product.ts';
 	export let reviews: Product['reviews'] = [];
 	function calculateRating(reviews: Product['reviews'][], count: boolean = false) {
 		let sum = 0;
@@ -18,7 +18,7 @@
 	}
 </script>
 
-<div class="flex items-center justify-start text-lg text-COLORYLW">
+<div class="flex items-center justify-start text-lg text-COLORACCENTL">
 	<!-- Don't ask. It's copilot-->
 	<div class="rating-as-text mt-1 pr-2">
 		{calculateRating(reviews)}

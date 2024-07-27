@@ -173,7 +173,7 @@
 				{
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': 'rgb(var(--COLORRED))'
+						'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 					}
 				}
 			);
@@ -196,7 +196,7 @@
 		<Navigation transparency={5} search={true} />
 	</div>
 	{#if $product}
-		<section class="py-12 text-COLORWHT sm:py-16">
+		<section class="py-12 text-COLORLIGHT-100 sm:py-16">
 			<div class="container mx-auto px-4">
 				<!-- <nav class="flex">
 			<ol role="list" class="flex items-center">
@@ -309,7 +309,7 @@
 														class="peer sr-only cursor-pointer"
 													/>
 													<p
-														class="rounded-lg border border-COLORWHT px-6 py-2 font-bold peer-checked:bg-COLORWHT peer-checked:text-COLORBLK"
+														class="rounded-lg border border-COLORLIGHT-100 px-6 py-2 font-bold peer-checked:bg-COLORLIGHT-100 peer-checked:text-COLORLIGHT-100"
 													>
 														{v.Name}
 													</p>
@@ -322,7 +322,7 @@
 						{/if}
 
 						<div
-							class="mt-10 flex flex-col items-center justify-between space-y-4 border-y border-COLORWHT py-4 sm:flex-row sm:space-y-0"
+							class="mt-10 flex flex-col items-center justify-between space-y-4 border-y border-COLORLIGHT-100 py-4 sm:flex-row sm:space-y-0"
 						>
 							<div class="flex items-end">
 								<h1 class="text-3xl font-bold">
@@ -372,15 +372,15 @@
 										on:click={() =>
 											goto(`/admin/dashboard/product/manage?product_id=${$product?._id}`)}
 									>
-										<IconButton icon={faPencil} color="COLORBLK4" />
+										<IconButton icon={faPencil} color=COLORDARK-75 />
 									</div>{/if}
 							</div>
 						</div>
 
 						<ul class="mt-8 space-y-2">
-							<li class="flex items-center text-left text-sm font-medium text-COLORWHT">
+							<li class="flex items-center text-left text-sm font-medium text-COLORLIGHT-100">
 								<svg
-									class="mr-2 block h-5 w-5 align-middle text-COLORWHT1"
+									class="mr-2 block h-5 w-5 align-middle text-COLORLIGHT-15"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="none"
 									viewBox="0 0 24 24"
@@ -400,7 +400,7 @@
 					</div>
 
 					<div class="lg:col-span-3">
-						<div class="border-b border-COLORWHT">
+						<div class="border-b border-COLORLIGHT-100">
 							<nav class="flex gap-0.5">
 								<a
 									href="#"
@@ -410,14 +410,14 @@
 										productDescription.classList.remove('hidden');
 										productReviews.classList.add('hidden');
 
-										reviewPaneSelection.classList.remove('bg-COLORBLK1');
+										reviewPaneSelection.classList.remove('bg-COLORDARK-75');
 										reviewPaneSelection.classList.add('border-transparent');
 
 										descriptionPaneSelection.classList.remove('border-transparent');
-										descriptionPaneSelection.classList.add('bg-COLORBLK1');
+										descriptionPaneSelection.classList.add('bg-COLORDARK-75');
 									}}
 									title=""
-									class="border-b-2 border-COLORWHT1 border-transparent px-4 py-4 text-sm font-medium hover:border-COLORWHT hover:bg-COLORBLK1 hover:opacity-80"
+									class="border-b-2 border-COLORLIGHT-15 border-transparent px-4 py-4 text-sm font-medium hover:border-COLORLIGHT-100 hover:bg-COLORDARK-75 hover:opacity-80"
 								>
 									Description
 								</a>
@@ -430,14 +430,14 @@
 										productDescription.classList.add('hidden');
 										productReviews.classList.remove('hidden');
 
-										descriptionPaneSelection.classList.remove('bg-COLORBLK1');
+										descriptionPaneSelection.classList.remove('bg-COLORDARK-75');
 										descriptionPaneSelection.classList.add('border-transparent');
 
 										reviewPaneSelection.classList.remove('border-transparent');
-										reviewPaneSelection.classList.add('bg-COLORBLK1');
+										reviewPaneSelection.classList.add('bg-COLORDARK-75');
 									}}
 									title=""
-									class="inline-flex items-center border-b-2 border-COLORWHT1 bg-COLORBLK1 px-4 py-4 text-sm font-medium hover:bg-COLORBLK1"
+									class="inline-flex items-center border-b-2 border-COLORLIGHT-15 bg-COLORDARK-75 px-4 py-4 text-sm font-medium hover:bg-COLORDARK-75"
 								>
 									Reviews
 								</a>
@@ -452,19 +452,19 @@
 						</div>
 						<div bind:this={productReviews} class="mt-8 flow-root overflow-clip sm:mt-12">
 							{#if $product}
-								<div class="pt-2 text-4xl font-semibold text-COLORWHT">Reviews</div>
+								<div class="pt-2 text-4xl font-semibold text-COLORLIGHT-100">Reviews</div>
 								<div class="review-graph flex w-full py-2 pb-2">
 									<div class="rating">
-										<div class="rating-as-text text-6xl font-bold text-COLORWHT1">
+										<div class="rating-as-text text-6xl font-bold text-COLORLIGHT-15">
 											{calculateRating($product.reviews)}
 										</div>
 										<div
-											class="rating-as-stars flex w-full items-center justify-start pl-1 text-xl text-COLORYLW"
+											class="rating-as-stars flex w-full items-center justify-start pl-1 text-xl text-COLORACCENTL"
 										>
 											<StarCount reviews={$product.reviews} />
 										</div>
 										<div
-											class="rating-as-text flex w-full items-center justify-start py-2 pl-1 text-COLORWHT3"
+											class="rating-as-text flex w-full items-center justify-start py-2 pl-1 text-COLORLIGHT-50"
 										>
 											{calculateRating($product.reviews, true)} Reviews
 										</div>
@@ -472,10 +472,10 @@
 									<div class="graphed-reviews hidden w-full flex-1 px-8 lg:block lg:flex-none">
 										{#each Array.from({ length: 5 }, (_, i) => i + 1) as rating}
 											<div class="flex items-center justify-between py-1">
-												<div class="px-2 text-COLORWHT">{rating}</div>
-												<div class="h-2 w-full rounded-sm bg-COLORBLK1">
+												<div class="px-2 text-COLORLIGHT-100">{rating}</div>
+												<div class="h-2 w-full rounded-sm bg-COLORDARK-75">
 													<div
-														class="h-full rounded-sm bg-COLORHPK"
+														class="h-full rounded-sm bg-COLORACCENTL"
 														style="width: {getPercentage($product.reviews, rating)}%"
 													/>
 												</div>
@@ -490,7 +490,7 @@
 									{#each $product.reviews as review}
 										{#if !review.hidden}
 											<div
-												class="review my-4 rounded-md bg-COLORBLK2 bg-opacity-50 px-4 py-2"
+												class="review my-4 rounded-md bg-COLORDARK-50 bg-opacity-50 px-4 py-2"
 												id={review._id}
 											>
 												<div class="flex bg-opacity-100">
@@ -506,13 +506,13 @@
 															style="width: 50px; height: 50px;"
 														/>
 													</div>
-													<div class="review-content text-COLORWHT">
+													<div class="review-content text-COLORLIGHT-100">
 														<div class="flex text-lg font-semibold">
 															<a href="/app/space/{review.reviewer?._id}" class="hover:underline"
 																><span>{review.reviewer?.username || 'Anonymous'}</span></a
 															>
 															<div
-																class="starcount flex items-center justify-center px-2 text-COLORYLW"
+																class="starcount flex items-center justify-center px-2 text-COLORACCENTL"
 															>
 																<!-- Copilot Logic-->
 																{#each Array.from({ length: 5 }, (_, i) => i) as _}
@@ -526,15 +526,15 @@
 																{/each}
 															</div>
 														</div>
-														<div class="text-md font-light text-COLORWHT1">
+														<div class="text-md font-light text-COLORLIGHT-15">
 															{@html escapeHtml(review.content).replace(/\n/g, '<br>')}
 														</div>
 														{#if JSON.parse(localStorage.staff ?? false)}
 															<div
-																class="actions my-4 flex flex-1 items-center justify-start text-COLORWHT lg:justify-end"
+																class="actions my-4 flex flex-1 items-center justify-start text-COLORLIGHT-100 lg:justify-end"
 															>
 																<div class="controls flex space-x-2">
-																	<div class="stub hidden bg-COLORRED" />
+																	<div class="stub hidden bg-COLORACCENTL" />
 																	<div
 																		class="edit-wrap h-fit w-fit"
 																		on:click={() => {
@@ -542,10 +542,10 @@
 																			try {
 																				document
 																					.getElementById(review._id)
-																					.classList.add('bg-COLORRED');
+																					.classList.add('bg-COLORACCENTL');
 																				document
 																					.getElementById(review._id)
-																					.classList.remove('bg-COLORWHT3');
+																					.classList.remove('bg-COLORLIGHT-50');
 																			} catch (error) {
 																				console.warn(
 																					'[DELETE_REVIEW]: Failed to update UI state.',
@@ -560,8 +560,8 @@
 																		<Button
 																			icon={faTrash}
 																			color="transparent"
-																			custom_style="border border-COLORHPK"
-																			color_t="COLORHPK"
+																			custom_style="border border-COLORACCENTL"
+																			color_t="COLORACCENTL"
 																			text="Delete review"
 																		/>
 																	</div>
@@ -579,8 +579,8 @@
 																	>
 																		<Button
 																			icon={faLink}
-																			color="COLORGRN2"
-																			color_t="COLORWHT"
+																			color="COLORACCENTD"
+																			color_t="COLORLIGHT-100"
 																			text="Copy link to review"
 																		/>
 																	</div>
@@ -609,13 +609,13 @@
 												/>
 											</div>
 											<form
-												class="review-content h-full w-full rounded-md px-1 py-1 text-COLORWHT"
+												class="review-content h-full w-full rounded-md px-1 py-1 text-COLORLIGHT-100"
 												action="#"
 												on:submit={(event) => handleSubmit(event)}
 											>
-												<div class="review-wrap mb-4 rounded-md border border-COLORBLE">
+												<div class="review-wrap mb-4 rounded-md border border-COLORACCENTL">
 													<div
-														class="text-i-combo flex items-center justify-start font-semibold text-COLORGRY"
+														class="text-i-combo flex items-center justify-start font-semibold text-COLORACCENTL"
 													>
 														<div class="icon px-2 py-2"><Fa icon={faPencil} size="1.01x" /></div>
 														Write a review...
@@ -623,7 +623,7 @@
 													<textarea
 														bind:this={newReviewContent}
 														name="review"
-														class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORWHT1 focus:outline-none"
+														class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORLIGHT-15 focus:outline-none"
 														rows="6"
 														placeholder="What's on your mind?"
 													/>
@@ -633,7 +633,7 @@
 												>
 													{#each [5, 4, 3, 2, 1] as value}
 														<div
-															class="star flex items-center justify-center text-COLORYLW hover:opacity-80"
+															class="star flex items-center justify-center text-COLORACCENTL hover:opacity-80"
 														>
 															<div class="star-wrapper relative">
 																<input
@@ -659,8 +659,8 @@
 													><Button
 														icon={faCog}
 														text="Apply Changes"
-														color="COLORGRN2"
-														color_t="COLORWHT"
+														color="COLORACCENTD"
+														color_t="COLORLIGHT-100"
 													/></button
 												>
 											</form>
@@ -685,7 +685,7 @@
 	}
 
 	.star-rating .star-wrapper label {
-		color: rgb(var(--COLORYLW));
+		color: rgb(var(--COLORACCENTL));
 		opacity: 0.5;
 	}
 	.star-rating .star-wrapper label.active {

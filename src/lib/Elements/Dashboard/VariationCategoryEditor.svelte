@@ -7,8 +7,8 @@
 	import type { VariationData } from '$lib/types/Variation';
 	import { faSortAlphaAsc } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
-	import TextInput from '../Inputs/TextInput.svelte';
 	import { writable, type Writable } from 'svelte/store';
+	import TextInput from '../Inputs/TextInput.svelte';
 	let productVariations: Writable<VariationData> = writable() as Writable<VariationData>; // Variation data
 	export { productVariations as variations };
 	let debounceTimeout1: NodeJS.Timeout;
@@ -21,7 +21,7 @@
 			<div class="mt-8 flex text-base">
 				<span>{$variation.Name}</span>
 				<span
-					class="ml-2 flex h-4 w-4 cursor-pointer items-center justify-center rounded-full bg-COLORBLK p-3 text-sm font-light text-COLORWHT hover:opacity-80"
+					class="ml-2 flex h-4 w-4 cursor-pointer items-center justify-center rounded-full bg-COLORDARK-100 p-3 text-sm font-light text-COLORLIGHT-100 hover:opacity-80"
 					on:click={async () => {
 						const errored = await deleteCategoryVariation($variation._id);
 						if (!errored) {
@@ -37,11 +37,11 @@
 					{#if v.VCategory_id.trim() === $variation._id.trim()}
 						<div
 							id={v._id}
-							class="flex cursor-pointer items-center justify-center rounded-lg border border-COLORWHT px-6 py-2 font-bold text-COLORWHT"
+							class="flex cursor-pointer items-center justify-center rounded-lg border border-COLORLIGHT-100 px-6 py-2 font-bold text-COLORLIGHT-100"
 						>
 							<span>{v.Name}</span>
 							<span
-								class="ml-2 flex h-4 w-4 cursor-pointer items-center justify-center rounded-full bg-COLORBLK p-3 text-sm font-light text-COLORWHT hover:opacity-80"
+								class="ml-2 flex h-4 w-4 cursor-pointer items-center justify-center rounded-full bg-COLORDARK-100 p-3 text-sm font-light text-COLORLIGHT-100 hover:opacity-80"
 								on:click={async () => {
 									const errored = await deleteVariation(v._id);
 									if (!errored) {

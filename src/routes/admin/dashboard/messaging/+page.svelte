@@ -52,7 +52,7 @@
 		<div class="flex items-center justify-end">
 			<div class="flex flex-col items-end space-y-2">
 				<div class="btn_wrp mt-4 lg:mt-0" on:click={() => goto('/admin/dashboard/messaging/new')}>
-					<Button color="COLORBLK1" color_t="COLORWHT" text="New message" icon={faPlus} />
+					<Button color="COLORDARK-75" color_t="COLORLIGHT-100" text="New message" icon={faPlus} />
 				</div>
 			</div>
 		</div>
@@ -77,8 +77,8 @@
 										<Button
 											icon={faPaperPlane}
 											color="transparent"
-											custom_style="border border-COLORWHT"
-											color_t="COLORWHT"
+											custom_style="border border-COLORLIGHT-100"
+											color_t="COLORLIGHT-100"
 											text="Go to channel"
 										/>
 									</div></a

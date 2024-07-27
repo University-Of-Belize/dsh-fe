@@ -11,31 +11,31 @@
 <span class="stub block inline flex hidden lg:hidden"></span>
 {#if !nomargin}
 	<form
-		class="searchbar mx-8 flex flex-1 items-center rounded-sm border border-COLORWHT5 bg-COLORBLK bg-opacity-90 px-4 py-2 text-sm focus:bg-COLORBLK1 active:bg-COLORBLK1 {class_}"
+		class="searchbar mx-8 flex flex-1 items-center rounded-sm border border-COLORLIGHT-100 bg-COLORDARK-100 bg-opacity-90 px-4 py-2 text-sm focus:bg-COLORDARK-75 active:bg-COLORDARK-75 {class_}"
 		action={toUrl ?? '/product'}
 	>
 		<div class="searchicon w-fit">
-			<Fa icon={faSearch} size="1.01x" class="pr-4 text-COLORWHT" />
+			<Fa icon={faSearch} size="1.01x" class="pr-4 text-COLORLIGHT-100" />
 		</div>
 		<input
 			type="text"
 			name="search"
-			class="font-regular w-full border-0 bg-transparent px-2 py-1 text-COLORWHT outline-0 focus:border-0 focus:shadow-none focus:outline-none active:border-0 active:shadow-none active:outline-0 active:ring-0"
+			class="font-regular w-full border-0 bg-transparent px-2 py-1 text-COLORLIGHT-100 outline-0 focus:border-0 focus:shadow-none focus:outline-none active:border-0 active:shadow-none active:outline-0 active:ring-0"
 			placeholder={placeholder ?? 'Search for something else?'}
 		/>
 	</form>
 {:else}
 	<form
-		class="searchbar flex flex-1 items-center rounded-sm border border-COLORWHT5 bg-COLORBLK bg-opacity-90 px-4 py-2 text-sm focus:bg-COLORBLK1 active:bg-COLORBLK1"
+		class="searchbar flex flex-1 items-center rounded-sm border border-COLORLIGHT-100 bg-COLORDARK-100 bg-opacity-90 px-4 py-2 text-sm focus:bg-COLORDARK-75 active:bg-COLORDARK-75"
 		action={toUrl ?? '/product'}
 	>
 		<div class="searchicon w-fit">
-			<Fa icon={faSearch} size="1.01x" class="pr-4 text-COLORWHT" />
+			<Fa icon={faSearch} size="1.01x" class="pr-4 text-COLORLIGHT-100" />
 		</div>
 		<input
 			type="text"
 			name="search"
-			class="font-regular w-full border-0 bg-transparent px-2 py-1 text-COLORWHT outline-0 focus:border-0 focus:shadow-none focus:outline-none active:border-0 active:shadow-none active:outline-0 active:ring-0"
+			class="font-regular w-full border-0 bg-transparent px-2 py-1 text-COLORLIGHT-100 outline-0 focus:border-0 focus:shadow-none focus:outline-none active:border-0 active:shadow-none active:outline-0 active:ring-0"
 			placeholder={placeholder ?? 'Search for something else?'}
 		/>
 	</form>

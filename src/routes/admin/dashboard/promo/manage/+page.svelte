@@ -140,7 +140,7 @@
 				</div>
 			{/if}{/if}
 		<div
-			class="editPane flex w-full flex-col justify-around bg-COLORBLK1 px-4 py-4 lg:flex-row"
+			class="editPane flex w-full flex-col justify-around bg-COLORDARK-75 px-4 py-4 lg:flex-row"
 			bind:this={editPane}
 		>
 			<div class="editGroup flex flex-col px-4 pb-8">
@@ -172,14 +172,14 @@
 					</div>
 					<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
 						<div class="label w-full text-lg font-light">Description</div>
-						<div class="review-wrap mb-4 mt-1 w-full rounded-md border border-COLORWHT">
-							<div class="text-i-combo flex items-center justify-start font-semibold text-COLORWHT">
+						<div class="review-wrap mb-4 mt-1 w-full rounded-md border border-COLORLIGHT-100">
+							<div class="text-i-combo flex items-center justify-start font-semibold text-COLORLIGHT-100">
 								<div class="icon px-2 py-2"><Fa icon={faPencil} size="1.01x" /></div>
 								Type in a description
 							</div>
 							<textarea
 								name="description"
-								class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORWHT focus:outline-none"
+								class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORLIGHT-100 focus:outline-none"
 								rows="6"
 								placeholder="Promotion description goes here"
 								value={data ? data.description : ''}
@@ -222,8 +222,8 @@
 					<button class="btn_wrp h-fit w-fit" type="submit">
 						<Button
 							icon={faCog}
-							color="COLORWHT"
-							color_t="COLORBLK"
+							color="COLORLIGHT-100"
+							color_t="COLORDARK-100"
 							text={promo_id ? 'Apply changes' : 'Create promotion'}
 							custom_style="my-2"
 						/>
@@ -248,8 +248,8 @@
 										icon={faLock}
 										text="Delete promo"
 										color="transparent"
-										color_t="COLORHPK"
-										custom_style="border border-COLORHPK my-2"
+										color_t="COLORACCENTL"
+										custom_style="border border-COLORACCENTL my-2"
 									/>
 								</div>
 							</div>

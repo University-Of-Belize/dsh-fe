@@ -6,7 +6,7 @@
 	export let html: boolean = false;
 </script>
 
-<div class="footer block w-full bg-COLORBLK5 text-center text-COLORWHT">
+<div class="footer block w-full bg-COLORDARK-75 text-center text-COLORLIGHT-100">
 	<div class="chunk-one flex items-center justify-center py-14">
 		<div class="block">
 			<div class="branding-text w-full items-center justify-center text-4xl font-semibold">

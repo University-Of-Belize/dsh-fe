@@ -80,7 +80,7 @@
 					toast.push(`${json.message}`, {
 						dismissable: false,
 						theme: {
-							'--toastBarBackground': 'rgb(var(--COLORRED))'
+							'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 						}
 					});
 					error_message.innerText = blocked_message;
@@ -130,7 +130,7 @@
 				return toast.push(`${json.message}`, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': 'rgb(var(--COLORRED))'
+						'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 					}
 				});
 			}
@@ -155,7 +155,7 @@
 			toast.push(`${error.message}. Try again later.`, {
 				dismissable: false,
 				theme: {
-					'--toastBarBackground': 'rgb(var(--COLORRED))'
+					'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 				}
 			});
 			console.log(error);
@@ -300,21 +300,21 @@
 	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} />
 	</div>
-	<div class="main-content flex h-full flex-wrap items-center justify-center text-COLORWHT">
+	<div class="main-content flex h-full flex-wrap items-center justify-center text-COLORLIGHT-100">
 		<div class="flex w-full flex-col md:w-1/2">
 			<div
 				class="mx-auto my-auto flex flex-col justify-center pt-8 md:justify-start md:px-6 md:pt-0 lg:w-[28rem]"
 			>
 				<p class="text-left text-3xl font-bold">Welcome back</p>
-				<p class="mt-2 text-left text-COLORWHT1">Please enter your credentials.</p>
+				<p class="mt-2 text-left text-COLORLIGHT-15">Please enter your credentials.</p>
 				<!--
 				<button
-					class="-2 mt-8 flex items-center justify-center rounded-md border bg-COLORBLK px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-COLORWHT1 hover:bg-COLORBLK2 hover:text-white focus:ring-2"
+					class="-2 mt-8 flex items-center justify-center rounded-md border bg-COLORDARK-100 px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-COLORLIGHT-15 hover:bg-COLORDARK-50 hover:text-white focus:ring-2"
 					><img class="mr-2 h-5" src="/icons/google-icon.svg" alt /> Log in with Google</button
 				>
-				<div class="relative mt-8 flex h-px place-items-center bg-COLORWHT">
+				<div class="relative mt-8 flex h-px place-items-center bg-COLORLIGHT-100">
 					<div
-						class="absolute left-1/2 h-6 w-14 -translate-x-1/2 bg-COLORWHT text-center text-sm text-COLORBLK"
+						class="absolute left-1/2 h-6 w-14 -translate-x-1/2 bg-COLORLIGHT-100 text-center text-sm text-COLORLIGHT-100"
 					>
 						or
 					</div>
@@ -356,7 +356,7 @@
 								Forgot Password?
 								<a
 									href="/auth/password_reset"
-									class="forgot-password font-semibold text-COLORWHT underline underline-offset-4"
+									class="forgot-password font-semibold text-COLORLIGHT-100 underline underline-offset-4"
 								>
 									Reset it now.
 								</a>
@@ -366,14 +366,14 @@
 					<button
 						type="submit"
 						title={logging_in ? 'Please wait for the request to complete' : ''}
-						class="w-full rounded-lg bg-COLORGRY px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2 disabled:opacity-50"
+						class="w-full rounded-lg bg-COLORACCENTL px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2 disabled:opacity-50"
 						disabled={logging_in}>Log in</button
 					>
 				</form>
 				<div class="pt-12 text-center">
 					<p class="whitespace-nowrap text-gray-600">
 						Don't have an account?
-						<a href="/auth/create" class="font-semibold text-COLORWHT underline underline-offset-4"
+						<a href="/auth/create" class="font-semibold text-COLORLIGHT-100 underline underline-offset-4"
 							>Sign up for free.</a
 						>
 					</p>

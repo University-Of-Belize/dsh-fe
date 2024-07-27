@@ -47,7 +47,7 @@
 		<div class="flex flex-1 items-center justify-end">
 			<div class="flex flex-col items-end space-y-2">
 				<div class="btn_wrp" on:click={() => goto('/admin/dashboard/product/manage')}>
-					<Button color="COLORBLK1" color_t="COLORWHT" text="New product" icon={faPlus} />
+					<Button color="COLORDARK-75" color_t="COLORLIGHT-100" text="New product" icon={faPlus} />
 				</div>
 			</div>
 		</div>
@@ -74,8 +74,8 @@
 								<Button
 									icon={faTrash}
 									color="transparent"
-									custom_style="border border-COLORHPK"
-									color_t="COLORHPK"
+									custom_style="border border-COLORACCENTL"
+									color_t="COLORACCENTL"
 									text="Delete product"
 								/>
 							</div>
@@ -84,7 +84,7 @@
 									class="edit-wrap h-fit w-fit"
 									on:click={() => goto(`/product/${product.slug}`)}
 								>
-									<Button icon={faCog} color="COLORWHT" color_t="COLORBLK" text="Go to listing" />
+									<Button icon={faCog} color="COLORLIGHT-100" color_t="COLORDARK-75" text="Go to listing" />
 								</div></a
 							>
 						</div>

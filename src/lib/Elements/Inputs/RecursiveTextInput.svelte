@@ -60,10 +60,10 @@
 	aria-disabled={disabled}
 	title={disabled ? disabled_text : ''}
 	style={container_style}
-	class="textinput_generic mt-2 flex flex-1 items-center rounded-md border border-COLORWHT bg-COLORBLK2 text-sm aria-disabled:cursor-not-allowed aria-disabled:opacity-40 {custom_style}"
+	class="textinput_generic mt-2 flex flex-1 items-center rounded-md border border-COLORLIGHT-100 bg-COLORDARK-50 text-sm aria-disabled:cursor-not-allowed aria-disabled:opacity-40 {custom_style}"
 >
 	<!-- <div class="icon w-fit">
-		<Fa {icon} size="1.25x" class="pr-4 text-COLORWHT" />
+		<Fa {icon} size="1.25x" class="pr-4 text-COLORLIGHT-100" />
 	</div>
 	<input
 		bind:this={inputBox}
@@ -74,7 +74,7 @@
 		{name}
                 {max}
                 {min}
-		class="w-full border-0 bg-transparent px-2 py-1 font-medium text-COLORWHT focus:outline-none active:outline-none disabled:cursor-not-allowed disabled:text-COLORWHT5 {class_}"
+		class="w-full border-0 bg-transparent px-2 py-1 font-medium text-COLORLIGHT-100 focus:outline-none active:outline-none disabled:cursor-not-allowed disabled:text-COLORLIGHT-100 {class_}"
 		{placeholder}
 		{required}
 		{disabled}
@@ -94,9 +94,9 @@
 		{required}
 		{disabled}
 		{autocomplete}
-		class="border-0 bg-transparent text-COLORWHT outline-none placeholder:text-COLORWHT3 focus:border-0 focus:outline-0 focus:ring-0 disabled:cursor-not-allowed disabled:text-COLORWHT5 {class_}"
+		class="border-0 bg-transparent text-COLORLIGHT-100 outline-none placeholder:text-COLORLIGHT-50 focus:border-0 focus:outline-0 focus:ring-0 disabled:cursor-not-allowed disabled:text-COLORLIGHT-100 {class_}"
 	>
-		<Fa {icon} slot="left" size="0.75x" class="px-1 text-COLORWHT" />
+		<Fa {icon} slot="left" size="0.75x" class="px-1 text-COLORLIGHT-100" />
 	</Input>
 </div>
 {#if value.trim() !== ''}

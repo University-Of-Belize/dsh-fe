@@ -48,7 +48,7 @@
 				return toast.push('That token was not valid.', {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': 'rgb(var(--COLORRED))'
+						'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 					}
 				});
 			}
@@ -87,26 +87,26 @@
 	</div>
 	<div class="main-content flex h-full items-center justify-center py-8 lg:mx-8">
 		{#if SecToken == null && localStorage.dev != undefined}
-			<div class="auth_window block rounded-md bg-COLORBLK1 pt-8 lg:px-6">
+			<div class="auth_window block rounded-md bg-COLORDARK-75 pt-8 lg:px-6">
 				<form class="block" action="#" on:submit={(event) => handleSubmit(event)}>
 					<div
-						class="mx-8 mb-6 flex flex-1 items-center justify-center text-3xl font-semibold text-COLORWHT"
+						class="mx-8 mb-6 flex flex-1 items-center justify-center text-3xl font-semibold text-COLORLIGHT-100"
 					>
 						{config.ui['branding-text']}
 						<span class="mb-4 ml-2 bg-yellow-300 px-2 py-1 text-sm text-gray-50">DEV</span>
 					</div>
 
 					<div
-						class="password mx-8 mt-2 flex flex-1 items-center rounded-sm border border-COLORWHT bg-transparent px-4 py-2 text-sm"
+						class="password mx-8 mt-2 flex flex-1 items-center rounded-sm border border-COLORLIGHT-100 bg-transparent px-4 py-2 text-sm"
 					>
 						<div class="icon w-fit">
-							<Fa icon={faKey} size="1.25x" class="pr-4 text-COLORWHT" />
+							<Fa icon={faKey} size="1.25x" class="pr-4 text-COLORLIGHT-100" />
 						</div>
 						<input
 							type="text"
 							autocomplete="off"
 							name="token"
-							class="w-full border-0 bg-transparent px-2 py-1 font-medium text-COLORWHT focus:outline-none"
+							class="w-full border-0 bg-transparent px-2 py-1 font-medium text-COLORLIGHT-100 focus:outline-none"
 							placeholder="Enter a valid user token"
 						/>
 					</div>
@@ -120,8 +120,8 @@
 						>
 							<Button
 								icon={faRightToBracket}
-								color="COLORWHT"
-								color_t="COLORBLK"
+								color="COLORLIGHT-100"
+								color_t="COLORDARK-100"
 								custom_style="w-full justify-center"
 								text="Log in"
 								disabled={logging_in}
@@ -130,7 +130,7 @@
 					</div>
 				</form>
 
-				<div class="mx-8 my-8 block text-COLORWHT">
+				<div class="mx-8 my-8 block text-COLORLIGHT-100">
 					<div class="text-2xl font-light">Have an account?</div>
 					<div
 						class="login mt-6 flex flex-1 items-center justify-start"
@@ -138,8 +138,8 @@
 					>
 						<Button
 							icon={faRightToBracket}
-							color="COLORYLW"
-							color_t="COLORBLK"
+							color="COLORACCENTL"
+							color_t="COLORDARK-100"
 							custom_style="w-18 justify-center"
 							text="Log in"
 						/>
@@ -147,10 +147,10 @@
 				</div>
 			</div>
 		{:else if SecToken != null}
-			<div class="rounded-xl border-gray-200 lg:border lg:bg-COLORBLK1 lg:shadow-sm">
+			<div class="rounded-xl border-gray-200 lg:border lg:bg-COLORDARK-75 lg:shadow-sm">
 				<div class="p-4 sm:p-7">
 					<div class="text-center">
-						<div class="mb-4 inline-block rounded-full bg-COLORGRY p-2 text-white">
+						<div class="mb-4 inline-block rounded-full bg-COLORACCENTL p-2 text-white">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								class="h-6 w-6"
@@ -166,16 +166,16 @@
 								/>
 							</svg>
 						</div>
-						<h1 class="block text-2xl font-bold text-COLORWHT">Signing you in...</h1>
-						<p class="mt-2 text-sm text-COLORWHT1">You'll be logged-in in just a moment.</p>
+						<h1 class="block text-2xl font-bold text-COLORLIGHT-100">Signing you in...</h1>
+						<p class="mt-2 text-sm text-COLORLIGHT-15">You'll be logged-in in just a moment.</p>
 					</div>
 				</div>
 			</div>
 		{:else}
-			<div class="rounded-xl border-gray-200 lg:border lg:bg-COLORBLK1 lg:shadow-sm">
+			<div class="rounded-xl border-gray-200 lg:border lg:bg-COLORDARK-75 lg:shadow-sm">
 				<div class="p-4 sm:p-7">
 					<div class="text-center">
-						<div class="mb-4 inline-block rounded-full bg-COLORGRY p-2 text-white">
+						<div class="mb-4 inline-block rounded-full bg-COLORACCENTL p-2 text-white">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								class="h-6 w-6"
@@ -191,7 +191,7 @@
 								/>
 							</svg>
 						</div>
-						<h1 class="block text-2xl font-bold text-COLORWHT">Signing you in...</h1>
+						<h1 class="block text-2xl font-bold text-COLORLIGHT-100">Signing you in...</h1>
 						<p class="mt-2 text-sm text-rose-600">
 							The link you followed does not work anymore.<br />You may need to request a magic link
 							again.

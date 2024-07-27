@@ -19,17 +19,17 @@
 <div
 	aria-disabled={disabled}
 	title={disabled ? disabled_text : ''}
-	class="username mt-2 flex flex-1 items-center rounded-sm border border-COLORWHT bg-COLORWHT5 px-4 py-2 text-sm aria-disabled:cursor-not-allowed aria-disabled:opacity-40 {custom_style}"
+	class="username mt-2 flex flex-1 items-center rounded-sm border border-COLORLIGHT-100 bg-COLORLIGHT-100 px-4 py-2 text-sm aria-disabled:cursor-not-allowed aria-disabled:opacity-40 {custom_style}"
 >
 	<div class="icon w-fit">
-		<Fa {icon} size="1.25x" class="pr-4 text-COLORWHT" />
+		<Fa {icon} size="1.25x" class="pr-4 text-COLORLIGHT-100" />
 	</div>
 	<input
 		on:input={handleChange}
 		{value}
 		type="datetime-local"
 		{name}
-		class="w-full bg-transparent px-2 py-1 font-medium text-COLORWHT focus:outline-none disabled:cursor-not-allowed disabled:text-COLORWHT"
+		class="w-full bg-transparent px-2 py-1 font-medium text-COLORLIGHT-100 focus:outline-none disabled:cursor-not-allowed disabled:text-COLORLIGHT-100"
 		{placeholder}
 		{disabled}
 	/>

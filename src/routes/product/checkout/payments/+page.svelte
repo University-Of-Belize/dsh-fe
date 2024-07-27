@@ -105,7 +105,7 @@
 			toast.push(`${res.message}`, {
 				dismissable: false,
 				theme: {
-					'--toastBarBackground': 'rgb(var(--COLORRED))'
+					'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 				}
 			});
 			setTimeout(() => {
@@ -152,7 +152,7 @@
 	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} titleWhere="/" />
 	</div>
-	<div class="main-content flex h-full items-center justify-start text-COLORWHT">
+	<div class="main-content flex h-full items-center justify-start text-COLORLIGHT-100">
 		<div
 			class="page-content flex h-full w-full flex-wrap items-start justify-center overflow-auto bg-transparent p-2 py-16 lg:space-x-14"
 		>
@@ -206,10 +206,10 @@
 										on:click={() => flipCard('flip')}
 									>
 										<div
-											class="w-full rounded-xl border border-COLORWHT pb-8 pt-14 opacity-100 shadow-md"
+											class="w-full rounded-xl border border-COLORLIGHT-100 pb-8 pt-14 opacity-100 shadow-md"
 											style="backface-visibility: hidden"
 										>
-											<div class="w-full overflow-clip px-8 text-COLORWHT">
+											<div class="w-full overflow-clip px-8 text-COLORLIGHT-100">
 												<div class="pt-1">
 													<!-- <p class="font-light">Card Number</p> -->
 													<p
@@ -243,7 +243,7 @@
 											</div>
 										</div>
 										<div
-											class="absolute w-full rounded-xl border border-COLORWHT pb-8 pt-12 opacity-100 shadow-2xl"
+											class="absolute w-full rounded-xl border border-COLORLIGHT-100 pb-8 pt-12 opacity-100 shadow-2xl"
 											style="backface-visibility: hidden; transform: rotateY(180deg); top: 0;"
 										>
 											<div class="block w-full">
@@ -251,12 +251,12 @@
 													<b>
 														<p
 															bind:this={imageCVCNumber}
-															class="ml-auto flex w-14 items-center py-2 pl-2 text-COLORWHT"
+															class="ml-auto flex w-14 items-center py-2 pl-2 text-COLORLIGHT-100"
 														>
 															456
 														</p></b
 													>
-													<p class="mr-2 flex justify-end pt-4 text-sm font-bold text-COLORWHT">
+													<p class="mr-2 flex justify-end pt-4 text-sm font-bold text-COLORLIGHT-100">
 														security code
 													</p>
 												</div>
@@ -294,8 +294,8 @@
 				<div class="my-4 w-full lg:hidden">
 					<Button
 						text="Next"
-						color="COLORBLK4"
-						color_t="COLORWHT"
+						color=COLORDARK-75
+						color_t="COLORLIGHT-100"
 						icon={undefined}
 						custom_style="w-full justify-center py-4 text-md"
 						on:click={() => {
@@ -315,7 +315,7 @@
 				<form on:submit={(e) => handleSubmit(e)}>
 					<div class="total_amount flex w-full flex-col items-center">
 						<div
-							class="mb-4 flex w-full items-center justify-start border-b border-COLORWHT pb-4 text-2xl font-semibold text-COLORWHT"
+							class="mb-4 flex w-full items-center justify-start border-b border-COLORLIGHT-100 pb-4 text-2xl font-semibold text-COLORLIGHT-100"
 						>
 							Order summary
 						</div>
@@ -478,7 +478,7 @@
 							{/if}
 							<!--- Credit card form ENDS -->
 							<div
-								class="total_item flex w-full flex-wrap items-center overflow-clip rounded-lg bg-COLORBLK3 py-4 text-COLORWHT"
+								class="total_item flex w-full flex-wrap items-center overflow-clip rounded-lg bg-COLORDARK-25 py-4 text-COLORLIGHT-100"
 							>
 								<div class="content mx-4 block w-full">
 									<div class="product-name font-base text-xl">Total amount due today</div>
@@ -512,24 +512,24 @@
 							type="submit"
 						>
 							<Button
-								color="COLORBLE"
-								color_t="COLORWHT"
+								color="COLORACCENTL"
+								color_t="COLORLIGHT-100"
 								text={transactionConfirm ? 'Confirm Payment?' : 'Pay now'}
 								icon={faLock}
 								disabled={cartTotal ? conductingTransaction : true}
 								disabled_text="Please wait for the current transaction to complete."
 								custom_style="w-full justify-center items-center {transactionConfirm
-									? 'bg-COLORRED'
+									? 'bg-COLORACCENTL'
 									: ''}"
 							/>
 						</button>
 					</div>
 				</form>
 				<div
-					class="mt-8 flex items-center justify-between space-x-2 overflow-clip rounded-xl border border-COLORWHT5 bg-COLORBLK pl-4 text-sm text-COLORWHT1"
+					class="mt-8 flex items-center justify-between space-x-2 overflow-clip rounded-xl border border-COLORLIGHT-100 bg-COLORDARK-100 pl-4 text-sm text-COLORLIGHT-15"
 				>
 					<div>Secure payment processing<br />powered by</div>
-					<a href="https://onelink.bz" target="_blank" class="bg-COLORBLK1 px-4 py-4">
+					<a href="https://onelink.bz" target="_blank" class="bg-COLORDARK-75 px-4 py-4">
 						<img
 							src="/assets/checkout/brands/one-link.svg"
 							width="50px"

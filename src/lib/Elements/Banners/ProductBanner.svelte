@@ -4,9 +4,9 @@
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
 	import type { Product } from '$lib/types/Product';
-	import { addToCart } from '../Utility/Cart';
 	import IconButton from '../Buttons/IconButton.svelte';
 	import StarCount from '../Generic/StarCount.svelte';
+	import { addToCart } from '../Utility/Cart';
 	let productImage: string;
 	let productId: string;
 	let productName: string;
@@ -51,7 +51,7 @@
 		<div class="flex items-center">
 			<div class="comboBox absolute bottom-2 flex flex-wrap lg:bottom-6">
 				<div
-					class="details button text-md mr-2 flex w-fit cursor-pointer select-none items-center rounded-sm bg-COLORRED px-12 py-4 font-semibold text-COLORWHT hover:bg-opacity-80"
+					class="details button text-md mr-2 flex w-fit cursor-pointer select-none items-center rounded-sm bg-COLORACCENTL px-12 py-4 font-semibold text-COLORLIGHT-100 hover:bg-opacity-80"
 					on:click={() => {
 						// @ts-ignore
 						goto(`/product/${productSlug}`);
@@ -62,10 +62,10 @@
 				</div>
 
 				<div class="addToCart" on:click={() => addToCart(productId, 1)}>
-					<IconButton icon={faCartPlus} color="COLORYLW" />
+					<IconButton icon={faCartPlus} color="COLORACCENTL" />
 				</div>
 
-				<!-- <IconButton icon={faHeart} color="COLORRED" class="hidden lg:flex px-5" /> -->
+				<!-- <IconButton icon={faHeart} color="COLORACCENTL" class="hidden lg:flex px-5" /> -->
 			</div>
 		</div>
 	</div>

@@ -52,7 +52,7 @@
 				return toast.push(`${json.message}`, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': 'rgb(var(--COLORRED))'
+						'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 					}
 				});
 			}
@@ -96,7 +96,7 @@
 			toast.push(`${error.message}. Try again later.`, {
 				dismissable: false,
 				theme: {
-					'--toastBarBackground': 'rgb(var(--COLORRED))'
+					'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 				}
 			});
 			console.log(error);

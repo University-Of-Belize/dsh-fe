@@ -5,7 +5,7 @@
 	import { Button, ButtonGroup, Drawer } from 'flowbite-svelte';
 	import Fa from 'svelte-fa';
 	import { sineIn } from 'svelte/easing';
-/***********************/
+	/***********************/
 	import { goto } from '$app/navigation';
 	import config from '$lib/config/settings';
 	import type { Category } from '$lib/types/Category';
@@ -120,7 +120,7 @@
 	{transitionParams}
 	bind:hidden={hidden1}
 	id="sidebar"
-	class="bg-COLORBLK p-5 text-COLORWHT"
+	class="bg-COLORDARK-100 text-COLORLIGHT-100 p-5"
 >
 	<div class="flex h-full flex-col">
 		<div class="nav-main block">
@@ -130,7 +130,7 @@
 					title="Toggle the sidebar"
 					aria-expanded="true"
 					aria-controls="sidebar"
-					class="mr-2 inline cursor-pointer rounded-lg bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:mr-3 lg:rounded"
+					class="bg-COLORDARK-75 text-COLORLIGHT-100 mr-2 inline cursor-pointer rounded-lg p-2 hover:bg-COLORDARK-75 hover:text-COLORLIGHT-75 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:mr-3 lg:rounded"
 				>
 					<span class="sr-only">Toggle sidebar</span>
 					<Fa icon={faBars} />
@@ -145,7 +145,7 @@
 			{#if user}
 				<div class="my-2 mb-4">
 					<div
-						class="wallet-indicator flex w-full cursor-pointer items-center justify-start space-x-4 rounded-md bg-COLORBLK3 px-2 py-4 text-sm font-medium text-white hover:opacity-80"
+						class="wallet-indicator bg-COLORDARK-50 flex w-full cursor-pointer items-center justify-start space-x-4 rounded-md px-2 py-4 text-sm font-medium text-white hover:opacity-80"
 						on:click={async () => {
 							await goto(`/app/space/${localStorage.user_id}`);
 						}}
@@ -156,7 +156,7 @@
 								title="My profile"
 								alt="{user?.username}'s photo"
 								width="40px"
-								class="rounded-full border border-COLORWHT bg-COLORBLK1 object-cover"
+								class="border-COLORLIGHT-100 bg-COLORDARK-50 rounded-full border object-cover"
 								style="height: 42px; width: 42px;"
 							/>
 						</div>
@@ -176,11 +176,17 @@
 			<div class="btn-wrp pl-2" >
 			</div> -->
 					<ButtonGroup class="flex w-full">
-						<Button on:click={() => goto('/auth/login')} class="flex-1 bg-COLORBLK2 text-COLORWHT">
+						<Button
+							on:click={() => goto('/auth/login')}
+							class="bg-COLORDARK-50 text-COLORLIGHT-100 flex-1"
+						>
 							<Fa icon={faRightToBracket} class="mr-2" />
 							Log in</Button
 						>
-						<Button on:click={() => goto('/auth/create')} class="flex-1 bg-COLORPNK text-COLORWHT">
+						<Button
+							on:click={() => goto('/auth/create')}
+							class="bg-COLORACCENTL text-COLORLIGHT-100 flex-1"
+						>
 							<Fa icon={faGift} class="mr-2" />
 							Sign up</Button
 						>
@@ -190,7 +196,7 @@
 					<div class="title pb-5 font-semibold">My Account</div>
 
 					<Button
-						class="w-full bg-COLORBLK3 text-COLORWHT hover:bg-COLORBLK3 hover:opacity-80"
+						class="bg-COLORDARK-50 text-COLORLIGHT-100 hover:bg-COLORACCENTL w-full"
 						on:click={async () => {
 							localStorage.clear();
 							localStorage.setItem('theme', 'dark');
@@ -204,7 +210,7 @@
 					>
 
 					<Button
-						class="w-full bg-COLORBLK1 text-COLORWHT hover:bg-COLORBLK1 hover:opacity-80"
+						class="bg-COLORDARK-75 text-COLORLIGHT-100 hover:bg-COLORDARK-75 w-full hover:opacity-80"
 						on:click={async () => {
 							await goto(`/admin/dashboard/user/manage2?user_id=${localStorage.user_id}`);
 						}}
@@ -231,7 +237,7 @@
 							}}
 						>
 							<Button
-								class="w-full bg-COLORBLK1 font-medium text-COLORWHT hover:bg-COLORBLK1 hover:opacity-80 lg:justify-start lg:text-left"
+								class="bg-COLORDARK-75 text-COLORLIGHT-100 hover:bg-COLORDARK-75 w-full font-medium hover:opacity-80 lg:justify-start lg:text-left"
 							>
 								<Fa icon={faStar} class="mr-2 hidden lg:block" />
 								{category.name ?? category.alias}</Button
@@ -240,7 +246,7 @@
 					{/each}
 				{:else}
 					<div class="two pt-1">
-						<Button class="w-full bg-COLORBLK4 font-semibold text-COLORWHT">
+						<Button class="bg-COLORDARK-75 text-COLORLIGHT-100 w-full font-semibold">
 							<Fa icon={faQuestionCircle} class="mr-2" />
 							Looks like you caught us! Just a moment.</Button
 						>
@@ -248,7 +254,7 @@
 				{/if}
 			</div>
 		</div>
-		<div class="nav-footer mt-auto block w-full space-y-2 text-xs font-light text-COLORWHT">
+		<div class="nav-footer text-COLORLIGHT-100 mt-auto block w-full space-y-2 text-xs font-light">
 			<div class="flex w-full items-center justify-between divide-x-2 text-center">
 				<div class="flex w-full items-center justify-center text-center hover:underline">
 					<a aria-label="View the app credits" href="/app/credits">Credits</a>
@@ -268,8 +274,8 @@
 	</div>
 </Drawer>
 
-<header class="border-b border-COLORBLK3 bg-COLORBLK antialiased bg-opacity-{transparency}">
-	<nav class="bg-opacity-100 px-4 py-2.5 text-COLORWHT opacity-100 lg:px-6">
+<header class="border-COLORDARK-25 bg-COLORDARK-100 border-b antialiased bg-opacity-{transparency}">
+	<nav class="text-COLORLIGHT-100 bg-opacity-100 px-4 py-2.5 opacity-100 lg:px-6">
 		<div class="flex flex-wrap items-center justify-between">
 			<!-- Logo and labels -->
 			<div class="flex items-center justify-start">
@@ -278,7 +284,7 @@
 					title="Toggle the sidebar"
 					aria-expanded="true"
 					aria-controls="sidebar"
-					class="mr-2 inline cursor-pointer rounded-lg bg-COLORBLK4 p-2 text-COLORWHT hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:mr-3 lg:rounded"
+					class="bg-COLORDARK-75 text-COLORLIGHT-100 mr-2 inline cursor-pointer rounded-lg p-2 hover:bg-COLORDARK-75 hover:text-COLORLIGHT-75 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:mr-3 lg:rounded"
 				>
 					<span class="sr-only">Toggle sidebar</span>
 					<Fa icon={faBars} />
@@ -312,7 +318,7 @@
 					<label for="topbar-search" class="sr-only">Search</label>
 					<div class="relative w-full">
 						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-							<Fa icon={faSearch} class="mr-4 text-gray-500" />
+							<Fa icon={faSearch} class="text-COLORLIGHT-100 mr-4" />
 						</div>
 						<input
 							{value}
@@ -321,7 +327,7 @@
 							title="Click to search for snacks, drinks and lunch"
 							id="topbar-search"
 							class="bg-opacity-{transparency +
-								35} block w-full rounded-lg border-0 bg-COLORBLK1 p-1.5 pl-9 text-xs font-light text-COLORWHT placeholder-COLORWHT focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm"
+								35} bg-COLORDARK-75 text-COLORLIGHT-100 placeholder-COLORLIGHT-100 block w-full rounded-lg border-0 p-1.5 pl-9 text-xs font-light focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm"
 							placeholder="Search for snacks, drinks or lunch"
 						/>
 					</div>
@@ -336,7 +342,7 @@
 							window.location.reload();
 						}}
 						type="button"
-						class="mr-2 hidden items-center justify-center rounded-lg bg-COLORBLK3 px-3 py-1.5 text-xs font-medium text-white hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex lg:px-4 lg:py-2"
+						class="bg-COLORDARK-50 mr-2 hidden items-center justify-center rounded-lg px-3 py-1.5 text-xs font-medium text-white hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex lg:px-4 lg:py-2"
 						><Fa icon={faPlus} class="mr-4" /> Install app</button
 					>
 				{/if}
@@ -353,7 +359,7 @@
 						}, 10);
 					}}
 					type="button"
-					class="mr-3 flex items-center justify-start rounded-lg bg-COLORBLK1 p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm md:mr-2 lg:mr-0 lg:hidden"
+					class="bg-COLORDARK-75 mr-3 flex items-center justify-start rounded-lg p-1.5 text-COLORLIGHT hover:bg-COLORDARK-75 hover:text-COLORLIGHT-75 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm md:mr-2 lg:mr-0 lg:hidden"
 				>
 					<span class="sr-only">Search</span>
 					<!-- Search icon -->
@@ -367,7 +373,7 @@
 					<button
 						type="button"
 						data-dropdown-toggle="notification-dropdown"
-						class="mr-1 rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600"
+						class="mr-1 rounded-lg p-2 text-COLORLIGHT hover:bg-COLORDARK-75 hover:text-COLORLIGHT-75 focus:ring-4 focus:ring-gray-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600"
 					>
 						<span class="sr-only">View notifications</span>
 						<!- Bell icon ->
@@ -395,7 +401,7 @@
 						<div>
 							<a
 								href="#"
-								class="flex border-b px-4 py-3 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-600"
+								class="flex border-b px-4 py-3 hover:bg-COLORDARK-75 dark:border-gray-600 dark:hover:bg-gray-600"
 							>
 								<div class="flex-shrink-0">
 									<img
@@ -421,7 +427,7 @@
 									</div>
 								</div>
 								<div class="w-full pl-3">
-									<div class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
+									<div class="mb-1.5 text-sm font-normal text-COLORLIGHT dark:text-gray-400">
 										New message from <span class="font-semibold text-gray-900 dark:text-white"
 											>Bonnie Green</span
 										>: "Hey, what's up? All set for the presentation?"
@@ -433,7 +439,7 @@
 							</a>
 							<a
 								href="#"
-								class="flex border-b px-4 py-3 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-600"
+								class="flex border-b px-4 py-3 hover:bg-COLORDARK-75 dark:border-gray-600 dark:hover:bg-gray-600"
 							>
 								<div class="flex-shrink-0">
 									<img
@@ -457,7 +463,7 @@
 									</div>
 								</div>
 								<div class="w-full pl-3">
-									<div class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
+									<div class="mb-1.5 text-sm font-normal text-COLORLIGHT dark:text-gray-400">
 										<span class="font-semibold text-gray-900 dark:text-white">Jese leos</span> and
 										<span class="font-medium text-gray-900 dark:text-white">5 others</span> started following
 										you.
@@ -469,7 +475,7 @@
 							</a>
 							<a
 								href="#"
-								class="flex border-b px-4 py-3 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-600"
+								class="flex border-b px-4 py-3 hover:bg-COLORDARK-75 dark:border-gray-600 dark:hover:bg-gray-600"
 							>
 								<div class="flex-shrink-0">
 									<img
@@ -494,7 +500,7 @@
 									</div>
 								</div>
 								<div class="w-full pl-3">
-									<div class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
+									<div class="mb-1.5 text-sm font-normal text-COLORLIGHT dark:text-gray-400">
 										<span class="font-semibold text-gray-900 dark:text-white">Joseph Mcfall</span>
 										and
 										<span class="font-medium text-gray-900 dark:text-white">141 others</span> love your
@@ -507,7 +513,7 @@
 							</a>
 							<a
 								href="#"
-								class="flex border-b px-4 py-3 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-600"
+								class="flex border-b px-4 py-3 hover:bg-COLORDARK-75 dark:border-gray-600 dark:hover:bg-gray-600"
 							>
 								<div class="flex-shrink-0">
 									<img
@@ -531,7 +537,7 @@
 									</div>
 								</div>
 								<div class="w-full pl-3">
-									<div class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
+									<div class="mb-1.5 text-sm font-normal text-COLORLIGHT dark:text-gray-400">
 										<span class="font-semibold text-gray-900 dark:text-white"
 											>Leslie Livingston</span
 										>
@@ -545,7 +551,7 @@
 									</div>
 								</div>
 							</a>
-							<a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600">
+							<a href="#" class="flex px-4 py-3 hover:bg-COLORDARK-75 dark:hover:bg-gray-600">
 								<div class="flex-shrink-0">
 									<img
 										class="h-11 w-11 rounded-full"
@@ -568,7 +574,7 @@
 									</div>
 								</div>
 								<div class="w-full pl-3">
-									<div class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
+									<div class="mb-1.5 text-sm font-normal text-COLORLIGHT dark:text-gray-400">
 										<span class="font-semibold text-gray-900 dark:text-white">Robert Brown</span> posted
 										a new video: Glassmorphism - learn how to implement the new design trend.
 									</div>
@@ -580,7 +586,7 @@
 						</div>
 						<a
 							href="#"
-							class="block bg-gray-50 py-2 text-center text-base font-medium text-gray-900 hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:underline"
+							class="block bg-gray-50 py-2 text-center text-base font-medium text-gray-900 hover:bg-COLORDARK-75 dark:bg-gray-700 dark:text-white dark:hover:underline"
 						>
 							<div class="inline-flex items-center">
 								<svg
@@ -604,18 +610,19 @@
 					<a
 						href="/product/checkout/"
 						type="button"
-						class="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+						class="rounded-lg p-2 text-COLORLIGHT hover:bg-COLORDARK-75 hover:text-COLORLIGHT-75 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
 					>
 						<span class="sr-only">Search</span>
 						<!-- Search icon -->
 						<Fa icon={faShoppingCart} />
 					</a>
 					<!-- Apps menu -->
-					<button id="quick_access"
+					<button
+						id="quick_access"
 						use:clickOutside
 						type="button"
 						data-dropdown-toggle="apps-dropdown"
-						class="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600"
+						class="rounded-lg p-2 text-COLORLIGHT hover:bg-COLORDARK-75 hover:text-COLORLIGHT-75 focus:ring-4 focus:ring-gray-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600"
 						on:click={(event) => {
 							apps_dropdown.classList.toggle('hidden');
 							apps_dropdown.classList.toggle('absolute');
@@ -648,7 +655,7 @@
 					</button>
 					<!-- Apps dropdown menu -->
 					<div
-						class="z-50 my-4 hidden max-w-sm list-none divide-y divide-gray-100 overflow-hidden rounded border border-COLORBLK bg-white"
+						class="divide-COLORDARK-50 border-COLORDARK-25 bg-COLORDARK-100 z-50 my-4 hidden max-w-sm list-none divide-y overflow-hidden rounded border"
 						on:click={() => {
 							// Let's start a war
 							apps_dropdown.classList.remove('hidden');
@@ -657,78 +664,78 @@
 						bind:this={apps_dropdown}
 					>
 						<div
-							class="block bg-COLORWHT4 px-4 py-2 text-center text-base font-medium text-COLORWHT"
+							class="bg-COLORDARK-75 text-COLORLIGHT-100 block px-4 py-2 text-center text-base font-medium"
 						>
 							Quick Access
 						</div>
 						<div class="grid grid-cols-3 gap-4 p-4">
 							<a
 								href="/admin/dashboard"
-								class="group block rounded-lg p-4 text-center hover:bg-gray-100 dark:hover:bg-gray-600"
+								class="hover:bg-COLORDARK-75 group block rounded-lg p-4 text-center"
 							>
 								<Fa
 									icon={faCog}
 									size="1.25x"
-									class="mb-2 flex w-full items-center justify-center text-gray-400"
+									class="text-COLORLIGHT mb-2 flex w-full items-center justify-center"
 								/>
-								<div class="text-sm font-medium text-gray-900 dark:text-white">Dash</div>
+								<div class="text-sm font-medium">Dash</div>
 							</a>
 
 							{#if staff}
 								<a
 									href="/admin/dashboard/user/manage"
-									class="group block rounded-lg p-4 text-center hover:bg-gray-100 dark:hover:bg-gray-600"
+									class="hover:bg-COLORDARK-75 group block rounded-lg p-4 text-center"
 								>
 									<Fa
 										icon={faUserPlus}
 										size="1.25x"
-										class="mb-2 flex w-full items-center justify-center text-gray-400"
+										class="text-COLORLIGHT mb-2 flex w-full items-center justify-center"
 									/>
-									<div class="text-sm font-medium text-gray-900 dark:text-white">New user</div>
+									<div class="text-sm font-medium">New user</div>
 								</a>
 								<a
 									href="/admin/dashboard/product/manage"
-									class="group block rounded-lg p-4 text-center hover:bg-gray-100 dark:hover:bg-gray-600"
+									class="hover:bg-COLORDARK-75 group block rounded-lg p-4 text-center"
 								>
 									<Fa
 										icon={faBurger}
 										size="1.25x"
-										class="mb-2 flex w-full items-center justify-center text-gray-400"
+										class="text-COLORLIGHT mb-2 flex w-full items-center justify-center"
 									/>
-									<div class="text-sm font-medium text-gray-900 dark:text-white">New product</div>
+									<div class="text-sm font-medium">New product</div>
 								</a>
 								<a
 									href="/admin/dashboard/promo/manage"
-									class="group block rounded-lg p-4 text-center hover:bg-gray-100 dark:hover:bg-gray-600"
+									class="hover:bg-COLORDARK-75 group block rounded-lg p-4 text-center"
 								>
 									<Fa
 										icon={faTag}
 										size="1.25x"
-										class="mb-2 flex w-full items-center justify-center text-gray-400"
+										class="text-COLORLIGHT mb-2 flex w-full items-center justify-center"
 									/>
-									<div class="text-sm font-medium text-gray-900 dark:text-white">New promo</div>
+									<div class="text-sm font-medium">New promo</div>
 								</a>
 								<a
 									href="/admin/dashboard/category/manage"
-									class="group block rounded-lg p-4 text-center hover:bg-gray-100 dark:hover:bg-gray-600"
+									class="hover:bg-COLORDARK-75 group block rounded-lg p-4 text-center"
 								>
 									<Fa
 										icon={faPlus}
 										size="1.25x"
-										class="mb-2 flex w-full items-center justify-center text-gray-400"
+										class="text-COLORLIGHT mb-2 flex w-full items-center justify-center"
 									/>
-									<div class="text-sm font-medium text-gray-900 dark:text-white">New category</div>
+									<div class="text-sm font-medium">New category</div>
 								</a>
 								<a
 									href="/admin/dashboard/new-article"
-									class="group block rounded-lg p-4 text-center hover:bg-gray-100 dark:hover:bg-gray-600"
+									class="hover:bg-COLORDARK-75 group block rounded-lg p-4 text-center"
 								>
 									<Fa
 										icon={faNoteSticky}
 										size="1.25x"
-										class="mb-2 flex w-full items-center justify-center text-gray-400"
+										class="text-COLORLIGHT mb-2 flex w-full items-center justify-center"
 									/>
-									<div class="text-sm font-medium text-gray-900 dark:text-white">New article</div>
+									<div class="text-sm font-medium">New article</div>
 								</a>
 							{/if}
 							<a
@@ -737,14 +744,14 @@
 									window.location.reload();
 								}}
 								href="#logout"
-								class="group block rounded-lg p-4 text-center hover:bg-gray-100 dark:hover:bg-gray-600"
+								class="hover:bg-COLORACCENTL group block rounded-lg p-4 text-center"
 							>
 								<Fa
 									icon={faArrowRightFromBracket}
 									size="1.25x"
-									class="mb-2 flex w-full items-center justify-center text-gray-400"
+									class="text-COLORLIGHT mb-2 flex w-full items-center justify-center"
 								/>
-								<div class="text-sm font-medium text-gray-900 dark:text-white">Logout</div>
+								<div class="text-sm font-medium">Logout</div>
 							</a>
 						</div>
 					</div>
@@ -752,7 +759,7 @@
 					<button
 						use:clickOutside
 						type="button"
-						class="mx-3 hidden rounded-full bg-gray-800 text-sm hover:opacity-80 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-0 lg:flex lg:items-center"
+						class="bg-COLORDARK-75 mx-3 hidden rounded-full text-sm hover:opacity-80 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-0 lg:flex lg:items-center"
 						id="user-menu-button"
 						aria-expanded="false"
 						data-dropdown-toggle="dropdown"
@@ -783,7 +790,7 @@
 					</button>
 					<!-- User dropdown menu -->
 					<div
-						class="z-50 my-4 hidden w-56 list-none divide-y divide-gray-100 rounded bg-white text-base shadow dark:divide-gray-600 dark:bg-gray-700"
+						class="divide-COLORDARK-15 bg-COLORDARK-100 border-COLORDARK-25 z-50 my-4 hidden w-56 list-none divide-y rounded border text-base shadow"
 						on:click={() => {
 							// Let's start a war
 							user_dropdown.classList.remove('hidden');
@@ -792,34 +799,27 @@
 						bind:this={user_dropdown}
 					>
 						<div class="px-4 py-3">
-							<span class="block text-sm font-semibold text-gray-900 dark:text-white"
-								>@{user?.username}</span
-							>
-							<span class="block truncate text-sm text-gray-500 dark:text-gray-400"
-								>{user?.email}</span
-							>
+							<span class="text-COLORDARK-25 block text-sm font-semibold">@{user?.username}</span>
+							<span class="text-COLORDARK-50 block truncate text-sm">{user?.email}</span>
 						</div>
-						<ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
+						<ul class="py-1" aria-labelledby="dropdown">
 							<li>
 								<a
 									href={`/app/space/${localStorage.user_id}`}
-									class="block px-4 py-2 text-sm hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-									>My profile</a
+									class="block px-4 py-2 text-sm hover:opacity-80">My profile</a
 								>
 							</li>
 							<li>
-								<a
-									href="/admin/dashboard"
-									class="block px-4 py-2 text-sm hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+								<a href="/admin/dashboard" class="block px-4 py-2 text-sm hover:opacity-80"
 									>Dashboard</a
 								>
 							</li>
 						</ul>
-						<ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
+						<ul class="py-1" aria-labelledby="dropdown">
 							<li>
 								<a
 									href="/admin/dashboard/review"
-									class="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+									class="flex items-center px-4 py-2 text-sm hover:opacity-80"
 								>
 									<Fa icon={faMessage} class="mr-4" />
 									My reviews
@@ -828,7 +828,7 @@
 							<li>
 								<a
 									href="/admin/dashboard/order"
-									class="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+									class="flex items-center px-4 py-2 text-sm hover:opacity-80"
 								>
 									<Fa icon={faClone} class="mr-4" />
 									My orders
@@ -836,8 +836,17 @@
 							</li>
 							<li>
 								<a
+									href="/admin/dashboard/messaging"
+									class="flex items-center px-4 py-2 text-sm hover:opacity-80"
+								>
+									<Fa icon={faMessage} class="mr-4" />
+									My messages
+								</a>
+							</li>
+							<li>
+								<a
 									href="/admin/dashboard/feedback"
-									class="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+									class="flex items-center px-4 py-2 text-sm hover:opacity-80"
 								>
 									<Fa icon={faFeed} class="mr-4" />
 									My feedback
@@ -846,14 +855,14 @@
 							<li>
 								<a
 									href="/admin/dashboard/user/experiments"
-									class="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+									class="flex items-center px-4 py-2 text-sm hover:opacity-80"
 								>
 									<Fa icon={faVial} class="mr-4" />
 									Experiments
 								</a>
 							</li>
 						</ul>
-						<ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
+						<ul aria-labelledby="dropdown">
 							<li>
 								<a
 									on:click={async () => {
@@ -864,8 +873,7 @@
 										}, 1000);
 									}}
 									href="#logout"
-									class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-									>Sign out</a
+									class="bg-COLORDARK-75 hover:bg-COLORACCENTL block px-4 py-2 text-sm">Sign out</a
 								>
 							</li>
 						</ul>
@@ -874,7 +882,7 @@
 					<button
 						type="button"
 						on:click={() => goto('/auth/login')}
-						class="items-center justify-center rounded-lg bg-COLORBLK2 px-3 py-1.5 text-xs font-medium text-COLORWHT hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex lg:px-4 lg:py-2"
+						class="bg-COLORDARK-50 text-COLORLIGHT-100 items-center justify-center rounded-lg px-3 py-1.5 text-xs font-medium hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex lg:px-4 lg:py-2"
 						><Fa icon={faRightToBracket} class="mr-4 hidden lg:block" /> Login</button
 					>
 				{/if}
@@ -895,7 +903,7 @@
 							theme = document.body.parentElement.getAttribute('data-theme');
 							localStorage.setItem('theme', theme ?? 'light');
 						}}
-						class="items-center justify-center rounded-lg bg-COLORBLK2 px-3 py-1.5 text-xs font-medium text-COLORWHT hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex lg:px-4 lg:py-2.5"
+						class="bg-COLORDARK-75 text-COLORLIGHT-100 items-center justify-center rounded-lg px-3 py-1.5 text-xs font-medium hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex lg:px-4 lg:py-2.5"
 						><Fa icon={theme_switched ? faSun : faMoon} /></button
 					></span
 				>
@@ -919,7 +927,7 @@
 									}
 								}
 							}}
-							class="items-center justify-center rounded-lg bg-COLORBLK2 px-3 py-1.5 text-xs font-medium text-COLORWHT hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex lg:px-4 lg:py-2.5"
+							class="bg-COLORDARK-50 text-COLORLIGHT-100 items-center justify-center rounded-lg px-3 py-1.5 text-xs font-medium hover:opacity-80 focus:outline-none focus:ring-4 sm:inline-flex lg:px-4 lg:py-2.5"
 							><Fa icon={faPaintbrush} /></button
 						></span
 					>
@@ -932,7 +940,7 @@
 			<div
 				bind:this={mobile_search}
 				style="height: 0px;"
-				class="mt-4 flex hidden w-full items-center justify-start rounded-lg bg-COLORBLK1 p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm lg:hidden"
+				class="bg-COLORDARK-75 mt-4 flex hidden w-full items-center justify-start rounded-lg p-1.5 text-COLORLIGHT hover:bg-COLORDARK-75 hover:text-COLORLIGHT-75 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm lg:hidden"
 			>
 				<span class="sr-only">Search</span>
 				<!-- Search icon -->
@@ -943,7 +951,7 @@
 					name="search"
 					title="Click to search for snacks, drinks and lunch"
 					id="topbar-search"
-					class="block w-full rounded-lg border-0 bg-transparent text-xs font-light text-COLORWHT placeholder-COLORWHT"
+					class="text-COLORLIGHT-100 placeholder-COLORLIGHT-100 block w-full rounded-lg border-0 bg-transparent text-xs font-light"
 					placeholder="Search for snacks, drinks or lunch"
 				/>
 			</div>
@@ -952,15 +960,15 @@
 	<!-- Announcements and stuff -->
 	{#if !localStorage.acknowledged_announcements || localStorage.acknowledged_announcements != 'true'}
 		<div
-			class="announcements-container fixed bottom-0 z-20 flex w-full bg-COLORBLK py-1 text-sm text-COLORWHT lg:text-center lg:text-base"
+			class="announcements-container bg-COLORDARK-100 text-COLORLIGHT-100 fixed bottom-0 z-20 flex w-full py-1 text-sm lg:text-center lg:text-base"
 		>
 			<div
 				class="container-wrap mx-2 flex w-full flex-col flex-wrap items-center justify-center space-y-4 bg-opacity-100 lg:mx-0 lg:flex-row lg:space-y-0"
 			>
 				<div
-					class="container flex flex-col flex-wrap items-center justify-center space-x-1 space-y-2 bg-opacity-100 text-COLORWHT lg:flex-row"
+					class="text-COLORLIGHT-100 container flex flex-col flex-wrap items-center justify-center space-x-1 space-y-2 bg-opacity-100 lg:flex-row"
 				>
-					<div class="block space-x-1 bg-opacity-100 text-COLORWHT lg:flex">
+					<div class="text-COLORLIGHT-100 block space-x-1 bg-opacity-100 lg:flex">
 						<div class="icon my-2 ml-1 lg:mx-2 lg:my-0">
 							<Fa icon={faCodePullRequest} size="1.25x" />
 						</div>
@@ -979,7 +987,7 @@
 					</div>
 				</div>
 				<div
-					class="btn-wrp mt-auto flex w-full items-center justify-center bg-COLORRED font-semibold text-COLORWHT focus:opacity-80 lg:ml-2 lg:mt-0 lg:w-auto"
+					class="btn-wrp bg-COLORACCENTL text-COLORLIGHT-100 mt-auto flex w-full items-center justify-center font-semibold focus:opacity-80 lg:ml-2 lg:mt-0 lg:w-auto"
 					on:click={() => {
 						localStorage.setItem('acknowledged_announcements', 'true');
 						window.location.reload();
@@ -988,7 +996,7 @@
 					<IconButton
 						icon={faX}
 						color=""
-						color_t="COLORWHT"
+						color_t="COLORLIGHT-100"
 						class="flex w-fit items-center justify-center"
 					/>
 					<span class="lg:hidden">CLOSE</span>

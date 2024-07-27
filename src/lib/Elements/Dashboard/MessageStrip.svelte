@@ -22,7 +22,7 @@
 	{id}
 	class="{hidden
 		? 'invisible'
-		: ''} conversation my-2 flex w-full cursor-pointer select-none items-center rounded-md bg-COLORBLK1 px-2 py-4 hover:bg-COLORBLK2"
+		: ''} conversation my-2 flex w-full cursor-pointer select-none items-center rounded-md bg-COLORDARK-75 px-2 py-4 hover:bg-COLORDARK-50"
 >
 	<div class="icon-wrap hidden items-center text-left lg:flex">
 		<div class="icon_wrap relative mr-4 rounded-full">
@@ -60,14 +60,14 @@
 			{/if}
 		</div>
 	</div>
-	<div class="details-block block flex-1 text-left text-base font-medium leading-4 text-COLORWHT">
+	<div class="details-block block flex-1 text-left text-base font-medium leading-4 text-COLORLIGHT-100">
 		{username}
-		<div class="mt-2 w-full text-xs font-normal text-COLORWHT1 lg:mt-0">
+		<div class="mt-2 w-full text-xs font-normal text-COLORLIGHT-15 lg:mt-0">
 			{message}
 		</div>
 	</div>
 	{#if notification}
-		<div class="message-notification mb-4 block h-full text-sm text-COLORWHT">
+		<div class="message-notification mb-4 block h-full text-sm text-COLORLIGHT-100">
 			<slot name="notification">slot=notification</slot>
 		</div>
 	{/if}

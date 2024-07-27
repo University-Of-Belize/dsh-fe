@@ -82,8 +82,8 @@
 									<Button
 										icon={faTrash}
 										color="transparent"
-										custom_style="border border-COLORHPK"
-										color_t="COLORHPK"
+										custom_style="border border-COLORACCENTL"
+										color_t="COLORACCENTL"
 										text="Delete review"
 									/>
 								</div>{/if}
@@ -92,7 +92,7 @@
 									class="edit-wrap h-fit w-fit"
 									on:click={() => goto(`/product/${review?.product.slug}#${review?._id}`)}
 								>
-									<Button icon={faCog} color="COLORWHT" color_t="COLORBLK" text="Go to listing" />
+									<Button icon={faCog} color="COLORLIGHT-100" color_t="COLORDARK-75" text="Go to listing" />
 								</div></a
 							>
 						</div>

@@ -1,10 +1,9 @@
 <script lang="ts">
+	import DataCard from '$lib/Elements/Cards/DataCard.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
-	import DataCard from '$lib/Elements/Cards/DataCard.svelte';
-
-	// import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+// import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 	// import Fa from 'svelte-fa';
 
 	import type { ContributorData } from '$lib/types/Contibutor';
@@ -76,7 +75,7 @@
 	<div class="content-wrapper absolute z-10 block h-full w-full overflow-auto pb-40 lg:mx-6">
 		<div class="content mx-4">
 			<!--- The title -->
-			<div class="my-8 block w-full text-2xl font-semibold text-COLORWHT">
+			<div class="my-8 block w-full text-2xl font-semibold text-COLORLIGHT-100">
 				<div>Credits</div>
 				<div class="text-sm font-light">
 					These are all the people who made it possible to bring this app into existence throughout
@@ -87,7 +86,7 @@
 				{#each contributors as contributor}
 					<!-- Start cards -->
 					<div
-						class="card-wrapper my-4 flex flex-wrap justify-center text-COLORWHT md:space-x-4 lg:justify-start"
+						class="card-wrapper my-4 flex flex-wrap justify-center text-COLORLIGHT-100 md:space-x-4 lg:justify-start"
 					>
 						<DataCard
 							url={contributor.url}

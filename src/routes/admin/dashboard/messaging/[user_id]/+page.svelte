@@ -163,19 +163,19 @@
 							required
 						/>
 						<form action="#" on:submit={(event) => handleSubmit(event)}>
-							<div class="relative flex h-fit w-full overflow-clip rounded-lg bg-COLORBLK1 p-1.5">
+							<div class="relative flex h-fit w-full overflow-clip rounded-lg bg-COLORDARK-75 p-1.5">
 								<input
 									bind:this={messageBox}
 									type="text"
 									name="message"
 									autocomplete="off"
 									title="Send a new message"
-									class="block w-full border-0 bg-transparent text-xs font-light text-COLORWHT placeholder-COLORWHT focus:border-0 focus:ring-0 sm:text-sm"
+									class="block w-full border-0 bg-transparent text-xs font-light text-COLORLIGHT-100 placeholder-COLORLIGHT-100 focus:border-0 focus:ring-0 sm:text-sm"
 									placeholder="Leave a message"
 								/>
 								<button
 									type="submit"
-									class="flex h-full cursor-pointer items-center justify-center px-6 py-2 text-center hover:bg-COLORBLK2"
+									class="flex h-full cursor-pointer items-center justify-center px-6 py-2 text-center hover:bg-COLORDARK-50"
 								>
 									<Fa icon={faPaperPlane} class="text-gray-500" />
 								</button>
@@ -209,7 +209,7 @@
 		{#if current_interaction}
 			<div class="messagebox mt-auto block lg:mb-6">
 				<form
-					class="relative flex h-fit w-full overflow-clip rounded-lg bg-COLORBLK1 p-1.5"
+					class="relative flex h-fit w-full overflow-clip rounded-lg bg-COLORDARK-75 p-1.5"
 					action="#"
 					on:submit={(event) => handleSubmit(event)}
 				>
@@ -219,12 +219,12 @@
 						name="message"
 						autocomplete="off"
 						title="Send a message to @{current_interaction?.username}"
-						class="block w-full border-0 bg-transparent text-xs font-light text-COLORWHT placeholder-COLORWHT focus:border-0 focus:ring-0 sm:text-sm"
+						class="block w-full border-0 bg-transparent text-xs font-light text-COLORLIGHT-100 placeholder-COLORLIGHT-100 focus:border-0 focus:ring-0 sm:text-sm"
 						placeholder="Send a message to @{current_interaction?.username}"
 					/>
 					<button
 						type="submit"
-						class="flex h-full cursor-pointer items-center justify-center px-6 py-2 text-center hover:bg-COLORBLK2"
+						class="flex h-full cursor-pointer items-center justify-center px-6 py-2 text-center hover:bg-COLORDARK-50"
 					>
 						<Fa icon={faPaperPlane} class="text-gray-500" />
 					</button>

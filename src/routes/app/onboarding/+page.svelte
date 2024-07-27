@@ -1,8 +1,5 @@
 <script lang="ts">
 	import CardPicker from '$lib/Elements/Cards/CardPicker.svelte';
-	import Footer from '$lib/Elements/Generic/Footer.svelte';
-	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
 
 	import { faDesktopAlt, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
 </script>
@@ -23,7 +20,7 @@
 			image="/pwa/screenshots/mobile_1.jpg"
 			image_alt="UniFood Mobile App"
 			button_icon={faMobileAlt}
-			button_color="COLORGRN2"
+			button_color="COLORACCENTD"
 			button_text="Install for mobile"
 			where_to="/app/mobile"
 		/>
@@ -34,7 +31,7 @@
 			image="/pwa/screenshots/desktop_1.jpg"
 			image_alt="UniFood Mobile App"
 			button_icon={faDesktopAlt}
-			button_color="COLORGRN2"
+			button_color="COLORACCENTD"
 			button_text="Install for desktop"
 			where_to="/app/desktop"
 		/>

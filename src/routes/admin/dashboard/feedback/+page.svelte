@@ -59,9 +59,9 @@
 			<!--- Lol, well 'custom_icon' took long enough -->
 			<Button
 				custom_icon="/icons/font-awesome/scribble.svg"
-				color="COLORBLK3"
+				color="COLORDARK-25"
 				text="Swap editor views"
-				color_t="COLORWHT"
+				color_t="COLORLIGHT-100"
 				custom_style="w-full"
 			/>
 		</div>
@@ -71,12 +71,12 @@
 			<div class="block">
 				{#if prefersRichText}
 					<div class="richTextInput mb-4">
-						<div class="mb-4 text-2xl font-semibold text-COLORWHT">Write some feedback</div>
+						<div class="mb-4 text-2xl font-semibold text-COLORLIGHT-100">Write some feedback</div>
 						<Editor bind:value={richTextInput} apiKey={config.ui['tiny-mce']['api-key']} />
 					</div>
 				{:else}
 					<div class="markDownInput mb-4">
-						<div class="mb-4 text-2xl font-semibold text-COLORWHT">Write some feedback</div>
+						<div class="mb-4 text-2xl font-semibold text-COLORLIGHT-100">Write some feedback</div>
 					</div>
 					<CommentBox
 						bind:this={feedbackInput}
@@ -96,8 +96,8 @@
 					<Button
 						icon={faPaperPlane}
 						color="transparent"
-						custom_style="border border-COLORGRN1"
-						color_t="COLORGRN"
+						custom_style="border border-COLORACCENTD"
+						color_t="COLORACCENTD"
 						text="Submit feedback"
 					/>
 				</div>
@@ -135,8 +135,8 @@
 								<Button
 									icon={faTrash}
 									color="transparent"
-									custom_style="border border-COLORHPK"
-									color_t="COLORHPK"
+									custom_style="border border-COLORACCENTL"
+									color_t="COLORACCENTL"
 									text="Delete feedback"
 								/>
 							</div>

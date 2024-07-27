@@ -122,7 +122,7 @@
 					} else {
 						toast.push("You've dismissed the install prompt.", {
 							theme: {
-								'--toastBarBackground': 'rgb(var(--COLORRED))'
+								'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 							}
 						});
 						console.log('User dismissed the install prompt');
@@ -146,7 +146,7 @@
 				return toast.push(`${json.message}`, {
 					dismissable: false,
 					theme: {
-						'--toastBarBackground': 'rgb(var(--COLORRED))'
+						'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 					}
 				});
 			}
@@ -158,7 +158,7 @@
 			toast.push(`${error.message}. Try again later.`, {
 				dismissable: false,
 				theme: {
-					'--toastBarBackground': 'rgb(var(--COLORRED))'
+					'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 				}
 			});
 			console.log(error);
@@ -199,8 +199,8 @@
 					>
 						<Button
 							icon={undefined}
-							color="COLORBLK2"
-							color_t="COLORWHT"
+							color="COLORDARK-50"
+							color_t="COLORLIGHT-100"
 							custom_style="justify-center"
 							text={buttonText}
 						/>

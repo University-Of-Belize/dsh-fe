@@ -67,9 +67,9 @@
 			<!--- Lol, well 'custom_icon' took long enough -->
 			<Button
 				custom_icon="/icons/font-awesome/scribble.svg"
-				color="COLORBLK3"
+				color="COLORDARK-25"
 				text="Swap editor views"
-				color_t="COLORWHT"
+				color_t="COLORLIGHT-100"
 				custom_style="w-full"
 			/>
 		</div>
@@ -80,14 +80,14 @@
 			<div class="block">
 				{#if prefersRichText}
 					<div class="richTextInput mb-4">
-						<div class="mb-4 text-2xl font-semibold text-COLORWHT">Rich-Text+MarkDown Editor</div>
+						<div class="mb-4 text-2xl font-semibold text-COLORLIGHT-100">Rich-Text+MarkDown Editor</div>
 						<Editor bind:value={richTextInput} apiKey={config.ui['tiny-mce']['api-key']} />
 					</div>
 				{:else}
 					<div class="markDownInput mb-4">
-						<div class="mb-4 text-2xl font-semibold text-COLORWHT">
+						<div class="mb-4 text-2xl font-semibold text-COLORLIGHT-100">
 							PlainText <a
-								class="text-COLORWHT underline"
+								class="text-COLORLIGHT-100 underline"
 								href="https://spec.commonmark.org/0.30/"
 								target="__blank">MarkDown</a
 							> Editor
@@ -116,8 +116,8 @@
 					<Button
 						icon={faPaperPlane}
 						color="transparent"
-						custom_style="border border-COLORGRN1"
-						color_t="COLORGRN"
+						custom_style="border border-COLORACCENTD"
+						color_t="COLORACCENTD"
 						text="Submit article"
 					/>
 				</div>
@@ -155,8 +155,8 @@
 									<Button
 										icon={faTrash}
 										color="transparent"
-										custom_style="border border-COLORHPK"
-										color_t="COLORHPK"
+										custom_style="border border-COLORACCENTL"
+										color_t="COLORACCENTL"
 										text="Delete article"
 									/>
 								</div>
@@ -169,8 +169,8 @@
 									<Button
 										icon={faReply}
 										color="transparent"
-										custom_style="border border-COLORGRN1"
-										color_t="COLORGRN"
+										custom_style="border border-COLORACCENTD"
+										color_t="COLORACCENTD"
 										text="View article"
 									/>
 								</div>

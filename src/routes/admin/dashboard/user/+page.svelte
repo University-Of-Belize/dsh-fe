@@ -99,7 +99,7 @@
 		<div class="flex flex-1 items-center justify-end">
 			{#if staff}
 				<div class="btn_wrp" on:click={() => goto('/admin/dashboard/user/manage')}>
-					<Button color="COLORBLK1" color_t="COLORWHT" text="New user" icon={faPlus} />
+					<Button color="COLORDARK-75" color_t="COLORLIGHT-100" text="New user" icon={faPlus} />
 				</div>{/if}
 			<!-- <div class="flex flex-col items-end space-y-2">
 						<SearchBar
@@ -130,8 +130,8 @@
 						<UserPill
 							{user}
 							tag
-							tagColor={user?.staff ? 'COLORHPK' : 'COLORGRN2'}
-							tagColor_t={user?.staff ? 'COLORWHT' : 'COLORWHT'}
+							tagColor={user?.staff ? 'COLORACCENTL' : 'COLORACCENTD'}
+							tagColor_t={user?.staff ? 'COLORLIGHT-100' : 'COLORLIGHT-100'}
 							tagText={user?.staff ? 'Admin' : 'User'}
 							description={data[0].score
 								? 'Not available with search.'
@@ -168,8 +168,8 @@
 									>
 										<Button
 											icon={faUserCog}
-											color="COLORBLE"
-											color_t="COLORWHT"
+											color="COLORACCENTD"
+											color_t="COLORDARK-75"
 											text="Load account"
 										/>
 									</div>{/if}
@@ -177,7 +177,7 @@
 									class="edit-wrap h-fit w-fit"
 									on:click={() => goto(`/admin/dashboard/user/manage2?user_id=${user?._id}`)}
 								>
-									<Button icon={faCog} color="COLORWHT" color_t="COLORBLK" text="Edit Account" />
+									<Button icon={faCog} color="COLORDARK-75" color_t="COLORDARK-100" text="Edit Account" />
 								</div>
 							</div>
 						</UserPill>

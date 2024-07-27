@@ -24,18 +24,18 @@
 
 <form
 	bind:this={form}
-	class="searchbar mx-8 flex flex-1 items-center rounded-sm bg-COLORWHT bg-opacity-90 px-4 py-2 text-sm"
+	class="searchbar mx-8 flex flex-1 items-center rounded-sm bg-COLORLIGHT-100 bg-opacity-90 px-4 py-2 text-sm"
 	on:input={handleChange}
 	action={toUrl ?? '/product'}
 >
 	<div class="searchicon w-fit">
-		<Fa icon={faSearch} size="1.01x" class="pr-4 text-COLORWHT" />
+		<Fa icon={faSearch} size="1.01x" class="pr-4 text-COLORLIGHT-100" />
 	</div>
 	<input
 		value={value ?? ''}
 		type="text"
 		name="search"
-		class="font-regular w-full bg-transparent px-2 py-1 text-COLORWHT focus:outline-none"
+		class="font-regular w-full bg-transparent px-2 py-1 text-COLORLIGHT-100 focus:outline-none"
 		placeholder={placeholder ?? 'Search for something else?'}
 	/>
 </form>

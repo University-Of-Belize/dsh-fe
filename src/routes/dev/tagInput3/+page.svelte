@@ -26,7 +26,7 @@
 
 		// Tag element
 		tagElement.classList.add('tag2');
-		tagElement.classList.add('bg-COLORBLE');
+		tagElement.classList.add('bg-COLORACCENTL');
 
 		// Close element
 		closeElement.classList.add('tag-close');
@@ -96,12 +96,12 @@
 	}
 </script>
 
-<main class="p-8 text-COLORWHT">
+<main class="p-8 text-COLORLIGHT-100">
 	<div class="mb-2 mt-6 text-2xl font-semibold">Development Area</div>
 	<div
 		bind:this={terminal}
 		style="font-family: 'Courier New', Courier, monospace;"
-		class="consoleEventLog block w-full rounded-sm border border-COLORWHT p-8 font-mono text-COLORBLE"
+		class="consoleEventLog block w-full rounded-sm border border-COLORLIGHT-100 p-8 font-mono text-COLORACCENTL"
 	>
 		<div>[TERMINAL] Ready to accept input</div>
 	</div>
@@ -112,7 +112,7 @@
 			<div class="tag-close ml-1">×</div>
 		</div>
 		<div
-			class="tag2 mr-1 flex h-9 w-fit items-center justify-center rounded-md bg-COLORBLE p-2 text-COLORWHT"
+			class="tag2 mr-1 flex h-9 w-fit items-center justify-center rounded-md bg-COLORACCENTL p-2 text-COLORLIGHT-100"
 		>
 			This is what a tag looks like
 			<div class="tag-close ml-1">×</div>
@@ -124,7 +124,7 @@
 	</div>
 	<div class="mt-6 text-xl font-semibold">Tag Input</div>
 	<div
-		class="tagInput mt-2 flex w-full items-center rounded-sm border border-COLORWHT bg-COLORWHT5 px-4 py-2 text-sm aria-disabled:cursor-not-allowed aria-disabled:opacity-40 {custom_style}"
+		class="tagInput mt-2 flex w-full items-center rounded-sm border border-COLORLIGHT-100 bg-COLORLIGHT-100 px-4 py-2 text-sm aria-disabled:cursor-not-allowed aria-disabled:opacity-40 {custom_style}"
 	>
 		<div bind:this={tagArea} class="tagArea flex px-2" />
 		<TextInput
@@ -158,7 +158,7 @@
 	}
 	/* Tag component */
 	:global(.tag) {
-		/* w-full rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORWHT aria-disabled:opacity-40 aria-disabled:cursor-not-allowed */
+		/* w-full rounded-sm bg-COLORLIGHT-100 px-4 py-2 items-center text-sm border border-COLORLIGHT-100 aria-disabled:opacity-40 aria-disabled:cursor-not-allowed */
 		display: flex;
 		justify-content: center;
 		align-items: center;

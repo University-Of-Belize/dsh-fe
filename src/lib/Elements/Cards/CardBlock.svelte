@@ -11,8 +11,8 @@
 	export let where_to: string;
 	// export let image_alt: string = "No image alt provided";
 	export let button_icon: IconDefinition;
-	export let button_color: string = 'COLORBLK4';
-	export let button_text_color: string = 'COLORWHT';
+	export let button_color: string = 'COLORDARK-15';
+	export let button_text_color: string = 'COLORLIGHT-100';
 	export let button_reloads: boolean = false;
 </script>
 
@@ -24,7 +24,7 @@
     </div> -->
 
 	<div
-		class="flex-1 basis-full overflow-hidden rounded-md border border-COLORHPK bg-COLORBLK1 p-6 text-COLORWHT lg:mx-1 lg:basis-0"
+		class="flex-1 basis-full overflow-hidden rounded-md border border-COLORACCENTL bg-COLORDARK-75 p-6 text-COLORLIGHT-100 lg:mx-1 lg:basis-0"
 	>
 		<div class="mb-6 text-xl font-semibold">
 			{@html title}

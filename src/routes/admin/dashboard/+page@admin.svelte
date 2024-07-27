@@ -82,7 +82,7 @@
 							toast.push('Notifications are now enabled for this device.', {
 								dismissable: false,
 								theme: {
-									'--toastBarBackground': 'rgb(var(--COLORBLE))'
+									'--toastBarBackground': 'rgb(var(--COLORACCENTD))'
 								}
 							});
 						} else {
@@ -91,7 +91,7 @@
 							toast.push('Notifications will now be disabled for this device moving forward.', {
 								dismissable: false,
 								theme: {
-									'--toastBarBackground': 'rgb(var(--COLORBLE))'
+									'--toastBarBackground': 'rgb(var(--COLORACCENTD))'
 								}
 							});
 							localStorage.setItem('notifications_enabled', 'false');
@@ -104,7 +104,7 @@
 							toast.push('Notifications will now be disabled for this device moving forward.', {
 								dismissable: false,
 								theme: {
-									'--toastBarBackground': 'rgb(var(--COLORBLE))'
+									'--toastBarBackground': 'rgb(var(--COLORACCENTD))'
 								}
 							});
 							localStorage.setItem('notifications_enabled', 'false');
@@ -115,7 +115,7 @@
 								{
 									dismissable: false,
 									theme: {
-										'--toastBarBackground': 'rgb(var(--COLORRED))'
+										'--toastBarBackground': 'rgb(var(--COLORACCENTL))'
 									}
 								}
 							);
@@ -163,7 +163,7 @@
 		{#if data != undefined}
 			{#each data.is[0][1] as shortcut, i}
 				<div
-					class="mx-4 my-4 h-56 w-56 cursor-pointer select-none rounded-sm bg-COLORBLK1 text-COLORWHT hover:opacity-80"
+					class="mx-4 my-4 h-56 w-56 cursor-pointer select-none rounded-sm bg-COLORDARK-75 text-COLORLIGHT-100 hover:opacity-80"
 					on:click={() => goto(data.is[1][1][i] ?? '/admin/dashboard')}
 				>
 					<div class="flex h-full w-full items-center justify-center text-center">

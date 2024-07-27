@@ -46,7 +46,7 @@
 		<div class="flex flex-1 items-center justify-end">
 			<div class="flex flex-col items-end space-y-2">
 				<div class="btn_wrp" on:click={() => goto('/admin/dashboard/promo/manage')}>
-					<Button color="COLORBLK1" color_t="COLORWHT" text="New promo" icon={faPlus} />
+					<Button color="COLORDARK-75" color_t="COLORLIGHT-100" text="New promo" icon={faPlus} />
 				</div>
 			</div>
 		</div>
@@ -80,8 +80,8 @@
 									<Button
 										icon={faTrash}
 										color="transparent"
-										custom_style="border border-COLORHPK"
-										color_t="COLORHPK"
+										custom_style="border border-COLORACCENTL"
+										color_t="COLORACCENTL"
 										text="Delete promotion"
 									/>
 								</div>
@@ -92,8 +92,8 @@
 									>
 										<Button
 											icon={faCog}
-											color="COLORWHT"
-											color_t="COLORBLK"
+											color="COLORLIGHT-100"
+											color_t="COLORDARK-100"
 											text="Edit promotion"
 										/>
 									</div></a

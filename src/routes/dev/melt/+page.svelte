@@ -1,8 +1,8 @@
 <svelte:options accessors />
 
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import html2canvas from 'html2canvas';
+	import { onMount } from 'svelte';
 
 	let terminal: HTMLDivElement;
 	let canvas: HTMLCanvasElement;
@@ -153,11 +153,11 @@
 	// End of user-code
 </script>
 
-<main class="p-8 text-COLORWHT">
+<main class="p-8 text-COLORLIGHT-100">
 	<div class="mb-2 mt-6 text-2xl font-semibold">Development Area</div>
 	<div
 		bind:this={terminal}
-		class="consoleEventLog block w-full rounded-sm border border-COLORWHT p-8 font-mono text-COLORBLE"
+		class="consoleEventLog block w-full rounded-sm border border-COLORLIGHT-100 p-8 font-mono text-COLORACCENTL"
 	>
 		<div class="consoleEvent">[TERMINAL] Ready to accept input</div>
 	</div>

@@ -186,7 +186,7 @@
 	<div class="navigation z-20 w-full">
 		<Navigation transparency={5} search={true} titleWhere="/" />
 	</div>
-	<div class="main-content flex h-full items-center justify-start text-COLORWHT">
+	<div class="main-content flex h-full items-center justify-start text-COLORLIGHT-100">
 		<div
 			class="page-content flex h-full w-full flex-wrap items-start justify-center overflow-auto bg-transparent p-2 py-16 lg:space-x-14"
 		>
@@ -200,7 +200,7 @@
 						</div>
 						<div class="flex space-x-2 lg:flex-1 lg:justify-end">
 							<div class="btn-wrp" on:click={() => history.back()}>
-								<Button text="Go Back" color="COLORBLK4" color_t="COLORWHT" icon={undefined} />
+								<Button text="Go Back" color=COLORDARK-75 color_t="COLORLIGHT-100" icon={undefined} />
 							</div>
 							<div
 								class="btn-wrp"
@@ -211,10 +211,10 @@
 									}, 3000);
 								}}
 							>
-								<IconButton icon={faTrash} color="COLORBLK4" color_t="COLORHPK" />
+								<IconButton icon={faTrash} color=COLORDARK-75 color_t="COLORACCENTL" />
 							</div>
 							<div class="btn-wrp" on:click={() => window.print()}>
-								<IconButton icon={faPrint} color="COLORBLK4" color_t="COLORWHT" />
+								<IconButton icon={faPrint} color=COLORDARK-75 color_t="COLORLIGHT-100" />
 							</div>
 						</div>
 					</div>
@@ -227,7 +227,7 @@
 					{#if data != undefined && dataLength > 0}
 						{#each data as item, index}
 							<li
-								class="flex flex-col space-y-3 py-6 text-left text-COLORWHT sm:flex-row sm:space-x-5 sm:space-y-0"
+								class="flex flex-col space-y-3 py-6 text-left text-COLORLIGHT-100 sm:flex-row sm:space-x-5 sm:space-y-0"
 							>
 								<div class="shrink-0">
 									<img
@@ -276,13 +276,13 @@
 											</p>
 
 											<div class="sm:order-1">
-												<div class="mx-auto flex h-8 items-stretch text-COLORBLK">
+												<div class="mx-auto flex h-8 items-stretch text-COLORLIGHT-100">
 													<button
 														id="cartQuantityIncrease_{index}"
 														on:click={() => {
 															updateCartQuantity(item, item.quantity - 1, index);
 														}}
-														class="flex items-center justify-center rounded-l-md border border-gray-700 bg-COLORBLK1 bg-opacity-80 px-4 text-COLORWHT transition hover:opacity-70"
+														class="flex items-center justify-center rounded-l-md border border-gray-700 bg-COLORDARK-75 bg-opacity-80 px-4 text-COLORLIGHT-100 transition hover:opacity-70"
 														>-</button
 													>
 													<input
@@ -296,7 +296,7 @@
 																index
 															);
 														}}
-														class="m-0 flex h-full w-16 items-center justify-center border-y border-gray-700 bg-COLORBLK1 p-0 px-4 text-center text-xs uppercase text-COLORWHT transition"
+														class="m-0 flex h-full w-16 items-center justify-center border-y border-gray-700 bg-COLORDARK-75 p-0 px-4 text-center text-xs uppercase text-COLORLIGHT-100 transition"
 														value={item.quantity ?? '1'}
 													/>
 													<button
@@ -304,7 +304,7 @@
 														on:click={() => {
 															updateCartQuantity(item, item.quantity + 1, index);
 														}}
-														class="flex items-center justify-center rounded-r-md border border-gray-700 bg-COLORBLK1 bg-opacity-80 px-4 text-COLORWHT transition hover:opacity-70"
+														class="flex items-center justify-center rounded-r-md border border-gray-700 bg-COLORDARK-75 bg-opacity-80 px-4 text-COLORLIGHT-100 transition hover:opacity-70"
 														>+</button
 													>
 												</div>
@@ -321,7 +321,7 @@
 													window.location.reload();
 												}, 3000);
 											}}
-											class="flex items-center space-x-2 rounded bg-COLORBLK2 p-2 text-center text-sm font-light text-COLORWHT3 transition-all duration-200 ease-in-out hover:text-gray-900 focus:shadow"
+											class="flex items-center space-x-2 rounded bg-COLORDARK-50 p-2 text-center text-sm font-light text-COLORLIGHT-50 transition-all duration-200 ease-in-out hover:text-gray-900 focus:shadow"
 										>
 											<svg
 												class="block h-5 w-5"
@@ -354,8 +354,8 @@
 				<div class="my-4 w-full lg:hidden">
 					<Button
 						text="Next"
-						color="COLORBLK4"
-						color_t="COLORWHT"
+						color=COLORDARK-75
+						color_t="COLORLIGHT-100"
 						icon={undefined}
 						custom_style="w-full justify-center py-4 text-md"
 						on:click={() => {
@@ -380,7 +380,7 @@
 					</div>
 					<div class="flex space-x-2 lg:flex-1 lg:justify-end">
 						<div class="btn-wrp" on:click={() => history.back()}>
-							<Button text="Go Back" color="COLORBLK4" color_t="COLORWHT" icon={undefined} />
+							<Button text="Go Back" color=COLORDARK-75 color_t="COLORLIGHT-100" icon={undefined} />
 						</div>
 						<div
 							class="btn-wrp"
@@ -391,27 +391,27 @@
 								}, 3000);
 							}}
 						>
-							<IconButton icon={faTrash} color="COLORBLK4" color_t="COLORHPK" />
+							<IconButton icon={faTrash} color=COLORDARK-75 color_t="COLORACCENTL" />
 						</div>
 						<div class="btn-wrp" on:click={() => window.print()}>
-							<IconButton icon={faPrint} color="COLORBLK4" color_t="COLORWHT" />
+							<IconButton icon={faPrint} color=COLORDARK-75 color_t="COLORLIGHT-100" />
 						</div>
 					</div>
 				</div>
 
 				<div class="total_amount flex w-full flex-col items-center">
 					<div
-						class="mb-4 flex w-full items-center justify-start border-b border-COLORWHT pb-4 text-2xl font-semibold text-COLORWHT"
+						class="mb-4 flex w-full items-center justify-start border-b border-COLORLIGHT-100 pb-4 text-2xl font-semibold text-COLORLIGHT-100"
 					>
 						Total amount
 					</div>
 					<div class="total_block block w-full items-center">
 						<div
-							class="total_item flex w-full flex-wrap items-center overflow-clip rounded-xl bg-COLORBLK3 py-4 text-COLORWHT"
+							class="total_item flex w-full flex-wrap items-center overflow-clip rounded-xl bg-COLORDARK-25 py-4 text-COLORLIGHT-100"
 						>
 							<div class="content mx-4 block">
 								<div class="product-name font-base text-xl">Total amount due today</div>
-								<div class="product-quantity text-sm font-light text-COLORWHT2">
+								<div class="product-quantity text-sm font-light text-COLORLIGHT-25">
 									Your total amount to pay (excl. discounts)
 								</div>
 							</div>
@@ -432,12 +432,12 @@
 						</div>
 						<div class="coupon_checker_section my-6 block w-full items-center">
 							<div
-								class="text-md mb-4 flex w-full items-center justify-start border-b border-COLORWHT pb-4 font-semibold text-COLORWHT"
+								class="text-md mb-4 flex w-full items-center justify-start border-b border-COLORLIGHT-100 pb-4 font-semibold text-COLORLIGHT-100"
 							>
 								Apply a coupon code
 							</div>
 							<form
-								class="coupon_checker flex h-fit flex-wrap items-center overflow-clip rounded-lg border border-COLORWHT bg-COLORBLK1 text-COLORWHT"
+								class="coupon_checker flex h-fit flex-wrap items-center overflow-clip rounded-lg border border-COLORLIGHT-100 bg-COLORDARK-75 text-COLORLIGHT-100"
 								action="#check-voucher"
 								on:submit={(e) => checkCoupon(e)}
 							>
@@ -445,12 +445,12 @@
 									icon={faTicket}
 									name="coupon_code"
 									placeholder="Type in a coupon code and press 'Check'"
-									custom_style="text-COLORBLK bg-transparent border-0 h-full mt-0"
+									custom_style="text-COLORLIGHT-100 bg-transparent border-0 h-full mt-0"
 								/>
 								<Button
 									text="Check"
-									color="COLORBLK4"
-									color_t="COLORWHT"
+									color=COLORDARK-75
+									color_t="COLORLIGHT-100"
 									type="submit"
 									icon={undefined}
 									rounding="sm"

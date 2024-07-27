@@ -43,7 +43,7 @@
 	</div>
 	<div class="block pb-12 text-xl font-light">
 		<div>Experimental features panel.</div>
-		<div class="text-COLORYLW">Try at your own risk.</div>
+		<div class="text-COLORACCENTL">Try at your own risk.</div>
 	</div>
 	<div class="flex w-full flex-col flex-wrap">
 		<div class="block">

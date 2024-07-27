@@ -3,8 +3,8 @@
 	import Fa from 'svelte-fa';
 	export let icon: import('@fortawesome/free-solid-svg-icons').IconDefinition | undefined =
 		undefined;
-	export let color: string = 'COLORBLK4';
-	export let color_t: string = 'COLORWHT';
+	export let color: string = 'COLORDARK-75';
+	export let color_t: string = 'COLORLIGHT-100';
 	export let text: string;
 	export let type: 'button' | 'submit' | 'reset' = 'button';
 	export let custom_style: string | undefined = '';
@@ -32,7 +32,7 @@
 
 <div
 	aria-disabled={disabled}
-	class="placeholder hidden pb-12 w-full border-COLORBLE border-COLORHPK bg-COLORBLE bg-COLORBLK bg-COLORBLK1 bg-COLORBLK2 bg-COLORBLK3 bg-COLORBLK4 bg-COLORBLK5 bg-COLORBYW bg-COLORGRN bg-COLORGRN1 bg-COLORGRN2 bg-COLORHPK bg-COLORPNK bg-COLORRED bg-COLORWHT bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORWHT4 bg-COLORWHT5 bg-COLORYLW text-COLORBLE text-COLORBLK text-COLORBLK1 text-COLORBLK2 text-COLORBLK3 text-COLORBLK4 text-COLORBLK5 text-COLORBYW text-COLORGRN text-COLORGRN1 text-COLORGRN2 text-COLORHPK text-COLORHPK text-COLORPNK text-COLORRED text-COLORWHT text-COLORWHT text-COLORWHT2 text-COLORWHT3 text-COLORWHT4 text-COLORWHT5 text-COLORYLW aria-disabled:cursor-not-allowed aria-disabled:select-none aria-disabled:opacity-40 {class_}"
+	class="placeholder hidden pb-12 w-full border-COLORACCENTD border-COLORACCENTL bg-COLORDARK-75 bg-COLORDARK-25 bg-COLORDARK-50 bg-COLORDARK-75 bg-COLORDARK-100 bg-COLORACCENTD text-COLORDARK-100 bg-COLORDARK-75 bg-COLORDARK-50 bg-COLORDARK-25 bg-COLORDARK-75 bg-COLORDARK-75 bg-COLORACCENTL bg-COLORACCENTD bg-COLORACCENTD bg-COLORACCENTD bg-COLORACCENTL bg-COLORACCENTL bg-COLORACCENTL bg-COLORLIGHT-15 bg-COLORLIGHT-25 bg-COLORLIGHT-50 bg-COLORLIGHT-75 bg-COLORLIGHT-100 bg-COLORWHT2 bg-COLORLIGHT-50 bg-COLORLIGHT-75 bg-COLORLIGHT-100 bg-COLORACCENTL text-COLORACCENTD text-COLORLIGHT-100 text-COLORDARK-75 text-COLORDARK-50 text-COLORDARK-25 text-COLORDARK-15 text-COLORDARK-15 text-COLORACCENTL text-COLORACCENTD text-COLORACCENTD text-COLORACCENTD text-COLORACCENTL text-COLORACCENTL text-COLORACCENTL text-COLORACCENTL text-COLORLIGHT-100 text-COLORLIGHT-100 text-COLORWHT2 text-COLORLIGHT-50 text-COLORLIGHT-75 text-COLORLIGHT-100 text-COLORACCENTL aria-disabled:cursor-not-allowed aria-disabled:select-none aria-disabled:opacity-40 {class_}"
 >
 	&nbsp;
 </div>
@@ -50,7 +50,7 @@
 >
 	<div class="icon hidden w-fit lg:block">
 		{#if custom_icon}
-			<div bind:this={iconData} class="h-9 w-9 pr-1 first:fill-COLORWHT md:pr-4"></div>
+			<div bind:this={iconData} class="h-9 w-9 pr-1 first:fill-COLORLIGHT-100 md:pr-4"></div>
 			<div style="width: 0px; height: 0px; opacity: 0; overflow: hidden;">
 				<object
 					bind:this={objectData}

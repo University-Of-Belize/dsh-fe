@@ -18,7 +18,7 @@
 
 		// Tag element
 		tagElement.classList.add('tag2');
-		tagElement.classList.add('bg-COLORBLE');
+		tagElement.classList.add('bg-COLORACCENTD');
 
 		// Close element
 		closeElement.classList.add('tag-close');
@@ -86,9 +86,9 @@
 	}
 </script>
 
-<div class="stub hidden bg-COLORBLE" />
+<div class="stub hidden bg-COLORACCENTD" />
 <div
-	class="tagInput mt-2 flex w-full items-center rounded-sm border border-COLORWHT bg-COLORWHT5 px-4 py-2 text-sm aria-disabled:cursor-not-allowed aria-disabled:opacity-40 {custom_style}"
+	class="tagInput mt-2 flex w-full items-center rounded-sm border border-COLORLIGHT-100 bg-COLORLIGHT-100 px-4 py-2 text-sm aria-disabled:cursor-not-allowed aria-disabled:opacity-40 {custom_style}"
 >
 	<div bind:this={tagArea} class="tagArea flex px-2" />
 	<TextInput
@@ -107,7 +107,7 @@
 <style>
 	/* Tag component */
 	:global(.tag) {
-		/* w-full rounded-sm bg-COLORWHT5 px-4 py-2 items-center text-sm border border-COLORWHT aria-disabled:opacity-40 aria-disabled:cursor-not-allowed */
+		/* w-full rounded-sm bg-COLORLIGHT-100 px-4 py-2 items-center text-sm border border-COLORLIGHT-100 aria-disabled:opacity-40 aria-disabled:cursor-not-allowed */
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -130,7 +130,7 @@
 		color: white; /* Corresponds to text-white in Tailwind */
 		border-radius: 0.375rem; /* Corresponds to rounded-md in Tailwind */
 		background-color: #93c5fd; /* Corresponds to bg-blue-300 in Tailwind */
-		background-color: rgb(var(--COLORBLE));
+		background-color: rgb(var(--COLORACCENTD));
 		width: fit-content; /* Corresponds to w-fit in Tailwind */
 	}
 	:global(.tag-close) {

@@ -10,8 +10,8 @@
 	import { R2S3Upload } from '../Utility/vendor/dishout/r2_s3';
 	export let user: User;
 	export let tag: boolean = false;
-	export let tagColor: string = 'COLORWHT';
-	export let tagColor_t: string = 'COLORWHT';
+	export let tagColor: string = 'COLORLIGHT-100';
+	export let tagColor_t: string = 'COLORLIGHT-100';
 	export let tagText: string = '';
 	export let description: string;
 	export let editProfilePicture = false;
@@ -42,19 +42,19 @@
 
 <!-- Color stub -->
 <div
-	class="placeholder hidden w-full bg-COLORBYW bg-COLORPNK bg-COLORRED bg-COLORWHT bg-COLORWHT bg-COLORWHT2 bg-COLORWHT3 bg-COLORYLW"
+	class="placeholder hidden w-full bg-COLORACCENTL bg-COLORACCENTL bg-COLORACCENTL bg-COLORLIGHT-100 bg-COLORLIGHT-100 bg-COLORWHT2 bg-COLORLIGHT-50 bg-COLORACCENTL"
 >
 	&nbsp;
 </div>
 
-<div class="review my-4 rounded-md bg-COLORBLK3 bg-opacity-50 px-4 py-4">
+<div class="review my-4 rounded-md bg-COLORDARK-25 bg-opacity-50 px-4 py-4">
 	<div class="flex flex-wrap space-y-4 bg-opacity-100 lg:space-y-2">
 		<div
 			class="reviewer-pfp flex w-full flex-row items-center justify-center pr-4 lg:w-auto lg:justify-start"
 		>
 			{#if editProfilePicture}
 				<div
-					class="pimg_wrp block h-fit w-fit rounded-md bg-COLORBLE"
+					class="pimg_wrp block h-fit w-fit rounded-md bg-COLORACCENTD"
 					on:click={() => {
 						photoInput.click();
 					}}
@@ -86,7 +86,7 @@
 							class="widget-wrp absolute z-10 flex w-full items-center justify-end"
 						>
 							<div
-								class="widget w-fit cursor-pointer rounded-md bg-COLORBLE px-2 py-2 text-COLORWHT shadow-md hover:opacity-80"
+								class="widget w-fit cursor-pointer rounded-md bg-COLORACCENTD px-2 py-2 text-COLORLIGHT-100 shadow-md hover:opacity-80"
 							>
 								<Fa icon={faImage} size="0.85x" />
 							</div>
@@ -135,10 +135,10 @@
 					</div>
 				{/if}
 			</div>
-			<div class="text-md mb-2 mt-4 hidden font-light text-COLORBLE lg:m-0 lg:block">
+			<div class="text-md mb-2 mt-4 hidden font-light text-COLORACCENTD lg:m-0 lg:block">
 				{@html description}
 			</div>
-			<div class="actions flex w-full flex-1 items-center justify-start text-COLORWHT lg:w-auto">
+			<div class="actions flex w-full flex-1 items-center justify-start text-COLORLIGHT-100 lg:w-auto">
 				<slot />
 			</div>
 		</div>
