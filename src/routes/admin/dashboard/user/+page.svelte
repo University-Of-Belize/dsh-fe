@@ -177,7 +177,7 @@
 									class="edit-wrap h-fit w-fit"
 									on:click={() => goto(`/admin/dashboard/user/manage2?user_id=${user?._id}`)}
 								>
-									<Button icon={faCog} color="COLORDARK-75" color_t="COLORDARK-100" text="Edit Account" />
+									<Button icon={faCog} color="COLORDARK-50" color_t="COLORLIGHT-100" text="Edit Account" />
 								</div>
 							</div>
 						</UserPill>
