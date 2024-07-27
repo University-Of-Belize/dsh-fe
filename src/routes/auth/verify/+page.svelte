@@ -53,8 +53,36 @@
 			// @ts-ignore
 			installPrompt = window.installPrompt;
 			if (!installPrompt) {
-				branding_text = 'The app is already installed';
-				text = 'You already have the app installed. No need to reinstall again.';
+				let device = navigator.platform;
+				const UAData = navigator.userAgentData;
+				if (!device) {
+					if (UAData) device = UAData.platform;
+					else device = 'Unknown';
+				}
+
+				// Normalize the device
+				device = device.toLowerCase();
+				if (device.includes('win') || device.includes('pocket')) device = 'windows';
+				else if (device.includes('mac')) device = 'macos';
+				else if (device.includes('linux')) device = 'linux';
+				else if (device.includes('android')) device = 'android';
+				else if (
+					device.includes('iphone') ||
+					device.includes('ipod') ||
+					device.includes('ipad') ||
+					device.includes('pike')
+				)
+					device = 'ios';
+				else device = 'unknown';
+
+				if (device === 'windows' || device === 'linux' || device === 'android') {
+					branding_text = 'The app is already installed';
+					text = 'You already have the app installed. No need to reinstall again.';
+				} else {
+					branding_text = 'Unsupported device';
+					text =
+						'Try signing up through the website. You can only use the website, but not install the app on this device. Please use a supported device to install the app.';
+				}
 				subtitle = 'Redirecting you back to the home page.';
 				buttonText = '';
 				smartButton.style.display = 'none';
