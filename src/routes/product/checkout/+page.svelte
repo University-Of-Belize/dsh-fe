@@ -410,7 +410,7 @@
 							class="total_item flex w-full flex-wrap items-center overflow-clip rounded-xl bg-COLORDARK-25 py-4 text-COLORLIGHT-100"
 						>
 							<div class="content mx-4 block">
-								<div class="product-name font-base text-xl">Total amount due today</div>
+								<div class="product-name font-normal text-xl">Total amount due today</div>
 								<div class="product-quantity text-sm font-light text-COLORLIGHT-25">
 									Your total amount to pay (excl. discounts)
 								</div>

@@ -285,15 +285,17 @@
 <div
 	class="content block h-full w-full overflow-auto bg-transparent p-2 py-8 pb-40 lg:px-16 lg:py-16"
 >
-	<div class="flex-header lg:flex block w-full flex-wrap items-start">
+	<div class="flex-header block w-full flex-wrap items-start lg:flex">
 		<div class="block">
 			<div class="flex pb-2 text-2xl font-semibold">What's Queued?</div>
-			<div class="flex pb-4 lg:pb-12 text-xl font-light">
+			<div class="flex pb-4 text-xl font-light lg:pb-12">
 				{staff ? 'Accept, decline and modify orders' : 'View and modify your open orders.'}
 			</div>
 		</div>
-		<div class="flex flex-1 justify-start lg:justify-end pb-2 text-xl font-normal">
-			<span class="border border-COLORLIGHT-75 px-4 py-2 mb-8">Open Orders: {data ? data.length : '--'}</span>
+		<div class="flex flex-1 justify-start pb-2 text-xl font-normal lg:justify-end">
+			<span class="mb-8 border border-COLORLIGHT-75 px-4 py-2"
+				>Open Orders: {data ? data.length : '--'}</span
+			>
 		</div>
 	</div>
 	<div class="flex w-full flex-col-reverse flex-wrap">
@@ -345,49 +347,67 @@
 							</div>
 
 							{#each order.products as product, index (product.product?._id)}
-								<div class="product-order-container mt-4 w-full">
+								<div class="product-order-container mt-4 w-full border-b border-COLORDARK-50 border-dashed pb-8 my-4">
 									<div class="flex flex-wrap">
 										<div class="my-4 text-2xl font-semibold">
 											{product.quantity + 'x '}
 											{product.product?.productName ?? 'Product Unavailable'}
 										</div>
-										<div
-											class="flex flex-1 basis-full items-center justify-start space-x-2 md:basis-0 md:justify-end"
-										>
-											{#if staff}
-												<button
-													class="btn_wrp h-fit w-fit"
-													on:click={() =>
-														goto(
-															`/admin/dashboard/product/manage?product_id=${
-																product.product?._id ?? 'back'
-															}`
-														)}
-												>
-													<Button
-														icon={faCog}
-														color="COLORACCENTD"
-														color_t="COLORLIGHT-100"
-														text="Edit Listing"
-														custom_style="my-2"
-														icon_on_sm
-													/>
-												</button>
+										<div class="block w-full">
+											<div class="block space-x-2">
+												{#if staff}
+													<button
+														class="btn_wrp h-fit w-fit"
+														on:click={() =>
+															goto(
+																`/admin/dashboard/product/manage?product_id=${
+																	product.product?._id ?? 'back'
+																}`
+															)}
+													>
+														<Button
+															icon={faCog}
+															color="COLORACCENTD"
+															color_t="COLORLIGHT-100"
+															text="Edit Listing"
+															custom_style="my-2"
+														/>
+													</button>
 
-												<button
-													class="btn_wrp h-fit w-fit"
-													on:click={() => goto(`/product/${product.product?.slug ?? 'back'}`)}
-												>
-													<Button
-														icon={faShare}
-														color="COLORLIGHT-100"
-														color_t="COLORDARK-100"
-														text="Go to Listing"
-														custom_style="my-2"
-														icon_on_sm
-													/>
-												</button>
-											{/if}
+													<button
+														class="btn_wrp h-fit w-fit"
+														on:click={() => goto(`/product/${product.product?.slug ?? 'back'}`)}
+													>
+														<Button
+															icon={faShare}
+															color="COLORLIGHT-100"
+															color_t="COLORDARK-100"
+															text="Go to Listing"
+															custom_style="my-2"
+														/>
+													</button>
+												{/if}
+											</div>
+											<div class="mb-4 mt-2 block">
+												<div class="text-md font-normal">
+													Product Price: {parseFloat(
+														product.product?.price.$numberDecimal
+													).toLocaleString('en-US', {
+														style: 'currency',
+														currency: config['checkout']['currency'],
+														minimumFractionDigits: 2
+													}) ?? '0.00'}
+												</div>
+												<div class="text-md font-normal">
+													Price x Quantity: {parseFloat(
+														product.product?.price.$numberDecimal * product.quantity
+													).toLocaleString('en-US', {
+														style: 'currency',
+														currency: config['checkout']['currency'],
+														minimumFractionDigits: 2
+													}) ?? '0.00'}
+												</div>
+											</div>
 										</div>
 									</div>
 									<div class="banner-top items-top flex w-full flex-wrap space-x-4">
@@ -417,15 +437,17 @@
 												class="product-description text-md mb-4 hidden h-full w-full rounded-md bg-transparent py-1 font-light text-COLORLIGHT-100"
 											>
 												<div class="text">
-													{@html product.product?.description.length > 250
-														? `${product.product?.description.slice(
-																0,
-																250
-															)}... <a class='font-semibold hover:underline' href='/product/${
-																product.product?.slug
-															}'>Read more</a>`
-														: product.product?.description ??
-															'This product entry is corrupt, failed to load or has been deleted.'}
+													{@html product.product?.description
+														? product.product?.description.length > 250
+															? `${product.product?.description.slice(
+																	0,
+																	250
+																)}... <a class='font-semibold hover:underline' href='/product/${
+																	product.product?.slug
+																}'>Read more</a>`
+															: product.product?.description ??
+																'This product entry is corrupt, failed to load or has been deleted.'
+														: 'No description.'}
 												</div>
 												<div class="product-price my-2 text-xl font-semibold">
 													{parseFloat(product.product?.price.$numberDecimal).toLocaleString(
@@ -447,14 +469,21 @@
 										</div>
 									</div>
 								</div>{/each}
-							<div class="my-4 hidden text-2xl font-semibold">
-								{parseFloat(order.final_amount.$numberDecimal ?? '0.00').toLocaleString('en-US', {
+							<div class="text-md mt-8 font-normal">
+								Discount %: {order.promo_code ? order.promo_code.discount_percentage : '0'}%
+							</div>
+							<div class="text-md mb-4 font-normal">
+								Final amount: {parseFloat(
+									order.final_amount.$numberDecimal ?? '0.00'
+								).toLocaleString('en-US', {
 									style: 'currency',
 									currency: config['checkout']['currency'],
 									minimumFractionDigits: 2
-								})}
+								}) ?? '0.00'}
 							</div>
-							<div class="flex flex-1 flex-wrap items-center justify-start space-x-2">
+							<div
+								class="flex flex-1 flex-wrap items-center justify-center space-x-2 lg:justify-start"
+							>
 								{#if staff}
 									<button
 										class="btn_wrp h-fit w-fit"
