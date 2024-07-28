@@ -28,6 +28,8 @@
 	let promos: Promo['code'][];
 	let currentAction: [number, string] = [-1, '']; // Not selected
 	let drawerOpenBy: number;
+    let exportMessage: HTMLSpanElement;
+
 	async function catchAll() {
 		// Try to see if we provided an order ID to search for
 		locateNodeUsingHash('order');
@@ -114,12 +116,14 @@
 			<div class="flex pb-4 text-xl font-light lg:pb-12">View closed orders</div>
 		</div>
 		<div
-			class="block flex-1 justify-start space-y-2 pb-2 text-2xl font-semibold lg:flex lg:justify-end lg:space-x-2 lg:space-y-0"
+			class="block pb-2 flex-1"
 		>
+        <div class="block lg:flex flex-1 justify-start space-y-2 text-2xl font-semibold lg:justify-end lg:space-x-2 lg:space-y-0">
 			<Button
 				text="Download Spreadsheet"
 				icon={faFileCsv}
 				on:click={async () => {
+                    exportMessage.classList.remove('hidden');
 					let data_ = JSON.parse(JSON.stringify(data));
 
 					// Remove unnecessary data
@@ -171,6 +175,7 @@
 					const csv = await converter.json2csv(data_);
 					// Create the blob
 					const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+                    exportMessage.classList.add('hidden');
 					saveAs(blob, 'closed_orders.csv');
 				}}
 			/>
@@ -178,6 +183,7 @@
 				text="Download XLSX"
 				icon={faFileExcel}
 				on:click={async () => {
+                    exportMessage.classList.remove('hidden');
 					let data_ = JSON.parse(JSON.stringify(data));
 					const workbook = xlsx.utils.book_new();
 
@@ -282,10 +288,13 @@
 					// Reorder the sheets
 					workbook.SheetNames = ['Closed Orders', 'Products Sold'];
 
+                    exportMessage.classList.add('hidden');
 					// Save the file
 					xlsx.writeFile(workbook, 'closed_orders.xlsx');
 				}}
 			/>
+        </div>
+        <span bind:this={exportMessage} class="flex hidden flex-1 justify-end my-2 text-COLORLIGHT-25 text-sm font-light">Generating export...</span>
 		</div>
 	</div>
 	<div class="flex w-full flex-col-reverse flex-wrap">
