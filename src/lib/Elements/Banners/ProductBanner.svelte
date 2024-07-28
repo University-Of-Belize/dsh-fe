@@ -2,7 +2,7 @@
 	import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 	import { goto } from '$app/navigation';
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import type { Product } from '$lib/types/Product';
 	import IconButton from '../Buttons/IconButton.svelte';
 	import StarCount from '../Generic/StarCount.svelte';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import type { Category } from '$lib/types/Category';
 	export let category: Category;
 	export let description: string;

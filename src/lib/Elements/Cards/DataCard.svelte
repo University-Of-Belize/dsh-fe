@@ -6,7 +6,7 @@
 	export let error_text: string;
 	export let no_forward: boolean = false;
 
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 </script>
 
 <div class="my-10 grid max-w-md">

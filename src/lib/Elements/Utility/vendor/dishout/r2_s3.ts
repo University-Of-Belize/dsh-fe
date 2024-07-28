@@ -1,4 +1,4 @@
-import config from '$lib/config/settings';
+import config from '$lib/config/index';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { toast } from '@zerodevx/svelte-toast';
@@ -56,3 +56,4 @@ async function R2S3Upload(event: Event, custom_path?: string, custom_filename?: 
 }
 
 export { R2S3Upload };
+

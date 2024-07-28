@@ -4,7 +4,7 @@
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
 	import CommentBox from '$lib/Elements/Inputs/CommentBox.svelte';
 	import { createArticle, deleteArticle } from '$lib/Elements/Utility/Article';
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import type { Article } from '$lib/types/Article';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';

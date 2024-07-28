@@ -1,5 +1,5 @@
 import { goto } from '$app/navigation';
-import config from '$lib/config/settings';
+import config from '$lib/config/index';
 import { toast } from '@zerodevx/svelte-toast';
 
 // Stolen code from: https://developer.spotify.com/

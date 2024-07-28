@@ -6,7 +6,7 @@
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import { createProduct, deleteProduct, editProduct } from '$lib/Elements/Utility/Product';
 	import { R2S3Upload } from '$lib/Elements/Utility/vendor/dishout/r2_s3';
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import type { Category } from '$lib/types/Category';
 	import type { Product } from '$lib/types/Product';
 	import type { User } from '$lib/types/User';

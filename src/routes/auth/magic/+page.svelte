@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import {
 		faKey,

@@ -3,7 +3,7 @@
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
 	import CommentBox from '$lib/Elements/Inputs/CommentBox.svelte';
 	import { createFeedback, deleteFeedback } from '$lib/Elements/Utility/Feedback';
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import type { Feedback } from '$lib/types/Feedback';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';

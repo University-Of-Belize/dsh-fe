@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import {
 		faCheckDouble,
 		faCog,

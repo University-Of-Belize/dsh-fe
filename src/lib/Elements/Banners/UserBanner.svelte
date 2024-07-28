@@ -1,5 +1,5 @@
 <script lang="ts">
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import type { User } from '$lib/types/User';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';

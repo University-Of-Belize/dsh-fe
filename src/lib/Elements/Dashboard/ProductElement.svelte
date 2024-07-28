@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import { faCheckDouble, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { addToCart } from '../Utility/Cart';

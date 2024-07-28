@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import IconButton from '$lib/Elements/Buttons/IconButton.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';

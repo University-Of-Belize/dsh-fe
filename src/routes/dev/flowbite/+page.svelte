@@ -5,7 +5,7 @@
 	import { sineIn } from 'svelte/easing';
 /***********************/
 	import { goto } from '$app/navigation';
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import type { Category } from '$lib/types/Category';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';

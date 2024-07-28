@@ -10,7 +10,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import { v4 } from 'uuid';
 
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import creditCardType from 'credit-card-type';
 
 	// The cart is an array of Products

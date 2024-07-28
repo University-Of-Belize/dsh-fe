@@ -1,5 +1,5 @@
 // import { goto } from '$app/navigation';
-// import config from '$lib/config/settings';
+// import config from '$lib/config/index';
 import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
 import { fetchWebApi } from '$lib/vendor/dishout/api';

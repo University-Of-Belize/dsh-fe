@@ -1,5 +1,5 @@
 <script lang="ts">
-	// import config from '$lib/config/settings';
+	// import config from '$lib/config/index';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';

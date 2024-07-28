@@ -2,7 +2,7 @@
 
 <script lang="ts">
 	import { escapeHtml } from '$lib/Elements/Utility/Review';
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import { faPencil } from '@fortawesome/free-solid-svg-icons';
 	import { createEventDispatcher } from 'svelte';
 	import Fa from 'svelte-fa';

@@ -3,7 +3,7 @@
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 // import Button from '$lib/Elements/Buttons/Button.svelte';
 	import TourModal from '$lib/Elements/Tour/default.svelte';
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import { admin_tour } from '$lib/data/tour_data';
 	import type { TourConfig } from '$lib/tour/index';
 	import Tour from '$lib/tour/index';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	export let text: string;
 	export let branding_text: string = config.ui['branding-text'];
 </script>

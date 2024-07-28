@@ -5,15 +5,15 @@
 	import { updated } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import ColorInput from '$lib/Elements/Inputs/TextInput.svelte';
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import type { FirebaseMessage } from '$lib/types/Firebase';
 	import { ThemeDefinition } from '$lib/types/ThemeDefinition';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
+	import { partytownSnippet } from '@builder.io/partytown/integration';
 	import { initializeApp } from '@firebase/app';
 	import { getMessaging, onMessage } from '@firebase/messaging';
 	import { faPaintbrush, faShare, faX } from '@fortawesome/free-solid-svg-icons';
 	import { SvelteToast, toast } from '@zerodevx/svelte-toast';
-	import { partytownSnippet } from '@builder.io/partytown/integration';
 	import 'node-localstorage/register';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import type { User } from '$lib/types/User';
 	export let user: User;
 	export let tag: boolean = false;

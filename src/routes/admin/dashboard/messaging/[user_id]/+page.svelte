@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import config from '$lib/config/settings';
+	import config from '$lib/config/index';
 	import MessageStrip from '$lib/Elements/Dashboard/MessageStrip.svelte';
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import type { Message, ServerMessage, UserDetailsMessage } from '$lib/types/Message';

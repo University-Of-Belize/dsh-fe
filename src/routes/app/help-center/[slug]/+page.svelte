@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	// import config from '$lib/config/settings';
+	// import config from '$lib/config/index';
 	import { onMount } from 'svelte';
 	// import { goto } from '$app/navigation';
 	// import Button from '$lib/Elements/Buttons/Button.svelte';

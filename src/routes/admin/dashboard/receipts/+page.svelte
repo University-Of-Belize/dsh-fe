@@ -6,7 +6,7 @@
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import { getPromo } from '$lib/Elements/Utility/Promo';
 	import { getLocaleDateTime } from '$lib/Elements/Utility/time';
-	import config from '$lib/config/index';
+	import config from '$lib/config';
 	import type { Order } from '$lib/types/Order';
 	import type { Promo } from '$lib/types/Promo';
 	import type { User } from '$lib/types/User';
@@ -52,7 +52,7 @@
 		// Try to see if we provided an order ID to search for
 		locateNodeUsingHash('order');
 		// Fetch all orders
-		const res = (await fetchWebApi('admin/order/manage', 'GET')) as Response;
+		const res = (await fetchWebApi('admin/order/manage?completed=true', 'GET')) as Response;
 		const r = await res.json();
 		if (!res.ok) {
 			return toast.push(r.message);
@@ -287,9 +287,9 @@
 >
 	<div class="flex-header flex w-full flex-wrap items-start">
 		<div class="block">
-			<div class="flex pb-2 text-2xl font-semibold">What's Queued?</div>
+			<div class="flex pb-2 text-2xl font-semibold">View receipts</div>
 			<div class="flex pb-12 text-xl font-light">
-				{staff ? 'Accept, decline and modify orders' : 'View and modify your open orders.'}
+				View closed orders
 			</div>
 		</div>
 		<div class="flex flex-1 justify-end pb-2 text-2xl font-semibold">
