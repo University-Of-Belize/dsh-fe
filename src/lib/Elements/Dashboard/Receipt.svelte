@@ -2,6 +2,7 @@
 	import config from '$lib/config/index';
 	import type { Order } from '$lib/types/Order';
 	import type { User } from '$lib/types/User';
+	import { getLocaleDateTime } from '../Utility/time';
 
 	export let order: Order;
 	export let order_index: number;
@@ -39,8 +40,38 @@
 				</div>
 			</div>
 		</div>
+		<!--- START TABLE (R_DETAILS)-->
+
+		<table class="mt-8 mb-2">
+			<thead class="hidden border-b bg-COLORDARK-50 text-COLORLIGHT-50 lg:table-header-group">
+				<tr class="">
+					<td class="whitespace-normal py-4 text-sm font-semibold sm:px-3">Bill to</td>
+					<td class="whitespace-normal py-4 text-sm font-semibold sm:px-3">Generated at</td>
+					<td class="whitespace-normal py-4 text-sm font-semibold sm:px-3">Receipt/Order #</td>
+					<td class="whitespace-normal py-4 text-sm font-semibold sm:px-3">Order status</td>
+					<!-- <td class="whitespace-normal py-4 text-sm font-semibold sm:px-3">Payment method</td> -->
+					<!-- <td class="whitespace-normal py-4 text-sm font-semibold sm:px-3">Payment status</td> -->
+				</tr>
+			</thead>
+			<tbody class="bg-COLORDARK-75 text-left text-COLORLIGHT-100">
+				<tr class="">
+					<td class="whitespace-no-wrap hidden py-4 text-sm font-normal sm:px-3 lg:table-cell"
+						>{order.order_from.email}</td
+					>
+					<td class="whitespace-no-wrap hidden py-4 text-sm font-normal sm:px-3 lg:table-cell"
+						>{getLocaleDateTime(order.order_date)}</td
+					>
+					<td class="whitespace-no-wrap hidden py-4 text-sm font-normal sm:px-3 lg:table-cell"
+						>{order.order_code}</td
+					>
+					<td class="whitespace-no-wrap hidden py-4 text-sm font-normal sm:px-3 lg:table-cell"
+						>{order.completed? "Yes": "No"}</td
+					>
+		</table>
+
+
 		<!----- START TABLE -->
-		<table class="my-8 w-full rounded-md border-COLORDARK-25 lg:border">
+		<table class="mb-8 w-full rounded-md border-COLORDARK-25 lg:border">
 			<thead class="hidden border-b bg-COLORDARK-50 text-COLORLIGHT-50 lg:table-header-group">
 				<tr class="">
 					<td class="whitespace-normal py-4 text-sm font-semibold sm:px-3"> Order from </td>

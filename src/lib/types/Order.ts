@@ -21,7 +21,9 @@ interface Order {
 	is_accepted?: boolean;
 	override_by?: User;
 	products: CartProduct[];
+	completed: boolean;
 	__v: number;
 }
 
 export type { Order };
+
