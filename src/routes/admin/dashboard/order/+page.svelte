@@ -285,15 +285,15 @@
 <div
 	class="content block h-full w-full overflow-auto bg-transparent p-2 py-8 pb-40 lg:px-16 lg:py-16"
 >
-	<div class="flex-header flex w-full flex-wrap items-start">
+	<div class="flex-header lg:flex block w-full flex-wrap items-start">
 		<div class="block">
 			<div class="flex pb-2 text-2xl font-semibold">What's Queued?</div>
-			<div class="flex pb-12 text-xl font-light">
+			<div class="flex pb-4 lg:pb-12 text-xl font-light">
 				{staff ? 'Accept, decline and modify orders' : 'View and modify your open orders.'}
 			</div>
 		</div>
-		<div class="flex flex-1 justify-end pb-2 text-2xl font-semibold">
-			Open Orders: {data ? data.length : '--'}
+		<div class="flex flex-1 justify-start lg:justify-end pb-2 text-xl font-normal">
+			<span class="border border-COLORLIGHT-75 px-4 py-2 mb-8">Open Orders: {data ? data.length : '--'}</span>
 		</div>
 	</div>
 	<div class="flex w-full flex-col-reverse flex-wrap">
