@@ -445,7 +445,7 @@
 									icon={faTicket}
 									name="coupon_code"
 									placeholder="Type in a coupon code and press 'Check'"
-									custom_style="text-COLORLIGHT-100 bg-transparent border-0 h-full mt-0"
+									custom_style="text-COLORLIGHT-100 bg-transparent border-0 h-full -mt-0 m-0"
 								/>
 								<Button
 									text="Check"
