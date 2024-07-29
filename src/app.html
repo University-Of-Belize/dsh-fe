@@ -33,6 +33,7 @@
 			partytown = {
 				forward: ['dataLayer.push', 'gtag']
 			};
+			window.gtag = function(){dataLayer.push(arguments);}
 		</script>
 		<script type="text/partytown">
 			window.dataLayer = window.dataLayer || [];
