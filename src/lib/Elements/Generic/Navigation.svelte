@@ -47,6 +47,7 @@
 	export let user: User | undefined = localStorage.user;
 	let nav: HTMLDivElement;
 	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
+	let darkMode: boolean = localStorage.theme === 'dark'; // Others will use this
 	let navDrawer: HTMLDivElement;
 	let navClose: HTMLDivElement;
 	let mobile_search: HTMLDivElement;
@@ -136,9 +137,21 @@
 					<Fa icon={faBars} />
 				</Button>
 				<a href="/" class="mr-4 flex">
-					<img src="{config.ui['branding-logo']}" class="mr-3 h-8" alt="Plattr Logo" />
+					<img
+						src={config.ui['branding-logo']}
+						class="mr-3 h-8"
+						alt="{config.ui['branding-text']} Logo"
+					/>
 					<span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-						{@html titleText.length > 15 ? titleText.substring(0, 15) : titleText}
+						{#if titleText !== config.ui['branding-text']}
+							{@html titleText.length > 15 ? titleText.substring(0, 15) : titleText}
+						{:else}
+							<img
+								src={darkMode ? '/icons/splash/splash-dark.svg' : '/icons/splash/splash-light.svg'}
+								class="mr-3 h-8"
+								alt="{config.ui['branding-text']} Logo"
+							/>
+						{/if}
 					</span>
 				</a>
 			</div>
