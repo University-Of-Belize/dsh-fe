@@ -49,8 +49,8 @@
 	class="invisible absolute inset-0 flex items-center justify-center bg-black bg-opacity-80 transition-all"
 >
 	<div class="text-2xl text-white">
-		<p>Thank you for watching</p>
-		<p>Enjoy the rest of the tour</p>
+		<p>Welcome to</p>
+		<p>UniFood</p>
 	</div>
 </div>
 
@@ -63,7 +63,7 @@
 </div>
 
 <YouTube
-	videoId="7id9rU19CDM"
+	videoId="esq2rgWH8qQ"
 	class="h-screen w-full"
 	{options}
 	on:ready={onReady}
