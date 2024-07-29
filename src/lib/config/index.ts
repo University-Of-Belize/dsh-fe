@@ -40,7 +40,7 @@ const settings = {
 		version: version,
 		APIretryLimit: 12, // Should be enough for server "wake-up"
 		'branding-text': 'Plattr',
-		'branding-logo': '/icons/icon-svgrepo.svg',
+		'branding-logo': '/icons/logo.svg',
 		'default-product': {
 			category: { _id: 'placeholder', name: 'Uncategorized' },
 			description: null,

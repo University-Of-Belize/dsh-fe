@@ -136,7 +136,7 @@
 					<Fa icon={faBars} />
 				</Button>
 				<a href="/" class="mr-4 flex">
-					<img src="/icons/icon-svgrepo.svg" class="mr-3 h-8" alt="Plattr Logo" />
+					<img src="{config.ui['branding-logo']}" class="mr-3 h-8" alt="Plattr Logo" />
 					<span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
 						{@html titleText.length > 15 ? titleText.substring(0, 15) : titleText}
 					</span>
