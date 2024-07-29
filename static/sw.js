@@ -72,7 +72,7 @@ self.addEventListener("fetch", async (event) => {
 
    const response = Promise.resolve(event.preloadResponse).then(async (r) => {
       // We don't want to save any of the API requests
-      if (!request.url.includes("/api/" || "cloudflarestorage.com")) {
+      if (!request.url.includes("/api/" || "cloudflarestorage.com" || "r2.dev")) {
          await caches.open(CACHE_NAME).then((cache) => cache.add(request.url));
       }
       return fetch(request, { method: request.method }) ?? r; // Prefer fetch over cached response
