@@ -81,6 +81,6 @@
     "xml-formatter": "^3.6.2"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "4.18.0"
+    "@rollup/rollup-linux-x64-gnu": "4.19.1"
   }
 }
