@@ -31,6 +31,7 @@ RUN if [ -f ./release ]; then \
 RUN bun install
 RUN bun --bun run sitemap
 RUN bunx --bun vite build
+RUN cp -r ./static/~partytown ./build/client/~partytown
 # RUN rm -rf node_modules
 # RUN bun install --ci  # Install with Continuous Integration
 

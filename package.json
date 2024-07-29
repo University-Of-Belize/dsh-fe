@@ -8,7 +8,7 @@
     "sitemap": "npx tsx ./scripts/generate-sitemap.ts",
     "prep": "npx svelte-kit prepare && npm run check && npm run lint && npm run format",
     "prebuild-next": "npx workbox-cli generateSW workbox-config.cjs",
-    "build": "vite build && cp -r ./static/~partytown ./build/client/~partytown",
+    "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
