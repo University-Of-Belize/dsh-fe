@@ -186,6 +186,25 @@
 								required
 							/>
 						</div>
+
+						<div class="my-4 flex items-start justify-start space-x-2">
+							<input
+								required
+								type="checkbox"
+								name="check"
+								title="You must agree to the terms and conditions in order to continue."
+								class="cursor-pointer rounded-md bg-COLORDARK-100 p-2.5"
+							/>
+							<p class="text-COLORLIGHT-75">
+								By signing up, you confirm that you have read and agree to our
+								<a
+									href="/app/legal/terms"
+									class="forgot-password font-semibold text-COLORLIGHT-100 underline underline-offset-4"
+								>
+									Terms and Conditions
+								</a>
+							</p>
+						</div>
 						<span
 							class="mt-4 hidden flex-col border border-l border-COLORACCENTL bg-COLORDARK-75 px-4 py-2 md:flex"
 							>Get early access to new features and the opportunity to share your valuable feedback.</span
@@ -199,10 +218,11 @@
 					>
 				</form>
 				<div class="py-12 text-center">
-					<p class="whitespace-nowrap text-gray-600">
+					<p class="whitespace-nowrap text-COLORLIGHT-75">
 						Already have an account?
-						<a href="/auth/login" class="font-semibold text-COLORLIGHT-100 underline underline-offset-4"
-							>Sign in</a
+						<a
+							href="/auth/login"
+							class="font-semibold text-COLORLIGHT-100 underline underline-offset-4">Sign in</a
 						>
 					</p>
 				</div>
