@@ -143,15 +143,15 @@
 						alt="{config.ui['branding-text']} Logo"
 					/>
 					<span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-						{#if titleText !== config.ui['branding-text']}
-							{@html titleText.length > 15 ? titleText.substring(0, 15) : titleText}
-						{:else}
+						<!-- {#if titleText !== config.ui['branding-text']} -->
+							{@html titleText.length > 15 ? titleText.substring(0, 15) + "..." : titleText}
+						<!-- {:else}
 							<img
 								src={darkMode ? '/icons/splash/splash-dark.svg' : '/icons/splash/splash-light.svg'}
 								class="mr-3 h-8"
 								alt="{config.ui['branding-text']} Logo"
 							/>
-						{/if}
+						{/if} -->
 					</span>
 				</a>
 			</div>
