@@ -30,10 +30,11 @@
 			await RunActivation();
 			state = 0;
 		} else if (localStorage.getItem('oops') === 'true') {
-			branding_text = 'Verify Your Account';
-			text = 'Check your email for a link to verify your account.';
-			subtitle = 'Until then, you have been blocked from using our services.';
-			buttonText = 'Resend Verification';
+			branding_text = 'Thanks For Your Interest!';
+			text = 'Your spot has been reserved!';
+			subtitle = 'Check your email for a link to verify your account when school opens!';
+			buttonText = '';
+			smartButton.style.display = 'none';
 			state = 1;
 		} else if (localStorage.getItem('blocked') === 'true') {
 			branding_text = 'Blocked';
