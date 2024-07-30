@@ -191,7 +191,6 @@
 							<input
 								required
 								type="checkbox"
-								name="check"
 								title="You must agree to the terms and conditions in order to continue."
 								class="cursor-pointer rounded-md bg-COLORDARK-100 p-2.5"
 							/>
