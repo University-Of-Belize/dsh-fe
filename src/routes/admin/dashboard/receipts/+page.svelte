@@ -102,7 +102,7 @@
 </script>
 
 <svelte:head>
-	<title>UniFood | Dashboard / Orders</title>
+	<title>UniFood | Dashboard / Receipts</title>
 </svelte:head>
 
 <div class="stub border- hidden border" />
