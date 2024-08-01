@@ -105,7 +105,7 @@
 	<title>UniFood | Dashboard / Receipts</title>
 </svelte:head>
 
-<div class="stub border- hidden border" />
+<div class="stub hidden border" />
 
 <div
 	class="content block h-full w-full overflow-auto bg-transparent p-2 py-8 pb-40 lg:px-16 lg:py-16"

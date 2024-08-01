@@ -90,7 +90,7 @@
 						<td class="whitespace-no-wrap hidden py-4 text-sm font-normal sm:px-3 lg:table-cell"
 							><img
 								title="{order.order_from.username} ({order.order_from.email})"
-								class="h-8 w-8 cursor-pointer overflow-hidden rounded-full border p-0.5"
+								class="h-8 w-8 cursor-help overflow-hidden rounded-full border p-0.5"
 								src={order.order_from
 									? order.order_from.profile_picture
 										? order.order_from.profile_picture
@@ -160,7 +160,7 @@
 						<td class="whitespace-no-wrap hidden py-4 text-sm font-normal sm:px-3 lg:table-cell">
 							<div class="items-center justify-start space-x-2 lg:flex">
 								<img
-									class="h-8 w-8 cursor-pointer overflow-hidden rounded-full border p-0.5"
+									class="h-8 w-8 cursor-help overflow-hidden rounded-full border p-0.5"
 									src={product.product?.image ?? config['product-showcase']['default-image']}
 									alt={product.product?.productName ?? 'Untitled Product'}
 									title={product.product?.productName ?? 'Untitled Product'}
