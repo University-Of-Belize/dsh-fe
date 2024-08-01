@@ -144,7 +144,7 @@
 					/>
 					<span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
 						<!-- {#if titleText !== config.ui['branding-text']} -->
-							{@html titleText.length > 15 ? titleText.substring(0, 15) + "..." : titleText}
+						{@html titleText.length > 15 ? titleText.substring(0, 15) + '...' : titleText}
 						<!-- {:else}
 							<img
 								src={darkMode ? '/icons/splash/splash-dark.svg' : '/icons/splash/splash-light.svg'}
@@ -327,24 +327,7 @@
 			</div>
 			<div class="hidden flex-1 items-center justify-center lg:flex">
 				<!-- Searchbar -->
-				<form action="/product" method="GET" class="mx-4 hidden w-full lg:block">
-					<label for="topbar-search" class="sr-only">Search</label>
-					<div class="relative w-full">
-						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-							<Fa icon={faSearch} class="mr-4 text-COLORLIGHT-100" />
-						</div>
-						<input
-							{value}
-							type="text"
-							name="search"
-							title="Click to search for snacks, drinks and lunch"
-							id="topbar-search"
-							class="bg-opacity-{transparency +
-								35} block w-full rounded-lg border-0 bg-COLORDARK-75 p-1.5 pl-9 text-xs font-light text-COLORLIGHT-100 placeholder-COLORLIGHT-100 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm"
-							placeholder="Search for snacks, drinks or lunch"
-						/>
-					</div>
-				</form>
+				<SearchBar {value} {transparency} placeholder="Search for snacks, drinks or lunch" />
 			</div>
 			<!-- Login buttons, etc. -->
 			<div class="flex items-center lg:order-2">

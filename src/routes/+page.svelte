@@ -38,7 +38,7 @@
 		LCP_EXT = LCP.split('.').pop(); // Get the extension
 
 		try {
-			const res = (await fetchWebApi('menu/random', 'GET')) as Response;
+			const res = (await fetchWebApi('menu/random?page=10', 'GET')) as Response;
 			if (!res) return;
 			const r = await res.json();
 			product = r.is;
