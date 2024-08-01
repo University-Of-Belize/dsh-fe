@@ -42,7 +42,7 @@
 		</div>
 		<!--- START TABLE (R_DETAILS)-->
 
-		<table class="mt-8 mb-2">
+		<table class="mb-2 mt-8">
 			<thead class="hidden border-b bg-COLORDARK-50 text-COLORLIGHT-50 lg:table-header-group">
 				<tr class="">
 					<td class="whitespace-normal py-4 text-sm font-semibold sm:px-3">Bill to</td>
@@ -65,16 +65,17 @@
 						>{order.order_code}</td
 					>
 					<td class="whitespace-no-wrap hidden py-4 text-sm font-normal sm:px-3 lg:table-cell"
-						>{order.completed? "Yes": "No"}</td
+						>{order.completed ? 'Yes' : 'No'}</td
 					>
+				</tr></tbody
+			>
 		</table>
-
 
 		<!----- START TABLE -->
 		<table class="mb-8 w-full rounded-md border-COLORDARK-25 lg:border">
 			<thead class="hidden border-b bg-COLORDARK-50 text-COLORLIGHT-50 lg:table-header-group">
 				<tr class="">
-					<td class="whitespace-normal py-4 text-sm font-semibold sm:px-3"> Order from </td>
+					<td class="whitespace-normal py-4 text-sm font-semibold sm:px-3">Order from</td>
 
 					<td class="whitespace-normal py-4 text-sm font-medium sm:px-3">Product QTY</td>
 					<td class="whitespace-normal py-4 text-sm font-medium sm:px-3">Product name</td>
@@ -161,7 +162,16 @@
 							<div class="items-center justify-start space-x-2 lg:flex">
 								<img
 									class="h-8 w-8 cursor-help overflow-hidden rounded-full border p-0.5"
-									src={product.product?.image ?? config['product-showcase']['default-image']}
+									src={(() => {
+										if (!product.product) {
+											return config['product-showcase']['default-image'];
+										}
+
+										if (product.product.image.trim() === '') {
+											return config['product-showcase']['default-image'];
+										}
+										return product.product?.image ?? config['product-showcase']['default-image'];
+									})()}
 									alt={product.product?.productName ?? 'Untitled Product'}
 									title={product.product?.productName ?? 'Untitled Product'}
 								/><span>{product.product.productName}</span>
