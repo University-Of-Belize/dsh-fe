@@ -30,6 +30,7 @@
 			await RunActivation();
 			state = 0;
 		} else if (localStorage.getItem('oops') === 'true') {
+			// @remind Change this crap back to the original state after signups are unblocked
 			branding_text = 'Thanks For Your Interest!';
 			text = 'Your spot has been reserved!';
 			subtitle = 'Check your email for a link to verify your account when school opens!';

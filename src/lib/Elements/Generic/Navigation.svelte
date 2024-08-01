@@ -275,7 +275,7 @@
 				<!-- @remind Enable as we continue to create these new, informational pages -->
 				<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">About</a></div> -->
 				<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">Jobs</a></div> -->
-				<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">Terms</a></div> -->
+				<div class="w-full text-center flex justify-center items-center hover:underline"><a href="/app/legal/terms">Terms</a></div>
 				<div class="flex w-full items-center justify-center text-center hover:underline">
 					<a aria-label="View the help center" href="/app/help-center">Blog</a>
 				</div>
@@ -975,7 +975,7 @@
 						</div>
 					</div>
 					<div>
-						<!--- @remind This isn't portable @todo make this portable. -->
+						<!--- @todo Describe this in a better way -->
 						And, if by chance you do experience any bugs, be sure to tell us using the
 						<a href="https://plattr.wuaze.com/public/d/2-using-the-feedback-hub" class="underline"
 							>Feedback Hub</a
