@@ -107,10 +107,10 @@
 				<input
 					type="text"
 					name="search"
-					title="Type in a username to search for a user"
+					title="Type in a username and press enter"
 					id="topbar-search"
 					class="block w-full rounded-lg border-0 bg-COLORDARK-75 p-1.5 pl-9 text-xs font-light text-COLORLIGHT-100 placeholder-COLORLIGHT-100 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:focus:border-primary-500 dark:focus:ring-primary-500 sm:text-sm"
-					placeholder="Type in a username to search for a user"
+					placeholder="Type in a username to search for a user and press enter"
 				/>
 			</div>
 			<p bind:this={error_message} class="mt-2 text-xs text-rose-600"></p>
@@ -135,11 +135,99 @@
 									required
 									icon={faMoneyBills}
 									name="amount-to-refill"
-									min="1"
-									max="100"
+									min="1.00"
+                                    step="0.25"
+									max="100.00"
 									type="number"
 									placeholder="Enter an amount (min 1/max 100)"
 									custom_style="bg-transparent"
+								/>
+							</div>
+							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center space-x-2">
+								<div class="label w-full text-lg font-light mb-1">Common amounts</div>
+								<Button 
+									on:click={() => {
+										refillUserAccount(
+											{
+												preventDefault: () => {},
+												target: [{ name: 'amount-to-refill', value: 2 }]
+											},
+											user_to_refill
+										);
+									}}
+									color="COLORDARK-100"
+									color_t="COLORLIGHT-100"
+									text="$2"
+								/>
+								<Button
+									on:click={() => {
+										refillUserAccount(
+											{
+												preventDefault: () => {},
+												target: [{ name: 'amount-to-refill', value: 5 }]
+											},
+											user_to_refill
+										);
+									}}
+									color="COLORDARK-100"
+									color_t="COLORLIGHT-100"
+									text="$5"
+								/>
+								<Button
+									on:click={() => {
+										refillUserAccount(
+											{
+												preventDefault: () => {},
+												target: [{ name: 'amount-to-refill', value: 10 }]
+											},
+											user_to_refill
+										);
+									}}
+									color="COLORDARK-100"
+									color_t="COLORLIGHT-100"
+									text="$10"
+								/>
+								<Button
+									on:click={() => {
+										refillUserAccount(
+											{
+												preventDefault: () => {},
+												target: [{ name: 'amount-to-refill', value: 15 }]
+											},
+											user_to_refill
+										);
+									}}
+									color="COLORDARK-100"
+									color_t="COLORLIGHT-100"
+									text="$15"
+								/>
+								<Button
+									on:click={() => {
+										refillUserAccount(
+											{
+												preventDefault: () => {},
+												target: [{ name: 'amount-to-refill', value: 20 }]
+											},
+											user_to_refill
+										);
+									}}
+									color="COLORDARK-100"
+									color_t="COLORLIGHT-100"
+									text="$20"
+								/>
+								<Button
+									on:click={() => {
+										refillUserAccount(
+											{
+												preventDefault: () => {},
+												target: [{ name: 'amount-to-refill', value: 100 }]
+											},
+											user_to_refill
+										);
+									}}
+									color="COLORDARK-100"
+									color_t="COLORLIGHT-100"
+									text="$100"
 								/>
 							</div>
 							<Button type="submit" color="COLORDARK-100" color_t="COLORLIGHT-100" text="Refill" />

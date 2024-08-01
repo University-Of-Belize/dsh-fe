@@ -38,7 +38,9 @@
 	<title>UniFood | Dashboard / Products</title>
 </svelte:head>
 
-<div class="content block h-full w-full overflow-auto bg-transparent p-2 py-8 lg:px-16 lg:py-16 pb-40">
+<div
+	class="content block h-full w-full overflow-auto bg-transparent p-2 py-8 pb-40 lg:px-16 lg:py-16"
+>
 	<div class="flex-header flex w-full flex-wrap items-center">
 		<div class="block">
 			<div class="flex pb-2 text-2xl font-semibold">Product Management</div>
@@ -84,15 +86,22 @@
 									class="edit-wrap h-fit w-fit"
 									on:click={() => goto(`/product/${product.slug}`)}
 								>
-									<Button icon={faCog} color="COLORLIGHT-100" color_t="COLORDARK-75" text="Go to listing" />
+									<Button
+										icon={faCog}
+										color="COLORLIGHT-100"
+										color_t="COLORDARK-75"
+										text="Go to listing"
+									/>
 								</div></a
 							>
 						</div>
 					</ProductPill>
 				</div>
-			{/each}{:else}<div class="font-light">
-				There was a problem while displaying the data.
-			</div>{/if}
+			{/each}{:else if $data.length === 0}
+			<div class="font-light">No products found. Add a new product to get started.</div>
+		{:else}
+			<div class="font-light">There was a problem while displaying the data.</div>
+		{/if}
 	</div>
 </div>
 
