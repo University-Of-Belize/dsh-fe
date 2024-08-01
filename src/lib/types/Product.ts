@@ -5,6 +5,7 @@ interface Product {
 	_id: string;
 	category: Category;
 	description: string;
+	deleted: boolean;
 	image: string;
 	in_stock: number;
 	price: {
@@ -22,6 +23,7 @@ interface CartProduct {
 		_id: string;
 		category: string;
 		description: string;
+		deleted: boolean;
 		image?: string;
 		in_stock: number;
 		price: {
@@ -48,4 +50,5 @@ interface EngineProduct extends Product {
 	reviews: Review[];
 }
 
-export type { Product, CartProduct, EngineProduct };
+export type { CartProduct, EngineProduct, Product };
+
