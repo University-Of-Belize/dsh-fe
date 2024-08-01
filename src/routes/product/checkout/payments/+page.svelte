@@ -162,14 +162,14 @@
 					<div class="flex pb-2 text-2xl font-semibold">Checkout</div>
 					<div class="flex text-xl font-light lg:pb-12">Confirm your payment</div>
 				</div>
-				<form class="grid grid-cols-1 gap-2 text-left sm:w-96 w-60">
-					
+				<form class="grid w-60 grid-cols-1 gap-2 text-left sm:w-96">
 					<!-- @remind REMOVE 'select-none' and 'pointer-events-none' AFTER 1 MONTH -->
 					<div
-						class="relative w-full select-none pointer-events-none opacity-50"
+						class="pointer-events-none relative w-full select-none opacity-50"
 						on:click={() => {
-							cardPayment = true;
-							paymentMethod = 'card';
+							// @remind Uncomment this after 1 month
+							// cardPayment = true;
+							// paymentMethod = 'card';
 						}}
 					>
 						<input
@@ -190,10 +190,11 @@
 							for="credit_debit"
 						>
 							<span class="text-xs font-semibold uppercase">DIRECT</span>
-							<span class="mt-2 text-xl font-bold">Credit/Debit Card</span>
+							<span class="mt-2 text-xl font-bold">(Disabled) Credit/Debit Card</span>
 							<ul class="mt-2 text-sm">
-								<li>Pay with your credit or debit card</li>
-								<li>Local and international cards are accepted</li>
+								<li>To comply with local authorities, this option has been disabled.</li>
+								<!-- <li>Pay with your credit or debit card</li> -->
+								<!-- <li>Local and international cards are accepted</li> -->
 							</ul>
 
 							<!-- on:mouseenter={() => flipCard('flip')}
@@ -259,7 +260,9 @@
 															456
 														</p></b
 													>
-													<p class="mr-2 flex justify-end pt-4 text-sm font-bold text-COLORLIGHT-100">
+													<p
+														class="mr-2 flex justify-end pt-4 text-sm font-bold text-COLORLIGHT-100"
+													>
 														security code
 													</p>
 												</div>
@@ -297,7 +300,7 @@
 				<div class="my-4 w-full lg:hidden">
 					<Button
 						text="Next"
-						color=COLORDARK-75
+						color="COLORDARK-75"
 						color_t="COLORLIGHT-100"
 						icon={undefined}
 						custom_style="w-full justify-center py-4 text-md"
@@ -484,8 +487,8 @@
 								class="total_item flex w-full flex-wrap items-center overflow-clip rounded-lg bg-COLORDARK-25 py-4 text-COLORLIGHT-100"
 							>
 								<div class="content mx-4 block w-full">
-									<div class="product-name font-normal text-xl">Total amount due today</div>
-									<div class="product-quantity text-sm font-light text-COLORWHT2">
+									<div class="product-name text-xl font-normal">Total amount due today</div>
+									<div class="product-quantity text-COLORWHT2 text-sm font-light">
 										Your total amount to pay (excl. discounts)
 									</div>
 								</div>
