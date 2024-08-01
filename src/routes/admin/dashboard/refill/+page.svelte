@@ -1,102 +1,19 @@
 <script lang="ts">
-	import { getPromo } from '$lib/Elements/Utility/Promo';
-	import type { Order } from '$lib/types/Order';
-	import type { Promo } from '$lib/types/Promo';
 	import type { User } from '$lib/types/User';
-// What is what?
-	import { locateNodeUsingHash } from '$lib/Elements/Utility/page';
-	import type { CartProduct } from '$lib/types/Product';
+	// What is what?
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
-	import { toast } from '@zerodevx/svelte-toast';
-	import _ from 'lodash';
 
+	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
-	import { faSearch } from '@fortawesome/free-solid-svg-icons';
-	import { onMount } from 'svelte';
+	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
+	import { what_is } from '$lib/vendor/dishout/What_Is';
+	import what from '$lib/vendor/dishout/Whats';
+	import { faMoneyBills, faSearch } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	let navDrawer: HTMLDivElement;
-	let editPane: HTMLDivElement;
-	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
-	let user: User =
-		localStorage.user && localStorage.user !== 'undefined' ? JSON.parse(localStorage.user) : {}; // User data
-	let user_to_refill: User | null = user;
-	let data: Order[]; // List of orders
-	let data_raw: Order[]; // Order data (raw, ungrouped)
-	let promos: Promo['code'][];
-	let currentAction: [number, string] = [-1, '']; // Not selected
-	let drawerOpenBy: number;
-	let exportMessage: HTMLSpanElement;
+	let user_to_refill: User | null = null;
 	let error_message: HTMLParagraphElement;
-
-	async function catchAll() {
-		// Try to see if we provided an order ID to search for
-		locateNodeUsingHash('order');
-		// Fetch all orders
-		const res = (await fetchWebApi('admin/order/manage?completed=true', 'GET')) as Response;
-		const r = await res.json();
-		if (!res.ok) {
-			return toast.push(r.message);
-		}
-
-		// data = r.is; // Rizz
-		data_raw = r.is; // Rizzler
-		// Group duplicate products together
-		// Copilot logic (very efficient it says, lol)
-		let copy = _.cloneDeep(r.is);
-		let productsMap = new Map();
-
-		r.is.forEach((order: Order, i: number) => {
-			// Rewrite the universe a bit.
-			copy[i].order_code = order.order_code.substring(0, 8).toUpperCase(); // Make a little bit shorter and easier to read
-			if (copy[i].products.length != 0) {
-				// Clear (if not already)
-				copy[i].products = [];
-			}
-
-			order.products.forEach((product: CartProduct) => {
-				const productId = product.product?._id;
-				if (productsMap.has(productId)) {
-					const existingProduct = productsMap.get(productId);
-					existingProduct.quantity += product.quantity;
-				} else {
-					productsMap.set(productId, { ...product });
-				}
-			});
-
-			copy[i].products = Array.from(productsMap.values());
-			productsMap.clear();
-		});
-		data = copy;
-		// Filter data array
-		// @ts-ignore
-		// data = data.filter((element) => element._id === product_id);
-		// Flatten
-		// @ts-ignore
-		// data = data[0];
-		// @ts-ignore
-		if (data.length === 0) {
-			toast.push('Nothing here to see! 👻');
-		}
-		console.log(data);
-	}
-
-	onMount(async () => {
-		try {
-			await catchAll();
-			if (staff) {
-				const pR = await getPromo();
-				promos = pR.is.map((item: Promo) => item.code);
-				console.log(promos); // This will log an array of codes
-			}
-		} catch (error) {
-			console.log(error);
-			toast.push(
-				`Oops. Something unexpected happened while loading the order page: ${error.message}`
-			);
-		}
-	});
-
-	const getId = (id: string) => document.getElementById(id);
+	let debounceTimeout: NodeJS.Timeout;
+	const debounceTimeoutDelay: number = 500;
 
 	// Lookup user
 	async function lookupUser(username: string) {
@@ -107,6 +24,37 @@
 			return undefined;
 		}
 		return r.is;
+	}
+
+	// Refill user account
+	async function refillUserAccount(event: Event, user: User | null) {
+		event.preventDefault();
+
+		if (user === null) {
+			error_message.innerText = 'Please search for a user first.';
+			return;
+		}
+
+		error_message.innerText = '';
+		const valueArray = Array.from(event.target)
+			.filter((el) => el.name)
+			.map((el) => el.value);
+
+		const amount = valueArray[0];
+		clearTimeout(debounceTimeout);
+		debounceTimeout = setTimeout(async () => {
+			const res = (await fetchWebApi(
+				'admin/user/manage/credit',
+				'PUT',
+				what_is(what.private.user, [user.username, amount])
+			)) as Response;
+			const r = await res.json();
+			if (!res.ok) {
+				error_message.innerText = r.message;
+				return;
+			}
+			user_to_refill = r.is;
+		}, debounceTimeoutDelay);
 	}
 
 	async function handleSubmit(event: Event) {
@@ -174,7 +122,29 @@
 				description={'Credit balance: ' + user_to_refill.credit.$numberDecimal}
 			>
 				<svelte:fragment slot="extraContent">
-					<div class="w-full">test</div>
+					<form
+						action="#refill"
+						class="w-full"
+						on:submit={(e) => refillUserAccount(e, user_to_refill)}
+					>
+						<div class="my-4 block w-full space-y-4">
+							<div class="text-2xl font-semibold">Refill this account</div>
+							<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
+								<div class="label w-full text-lg font-light">Amount to refill with</div>
+								<TextInput
+									required
+									icon={faMoneyBills}
+									name="amount-to-refill"
+									min="1"
+									max="100"
+									type="number"
+									placeholder="Enter an amount (min 1/max 100)"
+									custom_style="bg-transparent"
+								/>
+							</div>
+							<Button type="submit" color="COLORDARK-100" color_t="COLORLIGHT-100" text="Refill" />
+						</div>
+					</form>
 				</svelte:fragment>
 			</UserPill>
 		{/if}
