@@ -29,8 +29,9 @@
 	let transactionConfirm: boolean = false;
 	let cartTotal = localStorage.cart_total;
 	let currentCart = localStorage.currentCart;
-	let cardPayment: boolean = true;
-	let paymentMethod = 'card';
+	let cardPayment: boolean = false; // @remind Change to `true` after one month
+	// let paymentMethod = 'card'; // @remind Uncomment after one month
+	let paymentMethod = 'credit';
 
 	let checkout_card: HTMLDivElement;
 	let cart_summary: HTMLDivElement;
@@ -162,8 +163,10 @@
 					<div class="flex text-xl font-light lg:pb-12">Confirm your payment</div>
 				</div>
 				<form class="grid grid-cols-1 gap-2 text-left sm:w-96 w-60">
+					
+					<!-- @remind REMOVE 'select-none' and 'pointer-events-none' AFTER 1 MONTH -->
 					<div
-						class="relative w-full"
+						class="relative w-full select-none pointer-events-none opacity-50"
 						on:click={() => {
 							cardPayment = true;
 							paymentMethod = 'card';
