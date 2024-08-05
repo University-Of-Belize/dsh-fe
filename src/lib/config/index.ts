@@ -2,9 +2,11 @@ import { version } from '$app/environment';
 
 const settings = {
 	server: {
-		HTTPOrigin: 'https://winter-darkness-1705.fly.dev',
+		// HTTPOrigin: 'https://winter-darkness-1705.fly.dev',
+		database_url: 'mongodb://127.0.0.1:27017/dishout',
+		defaultTimeZone: 'America/Belize',
 		'api-version': '2',
-		// HTTPOrigin: 'https://icy-rain-2400.fly.dev',
+		HTTPOrigin: 'https://icy-rain-2400.fly.dev',
 		// HTTPOrigin: 'http://127.0.0.1:8080',
 		// HTTPOrigin: 'http://192.168.38.16:8080',
 		// HTTPOrigin: 'http://192.168.1.102:8080',
@@ -18,6 +20,9 @@ const settings = {
 			'pub-bucket-id': 'https://pub-25848f6979f1410bb0c611a1a9c24310.r2.dev/primary-uswest',
 			'access-key-id': 'a797ba44f071a177ce7467ad193c4ae7',
 			'secret-key-id': 'a3d77455a069f1d8c945ef665130bc7c00993cbb2fee73f7be01421e7aa9fc52'
+		},
+		auth: {
+			'token-length': 64
 		}
 	},
 	'product-view': {
