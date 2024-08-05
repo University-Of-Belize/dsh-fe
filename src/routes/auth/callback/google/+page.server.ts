@@ -3,17 +3,16 @@ import { getGoogleProfile, getGoogleToken } from '$lib/auth/google';
 import config from '$lib/config';
 import { connect, disconnect } from '$lib/database';
 import User from '$lib/database/models/Users';
+import { type SignInData } from '$lib/types/GoogleAuth';
 import cryptoRandomString from 'crypto-random-string';
 import type { PageServerLoad } from './$types';
-let data: string | null;
+let data: SignInData | null;
 
 export const load: PageServerLoad = async ({ url }) => {
 	// Run once
 	if (data || data === null) {
 		return {
-			props: {
-				token: data
-			}
+			props: data
 		};
 	}
 	// Turn $page.url.searchParams into a key-value object
@@ -30,9 +29,7 @@ export const load: PageServerLoad = async ({ url }) => {
 		data = null;
 		await disconnect();
 		return {
-			props: {
-				token: null
-			}
+			props: data
 		};
 	}
 	// console.log('User found: ', user);
@@ -44,15 +41,16 @@ export const load: PageServerLoad = async ({ url }) => {
 			type: 'alphanumeric'
 		});
 	const profile_token = user.token;
-	data = profile_token;
+	data = {
+		token: profile_token,
+		staff: user.staff
+	};
 	// Save the token to the database
 	await user.save();
 	// Disconnect from the database
 	await disconnect();
 
 	return {
-		props: {
-			token: profile_token
-		}
+		props: data
 	};
 };
