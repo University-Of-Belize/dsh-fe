@@ -32,6 +32,7 @@
 		const blocked = localStorage.blocked || localStorage.getItem('blocked');
 		if (token && !blocked) {
 			// token exists, do something
+			logging_in = true;
 			toast.push("You're already logged in");
 			goto(continue_url ?? '/admin/dashboard');
 		}
@@ -307,19 +308,23 @@
 			>
 				<p class="text-left text-3xl font-bold">Welcome back</p>
 				<p class="mt-2 text-left text-COLORLIGHT-15">Please enter your credentials.</p>
-				<!--
 				<button
-					class="-2 mt-8 flex items-center justify-center rounded-md border bg-COLORDARK-100 px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-COLORLIGHT-15 hover:bg-COLORDARK-50 hover:text-white focus:ring-2"
-					><img class="mr-2 h-5" src="/icons/google-icon.svg" alt /> Log in with Google</button
+					on:click={() => {
+						logging_in = true;
+						window.location.href = $page.data.props.google.AuthUrl;
+					}}
+					title={logging_in ? 'Please wait for the request to complete' : ''}
+					disabled={logging_in}
+					class="-2 mt-8 flex items-center justify-center rounded-md border border-COLORLIGHT-100 bg-transparent px-4 py-1 outline-none ring-COLORLIGHT-100 ring-offset-2 transition hover:border-COLORLIGHT-75 hover:text-COLORLIGHT-75 hover:opacity-75 focus:ring-2 disabled:opacity-25"
+					><img class="mr-2 h-5" src="/icons/google-icon.svg" alt /> Continue with Google</button
 				>
-				<div class="relative mt-8 flex h-px place-items-center bg-COLORLIGHT-100">
+				<!-- <div class="relative mt-8 flex h-px place-items-center bg-COLORLIGHT-100">
 					<div
 						class="absolute left-1/2 h-6 w-14 -translate-x-1/2 bg-COLORLIGHT-100 text-center text-sm text-COLORLIGHT-100"
 					>
 						or
 					</div>
-				</div>
-				--->
+				</div> -->
 				<form
 					class="flex flex-col pt-3 md:pt-8"
 					action="#"
@@ -352,11 +357,11 @@
 							{error_string}
 						</p>
 						<div class="mb-12 mt-4">
-							<p class="whitespace-nowrap text-gray-600">
+							<p class="whitespace-nowrap text-COLORLIGHT-100">
 								Forgot Password?
 								<a
 									href="/auth/password_reset"
-									class="forgot-password font-semibold text-COLORLIGHT-100 underline underline-offset-4"
+									class="forgot-password font-semibold underline underline-offset-4"
 								>
 									Reset it now.
 								</a>
@@ -371,9 +376,9 @@
 					>
 				</form>
 				<div class="pt-12 text-center">
-					<p class="whitespace-nowrap text-gray-600">
+					<p class="whitespace-nowrap text-COLORLIGHT-100">
 						Don't have an account?
-						<a href="/auth/create" class="font-semibold text-COLORLIGHT-100 underline underline-offset-4"
+						<a href="/auth/create" class="font-semibold underline underline-offset-4"
 							>Sign up for free.</a
 						>
 					</p>

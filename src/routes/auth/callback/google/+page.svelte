@@ -24,7 +24,7 @@
 <main class="m-4 space-y-2">
 	{#if !is_error}
 		<div class="text-2xl font-semibold text-COLORLIGHT-100">
-			Redirecting you to automatic setup...
+			Redirecting you to the authorized application...
 		</div>
 	{/if}
 
