@@ -12,16 +12,16 @@
 
 <!-- Color stub -->
 <div
-	class="placeholder hidden w-full bg-COLORACCENTD bg-COLORDARK-100 bg-COLORDARK-75 bg-COLORDARK-50 bg-COLORDARK-25 bg-COLORDARK-75 bg-COLORDARK-75 bg-COLORACCENTD bg-COLORACCENTD bg-COLORACCENTD bg-COLORACCENTL bg-COLORACCENTL bg-COLORLIGHT-100 bg-COLORWHT2 bg-COLORLIGHT-50 bg-COLORLIGHT-75 bg-COLORLIGHT-100 bg-COLORACCENTL"
+	class="placeholder bg-COLORWHT2 hidden w-full bg-COLORACCENTD bg-COLORACCENTD bg-COLORACCENTD bg-COLORACCENTD bg-COLORACCENTL bg-COLORACCENTL bg-COLORACCENTL bg-COLORDARK-100 bg-COLORDARK-25 bg-COLORDARK-50 bg-COLORDARK-75 bg-COLORDARK-75 bg-COLORDARK-75 bg-COLORLIGHT-100 bg-COLORLIGHT-100 bg-COLORLIGHT-50 bg-COLORLIGHT-75"
 >
 	&nbsp;
 </div>
 
 <div class="userPill my-4 rounded-md bg-COLORDARK-75 bg-opacity-50 px-4 py-2">
-	<div class="flex flex-wrap bg-opacity-100">
+	<div class="block flex-wrap bg-opacity-100 lg:flex">
 		<div class="user-pfp flex flex-col items-center justify-start pr-4">
 			<img
-				class="hidden lg:block rounded-md object-cover"
+				class="hidden rounded-md object-cover lg:block"
 				loading="lazy"
 				src={user?.profile_picture || config['user']['default-image']}
 				alt="{user?.username}'s avatar"
@@ -31,7 +31,7 @@
 				style="width: 50px; height: 50px;"
 			/>
 		</div>
-		<div class="user-wrap flex flex-wrap items-center lg:w-full">
+		<div class="user-wrap block flex-wrap items-center lg:flex lg:w-full">
 			<div class="user-content text-COLORLIGHT-100" style="word-break: break-word;">
 				<div class="flex items-center text-base font-semibold lg:text-lg">
 					<a href="/app/space/{user._id}" class="hover:underline"
@@ -58,10 +58,12 @@
 						{description}{/if}
 				</div>
 			</div>
-			<div class="actions flex flex-1 items-center justify-start text-COLORLIGHT-100 lg:justify-end">
+			<div
+				class="actions flex flex-1 items-center justify-start text-COLORLIGHT-100 lg:justify-end"
+			>
 				<slot />
 			</div>
 		</div>
-		<slot name="extraContent"/>
+		<slot name="extraContent" />
 	</div>
 </div>

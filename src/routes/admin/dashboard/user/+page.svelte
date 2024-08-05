@@ -142,7 +142,7 @@
 										: '<b>Activated; Logged in.</b>'}
 							html
 						>
-							<div class="actions flex space-x-2">
+							<div class="actions flex space-x-2 py-2.5">
 								{#if staff}
 									<div
 										class="btn-wrp h-fit w-fit bg-opacity-100"
