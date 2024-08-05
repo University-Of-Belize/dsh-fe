@@ -1,4 +1,3 @@
-// Import getGoogleSession from the auth module
 import { getGoogleProfile, getGoogleToken } from '$lib/auth/google';
 import config from '$lib/config';
 import { connect, disconnect } from '$lib/database';
@@ -6,15 +5,20 @@ import User from '$lib/database/models/Users';
 import { type SignInData } from '$lib/types/GoogleAuth';
 import cryptoRandomString from 'crypto-random-string';
 import type { PageServerLoad } from './$types';
-let data: SignInData | null;
+
+// Create a cache object to store the fetched data
+const cache: { [key: string]: SignInData | null } = {};
 
 export const load: PageServerLoad = async ({ url }) => {
-	// Run once
-	if (data || data === null) {
+	const cacheKey = url.toString();
+
+	// Check if the data is already cached
+	if (cache[cacheKey]) {
 		return {
-			props: data
+			props: cache[cacheKey]
 		};
 	}
+
 	// Turn $page.url.searchParams into a key-value object
 	const searchParams = Object.fromEntries(url.searchParams.entries());
 	const token = await getGoogleToken(searchParams.code);
@@ -26,13 +30,12 @@ export const load: PageServerLoad = async ({ url }) => {
 	const user = await User.findOne({ email: profile_email });
 	// If the user does not exist, return null
 	if (!user) {
-		data = null;
 		await disconnect();
 		return {
-			props: data
+			props: null
 		};
 	}
-	// console.log('User found: ', user);
+
 	// If the user exists, create the token
 	user.token =
 		'dtk-oauth.' +
@@ -41,7 +44,7 @@ export const load: PageServerLoad = async ({ url }) => {
 			type: 'alphanumeric'
 		});
 	const profile_token = user.token;
-	data = {
+	const data: SignInData = {
 		token: profile_token,
 		staff: user.staff
 	};
@@ -50,7 +53,13 @@ export const load: PageServerLoad = async ({ url }) => {
 	// Disconnect from the database
 	await disconnect();
 
+	// Cache the fetched data
+	cache[cacheKey] = data;
+
 	return {
 		props: data
 	};
 };
+
+export const csr = true;
+export const ssr = true;
