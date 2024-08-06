@@ -27,6 +27,7 @@ jobs:
         run: |
           echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
           echo $ENV_FILE >> .env
+          cat .env
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to fly.io
         if: github.event_name != 'pull_request'
