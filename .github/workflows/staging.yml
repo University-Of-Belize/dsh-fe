@@ -54,7 +54,7 @@ jobs:
           envkey_S3_BUCKET_ID: ${{ secrets.S3_BUCKET_ID }}
           envkey_TINYMCE_API_KEY: ${{ secrets.TINYMCE_API_KEY }}
           envkey_MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          directory: /
+          directory: ./
           file_name: .env
           fail_on_empty: true
           sort_keys: true
@@ -69,8 +69,6 @@ jobs:
       - name: Write Sentry resource file
         run: |
           echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
-          echo $ENV_FILE >> .env
-          cat .env
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to fly.io
         if: ${{ inputs.dry_run == false && github.event_name != 'pull_request' }}
