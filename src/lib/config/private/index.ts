@@ -1,0 +1,58 @@
+import {
+    FIREBASE_CONFIG_API_KEY,
+    FIREBASE_CONFIG_APP_ID,
+    FIREBASE_CONFIG_AUTH_DOMAIN,
+    FIREBASE_CONFIG_MEASUREMENT_ID,
+    FIREBASE_CONFIG_MESSAGING_SENDER_ID,
+    FIREBASE_CONFIG_PROJECT_ID,
+    FIREBASE_CONFIG_STORAGE_BUCKET,
+    FIREBASE_VAPID_KEY,
+    MONGODB_URI,
+    S3_ACCESS_KEY_ID,
+    S3_BUCKET_ID,
+    S3_PUB_BUCKET_ID,
+    S3_SECRET_KEY_ID,
+    SERVER_BOUND_ORGANIZATION,
+    SERVER_DEFAULT_TIMEZONE,
+    SERVER_HOME_DOMAIN,
+    SERVER_INDEXING_INTERVAL,
+    SERVER_SUPPORT_EMAIL,
+    TINYMCE_API_KEY
+} from '$env/static/private';
+import { PUBLIC_SERVER_API_VERSION, PUBLIC_SERVER_HTTP_ORIGIN } from '$env/static/public';
+
+const settings = {
+	server: {
+		database_url: MONGODB_URI,
+		defaultTimeZone: SERVER_DEFAULT_TIMEZONE,
+		'api-version': PUBLIC_SERVER_API_VERSION,
+		HTTPOrigin: PUBLIC_SERVER_HTTP_ORIGIN,
+		'support-email': SERVER_SUPPORT_EMAIL,
+		'bound-organization': SERVER_BOUND_ORGANIZATION,
+		'bound-domain': SERVER_HOME_DOMAIN,
+		'indexing-interval': SERVER_INDEXING_INTERVAL,
+		s3: {
+			'bucket-id': S3_BUCKET_ID,
+			'pub-bucket-id': S3_PUB_BUCKET_ID,
+			'access-key-id': S3_ACCESS_KEY_ID,
+			'secret-key-id': S3_SECRET_KEY_ID
+		}
+	},
+	firebase: {
+		config: {
+			apiKey: FIREBASE_CONFIG_API_KEY,
+			authDomain: FIREBASE_CONFIG_AUTH_DOMAIN,
+			projectId: FIREBASE_CONFIG_PROJECT_ID,
+			storageBucket: FIREBASE_CONFIG_STORAGE_BUCKET,
+			messagingSenderId: FIREBASE_CONFIG_MESSAGING_SENDER_ID,
+			appId: FIREBASE_CONFIG_APP_ID,
+			measurementId: FIREBASE_CONFIG_MEASUREMENT_ID
+		},
+		'vapid-key': FIREBASE_VAPID_KEY
+	},
+	'tiny-mce': {
+		'api-key': TINYMCE_API_KEY
+	}
+};
+
+export default settings;
