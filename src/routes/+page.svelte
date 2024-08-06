@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
-	import DataCard from '$lib/Elements/Cards/DataCard.svelte';
+	import ProductCard from '$lib/Elements/Cards/ProductCard.svelte';
 	import Footer from '$lib/Elements/Generic/Footer.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import type { Category } from '$lib/types/Category';
@@ -76,12 +76,12 @@
 	<link rel="preload" fetchpriority="high" as="image" href={LCP} type="image/{LCP_EXT}" />
 </svelte:head>
 
-<main class="h-screen w-full text-COLORLIGHT-100">
-	<div class="navigation z-20 w-full">
-		<Navigation transparency={5} search={true} />
-	</div>
+<div class="navigation z-20 w-full">
+	<Navigation transparency={5} search={true} />
+</div>
+<main class="block h-screen w-fit text-COLORLIGHT-100 lg:mx-10 lg:my-8">
 	<!-- {#if !localStorage.user} -->
-	<div class="hero mb-8">
+	<div class="hero lg:rounded-3xl text-left lg:m-4 overflow-clip lg:border lg:border-COLORDARK-75">
 		<!-- <div
 			class="image-and-wrapper relative"
 			style="height: 250px;{localStorage.token ? '100vh' : '800px'}"
@@ -123,7 +123,9 @@
 		</div> -->
 
 		<div class="hero-image w-full p-8">
-			<div class="mb-4 w-20 rounded-md bg-COLORDARK-50 px-2 py-1 text-sm font-medium text-COLORLIGHT-100">
+			<div
+				class="mb-4 w-20 rounded-md bg-COLORDARK-50 px-2 py-1 text-sm font-medium text-COLORLIGHT-100"
+			>
 				BETA
 			</div>
 			<p class="mb-2 text-2xl">This is it! 😊🎉</p>
@@ -153,20 +155,15 @@
 		</div>
 	</div>
 
-	<div class="content block">
-		<div class="category-grid flex w-full flex-wrap items-center justify-center">
-			<div class="gridelement relative flex h-16 w-full items-center justify-center bg-COLORDARK-100">
-				<div
-					class="content-wrapper absolute z-10 flex h-full w-full items-center justify-start bg-COLORDARK-100 px-8 text-2xl font-semibold text-COLORLIGHT-100"
-				>
-					Categories
-				</div>
-			</div>
-		</div>
+	<div class="content block text-left">
 		<div
-			class="category-grid flex h-full w-full flex-wrap items-center justify-center overflow-auto lg:justify-start"
+			class="flex h-full items-center justify-start rounded-lg bg-COLORDARK-75 px-8 py-2 text-xl font-medium text-COLORLIGHT-100 lg:mx-4 my-6"
 		>
-			<DataCard
+			Categories
+		</div>
+
+		<div class="grid grid-rows-1 px-4 lg:grid-cols-3 lg:gap-2">
+			<ProductCard
 				url="/product/view-all"
 				image="/assets/home/all_products.png"
 				name="View the menu"
@@ -174,7 +171,7 @@
 			/>
 			{#if categories.length > 0}
 				{#each categories as category}
-					<DataCard
+					<ProductCard
 						url={`/product?filter=${category.alias.toString().toLowerCase()}`}
 						image={category.image}
 						name={category.name}
@@ -190,22 +187,20 @@
 
 		<div class="featured block">
 			<div
-				class="banner-featured flex items-center justify-start bg-COLORDARK-75 px-8 py-12 text-2xl font-semibold text-COLORLIGHT-100"
-			>
-				For You
-			</div>
-			<div
-				class="category-grid flex h-full w-full flex-wrap items-center justify-center lg:justify-start"
-			>
+			class="flex h-full items-center justify-start rounded-lg bg-COLORDARK-75 px-8 py-2 text-xl font-medium text-COLORLIGHT-100 lg:mx-4 my-6"
+		>
+			Featured
+		</div>
+			<div class="grid grid-rows-1 px-4 lg:grid-cols-3 lg:gap-2">
 				{#if product}
 					{#each product as product}
-						<DataCard
+						<ProductCard
 							url={`/product/${product.slug}`}
 							image={product.image}
 							name={product.productName + `<br/>$${product.price?.$numberDecimal}`}
 							description={product.description
-								? product.description.length > 500
-									? product.description.substring(0, 500) + '...'
+								? product.description.length > 75
+									? product.description.substring(0, 75) + '...'
 									: product.description
 								: '' ?? ''}
 							reviews={product.reviews}
