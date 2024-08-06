@@ -36,7 +36,7 @@ jobs:
           cat .env
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to fly.io
-        if: ${{ inputs.dry_run == false || github.event_name != 'pull_request' }}
+        if: ${{ inputs.dry_run == false && github.event_name != 'pull_request' }}
         run: | 
          echo "Run RELEASE" >> release
          flyctl deploy --remote-only -a ubcafe
