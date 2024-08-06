@@ -110,7 +110,7 @@
 					</div>
 
 					<!-- The products -->
-					<div class="flex flex-wrap justify-center md:space-x-4 lg:my-4 lg:justify-start">
+					<div class="grid grid-rows-1 lg:grid-cols-3 lg:gap-2">
 						<!-- This way, we filter out all the products from reviews -->
 						{#each [...$products] as product}
 							{#if product.price != undefined}
