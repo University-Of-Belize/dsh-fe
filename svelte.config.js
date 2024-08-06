@@ -1,6 +1,6 @@
-import adapter from 'svelte-adapter-bun';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { readFileSync } from 'fs';
+import adapter from 'svelte-adapter-bun';
 import { fileURLToPath } from 'url';
 
 const file = fileURLToPath(new URL('package.json', import.meta.url));
@@ -23,6 +23,12 @@ const config = {
 		// If your environment is not supported or you settled on a specific environment, switch out the adapter.
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter(),
+
+		// @remind !!COMMENT!! If not developing
+		// csrf: {
+		// 	checkOrigin: false
+		// },
+
 		version: {
 			name: pkg.version
 		}
