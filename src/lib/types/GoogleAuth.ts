@@ -24,13 +24,3 @@ export interface GoogleToken {
 	token_type: string;
 	id_token: string;
 }
-
-export interface SignInData {
-	token: string;
-	staff: boolean;
-}
-
-export interface SignInError {
-	error: string;
-	status: string;
-}

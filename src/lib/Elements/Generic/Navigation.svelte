@@ -46,7 +46,7 @@
 	export let titleWhere: string = '/';
 	export let user: User | undefined = localStorage.user;
 	let nav: HTMLDivElement;
-	let staff: boolean = localStorage.staff ? JSON.parse(localStorage.staff) : false; // Others will use this
+	let staff: boolean = localStorage.staff === 'true'; // Others will use this
 	let darkMode: boolean = localStorage.theme === 'dark'; // Others will use this
 	let navDrawer: HTMLDivElement;
 	let navClose: HTMLDivElement;

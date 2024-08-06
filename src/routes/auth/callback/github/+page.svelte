@@ -49,7 +49,6 @@
 			}}
 		/>
 	{/if}
-
 	{#if is_error}
 		<div class="text-2xl font-semibold text-COLORLIGHT-100">
 			We couldn't sign you in. Please try again later.
@@ -58,7 +57,7 @@
 		<Button
 			text="Try again"
 			on:click={() => {
-				if (document.referrer.includes('https://accounts.google.com/')) {
+				if (document.referrer.includes('https://github.com/login/oauth/authorize')) {
 					history.back();
 					return;
 				}
