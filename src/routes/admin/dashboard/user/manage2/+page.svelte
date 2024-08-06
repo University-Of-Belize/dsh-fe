@@ -4,7 +4,7 @@
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import { editUser, registerUser } from '$lib/Elements/Utility/User';
-	import { R2S3Upload } from '$lib/Elements/Utility/vendor/dishout/r2_s3';
+	import { R2S3Upload } from '$lib/Elements/Utility/vendor/dishout/upload/client/index';
 	import config from '$lib/config/index';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -433,7 +433,9 @@
 										text="{data.staff ? 'Demote' : 'Promote'} user"
 										color="transparent"
 										color_t={data.staff ? 'COLORACCENTL' : 'COLORLIGHT-100'}
-										custom_style="border border-{data.staff ? 'COLORACCENTL' : 'COLORLIGHT-100'} my-2"
+										custom_style="border border-{data.staff
+											? 'COLORACCENTL'
+											: 'COLORLIGHT-100'} my-2"
 									/>
 								</div>
 							</div>

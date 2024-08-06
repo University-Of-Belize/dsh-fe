@@ -70,9 +70,7 @@
 					}
 				}}
 				bind:this={TextBoxVariations}
-				required
 				icon={faSortAlphaAsc}
-				name="name"
 				placeholder="Enter variation category name and press enter"
 				custom_style="bg-transparent"
 			/>

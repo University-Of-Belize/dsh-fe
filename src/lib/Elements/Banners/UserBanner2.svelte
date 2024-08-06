@@ -7,7 +7,7 @@
 	import { faImage } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Fa from 'svelte-fa';
-	import { R2S3Upload } from '../Utility/vendor/dishout/r2_s3';
+	import { R2S3Upload } from '$lib/Elements/Utility/vendor/dishout/upload/client/index';
 	export let user: User;
 	export let tag: boolean = false;
 	export let tagColor: string = 'COLORLIGHT-100';
@@ -61,7 +61,7 @@
 
 <!-- Color stub -->
 <div
-	class="placeholder hidden w-full bg-COLORACCENTL bg-COLORACCENTL bg-COLORACCENTL bg-COLORLIGHT-100 bg-COLORLIGHT-100 bg-COLORWHT2 bg-COLORLIGHT-50 bg-COLORACCENTL"
+	class="placeholder bg-COLORWHT2 hidden w-full bg-COLORACCENTL bg-COLORACCENTL bg-COLORACCENTL bg-COLORACCENTL bg-COLORLIGHT-100 bg-COLORLIGHT-100 bg-COLORLIGHT-50"
 >
 	&nbsp;
 </div>
@@ -155,7 +155,9 @@
 			<div class="text-md mb-2 mt-4 hidden font-light text-COLORLIGHT-15 lg:m-0 lg:block">
 				{@html description}
 			</div>
-			<div class="actions flex w-full flex-1 items-center justify-start text-COLORLIGHT-100 lg:w-auto">
+			<div
+				class="actions flex w-full flex-1 items-center justify-start text-COLORLIGHT-100 lg:w-auto"
+			>
 				<slot />
 			</div>
 		</div>

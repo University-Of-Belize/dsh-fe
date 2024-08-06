@@ -1,6 +1,5 @@
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import { toast } from '@zerodevx/svelte-toast';
 
 import config_pub from '$lib/config/index';
 import config_private from '$lib/config/private/index';
@@ -15,9 +14,8 @@ const S3 = new S3Client({
 	}
 });
 
-async function R2S3Upload(event: Event, custom_path?: string, custom_filename?: string) {
+export async function R2S3Upload(file: File, custom_path?: string, custom_filename?: string) {
 	let pub_url: string; // Public URL to file
-	const file = event.target.files[0]; // File to be uploaded
 
 	// Get the signed URL
 	const url = await getSignedUrl(
@@ -41,22 +39,15 @@ async function R2S3Upload(event: Event, custom_path?: string, custom_filename?: 
 	})
 		.then((response) => {
 			if (!response.ok) {
-				toast.push(`Oops. Something unexpected happened while uploading the file: ${response}`);
+				return;
 			}
-			// What to do after uploading the file
-			toast.push(`You have updated the photo successfully.`); // Push notification that upload succeeded
 			// Return the URL to the file
 			pub_url = `${config['server']['s3']['pub-bucket-id']}/${
 				custom_path ? `${custom_path}/` : ''
 			}${custom_filename ?? file.name}`; // Constructed URL
 		})
-		.catch((error) => {
-			console.error(error);
-			toast.push(`Oops. Something unexpected happened while uploading the file: ${error.message}`);
+		.catch(() => {
 			return config['product-view']['default-image'];
 		});
 	return pub_url ?? config['product-view']['default-image'];
 }
-
-export { R2S3Upload };
-

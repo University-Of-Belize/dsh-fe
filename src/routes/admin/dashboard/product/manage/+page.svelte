@@ -5,7 +5,7 @@
 	import Select from '$lib/Elements/Inputs/Select2.svelte';
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import { createProduct, deleteProduct, editProduct } from '$lib/Elements/Utility/Product';
-	import { R2S3Upload } from '$lib/Elements/Utility/vendor/dishout/r2_s3';
+	import { R2S3Upload } from '$lib/Elements/Utility/vendor/dishout/upload/client/index';
 	import config from '$lib/config/index';
 	import type { Category } from '$lib/types/Category';
 	import type { Product } from '$lib/types/Product';
@@ -414,7 +414,6 @@
 										bind:this={variation_category_TextInput}
 										required
 										icon={faSortAlphaAsc}
-										name="name"
 										placeholder="Enter variation name and press enter"
 										custom_style="bg-transparent"
 									/>
