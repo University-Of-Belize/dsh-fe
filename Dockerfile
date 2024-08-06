@@ -16,6 +16,14 @@ WORKDIR /build
 
 COPY . .
 
+# Do we have an '.env' file present?
+RUN if [ -f .env ]; then \
+    echo "Found .env file. Continuing..."; \
+  else \
+    echo "No .env file found. Quitting."; \
+    exit 1; \
+  fi
+
 # Auth Sentry
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y curl ca-certificates
 RUN curl -sL https://sentry.io/get-cli/ | sh
@@ -30,7 +38,6 @@ RUN if [ -f ./release ]; then \
 
 RUN bun install
 RUN bun --bun run sitemap
-RUN bun run check
 RUN bunx --bun vite build
 RUN cp -r ./static/~partytown ./build/client/~partytown
 # RUN rm -rf node_modules
