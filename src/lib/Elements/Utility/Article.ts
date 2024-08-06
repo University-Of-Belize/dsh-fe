@@ -1,10 +1,8 @@
-// import { goto } from '$app/navigation';
-// import config from '$lib/config/index';
 import { what_is } from '$lib/vendor/dishout/What_Is';
 import what from '$lib/vendor/dishout/Whats';
 import { fetchWebApi } from '$lib/vendor/dishout/api';
 import { toast } from '@zerodevx/svelte-toast';
-let debounceTimeout: number;
+let debounceTimeout: NodeJS.Timeout;
 
 const deleteArticle = async (articleId: string) => {
 	try {
@@ -63,3 +61,4 @@ async function createArticle(comment: string) {
 }
 
 export { createArticle, deleteArticle };
+

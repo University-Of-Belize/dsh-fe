@@ -558,14 +558,14 @@
 										on:click={() => {
 											// Copy the selected text to the clipboard
 											navigator.clipboard.writeText(
-												`${config.server['bound-domain']}/admin/dashboard/order#${order.order_code}`
+												`${window.location.origin}/admin/dashboard/order#${order.order_code}`
 											);
 											toast.push('Order code copied to clipboard.');
 										}}
 										on:keypress={() => {
 											// Copy the selected text to the clipboard
 											navigator.clipboard.writeText(
-												`${config.server['bound-domain']}/admin/dashboard/order#${order.order_code}`
+												`${window.location.origin}/admin/dashboard/order#${order.order_code}`
 											);
 											toast.push('Order code copied to clipboard.');
 										}}

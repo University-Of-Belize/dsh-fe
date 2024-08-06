@@ -2,7 +2,6 @@
 	import { goto } from '$app/navigation';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
-// import config from '$lib/config/index';
 	import type { ServerMessage } from '$lib/types/Message';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';

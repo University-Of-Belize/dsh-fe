@@ -3,6 +3,7 @@ interface Category {
 	name: string;
 	alias: string;
 	description: string;
+	image: string | undefined;
 	hidden: boolean;
 	__v: number;
 }

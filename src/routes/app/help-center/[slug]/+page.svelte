@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	// import config from '$lib/config/index';
 	import { onMount } from 'svelte';
-	// import { goto } from '$app/navigation';
+// import { goto } from '$app/navigation';
 	// import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import type { Article } from '$lib/types/Article';
