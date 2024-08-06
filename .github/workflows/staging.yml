@@ -14,7 +14,8 @@ on:
      inputs:
       dry_run:
         description: 'Dry run'
-        default: false
+        # default: false
+        default: true
         required: true
         type: boolean
 concurrency: # Multiple jobs should NOT run at the same time
@@ -85,5 +86,7 @@ jobs:
          flyctl deploy --remote-only -a ubcafe
       - name: Run basic test
         if: ${{ inputs.dry_run == true || github.event_name == 'pull_request' }}
-        run: docker build -t dishout:latest .
+        run: |
+         file .env
+         docker build -t dishout:latest .
       #- run: flyctl deploy --local-only -a ubcafe
