@@ -1,25 +1,43 @@
 import { version } from '$app/environment';
+import {
+	FIREBASE_CONFIG_API_KEY,
+	FIREBASE_CONFIG_APP_ID,
+	FIREBASE_CONFIG_AUTH_DOMAIN,
+	FIREBASE_CONFIG_MEASUREMENT_ID,
+	FIREBASE_CONFIG_MESSAGING_SENDER_ID,
+	FIREBASE_CONFIG_PROJECT_ID,
+	FIREBASE_CONFIG_STORAGE_BUCKET,
+	FIREBASE_VAPID_KEY,
+	MONGODB_URI,
+	S3_ACCESS_KEY_ID,
+	S3_BUCKET_ID,
+	S3_PUB_BUCKET_ID,
+	S3_SECRET_KEY_ID,
+	SERVER_API_VERSION,
+	SERVER_BOUND_ORGANIZATION,
+	SERVER_DEFAULT_TIMEZONE,
+	SERVER_HOME_DOMAIN,
+	SERVER_HTTP_ORIGIN,
+	SERVER_INDEXING_INTERVAL,
+	SERVER_SUPPORT_EMAIL,
+	TINYMCE_API_KEY
+} from '$env/static/private';
 
 const settings = {
 	server: {
-		// HTTPOrigin: 'https://winter-darkness-1705.fly.dev',
-		database_url: 'mongodb://127.0.0.1:27017/dishout',
-		defaultTimeZone: 'America/Belize',
-		'api-version': '2',
-		HTTPOrigin: 'https://icy-rain-2400.fly.dev',
-		// HTTPOrigin: 'http://127.0.0.1:8080',
-		// HTTPOrigin: 'http://192.168.38.16:8080',
-		// HTTPOrigin: 'http://192.168.1.102:8080',
-		'support-email': 'cafeteria@ub.edu.bz',
-		'bound-organization': 'University of Belize',
-		'bound-domain': 'https://cafe.ub.edu.bz',
-		'indexing-interval': '3 minutes',
+		database_url: MONGODB_URI,
+		defaultTimeZone: SERVER_DEFAULT_TIMEZONE,
+		'api-version': SERVER_API_VERSION,
+		HTTPOrigin: SERVER_HTTP_ORIGIN,
+		'support-email': SERVER_SUPPORT_EMAIL,
+		'bound-organization': SERVER_BOUND_ORGANIZATION,
+		'bound-domain': SERVER_HOME_DOMAIN,
+		'indexing-interval': SERVER_INDEXING_INTERVAL,
 		s3: {
-			'bucket-id':
-				'https://6fdadd342786403cfcd687d3475d1234.r2.cloudflarestorage.com/primary-uswest',
-			'pub-bucket-id': 'https://pub-25848f6979f1410bb0c611a1a9c24310.r2.dev/primary-uswest',
-			'access-key-id': 'a797ba44f071a177ce7467ad193c4ae7',
-			'secret-key-id': 'a3d77455a069f1d8c945ef665130bc7c00993cbb2fee73f7be01421e7aa9fc52'
+			'bucket-id': S3_BUCKET_ID,
+			'pub-bucket-id': S3_PUB_BUCKET_ID,
+			'access-key-id': S3_ACCESS_KEY_ID,
+			'secret-key-id': S3_SECRET_KEY_ID
 		},
 		auth: {
 			'token-length': 64
@@ -57,19 +75,18 @@ const settings = {
 		},
 		firebase: {
 			config: {
-				apiKey: 'AIzaSyBXolTmpW_6vwf7ryhmBxAGDVZr3vEaEU8',
-				authDomain: 'plattr-32d57.firebaseapp.com',
-				projectId: 'plattr-32d57',
-				storageBucket: 'plattr-32d57.appspot.com',
-				messagingSenderId: '955312324775',
-				appId: '1:955312324775:web:fa4d3755462265f83a1b82',
-				measurementId: 'G-N0E9QJVTK4'
+				apiKey: FIREBASE_CONFIG_API_KEY,
+				authDomain: FIREBASE_CONFIG_AUTH_DOMAIN,
+				projectId: FIREBASE_CONFIG_PROJECT_ID,
+				storageBucket: FIREBASE_CONFIG_STORAGE_BUCKET,
+				messagingSenderId: FIREBASE_CONFIG_MESSAGING_SENDER_ID,
+				appId: FIREBASE_CONFIG_APP_ID,
+				measurementId: FIREBASE_CONFIG_MEASUREMENT_ID
 			},
-			'vapid-key':
-				'BC3R5IsVxkK7bPwc47qAqC4NmKhLnkspqNl7gILUJU2dFyDfwmlvIyYSJYGxAu7cuFq86dndLTH19ZV3Bkqq_ec'
+			'vapid-key': FIREBASE_VAPID_KEY
 		},
 		'tiny-mce': {
-			'api-key': 'zwg7kdz5ie036r4ksqxf75r5pe9jnbdn6eg93r2f6dtxa5da'
+			'api-key': TINYMCE_API_KEY
 		}
 	}
 };
