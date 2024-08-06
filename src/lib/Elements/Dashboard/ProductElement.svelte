@@ -32,6 +32,12 @@
 		productName,
 		slug: productSlug
 	};
+
+	const price = parseFloat(productPrice).toLocaleString('en-US', {
+		style: 'currency',
+		currency: config['checkout']['currency'],
+		minimumFractionDigits: 2
+	});
 </script>
 
 <div
@@ -56,15 +62,9 @@
 	</div>
 	<div class="itemName flex items-center justify-between gap-4">
 		<a href="/product/{productSlug}"
-			><h3 class='font-medium {productUnavailable ? 'line-through' : ''}'>{productName}</h3></a
+			><h3 class="font-medium {productUnavailable ? 'line-through' : ''}">{productName}</h3></a
 		>
-		<span class="font-bold"
-			>{parseFloat(productPrice).toLocaleString('en-US', {
-				style: 'currency',
-				currency: config['checkout']['currency'],
-				minimumFractionDigits: 2
-			})}</span
-		>
+		<span class="font-bold">{price}</span>
 	</div>
 	<div class="itemDesc text-sm">
 		<p>
@@ -76,7 +76,8 @@
 	{@html productUnavailable ? `<span class="text-COLORACCENTL text-sm">OUT OF STOCK</span>` : ''}
 
 	<div class="itemButton">
-		<Button custom_style="w-full items-center text-center justify-center"
+		<Button
+			custom_style="w-full items-center text-center justify-center"
 			on:click={() => {
 				addToCart(product, productId, 1, []);
 				clearTimeout(debounceTimeout);
@@ -87,7 +88,7 @@
 			}}
 			text={added_to_cart
 				? `Added to cart ${clicked_times > 1 ? `(${clicked_times})` : ''}`
-				: 'Add to cart'}
+				: `Add to cart — ${price}`}
 		/>
 	</div>
 </div>

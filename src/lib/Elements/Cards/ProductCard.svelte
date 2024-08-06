@@ -25,7 +25,6 @@
 	</div>
 	<div class="itemName flex items-center justify-between gap-4">
 		<a href={url}><h3>{@html name}</h3></a>
-		<span>$458.23</span>
 	</div>
 	<div class="itemDesc text-sm"><p>{description}</p></div>
 	{#if error_text}
