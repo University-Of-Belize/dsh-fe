@@ -22,6 +22,7 @@ concurrency: # Multiple jobs should NOT run at the same time
   cancel-in-progress: true
 
 jobs:
+  build:
   create-envfile:
     runs-on: ubuntu-latest
     steps:
