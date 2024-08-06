@@ -30,6 +30,10 @@ jobs:
       ENV_FILE: ${{ secrets.ENV_FILE }}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - name: Write Sentry resource file
+        run: |
+          echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v2.0
         with:
@@ -69,10 +73,10 @@ jobs:
     #   FLY_API_TOKEN: ${{ secrets.FLYIO_ACCESS }}
     #   ENV_FILE: ${{ secrets.ENV_FILE }}
   #  steps:
-      - uses: actions/checkout@v3
-      - name: Write Sentry resource file
-        run: |
-          echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
+      # - uses: actions/checkout@v3
+      # - name: Write Sentry resource file
+      #   run: |
+      #     echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to fly.io
         if: ${{ inputs.dry_run == false && github.event_name != 'pull_request' }}
