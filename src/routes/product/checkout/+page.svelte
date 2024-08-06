@@ -21,7 +21,7 @@
 	import { faPrint, faTicket, faTrash } from '@fortawesome/free-solid-svg-icons';
 	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
-	const wants_single_cart = localStorage.wants_single_cart ?? false;
+	const wants_single_cart = localStorage.wants_single_cart === 'true';
 	$: single_cart = $page.url.searchParams.get('single_cart');
 
 	// The cart is an array of Products
@@ -53,14 +53,14 @@
 
 	onMount(async () => {
 		try {
-			if (single_cart && JSON.parse(wants_single_cart)) {
+			if (single_cart && wants_single_cart) {
 				localStorage.removeItem('wants_single_cart');
 				// We need to return and cancel the cart upload/sync
 				return addToCart(
 					{ _id: single_cart },
 					single_cart,
 					1,
-					JSON.parse(localStorage.selected_variations)
+					localStorage.selected_variations? JSON.parse(localStorage.selected_variations) : []
 				)
 					.then(() => {
 						localStorage.removeItem('selected_variations');
