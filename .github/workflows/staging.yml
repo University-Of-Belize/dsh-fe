@@ -11,6 +11,12 @@ on:
   pull_request:
     branches: ['staging']    
   workflow_dispatch:
+     inputs:
+      dry_run:
+        description: 'Dry run'
+        default: false
+        required: true
+        type: boolean
 concurrency: # Multiple jobs should NOT run at the same time
   group: ${{ github.workflow }}
   cancel-in-progress: true
@@ -30,11 +36,11 @@ jobs:
           cat .env
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to fly.io
-        if: github.event_name != 'pull_request'
+        if: inputs.dry_run || github.event_name != 'pull_request'
         run: | 
          echo "Run RELEASE" >> release
          flyctl deploy --remote-only -a ubcafe
       - name: Run basic test
-        if: github.event_name == 'pull_request'
+        if: inputs.dry_run || github.event_name == 'pull_request'
         run: docker build -t dishout:latest .
       #- run: flyctl deploy --local-only -a ubcafe
