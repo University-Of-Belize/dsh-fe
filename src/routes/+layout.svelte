@@ -2,10 +2,9 @@
 	import '../app.css';
 	// For reading storage
 	import { beforeNavigate, goto } from '$app/navigation';
-	import { updated } from '$app/stores';
+	import { page, updated } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import ColorInput from '$lib/Elements/Inputs/TextInput.svelte';
-	import config from '$lib/config/index';
 	import type { FirebaseMessage } from '$lib/types/Firebase';
 	import { ThemeDefinition } from '$lib/types/ThemeDefinition';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -64,7 +63,7 @@
 		}
 	};
 	// Initialize Firebase
-	const app = initializeApp(config.ui.firebase['config']);
+	const app = initializeApp($page.data.firebase.config);
 	localStorage.setItem('fb_instance_id', JSON.stringify(app)); // Store the instance in storage so that the rest of the app can access it
 
 	// Blocking function so that nothing else gets a chance to run

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
 	import CommentBox from '$lib/Elements/Inputs/CommentBox.svelte';
 	import { createArticle, deleteArticle } from '$lib/Elements/Utility/Article';
-	import config from '$lib/config/index';
 	import type { Article } from '$lib/types/Article';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -81,7 +81,7 @@
 				{#if prefersRichText}
 					<div class="richTextInput mb-4">
 						<div class="mb-4 text-2xl font-semibold text-COLORLIGHT-100">Rich-Text+MarkDown Editor</div>
-						<Editor bind:value={richTextInput} apiKey={config.ui['tiny-mce']['api-key']} />
+						<Editor bind:value={richTextInput} apiKey={$page.data.tinymce_apikey} />
 					</div>
 				{:else}
 					<div class="markDownInput mb-4">

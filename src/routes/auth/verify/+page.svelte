@@ -5,7 +5,6 @@
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import SearchBar from '$lib/Elements/Search/SearchBar.svelte';
-	import config from '$lib/config/index';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -132,7 +131,7 @@
 				window.open(
 					`https://mail.google.com/mail/u/?authuser=${localStorage.getItem(
 						'email'
-					)}&view=cm&fs=1&to=${config['server']['support-email']}&su=${localStorage.getItem(
+					)}&view=cm&fs=1&to=${$page.data.support_email}&su=${localStorage.getItem(
 						'email'
 					)} — Unblock Request&body=${localStorage.getItem(
 						'email'

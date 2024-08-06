@@ -2,7 +2,6 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
-	import config from '$lib/config/index';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -199,7 +198,7 @@
 							window.open(
 								`https://mail.google.com/mail/u/?authuser=${localStorage.getItem(
 									'email'
-								)}&view=cm&fs=1&to=${config['server']['support-email']}&su=${
+								)}&view=cm&fs=1&to=${$page.data.support_email}&su=${
 									localStorage.getItem('email') ?? '[YOUR_NAME]'
 								} — Support Request&body=User%20would%20like%20to%20file%20a%20support%20request.%0A%0AWrite%20your%20comment%20below%20this%20line.%0A------%0A%0A%0ABEFORE%20TYPING%20ANYTHING%20PLEASE%20AFFIX%20YOUR%20FULL%20NAME%20IN%20THE%20SUBJECT%20LINE!`,
 								'_blank'

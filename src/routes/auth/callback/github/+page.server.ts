@@ -3,9 +3,9 @@ import config from '$lib/config';
 import { connect, disconnect } from '$lib/database';
 import User from '$lib/database/models/Users';
 import type { GitHubEmails } from '$lib/types/GitHubAuth';
-import { type SignInData } from '$lib/types/GoogleAuth';
+import { type SignInData } from '$lib/types/OpenAuth';
 import cryptoRandomString from 'crypto-random-string';
-import type { PageServerLoad } from '../google/$types';
+import type { PageServerLoad } from './$types';
 
 // Create a cache object to store the fetched data
 const cache: { [key: string]: SignInData | null } = {};

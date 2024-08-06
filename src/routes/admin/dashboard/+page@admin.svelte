@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 // import Button from '$lib/Elements/Buttons/Button.svelte';
 	import TourModal from '$lib/Elements/Tour/default.svelte';
@@ -57,10 +58,10 @@
 				toast.push('Allow notifications if you want to receive order status updates.');
 				getToken(
 					localStorage.fb_instance_id
-						? getMessaging(initializeApp(config.ui.firebase['config'])) // @remind Fix this hacky way to get the instance id from the storage
-						: getMessaging(initializeApp(config.ui.firebase['config'])),
+						? getMessaging(initializeApp($page.data.firebase.config)) // @remind Fix this hacky way to get the instance id from the storage
+						: getMessaging(initializeApp($page.data.firebase.config)),
 					{
-						vapidKey: config.ui.firebase['vapid-key'],
+						vapidKey: $page.data.firebase['vapid-key'],
 						serviceWorkerRegistration: await navigator.serviceWorker.getRegistration()
 					}
 				)

@@ -43,7 +43,7 @@
 	let photoValue: HTMLInputElement;
 	let categories: Category[] = [];
 	let keywords_input: TagInput;
-	let productVariations: Writable<VariationData> = writable() as Writable<VariationData>; // Variation data	
+	let productVariations: Writable<VariationData> = writable() as Writable<VariationData>; // Variation data
 	let variation_category_TextInput: TextInput;
 
 	async function populateCategories() {
@@ -212,8 +212,6 @@
 			}
 		});
 	}
-
-	
 </script>
 
 <svelte:head>
@@ -329,9 +327,8 @@
 												name="description"
 												class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORLIGHT-100 focus:outline-none"
 												rows="6"
-												placeholder="Product description goes here. Add as many words as you'd like. Note each word will be counted as a keyword. So be specific, and descriptive at the same time. Products are indexed every {config[
-													'server'
-												]['indexing-interval']}"
+												placeholder="Product description goes here. Add as many words as you'd like. Note each word will be counted as a keyword. So be specific, and descriptive at the same time. Products are indexed every {$page
+													.data.indexing_interval}"
 												value={data ? data.description ?? '' : ''}
 											/>
 										</div>
@@ -404,20 +401,17 @@
 							<!--------------VARIATIONS EDITOR--ONLY SUPPORTED WHILE EDITING PRODUCTS------------------->
 							{#if product_id}
 								<div class="inputgroup block justify-start lg:items-center">
-									<div
-										class="label flex w-fit items-center justify-start text-lg font-light"
-									>
+									<div class="label flex w-fit items-center justify-start text-lg font-light">
 										<div>Variations (Optional)</div>
 									</div>
 									{#if $productVariations}
-									<VariationCategoryEditor variations={productVariations}/>
-								
+										<VariationCategoryEditor variations={productVariations} />
 									{/if}
 								</div>
 								<form class="mt-4" on:submit={(e) => createVariations(e)}>
-									<div class="text-lg font-medium my-4">New variation category</div>
+									<div class="my-4 text-lg font-medium">New variation category</div>
 									<TextInput
-									bind:this={variation_category_TextInput}
+										bind:this={variation_category_TextInput}
 										required
 										icon={faSortAlphaAsc}
 										name="name"
@@ -443,9 +437,8 @@
 								>
 									<div>Keywords</div>
 									<div
-										title="You can think of these as subcategories. Keywords can help users in searching for what they need. Add as many as you'd like, but be strategic when using them. Each word will be counted as a keyword. So be specific, and descriptive at the same time. Like for example, you can tag all drinks (hot or cold) as 'beverages' just as you'd tag all breakfast and lunch items as 'food'. Products are indexed every {config[
-											'server'
-										]['indexing-interval']}, so it may take a while before it takes effect."
+										title="You can think of these as subcategories. Keywords can help users in searching for what they need. Add as many as you'd like, but be strategic when using them. Each word will be counted as a keyword. So be specific, and descriptive at the same time. Like for example, you can tag all drinks (hot or cold) as 'beverages' just as you'd tag all breakfast and lunch items as 'food'. Products are indexed every {$page
+											.data.indexing_interval}, so it may take a while before it takes effect."
 										class="icon cursor-help select-none"
 									>
 										<Fa icon={faQuestionCircle} size="1x" />

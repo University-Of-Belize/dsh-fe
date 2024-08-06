@@ -4,7 +4,6 @@
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
 	import { editUser, registerUser } from '$lib/Elements/Utility/User';
-	import config from '$lib/config/index';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
 	import { faAd, faCog, faDollar, faLock, faUserCog } from '@fortawesome/free-solid-svg-icons';
@@ -224,7 +223,7 @@
 							<TextInput
 								icon={faUserCog}
 								name="email"
-								placeholder="Type in a {config['server']['bound-organization']} email address"
+								placeholder="Type in a {$page.data.organization} email address"
 								custom_style="bg-transparent"
 								required
 							/>

@@ -1,9 +1,9 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import Button from '$lib/Elements/Buttons/Button.svelte';
 	import UserPill from '$lib/Elements/Dashboard/UserPill.svelte';
 	import CommentBox from '$lib/Elements/Inputs/CommentBox.svelte';
 	import { createFeedback, deleteFeedback } from '$lib/Elements/Utility/Feedback';
-	import config from '$lib/config/index';
 	import type { Feedback } from '$lib/types/Feedback';
 	import type { User } from '$lib/types/User';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -72,7 +72,7 @@
 				{#if prefersRichText}
 					<div class="richTextInput mb-4">
 						<div class="mb-4 text-2xl font-semibold text-COLORLIGHT-100">Write some feedback</div>
-						<Editor bind:value={richTextInput} apiKey={config.ui['tiny-mce']['api-key']} />
+						<Editor bind:value={richTextInput} apiKey={$page.data.tinymce_apikey} />
 					</div>
 				{:else}
 					<div class="markDownInput mb-4">

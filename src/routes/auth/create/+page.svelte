@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import Navigation from '$lib/Elements/Generic/Navigation.svelte';
 	import TextInput from '$lib/Elements/Inputs/TextInput.svelte';
-	import config from '$lib/config/index';
 	import { what_is } from '$lib/vendor/dishout/What_Is';
 	import what from '$lib/vendor/dishout/Whats';
 	import { fetchWebApi } from '$lib/vendor/dishout/api';
@@ -155,7 +155,7 @@
 								icon={faUserCog}
 								type="email"
 								name="email"
-								placeholder="Type in your {config.server['bound-organization']} email address"
+								placeholder="Type in your {$page.data.organization} email address"
 								custom_style="bg-transparent"
 								required
 							/>

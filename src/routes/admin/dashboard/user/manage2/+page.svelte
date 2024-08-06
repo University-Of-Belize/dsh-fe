@@ -305,7 +305,7 @@
 							<TextInput
 								icon={faUserCog}
 								name="email"
-								placeholder="Type in a {config['server']['bound-organization']} email address"
+								placeholder="Type in a {$page.data.organization} email address"
 								custom_style="bg-transparent"
 								required
 							/>
