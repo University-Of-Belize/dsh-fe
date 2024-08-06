@@ -39,8 +39,8 @@ jobs:
           envkey_AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
           envkey_GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           envkey_GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          envkey_GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
-          envkey_GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
+          envkey_GITHUB_CLIENT_ID: ${{ secrets._GITHUB_CLIENT_ID }}
+          envkey_GITHUB_CLIENT_SECRET: ${{ secrets._GITHUB_CLIENT_SECRET }}
           envkey_FIREBASE_VAPID_KEY: ${{ secrets.FIREBASE_VAPID_KEY }}
           envkey_FIREBASE_CONFIG_API_KEY: ${{ secrets.FIREBASE_CONFIG_API_KEY }}
           envkey_FIREBASE_CONFIG_AUTH_DOMAIN: ${{ secrets.FIREBASE_CONFIG_AUTH_DOMAIN }}
