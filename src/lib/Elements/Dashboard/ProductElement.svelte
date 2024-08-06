@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import config from '$lib/config/index';
 	import Button from '../Buttons/Button.svelte';
 	import { addToCart } from '../Utility/Cart';
@@ -75,8 +76,9 @@
 	</div>
 	{@html productUnavailable ? `<span class="text-COLORACCENTL text-sm">OUT OF STOCK</span>` : ''}
 
-	<div class="itemButton">
+	<div class="itemButton block lg:flex lg:space-x-1 space-y-3">
 		<Button
+			font_size="xs"
 			custom_style="w-full items-center text-center justify-center"
 			on:click={() => {
 				addToCart(product, productId, 1, []);
@@ -89,6 +91,14 @@
 			text={added_to_cart
 				? `Added to cart ${clicked_times > 1 ? `(${clicked_times})` : ''}`
 				: `Add to cart — ${price}`}
+		/>
+		<Button
+			custom_style="w-full items-center text-center justify-center"
+			on:click={() => {
+				localStorage.setItem('wants_single_cart', 'true');
+				goto(`/product/checkout?single_cart=${product?._id}`);
+			}}
+			text="Buy now"
 		/>
 	</div>
 </div>

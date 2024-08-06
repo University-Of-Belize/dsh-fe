@@ -79,7 +79,7 @@
 <div class="navigation z-20 w-full">
 	<Navigation transparency={5} search={true} />
 </div>
-<main class="block h-screen w-fit text-COLORLIGHT-100 lg:mx-10 lg:my-8">
+<main class="block w-fit text-COLORLIGHT-100 lg:mx-10 lg:my-8">
 	<!-- {#if !localStorage.user} -->
 	<div class="hero lg:rounded-3xl text-left lg:m-4 overflow-clip lg:border lg:border-COLORDARK-75">
 		<!-- <div
