@@ -9,7 +9,7 @@ on:
   push:
     branches: ['staging']
   pull_request:
-    branches: ['staging']
+    branches: ['staging']    
   workflow_dispatch:
 concurrency: # Multiple jobs should NOT run at the same time
   group: ${{ github.workflow }}
@@ -26,6 +26,7 @@ jobs:
       - name: Write Sentry resource file
         run: |
           echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
+          echo $ENV_FILE >> .env
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to fly.io
         if: github.event_name != 'pull_request'
