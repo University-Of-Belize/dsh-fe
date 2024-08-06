@@ -36,11 +36,11 @@ jobs:
           cat .env
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to fly.io
-        if: inputs.dry_run == false || github.event_name != 'pull_request'
+        if: ${{ inputs.dry_run == false }} || github.event_name != 'pull_request'
         run: | 
          echo "Run RELEASE" >> release
          flyctl deploy --remote-only -a ubcafe
       - name: Run basic test
-        if: inputs.dry_run == true || github.event_name == 'pull_request'
+        if: ${{ inputs.dry_run == true }} || github.event_name == 'pull_request'
         run: docker build -t dishout:latest .
       #- run: flyctl deploy --local-only -a ubcafe
