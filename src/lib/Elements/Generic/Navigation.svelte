@@ -79,6 +79,7 @@
 	});
 
 	afterNavigate(() => {
+		loading_stopped = true;
 		setTimeout(() => {
 			is_loading = false;
 		}, 500);
@@ -1030,7 +1031,7 @@
 		class="loading-gradient-2"
 	>
 		<div
-			style="height: 3px; {loading_stopped ? 'animation: loading 3s ease-out 1;' : ''}"
+			style="height: 3px; {loading_stopped ? 'animation: loading 3s ease-out infinite;' : ''}"
 			class="loading-gradient w-full origin-right delay-0 duration-1000 ease-linear"
 		></div>
 	</div>
