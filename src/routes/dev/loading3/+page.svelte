@@ -1,5 +1,5 @@
 <div class="loading-bar" style="height: 3x; width: 100%">
-	<div style="height: 3px; animation: loading2 10s ease-out 1; will-change: transform;">
+	<div style="height: 3px; animation: loading 10s ease-out 1; will-change: transform;">
 		<div
 			style="height: 3px;"
 			class="loading-gradient w-full origin-right delay-0 duration-1000 ease-linear"
