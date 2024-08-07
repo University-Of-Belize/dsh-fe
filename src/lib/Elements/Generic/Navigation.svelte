@@ -6,7 +6,7 @@
 	import Fa from 'svelte-fa';
 	import { sineIn } from 'svelte/easing';
 /***********************/
-	import { goto } from '$app/navigation';
+	import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
 	import config from '$lib/config/index';
 	import type { Category } from '$lib/types/Category';
 	import type { User } from '$lib/types/User';
@@ -68,6 +68,21 @@
 	let apps_dropdown: HTMLDivElement;
 	let theme_switched: boolean = false;
 	let themedrawer_isHidden: boolean;
+	let is_loading: boolean = false;
+	let loading_stopped: boolean = false;
+
+	beforeNavigate(() => {
+		is_loading = true;
+		setTimeout(() => {
+			loading_stopped = true;
+		}, 3000);
+	});
+
+	afterNavigate(() => {
+		setTimeout(() => {
+			is_loading = false;
+		}, 500);
+	});
 
 	onMount(async () => {
 		themedrawer_isHidden = localStorage.getItem('themedrawer_isHidden') == 'true';
@@ -1009,3 +1024,14 @@
 		</div>
 	{/if}
 </header>
+<div class="loading-bar {is_loading ? '' : 'invisible'}" style="height: 3x; width: 100%">
+	<div
+		style="height: 3px; {is_loading ? 'animation: loading2 3s ease-out 1;' : ''}"
+		class="loading-gradient-2"
+	>
+		<div
+			style="height: 3px; {loading_stopped ? 'animation: loading 3s ease-out 1;' : ''}"
+			class="loading-gradient w-full origin-right delay-0 duration-1000 ease-linear"
+		></div>
+	</div>
+</div>

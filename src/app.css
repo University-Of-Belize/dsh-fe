@@ -225,6 +225,11 @@ textarea {
 }
 
 /* Animations */
+/* Loading bar */
+/*
+animation: loading2 10s ease-out 1; // Expands the loading bar
+animation: loading 10s ease-out 1;  // Scatters the loading bar colors
+*/
 @keyframes loading2 {
 	from {
 		transform: translateX(-100%);
@@ -243,4 +248,23 @@ textarea {
 	to {
 		transform: translateX(500%) scaleX(6);
 	}
+}
+
+.loading-gradient-2 {
+	will-change: transform;
+}
+
+.loading-gradient {
+	will-change: transform;
+	transform-origin: right;
+	background-image: linear-gradient(
+		to right,
+		rgb(var(--COLORMAIN)),
+		rgb(var(--COLORMAIN2)),
+		rgb(var(--COLORACCENTL)),
+		rgb(var(--COLORMAIN)),
+		rgb(var(--COLORACCENTD)),
+		rgb(var(--COLORMAIN2)),
+		rgb(var(--COLORACCENTL))
+	);
 }

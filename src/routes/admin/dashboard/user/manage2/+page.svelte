@@ -268,11 +268,12 @@
 					</div>
 				</div>
 			{:else}<div id="err_loadingFailure" class="font-light">
-					The user profile could not be loaded. Wait! Trying another way to load it.
+					The user profile could not be loaded.
 				</div>
 			{/if}
-		{:else if user_id}<div class="font-light">The server returned no data.</div>{/if}
-
+		{:else if user_id}<div class="font-light">The server returned no data.</div>
+			<div id="err_loadingFailure" class="font-light"></div>
+		{/if}
 		<div
 			class="editPane flex flex-col lg:flex-row {staff
 				? 'justify-around'
