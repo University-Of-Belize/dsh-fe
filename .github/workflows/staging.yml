@@ -88,6 +88,5 @@ jobs:
         if: ${{ inputs.dry_run == true || github.event_name == 'pull_request' }}
         run: |
          file .env
-         cat .env
          docker build -t dishout:latest .
       #- run: flyctl deploy --local-only -a ubcafe
