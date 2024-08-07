@@ -179,7 +179,9 @@
 			{/if}
 			{#if !user}
 				{#if search}
-					<SearchBar nomargin placeholder="Search for snacks, drinks or lunch" />
+					<div class="lg:hidden">
+						<SearchBar nomargin placeholder="Search for snacks, drinks or lunch" />
+					</div>
 				{:else}
 					<div class="searchbar mx-8 flex flex-1 items-center px-4 py-2 text-sm" />
 				{/if}
@@ -275,13 +277,19 @@
 				<!-- @remind Enable as we continue to create these new, informational pages -->
 				<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">About</a></div> -->
 				<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">Jobs</a></div> -->
-				<div class="w-full text-center flex justify-center items-center hover:underline"><a href="/app/legal/terms">Terms</a></div>
+				<div class="flex w-full items-center justify-center text-center hover:underline">
+					<a href="/app/legal/terms">Terms</a>
+				</div>
 				<div class="flex w-full items-center justify-center text-center hover:underline">
 					<a aria-label="View the help center" href="/app/help-center">Blog</a>
 				</div>
 			</div>
-			<div>
-				&copy; {new Date().getFullYear()} <a href="https://github.com/AlexDev404">AlexDev404</a>
+			<div class="block leading-snug">
+				<a href="https://github.com/AlexDev404">Built with ❤️ by AlexDev404</a>
+				<div>
+					&copy; {new Date().getFullYear()}
+					<a href="https://github.com/AlexDev404" class="hover:underline">AlexDev404</a>
+				</div>
 			</div>
 		</div>
 	</div>
