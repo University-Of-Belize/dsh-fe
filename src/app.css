@@ -3,7 +3,9 @@
 @tailwind components;
 @layer base {
 	:root {
-		--LANDINGPHOTO: url('/homepage/hero-shapes.webp');
+		/* https://pngtree.com/free-backgrounds-photos/colorful-frosted */
+		/* --LANDINGPHOTO: url('/homepage/hero-shapes.webp'); */
+		--LANDINGPHOTO: url('/homepage/frosted-banner_438.webp');
 		--COLORLIGHT: 209 214 238;
 		--COLORDARK: 20 36 40;
 

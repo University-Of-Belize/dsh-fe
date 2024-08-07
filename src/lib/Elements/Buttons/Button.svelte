@@ -6,6 +6,7 @@
 	export let color: string = 'COLORDARK-75';
 	export let color_t: string = 'COLORLIGHT-100';
 	export let text: string;
+	export let font_size: 'xs' | 'sm' | 'md' | 'lg' = 'md';
 	export let type: 'button' | 'submit' | 'reset' = 'button';
 	export let custom_style: string | undefined = '';
 	export let disabled: boolean = false; // Optional
@@ -28,11 +29,13 @@
 	function handleClick(event: Event) {
 		dispatch('click', event);
 	}
+
+	const text_size = `text-${font_size}`;
 </script>
 
 <div
 	aria-disabled={disabled}
-	class="placeholder hidden pb-12 w-full border-COLORACCENTD border-COLORACCENTL bg-COLORDARK-75 bg-COLORDARK-25 bg-COLORDARK-50 bg-COLORDARK-75 bg-COLORDARK-100 bg-COLORACCENTD text-COLORDARK-100 bg-COLORDARK-75 bg-COLORDARK-50 bg-COLORDARK-25 bg-COLORDARK-75 bg-COLORDARK-75 bg-COLORACCENTL bg-COLORACCENTD bg-COLORACCENTD bg-COLORACCENTD bg-COLORACCENTL bg-COLORACCENTL bg-COLORACCENTL bg-COLORLIGHT-15 bg-COLORLIGHT-25 bg-COLORLIGHT-50 bg-COLORLIGHT-75 bg-COLORLIGHT-100 bg-COLORWHT2 bg-COLORLIGHT-50 bg-COLORLIGHT-75 bg-COLORLIGHT-100 bg-COLORACCENTL text-COLORACCENTD text-COLORLIGHT-100 text-COLORDARK-75 text-COLORDARK-50 text-COLORDARK-25 text-COLORDARK-15 text-COLORDARK-15 text-COLORACCENTL text-COLORACCENTD text-COLORACCENTD text-COLORACCENTD text-COLORACCENTL text-COLORACCENTL text-COLORACCENTL text-COLORACCENTL text-COLORLIGHT-100 text-COLORLIGHT-100 text-COLORWHT2 text-COLORLIGHT-50 text-COLORLIGHT-75 text-COLORLIGHT-100 text-COLORACCENTL aria-disabled:cursor-not-allowed aria-disabled:select-none aria-disabled:opacity-40 {class_}"
+	class="placeholder hidden pb-12 w-full text-xs text-sm text-md text-lg border-COLORACCENTD border-COLORACCENTL bg-COLORDARK-75 bg-COLORDARK-25 bg-COLORDARK-50 bg-COLORDARK-75 bg-COLORDARK-100 bg-COLORACCENTD text-COLORDARK-100 bg-COLORDARK-75 bg-COLORDARK-50 bg-COLORDARK-25 bg-COLORDARK-75 bg-COLORDARK-75 bg-COLORACCENTL bg-COLORACCENTD bg-COLORACCENTD bg-COLORACCENTD bg-COLORACCENTL bg-COLORACCENTL bg-COLORACCENTL bg-COLORLIGHT-15 bg-COLORLIGHT-25 bg-COLORLIGHT-50 bg-COLORLIGHT-75 bg-COLORLIGHT-100 bg-COLORWHT2 bg-COLORLIGHT-50 bg-COLORLIGHT-75 bg-COLORLIGHT-100 bg-COLORACCENTL text-COLORACCENTD text-COLORLIGHT-100 text-COLORDARK-75 text-COLORDARK-50 text-COLORDARK-25 text-COLORDARK-15 text-COLORDARK-15 text-COLORACCENTL text-COLORACCENTD text-COLORACCENTD text-COLORACCENTD text-COLORACCENTL text-COLORACCENTL text-COLORACCENTL text-COLORACCENTL text-COLORLIGHT-100 text-COLORLIGHT-100 text-COLORWHT2 text-COLORLIGHT-50 text-COLORLIGHT-75 text-COLORLIGHT-100 text-COLORACCENTL aria-disabled:cursor-not-allowed aria-disabled:select-none aria-disabled:opacity-40 {class_}"
 >
 	&nbsp;
 </div>
@@ -83,7 +86,7 @@
 			<Fa {icon} size="1.01x" class="hidden pr-1 md:pr-4 lg:block" />
 		{/if}
 	</div>
-	<div class="{icon_on_sm ? 'hidden' : ''} md:block">
+	<div class="{icon_on_sm ? 'hidden' : ''} md:block {text_size}">
 		{text}
 	</div>
 </button>
