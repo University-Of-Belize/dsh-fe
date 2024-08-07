@@ -158,7 +158,7 @@
 						</div>
 					{/if}
 					<!-- The products -->
-					<div class="grid grid-rows-1 lg:grid-cols-3 lg:gap-2">
+					<div class="grid grid-rows-1 md:grid-cols-3 lg:grid-cols-5 lg:gap-2">
 						<!-- This way, we filter out all the products from reviews -->
 						{#each [...$products] as product}
 							{#if product.price != undefined}

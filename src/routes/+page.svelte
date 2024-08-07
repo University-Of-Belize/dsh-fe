@@ -162,7 +162,7 @@
 			Categories
 		</div>
 
-		<div class="grid grid-rows-1 px-4 lg:grid-cols-3 lg:gap-2">
+		<div class="grid grid-rows-1 px-4 md:grid-cols-3 lg:grid-cols-5 lg:gap-2">
 			<ProductCard
 				url="/product/view-all"
 				image="/assets/home/all_products.png"
@@ -191,7 +191,7 @@
 		>
 			Featured
 		</div>
-			<div class="grid grid-rows-1 px-4 lg:grid-cols-3 lg:gap-2">
+			<div class="grid grid-rows-1 px-4 md:grid-cols-3 lg:grid-cols-5 lg:gap-2">
 				{#if product}
 					{#each product as product}
 						<ProductCard
