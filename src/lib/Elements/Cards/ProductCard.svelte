@@ -7,9 +7,10 @@
 	export let no_forward: boolean = false;
 
 	import config from '$lib/config/index';
+	import Button from '../Buttons/Button.svelte';
 </script>
 
-<div class="item flex flex-col gap-4 overflow-hidden py-4 lg:p-10 transition-all ease-in-out">
+<div class="item flex flex-col gap-4 overflow-hidden py-4 transition-all ease-in-out lg:p-10">
 	<div
 		class="imageHolder flex w-full items-center justify-center overflow-hidden rounded-md bg-COLORACCENTL"
 		style="height: 200px"
@@ -32,9 +33,10 @@
 	{/if}
 
 	{#if !no_forward}
-		<a aria-label="Visit the link for '{name}'" href={url} class="py-4 text-sm font-semibold">
-			<!-- <span>▷</span> -->
-			<span class="underline">View page</span>
-		</a>
+		<div>
+			<a aria-label="Visit the link for '{name}'" href={url} class="py-4 text-sm font-semibold">
+				<Button custom_style="w-full items-center text-center justify-center" text="View page" />
+			</a>
+		</div>
 	{/if}
 </div>

@@ -195,7 +195,7 @@
 								class="cursor-pointer rounded-md bg-COLORDARK-100 p-2.5"
 							/>
 							<p class="text-COLORLIGHT-75">
-								By signing up, you confirm that you have read and agree to our
+								By signing up, you confirm <br class="lg:hidden"/>that you have read and agree <br class="lg:hidden"/>to our
 								<a
 									href="/app/legal/terms"
 									class="forgot-password font-semibold text-COLORLIGHT-100 underline underline-offset-4"
