@@ -15,11 +15,10 @@
 		--COLORACCENTL: 255 106 56;
 		--COLORACCENTD: 6 193 105;
 
-
 		/* HSL COLOR VARIANTS */
 		--COLORLIGHT_HS: 230, 46%;
 		--COLORLIGHT_L: 88%;
-		
+
 		--COLORDARK_HS: 192, 33%;
 		--COLORDARK_L: 12%;
 	}
@@ -40,11 +39,10 @@
 	--COLORACCENTL: 255 106 56;
 	--COLORACCENTD: 6 193 105;
 
-
 	/* HSL COLOR VARIANTS */
 	--COLORLIGHT_HS: 230, 46%;
 	--COLORLIGHT_L: 88%;
-	
+
 	--COLORDARK_HS: 192, 33%;
 	--COLORDARK_L: 12%;
 }
@@ -59,7 +57,6 @@
 
 	--COLORACCENTL: 255 106 56;
 	--COLORACCENTD: 6 193 105;
-
 
 	/* HSL COLOR VARIANTS */
 	--COLORLIGHT_HS: 192, 33%;
@@ -80,7 +77,6 @@
 	--COLORACCENTL: 255 0 168;
 	--COLORACCENTD: 0 255 23;
 
-
 	/* HSL COLOR VARIANTS */
 	--COLORLIGHT_HS: 0, 0%;
 	--COLORLIGHT_L: 100%;
@@ -100,12 +96,11 @@
 
 	--COLORACCENTL: 69 255 56;
 	--COLORACCENTD: 254 192 57;
-	
-	
+
 	/* HSL COLOR VARIANTS */
 	--COLORLIGHT_HS: 0, 0%;
 	--COLORLIGHT_L: 100%;
-	
+
 	--COLORDARK_HS: 222, 47%;
 	--COLORDARK_L: 11%;
 }
@@ -122,7 +117,6 @@
 
 	--COLORACCENTL: 0 255 23;
 	--COLORACCENTD: 154 30 139;
-
 
 	/* HSL COLOR VARIANTS */
 	--COLORLIGHT_HS: 0, 0%;
@@ -142,7 +136,6 @@
 
 	--COLORACCENTL: 222 118 118;
 	--COLORACCENTD: 0 0 0;
-
 
 	/* HSL COLOR VARIANTS */
 	--COLORLIGHT_HS: 0, 0%;
@@ -229,4 +222,25 @@ input,
 button,
 textarea {
 	outline: none;
+}
+
+/* Animations */
+@keyframes loading2 {
+	from {
+		transform: translateX(-100%);
+	}
+
+	to {
+		transform: translateX(0);
+	}
+}
+
+@keyframes loading {
+	from {
+		transform: translateX(0) scaleX(6);
+	}
+
+	to {
+		transform: translateX(500%) scaleX(6);
+	}
 }
