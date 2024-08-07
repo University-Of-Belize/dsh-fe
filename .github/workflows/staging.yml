@@ -67,12 +67,12 @@ jobs:
           echo $SENTRY_AUTH_TOKEN >> sentry_token.txt
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to fly.io
-        if: ${{ inputs.dry_run == false && github.event_name != 'pull_request' }}
+        if: ${{ inputs.dry_run == false && github.event_name != 'pull_request_target' }}
         run: | 
          echo "Run RELEASE" >> release
          flyctl deploy --remote-only -a ubcafe
       - name: Run basic test
-        if: ${{ inputs.dry_run == true || github.event_name == 'pull_request' }}
+        if: ${{ inputs.dry_run == true || github.event_name == 'pull_request_target' }}
         run: |
          file .env
          docker build -t dishout:latest .
