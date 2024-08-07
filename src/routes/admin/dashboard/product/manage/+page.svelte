@@ -183,11 +183,10 @@
 		event.preventDefault();
 		// @ts-ignore
 		const valueArray: string[] = Array.from(event.target)
-			.filter((el) => el.name)
+			.filter((el) => el.value)
 			.map((el) => el.value)
-			.filter((el) => el !== ''); // Extra step -- Take out empty strings
+			.filter((value) => value !== ''); // Extra step -- Take out empty strings
 
-		console.log(valueArray);
 		// 	variations: Variation[]
 		valueArray.forEach(async (variation) => {
 			const response = (await fetchWebApi(
@@ -305,14 +304,14 @@
 												bind:this={productImage}
 												src={data.image}
 												alt={data.productName}
-												class="productImage h-56 w-72 rounded-sm object-cover"
+												class="productImage h-56 min-w-60 lg:w-72 rounded-sm object-cover"
 											/>
 										</div>
 									</div>
 								</div>
 								<div class="inputgroup flex flex-wrap items-start justify-start lg:items-center">
 									<div class="label w-full text-lg font-semibold">Product description</div>
-									<div class="review-wrap mb-4 w-full rounded-md border border-black">
+									<div class="review-wrap mb-4 w-full rounded-md border border-COLORLIGHT-100">
 										<div
 											class="text-i-combo flex items-center justify-start font-semibold text-COLORLIGHT-100"
 										>
@@ -325,7 +324,7 @@
 													e.stopPropagation();
 												}}
 												name="description"
-												class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORLIGHT-100 focus:outline-none"
+												class="text-md mx-6 h-full border-0 w-full bg-transparent px-2 py-1 font-light text-COLORLIGHT-100 focus:outline-none"
 												rows="6"
 												placeholder="Product description goes here. Add as many words as you'd like. Note each word will be counted as a keyword. So be specific, and descriptive at the same time. Products are indexed every {$page
 													.data.indexing_interval}"

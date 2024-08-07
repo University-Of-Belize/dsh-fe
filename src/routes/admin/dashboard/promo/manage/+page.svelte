@@ -179,7 +179,7 @@
 							</div>
 							<textarea
 								name="description"
-								class="text-md mx-6 h-full w-full bg-transparent px-2 py-1 font-light text-COLORLIGHT-100 focus:outline-none"
+								class="text-md mx-6 h-full w-full border-0 bg-transparent px-2 py-1 font-light text-COLORLIGHT-100 focus:outline-none"
 								rows="6"
 								placeholder="Promotion description goes here"
 								value={data ? data.description : ''}
