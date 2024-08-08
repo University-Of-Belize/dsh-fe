@@ -1025,7 +1025,7 @@
 		</div>
 	{/if}
 </header>
-<div class="loading-bar {is_loading ? '' : 'invisible'}" style="height: 3x; width: 100%">
+<div class="loading-bar overflow-clip {is_loading ? '' : 'invisible'}" style="height: 3px; width: 100%">
 	<div
 		style="height: 3px; {is_loading ? 'animation: loading2 3s ease-out 1;' : ''}"
 		class="loading-gradient-2"

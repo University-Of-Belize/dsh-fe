@@ -108,10 +108,9 @@
 
 	<body data-sveltekit-preload-data="hover">
 		<!--- Lol, thanks Instagram -->
-		<div
-			id="splash-screen"
-			class=""
-			style="
+		<div id="splash-screen"
+			 class=""
+			 style="
 				position: fixed;
 				z-index: 100;
 				background: linear-gradient(
@@ -126,27 +125,30 @@
 				height: 100%;
 				transition: background 150ms;
 				user-select: none; /* Do not allow the user to select */
-			"
-		>
-			<img
-				loading="lazy"
-				width="80px"
-				height="80px"
-				alt="UNIFOOD"
-				style="position: absolute; top: 50%; left: 50%; margin: -40px 0 0 -40px"
-				src="/icons/logo.svg"
-			/><span
-				class="flex w-full items-center justify-center py-10 text-center"
-				style="position: absolute; bottom: 0"
-				><span class="flex w-fit flex-col items-center justify-center space-y-4"
-					><span>By students<br />in partnership with</span
-					><img
-						loading="lazy"
-						width="72px"
-						height="37px"
-						src="/icons/ub-logo.svg"
-						alt="The University of Belize" /></span
-			></span>
+			">
+			<div class="loading-bar overflow-clip" style="height: 3px; width: 100%; position: fixed; top: 0; right: 0;">
+				<div style="height: 3px; animation: loading2 3s ease-out 1;"
+					 class="loading-gradient-2">
+					<div style="height: 3px; animation: loading 3s ease-out infinite"
+						 class="loading-gradient w-full origin-right delay-0 duration-1000 ease-linear"></div>
+				</div>
+			</div>
+
+			<img loading="lazy"
+				 width="80px"
+				 height="80px"
+				 alt="UNIFOOD"
+				 style="position: absolute; top: 50%; left: 50%; margin: -40px 0 0 -40px"
+				 src="/icons/logo.svg" /><span class="flex w-full items-center justify-center py-10 text-center"
+									   style="position: absolute; bottom: 0">
+				<span class="flex w-fit flex-col items-center justify-center space-y-4">
+					<span>By students<br />in partnership with</span><img loading="lazy"
+																		  width="72px"
+																		  height="37px"
+																		  src="/icons/ub-logo.svg"
+																		  alt="The University of Belize" />
+				</span>
+			</span>
 		</div>
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
