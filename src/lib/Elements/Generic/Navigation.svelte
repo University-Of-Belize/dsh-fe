@@ -294,6 +294,9 @@
 				<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">About</a></div> -->
 				<!-- <div class="w-full text-center flex justify-center items-center hover:underline"><a href="#">Jobs</a></div> -->
 				<div class="flex w-full items-center justify-center text-center hover:underline">
+					<a href="/app/legal/eula">EULA</a>
+				</div>
+				<div class="flex w-full items-center justify-center text-center hover:underline">
 					<a href="/app/legal/terms">Terms</a>
 				</div>
 				<div class="flex w-full items-center justify-center text-center hover:underline">

@@ -51,7 +51,7 @@
 			image: '/assets/credits/KYLER_BROWN.jpg',
 			name: 'Kyler Brown',
 			description: 'Documentation, Systems Designer',
-			retired: false
+			retired: true
 		},
 		{
 			url: '#',
