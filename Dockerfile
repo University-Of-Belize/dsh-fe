@@ -79,7 +79,7 @@ ENV NODE_ENV production
 
 # Hack up an init script
 RUN echo \#\!/usr/bin/env bash >> start.sh
-RUN echo "PORT=8080 bun --bun index.js" >> start.sh
+RUN echo "ORIGIN={RENDER_EXTERNAL_HOSTNAME} PORT=8080 bun --bun index.js" >> start.sh
 RUN chmod +x start.sh
 
 CMD [ "./start.sh" ]
